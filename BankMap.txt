@@ -1,0 +1,170 @@
+... Piece of code not decompiled
+✅Fully decompiled
+❔Mostly decompiled with one or few unkown
+❓Partially or little underestood
+🎵Audio, not interested in decompiling
+⛔Unused
+💾Binary data
+🖼Sprite data
+🎨Palette data
+🗺Tile data
+📄Text data
+💿Audio data
+
+Bank 80
+
+❓808000 - UNK_RealMainLoop
+❓808083 - fromNightEvents
+✅8080ED - SetPlayerName
+❔80815F - SetCowName
+❔8081D2 - SetCowName2
+✅808254 - SetDogName
+✅8082C6 - SetHorseName
+✅808338 - SetKid1Name
+✅8083AE - SetKid2Name
+💾808424 - Value_0000
+💾808426 - Value_00F0
+✅808428 - RESET
+✅808645 - WaitForNMI
+✅80865D - WaitForNMIATimes
+✅80867B - NMI_Interrupt
+✅808699 - COP_Interrupt
+❔8086B1 - UpdateGraphics
+✅80872A - COP_Return
+✅80872B - ReadJoypad
+✅8087CE - ScreenFadein
+✅80880A - ScreenFadeout
+✅808846 - ZeroesVRAM
+✅808887 - ZeroesOAM
+⛔8088C3 - UNUSED1
+✅808980 - ZeroesCGRAM
+✅8089BC - ZeroesPartialVRAM
+✅8089F9 - RNGReturn0toA
+❔808A33 - AddProgrammedDMA
+✅808AA0 - RemoveProgrammedDMA
+✅808AB2 - StartLastPreparedDMA
+✅808AF0 - StartProgramedDMA
+💾808B3C - DMA_Channels_Flag_Table
+💾808B44 - Table_Object_Size
+💾808B4F - Table_BG_Mode
+💾808B5A - Table_BG1_Tilemap_Add
+💾808B65 - Table_BG2_Tilemap_Add
+💾808B70 - Table_BG3_Tilemap_Add
+💾808B7B - Table_BG4_Tilemap_Add
+💾808B86 - Table_BG12_Character_Add
+💾808B91 - Table_BG34_Character_Add
+💾808B9C - Table_Main_Screen
+💾808BA7 - Table_SubScreen
+💾808BB2 - Table_Window_Mask_Main
+💾808BBD - Table_Window_Mask_Sub
+💾808BC8 - Table_Color_Math1
+💾808BD3 - Table_Color_Math2
+💾808BDE - Table_Screen_Mode
+💾808BE9 - Table_Mask_Setting12
+💾808BF4 - Table_Mask_Setting34
+💾808BFF - Table_Mask_Setting
+💾808C0A - Table_Windows_Pos0
+💾808C15 - Table_Windows_Pos1
+💾808C20 - Table_Windows_Pos2
+💾808C2B - Table_Windows_Pos3
+💾808C36 - Table_Mask_Logic_BG
+💾808C41 - Table_Mask_Logic_Obj
+✅808C4C - InitialzieScreenStatusVar
+✅808C59 - ManageGraphicPresets
+✅808E0F - ForceBlank
+✅808E1E - ResetForceBlank
+✅808E2D - SetsBrightness
+...
+✅8091CF - LoadCGRAM
+...
+❓8095B3 - AutoMapScrolling
+❓8095DE - UNK_Audio5
+❓809671 - UNK_PrepareScreenTransition
+❓8096D3 - UNK_ScreenTransition
+✅80972B - ScreenTransitionReturn
+...
+❓80A0AB - UpdateBGOffset
+❓80A7C6 - TilemapManager
+...
+❔80AA38 - DMAVRAMWithOffset
+
+Bank 81
+...
+✅81D061 - ChangeStamina
+...
+❔81D570 - PlayerInteractionSelector
+...
+✅81D644 - GetFenceFromStack
+
+Bank 82
+❔828000 - UpdateTime
+...
+❔82A65A - LoadFarmMap
+...
+❓82D75E - IntroScreen
+...
+❔82B173 - FarmMapPointerTable
+
+Bank 83
+🎵838000 - Unk_Audio23
+✅838067 - MultiplicationUnsigned
+✅838082 - DivisionUnsigned
+⛔8380D0 - DivisionSigned
+✅838138 - GetRNG
+❓838166 - UNK_SetDMA1
+❓8381B7 - UNK_SetDMA2
+❓8381F8 - UNK_MemoryShuffling2
+🎵8382C6 - UNK_Audio26
+🎵8382FE - UNK_Audio24
+🎵838332 - UNK_Audio19
+🎵83833E - UNK_Audio18
+✅838376 - UNK_IncreaseTransitionPointer
+🎵838380 - UNK_Audio22
+🎵8383A4 - UNK_Audio20
+🎵838401 - UNK_Audio25
+🎵83841F - UNK_Audio21
+🎵83843D - UNK_Audio1
+🎵8384D3 - UNK_Audio4
+🎵838598 - UNK_Audio3
+🎵83878C - UNK_Audio9
+🎵8389C7 - UNK_Audio10
+🎵838A26 - UNK_Audio11
+🎵838AFF - UNK_Audio12
+🎵838CF3 - UNK_Audio13
+🎵838D38 - UNK_Audio14
+🎵838D8B - UNK_Audio6
+🎵838DDF - UNK_Audio15
+🎵838E32 - UNK_Audio2
+🎵838E7F - UNK_Audio16
+🎵838E8B - UNK_Audio8
+🎵838EC9 - UNK_Audio7
+🎵838EE4 - UNK_Audio17
+💿838EFF - UNK_Audio_Table5
+💿838F4F - UNK_Audio_Table7
+💿8390EF - UNK_Audio_Table3
+💿83927F - UNK_Audio_Table2
+💿8392B1 - UNK_Audio_Table4
+...
+❔83A9BE - NewGameSetup
+❔83ABF0 - NightReset
+...
+✅83B1C9 - AddMoney
+✅83B224 - AddWood
+✅83B253 - AddGrass
+✅83B282 - AddPlayerHappiness
+✅83B2B1 - LoadGameSlot
+✅83B68E - SaveGameSlot
+✅83BA45 - LoadGameSlotResume
+✅83BAD4 - CheckSRAMIntegrity
+✅83C807 - AddNewChicken
+✅83C8DC - AddNewCow
+✅83C995 - GetChickenPointer
+✅83C9A7 - GetsCowPointer
+⛔83C9BA - UnusedBarnCoopCheck
+💾Table_ChicketSpawnPos
+💾Table_CowsSpawnPos
+💾...
+❓83CA98 - RunsFunctionbyIndex
+💾UNK_TableFunctionSelect
+❓83CB69 - UNK_FuncInTable
+...

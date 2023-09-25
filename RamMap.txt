@@ -1,0 +1,240 @@
+This is just to keep track of the usage of the WRAM, memory here may not be accessed
+with those addresses. Spaces are places I dont know yet. Also a dumb project for days
+where I have a headache. Most real info is on ram.asm
+
+🛠️Game settings
+🕹Control
+📝Scratch or little used
+🎵Audio
+🗑Wasted
+⛔Unused
+🎨Graphic data
+🧢Player/Farm data
+
+🛠️$7E0000 = !NMI_Status - 8b
+
+🎨$7E0020 = !BG_subpixel_offset_X - 8b
+🎨$7E0021 = !BG_subpixel_offset_Y - 8b
+🎨$7E0022 = !tilemap_to_load - 8b
+🕹$7E0023 = !Joy1_Key_Pressed_Timer - 8b
+🛠️$7E0024 = !copyof_INIDISP - 8b
+📝$7E0025 = !fade_current_brightness = $25 - 8b
+📝$7E0026 = !fade_current_frame = $26 - 8b
+🛠️$7E0027 = !ProgDMA_Channel_Index - 8b
+🛠️$7E0028 = !ProgDMA_Channel_Flag_to_Copy - 8b
+🛠️$7E0029 = !ProgDMA_Destination_Memory - 8b
+🛠️$7E002A - $7E0031 = !ProgDMA_Control_Register_Table - 8b
+🛠️$7E0032 - $7E0041 = !ProgDMA_Destination_Addr_Table - 16b
+
+📝$7E0070 - $7E0093 = Scratch memory region
+
+🧢$7E00D4 = !player_action - 16b
+🧢$7E00D6 = !player_pos_X - 16b
+🧢$7E00D8 = !player_pos_Y - 16b
+
+🎨$7E00F5 = !OBJ_Offset_X - 16b
+🎨$7E00F7 = !OBJ_Offset_Y - 16b
+
+🛠️$7E0100 = !RNG_mem_1 - 8b
+🛠️$7E0101 = !RNG_mem_2 - 8b
+🛠️$7E0102 = !RNG_mem_3 - 8b
+
+📝$7E011A = !multiplicand - 8b
+📝$7E011B = !multiplier - 8b
+
+🕹$7E0124 = !Joy1_Current - 16b
+🕹$7E0126 = !Joy1_Last_Frame - 16b
+🕹$7E0128 = !Joy1_New_Input - 16b
+🕹$7E012A = !Joy1_New_Unpressed - 16b
+🕹$7E012C = !Joy1_Autorepeat - 16b
+🗑$7E012E = !Joy1_Unused - 16b
+🗑$7E0130 = !Joy2_Current - 16b
+🗑$7E0132 = !Joy2_Last_Frame - 16b
+🗑$7E0134 = !Joy2_New_Input - 16b
+🗑$7E0136 = !Joy2_Unused2 - 16b
+🗑$7E0138 = !Joy2_Autorepeat - 16b
+🗑$7E013A = !Joy2_Unused - 16b
+🗺$7E013C = !BG1_Map_Offset_X - 16b
+🗺$7E013E = !BG1_Map_Offset_Y - 16b
+🗺$7E0140 = !BG2_Map_Offset_X - 16b
+🗺$7E0142 = !BG2_Map_Offset_Y - 16b
+🗺$7E0144 = !BG3_Map_Offset_X - 16b
+🗺$7E0146 = !BG3_Map_Offset_Y - 16b
+
+
+🛠️$7E017D = !transition_dest_X - 16b
+🛠️$7E017F = !transition_dest_Y - 16b
+
+🛠️$7E087C = !map_scrolling_X_speed - 16b
+🛠️$7E087E = !map_scrolling_Y_speed - 16b 
+🛠️$7E0880 = !map_scrolling_timer - 16b
+🛠️$7E0881 - $7E0884 = !player_name_sort_1 - 8b *4
+🛠️$7E0885 - $7E0888 = !temp_name_1 - 8b *4
+
+🧢$7E0899 = !dog_name_short_1 - 8b
+🧢$7E089A = !dog_name_short_2 - 8b
+🧢$7E089B = !dog_name_short_3 - 8b
+🧢$7E089C = !dog_name_short_4 - 8b
+🧢$7E089D = !horse_name_short_1 - 8b
+🧢$7E089E = !horse_name_short_2 - 8b
+🧢$7E089F = !horse_name_short_3 - 8b
+🧢$7E08A0 = !horse_name_short_4 - 8b
+
+🧢$7E08D5 = !player_name_long_1 - 16b *4
+🧢$7E08D7 = !player_name_long_2 - 16b *4
+🧢$7E08D9 = !player_name_long_3 - 16b *4
+🧢$7E08DB = !player_name_long_4 - 16b *4
+🧢$7E08DD = !dog_name_long_1 - 16b
+🧢$7E08DF = !dog_name_long_2 - 16b
+🧢$7E08E1 = !dog_name_long_3 - 16b
+🧢$7E08E3 = !dog_name_long_4 - 16b
+🧢$7E08E5 = !horse_name_long_1 - 16b
+🧢$7E08E7 = !horse_name_long_2 - 16b
+🧢$7E08E9 = !horse_name_long_3 - 16b
+🧢$7E08EB = !horse_name_long_4 - 16b
+🧢$7E08ED = !kid1_name_long_1 - 16b
+🧢$7E08EF = !kid1_name_long_2 - 16b
+🧢$7E08F1 = !kid1_name_long_3 - 16b
+🧢$7E08F3 = !kid1_name_long_4 - 16b
+🧢$7E08F5 = !kid2_name_long_1 - 16b
+🧢$7E08F7 = !kid2_name_long_2 - 16b
+🧢$7E08F9 = !kid2_name_long_3 - 16b
+🧢$7E08FB = !kid2_name_long_4 - 16b
+
+🧢$7E0917 = !max_stamina - 8b
+🧢$7E0918 = !current_stamina - 8b
+
+🧢$7E091D = !item_on_hand - 8b
+
+🧢$7E0921 = !tool_selected - 8b
+
+🧢$7E0923 = !tool_backpack - 8b
+
+🧢$7E0925 = !idle_animation_timer - 8b
+🧢$7E0926 = !sprinkler_water - 8b
+🧢$7E0927 = !seeds_grass_N - 8b
+🧢$7E0928 = !seeds_corn_N - 8b
+🧢$7E0929 = !seeds_tomato_N - 8b
+🧢$7E092A = !seeds_potato_N - 8b
+🧢$7E092B = !seeds_turnip_N - 8b
+🧢$7E092C = !feed_cow_N - 8b
+🧢$7E092D = !feed_chicks_N - 8b
+
+🧢$7E0930 = !fed_cows_N - 8b
+🧢$7E0931 = !fed_chicks_N - 8b
+🧢$7E0932 = !fed_cows_flags - 16b
+🧢$7E0934 = !fed_chicks_flags - 16b
+
+🧢$7E096C = !exaustion_level - 8b
+
+🛠️$7E0973 = !time_running - 16b
+
+🛠️$7E098B = !transition_dest - 8b
+🧢$7E098C = !weather_tomorrow - 8b
+
+🗑$7E19B6 = !graphic_preset - 8b
+🗑$7E19B7 = !OBSEL_preset - 8b
+🗑$7E19B8 = !BGMODE_preset - 8b
+🗑$7E19BA = !BG1SC_preset - 8b
+🗑$7E19BB = !BG2SC_preset - 8b
+🗑$7E19BC = !BG3SC_preset - 8b
+🗑$7E19BD = !BG4SC_preset - 8b
+🗑$7E19BE = !BG12NBA_preset - 8b
+🗑$7E19BF = !BG34NBA_preset - 8b
+🗑$7E19D0 = !M7SEL_preset - 8b
+🗑$7E19D1 = !W12SEL_preset - 8b
+🗑$7E19D2 = !W34SEL_preset - 8b
+🗑$7E19D3 = !WOBJSEL_preset - 8b
+🗑$7E19D4 = !WH0_preset - 8b
+🗑$7E19D5 = !WH1_preset - 8b
+🗑$7E19D6 = !WH2_preset - 8b
+🗑$7E19D7 = !WH3_preset - 8b
+🗑$7E19D8 = !WBGLOG_preset - 8b
+🗑$7E19D9 = !WOBJLOG_preset - 8b
+🗑$7E19DA = !TM_preset - 8b
+🗑$7E19DB = !TS_preset - 8b
+🗑$7E19DC = !TMW_preset - 8b
+🗑$7E19DD = !TSW_preset - 8b
+🗑$7E19DE = !CGWSEL_preset - 8b
+🗑$7E19DF = !CGADSUB_preset - 8b
+🗑$7E19E0 = !COLDATA_preset - 8b
+🗑$7E19E1 = !SETINI_preset - 8b
+🗑$7E19E2 = !graphic_preset_unused01 - 8b
+🗑$7E19E3 = !BG1SC_noflip_preset - 8b
+🗑$7E19E4 = !graphic_preset_unused02 - 8b
+🗑$7E19E5 = !BG2SC_noflip_preset - 8b
+🗑$7E19E6 = !graphic_preset_unused03 - 8b
+🗑$7E19E7 = !BG3SC_noflip_preset - 8b
+🗑$7E19E8 = !graphic_preset_unused04 - 8b
+🗑$7E19E9 = !BG4SC_noflip_preset - 8b
+🗑$7E19EA = !graphic_preset_unknown - 8b
+
+🗑$7E19C0 = !graphic_preset_unused05 - 16b
+🗑$7E19C2 = !graphic_preset_unused06 - 16b
+🗑$7E19C4 = !graphic_preset_unused07 - 16b
+🗑$7E19C6 = !graphic_preset_unused08 - 16b
+🗑$7E19C8 = !graphic_preset_unused09 - 16b
+🗑$7E19CA = !graphic_preset_unused10 - 16b
+🗑$7E19CC = !graphic_preset_unused11 - 16b
+🗑$7E19CE = !graphic_preset_unused12 - 16b
+
+🧢$7EC1C6 - $7EC285 = !cow_array - 12x12x8b
+🧢$7EC286 - $7EC2F5 = !chicken_array - 12x6x8b
+
+-------
+
+🧢$7F1F00 = !shed_items_row_1 - 8b
+🧢$7F1F01 = !shed_items_row_2 - 8b
+🧢$7F1F02 = !shed_items_row_3 - 8b
+🧢$7F1F03 = !shed_items_row_4 - 8b
+🧢$7F1F04 = !money - 24b
+🧢$7F1F07 = !shipping_money - 24b
+🧢$7F1F0A = !cow_N - 8b
+🧢$7F1F0B = !chicks_N - 8b
+🧢$7F1F0C = !stored_wood - 16b
+🧢$7F1F0E = !wood_need_for_upgrade - 16b
+🧢$7F1F10 = !stored_grass - 16b
+
+🧢$7F1F18 = !year - 8b
+🧢$7F1F19 = !season - 8b
+🧢$7F1F1A = !weekday - 8b
+🧢$7F1F1B = !day - 8b
+🧢$7F1F1C = !hour - 8b
+🧢$7F1F1D = !minutes - 8b
+🧢$7F1F1E = !seconds - 8b
+🧢$7F1F1F = !hearts_maria - 16b
+🧢$7F1F21 = !hearts_ann - 16b
+🧢$7F1F23 = !hearts_nina - 16b
+🧢$7F1F25 = !hearts_ellen - 16b
+🧢$7F1F27 = !hearts_eve - 16b
+
+🧢$7F1F2C = !dog_pos_X - 16b
+🧢$7F1F2E = !dog_pos_Y - 16b
+
+🧢$7F1F33 = !happiness - 16b
+🧢$7F1F35 = !development_rate - 8b
+🧢$7F1F36 = !power_berry_N - 8b
+🧢$7F1F37 = !kid1_age - 16b
+🧢$7F1F39 = !kid2_age - 16b
+🧢$7F1F3B = !wife_pregnancy - 16b
+🧢$7F1F3D = !kid1_name_sort_1 - 8b
+🧢$7F1F3E = !kid1_name_sort_2 - 8b
+🧢$7F1F3F = !kid1_name_sort_3 - 8b
+🧢$7F1F40 = !kid1_name_sort_4 - 8b
+🧢$7F1F41 = !kid2_name_sort_1 - 8b
+🧢$7F1F42 = !kid2_name_sort_2 - 8b
+🧢$7F1F43 = !kid2_name_sort_3 - 8b
+🧢$7F1F44 = !kid2_name_sort_4 - 8b
+
+🧢$7F1F3B = !wife_pregnancy - 16b
+
+🧢$7F1F4A = !shipped_corn - 16b
+🧢$7F1F4C = !shipped_tomatoes - 16b
+🧢$7F1F4E = !shipped_turnips - 16b
+🧢$7F1F50 = !shipped_potatoes
+🧢$7F1F52 = !dog_hugs - 16b
+🧢$7F1F54 = !ranch_mastery - 16b
+🧢$7F1F56 = !ranch_development - 16b
+
+
+
