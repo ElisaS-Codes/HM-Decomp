@@ -1613,169 +1613,170 @@ SetsBrightness: ;808E2D
                        LDA.B $74                            ;808E64;000074; 
                        STA.B $44,X                          ;808E66;000044; 
                        RTL                                  ;808E68;      ;END_QQQQ
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          UNK_BigLoop: %Set16bit(!MX)                             ;808E69;      ; 
-                       %Set8bit(!M)                             ;808E6B;      ; 
-                       STZ.B $92                            ;808E6D;000092;$000092
-                       STZ.B $93                            ;808E6F;000093;$000093
-                       LDY.W #$0000                         ;808E71;      ; 
-                       %Set16bit(!M)                             ;808E74;      ; 
-                       LDA.W $0196                          ;808E76;000196;$000196
-                       AND.W #$000A                         ;808E79;      ; 
-                       BNE $03                            ;808E7C;808E81; 
-                       LDY.W #$0004                         ;808E7E;      ; 
-                                                            ;      ;      ; 
-                %Set16bit(!M)                             ;808E81;      ; 
-                       TYA                                  ;808E83;      ; 
-                       STA.B $7E                            ;808E84;00007E; 
-                       ASL A                                ;808E86;      ; 
-                       CLC                                  ;808E87;      ; 
-                       ADC.B $7E                            ;808E88;00007E; 
-                       TAX                                  ;808E8A;      ; 
-                       LDA.B $42,X                          ;808E8B;000042; 
-                       BNE CODE_808E9D                      ;808E8D;808E9D; 
-                       %Set8bit(!M)                             ;808E8F;      ; 
-                       LDA.B $44,X                          ;808E91;000044; 
-                       BNE CODE_808E9D                      ;808E93;808E9D; 
-                       CPY.W #$0004                         ;808E95;      ; 
-                       BCC CODE_808F19                      ;808E98;808F19; 
-                       JMP.W CODE_808F2C                    ;808E9A;808F2C; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_808E9D: %Set8bit(!M)                             ;808E9D;      ; 
-                       LDA.B #$01                           ;808E9F;      ; 
-                       STA.B $93                            ;808EA1;000093; 
-                       %Set16bit(!M)                             ;808EA3;      ; 
-                       PHY                                  ;808EA5;      ; 
-                       LDA.B $42,X                          ;808EA6;000042; 
-                       STA.B $72                            ;808EA8;000072; 
-                       %Set8bit(!M)                             ;808EAA;      ; 
-                       LDA.B $44,X                          ;808EAC;000044; 
-                       STA.B $74                            ;808EAE;000074; 
-                       %Set16bit(!M)                             ;808EB0;      ; 
-                       LDA.B [$72]                          ;808EB2;000072; 
-                       CMP.W #$FFFF                         ;808EB4;      ; 
-                       BNE CODE_808EBC                      ;808EB7;808EBC; 
-                       JMP.W CODE_808F57                    ;808EB9;808F57; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_808EBC: CMP.W #$FFFE                         ;808EBC;      ; 
-                       BNE CODE_808EC4                      ;808EBF;808EC4; 
-                       JMP.W CODE_808F62                    ;808EC1;808F62; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_808EC4: PLY                                  ;808EC4;      ; 
-                       TYX                                  ;808EC5;      ; 
-                       %Set8bit(!M)                             ;808EC6;      ; 
-                       LDA.W $014A,X                        ;808EC8;00014A; 
-                       BEQ CODE_808ED0                      ;808ECB;808ED0; 
-                       JMP.W CODE_808F52                    ;808ECD;808F52; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_808ED0: PHY                                  ;808ED0;      ; 
-                       TYX                                  ;808ED1;      ; 
-                       LDA.B #$00                           ;808ED2;      ; 
-                       XBA                                  ;808ED4;      ; 
-                       LDA.W $016A,X                        ;808ED5;00016A; 
-                       %Set16bit(!M)                             ;808ED8;      ; 
-                       PHA                                  ;808EDA;      ; 
-                       TYX                                  ;808EDB;      ; 
-                       %Set8bit(!M)                             ;808EDC;      ; 
-                       LDA.B #$00                           ;808EDE;      ; 
-                       XBA                                  ;808EE0;      ; 
-                       LDA.W $015A,X                        ;808EE1;00015A; 
-                       %Set16bit(!M)                             ;808EE4;      ; 
-                       PHA                                  ;808EE6;      ; 
-                       LDA.B [$72]                          ;808EE7;000072; 
-                       PLX                                  ;808EE9;      ; 
-                       PLY                                  ;808EEA;      ; 
-                       JSL.L IIII                           ;808EEB;80916F; 
-                       %Set16bit(!MX)                             ;808EEF;      ; 
-                       PLY                                  ;808EF1;      ; 
-                       PHY                                  ;808EF2;      ; 
-                       TYX                                  ;808EF3;      ; 
-                       LDY.W #$0002                         ;808EF4;      ; 
-                       %Set8bit(!M)                             ;808EF7;      ; 
-                       LDA.B [$72],Y                        ;808EF9;000072; 
-                       STA.W $014A,X                        ;808EFB;00014A; 
-                       %Set16bit(!M)                             ;808EFE;      ; 
-                       PLY                                  ;808F00;      ; 
-                       TYA                                  ;808F01;      ; 
-                       STA.B $7E                            ;808F02;00007E; 
-                       ASL A                                ;808F04;      ; 
-                       CLC                                  ;808F05;      ; 
-                       ADC.B $7E                            ;808F06;00007E; 
-                       TAX                                  ;808F08;      ; 
-                       LDA.B $42,X                          ;808F09;000042; 
-                       CLC                                  ;808F0B;      ; 
-                       ADC.W #$0003                         ;808F0C;      ; 
-                       STA.B $42,X                          ;808F0F;000042; 
-                       %Set8bit(!M)                             ;808F11;      ; 
-                       LDA.B $44,X                          ;808F13;000044; 
-                       ADC.B #$00                           ;808F15;      ; 
-                       STA.B $44,X                          ;808F17;000044; 
-                                                            ;      ;      ; 
-          CODE_808F19: %Set16bit(!M)                             ;808F19;      ; 
-                       TYA                                  ;808F1B;      ; 
-                       STA.B $7E                            ;808F1C;00007E; 
-                       ASL A                                ;808F1E;      ; 
-                       CLC                                  ;808F1F;      ; 
-                       ADC.B $7E                            ;808F20;00007E; 
-                       TAX                                  ;808F22;      ; 
-                       INY                                  ;808F23;      ; 
-                       CPY.W #$0010                         ;808F24;      ; 
-                       BEQ CODE_808F2C                      ;808F27;808F2C; 
-                       JMP.W $8E81                          ;808F29;808E81; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_808F2C: %Set8bit(!M)                             ;808F2C;      ; 
-                       LDA.B $93                            ;808F2E;000093; 
-                       BEQ CODE_808F51                      ;808F30;808F51; 
-                       LDA.B #$05                           ;808F32;      ; 
-                       STA.B !ProgDMA_Channel_Index                            ;808F34;000027; 
-                       LDA.B #$22                           ;808F36;      ; 
-                       STA.B !ProgDMA_Destination_Memory                            ;808F38;000029; 
-                       %Set16bit(!M)                             ;808F3A;      ; 
-                       LDY.W #$0100                         ;808F3C;      ; 
-                       LDX.W #$0000                         ;808F3F;      ; 
-                       LDA.W #$0900                         ;808F42;      ; 
-                       STA.B $72                            ;808F45;000072; 
-                       %Set8bit(!M)                             ;808F47;      ; 
-                       LDA.B #$7F                           ;808F49;      ; 
-                       STA.B $74                            ;808F4B;000074; 
-                       JSL.L AddProgrammedDMA                ;808F4D;808A33; 
-                                                            ;      ;      ; 
-          CODE_808F51: RTL                                  ;808F51;      ; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_808F52: DEC.W $014A,X                        ;808F52;00014A; 
-                       BRA CODE_808F19                      ;808F55;808F19; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_808F57: %Set16bit(!M)                             ;808F57;      ; 
-                       STZ.B $42,X                          ;808F59;000042; 
-                       %Set8bit(!M)                             ;808F5B;      ; 
-                       STZ.B $44,X                          ;808F5D;000044; 
-                       JMP.W CODE_808EC4                    ;808F5F;808EC4; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_808F62: %Set16bit(!M)                             ;808F62;      ; 
-                       LDY.W #$0002                         ;808F64;      ; 
-                       LDA.B [$72],Y                        ;808F67;000072; 
-                       STA.B $42,X                          ;808F69;000042; 
-                       INY                                  ;808F6B;      ; 
-                       INY                                  ;808F6C;      ; 
-                       %Set8bit(!M)                             ;808F6D;      ; 
-                       LDA.B [$72],Y                        ;808F6F;000072; 
-                       STA.B $44,X                          ;808F71;000044; 
-                       %Set16bit(!M)                             ;808F73;      ; 
-                       LDA.B $42,X                          ;808F75;000042; 
-                       STA.B $72                            ;808F77;000072; 
-                       %Set8bit(!M)                             ;808F79;      ; 
-                       LDA.B $44,X                          ;808F7B;000044; 
-                       STA.B $74                            ;808F7D;000074; 
-                       JMP.W CODE_808EC4                    ;808F7F;808EC4;END_UNK_BigLoop
+
+;;;;;;;;I think this is Rain/Snow related
+UNK_BigLoop:
+        %Set16bit(!MX)                       
+        %Set8bit(!M)                         
+        STZ.B $92                            
+        STZ.B $93                            
+        LDY.W #$0000                         
+        %Set16bit(!M)                        
+        LDA.W $0196                          ;if its raining    
+        AND.W #$000A                         
+        BNE +                              
+        LDY.W #$0004                         
+
+      + %Set16bit(!M)                        
+        TYA                                  
+        STA.B $7E                            
+        ASL A                                
+        CLC                                  
+        ADC.B $7E                            ;mult by 3, either 0 or 4
+        TAX                                  
+        LDA.B $42,X                          
+        BNE CODE_808E9D                      ;808E8D;808E9D; 
+        %Set8bit(!M)                             ;808E8F;      ; 
+        LDA.B $44,X                          ;808E91;000044; 
+        BNE CODE_808E9D                      ;808E93;808E9D; 
+        CPY.W #$0004                         ;808E95;      ; 
+        BCC CODE_808F19                      ;808E98;808F19; 
+        JMP.W CODE_808F2C                    ;808E9A;808F2C; 
+                                                ;      ;      ; 
+                                                ;      ;      ; 
+        CODE_808E9D: %Set8bit(!M)                             ;808E9D;      ; 
+        LDA.B #$01                           ;808E9F;      ; 
+        STA.B $93                            ;808EA1;000093; 
+        %Set16bit(!M)                             ;808EA3;      ; 
+        PHY                                  ;808EA5;      ; 
+        LDA.B $42,X                          ;808EA6;000042; 
+        STA.B $72                            ;808EA8;000072; 
+        %Set8bit(!M)                             ;808EAA;      ; 
+        LDA.B $44,X                          ;808EAC;000044; 
+        STA.B $74                            ;808EAE;000074; 
+        %Set16bit(!M)                             ;808EB0;      ; 
+        LDA.B [$72]                          ;808EB2;000072; 
+        CMP.W #$FFFF                         ;808EB4;      ; 
+        BNE CODE_808EBC                      ;808EB7;808EBC; 
+        JMP.W CODE_808F57                    ;808EB9;808F57; 
+                                                ;      ;      ; 
+                                                ;      ;      ; 
+        CODE_808EBC: CMP.W #$FFFE                         ;808EBC;      ; 
+        BNE CODE_808EC4                      ;808EBF;808EC4; 
+        JMP.W CODE_808F62                    ;808EC1;808F62; 
+                                                ;      ;      ; 
+                                                ;      ;      ; 
+        CODE_808EC4: PLY                                  ;808EC4;      ; 
+        TYX                                  ;808EC5;      ; 
+        %Set8bit(!M)                             ;808EC6;      ; 
+        LDA.W $014A,X                        ;808EC8;00014A; 
+        BEQ CODE_808ED0                      ;808ECB;808ED0; 
+        JMP.W CODE_808F52                    ;808ECD;808F52; 
+                                                ;      ;      ; 
+                                                ;      ;      ; 
+        CODE_808ED0: PHY                                  ;808ED0;      ; 
+        TYX                                  ;808ED1;      ; 
+        LDA.B #$00                           ;808ED2;      ; 
+        XBA                                  ;808ED4;      ; 
+        LDA.W $016A,X                        ;808ED5;00016A; 
+        %Set16bit(!M)                             ;808ED8;      ; 
+        PHA                                  ;808EDA;      ; 
+        TYX                                  ;808EDB;      ; 
+        %Set8bit(!M)                             ;808EDC;      ; 
+        LDA.B #$00                           ;808EDE;      ; 
+        XBA                                  ;808EE0;      ; 
+        LDA.W $015A,X                        ;808EE1;00015A; 
+        %Set16bit(!M)                             ;808EE4;      ; 
+        PHA                                  ;808EE6;      ; 
+        LDA.B [$72]                          ;808EE7;000072; 
+        PLX                                  ;808EE9;      ; 
+        PLY                                  ;808EEA;      ; 
+        JSL.L IIII                           ;808EEB;80916F; 
+        %Set16bit(!MX)                             ;808EEF;      ; 
+        PLY                                  ;808EF1;      ; 
+        PHY                                  ;808EF2;      ; 
+        TYX                                  ;808EF3;      ; 
+        LDY.W #$0002                         ;808EF4;      ; 
+        %Set8bit(!M)                             ;808EF7;      ; 
+        LDA.B [$72],Y                        ;808EF9;000072; 
+        STA.W $014A,X                        ;808EFB;00014A; 
+        %Set16bit(!M)                             ;808EFE;      ; 
+        PLY                                  ;808F00;      ; 
+        TYA                                  ;808F01;      ; 
+        STA.B $7E                            ;808F02;00007E; 
+        ASL A                                ;808F04;      ; 
+        CLC                                  ;808F05;      ; 
+        ADC.B $7E                            ;808F06;00007E; 
+        TAX                                  ;808F08;      ; 
+        LDA.B $42,X                          ;808F09;000042; 
+        CLC                                  ;808F0B;      ; 
+        ADC.W #$0003                         ;808F0C;      ; 
+        STA.B $42,X                          ;808F0F;000042; 
+        %Set8bit(!M)                             ;808F11;      ; 
+        LDA.B $44,X                          ;808F13;000044; 
+        ADC.B #$00                           ;808F15;      ; 
+        STA.B $44,X                          ;808F17;000044; 
+                                                ;      ;      ; 
+        CODE_808F19: %Set16bit(!M)                             ;808F19;      ; 
+        TYA                                  ;808F1B;      ; 
+        STA.B $7E                            ;808F1C;00007E; 
+        ASL A                                ;808F1E;      ; 
+        CLC                                  ;808F1F;      ; 
+        ADC.B $7E                            ;808F20;00007E; 
+        TAX                                  ;808F22;      ; 
+        INY                                  ;808F23;      ; 
+        CPY.W #$0010                         ;808F24;      ; 
+        BEQ CODE_808F2C                      ;808F27;808F2C; 
+        JMP.W $8E81                          ;808F29;808E81; 
+                                                ;      ;      ; 
+                                                ;      ;      ; 
+        CODE_808F2C: %Set8bit(!M)                             ;808F2C;      ; 
+        LDA.B $93                            ;808F2E;000093; 
+        BEQ CODE_808F51                      ;808F30;808F51; 
+        LDA.B #$05                           ;808F32;      ; 
+        STA.B !ProgDMA_Channel_Index                            ;808F34;000027; 
+        LDA.B #$22                           ;808F36;      ; 
+        STA.B !ProgDMA_Destination_Memory                            ;808F38;000029; 
+        %Set16bit(!M)                             ;808F3A;      ; 
+        LDY.W #$0100                         ;808F3C;      ; 
+        LDX.W #$0000                         ;808F3F;      ; 
+        LDA.W #$0900                         ;808F42;      ; 
+        STA.B $72                            ;808F45;000072; 
+        %Set8bit(!M)                             ;808F47;      ; 
+        LDA.B #$7F                           ;808F49;      ; 
+        STA.B $74                            ;808F4B;000074; 
+        JSL.L AddProgrammedDMA                ;808F4D;808A33; 
+                                                ;      ;      ; 
+        CODE_808F51: RTL                                  ;808F51;      ; 
+                                        ;      ;      ; 
+                                        ;      ;      ; 
+        CODE_808F52: DEC.W $014A,X                        ;808F52;00014A; 
+        BRA CODE_808F19                      ;808F55;808F19; 
+                                        ;      ;      ; 
+                                        ;      ;      ; 
+        CODE_808F57: %Set16bit(!M)                             ;808F57;      ; 
+        STZ.B $42,X                          ;808F59;000042; 
+        %Set8bit(!M)                             ;808F5B;      ; 
+        STZ.B $44,X                          ;808F5D;000044; 
+        JMP.W CODE_808EC4                    ;808F5F;808EC4; 
+                                        ;      ;      ; 
+                                        ;      ;      ; 
+        CODE_808F62: %Set16bit(!M)                             ;808F62;      ; 
+        LDY.W #$0002                         ;808F64;      ; 
+        LDA.B [$72],Y                        ;808F67;000072; 
+        STA.B $42,X                          ;808F69;000042; 
+        INY                                  ;808F6B;      ; 
+        INY                                  ;808F6C;      ; 
+        %Set8bit(!M)                             ;808F6D;      ; 
+        LDA.B [$72],Y                        ;808F6F;000072; 
+        STA.B $44,X                          ;808F71;000044; 
+        %Set16bit(!M)                             ;808F73;      ; 
+        LDA.B $42,X                          ;808F75;000042; 
+        STA.B $72                            ;808F77;000072; 
+        %Set8bit(!M)                             ;808F79;      ; 
+        LDA.B $44,X                          ;808F7B;000044; 
+        STA.B $74                            ;808F7D;000074; 
+        JMP.W CODE_808EC4                    ;808F7F;808EC4;END_UNK_BigLoop
                                                             ;      ;      ; 
                                                             ;      ;      ; 
      NullsPointersbyA: %Set16bit(!MX)                             ;808F82;      ;Param A
@@ -5039,6 +5040,8 @@ UNK_StaticMapScroling: %Set16bit(!MX)                             ;80A11C;      
 ;;;;;;;; "param" in $22, used as index on data table
 ;;;;;;;; Maybe it selects the palletes?
 TilemapManager: ;80A7C6
+        !number_of_tilemaps = $92
+
         %Set8bit(!M)                         
         %Set16bit(!X)                        
         LDA.B #$00                           
@@ -5053,7 +5056,7 @@ TilemapManager: ;80A7C6
         LDY.W #$0000                         
         LDA.B !tilemap_to_load                            
         CMP.B #$57                           ;after that value, theres splash screens
-        BCS .skip1                           
+        BCS .notsplashscreen                           
 
         LDA.B (!tilemap_pointer),Y           
         STA.W !current_graphic_preset        
@@ -5066,80 +5069,80 @@ TilemapManager: ;80A7C6
         %Set16bit(!M)                        
         LDA.L $7F1F5C                        
         AND.W #$0001                         
-        BEQ .skip2                           
+        BEQ .skip1                           
 
         %Set16bit(!MX)                       
         LDA.W $0196                          
         AND.W #$FFDF                         ;resets a flag
         STA.W $0196                          
 
-    .skip2: %Set16bit(!MX)               
+    .skip1: %Set16bit(!MX)               
         INY                                  
         INY                                  
 
-    .skip1:
+    .notsplashscreen:
         %Set8bit(!M)                 
-        LDA.B (!tilemap_pointer),Y                        
+        LDA.B (!tilemap_pointer),Y           
         STA.W $0181                          
         INY                                  
-        LDA.B (!tilemap_pointer),Y                        
-        STA.W $0182                          
+        LDA.B (!tilemap_pointer),Y           
+        STA.W $0182                          ;lower than 3?
         CMP.B #$03                           
-        BCC .skipA                      
+        BCC .skip2                      
 
         %Set16bit(!M)                        
         LDA.W $0196                          
         ORA.W #$0001                         
         STA.W $0196                          
 
-    .skipA:
+    .skip2:
         %Set8bit(!M)                         
         INY                                  
-        LDA.B (!tilemap_pointer),Y                        
-        STA.B $92                            
+        LDA.B (!tilemap_pointer),Y           
+        STA.B !number_of_tilemaps            
         INY                                  
-        LDA.B (!tilemap_pointer),Y                        
+        LDA.B (!tilemap_pointer),Y           
         STA.B $93                            
         INY                                  
-        LDA.B !tilemap_to_load                            
+        LDA.B !tilemap_to_load               
         CMP.B #$57                           
-        BCS .skip3                           
+        BCS .notsplashscreen2                
 
         %Set16bit(!M)                        
-        LDA.B (!tilemap_pointer),Y                        
+        LDA.B (!tilemap_pointer),Y           
         STA.B $ED                            
         INY                                  
         INY                                  
-        LDA.B (!tilemap_pointer),Y                        
+        LDA.B (!tilemap_pointer),Y           
         STA.B $F1                            
         INY                                  
         INY                                  
-        LDA.B (!tilemap_pointer),Y                        
+        LDA.B (!tilemap_pointer),Y           
         STA.B $EF                            
         INY                                  
         INY                                  
-        LDA.B (!tilemap_pointer),Y                        
+        LDA.B (!tilemap_pointer),Y           
         STA.B $F3                            
         INY                                  
         INY                                  
 
-    .skip3:
+    .notsplashscreen2:
         %Set8bit(!M)                         
-        LDA.B $92                            
-        BEQ A1111_Skip4                      
+        LDA.B !number_of_tilemaps            
+        BEQ .noTilemap                      
 
-    .loop1:
+    .tilemaploop:
         %Set16bit(!M)                        
-        LDA.B (!tilemap_pointer),Y                        
+        LDA.B (!tilemap_pointer),Y           
         PHA                                  
         INY                                  
         INY                                  
-        LDA.B (!tilemap_pointer),Y                        
+        LDA.B (!tilemap_pointer),Y           
         STA.B $72                            
         INY                                  
         INY                                  
         %Set8bit(!M)                         
-        LDA.B (!tilemap_pointer),Y                        
+        LDA.B (!tilemap_pointer),Y           
         STA.B $74                            
         %Set16bit(!M)                        
         INY                                  
@@ -5148,7 +5151,7 @@ TilemapManager: ;80A7C6
         STA.B $75                            
         %Set8bit(!M)                         
         LDA.B #$7E                           
-        STA.B $77                            
+        STA.B $77                            ;Vram
         JSL.L DecompressTileMap              
         %Set8bit(!M)                         
         LDA.B #$00                           
@@ -5173,55 +5176,57 @@ TilemapManager: ;80A7C6
         %Set16bit(!MX)                       
         PLY                                  
         %Set8bit(!M)                         
-        LDA.B $92                            
+        LDA.B !number_of_tilemaps            
         DEC A                                
-        STA.B $92                            
-        BNE .loop1                           
-                                        ;      ;      ; 
-        A1111_Skip4: %Set16bit(!MX)                             ;80A8BE;      ; 
-        LDA.B (!tilemap_pointer),Y                        ;80A8C0;000018;($000018)
-        STA.B $8A                            ;80A8C2;00008A;$00008A
-        INY                                  ;80A8C4;      ; 
-        INY                                  ;80A8C5;      ; 
-        LDA.B (!tilemap_pointer),Y                        ;80A8C6;000018;($000018)
-        STA.B $72                            ;80A8C8;000072;$000072
-        INY                                  ;80A8CA;      ; 
-        INY                                  ;80A8CB;      ; 
-        %Set8bit(!M)                             ;80A8CC;      ; 
-        LDA.B (!tilemap_pointer),Y                        ;80A8CE;000018;($000018)
-        STA.B $74                            ;80A8D0;000074;$000074
-        %Set16bit(!M)                             ;80A8D2;      ; 
-        INY                                  ;80A8D4;      ; 
-        PHY                                  ;80A8D5;      ; 
-        LDA.W #$2000                         ;80A8D6;      ; 
-        STA.B $75                            ;80A8D9;000075;$000075
-        %Set8bit(!M)                             ;80A8DB;      ; 
-        LDA.B #$7E                           ;80A8DD;      ; 
-        STA.B $77                            ;80A8DF;000077;$000077
-        %Set16bit(!M)                             ;80A8E1;      ; 
-        LDA.W $0196                          ;80A8E3;000196;$000196
-        AND.W #$8000                         ;80A8E6;      ; 
-        BNE .skip5                           ;80A8E9;80A8F1; 
-        JSL.L DecompressTileMap           ;80A8EB;8381F8; 
-        BRA A1111_Skip6                      ;80A8EF;80A901; 
-                                        ;      ;      ; 
-                                        ;      ;      ; 
-        .skip5: %Set16bit(!MX)                             ;80A8F1;      ; 
-        LDY.W #$0000                         ;80A8F3;      ; 
-                                        ;      ;      ; 
-        CODE_80A8F6: LDA.B [$72],Y                        ;80A8F6;000072;[$000072]
-        STA.B [$75],Y                        ;80A8F8;000075;[$000075]
-        INY                                  ;80A8FA;      ; 
-        INY                                  ;80A8FB;      ; 
-        CPY.W #$8000                         ;80A8FC;      ; 
-        BNE CODE_80A8F6                      ;80A8FF;80A8F6; 
-                                        ;      ;      ; 
-        A1111_Skip6: %Set8bit(!M)                             ;80A901;      ; 
-        LDA.B !tilemap_to_load                            ;80A903;000022;$000022
-        CMP.B #$04                           ;80A905;      ; 
-        BCS .skip7                           ;80A907;80A90D; 
-        JSL.L WWWW                           ;80A909;82AF00; 
-                                        ;      ;      ; 
+        STA.B !number_of_tilemaps            
+        BNE .tilemaploop                           
+
+    .noTilemap:
+        %Set16bit(!MX)                       
+        LDA.B (!tilemap_pointer),Y           
+        STA.B $8A                            
+        INY                                  
+        INY                                  
+        LDA.B (!tilemap_pointer),Y           
+        STA.B $72                            
+        INY                                  
+        INY                                  
+        %Set8bit(!M)                         
+        LDA.B (!tilemap_pointer),Y           
+        STA.B $74                            
+        %Set16bit(!M)                        
+        INY                                  
+        PHY                                  
+        LDA.W #$2000                         
+        STA.B $75                            
+        %Set8bit(!M)                         
+        LDA.B #$7E                           
+        STA.B $77                            
+        %Set16bit(!M)                        
+        LDA.W $0196                          
+        AND.W #$8000                         ;TODO
+        BNE .skip5                           
+        JSL.L DecompressTileMap              
+        BRA .skip6                      
+
+    .skip5: %Set16bit(!MX)               
+        LDY.W #$0000                         
+
+    .extradatareadloop:
+        LDA.B [$72],Y                        ;TODO Why?
+        STA.B [$75],Y                        
+        INY                                  
+        INY                                  
+        CPY.W #$8000                         
+        BNE .extradatareadloop               
+
+    .skip6:
+        %Set8bit(!M)                         
+        LDA.B !tilemap_to_load               
+        CMP.B #$04                           
+        BCS .skip7                           
+        JSL.L WWWW                           
+
         .skip7: %Set8bit(!M)                             ;80A90D;      ; 
         LDA.B $93                            ;80A90F;000093;$000093
         CMP.B #$01                           ;80A911;      ; 
@@ -5336,7 +5341,7 @@ TilemapManager: ;80A7C6
         DEC A                                ;80A9E5;      ; 
         STA.B $93                            ;80A9E6;000093;$000093
         BEQ .skip13                          ;80A9E8;80A9ED; 
-        JMP.W A1111_Skip4                    ;80A9EA;80A8BE; 
+        JMP.W .noTilemap                    ;80A9EA;80A8BE; 
                                         ;      ;      ; 
                                         ;      ;      ; 
         .skip13: %Set8bit(!M)                             ;80A9ED;      ; 
@@ -8659,7 +8664,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        RTS                                  ;80DD5A;      ; 
 
 
-                       db $79,$7F,$10,$11,$3A,$10,$8E,$6A,$10,$0D,$5E,$10,$D2,$6A,$10,$0D;80DD5B;      ; 
+        UNK_RainTable: db $79,$7F,$10,$11,$3A,$10,$8E,$6A,$10,$0D,$5E,$10,$D2,$6A,$10,$0D;80DD5B;      ; 
                        db $5E,$10,$8E,$6A,$10,$11,$3A,$10,$FE,$FF,$5B,$DD,$80,$D2,$6A,$10;80DD6B;      ; 
                        db $8E,$6A,$10,$0D,$5E,$10,$D2,$6A,$10,$11,$3A,$10,$D2,$6A,$10,$0D;80DD7B;      ; 
                        db $5E,$10,$8E,$6A,$10,$FE,$FF,$78,$DD,$80,$8E,$6A,$10,$0D,$5E,$10;80DD8B;      ; 

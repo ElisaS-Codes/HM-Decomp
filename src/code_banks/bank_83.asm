@@ -10955,7 +10955,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                                                             ;      ;      ; 
           CODE_83ECF3: CMP.B #$20                           ;83ECF3;      ; 
                        BNE CODE_83ECFA                      ;83ECF5;83ECFA; 
-                       JMP.W CODE_83F26D                    ;83ECF7;83F26D; 
+                       JMP.W RanchMasteryCalculator                    ;83ECF7;83F26D; 
                                                             ;      ;      ; 
                                                             ;      ;      ; 
           CODE_83ECFA: CMP.B #$21                           ;83ECFA;      ; 
@@ -11559,281 +11559,292 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        AND.W #$7FFF                         ;83F265;      ; 
                        STA.L $7F1F5E                        ;83F268;7F1F5E; 
                        RTS                                  ;83F26C;      ; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_83F26D: %Set16bit(!M)                             ;83F26D;      ; 
-                       LDA.W #$0000                         ;83F26F;      ; 
-                       STA.L !ranch_mastery                        ;83F272;7F1F54; 
-                       LDA.L !moneyL                        ;83F276;7F1F04; 
-                       LSR A                                ;83F27A;      ; 
-                       LSR A                                ;83F27B;      ; 
-                       LSR A                                ;83F27C;      ; 
-                       LSR A                                ;83F27D;      ; 
-                       LSR A                                ;83F27E;      ; 
-                       LSR A                                ;83F27F;      ; 
-                       LSR A                                ;83F280;      ; 
-                       CMP.W #$004E                         ;83F281;      ; 
-                       BCC CODE_83F289                      ;83F284;83F289; 
-                       LDA.W #$004E                         ;83F286;      ; 
-                                                            ;      ;      ; 
-          CODE_83F289: STA.L !ranch_mastery                        ;83F289;7F1F54; 
-                       %Set8bit(!M)                             ;83F28D;      ; 
-                       LDA.B #$00                           ;83F28F;      ; 
-                       XBA                                  ;83F291;      ; 
-                       LDA.L !cow_N                        ;83F292;7F1F0A; 
-                       ASL A                                ;83F296;      ; 
-                       CLC                                  ;83F297;      ; 
-                       ADC.L !cow_N                        ;83F298;7F1F0A; 
-                       %Set16bit(!M)                             ;83F29C;      ; 
-                       ADC.L !ranch_mastery                        ;83F29E;7F1F54; 
-                       STA.L !ranch_mastery                        ;83F2A2;7F1F54; 
-                       %Set8bit(!M)                             ;83F2A6;      ; 
-                       LDA.B #$00                           ;83F2A8;      ; 
-                       XBA                                  ;83F2AA;      ; 
-                       LDA.L !chicks_N                        ;83F2AB;7F1F0B; 
-                       ASL A                                ;83F2AF;      ; 
-                       CLC                                  ;83F2B0;      ; 
-                       ADC.L !chicks_N                        ;83F2B1;7F1F0B; 
-                       %Set16bit(!M)                             ;83F2B5;      ; 
-                       ADC.L !ranch_mastery                        ;83F2B7;7F1F54; 
-                       STA.L !ranch_mastery                        ;83F2BB;7F1F54; 
-                       %Set8bit(!M)                             ;83F2BF;      ; 
-                       LDA.B #$00                           ;83F2C1;      ; 
-                       XBA                                  ;83F2C3;      ; 
-                       LDA.W !max_stamina                          ;83F2C4;000917; 
-                       SEC                                  ;83F2C7;      ; 
-                       SBC.B #$64                           ;83F2C8;      ; 
-                       LSR A                                ;83F2CA;      ; 
-                       %Set16bit(!M)                             ;83F2CB;      ; 
-                       CLC                                  ;83F2CD;      ; 
-                       ADC.L !ranch_mastery                        ;83F2CE;7F1F54; 
-                       STA.L !ranch_mastery                        ;83F2D2;7F1F54; 
-                       %Set16bit(!M)                             ;83F2D6;      ; 
-                       LDA.L !hearts_maria                        ;83F2D8;7F1F1F; 
-                       AND.W #$01FF                         ;83F2DC;      ; 
-                       LSR A                                ;83F2DF;      ; 
-                       LSR A                                ;83F2E0;      ; 
-                       LSR A                                ;83F2E1;      ; 
-                       LSR A                                ;83F2E2;      ; 
-                       CLC                                  ;83F2E3;      ; 
-                       ADC.L !ranch_mastery                        ;83F2E4;7F1F54; 
-                       STA.L !ranch_mastery                        ;83F2E8;7F1F54; 
-                       %Set16bit(!M)                             ;83F2EC;      ; 
-                       LDA.L !hearts_ann                        ;83F2EE;7F1F21; 
-                       AND.W #$01FF                         ;83F2F2;      ; 
-                       LSR A                                ;83F2F5;      ; 
-                       LSR A                                ;83F2F6;      ; 
-                       LSR A                                ;83F2F7;      ; 
-                       LSR A                                ;83F2F8;      ; 
-                       CLC                                  ;83F2F9;      ; 
-                       ADC.L !ranch_mastery                        ;83F2FA;7F1F54; 
-                       STA.L !ranch_mastery                        ;83F2FE;7F1F54; 
-                       %Set16bit(!M)                             ;83F302;      ; 
-                       LDA.L !hearts_nina                        ;83F304;7F1F23; 
-                       AND.W #$01FF                         ;83F308;      ; 
-                       LSR A                                ;83F30B;      ; 
-                       LSR A                                ;83F30C;      ; 
-                       LSR A                                ;83F30D;      ; 
-                       LSR A                                ;83F30E;      ; 
-                       CLC                                  ;83F30F;      ; 
-                       ADC.L !ranch_mastery                        ;83F310;7F1F54; 
-                       STA.L !ranch_mastery                        ;83F314;7F1F54; 
-                       %Set16bit(!M)                             ;83F318;      ; 
-                       LDA.L !hearts_ellen                        ;83F31A;7F1F25; 
-                       AND.W #$01FF                         ;83F31E;      ; 
-                       LSR A                                ;83F321;      ; 
-                       LSR A                                ;83F322;      ; 
-                       LSR A                                ;83F323;      ; 
-                       LSR A                                ;83F324;      ; 
-                       CLC                                  ;83F325;      ; 
-                       ADC.L !ranch_mastery                        ;83F326;7F1F54; 
-                       STA.L !ranch_mastery                        ;83F32A;7F1F54; 
-                       %Set16bit(!M)                             ;83F32E;      ; 
-                       LDA.L !hearts_eve                        ;83F330;7F1F27; 
-                       AND.W #$01FF                         ;83F334;      ; 
-                       LSR A                                ;83F337;      ; 
-                       LSR A                                ;83F338;      ; 
-                       LSR A                                ;83F339;      ; 
-                       LSR A                                ;83F33A;      ; 
-                       CLC                                  ;83F33B;      ; 
-                       ADC.L !ranch_mastery                        ;83F33C;7F1F54; 
-                       STA.L !ranch_mastery                        ;83F340;7F1F54; 
-                       %Set16bit(!M)                             ;83F344;      ; 
-                       LDA.L !shipped_tomatoes                        ;83F346;7F1F4C; 
-                       AND.W #$01FF                         ;83F34A;      ; 
-                       LSR A                                ;83F34D;      ; 
-                       LSR A                                ;83F34E;      ; 
-                       LSR A                                ;83F34F;      ; 
-                       LSR A                                ;83F350;      ; 
-                       CLC                                  ;83F351;      ; 
-                       ADC.L !ranch_mastery                        ;83F352;7F1F54; 
-                       STA.L !ranch_mastery                        ;83F356;7F1F54; 
-                       %Set16bit(!M)                             ;83F35A;      ; 
-                       LDA.L !shipped_corn                        ;83F35C;7F1F4A; 
-                       AND.W #$01FF                         ;83F360;      ; 
-                       LSR A                                ;83F363;      ; 
-                       LSR A                                ;83F364;      ; 
-                       LSR A                                ;83F365;      ; 
-                       LSR A                                ;83F366;      ; 
-                       CLC                                  ;83F367;      ; 
-                       ADC.L !ranch_mastery                        ;83F368;7F1F54; 
-                       STA.L !ranch_mastery                        ;83F36C;7F1F54; 
-                       %Set16bit(!M)                             ;83F370;      ; 
-                       LDA.L !shipped_potatoes                        ;83F372;7F1F50; 
-                       AND.W #$01FF                         ;83F376;      ; 
-                       LSR A                                ;83F379;      ; 
-                       LSR A                                ;83F37A;      ; 
-                       LSR A                                ;83F37B;      ; 
-                       LSR A                                ;83F37C;      ; 
-                       CLC                                  ;83F37D;      ; 
-                       ADC.L !ranch_mastery                        ;83F37E;7F1F54; 
-                       STA.L !ranch_mastery                        ;83F382;7F1F54; 
-                       %Set16bit(!M)                             ;83F386;      ; 
-                       LDA.L !shipped_turnips                        ;83F388;7F1F4E; 
-                       AND.W #$01FF                         ;83F38C;      ; 
-                       LSR A                                ;83F38F;      ; 
-                       LSR A                                ;83F390;      ; 
-                       LSR A                                ;83F391;      ; 
-                       LSR A                                ;83F392;      ; 
-                       CLC                                  ;83F393;      ; 
-                       ADC.L !ranch_mastery                        ;83F394;7F1F54; 
-                       STA.L !ranch_mastery                        ;83F398;7F1F54; 
-                       %Set16bit(!M)                             ;83F39C;      ; 
-                       LDA.L !happiness                        ;83F39E;7F1F33; 
-                       LSR A                                ;83F3A2;      ; 
-                       LSR A                                ;83F3A3;      ; 
-                       LSR A                                ;83F3A4;      ; 
-                       LSR A                                ;83F3A5;      ; 
-                       LSR A                                ;83F3A6;      ; 
-                       CLC                                  ;83F3A7;      ; 
-                       ADC.L !ranch_mastery                        ;83F3A8;7F1F54; 
-                       STA.L !ranch_mastery                        ;83F3AC;7F1F54; 
-                       %Set16bit(!M)                             ;83F3B0;      ; 
-                       LDA.L $7F1F64                        ;83F3B2;7F1F64; 
-                       AND.W #$0080                         ;83F3B6;      ; 
-                       BEQ CODE_83F3C7                      ;83F3B9;83F3C7; 
-                       LDA.L !ranch_mastery                        ;83F3BB;7F1F54; 
-                       CLC                                  ;83F3BF;      ; 
-                       ADC.W #$0010                         ;83F3C0;      ; 
-                       STA.L !ranch_mastery                        ;83F3C3;7F1F54; 
-                                                            ;      ;      ; 
-          CODE_83F3C7: %Set16bit(!M)                             ;83F3C7;      ; 
-                       LDA.L $7F1F64                        ;83F3C9;7F1F64; 
-                       AND.W #$0040                         ;83F3CD;      ; 
-                       BEQ CODE_83F3DE                      ;83F3D0;83F3DE; 
-                       LDA.L !ranch_mastery                        ;83F3D2;7F1F54; 
-                       CLC                                  ;83F3D6;      ; 
-                       ADC.W #$0010                         ;83F3D7;      ; 
-                       STA.L !ranch_mastery                        ;83F3DA;7F1F54; 
-                                                            ;      ;      ; 
-          CODE_83F3DE: %Set16bit(!M)                             ;83F3DE;      ; 
-                       LDA.L $7F1F6E                        ;83F3E0;7F1F6E; 
-                       AND.W #$0008                         ;83F3E4;      ; 
-                       BEQ CODE_83F3F5                      ;83F3E7;83F3F5; 
-                       LDA.L !ranch_mastery                        ;83F3E9;7F1F54; 
-                       CLC                                  ;83F3ED;      ; 
-                       ADC.W #$0010                         ;83F3EE;      ; 
-                       STA.L !ranch_mastery                        ;83F3F1;7F1F54; 
-                                                            ;      ;      ; 
-          CODE_83F3F5: %Set16bit(!M)                             ;83F3F5;      ; 
-                       LDA.L $7F1F6E                        ;83F3F7;7F1F6E; 
-                       AND.W #$0004                         ;83F3FB;      ; 
-                       BEQ CODE_83F40C                      ;83F3FE;83F40C; 
-                       LDA.L !ranch_mastery                        ;83F400;7F1F54; 
-                       CLC                                  ;83F404;      ; 
-                       ADC.W #$0010                         ;83F405;      ; 
-                       STA.L !ranch_mastery                        ;83F408;7F1F54; 
-                                                            ;      ;      ; 
-          CODE_83F40C: %Set16bit(!M)                             ;83F40C;      ; 
-                       LDA.L $7F1F66                        ;83F40E;7F1F66; 
-                       AND.W #$001F                         ;83F412;      ; 
-                       BEQ CODE_83F423                      ;83F415;83F423; 
-                       LDA.L !ranch_mastery                        ;83F417;7F1F54; 
-                       CLC                                  ;83F41B;      ; 
-                       ADC.W #$0020                         ;83F41C;      ; 
-                       STA.L !ranch_mastery                        ;83F41F;7F1F54; 
-                                                            ;      ;      ; 
-          CODE_83F423: %Set16bit(!M)                             ;83F423;      ; 
-                       LDA.L $7F1F6E                        ;83F425;7F1F6E; 
-                       AND.W #$4000                         ;83F429;      ; 
-                       BEQ CODE_83F43A                      ;83F42C;83F43A; 
-                       LDA.L !ranch_mastery                        ;83F42E;7F1F54; 
-                       CLC                                  ;83F432;      ; 
-                       ADC.W #$0016                         ;83F433;      ; 
-                       STA.L !ranch_mastery                        ;83F436;7F1F54; 
-                                                            ;      ;      ; 
-          CODE_83F43A: %Set16bit(!M)                             ;83F43A;      ; 
-                       LDA.L $7F1F6C                        ;83F43C;7F1F6C; 
-                       AND.W #$1000                         ;83F440;      ; 
-                       BEQ CODE_83F451                      ;83F443;83F451; 
-                       LDA.L !ranch_mastery                        ;83F445;7F1F54; 
-                       CLC                                  ;83F449;      ; 
-                       ADC.W #$0015                         ;83F44A;      ; 
-                       STA.L !ranch_mastery                        ;83F44D;7F1F54; 
-                                                            ;      ;      ; 
-          CODE_83F451: %Set16bit(!M)                             ;83F451;      ; 
-                       LDA.L !ranch_development                        ;83F453;7F1F56; 
-                       LSR A                                ;83F457;      ; 
-                       CLC                                  ;83F458;      ; 
-                       ADC.L !ranch_mastery                        ;83F459;7F1F54; 
-                       STA.L !ranch_mastery                        ;83F45D;7F1F54; 
-                       %Set16bit(!M)                             ;83F461;      ; 
-                       LDX.W #$0000                         ;83F463;      ; 
-                                                            ;      ;      ; 
-          CODE_83F466: %Set16bit(!MX)                             ;83F466;      ; 
-                       PHX                                  ;83F468;      ; 
-                       TXA                                  ;83F469;      ; 
-                       JSL.L GetsCowPointer                ;83F46A;83C9A7; 
-                       %Set8bit(!M)                             ;83F46E;      ; 
-                       %Set16bit(!X)                             ;83F470;      ; 
-                       LDY.W #$0000                         ;83F472;      ; 
-                       LDA.B [$72],Y                        ;83F475;000072; 
-                       AND.B #$01                           ;83F477;      ; 
-                       BEQ CODE_83F497                      ;83F479;83F497; 
-                       LDY.W #$0004                         ;83F47B;      ; 
-                       LDA.B #$00                           ;83F47E;      ; 
-                       XBA                                  ;83F480;      ; 
-                       LDA.B [$72],Y                        ;83F481;000072; 
-                       LSR A                                ;83F483;      ; 
-                       LSR A                                ;83F484;      ; 
-                       LSR A                                ;83F485;      ; 
-                       CMP.B #$19                           ;83F486;      ; 
-                       BCC CODE_83F48C                      ;83F488;83F48C; 
-                       LDA.B #$19                           ;83F48A;      ; 
-                                                            ;      ;      ; 
-          CODE_83F48C: %Set16bit(!M)                             ;83F48C;      ; 
-                       CLC                                  ;83F48E;      ; 
-                       ADC.L !ranch_mastery                        ;83F48F;7F1F54; 
-                       STA.L !ranch_mastery                        ;83F493;7F1F54; 
-                                                            ;      ;      ; 
-          CODE_83F497: %Set16bit(!MX)                             ;83F497;      ; 
-                       PLX                                  ;83F499;      ; 
-                       INX                                  ;83F49A;      ; 
-                       CPX.W #$000C                         ;83F49B;      ; 
-                       BNE CODE_83F466                      ;83F49E;83F466; 
-                       %Set16bit(!M)                             ;83F4A0;      ; 
-                       LDA.L !ranch_mastery                        ;83F4A2;7F1F54; 
-                       CMP.W #$03E7                         ;83F4A6;      ; 
-                       BCC CODE_83F4B2                      ;83F4A9;83F4B2; 
-                       LDA.W #$03E7                         ;83F4AB;      ; 
-                       STA.L !ranch_mastery                        ;83F4AE;7F1F54; 
-                                                            ;      ;      ; 
-          CODE_83F4B2: %Set16bit(!MX)                             ;83F4B2;      ; 
-                       LDA.W #$0000                         ;83F4B4;      ; 
-                       LDX.W #$0046                         ;83F4B7;      ; 
-                       LDY.W #$000C                         ;83F4BA;      ; 
-                       JSL.L VIP                            ;83F4BD;848097; 
-                       %Set8bit(!M)                             ;83F4C1;      ; 
-                       LDA.B #$25                           ;83F4C3;      ; 
-                       STA.L $7F1F47                        ;83F4C5;7F1F47; 
-                       %Set16bit(!M)                             ;83F4C9;      ; 
-                       LDA.L $7F1F5E                        ;83F4CB;7F1F5E; 
-                       ORA.W #$8000                         ;83F4CF;      ; 
-                       STA.L $7F1F5E                        ;83F4D2;7F1F5E; 
-                       RTS                                  ;83F4D6;      ; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_83F4D7: RTS                                  ;83F4D7;      ; 
+
+
+;;;;;;;; Ranch mastery calculator
+;;;;;;;; This function is notoriously bugged, Ill add corrections to it in 
+;;;;;;;; comments of Maria, but I dont want to change the code... yet at least.
+;;;;;;;; Repeat the fix on every other place I add BUG
+RanchMasteryCalculator:
+        %Set16bit(!M)                        
+        LDA.W #$0000                         
+        STA.L !ranch_mastery                 
+        LDA.L !moneyL                        
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        CMP.W #78                            ;aka > 99840G
+        BCC +                      
+        LDA.W #78                            
+
+      + STA.L !ranch_mastery                 
+        %Set8bit(!M)                         
+        LDA.B #$00                           
+        XBA                                  
+        LDA.L !cow_N                         
+        ASL A                                
+        CLC                                  
+        ADC.L !cow_N                         ;Number of cows * 3
+        %Set16bit(!M)                        
+        ADC.L !ranch_mastery                 
+        STA.L !ranch_mastery                 
+        %Set8bit(!M)                         
+        LDA.B #$00                           
+        XBA                                  
+        LDA.L !chicks_N                      
+        ASL A                                
+        CLC                                  
+        ADC.L !chicks_N                      ;chinks * 3 too
+        %Set16bit(!M)                        
+        ADC.L !ranch_mastery                 
+        STA.L !ranch_mastery                 
+        %Set8bit(!M)                         
+        LDA.B #$00                           
+        XBA                                  
+        LDA.W !max_stamina                   
+        SEC                                  
+        SBC.B #$64                           ;Max stamina - 100, it starts at 100
+        LSR A                                
+        %Set16bit(!M)                        
+        CLC                                  
+        ADC.L !ranch_mastery                 
+        STA.L !ranch_mastery                 
+        %Set16bit(!M)                        
+        LDA.L !hearts_maria                  ;BUG
+        AND.W #$01FF                         ;replace with CMP
+        ;BIM +
+        ;STA #31
+        ;BRA ++
+        LSR A                                ;add a + in this line
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        CLC                                  ;add ++ here
+        ADC.L !ranch_mastery                 
+        STA.L !ranch_mastery                 
+        %Set16bit(!M)                        
+        LDA.L !hearts_ann                    ;BUG
+        AND.W #$01FF                         
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        CLC                                  
+        ADC.L !ranch_mastery                 
+        STA.L !ranch_mastery                 
+        %Set16bit(!M)                        
+        LDA.L !hearts_nina                   ;BUG
+        AND.W #$01FF                         
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        CLC                                  
+        ADC.L !ranch_mastery                 
+        STA.L !ranch_mastery                 
+        %Set16bit(!M)                        
+        LDA.L !hearts_ellen                  ;BUG
+        AND.W #$01FF                         
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        CLC                                  
+        ADC.L !ranch_mastery                 
+        STA.L !ranch_mastery                 
+        %Set16bit(!M)                        
+        LDA.L !hearts_eve                    ;BUG
+        AND.W #$01FF                         
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        CLC                                  
+        ADC.L !ranch_mastery                 
+        STA.L !ranch_mastery                 
+        %Set16bit(!M)                        
+        LDA.L !shipped_tomatoes              ;Bug
+        AND.W #$01FF                         
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        CLC                                  
+        ADC.L !ranch_mastery                 
+        STA.L !ranch_mastery                 
+        %Set16bit(!M)                        
+        LDA.L !shipped_corn                  ;Bug
+        AND.W #$01FF                         
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        CLC                                  
+        ADC.L !ranch_mastery                 
+        STA.L !ranch_mastery                 
+        %Set16bit(!M)                        
+        LDA.L !shipped_potatoes              ;Bug
+        AND.W #$01FF                         
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        CLC                                  
+        ADC.L !ranch_mastery                 
+        STA.L !ranch_mastery                 
+        %Set16bit(!M)                        
+        LDA.L !shipped_turnips               ;Bug
+        AND.W #$01FF                         
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        CLC                                  
+        ADC.L !ranch_mastery                 
+        STA.L !ranch_mastery                 
+        %Set16bit(!M)                        
+        LDA.L !happiness                     
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        CLC                                  
+        ADC.L !ranch_mastery                 
+        STA.L !ranch_mastery                 
+        %Set16bit(!M)                        
+        LDA.L $7F1F64                        
+        AND.W #$0080                         ;House Upgrade Max
+        BEQ +                      
+        LDA.L !ranch_mastery                 
+        CLC                                  
+        ADC.W #16                         
+        STA.L !ranch_mastery                 
+
+      + %Set16bit(!M)                        
+        LDA.L $7F1F64                        
+        AND.W #$0040                         ;House First Upgrade
+        BEQ +                                
+        LDA.L !ranch_mastery                 
+        CLC                                  
+        ADC.W #16                            
+        STA.L !ranch_mastery                 
+
+      + %Set16bit(!M)                        
+        LDA.L $7F1F6E                        
+        AND.W #$0008                         ;Child 1
+        BEQ +                      
+        LDA.L !ranch_mastery                 
+        CLC                                  
+        ADC.W #16                         
+        STA.L !ranch_mastery                 
+
+      + %Set16bit(!M)                        
+        LDA.L $7F1F6E                        
+        AND.W #$0004                         ;Child 2
+        BEQ +                      
+        LDA.L !ranch_mastery                 
+        CLC                                  
+        ADC.W #16                         
+        STA.L !ranch_mastery                 
+
+      + %Set16bit(!M)                        
+        LDA.L $7F1F66                        
+        AND.W #$001F                         
+        BEQ +                      
+        LDA.L !ranch_mastery                 
+        CLC                                  
+        ADC.W #32                         
+        STA.L !ranch_mastery                 
+
+      + %Set16bit(!M)                        
+        LDA.L $7F1F6E                        
+        AND.W #$4000                         ;Clock Owned
+        BEQ +                                
+        LDA.L !ranch_mastery                 
+        CLC                                  
+        ADC.W #22                            
+        STA.L !ranch_mastery                 
+
+      + %Set16bit(!M)                        
+        LDA.L $7F1F6C                        
+        AND.W #$1000                         ;Turtle Shell
+        BEQ +                      
+        LDA.L !ranch_mastery                 
+        CLC                                  
+        ADC.W #21                         
+        STA.L !ranch_mastery              
+
+      + %Set16bit(!M)                        
+        LDA.L !ranch_development             
+        LSR A                                
+        CLC                                  
+        ADC.L !ranch_mastery                 
+        STA.L !ranch_mastery                 
+
+        %Set16bit(!M)                        
+        LDX.W #$0000                         
+
+      - %Set16bit(!MX)                       ;Cow Happiness Loop
+        PHX                                  
+        TXA                                  
+        JSL.L GetsCowPointer                 
+        %Set8bit(!M)                         
+        %Set16bit(!X)                        
+        LDY.W #$0000                         
+        LDA.B [$72],Y                        
+        AND.B #$01                           ;cow exists
+        BEQ +                      
+        LDY.W #$0004                         ;cow happiness var
+        LDA.B #$00                           
+        XBA                                  
+        LDA.B [$72],Y                        
+        LSR A                                
+        LSR A                                
+        LSR A                                
+        CMP.B #$19                           ;at least half max happyness
+        BCC +                               
+        LDA.B #25                           
+
+      + %Set16bit(!M)                        
+        CLC                                  
+        ADC.L !ranch_mastery                 
+        STA.L !ranch_mastery                 
+
+      + %Set16bit(!MX)                       
+        PLX                                  
+        INX                                  
+        CPX.W #12                         
+        BNE -                                
+
+        %Set16bit(!M)                        
+        LDA.L !ranch_mastery                 
+        CMP.W #999                           
+        BCC +                      
+        LDA.W #999                         
+        STA.L !ranch_mastery                 
+
+      + %Set16bit(!MX)                       ;TODO
+        LDA.W #$0000                         
+        LDX.W #$0046                         
+        LDY.W #$000C                         
+        JSL.L VIP                            
+        %Set8bit(!M)                         
+        LDA.B #$25                           
+        STA.L $7F1F47                        
+        %Set16bit(!M)                        
+        LDA.L $7F1F5E                        
+        ORA.W #$8000                         
+        STA.L $7F1F5E                        
+
+        RTS                                  
+
+
+        CODE_83F4D7: RTS                                  ;83F4D7;      ; 
                                                             ;      ;      ; 
                                                             ;      ;      ; 
           CODE_83F4D8: %Set16bit(!MX)                             ;83F4D8;      ; 
