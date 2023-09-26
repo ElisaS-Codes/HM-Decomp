@@ -5,10 +5,12 @@ Params A:Control Registers, X:VRAM/CGRAM Dest Addresses, Y(DMA Size), $72 & $74 
 80AA7C
 80AB3C
 InputTypeSelector DATA16_84C014
+DATA8_81A9F6 = pointers 16
+DATA8_81AC49 tons of rts probably
 
 ====Working on
 UNK_BigLoop
-WWWW
+UNK_PartialMap
 UNK_OperatesOnSeasonTable
 
 current_graphic_preset  = 02
@@ -32,6 +34,10 @@ Decompress + copy to VRAM
 $8A = $6000
 72 $A5DE84
 
+10 = $0410
+12 = 0000
+14 = $0A00
+16 = 0000 pointers?
 
 
 current_graphic_preset,$0196 flag,0181,0182,$92,$93,$8A,$00EF9F
@@ -100,8 +106,8 @@ $D0 -
 $D1 - 
 $D2 -Flags?
 "$0004" set overnight, some stops movement? $0004 set if regenerating $0924 rng
-"0002" holding item?
 "0008" set when you have no stamina
+???? s?hm - m: Can Move; h: holding item; s: no stamina
 $D3 - 
 $DA - 
 $DC - 
@@ -324,6 +330,8 @@ $7F1F5C - (some kind of flag, related to palettes?)
 ???? ????
 ???? ???u - u: related to $0196
 $7F1F5E - (flags? related to time $8000 checked during night)
+???? ????
+???? ???b - b:Things in the shipping bin
 $7F1F60 - Flags? $0800 related to 098D? resets during night
 ???? s??? - s: Save failed CRC
 ???? c??? - can change stamina?
@@ -345,7 +353,7 @@ $7F1F6C -
 ???t ???? - t=Turtle Shell
 ???? ????
 $7F1F6E - Flags
-?c?? ???? - c=Clock Owned
+?ch? ???? - c=Clock Owned; h:egg hatching
 ???? cc?? - cc=childs(%01 child1, %10 child2)
 $7F1F70 - 
 $7F1F72 - 
@@ -355,3 +363,78 @@ $7F1F78 -
 $7F1F7A - 
 
 $A78000 - 
+
+
+
+
+
+
+Items:
+00 nothing
+01 mushroom
+02 poison mushroom
+03 grapes
+04 Green Fruit
+05 Orb thingy? flower?
+06 Cake
+07 Fish
+08 Power Berry
+09 Grass
+0A Smaller grass?
+0B Grass??
+0C Grass??
+0E Nothing?
+0F Fence
+10 Corn
+11 Tomatoe
+12 Potato
+13 Turnip
+14 Egg
+15 Small Milk
+16 Mid Milk
+17 Big Milk
+18 Herb
+19 Flower
+1A Fodder
+1B Green Perfume Glitched
+1C Glitch
+1D Glich
+1E Red Egg
+1F Light Blue Egg
+20 Blue Egg
+21 Pink Egg
+22 Green Egg
+23 Yellow Egg
+24 Wheather Vain
+25 Chicken
+26 Chick
+27+ glitch
+29 Mole
+2A Sickle
+2B Hoe
+2C Hammer
+2D Axe
+2E Corn Seeds Bag
+2F Tomatoe Seeds Bag
+30 Potato Seeds Bag
+31 Turnip Seeds Bag
+32 Cow Medicine
+33 Miracle Potion
+34 Bell
+35 Grass Seed
+36 Paint
+37 Milker
+38 Brush
+39 Watering Can
+3a Gold Sickle
+3b Gold Hoe
+3c Gold Hammer
+3d Gold Axe
+3e Sprinker
+3f Blue thing?
+40 Summit Seed
+41 Blue Feather
+42 Chicken Feed
+43 Cow Feed
+44 Glitch
+--------

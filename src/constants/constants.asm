@@ -54,6 +54,10 @@ endmacro
 !key_B = #$8000
 !key_A = #$0080
 
+;;Items
+!item_egg = #$28
+
 ;;Maps
 !map_house = #$15
-
+!MapBarn = #$27
+!MapCoop = #$28
