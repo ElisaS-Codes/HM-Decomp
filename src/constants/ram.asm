@@ -306,8 +306,8 @@
 ; x9 - Cow 1 Pregnancy
 ; xA - Cow 1 Happiness
 ; xB - 
-; xE - 16b Barn Spawn Position X ;16b
-; x0 - 16b Barn Spawn Position Y ;16b
+; xE - Position X ;16b
+; x0 - Position Y ;16b
 ; x2 - Name 1
 ; x3 - Name 2
 ; x4 - Name 3
@@ -329,11 +329,12 @@
 ;;Chicken data
 !chicken_array = $7EC286
 ; x6/xE	- Status? starts as #$43(0100 0011)/#$09(0000 1001)
+; ?1?? aaax - a=age(001=egg,010=child,100=adult),e=exists
 ; x7/xF - #$28(0010 1000) 40/Season + 4
 ; x8/x0 - #0
 ; x9/x1 - 
-; xA/x2 - Spawn position X ;16b
-; xC/x4 - Spawn position X ;16b
+; xA/x2 - Position X ;16b
+; xC/x4 - Position Y ;16b
 
 ;$7EC286 - Chicken 01
 ;$7EC28E - Chicken 02

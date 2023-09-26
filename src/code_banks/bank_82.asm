@@ -5439,7 +5439,7 @@ LoadFarmMap: ;82A65A
                        RTL                                  ;82AEFF;      ; 
                                                             ;      ;      ; 
 ;;;;;;;
-WWWW: ;82AF00
+UNK_PartialMap: ;82AF00
        %Set16bit(!MX)                        
        LDY.W #$0000                          
 
@@ -5792,7 +5792,7 @@ WWWW: ;82AF00
                        TAY                                  ;82B13A;      ; 
                        RTL                                  ;82B13B;      ; 
 
-;;;;;;; Takes X as parameter
+;;;;;;; Takes X and Y as parameter
 UNK_OperatesOnSeasonTable:
        %Set16bit(!MX)                        
        TXA                                   

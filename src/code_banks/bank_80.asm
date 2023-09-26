@@ -5224,18 +5224,19 @@ TilemapManager: ;80A7C6
         %Set8bit(!M)                         
         LDA.B !tilemap_to_load               
         CMP.B #$04                           
-        BCS .skip7                           
-        JSL.L WWWW                           
+        BCS .skip7                           ;Farms by season
+        JSL.L UNK_PartialMap                           
 
-        .skip7: %Set8bit(!M)                             ;80A90D;      ; 
-        LDA.B $93                            ;80A90F;000093;$000093
-        CMP.B #$01                           ;80A911;      ; 
-        BNE .skip8                           ;80A913;80A924; 
+    .skip7:
+        %Set8bit(!M)                         
+        LDA.B $93                            
+        CMP.B #$01                           
+        BNE .skip8                           
         %Set16bit(!MX)                             ;80A915;      ; 
         LDA.L $7F1F5E                        ;80A917;7F1F5E;$7F1F5E
         AND.W #$0002                         ;80A91B;      ; 
         BNE .skip8                           ;80A91E;80A924; 
-        JSL.L CODE_81A9E5                    ;80A920;81A9E5; 
+        JSL.L UNK_ExecuteFromPointers                    ;80A920;81A9E5; 
                                         ;      ;      ; 
         .skip8: %Set16bit(!M)                             ;80A924;      ; 
         STZ.B !OBJ_Offset_X                            ;80A926;0000F5;$0000F5
@@ -5411,10 +5412,9 @@ LoadsFromVRAMwithOffset: ;80AA38
         PLX                                  
         RTS                                  
                                                             ;      ;      ; 
-                                                            ;      ;      ; 
-           UNK_Table2: db $00,$00,$40,$00,$80,$00,$00,$01,$00,$01;80AA68;      ; 
-                                                            ;      ;      ; 
-           UNK_Table3: db $00,$00,$00,$10,$00,$20,$00,$40,$00,$40;80AA72;      ;used on TilemapManager
+        ;Related to 0181, stored in A1
+UNK_Table2: dw $0000,$0040,$0080,$0100,$0100;80AA68;      ; 
+UNK_Table3: dw $0000,$1000,$2000,$4000,$4000;80AA72;      ;used on TilemapManager
                                                             ;      ;      ; 
 incsrc "../tilesets/tilemapManagerTable.asm"
                                                             ;      ;      ; 

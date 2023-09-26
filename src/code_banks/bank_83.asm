@@ -6968,7 +6968,7 @@ CheckSRAMIntegrity: ;83BAD4
           CODE_83C806: RTL                                  ;83C806;      ; 
 
 
-;;;;;;;; Param in A = 0: bought; Return in A, 0 = sucess, 1 = coop full
+;;;;;;;; Param in A = 0: hatched; Return in A, 0 = sucess, 1 = coop full
 AddNewChicken: ;83C807
         !chicken_pointer = $72
         !chicken_source = $7E
@@ -7022,9 +7022,9 @@ AddNewChicken: ;83C807
         %Set16bit(!M)                        
         LDA.B !chicken_source                            
         CMP.W #$0001                         
-        BEQ .condition1                      
+        BEQ .bought                      
         CMP.W #$0002                         
-        BEQ .condition2                      
+        BEQ .hatched                      
         %Set8bit(!M)                         
         LDY.W #$0000                         
         LDA.B #$43                           
@@ -7032,20 +7032,20 @@ AddNewChicken: ;83C807
         %Set16bit(!MX)                       
         LDY.W #$0004                         
         LDA.W #$00E8                         
-        STA.B [!chicken_pointer],Y           
+        STA.B [!chicken_pointer],Y           ;Spawn Position X
         LDY.W #$0006                         
         LDA.W #$00B8                         
-        STA.B [!chicken_pointer],Y           
+        STA.B [!chicken_pointer],Y           ;Spawn Position Y
         BRA .newChickenSuccess                
 
-    .condition1:
+    .bought:
         %Set8bit(!M)                         
         LDY.W #$0000                         
         LDA.B #$09                           
         STA.B [!chicken_pointer],Y           
-        BRA .condition1_cont                 
+        BRA .bought_cont                 
 
-    .condition2:
+    .hatched:
         %Set8bit(!M)                         
         LDY.W #$0000                         
         LDA.B #$09                           
@@ -7058,13 +7058,13 @@ AddNewChicken: ;83C807
         %Set16bit(!M)                        
         LDY.W #$0004                         
         LDA.W #$0238                         
-        STA.B [!chicken_pointer],Y           
+        STA.B [!chicken_pointer],Y           ;Spawn Position X
         LDY.W #$0006                         
         LDA.W #$0318                         
-        STA.B [!chicken_pointer],Y           
+        STA.B [!chicken_pointer],Y           ;Spawn Position Y
         BRA .newChickenSuccess               
 
-    .condition1_cont: 
+    .bought_cont: 
         %Set16bit(!MX)                       
         TXA                                  
         ASL A                                
