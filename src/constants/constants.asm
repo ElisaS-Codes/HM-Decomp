@@ -58,6 +58,9 @@ endmacro
 !item_egg = #$28
 
 ;;Maps
-!map_house = #$15
-!MapBarn = #$27
-!MapCoop = #$28
+!map_farm_winter = #04
+!map_mountain_spring = #$10
+!map_house_1 = #$15
+!map_barn = #$27
+!map_coop = #$28
+!natsume_logo = #$5D

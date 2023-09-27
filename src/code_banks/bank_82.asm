@@ -3169,7 +3169,7 @@ UNK_SomethingGrassSeeds: %Set8bit(!M)                             ;829B9D;      
                        %Set8bit(!M)                             ;829D0D;      ; 
                        LDX.W $0985                          ;829D0F;000985; 
                        LDY.W $0987                          ;829D12;000987; 
-                       JSL.L CODE_82B03A                    ;829D15;82B03A; 
+                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;829D15;82B03A; 
                        %Set16bit(!M)                             ;829D19;      ; 
                        PLA                                  ;829D1B;      ; 
                        ASL A                                ;829D1C;      ; 
@@ -3849,7 +3849,7 @@ UNK_SomethingGrassSeeds: %Set8bit(!M)                             ;829B9D;      
                        %Set8bit(!M)                             ;82A332;      ; 
                        LDX.W $0985                          ;82A334;000985; 
                        LDY.W $0987                          ;82A337;000987; 
-                       JSL.L CODE_82B03A                    ;82A33A;82B03A; 
+                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;82A33A;82B03A; 
                        %Set16bit(!M)                             ;82A33E;      ; 
                        PLA                                  ;82A340;      ; 
                        ASL A                                ;82A341;      ; 
@@ -5622,7 +5622,7 @@ UNK_PartialMap: ;82AF00
                                                             ;      ;      ; 
          DATA8_82B02A: db $09,$02,$07,$01,$07,$04,$07,$04,$09,$03,$08,$02,$09,$06,$08,$05;82B02A;      ; 
                                                             ;      ;      ; 
-          CODE_82B03A: %Set8bit(!M)                             ;82B03A;      ; 
+          UNK_MOVE_FROM_SEASON_TO_09B6: %Set8bit(!M)                             ;82B03A;      ; 
                        %Set16bit(!X)                             ;82B03C;      ; 
                        PHA                                  ;82B03E;      ; 
                        JSR.W UNK_OperatesOnSeasonTable      ;82B03F;82B13C; 
@@ -5763,7 +5763,7 @@ UNK_PartialMap: ;82AF00
                        TAY                                  ;82B10C;      ; 
                        %Set8bit(!M)                             ;82B10D;      ; 
                        PLA                                  ;82B10F;      ; 
-                       JSL.L CODE_82B03A                    ;82B110;82B03A; 
+                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;82B110;82B03A; 
                        %Set16bit(!MX)                             ;82B114;      ; 
                        PLY                                  ;82B116;      ; 
                        PLX                                  ;82B117;      ; 
@@ -6935,7 +6935,7 @@ IntroScreen: ;82D75E
        JSL.L ZeroesVRAM 
                             
        %Set8bit(!M)                          
-       LDA.B #$5D                            
+       LDA.B !natsume_logo                   
        STA.B !tilemap_to_load                             
        JSL.L TilemapManager            
        %Set16bit(!M)                         

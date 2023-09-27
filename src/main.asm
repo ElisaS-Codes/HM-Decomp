@@ -52,11 +52,11 @@ incsrc "data_banks/bank_A5.asm"     ;Tilemaps
 incsrc "data_banks/bank_A6.asm"
 incsrc "data_banks/bank_A7.asm"     ;Graphics?
 incsrc "data_banks/bank_A8.asm"     ;Palettes
-incsrc "data_banks/bank_A9.asm"
-incsrc "data_banks/bank_AA.asm"
-incsrc "data_banks/bank_AB.asm"
-incsrc "data_banks/bank_AC.asm"
-incsrc "data_banks/bank_AD.asm"
+incsrc "data_banks/bank_A9.asm"     ;Palettes
+incsrc "data_banks/bank_AA.asm"     ;Empty
+incsrc "data_banks/bank_AB.asm"     ;Empty
+incsrc "data_banks/bank_AC.asm"     ;Empty
+incsrc "data_banks/bank_AD.asm"     ;Audio
 incsrc "data_banks/bank_AE.asm"
 incsrc "data_banks/bank_AF.asm"
 incsrc "data_banks/bank_B0.asm"
