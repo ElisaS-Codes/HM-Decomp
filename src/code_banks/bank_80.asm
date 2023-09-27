@@ -33,7 +33,7 @@ ORG $808000
         LDA.W #$0078                         
         STA.W !transition_dest_Y             
         %Set8bit(!M)                         
-        LDA.B !map_house                     
+        LDA.B !map_house_1                     
         STA.W !transition_dest               
         JSL.L FindMostLovedandFillVariables  
         JSL.L UNK_ScreenTransition           
@@ -2199,92 +2199,93 @@ LoadCGRAM: ;8091CF
                        BNE CODE_80922E                      ;80923E;80922E; 
                        RTL                                  ;809240;      ;END_HHHH
                                                             ;      ;      ; 
-                                                            ;      ;      ; 
-                 GGGG: %Set8bit(!M)                             ;809241;      ; 
-                       %Set16bit(!X)                             ;809243;      ; 
-                       LDA.B #$00                           ;809245;      ; 
-                       XBA                                  ;809247;      ; 
-                       LDA.B !tilemap_to_load                            ;809248;000022; 
-                       %Set16bit(!M)                             ;80924A;      ; 
-                       STA.B $80                            ;80924C;000080; 
-                       ASL A                                ;80924E;      ; 
-                       ASL A                                ;80924F;      ; 
-                       CLC                                  ;809250;      ; 
-                       ADC.B $80                            ;809251;000080; 
-                       ADC.B $80                            ;809253;000080; 
-                       ADC.W #$0004                         ;809255;      ; 
-                       TAX                                  ;809258;      ; 
-                       %Set8bit(!M)                             ;809259;      ; 
-                       LDA.B #$00                           ;80925B;      ; 
-                       XBA                                  ;80925D;      ; 
-                       LDA.L DATA8_80BB5C,X                 ;80925E;80BB5C; 
-                       %Set16bit(!M)                             ;809262;      ; 
-                       STA.B $7E                            ;809264;00007E; 
-                       ASL A                                ;809266;      ; 
-                       CLC                                  ;809267;      ; 
-                       ADC.B $7E                            ;809268;00007E; 
-                       TAX                                  ;80926A;      ; 
-                       LDA.L PalettePointerTable,X          ;80926B;80B9FD; 
-                       STA.B $72                            ;80926F;000072; 
-                       INX                                  ;809271;      ; 
-                       INX                                  ;809272;      ; 
-                       %Set8bit(!M)                             ;809273;      ; 
-                       LDA.L PalettePointerTable,X          ;809275;80B9FD; 
-                       STA.B $74                            ;809279;000074; 
-                       %Set16bit(!M)                             ;80927B;      ; 
-                       LDA.W #$0100                         ;80927D;      ; 
-                       STA.B $7E                            ;809280;00007E; 
-                       LDX.W #$0000                         ;809282;      ; 
-                       LDY.W #$0000                         ;809285;      ; 
-                                                            ;      ;      ; 
-          CODE_809288: LDA.B [$72],Y                        ;809288;000072; 
-                       STA.L $7F0B00,X                      ;80928A;7F0B00; 
-                       INY                                  ;80928E;      ; 
-                       INY                                  ;80928F;      ; 
-                       INX                                  ;809290;      ; 
-                       INX                                  ;809291;      ; 
-                       CPY.B $7E                            ;809292;00007E; 
-                       BNE CODE_809288                      ;809294;809288; 
-                       %Set8bit(!M)                             ;809296;      ; 
-                       LDA.B #$00                           ;809298;      ; 
-                       XBA                                  ;80929A;      ; 
-                       LDA.B !tilemap_to_load                            ;80929B;000022; 
-                       ASL A                                ;80929D;      ; 
-                       TAX                                  ;80929E;      ; 
-                       INX                                  ;80929F;      ; 
-                       LDA.W UNK_Table11,X                 ;8092A0;00BE44; 
-                       %Set16bit(!M)                             ;8092A3;      ; 
-                       STA.B $7E                            ;8092A5;00007E; 
-                       ASL A                                ;8092A7;      ; 
-                       CLC                                  ;8092A8;      ; 
-                       ADC.B $7E                            ;8092A9;00007E; 
-                       TAX                                  ;8092AB;      ; 
-                       LDA.L PalettePointerTable,X          ;8092AC;80B9FD; 
-                       STA.B $72                            ;8092B0;000072; 
-                       INX                                  ;8092B2;      ; 
-                       INX                                  ;8092B3;      ; 
-                       %Set8bit(!M)                             ;8092B4;      ; 
-                       LDA.L PalettePointerTable,X          ;8092B6;80B9FD; 
-                       STA.B $74                            ;8092BA;000074; 
-                       %Set16bit(!M)                             ;8092BC;      ; 
-                       LDA.W #$0100                         ;8092BE;      ; 
-                       STA.B $7E                            ;8092C1;00007E; 
-                       LDX.W #$0100                         ;8092C3;      ; 
-                       LDY.W #$0000                         ;8092C6;      ; 
-                                                            ;      ;      ; 
-          CODE_8092C9: LDA.B [$72],Y                        ;8092C9;000072; 
-                       STA.L $7F0B00,X                      ;8092CB;7F0B00; 
-                       INY                                  ;8092CF;      ; 
-                       INY                                  ;8092D0;      ; 
-                       INX                                  ;8092D1;      ; 
-                       INX                                  ;8092D2;      ; 
-                       CPY.B $7E                            ;8092D3;00007E; 
-                       BNE CODE_8092C9                      ;8092D5;8092C9; 
-                       %Set8bit(!M)                             ;8092D7;      ; 
-                       LDA.B #$01                           ;8092D9;      ; 
-                       STA.B $92                            ;8092DB;000092; 
-                       JSL.L AAAA                           ;8092DD;8093A4; 
-                       RTL                                  ;8092E1;      ;END_GGGG
+;;;;;;;;
+GGGG:
+        %Set8bit(!M)                         
+        %Set16bit(!X)                        
+        LDA.B #$00                           
+        XBA                                  
+        LDA.B !tilemap_to_load               
+        %Set16bit(!M)                        
+        STA.B $80                            
+        ASL A                                
+        ASL A                                
+        CLC                                  
+        ADC.B $80                            
+        ADC.B $80                            
+        ADC.W #$0004                         ; * 6 + 4?
+        TAX                                  
+        %Set8bit(!M)                         
+        LDA.B #$00                           
+        XBA                                  
+        LDA.L DATA8_80BB5C,X                 
+        %Set16bit(!M)                        
+        STA.B $7E                            
+        ASL A                                
+        CLC                                  
+        ADC.B $7E                            ; * 3
+        TAX                                  
+        LDA.L PalettePointerTable,X          
+        STA.B $72                            ;80926F;000072; 
+        INX                                  ;809271;      ; 
+        INX                                  ;809272;      ; 
+        %Set8bit(!M)                             ;809273;      ; 
+        LDA.L PalettePointerTable,X          ;809275;80B9FD; 
+        STA.B $74                            ;809279;000074; 
+        %Set16bit(!M)                             ;80927B;      ; 
+        LDA.W #$0100                         ;80927D;      ; 
+        STA.B $7E                            ;809280;00007E; 
+        LDX.W #$0000                         ;809282;      ; 
+        LDY.W #$0000                         ;809285;      ; 
+                                        ;      ;      ; 
+        CODE_809288: LDA.B [$72],Y                        ;809288;000072; 
+        STA.L $7F0B00,X                      ;80928A;7F0B00; 
+        INY                                  ;80928E;      ; 
+        INY                                  ;80928F;      ; 
+        INX                                  ;809290;      ; 
+        INX                                  ;809291;      ; 
+        CPY.B $7E                            ;809292;00007E; 
+        BNE CODE_809288                      ;809294;809288; 
+        %Set8bit(!M)                             ;809296;      ; 
+        LDA.B #$00                           ;809298;      ; 
+        XBA                                  ;80929A;      ; 
+        LDA.B !tilemap_to_load                            ;80929B;000022; 
+        ASL A                                ;80929D;      ; 
+        TAX                                  ;80929E;      ; 
+        INX                                  ;80929F;      ; 
+        LDA.W UNK_Table11,X                 ;8092A0;00BE44; 
+        %Set16bit(!M)                             ;8092A3;      ; 
+        STA.B $7E                            ;8092A5;00007E; 
+        ASL A                                ;8092A7;      ; 
+        CLC                                  ;8092A8;      ; 
+        ADC.B $7E                            ;8092A9;00007E; 
+        TAX                                  ;8092AB;      ; 
+        LDA.L PalettePointerTable,X          ;8092AC;80B9FD; 
+        STA.B $72                            ;8092B0;000072; 
+        INX                                  ;8092B2;      ; 
+        INX                                  ;8092B3;      ; 
+        %Set8bit(!M)                             ;8092B4;      ; 
+        LDA.L PalettePointerTable,X          ;8092B6;80B9FD; 
+        STA.B $74                            ;8092BA;000074; 
+        %Set16bit(!M)                             ;8092BC;      ; 
+        LDA.W #$0100                         ;8092BE;      ; 
+        STA.B $7E                            ;8092C1;00007E; 
+        LDX.W #$0100                         ;8092C3;      ; 
+        LDY.W #$0000                         ;8092C6;      ; 
+                                        ;      ;      ; 
+        CODE_8092C9: LDA.B [$72],Y                        ;8092C9;000072; 
+        STA.L $7F0B00,X                      ;8092CB;7F0B00; 
+        INY                                  ;8092CF;      ; 
+        INY                                  ;8092D0;      ; 
+        INX                                  ;8092D1;      ; 
+        INX                                  ;8092D2;      ; 
+        CPY.B $7E                            ;8092D3;00007E; 
+        BNE CODE_8092C9                      ;8092D5;8092C9; 
+        %Set8bit(!M)                             ;8092D7;      ; 
+        LDA.B #$01                           ;8092D9;      ; 
+        STA.B $92                            ;8092DB;000092; 
+        JSL.L AAAA                           ;8092DD;8093A4; 
+        RTL                                  ;8092E1;      ;END_GGGG
                                                             ;      ;      ; 
                                                             ;      ;      ; 
                  FFFF: %Set8bit(!M)                             ;8092E2;      ; 

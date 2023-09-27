@@ -295,7 +295,7 @@
                        LDA.W #$00A1                         ;81821F;      ; 
                        LDX.W $09AD                          ;818222;0009AD; 
                        LDY.W $09AF                          ;818225;0009AF; 
-                       JSL.L CODE_82B03A                    ;818228;82B03A; 
+                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;818228;82B03A; 
                                                             ;      ;      ; 
           CODE_81822C: JSR.W CODE_8188E5                    ;81822C;8188E5; 
                        %Set8bit(!M)                             ;81822F;      ; 
@@ -329,7 +329,7 @@
                        LDA.W #$00A1                         ;818261;      ; 
                        LDX.W $09AD                          ;818264;0009AD; 
                        LDY.W $09AF                          ;818267;0009AF; 
-                       JSL.L CODE_82B03A                    ;81826A;82B03A; 
+                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;81826A;82B03A; 
                                                             ;      ;      ; 
           CODE_81826E: JSR.W CODE_8188E5                    ;81826E;8188E5; 
                        %Set8bit(!M)                             ;818271;      ; 
@@ -363,7 +363,7 @@
                        LDA.W #$00A1                         ;8182A3;      ; 
                        LDX.W $09AD                          ;8182A6;0009AD; 
                        LDY.W $09AF                          ;8182A9;0009AF; 
-                       JSL.L CODE_82B03A                    ;8182AC;82B03A; 
+                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;8182AC;82B03A; 
                                                             ;      ;      ; 
           CODE_8182B0: JSR.W CODE_8188E5                    ;8182B0;8188E5; 
                        %Set8bit(!M)                             ;8182B3;      ; 
@@ -394,7 +394,7 @@
                        LDA.W #$00A1                         ;8182E2;      ; 
                        LDX.W $09AD                          ;8182E5;0009AD; 
                        LDY.W $09AF                          ;8182E8;0009AF; 
-                       JSL.L CODE_82B03A                    ;8182EB;82B03A; 
+                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;8182EB;82B03A; 
                                                             ;      ;      ; 
           CODE_8182EF: JSR.W CODE_8188E5                    ;8182EF;8188E5; 
                        %Set8bit(!M)                             ;8182F2;      ; 
@@ -419,7 +419,7 @@
                        LDA.W #$00A1                         ;81831B;      ; 
                        LDX.W $09AD                          ;81831E;0009AD; 
                        LDY.W $09AF                          ;818321;0009AF; 
-                       JSL.L CODE_82B03A                    ;818324;82B03A; 
+                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;818324;82B03A; 
                                                             ;      ;      ; 
           CODE_818328: JSR.W CODE_8188E5                    ;818328;8188E5; 
                        %Set8bit(!M)                             ;81832B;      ; 
@@ -2535,7 +2535,7 @@
                        JMP.W CODE_819397                    ;819391;819397; 
                                                             ;      ;      ; 
                                                             ;      ;      ; 
-          CODE_819394: JMP.W UnsellableItem                    ;819394;819497; 
+          CODE_819394: JMP.W Droped_on_special_place                    ;819394;819497; 
                                                             ;      ;      ; 
                                                             ;      ;      ; 
           CODE_819397: %Set16bit(!M)                             ;819397;      ; 
@@ -2550,13 +2550,13 @@
                        JSL.L CGGGG                          ;8193B1;82AC61; 
                        CPX.W #$00F2                         ;8193B5;      ; 
                        BEQ CODE_8193BD                      ;8193B8;8193BD; 
-                       JMP.W UnsellableItem                    ;8193BA;819497; 
+                       JMP.W Droped_on_special_place                    ;8193BA;819497; 
                                                             ;      ;      ; 
                                                             ;      ;      ; 
-          CODE_8193BD: BRA Droped_on_special_place                      ;8193BD;8193BF; 
+          CODE_8193BD: BRA Droped_on_sale_place                      ;8193BD;8193BF; 
                                                             ;      ;      ; 
 ;;;;;; This controlls if its get sold or it gets incubated or what happens.
-Droped_on_special_place:
+Droped_on_sale_place:
       %Set8bit(!M)                           
       %Set16bit(!X)                          
       LDA.B #$00                             
@@ -2569,7 +2569,7 @@ Droped_on_special_place:
       %Set8bit(!M)                           
       LDA.L Items_Price_Table,X              
       BNE +                                  ;if its worth something
-      JMP.W UnsellableItem                      
+      JMP.W Droped_on_special_place                      
 
     + LDA.L !hour                            
       CMP.B #17                              ;Before 5
@@ -2598,12 +2598,12 @@ Droped_on_special_place:
       JSL.L CODE_8581A2                      ;TODO
       %Set8bit(!M)                         
       LDA.B !tilemap_to_load               
-      CMP.B !MapBarn                       
+      CMP.B !map_barn                       
       BNE .notbarn                      
       JMP.W .barnbin                      
 
     .notbarn:
-      CMP.B !MapCoop                         
+      CMP.B !map_coop                         
       BNE .notcoop                           
       JMP.W .coopbin                         
 
@@ -2655,7 +2655,7 @@ Droped_on_special_place:
       STZ.W !item_on_hand                  
       JMP.W returnSellFunction             
 
-    UnsellableItem:
+    Droped_on_special_place:
       %Set8bit(!M)                           
       %Set16bit(!X)                          
       LDA.W !item_on_hand                    
@@ -2665,7 +2665,7 @@ Droped_on_special_place:
 
    .itsanegg: 
       LDA.B !tilemap_to_load                 
-      CMP.B !MapCoop                         
+      CMP.B !map_coop                         
       BEQ .itsonthecoop                        
       JMP.W .nothatchableegg                 
 
@@ -2690,7 +2690,7 @@ Droped_on_special_place:
       BEQ .alreadyhatchingegg                
       JMP.W .nothatchableegg                 
 
-   .alreadyhatchingegg: 
+  .alreadyhatchingegg: 
       %Set16bit(!MX)                         
       LDA.W #$0014                           
       LDX.W #$0000                           
@@ -2706,68 +2706,68 @@ Droped_on_special_place:
       JSL.L AddNewChicken                    
       %Set16bit(!MX)                         
       LDA.L $7F1F6E                          
-      ORA.W #$2000                         ;81950B;      ; 
-      STA.L $7F1F6E                        ;81950E;7F1F6E; 
-      LDA.W #$00A1                         ;819512;      ; 
-      LDX.W #$00E0                         ;819515;      ; 
-      LDY.W #$00B0                         ;819518;      ; 
-      JSL.L CODE_82B03A                    ;81951B;82B03A; 
-      %Set16bit(!MX)                             ;81951F;      ; 
-      LDA.W $0978                          ;819521;000978; 
-      STA.B $A5                            ;819524;0000A5; 
-      JSL.L CODE_8581A2                    ;819526;8581A2; 
-      JSL.L CODE_81A4F1                    ;81952A;81A4F1; 
-      %Set8bit(!M)                             ;81952E;      ; 
-      STZ.W !item_on_hand                          ;819530;00091D; 
-      %Set16bit(!MX)                             ;819533;      ; 
-      LDA.W #$0005                         ;819535;      ; 
-      JSL.L AddPlayerHappiness                   ;819538;83B282; 
-      JMP.W returnSellFunction                    ;81953C;8196AE; 
-                                          ;      ;      ; 
-                                          ;      ;      ; 
-    .nothatchableegg:
-      %Set8bit(!M)                             ;81953F;      ; 
-      %Set16bit(!X)                             ;819541;      ; 
-      LDA.B !tilemap_to_load                            ;819543;000022; 
-      CMP.B #$04                           ;819545;      ; 
-      BCC CODE_819590                      ;819547;819590; 
-      CMP.B #$10                           ;819549;      ; 
-      BCS CODE_819550                      ;81954B;819550; 
-      JMP.W CODE_81965B                    ;81954D;81965B; 
-                                          ;      ;      ; 
-                                          ;      ;      ; 
-      CODE_819550: CMP.B #$15                           ;819550;      ; 
-      BCC CODE_819557                      ;819552;819557; 
-      JMP.W CODE_81965B                    ;819554;81965B; 
-                                          ;      ;      ; 
-                                          ;      ;      ; 
-      CODE_819557: %Set16bit(!M)                             ;819557;      ; 
-      LDA.W #$0001                         ;819559;      ; 
-      LDX.W #$0006                         ;81955C;      ; 
-      LDY.W #$0006                         ;81955F;      ; 
-      JSL.L CODE_81D14E                    ;819562;81D14E; 
-      %Set16bit(!MX)                             ;819566;      ; 
-      LDX.W $0985                          ;819568;000985; 
-      LDY.W $0987                          ;81956B;000987; 
+      ORA.W #$2000                           ;hatching egg flag
+      STA.L $7F1F6E                          
+      LDA.W #$00A1                           
+      LDX.W #$00E0                           
+      LDY.W #$00B0                           
+      JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                      
+      %Set16bit(!MX)                         
+      LDA.W $0978                            
+      STA.B $A5                              
+      JSL.L CODE_8581A2                      
+      JSL.L CODE_81A4F1                      
+      %Set8bit(!M)                           
+      STZ.W !item_on_hand                    
+      %Set16bit(!MX)                         
+      LDA.W #$0005                           ;Incubating gives you 5 happiness
+      JSL.L AddPlayerHappiness               
+      JMP.W returnSellFunction               
+
+  .nothatchableegg:
+      %Set8bit(!M)                         
+      %Set16bit(!X)                          
+      LDA.B !tilemap_to_load                 
+      CMP.B !map_farm_winter                 ;Farm
+      BCC .onthefarm                         
+      CMP.B !map_mountain_spring             
+      BCS .onmountain                        
+      JMP.W CODE_81965B                      
+
+  .onmountain:
+      CMP.B !map_house_1                           
+      BCC .beforehouse                       
+      JMP.W CODE_81965B                    
+
+  .beforehouse: 
+      %Set16bit(!M)                          
+      LDA.W #$0001                           
+      LDX.W #$0006                           
+      LDY.W #$0006                           
+      JSL.L CODE_81D14E                      
+      %Set16bit(!MX)                         
+      LDX.W $0985                             
+      LDY.W $0987                             
       LDA.W #$0002                         ;81956E;      ; 
       JSL.L CGGGG                          ;819571;82AC61; 
       %Set16bit(!MX)                             ;819575;      ; 
       LDA.W #$0006                         ;819577;      ; 
       CPX.W #$00F0                         ;81957A;      ; 
-      BNE CODE_819582                      ;81957D;819582; 
+      BNE +                      ;81957D;819582; 
       JMP.W CODE_8195F4                    ;81957F;8195F4; 
                                           ;      ;      ; 
                                           ;      ;      ; 
-      CODE_819582: LDA.W #$0007                         ;819582;      ; 
+    + LDA.W #$0007                         ;819582;      ; 
       CPX.W #$00F4                         ;819585;      ; 
-      BNE CODE_81958D                      ;819588;81958D; 
+      BNE +                      ;819588;81958D; 
       JMP.W CODE_819631                    ;81958A;819631; 
                                           ;      ;      ; 
                                           ;      ;      ; 
-      CODE_81958D: JMP.W CODE_81965B                    ;81958D;81965B; 
+    + JMP.W CODE_81965B                    ;81958D;81965B; 
                                           ;      ;      ; 
                                           ;      ;      ; 
-      CODE_819590: %Set16bit(!M)                             ;819590;      ; 
+  .onthefarm: 
+      %Set16bit(!M)                             ;819590;      ; 
       LDA.W #$0001                         ;819592;      ; 
       LDX.W #$0006                         ;819595;      ; 
       LDY.W #$0006                         ;819598;      ; 
@@ -3117,8 +3117,8 @@ Items_Price_Table:     db $00,$00,$00,$0F,$00,$14,$00,$0F,$00,$14,$00,$3C,$00,$0
                        db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;81A348;      ; 
                        db $00,$00,$00,$00,$00,$00,$00,$01,$00,$00,$00;81A358;      ; 
                                                             ;      ;      ; 
-         DATA8_81A363: db $18,$02,$08,$02,$A8,$01,$D2,$00,$E8,$02,$F2,$00,$18,$03,$52,$02;81A363;      ; 
-                       db $E8,$00,$22,$03,$98,$02,$72,$03,$B0,$02,$70,$01,$68,$00,$50,$02;81A373;      ; 
+         DATA8_81A363: dw $0218,$0208,$01A8,$00D2,$02E8,$00F2,$0318,$0252;81A363;      ; 
+                       dw $00E8,$0322,$0298,$0372,$02B0,$0170,$0068,$0250;81A373;      ; 
                                                             ;      ;      ; 
 BAAAA: ;81A383
       %Set16bit(!MX)                       
@@ -4335,14 +4335,30 @@ UNK_ExecuteFromPointers:
          DATA8_81AC49: db $80,$01,$50,$00,$90,$01,$50,$00,$A0,$01,$50,$00,$B0,$01,$50,$00;81AC49;      ; 
                        db $C0,$01,$50,$00,$80,$01,$60,$00,$90,$01,$60,$00,$A0,$01,$60,$00;81AC59;      ; 
                        db $B0,$01,$60,$00,$C0,$01,$60,$00,$60,$60,$60,$60,$60,$60,$60,$60;81AC69;      ; 
-                       db $60,$60,$60,$60,$60,$60,$60       ;81AC79;      ; 
-                       %Set16bit(!MX)                             ;81AC80;      ; 
+
+         DATA8_00AC71: RTS                                  ;81AC71;      ; 
+                       RTS                                  ;81AC72;      ; 
+                       RTS                                  ;81AC73;      ; 
+                       RTS                                  ;81AC74;      ; 
+                       RTS                                  ;81AC75;      ; 
+                       RTS                                  ;81AC76;      ; 
+                       RTS                                  ;81AC77;      ; 
+         DATA8_00AC78: RTS                                  ;81AC78;      ; 
+         DATA8_00AC79: RTS                                  ;81AC79;      ; 
+         DATA8_00AC7A: RTS                                  ;81AC7A;      ; 
+         DATA8_00AC7B: RTS                                  ;81AC7B;      ; 
+         DATA8_00AC7C: RTS                                  ;81AC7C;      ; 
+         DATA8_00AC7D: RTS                                  ;81AC7D;      ; 
+         DATA8_00AC7E: RTS                                  ;81AC7E;      ; 
+         DATA8_00AC7F: RTS                                  ;81AC7F;      ; 
+
+         DATA8_00AC80: REP #$30                             ;81AC80;      ; 
                        LDA.W $0196                          ;81AC82;000196; 
                        AND.W #$0002                         ;81AC85;      ; 
                        BNE CODE_81ACB7                      ;81AC88;81ACB7; 
                        LDA.W $0196                          ;81AC8A;000196; 
                        AND.W #$0008                         ;81AC8D;      ; 
-                       BNE CODE_81ACB7                      ;81AC90;81ACB7; 
+                       BNE CODE_81ACB7                      ;81AC90;81ACB7;
                                                             ;      ;      ; 
           CODE_81AC92: %Set16bit(!MX)                             ;81AC92;      ; 
                        LDA.L $7F1F64                        ;81AC94;7F1F64; 
@@ -4377,9 +4393,9 @@ UNK_ExecuteFromPointers:
                                                             ;      ;      ; 
                        RTS                                  ;81ACCA;      ; 
                                                             ;      ;      ; 
-                       RTS                                  ;81ACCB;      ; 
+         DATA8_00ACCB: RTS                                  ;81ACCB;      ; 
                                                             ;      ;      ; 
-                       %Set16bit(!MX)                             ;81ACCC;      ; 
+         DATA8_00ACCC: %Set16bit(!MX)                             ;81ACCC;      ; 
                        LDA.W $0196                          ;81ACCE;000196; 
                        AND.W #$0010                         ;81ACD1;      ; 
                        BEQ CODE_81ACE3                      ;81ACD4;81ACE3; 
@@ -4400,7 +4416,7 @@ UNK_ExecuteFromPointers:
                        LDA.W #$00D7                         ;81ACFD;      ; 
                        LDX.W #$0090                         ;81AD00;      ; 
                        LDY.W #$0050                         ;81AD03;      ; 
-                       JSL.L CODE_82B03A                    ;81AD06;82B03A; 
+                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;81AD06;82B03A; 
                                                             ;      ;      ; 
           CODE_81AD0A: %Set16bit(!MX)                             ;81AD0A;      ; 
                        LDA.L $7F1F6E                        ;81AD0C;7F1F6E; 
@@ -4413,7 +4429,7 @@ UNK_ExecuteFromPointers:
                                                             ;      ;      ; 
           CODE_81AD22: RTS                                  ;81AD22;      ; 
                                                             ;      ;      ; 
-                       %Set16bit(!MX)                             ;81AD23;      ; 
+         DATA8_00AD23: %Set16bit(!MX)                             ;81AD23;      ; 
                        LDA.W $0196                          ;81AD25;000196; 
                        AND.W #$0010                         ;81AD28;      ; 
                        BEQ CODE_81AD3A                      ;81AD2B;81AD3A; 
@@ -4434,7 +4450,7 @@ UNK_ExecuteFromPointers:
                        LDA.W #$00D7                         ;81AD54;      ; 
                        LDX.W #$0090                         ;81AD57;      ; 
                        LDY.W #$0050                         ;81AD5A;      ; 
-                       JSL.L CODE_82B03A                    ;81AD5D;82B03A; 
+                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;81AD5D;82B03A; 
                                                             ;      ;      ; 
           CODE_81AD61: %Set16bit(!MX)                             ;81AD61;      ; 
                        LDA.L $7F1F6E                        ;81AD63;7F1F6E; 
@@ -4447,7 +4463,7 @@ UNK_ExecuteFromPointers:
                                                             ;      ;      ; 
           CODE_81AD79: RTS                                  ;81AD79;      ; 
                                                             ;      ;      ; 
-                       %Set16bit(!MX)                             ;81AD7A;      ; 
+         DATA8_00AD7A: %Set16bit(!MX)                             ;81AD7A;      ; 
                        LDA.W $0196                          ;81AD7C;000196; 
                        AND.W #$0010                         ;81AD7F;      ; 
                        BEQ CODE_81AD91                      ;81AD82;81AD91; 
@@ -4468,7 +4484,7 @@ UNK_ExecuteFromPointers:
                        LDA.W #$00D7                         ;81ADAB;      ; 
                        LDX.W #$0140                         ;81ADAE;      ; 
                        LDY.W #$0060                         ;81ADB1;      ; 
-                       JSL.L CODE_82B03A                    ;81ADB4;82B03A; 
+                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;81ADB4;82B03A; 
                                                             ;      ;      ; 
           CODE_81ADB8: %Set16bit(!MX)                             ;81ADB8;      ; 
                        LDA.L $7F1F6E                        ;81ADBA;7F1F6E; 
@@ -4480,16 +4496,11 @@ UNK_ExecuteFromPointers:
                        JSL.L CODE_81A7CE                    ;81ADCC;81A7CE; 
                                                             ;      ;      ; 
           CODE_81ADD0: RTS                                  ;81ADD0;      ; 
-                                                            ;      ;      ; 
-                       RTS                                  ;81ADD1;      ; 
-                                                            ;      ;      ; 
-                       RTS                                  ;81ADD2;      ; 
-                                                            ;      ;      ; 
-                       RTS                                  ;81ADD3;      ; 
-                                                            ;      ;      ; 
-                       RTS                                  ;81ADD4;      ; 
-                                                            ;      ;      ; 
-                       %Set16bit(!MX)                             ;81ADD5;      ; 
+         DATA8_00ADD1: RTS                                  ;81ADD1;      ; 
+         DATA8_00ADD2: RTS                                  ;81ADD2;      ; 
+         DATA8_00ADD3: RTS                                  ;81ADD3;      ; 
+         DATA8_00ADD4: RTS                                  ;81ADD4;      ; 
+         DATA8_00ADD5: %Set16bit(!MX)                             ;81ADD5;      ; 
                        LDA.L $7F1F68                        ;81ADD7;7F1F68; 
                        AND.W #$0001                         ;81ADDB;      ; 
                        BNE CODE_81ADE3                      ;81ADDE;81ADE3; 
@@ -4566,17 +4577,17 @@ UNK_ExecuteFromPointers:
                                                             ;      ;      ; 
           CODE_81AE69: RTS                                  ;81AE69;      ; 
                                                             ;      ;      ; 
-                       RTS                                  ;81AE6A;      ; 
+         DATA8_00AE6A: RTS                                  ;81AE6A;      ; 
                                                             ;      ;      ; 
-                       RTS                                  ;81AE6B;      ; 
+         DATA8_00AE6B: RTS                                  ;81AE6B;      ; 
                                                             ;      ;      ; 
-                       RTS                                  ;81AE6C;      ; 
+         DATA8_00AE6C: RTS                                  ;81AE6C;      ; 
                                                             ;      ;      ; 
-                       RTS                                  ;81AE6D;      ; 
+         DATA8_00AE6D: RTS                                  ;81AE6D;      ; 
                                                             ;      ;      ; 
-                       RTS                                  ;81AE6E;      ; 
+         DATA8_00AE6E: RTS                                  ;81AE6E;      ; 
                                                             ;      ;      ; 
-                       %Set16bit(!MX)                             ;81AE6F;      ; 
+         DATA8_00AE6F: %Set16bit(!MX)                             ;81AE6F;      ; 
                        LDA.L $7F1F68                        ;81AE71;7F1F68; 
                        AND.W #$0001                         ;81AE75;      ; 
                        BNE CODE_81AE7D                      ;81AE78;81AE7D; 
@@ -4720,9 +4731,9 @@ UNK_ExecuteFromPointers:
                                                             ;      ;      ; 
           CODE_81AFBE: RTS                                  ;81AFBE;      ; 
                                                             ;      ;      ; 
-                       RTS                                  ;81AFBF;      ; 
+         DATA8_00AFBF: RTS                                  ;81AFBF;      ; 
                                                             ;      ;      ; 
-                       %Set16bit(!MX)                             ;81AFC0;      ; 
+         DATA8_00AFC0: %Set16bit(!MX)                             ;81AFC0;      ; 
                        LDA.L $7F1F68                        ;81AFC2;7F1F68; 
                        AND.W #$0001                         ;81AFC6;      ; 
                        BNE CODE_81AFCE                      ;81AFC9;81AFCE; 
@@ -4793,9 +4804,9 @@ UNK_ExecuteFromPointers:
                                                             ;      ;      ; 
           CODE_81B062: RTS                                  ;81B062;      ; 
                                                             ;      ;      ; 
-                       RTS                                  ;81B063;      ; 
+         DATA8_00B063: RTS                                  ;81B063;      ; 
                                                             ;      ;      ; 
-                       %Set16bit(!MX)                             ;81B064;      ; 
+         DATA8_00B064: %Set16bit(!MX)                             ;81B064;      ; 
                        LDY.W #$0000                         ;81B066;      ; 
                                                             ;      ;      ; 
           CODE_81B069: %Set16bit(!MX)                             ;81B069;      ; 
@@ -4832,7 +4843,7 @@ UNK_ExecuteFromPointers:
                                                             ;      ;      ; 
           CODE_81B0A7: RTS                                  ;81B0A7;      ; 
                                                             ;      ;      ; 
-                       %Set16bit(!MX)                             ;81B0A8;      ; 
+         DATA8_00B0A8: %Set16bit(!MX)                             ;81B0A8;      ; 
                        LDA.W #$001A                         ;81B0AA;      ; 
                        LDX.W #$0000                         ;81B0AD;      ; 
                        LDY.W #$0001                         ;81B0B0;      ; 
@@ -4895,7 +4906,8 @@ UNK_ExecuteFromPointers:
                        dw $7A30,$68FA,$A722,$82B0,$30C2,$EFA9,$A200,$0020;81B23D;      ; 
                        dw $B0A0,$4801,$5ADA,$CE22,$81A7,$30C2,$FA7A,$2268;81B24D;      ; 
                        dw $B0A7,$6082,$6060,$6060,$6060,$6060,$6060,$6060;81B25D;      ; 
-                       %Set16bit(!MX)                             ;81B26D;      ; 
+
+         DATA8_00B26D: %Set16bit(!MX)                             ;81B26D;      ; 
                        LDA.L $7F1F5A                        ;81B26F;7F1F5A; 
                        AND.W #$0001                         ;81B273;      ; 
                        BNE CODE_81B292                      ;81B276;81B292; 
@@ -11716,7 +11728,7 @@ CODE_81D716: ;81D716
                        LDA.W #$00A1                         ;81F596;      ; 
                        LDX.W $09AD                          ;81F599;0009AD; 
                        LDY.W $09AF                          ;81F59C;0009AF; 
-                       JSL.L CODE_82B03A                    ;81F59F;82B03A; 
+                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;81F59F;82B03A; 
                        %Set16bit(!MX)                             ;81F5A3;      ; 
                        LDA.W #$0040                         ;81F5A5;      ; 
                        EOR.W #$FFFF                         ;81F5A8;      ; 

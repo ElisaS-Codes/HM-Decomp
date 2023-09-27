@@ -2,11 +2,7 @@ bcs if bigger, bcc if lower
 Params A:Control Registers, X:VRAM/CGRAM Dest Addresses, Y(DMA Size), $72 & $74 24b src
 
 ====Re-DECOMP
-80AA7C
-80AB3C
-InputTypeSelector DATA16_84C014
-DATA8_81A9F6 = pointers 16
-DATA8_81AC49 tons of rts probably
+PalettePointerTable
 
 ====Working on
 UNK_BigLoop

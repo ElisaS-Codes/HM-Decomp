@@ -7576,7 +7576,7 @@
                        PLX                                  ;84BA48;      ; 
                        %Set8bit(!M)                             ;84BA49;      ; 
                        PLA                                  ;84BA4B;      ; 
-                       JSL.L CODE_82B03A                    ;84BA4C;82B03A; 
+                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;84BA4C;82B03A; 
                        RTS                                  ;84BA50;      ; 
                                                             ;      ;      ; 
                        %Set16bit(!MX)                             ;84BA51;      ; 
