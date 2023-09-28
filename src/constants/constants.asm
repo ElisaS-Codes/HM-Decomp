@@ -53,6 +53,12 @@ endmacro
 !key_Right = #$0200
 !key_B = #$8000
 !key_A = #$0080
+!key_X = #$0040
+!key_Y = #$4000
+!key_R = #$0010
+!key_L = #$0020
+!key_Select = #$2000
+!key_Start = #$1000
 
 ;;Items
 !item_egg = #$28

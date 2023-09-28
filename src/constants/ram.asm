@@ -164,6 +164,8 @@
 !player_name_long_2 = $08D7 ;16b
 !player_name_long_3 = $08D9 ;16b
 !player_name_long_4 = $08DB ;16b
+!player_direction = $DA ;16
+;0:down, 
 !player_pos_X = $D6 ;16b
 !player_pos_Y = $D8 ;16b
 !max_stamina = $0917 ;8b
@@ -176,7 +178,7 @@
 !happiness = $7F1F33 ;16b
 !power_berry_N = $7F1F36 ;8b
 !player_action = $D4 ;16b TODO
-;1 walk, 2 run, 3 jump, 4 item on hand, 9 idle, b tired?, c show item start, 10 about to cast, 11 fishing, 12 fishing with bite, 13 reeling, 14 drunk, 15 drinking
+;1 walk, 2 run, 3 jump, 4 item on hand, 05 Drop Item 09 idle, 0A Using Tool, 0B Tired, 0C Show Tool, 0D whistle Horse, 0F about to cast, 10 casting, 11 fishing, 12 fishing with bite, 13 reeling, 14 drunk, 15 drinking, 16, Dropping Dog 1B Whistle Dog, 1C Use Tool
 !exaustion_level = $096C
 
 ;;Family

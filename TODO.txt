@@ -5,6 +5,11 @@ Params A:Control Registers, X:VRAM/CGRAM Dest Addresses, Y(DMA Size), $72 & $74 
 PalettePointerTable
 
 ====Working on
+$DA ???
+
+
+
+
 UNK_BigLoop
 UNK_PartialMap
 UNK_OperatesOnSeasonTable
@@ -103,9 +108,10 @@ $D1 -
 $D2 -Flags?
 "$0004" set overnight, some stops movement? $0004 set if regenerating $0924 rng
 "0008" set when you have no stamina
-???? s?hm - m: Can Move; h: holding item; s: no stamina
+w??? ???? - w:walking to transition
+d??? s?hm - d: carrying dog m: Can Move; h: holding item; s: no stamina; x:
 $D3 - 
-$DA - 
+$DA - Player sprite to load?
 $DC - 
 $E5 - if player sprite is looking horizontal?
 $E7 - if player sprite is looking vertical?
@@ -205,6 +211,7 @@ $7E08D3 -
 $0901 - (what animation?)
 #$003c - idle?
 #$004B-#$004D = stamina lowering animation
+#008B+4 fishing something
 
 $0905 - OAM Source pointer? related to 7EA100 block
 
@@ -324,13 +331,15 @@ $7F1F49 - (0)
 $7F1F5A - (flags? $8000 related to time. #$0400 related to time too)
 $7F1F5C - (some kind of flag, related to palettes?)
 ???? ????
-???? ???u - u: related to $0196
+?x?? ???u - u: related to $0196 x:wont move
 $7F1F5E - (flags? related to time $8000 checked during night)
 ???? ????
 ???? ???b - b:Things in the shipping bin
 $7F1F60 - Flags? $0800 related to 098D? resets during night
-???? s??? - s: Save failed CRC
+t??? s??? - t:tool related? no stamina? s: Save failed CRC
 ???? c??? - can change stamina?
+
+FishingCastLine
 
 $7F1F62 - 
 $7F1F64 - Player Flags 1
@@ -342,7 +351,7 @@ $7F1F66 - (Which Wife)
 ???w wwww - each bit might be a wife, to select witch one you have
 $7F1F68 - Flags?
 ???? ????
-???? ???u - u = when set, it doesnt re-generates $0924 rng number
+d??? h??u - d:dog owned h:horse owned u:when set, it doesnt re-generates $0924 rng number
 
 $7F1F6A - Events Flags?
 $7F1F6C - 

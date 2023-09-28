@@ -8269,7 +8269,7 @@
                        %Set16bit(!MX)                             ;84BF94;      ; 
                        LDA.W #$000A                         ;84BF96;      ; 
                        STA.B !player_action                            ;84BF99;0000D4; 
-                       JSL.L CODE_8290A8                    ;84BF9B;8290A8; 
+                       JSL.L ToolUsed                    ;84BF9B;8290A8; 
                                                             ;      ;      ; 
           CODE_84BF9F: RTS                                  ;84BF9F;      ; 
                                                             ;      ;      ; 
@@ -9215,220 +9215,204 @@ NameMenuKeyRight: ;84C267
                        STZ.W $018B                          ;84C6B3;00018B; 
                                                             ;      ;      ; 
           CODE_84C6B6: RTL                                  ;84C6B6;      ; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          PlayerMovementInputs: %Set16bit(!MX)                             ;84C6B7;      ; 
-                       LDA.B $D2                            ;84C6B9;0000D2; 
-                       AND.W #$00C4                         ;84C6BB;      ; 
-                       BEQ +                      ;84C6BE;84C6C3; 
-                       JMP.W InputsReturn                    ;84C6C0;84C7B5; 
 
-          + LDA.B !player_action                            ;84C6C3;0000D4; 
-                       CMP.W #$0003                         ;84C6C5;      ; 
-                       BNE +                      ;84C6C8;84C6CD; 
-                       JMP.W InputsReturn                    ;84C6CA;84C7B5; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          + LDA.L $7F1F5C                        ;84C6CD;7F1F5C; 
-                       AND.W #$0020                         ;84C6D1;      ; 
-                       BEQ +                      ;84C6D4;84C6D9; 
-                       JMP.W InputsReturn                    ;84C6D6;84C7B5; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-        + %Set16bit(!MX)                             ;84C6D9;      ; 
-                       LDA.B $D2                            ;84C6DB;0000D2; 
-                       AND.W #$1000                         ;84C6DD;      ; 
-                       BEQ +                      ;84C6E0;84C6E5; 
-                       JMP.W CODE_84C7D6                    ;84C6E2;84C7D6; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          + %Set16bit(!MX)                             ;84C6E5;      ; 
-                       LDA.B $D2                            ;84C6E7;0000D2; 
-                       AND.W #$4000                         ;84C6E9;      ; 
-                       BNE +                     ;84C6EC;84C6F1; 
-                       JMP.W InputsReturn                    ;84C6EE;84C7B5; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          + %Set16bit(!MX)                             ;84C6F1;      ; 
-                       LDA.B !player_action                            ;84C6F3;0000D4; 
-                       CMP.W #$0011                         ;84C6F5;      ; 
-                       BNE +                      ;84C6F8;84C6FD; 
-                       JMP.W CODE_84C7AA                    ;84C6FA;84C7AA; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          + CMP.W #$0012                         ;84C6FD;      ; 
-                       BNE +                      ;84C700;84C705; 
-                       JMP.W CODE_84C7AA                    ;84C702;84C7AA; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          + %Set8bit(!M)                             ;84C705;      ; 
-                       LDX.B !player_action                            ;84C707;0000D4; 
-                       LDA.L DATA8_84C7B6,X                 ;84C709;84C7B6; 
-                       BEQ +                      ;84C70D;84C712; 
-                       JMP.W InputsReturn                    ;84C70F;84C7B5; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          + %Set16bit(!MX)                             ;84C712;      ; 
-                       LDA.W !Joy1_Current                          ;84C714;000124; 
-                       BIT.W #$0400                         ;84C717;      ; 
-                       BEQ +                      ;84C71A;84C71F; 
-                       JMP.W CODE_84C935                    ;84C71C;84C935; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          + LDA.W !Joy1_Current                          ;84C71F;000124; 
-                       BIT.W #$0800                         ;84C722;      ; 
-                       BEQ CODE_84C72A                      ;84C725;84C72A; 
-                       JMP.W CODE_84C96F                    ;84C727;84C96F; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C72A: LDA.W !Joy1_Current                          ;84C72A;000124; 
-                       BIT.W #$0100                         ;84C72D;      ; 
-                       BEQ CODE_84C735                      ;84C730;84C735; 
-                       JMP.W CODE_84C9A9                    ;84C732;84C9A9; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C735: LDA.W !Joy1_Current                          ;84C735;000124; 
-                       BIT.W #$0200                         ;84C738;      ; 
-                       BEQ CODE_84C740                      ;84C73B;84C740; 
-                       JMP.W CODE_84C9E3                    ;84C73D;84C9E3; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C740: %Set16bit(!MX)                             ;84C740;      ; 
-                       LDA.B $D2                            ;84C742;0000D2; 
-                       AND.W #$1000                         ;84C744;      ; 
-                       BEQ CODE_84C74C                      ;84C747;84C74C; 
-                       JMP.W CODE_84C804                    ;84C749;84C804; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C74C: %Set16bit(!MX)                             ;84C74C;      ; 
-                       LDA.B !player_action                            ;84C74E;0000D4; 
-                       CMP.W #$000F                         ;84C750;      ; 
-                       BNE CODE_84C758                      ;84C753;84C758; 
-                       JMP.W CODE_84C7AA                    ;84C755;84C7AA; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C758: %Set16bit(!M)                             ;84C758;      ; 
-                       LDA.W !Joy1_New_Input                          ;84C75A;000128; 
-                       BIT.W #$0080                         ;84C75D;      ; 
-                       BEQ CODE_84C765                      ;84C760;84C765; 
-                       JMP.W CODE_84CAA5                    ;84C762;84CAA5; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C765: %Set16bit(!MX)                             ;84C765;      ; 
-                       LDA.B $D2                            ;84C767;0000D2; 
-                       AND.W #$0020                         ;84C769;      ; 
-                       BEQ CODE_84C771                      ;84C76C;84C771; 
-                       JMP.W InputsReturn                    ;84C76E;84C7B5; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C771: %Set16bit(!M)                             ;84C771;      ; 
-                       LDA.W !Joy1_Current                          ;84C773;000124; 
-                       BIT.W #$8000                         ;84C776;      ; 
-                       BEQ CODE_84C77E                      ;84C779;84C77E; 
-                       JMP.W CODE_84CA1D                    ;84C77B;84CA1D; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C77E: LDA.W !Joy1_New_Input                          ;84C77E;000128; 
-                       BIT.W #$2000                         ;84C781;      ; 
-                       BEQ CODE_84C789                      ;84C784;84C789; 
-                       JMP.W CODE_84CE7A                    ;84C786;84CE7A; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C789: LDA.W !Joy1_New_Input                          ;84C789;000128; 
-                       BIT.W #$0040                         ;84C78C;      ; 
-                       BEQ CODE_84C794                      ;84C78F;84C794; 
-                       JMP.W CODE_84CEA6                    ;84C791;84CEA6; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C794: LDA.W !Joy1_New_Input                          ;84C794;000128; 
-                       BIT.W #$0010                         ;84C797;      ; 
-                       BEQ CODE_84C79F                      ;84C79A;84C79F; 
-                       JMP.W CODE_84CE0C                    ;84C79C;84CE0C; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C79F: LDA.W !Joy1_New_Input                          ;84C79F;000128; 
-                       BIT.W #$0020                         ;84C7A2;      ; 
-                       BEQ CODE_84C7AA                      ;84C7A5;84C7AA; 
-                       JMP.W CODE_84CE43                    ;84C7A7;84CE43; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C7AA: LDA.W !Joy1_New_Input                          ;84C7AA;000128; 
-                       BIT.W #$4000                         ;84C7AD;      ; 
-                       BEQ InputsReturn                      ;84C7B0;84C7B5; 
-                       JMP.W CODE_84CD77                    ;84C7B2;84CD77; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          InputsReturn: RTL                                  ;84C7B5;      ; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-         DATA8_84C7B6: db $00,$00,$00,$00,$01,$01,$00,$00,$01,$00,$01,$01,$01,$01,$00,$00;84C7B6;      ; 
-                       db $01,$00,$00,$01,$01,$01,$01,$01,$01,$00,$01,$01,$01,$00,$00,$00;84C7C6;      ; 
+;;;;;;Pretty simple, checks all keys. Fishing has its own subrutines
+PlayerMovementInputs:
+      %Set16bit(!MX)                             
+      LDA.B $D2                              
+      AND.W #$00C4                           ;flags that indicate it cant interact
+      BEQ +                                  
+      JMP.W InputsReturn                     
+
+    + LDA.B !player_action                
+      CMP.W #$0003                           ;Jump
+      BNE +                                  
+      JMP.W InputsReturn                     
+
+    + LDA.L $7F1F5C                        
+      AND.W #$0020                           ;TODO
+      BEQ +                                  
+      JMP.W InputsReturn                     
+
+    + %Set16bit(!MX)                       
+      LDA.B $D2                              
+      AND.W #$1000                           ;TODO
+      BEQ +                                  
+      JMP.W CODE_84C7D6                      ;TODO
+
+    + %Set16bit(!MX)                       
+      LDA.B $D2                              
+      AND.W #$4000                           ;TODO
+      BNE +                                  
+      JMP.W InputsReturn                     
+
+    + %Set16bit(!MX)                         
+      LDA.B !player_action                   
+      CMP.W #$0011                           ;Fishing
+      BNE +                                  
+      JMP.W PlayerActionToolUse                      
+
+    + CMP.W #$0012                           ;Fishing with bite
+      BNE +                                  
+      JMP.W PlayerActionToolUse                    
+
+    + %Set8bit(!M)                           
+      LDX.B !player_action                   
+      LDA.L PlayerActionCanInteract,X        
+      BEQ +                                  
+      JMP.W InputsReturn                     
+
+    + %Set16bit(!MX)                         
+      LDA.W !Joy1_Current                    
+      BIT.W !key_Down                           
+      BEQ +                                  
+      JMP.W PlayerActionDown                      
+
+    + LDA.W !Joy1_Current                  
+      BIT.W !key_Up                        
+      BEQ +                      
+      JMP.W PlayerActionUp                    
+
+    + LDA.W !Joy1_Current                    
+      BIT.W !key_Left                           
+      BEQ +                        
+      JMP.W PlayerActionLeft                      
+
+    + LDA.W !Joy1_Current                    
+      BIT.W !key_Right                       
+      BEQ PlayerActionKeysPressed           
+      JMP.W PlayerActionRight                      
+
+;;;;;;
+PlayerActionKeysPressed: 
+      %Set16bit(!MX)                         
+      LDA.B $D2                              
+      AND.W #$1000                           ;TODO
+      BEQ +
+      JMP.W CODE_84C804                      
+
+    + %Set16bit(!MX)                         
+      LDA.B !player_action                   
+      CMP.W #$000F                           ;prepared to cast
+      BNE +                        
+      JMP.W PlayerActionToolUse                    
+
+    + %Set16bit(!M)                          
+      LDA.W !Joy1_New_Input                  
+      BIT.W !key_A                           
+      BEQ +                       
+      JMP.W PlayerKeyA                       
+
+    + %Set16bit(!MX)                         
+      LDA.B $D2                              
+      AND.W #$0020                           
+      BEQ +                        
+      JMP.W InputsReturn                     
+
+    + %Set16bit(!M)                          
+      LDA.W !Joy1_Current                    
+      BIT.W !key_B                           
+      BEQ +                                  
+      JMP.W PlayerKeyB                      
+
+    + LDA.W !Joy1_New_Input                  
+      BIT.W !key_Select                      
+      BEQ +                                  
+      JMP.W PlayerKeySelect                      
+
+    + LDA.W !Joy1_New_Input                  
+      BIT.W !key_X                           
+      BEQ +                                  
+      JMP.W PlayerKeyX                      
+
+    + LDA.W !Joy1_New_Input                  
+      BIT.W !key_R                           
+      BEQ +                                  
+      JMP.W PlayerKeyR                      
+
+    + LDA.W !Joy1_New_Input                  
+      BIT.W !key_L                           
+      BEQ PlayerActionToolUse                      
+      JMP.W PlayerKeyL                      
+
+  PlayerActionToolUse:
+      LDA.W !Joy1_New_Input                  
+      BIT.W !key_Y                           
+      BEQ InputsReturn                       
+      JMP.W PlayerKeyY                      
+
+InputsReturn: RTL                            
+
+;1 walk, 2 run, 3 jump, 4 item on hand, 9 idle, b tired?, c show item start, 10 casting, 11 fishing, 12 fishing with bite, 13 reeling, 14 drunk, 15 drinking
+;Inverse 1 = CANT'T move or interact
+PlayerActionCanInteract: db $00,$00,$00,$00,$01,$01,$00,$00,$01,$00,$01,$01,$01,$01,$00,$00;84C7B6;      ; 
+                         db $01,$00,$00,$01,$01,$01,$01,$01,$01,$00,$01,$01,$01,$00,$00,$00;84C7C6;      ; 
                                                             ;      ;      ; 
           CODE_84C7D6: %Set16bit(!MX)                             ;84C7D6;      ; 
                        LDA.W $08FD                          ;84C7D8;0008FD; 
                        BIT.W #$0400                         ;84C7DB;      ; 
                        BEQ CODE_84C7E3                      ;84C7DE;84C7E3; 
-                       JMP.W CODE_84C935                    ;84C7E0;84C935; 
+                       JMP.W PlayerActionDown                    ;84C7E0;84C935; 
                                                             ;      ;      ; 
                                                             ;      ;      ; 
           CODE_84C7E3: LDA.W $08FD                          ;84C7E3;0008FD; 
                        BIT.W #$0800                         ;84C7E6;      ; 
                        BEQ CODE_84C7EE                      ;84C7E9;84C7EE; 
-                       JMP.W CODE_84C96F                    ;84C7EB;84C96F; 
+                       JMP.W PlayerActionUp                    ;84C7EB;84C96F; 
                                                             ;      ;      ; 
                                                             ;      ;      ; 
           CODE_84C7EE: LDA.W $08FD                          ;84C7EE;0008FD; 
                        BIT.W #$0100                         ;84C7F1;      ; 
                        BEQ CODE_84C7F9                      ;84C7F4;84C7F9; 
-                       JMP.W CODE_84C9A9                    ;84C7F6;84C9A9; 
+                       JMP.W PlayerActionLeft                    ;84C7F6;84C9A9; 
                                                             ;      ;      ; 
                                                             ;      ;      ; 
           CODE_84C7F9: LDA.W $08FD                          ;84C7F9;0008FD; 
                        BIT.W #$0200                         ;84C7FC;      ; 
                        BEQ CODE_84C804                      ;84C7FF;84C804; 
-                       JMP.W CODE_84C9E3                    ;84C801;84C9E3; 
+                       JMP.W PlayerActionRight                    ;84C801;84C9E3; 
                                                             ;      ;      ; 
                                                             ;      ;      ; 
           CODE_84C804: LDA.W $08FD                          ;84C804;0008FD; 
                        BIT.W #$0080                         ;84C807;      ; 
                        BEQ CODE_84C80F                      ;84C80A;84C80F; 
-                       JMP.W CODE_84CAA5                    ;84C80C;84CAA5; 
+                       JMP.W PlayerKeyA                    ;84C80C;84CAA5; 
                                                             ;      ;      ; 
                                                             ;      ;      ; 
           CODE_84C80F: LDA.W $08FD                          ;84C80F;0008FD; 
                        BIT.W #$8000                         ;84C812;      ; 
                        BEQ CODE_84C81A                      ;84C815;84C81A; 
-                       JMP.W CODE_84CA1D                    ;84C817;84CA1D; 
+                       JMP.W PlayerKeyB                    ;84C817;84CA1D; 
                                                             ;      ;      ; 
                                                             ;      ;      ; 
           CODE_84C81A: LDA.W $08FD                          ;84C81A;0008FD; 
                        BIT.W #$2000                         ;84C81D;      ; 
                        BEQ CODE_84C825                      ;84C820;84C825; 
-                       JMP.W CODE_84CE7A                    ;84C822;84CE7A; 
+                       JMP.W PlayerKeySelect                    ;84C822;84CE7A; 
                                                             ;      ;      ; 
                                                             ;      ;      ; 
           CODE_84C825: LDA.W $08FD                          ;84C825;0008FD; 
                        BIT.W #$0040                         ;84C828;      ; 
                        BEQ CODE_84C830                      ;84C82B;84C830; 
-                       JMP.W CODE_84CEA6                    ;84C82D;84CEA6; 
+                       JMP.W PlayerKeyX                    ;84C82D;84CEA6; 
                                                             ;      ;      ; 
                                                             ;      ;      ; 
           CODE_84C830: LDA.W $08FD                          ;84C830;0008FD; 
                        BIT.W #$0010                         ;84C833;      ; 
                        BEQ CODE_84C83B                      ;84C836;84C83B; 
-                       JMP.W CODE_84CE0C                    ;84C838;84CE0C; 
+                       JMP.W PlayerKeyR                    ;84C838;84CE0C; 
                                                             ;      ;      ; 
                                                             ;      ;      ; 
           CODE_84C83B: LDA.W $08FD                          ;84C83B;0008FD; 
                        BIT.W #$0020                         ;84C83E;      ; 
                        BEQ CODE_84C846                      ;84C841;84C846; 
-                       JMP.W CODE_84CE43                    ;84C843;84CE43; 
+                       JMP.W PlayerKeyL                    ;84C843;84CE43; 
                                                             ;      ;      ; 
                                                             ;      ;      ; 
           CODE_84C846: LDA.W $08FD                          ;84C846;0008FD; 
                        BIT.W #$4000                         ;84C849;      ; 
                        BEQ CODE_84C851                      ;84C84C;84C851; 
-                       JMP.W CODE_84CD77                    ;84C84E;84CD77; 
+                       JMP.W PlayerKeyY                    ;84C84E;84CD77; 
                                                             ;      ;      ; 
                                                             ;      ;      ; 
           CODE_84C851: RTL                                  ;84C851;      ; 
@@ -9558,260 +9542,260 @@ NameMenuKeyRight: ;84C267
                        LDA.W #$0000                         ;84C92D;      ; 
                        STA.B !player_action                            ;84C930;0000D4; 
                        JMP.W CODE_84C889                    ;84C932;84C889; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C935: %Set16bit(!MX)                             ;84C935;      ; 
-                       LDA.W #$0001                         ;84C937;      ; 
-                       STA.B !player_action                            ;84C93A;0000D4; 
-                       %Set16bit(!MX)                             ;84C93C;      ; 
-                       LDA.W #$0000                         ;84C93E;      ; 
-                       STA.B $DA                            ;84C941;0000DA; 
-                       %Set16bit(!MX)                             ;84C943;      ; 
-                       LDA.W #$0000                         ;84C945;      ; 
-                       STA.W $0911                          ;84C948;000911; 
-                       JMP.W CODE_84C740                    ;84C94B;84C740; 
-                                                            ;      ;      ; 
-                       %Set16bit(!MX)                             ;84C94E;      ; 
-                       LDA.W $0911                          ;84C950;000911; 
-                       CMP.W #$0001                         ;84C953;      ; 
-                       BNE CODE_84C95B                      ;84C956;84C95B; 
-                       JMP.W CODE_84C95E                    ;84C958;84C95E; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C95B: JMP.W InputsReturn                    ;84C95B;84C7B5; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C95E: %Set16bit(!MX)                             ;84C95E;      ; 
-                       LDA.W #$0001                         ;84C960;      ; 
-                       STA.B !player_action                            ;84C963;0000D4; 
-                       %Set16bit(!MX)                             ;84C965;      ; 
-                       LDA.W #$0001                         ;84C967;      ; 
-                       STA.B $DA                            ;84C96A;0000DA; 
-                       JMP.W InputsReturn                    ;84C96C;84C7B5; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C96F: %Set16bit(!MX)                             ;84C96F;      ; 
-                       LDA.W #$0001                         ;84C971;      ; 
-                       STA.B !player_action                            ;84C974;0000D4; 
-                       %Set16bit(!MX)                             ;84C976;      ; 
-                       LDA.W #$0001                         ;84C978;      ; 
-                       STA.B $DA                            ;84C97B;0000DA; 
-                       %Set16bit(!MX)                             ;84C97D;      ; 
-                       LDA.W #$0001                         ;84C97F;      ; 
-                       STA.W $0911                          ;84C982;000911; 
-                       JMP.W CODE_84C740                    ;84C985;84C740; 
-                                                            ;      ;      ; 
-                       %Set16bit(!MX)                             ;84C988;      ; 
-                       LDA.W $0911                          ;84C98A;000911; 
-                       CMP.W #$0000                         ;84C98D;      ; 
-                       BNE CODE_84C995                      ;84C990;84C995; 
-                       JMP.W CODE_84C998                    ;84C992;84C998; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C995: JMP.W CODE_84C740                    ;84C995;84C740; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C998: %Set16bit(!MX)                             ;84C998;      ; 
-                       LDA.W #$0001                         ;84C99A;      ; 
-                       STA.B !player_action                            ;84C99D;0000D4; 
-                       %Set16bit(!MX)                             ;84C99F;      ; 
-                       LDA.W #$0000                         ;84C9A1;      ; 
-                       STA.B $DA                            ;84C9A4;0000DA; 
-                       JMP.W InputsReturn                    ;84C9A6;84C7B5; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C9A9: %Set16bit(!MX)                             ;84C9A9;      ; 
-                       LDA.W #$0001                         ;84C9AB;      ; 
-                       STA.B !player_action                            ;84C9AE;0000D4; 
-                       %Set16bit(!MX)                             ;84C9B0;      ; 
-                       LDA.W #$0002                         ;84C9B2;      ; 
-                       STA.B $DA                            ;84C9B5;0000DA; 
-                       %Set16bit(!MX)                             ;84C9B7;      ; 
-                       LDA.W #$0002                         ;84C9B9;      ; 
-                       STA.W $0911                          ;84C9BC;000911; 
-                       JMP.W CODE_84C740                    ;84C9BF;84C740; 
-                                                            ;      ;      ; 
-                       %Set16bit(!MX)                             ;84C9C2;      ; 
-                       LDA.W $0911                          ;84C9C4;000911; 
-                       CMP.W #$0003                         ;84C9C7;      ; 
-                       BNE CODE_84C9CF                      ;84C9CA;84C9CF; 
-                       JMP.W CODE_84C9D2                    ;84C9CC;84C9D2; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C9CF: JMP.W CODE_84C740                    ;84C9CF;84C740; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C9D2: %Set16bit(!MX)                             ;84C9D2;      ; 
-                       LDA.W #$0001                         ;84C9D4;      ; 
-                       STA.B !player_action                            ;84C9D7;0000D4; 
-                       %Set16bit(!MX)                             ;84C9D9;      ; 
-                       LDA.W #$0003                         ;84C9DB;      ; 
-                       STA.B $DA                            ;84C9DE;0000DA; 
-                       JMP.W InputsReturn                    ;84C9E0;84C7B5; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84C9E3: %Set16bit(!MX)                             ;84C9E3;      ; 
-                       LDA.W #$0001                         ;84C9E5;      ; 
-                       STA.B !player_action                            ;84C9E8;0000D4; 
-                       %Set16bit(!MX)                             ;84C9EA;      ; 
-                       LDA.W #$0003                         ;84C9EC;      ; 
-                       STA.B $DA                            ;84C9EF;0000DA; 
-                       %Set16bit(!MX)                             ;84C9F1;      ; 
-                       LDA.W #$0003                         ;84C9F3;      ; 
-                       STA.W $0911                          ;84C9F6;000911; 
-                       JMP.W CODE_84C740                    ;84C9F9;84C740; 
-                                                            ;      ;      ; 
-                       %Set16bit(!MX)                             ;84C9FC;      ; 
-                       LDA.W $0911                          ;84C9FE;000911; 
-                       CMP.W #$0002                         ;84CA01;      ; 
-                       BNE CODE_84CA09                      ;84CA04;84CA09; 
-                       JMP.W CODE_84CA0C                    ;84CA06;84CA0C; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CA09: JMP.W CODE_84C740                    ;84CA09;84C740; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CA0C: %Set16bit(!MX)                             ;84CA0C;      ; 
-                       LDA.W #$0001                         ;84CA0E;      ; 
-                       STA.B !player_action                            ;84CA11;0000D4; 
-                       %Set16bit(!MX)                             ;84CA13;      ; 
-                       LDA.W #$0002                         ;84CA15;      ; 
-                       STA.B $DA                            ;84CA18;0000DA; 
-                       JMP.W InputsReturn                    ;84CA1A;84C7B5; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CA1D: %Set16bit(!MX)                             ;84CA1D;      ; 
-                       LDA.B $D2                            ;84CA1F;0000D2; 
-                       AND.W #$0800                         ;84CA21;      ; 
-                       BEQ CODE_84CA29                      ;84CA24;84CA29; 
-                       JMP.W CODE_84CA9D                    ;84CA26;84CA9D; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CA29: LDA.W #$0000                         ;84CA29;      ; 
-                       LDX.W #$0007                         ;84CA2C;      ; 
-                       LDY.W #$0007                         ;84CA2F;      ; 
-                       JSL.L CODE_81D14E                    ;84CA32;81D14E; 
-                       %Set16bit(!MX)                             ;84CA36;      ; 
-                       LDX.W $0985                          ;84CA38;000985; 
-                       LDY.W $0987                          ;84CA3B;000987; 
-                       LDA.W #$0002                         ;84CA3E;      ; 
-                       JSL.L CGGGG                          ;84CA41;82AC61; 
-                       %Set8bit(!M)                             ;84CA45;      ; 
-                       AND.B #$60                           ;84CA47;      ; 
-                       BEQ CODE_84CA9D                      ;84CA49;84CA9D; 
-                       AND.B #$20                           ;84CA4B;      ; 
-                       BNE CODE_84CA5F                      ;84CA4D;84CA5F; 
-                       %Set16bit(!MX)                             ;84CA4F;      ; 
-                       LDA.B $D2                            ;84CA51;0000D2; 
-                       ORA.W #$0200                         ;84CA53;      ; 
-                       STA.B $D2                            ;84CA56;0000D2; 
-                       %Set16bit(!M)                             ;84CA58;      ; 
-                       LDA.W #$0021                         ;84CA5A;      ; 
-                       BRA CODE_84CA66                      ;84CA5D;84CA66; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CA5F: %Set16bit(!M)                             ;84CA5F;      ; 
-                       LDA.W #$001C                         ;84CA61;      ; 
-                       BRA CODE_84CA66                      ;84CA64;84CA66; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CA66: %Set16bit(!MX)                             ;84CA66;      ; 
-                       STA.B $E3                            ;84CA68;0000E3; 
-                       LDA.B !player_pos_X                           ;84CA6A;0000D6; 
-                       STA.B $DF                            ;84CA6C;0000DF; 
-                       LDA.B !player_pos_Y                            ;84CA6E;0000D8; 
-                       STA.B $E1                            ;84CA70;0000E1; 
-                       STZ.B $E5                            ;84CA72;0000E5; 
-                       STZ.B $E7                            ;84CA74;0000E7; 
-                       LDA.B $DA                            ;84CA76;0000DA; 
-                       JSL.L CEEEE                          ;84CA78;83AF37; 
-                       %Set16bit(!MX)                             ;84CA7C;      ; 
-                       BNE CODE_84CA9D                      ;84CA7E;84CA9D; 
-                       %Set16bit(!M)                             ;84CA80;      ; 
-                       LDA.W #$0020                         ;84CA82;      ; 
-                       STA.B $E3                            ;84CA85;0000E3; 
-                       LDA.B $DA                            ;84CA87;0000DA; 
-                       JSL.L CBBBB                          ;84CA89;83AD91; 
-                       %Set16bit(!MX)                             ;84CA8D;      ; 
-                       CMP.W #$0000                         ;84CA8F;      ; 
-                       BNE CODE_84CA9D                      ;84CA92;84CA9D; 
-                       %Set16bit(!MX)                             ;84CA94;      ; 
-                       LDA.W #$0003                         ;84CA96;      ; 
-                       STA.B !player_action                            ;84CA99;0000D4; 
-                       BRA CODE_84CAA4                      ;84CA9B;84CAA4; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CA9D: %Set16bit(!MX)                             ;84CA9D;      ; 
-                       LDA.W #$0002                         ;84CA9F;      ; 
-                       STA.B !player_action                            ;84CAA2;0000D4; 
-                                                            ;      ;      ; 
-          CODE_84CAA4: RTL                                  ;84CAA4;      ; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CAA5: %Set16bit(!MX)                             ;84CAA5;      ; 
-                       LDA.B $D2                            ;84CAA7;0000D2; 
-                       AND.W #$0800                         ;84CAA9;      ; 
-                       BEQ CODE_84CAB1                      ;84CAAC;84CAB1; 
-                       JMP.W CODE_84CB2B                    ;84CAAE;84CB2B; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CAB1: LDA.B $D2                            ;84CAB1;0000D2; 
-                       AND.W #$0010                         ;84CAB3;      ; 
-                       BEQ CODE_84CABB                      ;84CAB6;84CABB; 
-                       JMP.W CODE_84CC1C                    ;84CAB8;84CC1C; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CABB: LDA.L $7F1F60                        ;84CABB;7F1F60; 
-                       AND.W #$0006                         ;84CABF;      ; 
-                       BEQ CODE_84CAC7                      ;84CAC2;84CAC7; 
-                       JMP.W CODE_84CAFE                    ;84CAC4;84CAFE; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CAC7: %Set16bit(!MX)                             ;84CAC7;      ; 
-                       LDA.B $D2                            ;84CAC9;0000D2; 
-                       AND.W #$0002                         ;84CACB;      ; 
-                       BEQ CODE_84CAD3                      ;84CACE;84CAD3; 
-                       JMP.W CODE_84CAF6                    ;84CAD0;84CAF6; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CAD3: %Set16bit(!M)                             ;84CAD3;      ; 
-                       LDA.W #$0000                         ;84CAD5;      ; 
-                       LDX.W #$0007                         ;84CAD8;      ; 
-                       LDY.W #$0007                         ;84CADB;      ; 
-                       JSL.L CODE_81D14E                    ;84CADE;81D14E; 
-                       %Set16bit(!MX)                             ;84CAE2;      ; 
-                       LDX.W $0985                          ;84CAE4;000985; 
-                       LDY.W $0987                          ;84CAE7;000987; 
-                       LDA.W #$0002                         ;84CAEA;      ; 
-                       JSL.L CGGGG                          ;84CAED;82AC61; 
-                       JSL.L CODE_82AD0E                    ;84CAF1;82AD0E; 
-                       RTL                                  ;84CAF5;      ; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CAF6: %Set16bit(!MX)                             ;84CAF6;      ; 
-                       LDA.W #$0005                         ;84CAF8;      ; 
-                       STA.B !player_action                            ;84CAFB;0000D4; 
-                       RTL                                  ;84CAFD;      ; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CAFE: %Set16bit(!MX)                             ;84CAFE;      ; 
-                       LDA.W #$0000                         ;84CB00;      ; 
-                       LDX.W #$0007                         ;84CB03;      ; 
-                       LDY.W #$0007                         ;84CB06;      ; 
-                       JSL.L CODE_81D14E                    ;84CB09;81D14E; 
-                       %Set16bit(!MX)                             ;84CB0D;      ; 
-                       LDX.W $0985                          ;84CB0F;000985; 
-                       LDY.W $0987                          ;84CB12;000987; 
-                       LDA.W #$0000                         ;84CB15;      ; 
-                       JSL.L CGGGG                          ;84CB18;82AC61; 
-                       %Set16bit(!MX)                             ;84CB1C;      ; 
-                       CPX.W #$00F5                         ;84CB1E;      ; 
-                       BNE CODE_84CB2A                      ;84CB21;84CB2A; 
-                       %Set16bit(!MX)                             ;84CB23;      ; 
-                       LDA.W #$001A                         ;84CB25;      ; 
-                       STA.B !player_action                            ;84CB28;0000D4; 
-                                                            ;      ;      ; 
-          CODE_84CB2A: RTL                                  ;84CB2A;      ; 
+
+;;;;;;
+PlayerActionDown: ;84C935
+      %Set16bit(!MX)                         
+      LDA.W #$0001                           ;Walking
+      STA.B !player_action                   
+      %Set16bit(!MX)                         
+      LDA.W #$0000                           
+      STA.B $DA                              
+      %Set16bit(!MX)                         
+      LDA.W #$0000                           
+      STA.W $0911                            ;TODO
+      JMP.W PlayerActionKeysPressed          
+
+      %Set16bit(!MX)                         
+      LDA.W $0911                            
+      CMP.W #$0001                           
+      BNE .return                            
+      JMP.W .reversecommand                  
+
+  .return JMP.W InputsReturn                 
+
+  .reversecommand: 
+      %Set16bit(!MX)                         
+      LDA.W #$0001                           
+      STA.B !player_action                   
+      %Set16bit(!MX)                         
+      LDA.W #$0001                           
+      STA.B $DA                              
+      JMP.W InputsReturn                     
+
+;;;;;;
+PlayerActionUp: 
+      %Set16bit(!MX)                         
+      LDA.W #$0001                           
+      STA.B !player_action                   
+      %Set16bit(!MX)                         
+      LDA.W #$0001                         ;84C978;      ; 
+      STA.B $DA                            ;84C97B;0000DA; 
+      %Set16bit(!MX)                             ;84C97D;      ; 
+      LDA.W #$0001                         ;84C97F;      ; 
+      STA.W $0911                          ;84C982;000911; 
+      JMP.W PlayerActionKeysPressed                    ;84C985;84C740; 
+                                  ;      ;      ; 
+      %Set16bit(!MX)                             ;84C988;      ; 
+      LDA.W $0911                          ;84C98A;000911; 
+      CMP.W #$0000                         ;84C98D;      ; 
+      BNE CODE_84C995                      ;84C990;84C995; 
+      JMP.W CODE_84C998                    ;84C992;84C998; 
+                                  ;      ;      ; 
+                                  ;      ;      ; 
+      CODE_84C995: JMP.W PlayerActionKeysPressed                    ;84C995;84C740; 
+                                  ;      ;      ; 
+                                  ;      ;      ; 
+      CODE_84C998: %Set16bit(!MX)                             ;84C998;      ; 
+      LDA.W #$0001                         ;84C99A;      ; 
+      STA.B !player_action                            ;84C99D;0000D4; 
+      %Set16bit(!MX)                             ;84C99F;      ; 
+      LDA.W #$0000                         ;84C9A1;      ; 
+      STA.B $DA                            ;84C9A4;0000DA; 
+      JMP.W InputsReturn                    ;84C9A6;84C7B5; 
+                                  ;      ;      ; 
+                                  ;      ;      ; 
+      PlayerActionLeft: %Set16bit(!MX)                             ;84C9A9;      ; 
+      LDA.W #$0001                         ;84C9AB;      ; 
+      STA.B !player_action                            ;84C9AE;0000D4; 
+      %Set16bit(!MX)                             ;84C9B0;      ; 
+      LDA.W #$0002                         ;84C9B2;      ; 
+      STA.B $DA                            ;84C9B5;0000DA; 
+      %Set16bit(!MX)                             ;84C9B7;      ; 
+      LDA.W #$0002                         ;84C9B9;      ; 
+      STA.W $0911                          ;84C9BC;000911; 
+      JMP.W PlayerActionKeysPressed                    ;84C9BF;84C740; 
+                                  ;      ;      ; 
+      %Set16bit(!MX)                             ;84C9C2;      ; 
+      LDA.W $0911                          ;84C9C4;000911; 
+      CMP.W #$0003                         ;84C9C7;      ; 
+      BNE CODE_84C9CF                      ;84C9CA;84C9CF; 
+      JMP.W CODE_84C9D2                    ;84C9CC;84C9D2; 
+                                  ;      ;      ; 
+                                  ;      ;      ; 
+      CODE_84C9CF: JMP.W PlayerActionKeysPressed                    ;84C9CF;84C740; 
+                                  ;      ;      ; 
+                                  ;      ;      ; 
+      CODE_84C9D2: %Set16bit(!MX)                             ;84C9D2;      ; 
+      LDA.W #$0001                         ;84C9D4;      ; 
+      STA.B !player_action                            ;84C9D7;0000D4; 
+      %Set16bit(!MX)                             ;84C9D9;      ; 
+      LDA.W #$0003                         ;84C9DB;      ; 
+      STA.B $DA                            ;84C9DE;0000DA; 
+      JMP.W InputsReturn                    ;84C9E0;84C7B5; 
+                                  ;      ;      ; 
+                                  ;      ;      ; 
+      PlayerActionRight: %Set16bit(!MX)                             ;84C9E3;      ; 
+      LDA.W #$0001                         ;84C9E5;      ; 
+      STA.B !player_action                            ;84C9E8;0000D4; 
+      %Set16bit(!MX)                             ;84C9EA;      ; 
+      LDA.W #$0003                         ;84C9EC;      ; 
+      STA.B $DA                            ;84C9EF;0000DA; 
+      %Set16bit(!MX)                             ;84C9F1;      ; 
+      LDA.W #$0003                         ;84C9F3;      ; 
+      STA.W $0911                          ;84C9F6;000911; 
+      JMP.W PlayerActionKeysPressed                    ;84C9F9;84C740; 
+                                  ;      ;      ; 
+      %Set16bit(!MX)                             ;84C9FC;      ; 
+      LDA.W $0911                          ;84C9FE;000911; 
+      CMP.W #$0002                         ;84CA01;      ; 
+      BNE CODE_84CA09                      ;84CA04;84CA09; 
+      JMP.W CODE_84CA0C                    ;84CA06;84CA0C; 
+                                  ;      ;      ; 
+                                  ;      ;      ; 
+      CODE_84CA09: JMP.W PlayerActionKeysPressed                    ;84CA09;84C740; 
+                                  ;      ;      ; 
+                                  ;      ;      ; 
+      CODE_84CA0C: %Set16bit(!MX)                             ;84CA0C;      ; 
+      LDA.W #$0001                         ;84CA0E;      ; 
+      STA.B !player_action                            ;84CA11;0000D4; 
+      %Set16bit(!MX)                             ;84CA13;      ; 
+      LDA.W #$0002                         ;84CA15;      ; 
+      STA.B $DA                            ;84CA18;0000DA; 
+      JMP.W InputsReturn                    ;84CA1A;84C7B5; 
+
+;;;;;;
+PlayerKeyB:
+      %Set16bit(!MX)                       
+      LDA.B $D2                            
+      AND.W #$0800                         ;Playing an animation
+      BEQ +                      ;84CA24;84CA29; 
+      JMP.W .running                    ;84CA26;84CA9D; 
+
+    + LDA.W #$0000                         ;84CA29;      ; 
+      LDX.W #$0007                         ;84CA2C;      ; 
+      LDY.W #$0007                         ;84CA2F;      ; 
+      JSL.L CODE_81D14E                    ;84CA32;81D14E; 
+      %Set16bit(!MX)                             ;84CA36;      ; 
+      LDX.W $0985                          ;84CA38;000985; 
+      LDY.W $0987                          ;84CA3B;000987; 
+      LDA.W #$0002                         ;84CA3E;      ; 
+      JSL.L CGGGG                          ;84CA41;82AC61; 
+      %Set8bit(!M)                             ;84CA45;      ; 
+      AND.B #$60                           ;84CA47;      ; 
+      BEQ .running                      ;84CA49;84CA9D; 
+      AND.B #$20                           ;84CA4B;      ; 
+      BNE ++                      ;84CA4D;84CA5F; 
+      %Set16bit(!MX)                             ;84CA4F;      ; 
+      LDA.B $D2                            ;84CA51;0000D2; 
+      ORA.W #$0200                         ;84CA53;      ; 
+      STA.B $D2                            ;84CA56;0000D2; 
+      %Set16bit(!M)                             ;84CA58;      ; 
+      LDA.W #$0021                         ;84CA5A;      ; 
+      BRA +                      ;84CA5D;84CA66; 
+                                          ;      ;      ; 
+                                          ;      ;      ; 
+   ++ %Set16bit(!M)                             ;84CA5F;      ; 
+      LDA.W #$001C                         ;84CA61;      ; 
+      BRA +                      ;84CA64;84CA66; 
+                                          ;      ;      ; 
+                                          ;      ;      ; 
+    + %Set16bit(!MX)                             ;84CA66;      ; 
+      STA.B $E3                            ;84CA68;0000E3; 
+      LDA.B !player_pos_X                           ;84CA6A;0000D6; 
+      STA.B $DF                            ;84CA6C;0000DF; 
+      LDA.B !player_pos_Y                            ;84CA6E;0000D8; 
+      STA.B $E1                            ;84CA70;0000E1; 
+      STZ.B $E5                            ;84CA72;0000E5; 
+      STZ.B $E7                            ;84CA74;0000E7; 
+      LDA.B $DA                            ;84CA76;0000DA; 
+      JSL.L CEEEE                          ;84CA78;83AF37; 
+      %Set16bit(!MX)                             ;84CA7C;      ; 
+      BNE .running                      ;84CA7E;84CA9D; 
+      %Set16bit(!M)                             ;84CA80;      ; 
+      LDA.W #$0020                         ;84CA82;      ; 
+      STA.B $E3                            ;84CA85;0000E3; 
+      LDA.B $DA                            ;84CA87;0000DA; 
+      JSL.L CBBBB                          ;84CA89;83AD91; 
+      %Set16bit(!MX)                             ;84CA8D;      ; 
+      CMP.W #$0000                         ;84CA8F;      ; 
+      BNE .running                      ;84CA92;84CA9D; 
+      %Set16bit(!MX)                             ;84CA94;      ; 
+      LDA.W #$0003                         ;84CA96;      ; 
+      STA.B !player_action                            ;84CA99;0000D4; 
+      BRA .return                      ;84CA9B;84CAA4; 
+
+  .running:
+      %Set16bit(!MX)                         
+      LDA.W #$0002                           ;Running
+      STA.B !player_action                   
+
+  .return: RTL                                  ;84CAA4;      ; 
+
+;;;;;;
+PlayerKeyA:
+      %Set16bit(!MX)                         
+      LDA.B $D2                              
+      AND.W #$0800                           ;Playing an animation
+      BEQ +                        
+      JMP.W CODE_84CB2B                      
+
+    + LDA.B $D2                              
+      AND.W #$0010                           ;Carring item or dog
+      BEQ +                                  
+      JMP.W CODE_84CC1C                      ;TODO
+
+    + LDA.L $7F1F60                          
+      AND.W #$0006                           ;TODO
+      BEQ +                        
+      JMP.W CODE_84CAFE                      ;TODO
+
+    + %Set16bit(!MX)                         
+      LDA.B $D2                              
+      AND.W #$0002                           ;TODO
+      BEQ +                                  
+      JMP.W CODE_84CAF6                      ;TODO
+
+    + %Set16bit(!M)                          
+      LDA.W #$0000                           
+      LDX.W #$0007                           
+      LDY.W #$0007                           
+      JSL.L CODE_81D14E                      
+      %Set16bit(!MX)                         
+      LDX.W $0985                            
+      LDY.W $0987                            
+      LDA.W #$0002                           
+      JSL.L CGGGG                            
+      JSL.L CODE_82AD0E                      
+
+      RTL                                    
+
+;;;;;;
+  CODE_84CAF6: ;84CAF6
+      %Set16bit(!MX)                         
+      LDA.W #$0005                           ;Drop Item
+      STA.B !player_action                   
+      RTL                                    
+
+  CODE_84CAFE: ;84CAFE
+      %Set16bit(!MX)                             ;      ; 
+      LDA.W #$0000                         ;84CB00;      ; 
+      LDX.W #$0007                         ;84CB03;      ; 
+      LDY.W #$0007                         ;84CB06;      ; 
+      JSL.L CODE_81D14E                    ;84CB09;81D14E; 
+      %Set16bit(!MX)                             ;84CB0D;      ; 
+      LDX.W $0985                          ;84CB0F;000985; 
+      LDY.W $0987                          ;84CB12;000987; 
+      LDA.W #$0000                         ;84CB15;      ; 
+      JSL.L CGGGG                          ;84CB18;82AC61; 
+      %Set16bit(!MX)                             ;84CB1C;      ; 
+      CPX.W #$00F5                         ;84CB1E;      ; 
+      BNE .return                      ;84CB21;84CB2A; 
+      %Set16bit(!MX)                             ;84CB23;      ; 
+      LDA.W #$001A                         ;84CB25;      ; 
+      STA.B !player_action                            ;84CB28;0000D4; 
+                                        ;      ;      ; 
+  .return: RTL                                  ;84CB2A;      ; 
                                                             ;      ;      ; 
                                                             ;      ;      ; 
           CODE_84CB2B: %Set16bit(!MX)                             ;84CB2B;      ; 
@@ -10096,214 +10080,206 @@ NameMenuKeyRight: ;84C267
           CODE_84CD71: %Set16bit(!MX)                             ;84CD71;      ; 
                        LDA.W #$0001                         ;84CD73;      ; 
                        RTL                                  ;84CD76;      ; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CD77: %Set16bit(!MX)                             ;84CD77;      ; 
-                       LDA.B $D2                            ;84CD79;0000D2; 
-                       AND.W #$0002                         ;84CD7B;      ; 
-                       BEQ CODE_84CD83                      ;84CD7E;84CD83; 
-                       JMP.W CODE_84CDDC                    ;84CD80;84CDDC; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CD83: %Set16bit(!MX)                             ;84CD83;      ; 
-                       LDA.B $D2                            ;84CD85;0000D2; 
-                       AND.W #$0010                         ;84CD87;      ; 
-                       BEQ CODE_84CD8F                      ;84CD8A;84CD8F; 
-                       JMP.W CODE_84CDDC                    ;84CD8C;84CDDC; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CD8F: %Set16bit(!MX)                             ;84CD8F;      ; 
-                       LDA.B $D2                            ;84CD91;0000D2; 
-                       AND.W #$0800                         ;84CD93;      ; 
-                       BEQ CODE_84CD9B                      ;84CD96;84CD9B; 
-                       JMP.W CODE_84CDDC                    ;84CD98;84CDDC; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CD9B: %Set16bit(!MX)                             ;84CD9B;      ; 
-                       LDA.B !player_action                            ;84CD9D;0000D4; 
-                       CMP.W #$000F                         ;84CD9F;      ; 
-                       BNE CODE_84CDA7                      ;84CDA2;84CDA7; 
-                       JMP.W CODE_84CDDD                    ;84CDA4;84CDDD; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CDA7: %Set16bit(!MX)                             ;84CDA7;      ; 
-                       LDA.B !player_action                            ;84CDA9;0000D4; 
-                       CMP.W #$0011                         ;84CDAB;      ; 
-                       BNE CODE_84CDB3                      ;84CDAE;84CDB3; 
-                       JMP.W CODE_84CDE5                    ;84CDB0;84CDE5; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CDB3: %Set16bit(!MX)                             ;84CDB3;      ; 
-                       LDA.B !player_action                            ;84CDB5;0000D4; 
-                       CMP.W #$0012                         ;84CDB7;      ; 
-                       BNE CODE_84CDBF                      ;84CDBA;84CDBF; 
-                       JMP.W CODE_84CDED                    ;84CDBC;84CDED; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CDBF: %Set16bit(!M)                             ;84CDBF;      ; 
-                       LDA.L $7F1F60                        ;84CDC1;7F1F60; 
-                       AND.W #$8000                         ;84CDC5;      ; 
-                       BNE CODE_84CDDC                      ;84CDC8;84CDDC; 
-                       %Set8bit(!M)                             ;84CDCA;      ; 
-                       LDA.W !tool_selected                          ;84CDCC;000921; 
-                       BEQ CODE_84CDDC                      ;84CDCF;84CDDC; 
-                       %Set16bit(!MX)                             ;84CDD1;      ; 
-                       LDA.W #$000A                         ;84CDD3;      ; 
-                       STA.B !player_action                            ;84CDD6;0000D4; 
-                       JSL.L CODE_8290A8                    ;84CDD8;8290A8; 
-                                                            ;      ;      ; 
-          CODE_84CDDC: RTL                                  ;84CDDC;      ; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CDDD: %Set16bit(!MX)                             ;84CDDD;      ; 
-                       LDA.W #$0010                         ;84CDDF;      ; 
-                       STA.B !player_action                            ;84CDE2;0000D4; 
-                       RTL                                  ;84CDE4;      ; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CDE5: %Set16bit(!MX)                             ;84CDE5;      ; 
-                       LDA.W #$000F                         ;84CDE7;      ; 
-                       STA.B !player_action                            ;84CDEA;0000D4; 
-                       RTL                                  ;84CDEC;      ; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CDED: %Set16bit(!MX)                             ;84CDED;      ; 
-                       LDA.W #$0013                         ;84CDEF;      ; 
-                       STA.B !player_action                            ;84CDF2;0000D4; 
-                       %Set8bit(!M)                             ;84CDF4;      ; 
-                       LDA.B #$03                           ;84CDF6;      ; 
-                       JSL.L RNGReturn0toA                  ;84CDF8;8089F9; 
-                       %Set8bit(!M)                             ;84CDFC;      ; 
-                       XBA                                  ;84CDFE;      ; 
-                       LDA.B #$00                           ;84CDFF;      ; 
-                       XBA                                  ;84CE01;      ; 
-                       %Set16bit(!M)                             ;84CE02;      ; 
-                       CLC                                  ;84CE04;      ; 
-                       ADC.W #$008B                         ;84CE05;      ; 
-                       STA.W $0901                          ;84CE08;000901; 
-                       RTL                                  ;84CE0B;      ; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CE0C: %Set16bit(!MX)                             ;84CE0C;      ; 
-                       LDA.B $D2                            ;84CE0E;0000D2; 
-                       AND.W #$0002                         ;84CE10;      ; 
-                       BEQ CODE_84CE18                      ;84CE13;84CE18; 
-                       JMP.W CODE_84CE42                    ;84CE15;84CE42; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CE18: %Set16bit(!MX)                             ;84CE18;      ; 
-                       LDA.B $D2                            ;84CE1A;0000D2; 
-                       AND.W #$0010                         ;84CE1C;      ; 
-                       BEQ CODE_84CE24                      ;84CE1F;84CE24; 
-                       JMP.W CODE_84CE42                    ;84CE21;84CE42; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CE24: %Set16bit(!MX)                             ;84CE24;      ; 
-                       LDA.B $D2                            ;84CE26;0000D2; 
-                       AND.W #$0800                         ;84CE28;      ; 
-                       BEQ CODE_84CE30                      ;84CE2B;84CE30; 
-                       JMP.W CODE_84CE42                    ;84CE2D;84CE42; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CE30: %Set16bit(!MX)                             ;84CE30;      ; 
-                       LDA.L $7F1F68                        ;84CE32;7F1F68; 
-                       AND.W #$0100                         ;84CE36;      ; 
-                       BEQ CODE_84CE42                      ;84CE39;84CE42; 
-                       %Set16bit(!MX)                             ;84CE3B;      ; 
-                       LDA.W #$000D                         ;84CE3D;      ; 
-                       STA.B !player_action                            ;84CE40;0000D4; 
-                                                            ;      ;      ; 
-          CODE_84CE42: RTL                                  ;84CE42;      ; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CE43: %Set16bit(!MX)                             ;84CE43;      ; 
-                       LDA.B $D2                            ;84CE45;0000D2; 
-                       AND.W #$0002                         ;84CE47;      ; 
-                       BEQ CODE_84CE4F                      ;84CE4A;84CE4F; 
-                       JMP.W CODE_84CE79                    ;84CE4C;84CE79; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CE4F: %Set16bit(!MX)                             ;84CE4F;      ; 
-                       LDA.B $D2                            ;84CE51;0000D2; 
-                       AND.W #$0010                         ;84CE53;      ; 
-                       BEQ CODE_84CE5B                      ;84CE56;84CE5B; 
-                       JMP.W CODE_84CE79                    ;84CE58;84CE79; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CE5B: %Set16bit(!MX)                             ;84CE5B;      ; 
-                       LDA.B $D2                            ;84CE5D;0000D2; 
-                       AND.W #$0800                         ;84CE5F;      ; 
-                       BEQ CODE_84CE67                      ;84CE62;84CE67; 
-                       JMP.W CODE_84CE79                    ;84CE64;84CE79; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CE67: %Set16bit(!MX)                             ;84CE67;      ; 
-                       LDA.L $7F1F68                        ;84CE69;7F1F68; 
-                       AND.W #$0080                         ;84CE6D;      ; 
-                       BEQ CODE_84CE79                      ;84CE70;84CE79; 
-                       %Set16bit(!MX)                             ;84CE72;      ; 
-                       LDA.W #$001B                         ;84CE74;      ; 
-                       STA.B !player_action                            ;84CE77;0000D4; 
-                                                            ;      ;      ; 
-          CODE_84CE79: RTL                                  ;84CE79;      ; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CE7A: %Set16bit(!MX)                             ;84CE7A;      ; 
-                       LDA.B $D2                            ;84CE7C;0000D2; 
-                       AND.W #$0002                         ;84CE7E;      ; 
-                       BEQ CODE_84CE86                      ;84CE81;84CE86; 
-                       JMP.W CODE_84CEA5                    ;84CE83;84CEA5; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CE86: %Set16bit(!MX)                             ;84CE86;      ; 
-                       LDA.B $D2                            ;84CE88;0000D2; 
-                       AND.W #$0010                         ;84CE8A;      ; 
-                       BEQ CODE_84CE92                      ;84CE8D;84CE92; 
-                       JMP.W CODE_84CEA5                    ;84CE8F;84CEA5; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CE92: %Set16bit(!MX)                             ;84CE92;      ; 
-                       LDA.B $D2                            ;84CE94;0000D2; 
-                       AND.W #$0800                         ;84CE96;      ; 
-                       BEQ CODE_84CE9E                      ;84CE99;84CE9E; 
-                       JMP.W CODE_84CEA5                    ;84CE9B;84CEA5; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CE9E: %Set16bit(!MX)                             ;84CE9E;      ; 
-                       LDA.W #$000C                         ;84CEA0;      ; 
-                       STA.B !player_action                            ;84CEA3;0000D4; 
-                                                            ;      ;      ; 
-          CODE_84CEA5: RTL                                  ;84CEA5;      ; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CEA6: %Set16bit(!MX)                             ;84CEA6;      ; 
-                       LDA.B $D2                            ;84CEA8;0000D2; 
-                       AND.W #$0002                         ;84CEAA;      ; 
-                       BEQ CODE_84CEB2                      ;84CEAD;84CEB2; 
-                       JMP.W CODE_84CED1                    ;84CEAF;84CED1; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CEB2: %Set16bit(!MX)                             ;84CEB2;      ; 
-                       LDA.B $D2                            ;84CEB4;0000D2; 
-                       AND.W #$0010                         ;84CEB6;      ; 
-                       BEQ CODE_84CEBE                      ;84CEB9;84CEBE; 
-                       JMP.W CODE_84CED1                    ;84CEBB;84CED1; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CEBE: %Set16bit(!MX)                             ;84CEBE;      ; 
-                       LDA.B $D2                            ;84CEC0;0000D2; 
-                       AND.W #$0800                         ;84CEC2;      ; 
-                       BEQ CODE_84CECA                      ;84CEC5;84CECA; 
-                       JMP.W CODE_84CED1                    ;84CEC7;84CED1; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
-          CODE_84CECA: %Set16bit(!MX)                             ;84CECA;      ; 
-                       LDA.W #$001C                         ;84CECC;      ; 
-                       STA.B !player_action                            ;84CECF;0000D4; 
-                                                            ;      ;      ; 
-          CODE_84CED1: RTL                                  ;84CED1;      ; 
-                                                            ;      ;      ; 
-                                                            ;      ;      ; 
+
+
+PlayerKeyY: ;84CD77
+      %Set16bit(!MX)                         
+      LDA.B $D2                              
+      AND.W #$0002                           ;Not holding Items
+      BEQ +                        
+      JMP.W .return                          
+
+    + %Set16bit(!MX)                         
+      LDA.B $D2                              
+      AND.W #$0010                           ;TODO
+      BEQ +                        
+      JMP.W .return                          
+
+    + %Set16bit(!MX)                         
+      LDA.B $D2                              
+      AND.W #$0800                           ;TODO
+      BEQ +                                  
+      JMP.W .return                          
+
+    + %Set16bit(!MX)                       
+      LDA.B !player_action                 
+      CMP.W #$000F                           ;about to cast
+      BNE +                                
+      JMP.W FishingCastLine                  
+
+    + %Set16bit(!MX)                         
+      LDA.B !player_action                   
+      CMP.W #$0011                           ;Fishing
+      BNE +                                  
+      JMP.W FishingReelEmpty                 
+
+    + %Set16bit(!MX)                         
+      LDA.B !player_action                   
+      CMP.W #$0012                           
+      BNE +                                  
+      JMP.W FishingCatchSomething            
+
+    + %Set16bit(!M)                          
+      LDA.L $7F1F60                          
+      AND.W #$8000                           ;TODO
+      BNE .return                            
+
+      %Set8bit(!M)                           
+      LDA.W !tool_selected                   
+      BEQ .return                            
+      
+      %Set16bit(!MX)                         
+      LDA.W #$000A                           ;Using Tool
+      STA.B !player_action                   
+      JSL.L ToolUsed                         
+
+  .return: RTL                               
+
+FishingCastLine: 
+      %Set16bit(!MX)                         
+      LDA.W #$0010                           ;casting
+      STA.B !player_action                   
+      RTL                                    
+
+FishingReelEmpty: 
+      %Set16bit(!MX)                         
+      LDA.W #$000F                           ;about to cast
+      STA.B !player_action                   
+      RTL                                    
+
+FishingCatchSomething: ;84CDED
+      %Set16bit(!MX)                       
+      LDA.W #$0013                           ;Reeling
+      STA.B !player_action                   
+      %Set8bit(!M)                           
+      LDA.B #$03                             
+      JSL.L RNGReturn0toA                    ;get a number 0-1
+      %Set8bit(!M)                           
+      XBA                                    
+      LDA.B #$00                             
+      XBA                                    
+      %Set16bit(!M)                          
+      CLC                                    
+      ADC.W #$008B                           
+      STA.W $0901                            
+      RTL                                    
+
+;;;;;;
+PlayerKeyR: ;84CE0C
+      %Set16bit(!MX)                       
+      LDA.B $D2                              
+      AND.W #$0002                           ;Not holding Items
+      BEQ +                                  
+      JMP.W .return                          
+
+    + %Set16bit(!MX)                         
+      LDA.B $D2                              
+      AND.W #$0010                           ;TODO
+      BEQ +                                  
+      JMP.W .return                          
+
+    + %Set16bit(!MX)                         
+      LDA.B $D2                              
+      AND.W #$0800                           ;TODO
+      BEQ +                                  
+      JMP.W .return                          
+
+    + %Set16bit(!MX)                         
+      LDA.L $7F1F68                          
+      AND.W #$0100                           ;Horse Owned
+      BEQ .return                            
+
+      %Set16bit(!MX)                         
+      LDA.W #$000D                           ;Horse Whistled
+      STA.B !player_action                   
+
+  .return: RTL                               
+
+;;;;;;
+PlayerKeyL: ;84CE43
+      %Set16bit(!MX)                         
+      LDA.B $D2                              
+      AND.W #$0002                           ;Not holding Items
+      BEQ +                        
+      JMP.W .return                          
+
+    + %Set16bit(!MX)                         
+      LDA.B $D2                              
+      AND.W #$0010                           ;TODO
+      BEQ +                        
+      JMP.W .return                          
+
+    + %Set16bit(!MX)                         
+      LDA.B $D2                              
+      AND.W #$0800                           ;TODO
+      BEQ +                        
+      JMP.W .return                          
+
+    + %Set16bit(!MX)                         
+      LDA.L $7F1F68                          
+      AND.W #$0080                           ;Dog owned
+      BEQ .return                            
+
+      %Set16bit(!MX)                         
+      LDA.W #$001B                           ;Dog Whistled
+      STA.B !player_action                   
+
+  .return: RTL                               
+
+;;;;;;
+PlayerKeySelect: 
+      %Set16bit(!MX)                         
+      LDA.B $D2                              
+      AND.W #$0002                           ;Not holding Items
+      BEQ +                        
+      JMP.W .return                      
+
+    + %Set16bit(!MX)                         
+      LDA.B $D2                              
+      AND.W #$0010                           ;TODO
+      BEQ +                        
+      JMP.W .return                      
+
+    + %Set16bit(!MX)                         
+      LDA.B $D2                              
+      AND.W #$0800                           ;TODO
+      BEQ +                                  
+      JMP.W .return                          
+
+    + %Set16bit(!MX)                         
+      LDA.W #$000C                           
+      STA.B !player_action                   
+
+      .return: RTL                           
+
+;;;;;;
+PlayerKeyX:
+      %Set16bit(!MX)                         
+      LDA.B $D2                              
+      AND.W #$0002                           
+      BEQ .notholdingitem                    
+      JMP.W .return                          
+
+  .notholdingitem: 
+      %Set16bit(!MX)                         
+      LDA.B $D2                              
+      AND.W #$0010                           ;TODO
+      BEQ +                        
+      JMP.W .return                      
+
+    + %Set16bit(!MX)                         
+      LDA.B $D2                              
+      AND.W #$0800                           ;TODO
+      BEQ +                                   
+      JMP.W .return                           
+
+    + %Set16bit(!MX)                         
+      LDA.W #$001C                           
+      STA.B !player_action                   
+
+  .return: RTL                               
+
+
           CODE_84CED2: %Set8bit(!M)                             ;84CED2;      ; 
                        %Set16bit(!X)                             ;84CED4;      ; 
                        LDA.W $019B                          ;84CED6;00019B; 

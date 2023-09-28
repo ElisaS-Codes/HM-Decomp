@@ -98,7 +98,7 @@ BHHHH: ;8280AA
 
        .CODE_8280CD:
        LDA.B !player_action                            ;8280CD;0000D4; 
-       CMP.W #$000F                          ;Fishing: about to cast line
+       CMP.W #$000F                          ;Fishing: casting line
        BNE .CODE_8280D7                       ;8280D2;8280D7; 
        JMP.W $8130                        ;8280D4;828130; 
                                           ;      ;      ; 
@@ -1724,7 +1724,7 @@ FindMostLovedandFillVariables: %Set16bit(!MX)                             ;828EC
                        db $28,$28,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;829094;      ; 
                        db $00,$00,$00,$00                   ;8290A4;      ; 
                                                             ;      ;      ; 
-          CODE_8290A8: %Set8bit(!M)                             ;8290A8;      ; 
+          ToolUsed: %Set8bit(!M)                             ;8290A8;      ; 
                        %Set16bit(!X)                             ;8290AA;      ; 
                        %Set16bit(!MX)                             ;8290AC;      ; 
                        LDA.B $D2                            ;8290AE;0000D2; 
