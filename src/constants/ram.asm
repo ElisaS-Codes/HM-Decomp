@@ -1,8 +1,8 @@
 ;Scratch memory, every thing here is not usually important, also used for
 ;parameters and function returns. usually used as 16b, but sometimes some
 ;are used as 8b, specially for banks for long pointers. 72 and 7E are the most used
-!scratch70 = $70 
-!scratch72 = $72 
+!scratch70 = $70
+!scratch72 = $72
 !scratch74 = $74
 !scratch7E = $7E
 !scratch80 = $80
@@ -26,6 +26,8 @@
 !tilemap_pointer = $18
 !tilemap_to_load = $22 ;8b more data on TileMapmanagerTable.asm
 !copyof_INIDISP = $24 ;8bit Copy of the value in the Screen Display Register
+
+!game_state = $D2 ;16b
 
 !fade_current_brightness = $25
 !fade_current_frame = $26
@@ -165,7 +167,7 @@
 !player_name_long_3 = $08D9 ;16b
 !player_name_long_4 = $08DB ;16b
 !player_direction = $DA ;16
-;0:down, 
+;0:down,1:up, 2:left 3:right
 !player_pos_X = $D6 ;16b
 !player_pos_Y = $D8 ;16b
 !max_stamina = $0917 ;8b
@@ -307,7 +309,7 @@
 ; x8 - ($27?)
 ; x9 - Cow 1 Pregnancy
 ; xA - Cow 1 Happiness
-; xB - 
+; xB -
 ; xE - Position X ;16b
 ; x0 - Position Y ;16b
 ; x2 - Name 1
@@ -334,7 +336,7 @@
 ; ?1?? aaax - a=age(001=egg,010=child,100=adult),e=exists
 ; x7/xF - #$28(0010 1000) 40/Season + 4
 ; x8/x0 - #0
-; x9/x1 - 
+; x9/x1 -
 ; xA/x2 - Position X ;16b
 ; xC/x4 - Position Y ;16b
 

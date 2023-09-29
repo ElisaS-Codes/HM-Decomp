@@ -5,9 +5,12 @@ Params A:Control Registers, X:VRAM/CGRAM Dest Addresses, Y(DMA Size), $72 & $74 
 PalettePointerTable
 
 ====Working on
-$DA ???
 
 
+0985 TempX;16b
+0987 TempY;16b
+0181 = 2
+0182 = 2
 
 
 UNK_BigLoop
@@ -22,7 +25,7 @@ $7F1F5C check flag
 $0196 removes 32 flag
 
 
-db $02,$02,$01,$01,$00,$20, $97,$EF,$9F, $00,$60, $84,$DE,$A5;80B6A3;      ; 
+db $02,$02,$01,$01,$00,$20, $97,$EF,$9F, $00,$60, $84,$DE,$A5;80B6A3;      ;
 
 0181 = 2
 0182 = 2
@@ -63,7 +66,7 @@ $7F1F49 - (0)
 $04 - 24b pointer
 $07 - 24b Pointer, increases by $10
 $0A - 24b Pointer to in ram graphics
-$0C - 
+$0C -
 $0D - 24b pointer
 
 $12 -
@@ -85,13 +88,13 @@ $9A - DMA ready? 9A - DMA ready but only for Channel 5? its only set in one plac
 ???1 ???? 1=OAM DMA ready?
 ???? ????
 
-$A1 - 
+$A1 -
 
 $A7
 
 $7E00A9 - stores temp data from 01A6
 
-$7E00AD - 
+$7E00AD -
 $7E00AF - OAM Memory Size ($7EA000)
 $7E00B7 - Something related to OAM copy on WRAM
 
@@ -101,29 +104,28 @@ $7E00BF - index to start of VGRAM
 
 $C7 - (Something to do with PrepDMA size? #$1800 changes during transition)
 $CC - 24b pointer
-$CE - 
-$CF - 
-$D0 - 
-$D1 - 
+$CE -
+$CF -
+$D0 -
+$D1 -
 $D2 -Flags?
 "$0004" set overnight, some stops movement? $0004 set if regenerating $0924 rng
 "0008" set when you have no stamina
 w??? ???? - w:walking to transition
 d??? s?hm - d: carrying dog m: Can Move; h: holding item; s: no stamina; x:
-$D3 - 
 $DA - Player sprite to load?
-$DC - 
+$DC -
 $E5 - if player sprite is looking horizontal?
 $E7 - if player sprite is looking vertical?
-$E9 - 
-$EB - 
+$E9 -
+$EB -
 
 $ED - Related to palette? ED->F1->EF->F2 from rom 80A300+
-$EF - 
-$F1 - 
-$F2 - 
+$EF -
+$F1 -
+$F2 -
 
-$FA - 
+$FA -
 
 $0103 - counter during transition
 
@@ -137,9 +139,9 @@ $0118 - Audio?
 $0146 - Flags?
 $0148 -
 
-$014A - 
-$015A - 
-$016A - 
+$014A -
+$015A -
+$016A -
 
 014b
 014e related to sprite/changes?
@@ -148,16 +150,16 @@ $016A -
 
 $017A - (Related to text Windows? Maybe just disables control)
 $017B - (Next instruction for text? 1 autoadvancing text, 5 click to close, 9 stop for new screen, 81 reading data/formatting?)
-$017C - 
+$017C -
 
-$0181 - 
+$0181 -
 $0182 - (#$03 special value)
 
 $0183 - something to do with text writing
-$0185 - 
+$0185 -
 $0187 - something to do with text writing
 
-$018B - 
+$018B -
 
 $0195 - Graphic mode ?
 $0196 - gets ORed with 0195? feels like flags?
@@ -171,14 +173,14 @@ $019B - UNK, changing it sometimes shows the crib sprite?
 $019C - OBJs data table?
 ++
 
-$01B0 - 
+$01B0 -
 ++
 
 $01A6+ - Pointers related to OAM?
 
 $01AD - sorute frame
 
-$084A - 
+$084A -
 
 								 Ma|Ni|An|El|Ev
 $7E08A1 - (related to most loved 26|1A|27|1E|1E)
@@ -187,26 +189,26 @@ $7E08A5 - (related to most loved 11|0D|0D|0B|04)
 $7E08A7 - (related to most loved 08|B1|00|04|B1)
 $7E08A9 - (related to most loved 00|B1|B1|0D|B1)
 
-$7E084A - 
+$7E084A -
 
 $0878 - Flags? related to $E9, related to movement? maybe not flags, checked if less than c0?
-$087A - 
+$087A -
 
 $7E08B3 - Data from Season Table
-$7E08B5 - 
-$7E08B7 - 
-$7E08B9 - 
-$7E08BB - 
-$7E08BD - 
+$7E08B5 -
+$7E08B7 -
+$7E08B9 -
+$7E08BB -
+$7E08BD -
 $7E08BF - Data from Day of Week Table
-$7E08C1 - 
-$7E08C3 - 
-$7E08C7 - 
-$7E08C9 - 
-$7E08CB - 
-$7E08CF - 
+$7E08C1 -
+$7E08C3 -
+$7E08C7 -
+$7E08C9 -
+$7E08CB -
+$7E08CF -
 $7E08D1 - Data from First Days Table
-$7E08D3 - 
+$7E08D3 -
 
 $0901 - (what animation?)
 #$003c - idle?
@@ -226,21 +228,21 @@ $091C - (related to animals?)
 $091E -
 $091F -
 $0920 - (rng 0-3)
-$0922 - 
+$0922 -
 $0924 - (hold an rng 0-3)
 
 $0927 - set 1 during first game, rest 0
-$0928 - 
-$0929 - 
-$092A - 
-$092B - 
-$092C - 
-$092D - 
-$092E - 
+$0928 -
+$0929 -
+$092A -
+$092B -
+$092C -
+$092D -
+$092E -
 
-$0937 - 
+$0937 -
 
-$096B - 
+$096B -
 $096C - stamina level
 #3: no stamnina left lower more stamina
 $096D - reset during movement?
@@ -250,7 +252,7 @@ $096F - flags 1 skis audio?
 
 $0970 - House Level?
 
-$0972 - 
+$0972 -
 $0974 - ;8b
 $0975 - savelocation ;24b
 $0978 - ;16
@@ -269,11 +271,11 @@ $7E098B - Map to transition
 $7E098C - Weather tomorrow (00:Sunny, 01:rain, 03:hurricane, 04:fair, 05:sunny and calm, 06:flower festival, 07:harvest festival, 08:Thanksgiving Festival, 09:Star Night Festival, 0A:festive mood, 0B:annual egg festival, 0C:snow)
 $7E098D - related to audio? probably not
 $7E098E - Related to save?
-$7E098F - 
+$7E098F -
 
-$7E0990 - 
+$7E0990 -
 $7E0991 - menu y index
-$7E0993 - 
+$7E0993 -
 $7E0994 - index of character in menu?
 
 $7E09A3 - X Position
@@ -289,7 +291,7 @@ $7EA220-31E - ($0000)
 
 $7EA320-41E - (32b? $0000) CGRAM
 
-$7EA420 - 
+$7EA420 -
 $7EA422 - (Holds DMA Source Address Low)
 $7EA424 - (Holds DMA Source Address High)
 
@@ -303,27 +305,27 @@ $7EB4E6-B586 - ($00) holds variables to set up around $0974
 $7F0900-09FF - CGRAM content used
 $7F0D00-0DFF - CGRAM content also
 
-$7F0000-0800 - 
+$7F0000-0800 -
 
 $7F0900-09FF - CGRAM content
 
 $7F098B - (#$3C)
-$7F0B00 - 
-$7F0D00 - 
+$7F0B00 -
+$7F0D00 -
 
 $7F0F00-1F00 - ($FFFF)
 
 $7F1F12 - (set between water counter and some cow data?), some kind of counter down?
 
-$7F1F29 - 
+$7F1F29 -
 
 $7F1F2B - Starting cow Happiness?
 
 $7F1F30 - (drop dog?)
-$7F1F31 - 
+$7F1F31 -
 
 
-$7F1F45 - 
+$7F1F45 -
 
 $7F1F48 - (0)
 $7F1F49 - (0)
@@ -341,7 +343,7 @@ t??? s??? - t:tool related? no stamina? s: Save failed CRC
 
 FishingCastLine
 
-$7F1F62 - 
+$7F1F62 -
 $7F1F64 - Player Flags 1
 ???? ????
 hh?? cc?? - hh:House Upgrade (%01 upgrade 1, %10 upgrade 2), c=Cow Pregnat?
@@ -354,20 +356,20 @@ $7F1F68 - Flags?
 d??? h??u - d:dog owned h:horse owned u:when set, it doesnt re-generates $0924 rng number
 
 $7F1F6A - Events Flags?
-$7F1F6C - 
+$7F1F6C -
 ???t ???? - t=Turtle Shell
 ???? ????
 $7F1F6E - Flags
 ?ch? ???? - c=Clock Owned; h:egg hatching
 ???? cc?? - cc=childs(%01 child1, %10 child2)
-$7F1F70 - 
-$7F1F72 - 
-$7F1F74 - 
-$7F1F76 - 
-$7F1F78 - 
-$7F1F7A - 
+$7F1F70 -
+$7F1F72 -
+$7F1F74 -
+$7F1F76 -
+$7F1F78 -
+$7F1F7A -
 
-$A78000 - 
+$A78000 -
 
 
 
