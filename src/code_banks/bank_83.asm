@@ -11798,7 +11798,7 @@ RanchMasteryCalculator:
         LDY.W #$0000                         
         LDA.B [$72],Y                        
         AND.B #$01                           ;cow exists
-        BEQ +                      
+        BEQ ++                      
         LDY.W #$0004                         ;cow happiness var
         LDA.B #$00                           
         XBA                                  
@@ -11815,7 +11815,7 @@ RanchMasteryCalculator:
         ADC.L !ranch_mastery                 
         STA.L !ranch_mastery                 
 
-      + %Set16bit(!MX)                       
+     ++ %Set16bit(!MX)                       
         PLX                                  
         INX                                  
         CPX.W #12                         

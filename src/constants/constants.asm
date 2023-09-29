@@ -61,7 +61,7 @@ endmacro
 !key_Start = #$1000
 
 ;;Items
-!item_egg = #$28
+!item_egg = #$14
 
 ;;Maps
 !map_farm_winter = #04
