@@ -2141,7 +2141,7 @@ LoadCGRAM: ;8091CF
         STA.B $7E
         ASL A
         CLC
-        ADC.B $7E
+        ADC.B $7E                            ;*3
         TAX
         LDA.L PalettePointerTable,X
         STA.B $72
@@ -2213,12 +2213,12 @@ GGGG:
         CLC
         ADC.B $80
         ADC.B $80
-        ADC.W #$0004                         ; * 6 + 4?
+        ADC.W #$0004                         ; * 6 + 4
         TAX
         %Set8bit(!M)
         LDA.B #$00
         XBA
-        LDA.L DATA8_80BB5C,X
+        LDA.L Time_Palette_Table,X
         %Set16bit(!M)
         STA.B $7E
         ASL A
@@ -2226,19 +2226,20 @@ GGGG:
         ADC.B $7E                            ; * 3
         TAX
         LDA.L PalettePointerTable,X
-        STA.B $72                            ;80926F;000072;
-        INX                                  ;809271;      ;
-        INX                                  ;809272;      ;
-        %Set8bit(!M)                             ;809273;      ;
-        LDA.L PalettePointerTable,X          ;809275;80B9FD;
-        STA.B $74                            ;809279;000074;
-        %Set16bit(!M)                             ;80927B;      ;
-        LDA.W #$0100                         ;80927D;      ;
-        STA.B $7E                            ;809280;00007E;
-        LDX.W #$0000                         ;809282;      ;
-        LDY.W #$0000                         ;809285;      ;
-                                        ;      ;      ;
-        CODE_809288: LDA.B [$72],Y                        ;809288;000072;
+        STA.B $72
+        INX
+        INX
+        %Set8bit(!M)
+        LDA.L PalettePointerTable,X
+        STA.B $74
+        %Set16bit(!M)
+        LDA.W #$0100
+        STA.B $7E
+        LDX.W #$0000
+        LDY.W #$0000
+
+        CODE_809288:
+        LDA.B [$72],Y                        ;809288;000072;
         STA.L $7F0B00,X                      ;80928A;7F0B00;
         INY                                  ;80928E;      ;
         INY                                  ;80928F;      ;
@@ -2286,48 +2287,50 @@ GGGG:
         STA.B $92                            ;8092DB;000092;
         JSL.L AAAA                           ;8092DD;8093A4;
         RTL                                  ;8092E1;      ;END_GGGG
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                 FFFF: %Set8bit(!M)                             ;8092E2;      ;
-                       %Set16bit(!X)                             ;8092E4;      ;
-                       LDX.W #$0000                         ;8092E6;      ;
-                       LDA.L !hour                        ;8092E9;7F1F1C;
-                       CMP.B #$07                           ;8092ED;      ;
-                       BCC .timeSet                         ;8092EF;809301;
-                       INX                                  ;8092F1;      ;
-                       CMP.B #$0F                           ;8092F2;      ;
-                       BCC .timeSet                         ;8092F4;809301;
-                       INX                                  ;8092F6;      ;
-                       CMP.B #$11                           ;8092F7;      ;
-                       BCC .timeSet                         ;8092F9;809301;
-                       INX                                  ;8092FB;      ;
-                       CMP.B #$12                           ;8092FC;      ;
-                       BCC .timeSet                         ;8092FE;809301;
-                       INX                                  ;809300;      ;
-                                                            ;      ;      ;
-             .timeSet: STX.B $7E                            ;809301;00007E;
-                       LDA.B #$00                           ;809303;      ;
-                       XBA                                  ;809305;      ;
-                       LDA.B !tilemap_to_load                            ;809306;000022;
-                       %Set16bit(!M)                             ;809308;      ;
-                       STA.B $80                            ;80930A;000080;
-                       ASL A                                ;80930C;      ;
-                       ASL A                                ;80930D;      ;
-                       CLC                                  ;80930E;      ;
-                       ADC.B $80                            ;80930F;000080;
-                       ADC.B $80                            ;809311;000080;
-                       ADC.B $7E                            ;809313;00007E;
-                       TAX                                  ;809315;      ;
-                       %Set8bit(!M)                             ;809316;      ;
-                       LDA.B #$00                           ;809318;      ;
-                       XBA                                  ;80931A;      ;
-                       LDA.L DATA8_80BB5C,X                 ;80931B;80BB5C;
-                       STA.W $017B                          ;80931F;00017B;
-                       %Set16bit(!M)                             ;809322;      ;
-                       JSL.L LoadCGRAM                ;809324;8091CF;
-                       RTL                                  ;809328;      ;END_FFFF
-                                                            ;      ;      ;
-                                                            ;      ;      ;
+
+ ;;;;;;;
+ ChangePalettebyTime: ;8092E2
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDX.W #$0000
+        LDA.L !hour
+        CMP.B #$07
+        BCC .timeFound
+        INX
+        CMP.B #$0F
+        BCC .timeFound
+        INX
+        CMP.B #$11
+        BCC .timeFound
+        INX
+        CMP.B #$12
+        BCC .timeFound
+        INX
+
+    .timeFound:
+        STX.B $7E
+        LDA.B #$00
+        XBA
+        LDA.B !tilemap_to_load
+        %Set16bit(!M)
+        STA.B $80                            ;Map
+        ASL A
+        ASL A
+        CLC
+        ADC.B $80
+        ADC.B $80                            ;*6, as theres 6 values
+        ADC.B $7E                            ;+ current seleceted
+        TAX
+        %Set8bit(!M)
+        LDA.B #$00
+        XBA
+        LDA.L Time_Palette_Table,X
+        STA.W $017B
+        %Set16bit(!M)
+        JSL.L LoadCGRAM
+
+        RTL
+
                  EEEE: %Set16bit(!MX)                             ;809329;      ;
                        LDA.L $7F1F5E                        ;80932B;7F1F5E;
                        AND.W #$0080                         ;80932F;      ;
@@ -2601,7 +2604,7 @@ GGGG:
                        %Set8bit(!M)                             ;809535;      ;
                        LDA.B #$00                           ;809537;      ;
                        XBA                                  ;809539;      ;
-                       LDA.L DATA8_80BB5C,X                 ;80953A;80BB5C;
+                       LDA.L Time_Palette_Table,X                 ;80953A;80BB5C;
                        CMP.W $017B                          ;80953E;00017B;
                        BEQ CODE_809552                      ;809541;809552;
                        CMP.B #$FF                           ;809543;      ;
@@ -3040,7 +3043,7 @@ ScreenTransitionReturn: ;80972B
                        STA.B !tilemap_to_load                            ;8098AF;000022;
                        JSL.L BSSSS                          ;8098B1;82A5FB;
                        JSL.L TilemapManager           ;8098B5;80A7C6;
-                       JSL.L FFFF                           ;8098B9;8092E2;
+                       JSL.L ChangePalettebyTime                           ;8098B9;8092E2;
                        JSL.L EEEE                           ;8098BD;809329;
                        JSL.L A8888                           ;8098C1;809553;
                        JSL.L GGGG                           ;8098C5;809241;
@@ -5496,7 +5499,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        db $A9,$00,$DE,$A9,$00,$E0,$A9,$00,$D8,$A9,$00,$DA,$A9,$00,$8C,$A9;80BB3D;      ;
                        db $00,$DC,$A9,$00,$E2,$A9,$00,$E4,$A9,$00,$E6,$A9,$00,$E8,$A9;80BB4D;      ;
                                                             ;      ;      ;
-         DATA8_80BB5C: db $00,$01,$02,$06,$07,$FF,$03,$04,$05,$06,$07,$FF,$08,$09,$0A,$0B;80BB5C;      ;
+         Time_Palette_Table: db $00,$01,$02,$06,$07,$FF,$03,$04,$05,$06,$07,$FF,$08,$09,$0A,$0B;80BB5C;      ;
                        db $0C,$FF,$0D,$0E,$0F,$10,$11,$FF,$FF,$12,$13,$14,$15,$FF,$FF,$16;80BB6C;      ;
                        db $17,$18,$19,$FF,$FF,$1A,$1B,$1C,$1D,$FF,$FF,$1E,$1F,$20,$21,$FF;80BB7C;      ;
                        db $FF,$22,$22,$FF,$FF,$FF,$FF,$23,$23,$FF,$FF,$FF,$FF,$FF,$FF,$24;80BB8C;      ;
