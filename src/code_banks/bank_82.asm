@@ -437,8 +437,8 @@ UNK_Table5_SeasonRelated: db $60,$00,$00,$00,$40,$00,$00,$00,$08,$10,$04,$00,$08
                        JSL.L Unk_Seasons2                   ;828398;82A811;
                        JSL.L BOOOO                          ;82839C;828209;
                        JSL.L CODE_83BC5A                    ;8283A0;83BC5A;
-                       JSL.L CODE_828CF9                    ;8283A4;828CF9;
-                       JSL.L FindMostLovedandFillVariables  ;8283A8;828EC6;
+                       JSL.L WeatherTomorrow                    ;8283A4;828CF9;
+                       JSL.L FindMostLovedName  ;8283A8;828EC6;
                        JSL.L CODE_828790                    ;8283AC;828790;
                        %Set16bit(!M)                             ;8283B0;      ;
                        STZ.W $0915                          ;8283B2;000915;
@@ -1292,383 +1292,390 @@ LoadsDateDataFromTables: %Set8bit(!M)                             ;8289D6;      
                                                             ;      ;      ;
                                                             ;      ;      ;
          DATA8_828CED: db $04,$00,$02,$00,$08,$00,$10,$00,$00,$02,$00,$01;828CED;      ;
-                                                            ;      ;      ;
-          CODE_828CF9: %Set8bit(!M)                             ;828CF9;      ;
-                       %Set16bit(!X)                             ;828CFB;      ;
-                       LDA.L !season                        ;828CFD;7F1F19;
-                       BNE CODE_828D18                      ;828D01;828D18;
-                       LDA.L !day                        ;828D03;7F1F1B;
-                       CMP.B #$16                           ;828D07;      ;
-                       BEQ CODE_828D0E                      ;828D09;828D0E;
-                       JMP.W CODE_828E64                    ;828D0B;828E64;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_828D0E: %Set8bit(!M)                             ;828D0E;      ;
-                       LDA.B #$06                           ;828D10;      ;
-                       STA.W !weather_tomorrow                          ;828D12;00098C;
-                       JMP.W CODE_828EB1                    ;828D15;828EB1;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_828D18: %Set8bit(!M)                             ;828D18;      ;
-                       LDA.L !season                        ;828D1A;7F1F19;
-                       CMP.B #$02                           ;828D1E;      ;
-                       BNE CODE_828D4B                      ;828D20;828D4B;
-                       LDA.L !day                        ;828D22;7F1F1B;
-                       CMP.B #$0B                           ;828D26;      ;
-                       BNE CODE_828D34                      ;828D28;828D34;
-                       %Set8bit(!M)                             ;828D2A;      ;
-                       LDA.B #$07                           ;828D2C;      ;
-                       STA.W !weather_tomorrow                          ;828D2E;00098C;
-                       JMP.W CODE_828EB1                    ;828D31;828EB1;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_828D34: %Set8bit(!M)                             ;828D34;      ;
-                       LDA.L !day                        ;828D36;7F1F1B;
-                       CMP.B #$13                           ;828D3A;      ;
-                       BEQ CODE_828D41                      ;828D3C;828D41;
-                       JMP.W CODE_828E64                    ;828D3E;828E64;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_828D41: %Set8bit(!M)                             ;828D41;      ;
-                       LDA.B #$0B                           ;828D43;      ;
-                       STA.W !weather_tomorrow                          ;828D45;00098C;
-                       JMP.W CODE_828EB1                    ;828D48;828EB1;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_828D4B: %Set8bit(!M)                             ;828D4B;      ;
-                       LDA.L !season                        ;828D4D;7F1F19;
-                       CMP.B #$03                           ;828D51;      ;
-                       BEQ CODE_828D58                      ;828D53;828D58;
-                       JMP.W CODE_828DDF                    ;828D55;828DDF;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_828D58: LDA.L !day                        ;828D58;7F1F1B;
-                       CMP.B #$09                           ;828D5C;      ;
-                       BNE CODE_828D6A                      ;828D5E;828D6A;
-                       %Set8bit(!M)                             ;828D60;      ;
-                       LDA.B #$08                           ;828D62;      ;
-                       STA.W !weather_tomorrow                          ;828D64;00098C;
-                       JMP.W CODE_828EB1                    ;828D67;828EB1;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_828D6A: %Set8bit(!M)                             ;828D6A;      ;
-                       LDA.L !day                        ;828D6C;7F1F1B;
-                       CMP.B #$17                           ;828D70;      ;
-                       BNE CODE_828D7E                      ;828D72;828D7E;
-                       %Set8bit(!M)                             ;828D74;      ;
-                       LDA.B #$09                           ;828D76;      ;
-                       STA.W !weather_tomorrow                          ;828D78;00098C;
-                       JMP.W CODE_828EB1                    ;828D7B;828EB1;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_828D7E: %Set8bit(!M)                             ;828D7E;      ;
-                       LDA.L !day                        ;828D80;7F1F1B;
-                       CMP.B #$1E                           ;828D84;      ;
-                       BNE CODE_828D92                      ;828D86;828D92;
-                       %Set8bit(!M)                             ;828D88;      ;
-                       LDA.B #$0A                           ;828D8A;      ;
-                       STA.W !weather_tomorrow                          ;828D8C;00098C;
-                       JMP.W CODE_828EB1                    ;828D8F;828EB1;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_828D92: %Set8bit(!M)                             ;828D92;      ;
-                       LDA.L !year                        ;828D94;7F1F18;
-                       BEQ CODE_828D9D                      ;828D98;828D9D;
-                       JMP.W CODE_828E64                    ;828D9A;828E64;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_828D9D: %Set16bit(!M)                             ;828D9D;      ;
-                       LDA.L $7F1F64                        ;828D9F;7F1F64;
-                       AND.W #$0002                         ;828DA3;      ;
-                       BEQ CODE_828DAB                      ;828DA6;828DAB;
-                       JMP.W CODE_828E64                    ;828DA8;828E64;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_828DAB: %Set8bit(!M)                             ;828DAB;      ;
-                       LDA.L !day                        ;828DAD;7F1F1B;
-                       CMP.B #$07                           ;828DB1;      ;
-                       BEQ CODE_828DD5                      ;828DB3;828DD5;
-                       LDA.B #$00                           ;828DB5;      ;
-                       XBA                                  ;828DB7;      ;
-                       LDA.L !season                        ;828DB8;7F1F19;
-                       %Set16bit(!M)                             ;828DBC;      ;
-                       TAX                                  ;828DBE;      ;
-                       %Set8bit(!M)                             ;828DBF;      ;
-                       LDA.L DATA8_828EC2,X                 ;828DC1;828EC2;
-                       BNE CODE_828DCA                      ;828DC5;828DCA;
-                       JMP.W CODE_828E64                    ;828DC7;828E64;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_828DCA: JSL.L RNGReturn0toA                  ;828DCA;8089F9;
-                       %Set8bit(!M)                             ;828DCE;      ;
-                       BEQ CODE_828DD5                      ;828DD0;828DD5;
-                       JMP.W CODE_828E64                    ;828DD2;828E64;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_828DD5: %Set8bit(!M)                             ;828DD5;      ;
-                       LDA.B #$04                           ;828DD7;      ;
-                       STA.W !weather_tomorrow                          ;828DD9;00098C;
-                       JMP.W CODE_828EB1                    ;828DDC;828EB1;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_828DDF: %Set8bit(!M)                             ;828DDF;      ;
-                       LDA.L !year                        ;828DE1;7F1F18;
-                       BNE CODE_828E20                      ;828DE5;828E20;
-                       %Set16bit(!M)                             ;828DE7;      ;
-                       LDA.L $7F1F64                        ;828DE9;7F1F64;
-                       AND.W #$0001                         ;828DED;      ;
-                       BNE CODE_828E20                      ;828DF0;828E20;
-                       %Set8bit(!M)                             ;828DF2;      ;
-                       LDA.L !day                        ;828DF4;7F1F1B;
-                       CMP.B #$1D                           ;828DF8;      ;
-                       BEQ CODE_828E16                      ;828DFA;828E16;
-                       LDA.B #$00                           ;828DFC;      ;
-                       XBA                                  ;828DFE;      ;
-                       LDA.L !season                        ;828DFF;7F1F19;
-                       %Set16bit(!M)                             ;828E03;      ;
-                       TAX                                  ;828E05;      ;
-                       %Set8bit(!M)                             ;828E06;      ;
-                       LDA.L DATA8_828EBE,X                 ;828E08;828EBE;
-                       BEQ CODE_828E20                      ;828E0C;828E20;
-                       JSL.L RNGReturn0toA                  ;828E0E;8089F9;
-                       %Set8bit(!M)                             ;828E12;      ;
-                       BNE CODE_828E20                      ;828E14;828E20;
-                                                            ;      ;      ;
-          CODE_828E16: %Set8bit(!M)                             ;828E16;      ;
-                       LDA.B #$05                           ;828E18;      ;
-                       STA.W !weather_tomorrow                          ;828E1A;00098C;
-                       JMP.W CODE_828EB1                    ;828E1D;828EB1;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_828E20: %Set8bit(!M)                             ;828E20;      ;
-                       LDA.L !day                        ;828E22;7F1F1B;
-                       CMP.B #$1E                           ;828E26;      ;
-                       BEQ CODE_828E64                      ;828E28;828E64;
-                       %Set8bit(!M)                             ;828E2A;      ;
-                       LDA.B #$00                           ;828E2C;      ;
-                       XBA                                  ;828E2E;      ;
-                       LDA.L !season                        ;828E2F;7F1F19;
-                       %Set16bit(!M)                             ;828E33;      ;
-                       TAX                                  ;828E35;      ;
-                       %Set8bit(!M)                             ;828E36;      ;
-                       LDA.B #$00                           ;828E38;      ;
-                       XBA                                  ;828E3A;      ;
-                       LDA.L DATA8_828EB2,X                 ;828E3B;828EB2;
-                       BEQ CODE_828E64                      ;828E3F;828E64;
-                       %Set16bit(!MX)                             ;828E41;      ;
-                       TAY                                  ;828E43;      ;
-                       LDA.L $7F1F6C                        ;828E44;7F1F6C;
-                       AND.W #$1000                         ;828E48;      ;
-                       BEQ CODE_828E50                      ;828E4B;828E50;
-                       TYA                                  ;828E4D;      ;
-                       ASL A                                ;828E4E;      ;
-                       TAY                                  ;828E4F;      ;
-                                                            ;      ;      ;
-          CODE_828E50: %Set16bit(!MX)                             ;828E50;      ;
-                       TYA                                  ;828E52;      ;
-                       %Set8bit(!M)                             ;828E53;      ;
-                       JSL.L RNGReturn0toA                  ;828E55;8089F9;
-                       %Set8bit(!M)                             ;828E59;      ;
-                       BNE CODE_828E64                      ;828E5B;828E64;
-                       LDA.B #$03                           ;828E5D;      ;
-                       STA.W !weather_tomorrow                          ;828E5F;00098C;
-                       BRA CODE_828EB1                      ;828E62;828EB1;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_828E64: %Set8bit(!M)                             ;828E64;      ;
-                       LDA.B #$00                           ;828E66;      ;
-                       XBA                                  ;828E68;      ;
-                       LDA.L !season                        ;828E69;7F1F19;
-                       %Set16bit(!M)                             ;828E6D;      ;
-                       TAX                                  ;828E6F;      ;
-                       %Set8bit(!M)                             ;828E70;      ;
-                       LDA.L DATA8_828EB6,X                 ;828E72;828EB6;
-                       BEQ CODE_828E87                      ;828E76;828E87;
-                       JSL.L RNGReturn0toA                  ;828E78;8089F9;
-                       %Set8bit(!M)                             ;828E7C;      ;
-                       BNE CODE_828E87                      ;828E7E;828E87;
-                       LDA.B #$01                           ;828E80;      ;
-                       STA.W !weather_tomorrow                          ;828E82;00098C;
-                       BRA CODE_828EB1                      ;828E85;828EB1;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_828E87: %Set8bit(!M)                             ;828E87;      ;
-                       LDA.B #$00                           ;828E89;      ;
-                       XBA                                  ;828E8B;      ;
-                       LDA.L !season                        ;828E8C;7F1F19;
-                       %Set16bit(!M)                             ;828E90;      ;
-                       TAX                                  ;828E92;      ;
-                       %Set8bit(!M)                             ;828E93;      ;
-                       LDA.L DATA8_828EBA,X                 ;828E95;828EBA;
-                       BEQ CODE_828EAA                      ;828E99;828EAA;
-                       JSL.L RNGReturn0toA                  ;828E9B;8089F9;
-                       %Set8bit(!M)                             ;828E9F;      ;
-                       BNE CODE_828EAA                      ;828EA1;828EAA;
-                       LDA.B #$02                           ;828EA3;      ;
-                       STA.W !weather_tomorrow                          ;828EA5;00098C;
-                       BRA CODE_828EB1                      ;828EA8;828EB1;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_828EAA: %Set8bit(!M)                             ;828EAA;      ;
-                       LDA.B #$00                           ;828EAC;      ;
-                       STA.W !weather_tomorrow                          ;828EAE;00098C;
-                                                            ;      ;      ;
-          CODE_828EB1: RTL                                  ;828EB1;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-         DATA8_828EB2: db $00,$1E,$00,$00                   ;828EB2;      ;
-                                                            ;      ;      ;
-         DATA8_828EB6: db $06,$0A,$0A,$00                   ;828EB6;      ;
-                                                            ;      ;      ;
-         DATA8_828EBA: db $00,$00,$00,$03                   ;828EBA;      ;
-                                                            ;      ;      ;
+
+;;;;;;; Set climate for events TODO, give it a second pass
+WeatherTomorrow: ;828CF9
+       %Set8bit(!M)                   
+       %Set16bit(!X)                  
+       LDA.L !season                        
+       BNE .notspring                       
+       LDA.L !day                           
+       CMP.B #22                           
+       BEQ .flowerfestival                      
+       JMP.W .normalday                        
+
+    .flowerfestival:
+       %Set8bit(!M)                        
+       LDA.B #$06                            ;flower festival climate
+       STA.W !weather_tomorrow            
+       JMP.W .return                      
+
+    .notspring:
+       %Set8bit(!M)              
+       LDA.L !season             
+       CMP.B #$02                
+       BNE .notfall           
+       LDA.L !day                         
+       CMP.B #11                         
+       BNE .notharvestfestival            
+       %Set8bit(!M)                       
+       LDA.B #$07                            ;harvest festival climate
+       STA.W !weather_tomorrow               
+       JMP.W .return                    
+
+    .notharvestfestival: 
+       %Set8bit(!M)                       
+       LDA.L !day                         
+       CMP.B #19                             
+       BEQ .eggfestival                     
+       JMP.W .normalday                   
+
+     .eggfestival: 
+       %Set8bit(!M)                           
+       LDA.B #$0B                            ;egg festival
+       STA.W !weather_tomorrow                
+       JMP.W .return                   
+
+    .notfall:
+       %Set8bit(!M)                     
+       LDA.L !season                    
+       CMP.B #$03                       
+       BEQ .iswinter                     
+       JMP.W .CODE_828DDF                    
+
+    .iswinter: 
+       LDA.L !day                        
+       CMP.B #9                        
+       BNE .notthanksgiving                     
+       %Set8bit(!M)                             
+       LDA.B #$08                            ;Thanksgiving Climate
+       STA.W !weather_tomorrow                  
+       JMP.W .return                    
+
+    .notthanksgiving: 
+       %Set8bit(!M)                     
+       LDA.L !day                       
+       CMP.B #23                             
+       BNE .notstarnight                      
+       %Set8bit(!M)                         
+       LDA.B #$09                            ;Star Night Festival Climate
+       STA.W !weather_tomorrow              
+       JMP.W .return                       
+
+    .notstarnight:
+       %Set8bit(!M)                       
+       LDA.L !day                         
+       CMP.B #30
+       BNE .notwinter                     
+       %Set8bit(!M)                        
+       LDA.B #$0A                            ;new years festival climate
+       STA.W !weather_tomorrow             
+       JMP.W .return                       
+
+    .notwinter: 
+       %Set8bit(!M)                       
+       LDA.L !year                        
+       BEQ .specialcase                      ;Year 1
+       JMP.W .normalday                  
+
+    .specialcase: 
+       %Set16bit(!M)                        
+       LDA.L $7F1F64                        
+       AND.W #$0002                          ;TODO
+       BEQ .specialdays                      
+       JMP.W .normalday                    
+
+    .specialdays:
+       %Set8bit(!M)                      
+       LDA.L !day                        
+       CMP.B #$07                        
+       BEQ .fairclimate                         
+       LDA.B #$00                        
+       XBA                               
+       LDA.L !season                     
+       %Set16bit(!M)                     
+       TAX                               
+       %Set8bit(!M)                      
+       LDA.L Snowstorm_Chance_Table,X                 ;TODO
+       BNE .snowstorm                      
+       JMP.W .normalday                    
+
+    .snowstorm:
+       JSL.L RNGReturn0toA           
+       %Set8bit(!M)                  
+       BEQ .fairclimate                     
+       JMP.W .normalday              
+
+    .fairclimate:
+       %Set8bit(!M)                        
+       LDA.B #$04                          
+       STA.W !weather_tomorrow             
+       JMP.W .return                      
+
+    .CODE_828DDF:
+       %Set8bit(!M)                             
+       LDA.L !year                        
+       BNE .CODE_828E20                       ;Year after first
+       %Set16bit(!M)                      
+       LDA.L $7F1F64                      
+       AND.W #$0001                          ;TODO
+       BNE .CODE_828E20                       
+       %Set8bit(!M)                             ;828DF2;      ;
+       LDA.L !day                        ;828DF4;7F1F1B;
+       CMP.B #29                           ;828DF8;      ;
+       BEQ .CODE_828E16                      ;828DFA;828E16;
+       LDA.B #$00                           ;828DFC;      ;
+       XBA                                  ;828DFE;      ;
+       LDA.L !season                        ;828DFF;7F1F19;
+       %Set16bit(!M)                             ;828E03;      ;
+       TAX                                  ;828E05;      ;
+       %Set8bit(!M)                             ;828E06;      ;
+       LDA.L DATA8_828EBE,X                 ;828E08;828EBE;
+       BEQ .CODE_828E20                      ;828E0C;828E20;
+       JSL.L RNGReturn0toA                  ;828E0E;8089F9;
+       %Set8bit(!M)                             ;828E12;      ;
+       BNE .CODE_828E20                      ;828E14;828E20;
+                                   ;      ;      ;
+       .CODE_828E16: %Set8bit(!M)                             ;828E16;      ;
+       LDA.B #$05                           ;828E18;      ;
+       STA.W !weather_tomorrow                          ;828E1A;00098C;
+       JMP.W .return                    ;828E1D;828EB1;
+
+       .CODE_828E20:
+       %Set8bit(!M)                         
+       LDA.L !day                           
+       CMP.B #30                            ;not last day
+       BEQ .normalday                       
+       %Set8bit(!M)                         
+       LDA.B #$00                           
+       XBA                                  
+       LDA.L !season                        
+       %Set16bit(!M)                        
+       TAX                                   
+       %Set8bit(!M)                          
+       LDA.B #$00                            
+       XBA                                   
+       LDA.L Hurricane_Chance_Table,X       
+       BEQ .normalday                       
+       %Set16bit(!MX)                       
+       TAY                                  
+       LDA.L $7F1F6C                        
+       AND.W #$1000                          ;Turtle Shell
+       BEQ .ohohhurracane                   
+       TYA                                  
+       ASL A                                 ;Transfering Ys carry flag?
+       TAY                                  
+
+    .ohohhurracane: 
+       %Set16bit(!MX)                       
+       TYA                                  
+       %Set8bit(!M)                         
+       JSL.L RNGReturn0toA                  
+       %Set8bit(!M)                         
+       BNE .normalday                      
+       LDA.B #$03                            ;Hurracane 
+       STA.W !weather_tomorrow               
+       BRA .return                           
+
+    .normalday:
+       %Set8bit(!M)                
+       LDA.B #$00                          
+       XBA                                 
+       LDA.L !season                       
+       %Set16bit(!M)                       
+       TAX                                 
+       %Set8bit(!M)                        
+       LDA.L Rain_Chance_Table,X                
+       BEQ .norain                     
+       JSL.L RNGReturn0toA                  
+       %Set8bit(!M)                       
+       BNE .norain                      
+       LDA.B #$01                         
+       STA.W !weather_tomorrow            
+       BRA .return                       
+
+    .norain: 
+       %Set8bit(!M)                         
+       LDA.B #$00                           
+       XBA                                  
+       LDA.L !season                        
+       %Set16bit(!M)                        
+       TAX                                  
+       %Set8bit(!M)                         
+       LDA.L Snow_Chance_Table,X                 
+       BEQ .sunnyday                      ;828E99;828EAA;
+       JSL.L RNGReturn0toA                  ;828E9B;8089F9;
+       %Set8bit(!M)                             ;828E9F;      ;
+       BNE .sunnyday                      ;828EA1;828EAA;
+       LDA.B #$02                           ;828EA3;      ;
+       STA.W !weather_tomorrow                          ;828EA5;00098C;
+       BRA .return                      ;828EA8;828EB1;
+                                   ;      ;      ;
+                                   ;      ;      ;
+       .sunnyday: %Set8bit(!M)                             ;828EAA;      ;
+       LDA.B #$00                           ;828EAC;      ;
+       STA.W !weather_tomorrow                          ;828EAE;00098C;
+                                   ;      ;      ;
+       .return: RTL                                  ;828EB1;      ;
+
+         Hurricane_Chance_Table: db $00,$1E,$00,$00                   ;828EB2;      ;
+         Rain_Chance_Table: db $06,$0A,$0A,$00                   ;828EB6;      ;
+         Snow_Chance_Table: db $00,$00,$00,$03                   ;828EBA;      ;
          DATA8_828EBE: db $00,$1E,$00,$00                   ;828EBE;      ;
-                                                            ;      ;      ;
-         DATA8_828EC2: db $00,$00,$00,$08                   ;828EC2;      ;
-                                                            ;      ;      ;
-FindMostLovedandFillVariables: %Set16bit(!MX)                             ;828EC6;      ;
-                       LDY.W #$0000                         ;828EC8;      ;
-                       LDA.L !hearts_maria                        ;828ECB;7F1F1F;Hearts for Maria
-                       STA.B $7E                            ;828ECF;00007E;
-                       LDX.W #$0002                         ;828ED1;      ;
-                                                            ;      ;      ;
-                .loop: %Set16bit(!MX)                             ;828ED4;      ;
-                       LDA.L !hearts_maria,X                      ;828ED6;7F1F1F;
-                       CMP.B $7E                            ;828EDA;00007E;
-                       BCS .morelove                        ;828EDC;828EE0;
-                       BRA .findnext                        ;828EDE;828EE7;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-            .morelove: %Set16bit(!MX)                             ;828EE0;      ;
-                       STA.B $7E                            ;828EE2;00007E;
-                       TXA                                  ;828EE4;      ;
-                       LSR A                                ;828EE5;      ;
-                       TAY                                  ;828EE6;      ;
-                                                            ;      ;      ;
-            .findnext: %Set16bit(!MX)                             ;828EE7;      ;
-                       INX                                  ;828EE9;      ;
-                       INX                                  ;828EEA;      ;
-                       CPX.W #$000A                         ;828EEB;      ;
-                       BNE .loop                            ;828EEE;828ED4;
-                       CPY.W #$0000                         ;828EF0;      ;
-                       BEQ .ifMaria                         ;828EF3;828F0C;
-                       CPY.W #$0001                         ;828EF5;      ;
-                       BEQ .ifNina                          ;828EF8;828F2D;
-                       CPY.W #$0002                         ;828EFA;      ;
-                       BEQ .ifAnn                           ;828EFD;828F4E;
-                       CPY.W #$0003                         ;828EFF;      ;
-                       BEQ .ifEllen                         ;828F02;828F6F;
-                       CPY.W #$0004                         ;828F04;      ;
-                       BNE .ifMaria                         ;828F07;828F0C;
-                       JMP.W .ifEve                         ;828F09;828F90;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-             .ifMaria: %Set16bit(!MX)                             ;828F0C;      ;
-                       LDA.W #$0026                         ;828F0E;      ;
-                       STA.W $08A1                          ;828F11;0008A1;
-                       LDA.W #$0000                         ;828F14;      ;
-                       STA.W $08A3                          ;828F17;0008A3;
-                       LDA.W #$0011                         ;828F1A;      ;
-                       STA.W $08A5                          ;828F1D;0008A5;
-                       LDA.W #$0008                         ;828F20;      ;
-                       STA.W $08A7                          ;828F23;0008A7;
-                       LDA.W #$0000                         ;828F26;      ;
-                       STA.W $08A9                          ;828F29;0008A9;
-                       RTL                                  ;828F2C;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-              .ifNina: %Set16bit(!MX)                             ;828F2D;      ;
-                       LDA.W #$001A                         ;828F2F;      ;
-                       STA.W $08A1                          ;828F32;0008A1;
-                       LDA.W #$000D                         ;828F35;      ;
-                       STA.W $08A3                          ;828F38;0008A3;
-                       LDA.W #$000D                         ;828F3B;      ;
-                       STA.W $08A5                          ;828F3E;0008A5;
-                       LDA.W #$00B1                         ;828F41;      ;
-                       STA.W $08A7                          ;828F44;0008A7;
-                       LDA.W #$00B1                         ;828F47;      ;
-                       STA.W $08A9                          ;828F4A;0008A9;
-                       RTL                                  ;828F4D;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-               .ifAnn: %Set16bit(!MX)                             ;828F4E;      ;
-                       LDA.W #$0027                         ;828F50;      ;
-                       STA.W $08A1                          ;828F53;0008A1;
-                       LDA.W #$0008                         ;828F56;      ;
-                       STA.W $08A3                          ;828F59;0008A3;
-                       LDA.W #$000D                         ;828F5C;      ;
-                       STA.W $08A5                          ;828F5F;0008A5;
-                       LDA.W #$0000                         ;828F62;      ;
-                       STA.W $08A7                          ;828F65;0008A7;
-                       LDA.W #$00B1                         ;828F68;      ;
-                       STA.W $08A9                          ;828F6B;0008A9;
-                       RTL                                  ;828F6E;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-             .ifEllen: %Set16bit(!MX)                             ;828F6F;      ;
-                       LDA.W #$001E                         ;828F71;      ;
-                       STA.W $08A1                          ;828F74;0008A1;
-                       LDA.W #$000B                         ;828F77;      ;
-                       STA.W $08A3                          ;828F7A;0008A3;
-                       LDA.W #$000B                         ;828F7D;      ;
-                       STA.W $08A5                          ;828F80;0008A5;
-                       LDA.W #$0004                         ;828F83;      ;
-                       STA.W $08A7                          ;828F86;0008A7;
-                       LDA.W #$000D                         ;828F89;      ;
-                       STA.W $08A9                          ;828F8C;0008A9;
-                       RTL                                  ;828F8F;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-               .ifEve: %Set16bit(!MX)                             ;828F90;      ;
-                       LDA.W #$001E                         ;828F92;      ;
-                       STA.W $08A1                          ;828F95;0008A1;
-                       LDA.W #$0015                         ;828F98;      ;
-                       STA.W $08A3                          ;828F9B;0008A3;
-                       LDA.W #$0004                         ;828F9E;      ;
-                       STA.W $08A5                          ;828FA1;0008A5;
-                       LDA.W #$00B1                         ;828FA4;      ;
-                       STA.W $08A7                          ;828FA7;0008A7;
-                       LDA.W #$00B1                         ;828FAA;      ;
-                       STA.W $08A9                          ;828FAD;0008A9;
-                       RTL                                  ;828FB0;      ;END_FindMostLovedandFillVariables
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                AFFFF: %Set8bit(!M)                             ;828FB1;      ;
-                       LDA.B #$00                           ;828FB3;      ;
-                       XBA                                  ;828FB5;      ;
-                       LDA.W $0922                          ;828FB6;000922;
-                       CMP.B #$02                           ;828FB9;      ;
-                       BEQ CODE_828FF2                      ;828FBB;828FF2;
-                       %Set16bit(!M)                             ;828FBD;      ;
-                       STA.B $80                            ;828FBF;000080;
-                       %Set8bit(!M)                             ;828FC1;      ;
-                       LDA.B #$00                           ;828FC3;      ;
-                       XBA                                  ;828FC5;      ;
-                       LDA.W !tool_selected                          ;828FC6;000921;
-                       %Set16bit(!M)                             ;828FC9;      ;
-                       STA.B $7E                            ;828FCB;00007E;
-                       ASL A                                ;828FCD;      ;
-                       CLC                                  ;828FCE;      ;
-                       ADC.B $7E                            ;828FCF;00007E;
-                       TAX                                  ;828FD1;      ;
-                       %Set8bit(!M)                             ;828FD2;      ;
-                       LDA.L DATA8_829054,X                 ;828FD4;829054;
-                       STA.W $0115                          ;828FD8;000115;
-                       INX                                  ;828FDB;      ;
-                       %Set16bit(!M)                             ;828FDC;      ;
-                       TXA                                  ;828FDE;      ;
-                       CLC                                  ;828FDF;      ;
-                       ADC.B $80                            ;828FE0;000080;
-                       TAX                                  ;828FE2;      ;
-                       %Set8bit(!M)                             ;828FE3;      ;
-                       LDA.L DATA8_829054,X                 ;828FE5;829054;
-                       BEQ CODE_828FF2                      ;828FE9;828FF2;
-                       STA.W $0114                          ;828FEB;000114;
-                       JSL.L UNK_Audio19                    ;828FEE;838332;
-                                                            ;      ;      ;
-          CODE_828FF2: RTL                                  ;828FF2;      ;END_AFFFF
-                                                            ;      ;      ;
-                                                            ;      ;      ;
+         Snowstorm_Chance_Table: db $00,$00,$00,$08                   ;828EC2;      ;
+
+;;;;;;; Loads the name of the most loved partner. It is never read?
+FindMostLovedName: ;828EC2
+       %Set16bit(!MX)                     
+       LDY.W #$0000                       
+       LDA.L !hearts_maria                   ;Assume Maria
+       STA.B $7E                          
+       LDX.W #$0002                          ;Temp value of who
+
+    .loop:
+       %Set16bit(!MX)                      
+       LDA.L !hearts_maria,X               
+       CMP.B $7E                           
+       BCS .morelove                       
+       BRA .findnext                       
+
+    .morelove:
+       %Set16bit(!MX)                       
+       STA.B $7E                            ;if someone has more love, take its place
+       TXA                                  
+       LSR A                                
+       TAY                                  
+
+    .findnext: 
+       %Set16bit(!MX)                       
+       INX                                  
+       INX                                  
+       CPX.W #$000A                         
+       BNE .loop                            
+       CPY.W #$0000                         
+       BEQ .ifMaria                         
+       CPY.W #$0001                         
+       BEQ .ifNina                          
+       CPY.W #$0002                         
+       BEQ .ifAnn                           
+       CPY.W #$0003                         
+       BEQ .ifEllen                         
+       CPY.W #$0004                         
+       BNE .ifMaria                         ;BUG, this defaults Maria before Eve
+       JMP.W .ifEve                         
+
+    .ifMaria:
+       %Set16bit(!MX)                       
+       LDA.W #$0026                         
+       STA.W $08A1                          
+       LDA.W #$0000                         
+       STA.W $08A3                          
+       LDA.W #$0011                         
+       STA.W $08A5                          
+       LDA.W #$0008                         
+       STA.W $08A7                          
+       LDA.W #$0000                         
+       STA.W $08A9                          
+
+       RTL                                  
+
+    .ifNina:
+       %Set16bit(!MX)                   
+       LDA.W #$001A                     
+       STA.W $08A1                      
+       LDA.W #$000D                     
+       STA.W $08A3                      
+       LDA.W #$000D                     
+       STA.W $08A5                      
+       LDA.W #$00B1                     
+       STA.W $08A7                      
+       LDA.W #$00B1                     
+       STA.W $08A9                      
+
+       RTL                               
+
+    .ifAnn:   
+       %Set16bit(!MX)                    
+       LDA.W #$0027                      
+       STA.W $08A1                       
+       LDA.W #$0008                      
+       STA.W $08A3                       
+       LDA.W #$000D                      
+       STA.W $08A5                       
+       LDA.W #$0000                      
+       STA.W $08A7                       
+       LDA.W #$00B1                      
+       STA.W $08A9                       
+
+       RTL                               
+
+    .ifEllen:
+       %Set16bit(!MX)     
+       LDA.W #$001E       
+       STA.W $08A1        
+       LDA.W #$000B       
+       STA.W $08A3        
+       LDA.W #$000B       
+       STA.W $08A5        
+       LDA.W #$0004       
+       STA.W $08A7        
+       LDA.W #$000D       
+       STA.W $08A9        
+       
+       RTL
+
+    .ifEve: 
+       %Set16bit(!MX)                       
+       LDA.W #$001E                         
+       STA.W $08A1                          
+       LDA.W #$0015                         
+       STA.W $08A3                          
+       LDA.W #$0004                         
+       STA.W $08A5                          
+       LDA.W #$00B1                         
+       STA.W $08A7                          
+       LDA.W #$00B1                         
+       STA.W $08A9                          
+
+       RTL                                  
+
+;;;;;;; TODO
+AFFFF: ;828FB1
+       %Set8bit(!M)                         
+       LDA.B #$00                           
+       XBA                                  
+       LDA.W $0922                          
+       CMP.B #$02                           
+       BEQ .return                      
+       %Set16bit(!M)                       
+       STA.B $80                           
+       %Set8bit(!M)                        
+       LDA.B #$00                          
+       XBA                                 
+       LDA.W !tool_selected                
+       %Set16bit(!M)                       
+       STA.B $7E                           
+       ASL A                               
+       CLC                                 
+       ADC.B $7E                            
+       TAX                                  
+       %Set8bit(!M)                         
+       LDA.L DATA8_829054,X                 
+       STA.W $0115                          
+       INX                                  
+       %Set16bit(!M)                        
+       TXA                                  
+       CLC                                  
+       ADC.B $80                            
+       TAX                                  
+       %Set8bit(!M)                         
+       LDA.L DATA8_829054,X                 
+       BEQ .return                          
+       STA.W $0114                          
+       JSL.L UNK_Audio19                    
+
+       .return: RTL                                  
+
                 AEEEE: %Set8bit(!M)                             ;828FF3;      ;
                        LDA.B #$00                           ;828FF5;      ;
                        XBA                                  ;828FF7;      ;
