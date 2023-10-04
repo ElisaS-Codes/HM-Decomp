@@ -166,6 +166,11 @@
 !player_name_long_2 = $08D7 ;16b
 !player_name_long_3 = $08D9 ;16b
 !player_name_long_4 = $08DB ;16b
+!most_hearts_girl_name_1 = $08A1 ;16b
+!most_hearts_girl_name_2 = $08A3 ;16b
+!most_hearts_girl_name_3 = $08A5 ;16b
+!most_hearts_girl_name_4 = $08A7 ;16b
+!most_hearts_girl_name_5 = $08A9 ;16b
 !player_direction = $DA ;16
 ;0:down,1:up, 2:left 3:right
 !player_pos_X = $D6 ;16b
@@ -174,7 +179,7 @@
 !current_stamina = $0918 ;8b
 !idle_animation_timer = $0925 ;8b
 !item_on_hand = $091D ;8b
-;#$57 - Wood
+;at the end of TODO, need to find a place for Items
 !tool_selected = $0921 ;8b 00:nothing, 01:sickle, 02:hoe, 03:hammer, 04:axe, 05:yellow seed, 06:red seed, 07:brown seed, 08:white seed, 09:cow medicine, 0A:cow icon, 0B:bell, 0C:grass seed, 0D:paint, 0E:milker, 0F:brush, 10:watering, 11:gold sickle, 12:gold hoe, 13:gold hammer, 14:gold axe, 15:sprinkler, 16:bean, 17:gem, 18:blue feather, 19:chicken feed, 20:cow feed
 !tool_backpack = $0923 ;8b
 !happiness = $7F1F33 ;16b
@@ -244,6 +249,7 @@
 !stored_grass = $7F1F10 ;16b
 !weather_tomorrow = $098C ;8b - 00:Sunny, 01:rain, 03:hurricane, 04:fair, 05:sunny and calm, 06:flower festival, 07:harvest festival, 08:Thanksgiving Festival, 09:Star Night Festival, 0A:festive mood, 0B:annual egg festival, 0C:snow
 !development_rate = $7F1F35
+!dog_map = $7F1F30 ;8b
 !dog_pos_X = $7F1F2C ;16b
 !dog_pos_Y = $7F1F2E ;16b
 !dog_hugs = $7F1F52 ;16b
@@ -303,10 +309,10 @@
 ;;COW DATA
 !cow_array = $7EC1C6
 ;cow data structure
-; x6	- Cow 1 Status; -pscaaae
+; x6	- Cow 1 Status; -psc aaae
 ;   p=pregnant,s=sick,c=cranky,a=age(001=baby,010=child,100=adult),e=exists
 ; x7 - (1? 0?)
-; x8 - ($27?)
+; x8 - Map
 ; x9 - Cow 1 Pregnancy
 ; xA - Cow 1 Happiness
 ; xB -
@@ -334,7 +340,7 @@
 !chicken_array = $7EC286
 ; x6/xE	- Status? starts as #$43(0100 0011)/#$09(0000 1001)
 ; ?1?? aaax - a=age(001=egg,010=child,100=adult),e=exists
-; x7/xF - #$28(0010 1000) 40/Season + 4
+; x7/xF - Map
 ; x8/x0 - #0
 ; x9/x1 -
 ; xA/x2 - Position X ;16b

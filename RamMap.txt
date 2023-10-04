@@ -66,7 +66,7 @@ where I have a headache. Most real info is on ram.asm
 🛠️$7E017F = !transition_dest_Y - 16b
 
 🛠️$7E087C = !map_scrolling_X_speed - 16b
-🛠️$7E087E = !map_scrolling_Y_speed - 16b 
+🛠️$7E087E = !map_scrolling_Y_speed - 16b
 🛠️$7E0880 = !map_scrolling_timer - 16b
 🛠️$7E0881 - $7E0884 = !player_name_sort_1 - 8b *4
 🛠️$7E0885 - $7E0888 = !temp_name_1 - 8b *4
@@ -79,11 +79,16 @@ where I have a headache. Most real info is on ram.asm
 🧢$7E089E = !horse_name_short_2 - 8b
 🧢$7E089F = !horse_name_short_3 - 8b
 🧢$7E08A0 = !horse_name_short_4 - 8b
+🗑$7E08A1 = !most_hearts_girl_name_1 - 16b
+🗑$7E08A3 = !most_hearts_girl_name_2 - 16b
+🗑$7E08A5 = !most_hearts_girl_name_3 - 16b
+🗑$7E08A7 = !most_hearts_girl_name_4 - 16b
+🗑$7E08A9 = !most_hearts_girl_name_5 - 16b
 
-🧢$7E08D5 = !player_name_long_1 - 16b *4
-🧢$7E08D7 = !player_name_long_2 - 16b *4
-🧢$7E08D9 = !player_name_long_3 - 16b *4
-🧢$7E08DB = !player_name_long_4 - 16b *4
+🧢$7E08D5 = !player_name_long_1 - 16b
+🧢$7E08D7 = !player_name_long_2 - 16b
+🧢$7E08D9 = !player_name_long_3 - 16b
+🧢$7E08DB = !player_name_long_4 - 16b
 🧢$7E08DD = !dog_name_long_1 - 16b
 🧢$7E08DF = !dog_name_long_2 - 16b
 🧢$7E08E1 = !dog_name_long_3 - 16b
@@ -210,6 +215,7 @@ where I have a headache. Most real info is on ram.asm
 
 🧢$7F1F2C = !dog_pos_X - 16b
 🧢$7F1F2E = !dog_pos_Y - 16b
+🧢$7F1F30 = !dog_map - 8b
 
 🧢$7F1F33 = !happiness - 16b
 🧢$7F1F35 = !development_rate - 8b

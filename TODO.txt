@@ -5,10 +5,24 @@ Params A:Control Registers, X:VRAM/CGRAM Dest Addresses, Y(DMA Size), $72 & $74 
 PalettePointerTable
 
 ====Working on
+CODE_83BC5A Cow feeding subrutine?
+CODE_828CF9 Weather tomorrow subrutine?
+CODE_828C09 More weather_tomorrow?
+CODE_828790 Wife Pregnancy subrutine
+LoadsDateDataFromTables - Special Events?
+
+Unk_Seasons2
+
+CKKKK
+	$0181? related to map loaded?
+	$092E?
+	$82 = 0
+	$84 = 0
+	double loop that calls UNK_OperatesOnSeasonTable
 
 
-0985 TempX;16b
-0987 TempY;16b
+0985 TempX while running;16b
+0987 TempY while running;16b
 0181 = 2
 0182 = 2
 
@@ -182,13 +196,6 @@ $01AD - sorute frame
 
 $084A -
 
-								 Ma|Ni|An|El|Ev
-$7E08A1 - (related to most loved 26|1A|27|1E|1E)
-$7E08A3 - (related to most loved 00|0D|08|0B|15)
-$7E08A5 - (related to most loved 11|0D|0D|0B|04)
-$7E08A7 - (related to most loved 08|B1|00|04|B1)
-$7E08A9 - (related to most loved 00|B1|B1|0D|B1)
-
 $7E084A -
 
 $0878 - Flags? related to $E9, related to movement? maybe not flags, checked if less than c0?
@@ -298,7 +305,7 @@ $7EA424 - (Holds DMA Source Address High)
 
 $7EA4E6\farm data * #$0F00
 $7EA5A6/
-$7EB4E6-B586 - ($00) holds variables to set up around $0974
+$7EB4E6-B586 - ($00) holds variables to set up around $0974 map?
 
 ==============
 

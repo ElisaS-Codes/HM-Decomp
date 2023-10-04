@@ -3642,7 +3642,7 @@
                        STA.B [$72],Y                        ;849C8D;000072;
                        %Set16bit(!M)                             ;849C8F;      ;
                        LDA.W #$0001                         ;849C91;      ;
-                       JSL.L CODE_84A5D4                    ;849C94;84A5D4;
+                       JSL.L AddCowHappiness                    ;849C94;84A5D4;
                        %Set8bit(!M)                             ;849C98;      ;
                        %Set16bit(!X)                             ;849C9A;      ;
                        LDY.W #$0000                         ;849C9C;      ;
@@ -3912,7 +3912,7 @@
                        STA.B [$72],Y                        ;849E88;000072;
                        %Set16bit(!M)                             ;849E8A;      ;
                        LDA.W #$000A                         ;849E8C;      ;
-                       JSL.L CODE_84A5D4                    ;849E8F;84A5D4;
+                       JSL.L AddCowHappiness                    ;849E8F;84A5D4;
                        %Set8bit(!M)                             ;849E93;      ;
                        LDY.W #$0003                         ;849E95;      ;
                        LDA.B #$15                           ;849E98;      ;
@@ -3940,7 +3940,7 @@
                        STA.B [$72],Y                        ;849EC5;000072;
                        %Set16bit(!M)                             ;849EC7;      ;
                        LDA.W #$0003                         ;849EC9;      ;
-                       JSL.L CODE_84A5D4                    ;849ECC;84A5D4;
+                       JSL.L AddCowHappiness                    ;849ECC;84A5D4;
                        %Set8bit(!M)                             ;849ED0;      ;
                        %Set16bit(!X)                             ;849ED2;      ;
                        LDY.W #$0000                         ;849ED4;      ;
@@ -4875,40 +4875,41 @@
                        LDA.W #$0178                         ;84A5CC;      ;
                        STA.B [$72],Y                        ;84A5CF;000072;
                        JMP.W CODE_84A46E                    ;84A5D1;84A46E;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_84A5D4: %Set16bit(!MX)                             ;84A5D4;      ;
-                       STA.B $7E                            ;84A5D6;00007E;
-                       LDA.W #$0000                         ;84A5D8;      ;
-                       %Set8bit(!M)                             ;84A5DB;      ;
-                       LDY.W #$0004                         ;84A5DD;      ;
-                       LDA.B [$72],Y                        ;84A5E0;000072;
-                       %Set16bit(!M)                             ;84A5E2;      ;
-                       STA.B $80                            ;84A5E4;000080;
-                       LDA.B $80                            ;84A5E6;000080;
-                       CLC                                  ;84A5E8;      ;
-                       ADC.B $7E                            ;84A5E9;00007E;
-                       BMI CODE_84A5F8                      ;84A5EB;84A5F8;
-                       CMP.W #$0100                         ;84A5ED;      ;
-                       BCS CODE_84A600                      ;84A5F0;84A600;
-                       %Set8bit(!M)                             ;84A5F2;      ;
-                       STA.B [$72],Y                        ;84A5F4;000072;
-                       BRA CODE_84A606                      ;84A5F6;84A606;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_84A5F8: %Set8bit(!M)                             ;84A5F8;      ;
-                       LDA.B #$00                           ;84A5FA;      ;
-                       STA.B [$72],Y                        ;84A5FC;000072;
-                       BRA CODE_84A606                      ;84A5FE;84A606;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_84A600: %Set8bit(!M)                             ;84A600;      ;
-                       LDA.B #$FF                           ;84A602;      ;
-                       STA.B [$72],Y                        ;84A604;000072;
-                                                            ;      ;      ;
-          CODE_84A606: RTL                                  ;84A606;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
+
+;;;;;;;; $72 comes pre packed with the cow's pointer. A is ammount to change
+AddCowHappiness:
+        %Set16bit(!MX)
+        STA.B $7E
+        LDA.W #$0000
+        %Set8bit(!M)
+        LDY.W #$0004                         ;Happiness
+        LDA.B [$72],Y                        ;cow pointer loaded
+        %Set16bit(!M)
+        STA.B $80
+        LDA.B $80
+        CLC
+        ADC.B $7E
+        BMI .negative
+        CMP.W #256
+        BCS .over
+        %Set8bit(!M)
+        STA.B [$72],Y
+        BRA .return
+
+    .negative:
+        %Set8bit(!M)
+        LDA.B #$00
+        STA.B [$72],Y
+        BRA .return
+
+    .over:
+        %Set8bit(!M)
+        LDA.B #255
+        STA.B [$72],Y
+
+    .return: RTL
+
+
           CODE_84A607: %Set8bit(!M)                             ;84A607;      ;
                        %Set16bit(!X)                             ;84A609;      ;
                        LDY.W #$0001                         ;84A60B;      ;
@@ -7857,7 +7858,7 @@
                        STA.B !game_state                            ;84BC72;0000D2;
                        %Set8bit(!M)                             ;84BC74;      ;
                        LDA.L !season                        ;84BC76;7F1F19;
-                       STA.L $7F1F30                        ;84BC7A;7F1F30;
+                       STA.L !dog_map                        ;84BC7A;7F1F30;
                        %Set16bit(!MX)                             ;84BC7E;      ;
                        LDA.W #$0078                         ;84BC80;      ;
                        STA.L !dog_pos_X                        ;84BC83;7F1F2C;
@@ -7947,7 +7948,7 @@
                        STA.B !game_state                            ;84BD25;0000D2;
                        %Set8bit(!M)                             ;84BD27;      ;
                        LDA.L !season                        ;84BD29;7F1F19;
-                       STA.L $7F1F30                        ;84BD2D;7F1F30;
+                       STA.L !dog_map                        ;84BD2D;7F1F30;
                        %Set16bit(!MX)                             ;84BD31;      ;
                        LDA.W #$0078                         ;84BD33;      ;
                        STA.L !dog_pos_X                        ;84BD36;7F1F2C;
@@ -9897,7 +9898,7 @@ PlayerKeyA:
                        STA.L !dog_pos_Y                        ;84CBFB;7F1F2E;
                        %Set8bit(!M)                             ;84CBFF;      ;
                        LDA.B !tilemap_to_load                            ;84CC01;000022;
-                       STA.L $7F1F30                        ;84CC03;7F1F30;
+                       STA.L !dog_map                        ;84CC03;7F1F30;
                        %Set16bit(!MX)                             ;84CC07;      ;
                        LDA.W #$0016                         ;84CC09;      ;
                        STA.B !player_action                            ;84CC0C;0000D4;

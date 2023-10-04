@@ -1949,7 +1949,7 @@
                        SBC.W #$00E2                         ;818EE0;      ;
                        ASL A                                ;818EE3;      ;
                        TAX                                  ;818EE4;      ;
-                       LDA.L DATA16_82A571,X                ;818EE5;82A571;
+                       LDA.L Cow_Feed_Flags,X                ;818EE5;82A571;
                        ORA.W !fed_cows_flags                          ;818EE9;000932;
                        STA.W !fed_cows_flags                          ;818EEC;000932;
                        %Set8bit(!M)                             ;818EEF;      ;
@@ -1975,7 +1975,7 @@
                        SBC.W #$00E2                         ;818F0F;      ;
                        ASL A                                ;818F12;      ;
                        TAX                                  ;818F13;      ;
-                       LDA.L DATA16_82A571,X                ;818F14;82A571;
+                       LDA.L Cow_Feed_Flags,X                ;818F14;82A571;
                        ORA.W !fed_chicks_flags                          ;818F18;000934;
                        STA.W !fed_chicks_flags                          ;818F1B;000934;
                        %Set8bit(!M)                             ;818F1E;      ;
@@ -4856,7 +4856,7 @@ UNK_ExecuteFromPointers:
                        TYA                                  ;81B0BE;      ;
                        ASL A                                ;81B0BF;      ;
                        TAX                                  ;81B0C0;      ;
-                       LDA.L DATA16_82A571,X                ;81B0C1;82A571;
+                       LDA.L Cow_Feed_Flags,X                ;81B0C1;82A571;
                        AND.W !fed_cows_flags                          ;81B0C5;000932;
                        BEQ CODE_81B0E3                      ;81B0C8;81B0E3;
                        TYA                                  ;81B0CA;      ;

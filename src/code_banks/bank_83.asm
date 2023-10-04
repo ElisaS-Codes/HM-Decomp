@@ -3224,7 +3224,7 @@ NewGameSetup: ;83A9BE
         LDA.B #$00
         STA.L $7F1F2B
         LDA.B #$00
-        STA.L $7F1F30
+        STA.L !dog_map
         LDA.B #$00
         STA.L $7F1F31
         LDA.B #$00
@@ -4396,7 +4396,7 @@ LoadGameSlot: ;83B2B1
         STA.L $7F1F2B
         LDY.W #$0013
         LDA.B [!savelocation],Y
-        STA.L $7F1F30
+        STA.L !dog_map
         LDY.W #$0014
         LDA.B [!savelocation],Y
         STA.L $7F1F31
@@ -4792,7 +4792,7 @@ SaveGameSlot: ;83B68E
         LDA.L $7F1F2B
         STA.B [!savelocation],Y
         LDY.W #$0013
-        LDA.L $7F1F30
+        LDA.L !dog_map
         STA.B [!savelocation],Y
         LDY.W #$0014
         LDA.L $7F1F31
@@ -5438,7 +5438,7 @@ CheckSRAMIntegrity: ;83BAD4
                        TXA                                  ;83BCB3;      ;
                        ASL A                                ;83BCB4;      ;
                        TAX                                  ;83BCB5;      ;
-                       LDA.L DATA16_82A571,X                ;83BCB6;82A571;
+                       LDA.L Cow_Feed_Flags,X                ;83BCB6;82A571;
                        AND.W !fed_cows_flags                          ;83BCBA;000932;
                        BEQ CODE_83BD10                      ;83BCBD;83BD10;
                        JMP.W CODE_83BD9E                    ;83BCBF;83BD9E;
@@ -5446,7 +5446,7 @@ CheckSRAMIntegrity: ;83BAD4
                                                             ;      ;      ;
           CODE_83BCC2: %Set16bit(!MX)                             ;83BCC2;      ;
                        LDX.W #$0018                         ;83BCC4;      ;
-                       LDA.L DATA16_82A571,X                ;83BCC7;82A571;
+                       LDA.L Cow_Feed_Flags,X                ;83BCC7;82A571;
                        AND.W !fed_cows_flags                          ;83BCCB;000932;
                        BEQ CODE_83BD10                      ;83BCCE;83BD10;
                        JMP.W CODE_83BD9E                    ;83BCD0;83BD9E;
@@ -5480,7 +5480,7 @@ CheckSRAMIntegrity: ;83BAD4
                                                             ;      ;      ;
           CODE_83BD10: %Set16bit(!M)                             ;83BD10;      ;
                        LDA.W #$FFF8                         ;83BD12;      ;
-                       JSL.L CODE_84A5D4                    ;83BD15;84A5D4;
+                       JSL.L AddCowHappiness                    ;83BD15;84A5D4;
                        %Set16bit(!MX)                             ;83BD19;      ;
                        LDY.W #$0004                         ;83BD1B;      ;
                        BRA CODE_83BD50                      ;83BD1E;83BD50;
@@ -5488,7 +5488,7 @@ CheckSRAMIntegrity: ;83BAD4
                                                             ;      ;      ;
           CODE_83BD20: %Set16bit(!M)                             ;83BD20;      ;
                        LDA.W #$FFF0                         ;83BD22;      ;
-                       JSL.L CODE_84A5D4                    ;83BD25;84A5D4;
+                       JSL.L AddCowHappiness                    ;83BD25;84A5D4;
                        %Set16bit(!MX)                             ;83BD29;      ;
                        LDY.W #$0002                         ;83BD2B;      ;
                        BRA CODE_83BD50                      ;83BD2E;83BD50;
@@ -5496,7 +5496,7 @@ CheckSRAMIntegrity: ;83BAD4
                                                             ;      ;      ;
           CODE_83BD30: %Set16bit(!M)                             ;83BD30;      ;
                        LDA.W #$FFE8                         ;83BD32;      ;
-                       JSL.L CODE_84A5D4                    ;83BD35;84A5D4;
+                       JSL.L AddCowHappiness                    ;83BD35;84A5D4;
                        %Set16bit(!MX)                             ;83BD39;      ;
                        LDY.W #$0002                         ;83BD3B;      ;
                        BRA CODE_83BD50                      ;83BD3E;83BD50;
@@ -5504,7 +5504,7 @@ CheckSRAMIntegrity: ;83BAD4
                                                             ;      ;      ;
           CODE_83BD40: %Set16bit(!M)                             ;83BD40;      ;
                        LDA.W #$FFF8                         ;83BD42;      ;
-                       JSL.L CODE_84A5D4                    ;83BD45;84A5D4;
+                       JSL.L AddCowHappiness                    ;83BD45;84A5D4;
                        %Set16bit(!MX)                             ;83BD49;      ;
                        LDY.W #$0008                         ;83BD4B;      ;
                        BRA CODE_83BD50                      ;83BD4E;83BD50;
@@ -5539,7 +5539,7 @@ CheckSRAMIntegrity: ;83BAD4
                        STA.B [$72],Y                        ;83BD8A;000072;
                        %Set16bit(!M)                             ;83BD8C;      ;
                        LDA.W #$FFF4                         ;83BD8E;      ;
-                       JSL.L CODE_84A5D4                    ;83BD91;84A5D4;
+                       JSL.L AddCowHappiness                    ;83BD91;84A5D4;
                        %Set16bit(!MX)                             ;83BD95;      ;
                        LDA.W #$FFE2                         ;83BD97;      ;
                        JSL.L AddPlayerHappiness                   ;83BD9A;83B282;
@@ -5565,7 +5565,7 @@ CheckSRAMIntegrity: ;83BAD4
                        BNE CODE_83BDD6                      ;83BDC9;83BDD6;
                        %Set16bit(!M)                             ;83BDCB;      ;
                        LDA.W #$FFF8                         ;83BDCD;      ;
-                       JSL.L CODE_84A5D4                    ;83BDD0;84A5D4;
+                       JSL.L AddCowHappiness                    ;83BDD0;84A5D4;
                        BRA CODE_83BDEB                      ;83BDD4;83BDEB;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -5606,7 +5606,7 @@ CheckSRAMIntegrity: ;83BAD4
                        STA.B [$72],Y                        ;83BE21;000072;
                        %Set16bit(!M)                             ;83BE23;      ;
                        LDA.W #$FFE2                         ;83BE25;      ;
-                       JSL.L CODE_84A5D4                    ;83BE28;84A5D4;
+                       JSL.L AddCowHappiness                    ;83BE28;84A5D4;
                        BRA CODE_83BE3F                      ;83BE2C;83BE3F;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -6727,7 +6727,7 @@ CheckSRAMIntegrity: ;83BAD4
                                                             ;      ;      ;
                                                             ;      ;      ;
           CODE_83C661: %Set8bit(!M)                             ;83C661;      ;
-                       LDA.L $7F1F30                        ;83C663;7F1F30;
+                       LDA.L !dog_map                        ;83C663;7F1F30;
                        CMP.B #$04                           ;83C667;      ;
                        BCS CODE_83C677                      ;83C669;83C677;
                        LDA.B !tilemap_to_load                            ;83C66B;000022;
@@ -6740,7 +6740,7 @@ CheckSRAMIntegrity: ;83BAD4
                                                             ;      ;      ;
                                                             ;      ;      ;
           CODE_83C677: %Set8bit(!M)                             ;83C677;      ;
-                       LDA.L $7F1F30                        ;83C679;7F1F30;
+                       LDA.L !dog_map                        ;83C679;7F1F30;
                        CMP.B #$08                           ;83C67D;      ;
                        BCS CODE_83C693                      ;83C67F;83C693;
                        LDA.B !tilemap_to_load                            ;83C681;000022;
@@ -6758,7 +6758,7 @@ CheckSRAMIntegrity: ;83BAD4
                                                             ;      ;      ;
                                                             ;      ;      ;
           CODE_83C693: %Set8bit(!M)                             ;83C693;      ;
-                       LDA.L $7F1F30                        ;83C695;7F1F30;
+                       LDA.L !dog_map                        ;83C695;7F1F30;
                        CMP.B #$10                           ;83C699;      ;
                        BCS CODE_83C6AF                      ;83C69B;83C6AF;
                        LDA.B !tilemap_to_load                            ;83C69D;000022;
@@ -6776,7 +6776,7 @@ CheckSRAMIntegrity: ;83BAD4
                                                             ;      ;      ;
                                                             ;      ;      ;
           CODE_83C6AF: %Set8bit(!M)                             ;83C6AF;      ;
-                       LDA.L $7F1F30                        ;83C6B1;7F1F30;
+                       LDA.L !dog_map                        ;83C6B1;7F1F30;
                        CMP.B #$14                           ;83C6B5;      ;
                        BCS CODE_83C6CB                      ;83C6B7;83C6CB;
                        LDA.B !tilemap_to_load                            ;83C6B9;000022;
@@ -6794,7 +6794,7 @@ CheckSRAMIntegrity: ;83BAD4
                                                             ;      ;      ;
                                                             ;      ;      ;
           CODE_83C6CB: %Set8bit(!M)                             ;83C6CB;      ;
-                       LDA.L $7F1F30                        ;83C6CD;7F1F30;
+                       LDA.L !dog_map                        ;83C6CD;7F1F30;
                        CMP.B #$18                           ;83C6D1;      ;
                        BCS CODE_83C6E7                      ;83C6D3;83C6E7;
                        LDA.B !tilemap_to_load                            ;83C6D5;000022;
@@ -6812,7 +6812,7 @@ CheckSRAMIntegrity: ;83BAD4
                                                             ;      ;      ;
                                                             ;      ;      ;
           CODE_83C6E7: %Set8bit(!M)                             ;83C6E7;      ;
-                       LDA.L $7F1F30                        ;83C6E9;7F1F30;
+                       LDA.L !dog_map                        ;83C6E9;7F1F30;
                        CMP.B #$31                           ;83C6ED;      ;
                        BCC CODE_83C6FC                      ;83C6EF;83C6FC;
                        LDA.B !tilemap_to_load                            ;83C6F1;000022;
@@ -6825,7 +6825,7 @@ CheckSRAMIntegrity: ;83BAD4
                                                             ;      ;      ;
                                                             ;      ;      ;
           CODE_83C6FC: %Set8bit(!M)                             ;83C6FC;      ;
-                       LDA.L $7F1F30                        ;83C6FE;7F1F30;
+                       LDA.L !dog_map                        ;83C6FE;7F1F30;
                        CMP.B !tilemap_to_load                            ;83C702;000022;
                        BEQ CODE_83C709                      ;83C704;83C709;
                        JMP.W CODE_83C734                    ;83C706;83C734;
@@ -7707,7 +7707,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        STA.L !dog_pos_Y                        ;83CF03;7F1F2E;
                        %Set8bit(!M)                             ;83CF07;      ;
                        LDA.B #$00                           ;83CF09;      ;
-                       STA.L $7F1F30                        ;83CF0B;7F1F30;
+                       STA.L !dog_map                        ;83CF0B;7F1F30;
                        RTS                                  ;83CF0F;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -10164,7 +10164,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        STA.B !game_state                            ;83E50E;0000D2;
                        %Set8bit(!M)                             ;83E510;      ;
                        LDA.L !season                        ;83E512;7F1F19;
-                       STA.L $7F1F30                        ;83E516;7F1F30;
+                       STA.L !dog_map                        ;83E516;7F1F30;
                        %Set16bit(!MX)                             ;83E51A;      ;
                        LDA.W #$0078                         ;83E51C;      ;
                        STA.L !dog_pos_X                        ;83E51F;7F1F2C;

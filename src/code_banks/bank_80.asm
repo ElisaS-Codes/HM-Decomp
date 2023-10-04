@@ -35,7 +35,7 @@ ORG $808000
         %Set8bit(!M)
         LDA.B !map_house_1
         STA.W !transition_dest
-        JSL.L FindMostLovedandFillVariables
+        JSL.L NameofMostLovedGirl
         JSL.L UNK_ScreenTransition
         %Set16bit(!M)
         LDA.L $7F1F68
