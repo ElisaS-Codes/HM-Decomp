@@ -28,14 +28,14 @@ ORG $808000
         LDA.B #$01
         STA.W !inputstate
         %Set16bit(!MX)
-        LDA.W #$0088
+        LDA.W #$0088                         ;Position of the chair you wake up in
         STA.W !transition_dest_X
         LDA.W #$0078
         STA.W !transition_dest_Y
         %Set8bit(!M)
         LDA.B !map_house_1
         STA.W !transition_dest
-        JSL.L NameofMostLovedGirl
+        JSL.L FindMostLovedName
         JSL.L UNK_ScreenTransition
         %Set16bit(!M)
         LDA.L $7F1F68
