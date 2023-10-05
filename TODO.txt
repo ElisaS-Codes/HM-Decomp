@@ -10,6 +10,7 @@ CODE_828CF9 Weather tomorrow subrutine?
 CODE_828C09 More weather_tomorrow?
 CODE_828790 Wife Pregnancy subrutine
 LoadsDateDataFromTables - Special Events?
+CKKKK Grass counting? unlikely
 
 Unk_Seasons2
 
@@ -367,7 +368,7 @@ $7F1F6C -
 ???t ???? - t=Turtle Shell
 ???? ????
 $7F1F6E - Flags
-?ch? ???? - c=Clock Owned; h:egg hatching
+wch? ???? - w=cow grown c=Clock Owned; h:egg hatching
 ???? cc?? - cc=childs(%01 child1, %10 child2)
 $7F1F70 -
 $7F1F72 -
