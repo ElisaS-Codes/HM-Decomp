@@ -5387,484 +5387,492 @@ CheckSRAMIntegrity: ;83BAD4
     .check2Passed:
         RTL
 
-          CODE_83BC5A: %Set16bit(!MX)                             ;83BC5A;      ;
-                       LDA.L $7F1F60                        ;83BC5C;7F1F60;
-                       AND.W #$0001                         ;83BC60;      ;
-                       BEQ CODE_83BC68                      ;83BC63;83BC68;
-                       JMP.W CODE_83BE4B                    ;83BC65;83BE4B;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BC68: LDX.W #$0000                         ;83BC68;      ;
-                                                            ;      ;      ;
-          CODE_83BC6B: %Set16bit(!MX)                             ;83BC6B;      ;
-                       PHX                                  ;83BC6D;      ;
-                       PHX                                  ;83BC6E;      ;
-                       TXA                                  ;83BC6F;      ;
-                       JSL.L GetsCowPointer                ;83BC70;83C9A7;
-                       %Set8bit(!M)                             ;83BC74;      ;
-                       %Set16bit(!X)                             ;83BC76;      ;
-                       PLX                                  ;83BC78;      ;
-                       LDY.W #$0000                         ;83BC79;      ;
-                       LDA.B [$72],Y                        ;83BC7C;000072;
-                       AND.B #$01                           ;83BC7E;      ;
-                       BNE CODE_83BC85                      ;83BC80;83BC85;
-                       JMP.W CODE_83BE3F                    ;83BC82;83BE3F;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BC85: %Set8bit(!M)                             ;83BC85;      ;
-                       LDY.W #$0000                         ;83BC87;      ;
-                       LDA.B [$72],Y                        ;83BC8A;000072;
-                       AND.B #$02                           ;83BC8C;      ;
-                       BEQ CODE_83BC93                      ;83BC8E;83BC93;
-                       JMP.W CODE_83BE3F                    ;83BC90;83BE3F;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BC93: LDY.W #$0000                         ;83BC93;      ;
-                       LDA.B [$72],Y                        ;83BC96;000072;
-                       AND.B #$04                           ;83BC98;      ;
-                       BEQ CODE_83BC9F                      ;83BC9A;83BC9F;
-                       JMP.W CODE_83BE2E                    ;83BC9C;83BE2E;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BC9F: LDY.W #$0002                         ;83BC9F;      ;
-                       LDA.B [$72],Y                        ;83BCA2;000072;
-                       CMP.B #$27                           ;83BCA4;      ;
-                       BNE CODE_83BCD3                      ;83BCA6;83BCD3;
-                       LDY.W #$0000                         ;83BCA8;      ;
-                       LDA.B [$72],Y                        ;83BCAB;000072;
-                       AND.B #$40                           ;83BCAD;      ;
-                       BNE CODE_83BCC2                      ;83BCAF;83BCC2;
-                       %Set16bit(!M)                             ;83BCB1;      ;
-                       TXA                                  ;83BCB3;      ;
-                       ASL A                                ;83BCB4;      ;
-                       TAX                                  ;83BCB5;      ;
-                       LDA.L Cow_Feed_Flags,X                ;83BCB6;82A571;
-                       AND.W !fed_cows_flags                          ;83BCBA;000932;
-                       BEQ CODE_83BD10                      ;83BCBD;83BD10;
-                       JMP.W CODE_83BD9E                    ;83BCBF;83BD9E;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BCC2: %Set16bit(!MX)                             ;83BCC2;      ;
-                       LDX.W #$0018                         ;83BCC4;      ;
-                       LDA.L Cow_Feed_Flags,X                ;83BCC7;82A571;
-                       AND.W !fed_cows_flags                          ;83BCCB;000932;
-                       BEQ CODE_83BD10                      ;83BCCE;83BD10;
-                       JMP.W CODE_83BD9E                    ;83BCD0;83BD9E;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BCD3: %Set8bit(!M)                             ;83BCD3;      ;
-                       %Set16bit(!X)                             ;83BCD5;      ;
-                       LDY.W #$0002                         ;83BCD7;      ;
-                       LDA.B [$72],Y                        ;83BCDA;000072;
-                       CMP.B #$04                           ;83BCDC;      ;
-                       BCS CODE_83BD10                      ;83BCDE;83BD10;
-                       JSL.L CKKKK                          ;83BCE0;82A9A0;
-                       %Set16bit(!M)                             ;83BCE4;      ;
-                       LDA.W $092E                          ;83BCE6;00092E;
-                       BEQ CODE_83BD10                      ;83BCE9;83BD10;
-                       %Set16bit(!M)                             ;83BCEB;      ;
-                       LDA.W $0196                          ;83BCED;000196;
-                       AND.W #$0002                         ;83BCF0;      ;
-                       BNE CODE_83BD10                      ;83BCF3;83BD10;
-                       LDA.W $0196                          ;83BCF5;000196;
-                       AND.W #$0008                         ;83BCF8;      ;
-                       BNE CODE_83BD20                      ;83BCFB;83BD20;
-                       LDA.W $0196                          ;83BCFD;000196;
-                       AND.W #$0010                         ;83BD00;      ;
-                       BNE CODE_83BD30                      ;83BD03;83BD30;
-                       LDA.W $0196                          ;83BD05;000196;
-                       AND.W #$0200                         ;83BD08;      ;
-                       BNE CODE_83BD40                      ;83BD0B;83BD40;
-                       JMP.W CODE_83BD9E                    ;83BD0D;83BD9E;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BD10: %Set16bit(!M)                             ;83BD10;      ;
-                       LDA.W #$FFF8                         ;83BD12;      ;
-                       JSL.L AddCowHappiness                    ;83BD15;84A5D4;
-                       %Set16bit(!MX)                             ;83BD19;      ;
-                       LDY.W #$0004                         ;83BD1B;      ;
-                       BRA CODE_83BD50                      ;83BD1E;83BD50;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BD20: %Set16bit(!M)                             ;83BD20;      ;
-                       LDA.W #$FFF0                         ;83BD22;      ;
-                       JSL.L AddCowHappiness                    ;83BD25;84A5D4;
-                       %Set16bit(!MX)                             ;83BD29;      ;
-                       LDY.W #$0002                         ;83BD2B;      ;
-                       BRA CODE_83BD50                      ;83BD2E;83BD50;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BD30: %Set16bit(!M)                             ;83BD30;      ;
-                       LDA.W #$FFE8                         ;83BD32;      ;
-                       JSL.L AddCowHappiness                    ;83BD35;84A5D4;
-                       %Set16bit(!MX)                             ;83BD39;      ;
-                       LDY.W #$0002                         ;83BD3B;      ;
-                       BRA CODE_83BD50                      ;83BD3E;83BD50;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BD40: %Set16bit(!M)                             ;83BD40;      ;
-                       LDA.W #$FFF8                         ;83BD42;      ;
-                       JSL.L AddCowHappiness                    ;83BD45;84A5D4;
-                       %Set16bit(!MX)                             ;83BD49;      ;
-                       LDY.W #$0008                         ;83BD4B;      ;
-                       BRA CODE_83BD50                      ;83BD4E;83BD50;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BD50: %Set16bit(!MX)                             ;83BD50;      ;
-                       TYA                                  ;83BD52;      ;
-                       JSL.L RNGReturn0toA                  ;83BD53;8089F9;
-                       BNE CODE_83BD9E                      ;83BD57;83BD9E;
-                       %Set8bit(!M)                             ;83BD59;      ;
-                       %Set16bit(!X)                             ;83BD5B;      ;
-                       LDY.W #$0000                         ;83BD5D;      ;
-                       LDA.B [$72],Y                        ;83BD60;000072;
-                       AND.B #$40                           ;83BD62;      ;
-                       BNE CODE_83BD9E                      ;83BD64;83BD9E;
-                       LDY.W #$0001                         ;83BD66;      ;
-                       LDA.B [$72],Y                        ;83BD69;000072;
-                       AND.B #$80                           ;83BD6B;      ;
-                       BNE CODE_83BD9E                      ;83BD6D;83BD9E;
-                       LDY.W #$0000                         ;83BD6F;      ;
-                       LDA.B [$72],Y                        ;83BD72;000072;
-                       AND.B #$20                           ;83BD74;      ;
-                       BNE CODE_83BD9E                      ;83BD76;83BD9E;
-                       %Set8bit(!M)                             ;83BD78;      ;
-                       %Set16bit(!X)                             ;83BD7A;      ;
-                       LDY.W #$0000                         ;83BD7C;      ;
-                       LDA.B [$72],Y                        ;83BD7F;000072;
-                       ORA.B #$20                           ;83BD81;      ;
-                       STA.B [$72],Y                        ;83BD83;000072;
-                       LDY.W #$0003                         ;83BD85;      ;
-                       LDA.B #$07                           ;83BD88;      ;
-                       STA.B [$72],Y                        ;83BD8A;000072;
-                       %Set16bit(!M)                             ;83BD8C;      ;
-                       LDA.W #$FFF4                         ;83BD8E;      ;
-                       JSL.L AddCowHappiness                    ;83BD91;84A5D4;
-                       %Set16bit(!MX)                             ;83BD95;      ;
-                       LDA.W #$FFE2                         ;83BD97;      ;
-                       JSL.L AddPlayerHappiness                   ;83BD9A;83B282;
-                                                            ;      ;      ;
-          CODE_83BD9E: %Set8bit(!M)                             ;83BD9E;      ;
-                       %Set16bit(!X)                             ;83BDA0;      ;
-                       LDY.W #$0005                         ;83BDA2;      ;
-                       LDA.B [$72],Y                        ;83BDA5;000072;
-                       CMP.B #$0A                           ;83BDA7;      ;
-                       BEQ CODE_83BDEB                      ;83BDA9;83BDEB;
-                       %Set16bit(!M)                             ;83BDAB;      ;
-                       LDA.L $7F1F5A                        ;83BDAD;7F1F5A;
-                       AND.W #$1000                         ;83BDB1;      ;
-                       BEQ CODE_83BDD6                      ;83BDB4;83BDD6;
-                       %Set8bit(!M)                             ;83BDB6;      ;
-                       LDY.W #$0002                         ;83BDB8;      ;
-                       LDA.B [$72],Y                        ;83BDBB;000072;
-                       CMP.B #$27                           ;83BDBD;      ;
-                       BEQ CODE_83BE3F                      ;83BDBF;83BE3F;
-                       %Set8bit(!M)                             ;83BDC1;      ;
-                       LDA.B #$10                           ;83BDC3;      ;
-                       JSL.L RNGReturn0toA                  ;83BDC5;8089F9;
-                       BNE CODE_83BDD6                      ;83BDC9;83BDD6;
-                       %Set16bit(!M)                             ;83BDCB;      ;
-                       LDA.W #$FFF8                         ;83BDCD;      ;
-                       JSL.L AddCowHappiness                    ;83BDD0;84A5D4;
-                       BRA CODE_83BDEB                      ;83BDD4;83BDEB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BDD6: %Set16bit(!M)                             ;83BDD6;      ;
-                       LDA.W $0196                          ;83BDD8;000196;
-                       AND.W #$0400                         ;83BDDB;      ;
-                       BEQ CODE_83BE3F                      ;83BDDE;83BE3F;
-                       %Set8bit(!M)                             ;83BDE0;      ;
-                       LDY.W #$0002                         ;83BDE2;      ;
-                       LDA.B [$72],Y                        ;83BDE5;000072;
-                       CMP.B #$27                           ;83BDE7;      ;
-                       BEQ CODE_83BE3F                      ;83BDE9;83BE3F;
-                                                            ;      ;      ;
-          CODE_83BDEB: %Set8bit(!M)                             ;83BDEB;      ;
-                       %Set16bit(!X)                             ;83BDED;      ;
-                       LDY.W #$0000                         ;83BDEF;      ;
-                       LDA.B [$72],Y                        ;83BDF2;000072;
-                       AND.B #$40                           ;83BDF4;      ;
-                       BNE CODE_83BE3F                      ;83BDF6;83BE3F;
-                       LDY.W #$0001                         ;83BDF8;      ;
-                       LDA.B [$72],Y                        ;83BDFB;000072;
-                       AND.B #$80                           ;83BDFD;      ;
-                       BNE CODE_83BE3F                      ;83BDFF;83BE3F;
-                       LDY.W #$0000                         ;83BE01;      ;
-                       LDA.B [$72],Y                        ;83BE04;000072;
-                       AND.B #$20                           ;83BE06;      ;
-                       BNE CODE_83BE3F                      ;83BE08;83BE3F;
-                       %Set8bit(!M)                             ;83BE0A;      ;
-                       LDY.W #$0000                         ;83BE0C;      ;
-                       LDA.B [$72],Y                        ;83BE0F;000072;
-                       ORA.B #$10                           ;83BE11;      ;
-                       STA.B [$72],Y                        ;83BE13;000072;
-                       LDY.W #$0003                         ;83BE15;      ;
-                       LDA.B #$03                           ;83BE18;      ;
-                       STA.B [$72],Y                        ;83BE1A;000072;
-                       LDY.W #$0005                         ;83BE1C;      ;
-                       LDA.B #$00                           ;83BE1F;      ;
-                       STA.B [$72],Y                        ;83BE21;000072;
-                       %Set16bit(!M)                             ;83BE23;      ;
-                       LDA.W #$FFE2                         ;83BE25;      ;
-                       JSL.L AddCowHappiness                    ;83BE28;84A5D4;
-                       BRA CODE_83BE3F                      ;83BE2C;83BE3F;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BE2E: %Set8bit(!M)                             ;83BE2E;      ;
-                       %Set16bit(!X)                             ;83BE30;      ;
-                       LDY.W #$0002                         ;83BE32;      ;
-                       LDA.B [$72],Y                        ;83BE35;000072;
-                       CMP.B #$04                           ;83BE37;      ;
-                       BCS CODE_83BE3F                      ;83BE39;83BE3F;
-                       JSL.L CKKKK                          ;83BE3B;82A9A0;
-                                                            ;      ;      ;
-          CODE_83BE3F: %Set16bit(!MX)                             ;83BE3F;      ;
-                       PLX                                  ;83BE41;      ;
-                       INX                                  ;83BE42;      ;
-                       CPX.W #$000C                         ;83BE43;      ;
-                       BEQ CODE_83BE4B                      ;83BE46;83BE4B;
-                       JMP.W CODE_83BC6B                    ;83BE48;83BC6B;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BE4B: %Set16bit(!MX)                             ;83BE4B;      ;
-                       LDA.L $7F1F6E                        ;83BE4D;7F1F6E;
-                       AND.W #$EFBF                         ;83BE51;      ;
-                       STA.L $7F1F6E                        ;83BE54;7F1F6E;
-                       LDX.W #$0000                         ;83BE58;      ;
-                                                            ;      ;      ;
-          CODE_83BE5B: %Set16bit(!MX)                             ;83BE5B;      ;
-                       PHX                                  ;83BE5D;      ;
-                       PHX                                  ;83BE5E;      ;
-                       TXA                                  ;83BE5F;      ;
-                       JSL.L GetsCowPointer                ;83BE60;83C9A7;
-                       %Set8bit(!M)                             ;83BE64;      ;
-                       %Set16bit(!X)                             ;83BE66;      ;
-                       PLX                                  ;83BE68;      ;
-                       LDY.W #$0000                         ;83BE69;      ;
-                       LDA.B [$72],Y                        ;83BE6C;000072;
-                       AND.B #$01                           ;83BE6E;      ;
-                       BNE CODE_83BE75                      ;83BE70;83BE75;
-                       JMP.W CODE_83C01A                    ;83BE72;83C01A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BE75: LDY.W #$0004                         ;83BE75;      ;
-                       LDA.B [$72],Y                        ;83BE78;000072;
-                       %Set8bit(!M)                             ;83BE7A;      ;
-                       %Set16bit(!X)                             ;83BE7C;      ;
-                       LDY.W #$0001                         ;83BE7E;      ;
-                       LDA.B [$72],Y                        ;83BE81;000072;
-                       AND.B #$F8                           ;83BE83;      ;
-                       STA.B [$72],Y                        ;83BE85;000072;
-                       LDY.W #$0000                         ;83BE87;      ;
-                       LDA.B [$72],Y                        ;83BE8A;000072;
-                       AND.B #$02                           ;83BE8C;      ;
-                       BEQ CODE_83BEB1                      ;83BE8E;83BEB1;
-                       LDY.W #$0003                         ;83BE90;      ;
-                       LDA.B [$72],Y                        ;83BE93;000072;
-                       INC A                                ;83BE95;      ;
-                       STA.B [$72],Y                        ;83BE96;000072;
-                       CMP.B #$0E                           ;83BE98;      ;
-                       BEQ CODE_83BE9F                      ;83BE9A;83BE9F;
-                       JMP.W CODE_83C01A                    ;83BE9C;83C01A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BE9F: LDA.B #$00                           ;83BE9F;      ;
-                       STA.B [$72],Y                        ;83BEA1;000072;
-                       LDY.W #$0000                         ;83BEA3;      ;
-                       LDA.B [$72],Y                        ;83BEA6;000072;
-                       ORA.B #$04                           ;83BEA8;      ;
-                       AND.B #$FD                           ;83BEAA;      ;
-                       STA.B [$72],Y                        ;83BEAC;000072;
-                       JMP.W CODE_83C01A                    ;83BEAE;83C01A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BEB1: %Set8bit(!M)                             ;83BEB1;      ;
-                       %Set16bit(!X)                             ;83BEB3;      ;
-                       LDY.W #$0000                         ;83BEB5;      ;
-                       LDA.B [$72],Y                        ;83BEB8;000072;
-                       AND.B #$04                           ;83BEBA;      ;
-                       BEQ CODE_83BEF5                      ;83BEBC;83BEF5;
-                       %Set8bit(!M)                             ;83BEBE;      ;
-                       LDY.W #$0003                         ;83BEC0;      ;
-                       LDA.B [$72],Y                        ;83BEC3;000072;
-                       INC A                                ;83BEC5;      ;
-                       STA.B [$72],Y                        ;83BEC6;000072;
-                       CMP.B #$15                           ;83BEC8;      ;
-                       BEQ CODE_83BECF                      ;83BECA;83BECF;
-                       JMP.W CODE_83C01A                    ;83BECC;83C01A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BECF: LDA.B #$00                           ;83BECF;      ;
-                       STA.B [$72],Y                        ;83BED1;000072;
-                       LDY.W #$0000                         ;83BED3;      ;
-                       LDA.B [$72],Y                        ;83BED6;000072;
-                       ORA.B #$08                           ;83BED8;      ;
-                       AND.B #$FB                           ;83BEDA;      ;
-                       STA.B [$72],Y                        ;83BEDC;000072;
-                       LDY.W #$0003                         ;83BEDE;      ;
-                       LDA.B #$00                           ;83BEE1;      ;
-                       STA.B [$72],Y                        ;83BEE3;000072;
-                       %Set16bit(!M)                             ;83BEE5;      ;
-                       LDA.L $7F1F6E                        ;83BEE7;7F1F6E;
-                       ORA.W #$1000                         ;83BEEB;      ;
-                       STA.L $7F1F6E                        ;83BEEE;7F1F6E;
-                       JMP.W CODE_83C01A                    ;83BEF2;83C01A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BEF5: %Set16bit(!MX)                             ;83BEF5;      ;
-                       LDA.L $7F1F6E                        ;83BEF7;7F1F6E;
-                       ORA.W #$1000                         ;83BEFB;      ;
-                       STA.L $7F1F6E                        ;83BEFE;7F1F6E;
-                       %Set8bit(!M)                             ;83BF02;      ;
-                       LDY.W #$0000                         ;83BF04;      ;
-                       LDA.B [$72],Y                        ;83BF07;000072;
-                       AND.B #$10                           ;83BF09;      ;
-                       BEQ CODE_83BF26                      ;83BF0B;83BF26;
-                       LDY.W #$0003                         ;83BF0D;      ;
-                       LDA.B [$72],Y                        ;83BF10;000072;
-                       DEC A                                ;83BF12;      ;
-                       STA.B [$72],Y                        ;83BF13;000072;
-                       BEQ CODE_83BF1A                      ;83BF15;83BF1A;
-                       JMP.W CODE_83C01A                    ;83BF17;83C01A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BF1A: LDY.W #$0000                         ;83BF1A;      ;
-                       LDA.B [$72],Y                        ;83BF1D;000072;
-                       AND.B #$EF                           ;83BF1F;      ;
-                       STA.B [$72],Y                        ;83BF21;000072;
-                       JMP.W CODE_83C01A                    ;83BF23;83C01A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BF26: %Set8bit(!M)                             ;83BF26;      ;
-                       %Set16bit(!X)                             ;83BF28;      ;
-                       LDY.W #$0000                         ;83BF2A;      ;
-                       LDA.B [$72],Y                        ;83BF2D;000072;
-                       AND.B #$20                           ;83BF2F;      ;
-                       BEQ CODE_83BF87                      ;83BF31;83BF87;
-                       LDY.W #$0003                         ;83BF33;      ;
-                       LDA.B [$72],Y                        ;83BF36;000072;
-                       BEQ CODE_83BF42                      ;83BF38;83BF42;
-                       DEC A                                ;83BF3A;      ;
-                       STA.B [$72],Y                        ;83BF3B;000072;
-                       BEQ CODE_83BF42                      ;83BF3D;83BF42;
-                       JMP.W CODE_83C01A                    ;83BF3F;83C01A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BF42: %Set16bit(!MX)                             ;83BF42;      ;
-                       LDA.W $0196                          ;83BF44;000196;
-                       AND.W #$001A                         ;83BF47;      ;
-                       BEQ CODE_83BF4F                      ;83BF4A;83BF4F;
-                       JMP.W CODE_83C01A                    ;83BF4C;83C01A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BF4F: %Set8bit(!M)                             ;83BF4F;      ;
-                       LDA.W !weather_tomorrow                          ;83BF51;00098C;
-                       CMP.B #$06                           ;83BF54;      ;
-                       BCC CODE_83BF5B                      ;83BF56;83BF5B;
-                       JMP.W CODE_83C01A                    ;83BF58;83C01A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BF5B: %Set8bit(!M)                             ;83BF5B;      ;
-                       LDY.W #$0000                         ;83BF5D;      ;
-                       LDA.B #$00                           ;83BF60;      ;
-                       STA.B [$72],Y                        ;83BF62;000072;
-                       %Set8bit(!M)                             ;83BF64;      ;
-                       LDA.L !cow_N                        ;83BF66;7F1F0A;
-                       DEC A                                ;83BF6A;      ;
-                       STA.L !cow_N                        ;83BF6B;7F1F0A;
-                       %Set16bit(!M)                             ;83BF6F;      ;
-                       LDA.L $7F1F6E                        ;83BF71;7F1F6E;
-                       ORA.W #$0040                         ;83BF75;      ;
-                       STA.L $7F1F6E                        ;83BF78;7F1F6E;
-                       PLX                                  ;83BF7C;      ;
-                       PHX                                  ;83BF7D;      ;
-                       TXA                                  ;83BF7E;      ;
-                       %Set8bit(!M)                             ;83BF7F;      ;
-                       STA.W $0937                          ;83BF81;000937;
-                       JMP.W CODE_83C01A                    ;83BF84;83C01A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BF87: %Set8bit(!M)                             ;83BF87;      ;
-                       %Set16bit(!X)                             ;83BF89;      ;
-                       LDY.W #$0001                         ;83BF8B;      ;
-                       LDA.B [$72],Y                        ;83BF8E;000072;
-                       AND.B #$80                           ;83BF90;      ;
-                       BEQ CODE_83BFAA                      ;83BF92;83BFAA;
-                       %Set8bit(!M)                             ;83BF94;      ;
-                       LDY.W #$0000                         ;83BF96;      ;
-                       LDA.B [$72],Y                        ;83BF99;000072;
-                       ORA.B #$40                           ;83BF9B;      ;
-                       STA.B [$72],Y                        ;83BF9D;000072;
-                       LDY.W #$0001                         ;83BF9F;      ;
-                       LDA.B [$72],Y                        ;83BFA2;000072;
-                       AND.B #$7F                           ;83BFA4;      ;
-                       STA.B [$72],Y                        ;83BFA6;000072;
-                       BRA CODE_83C01A                      ;83BFA8;83C01A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83BFAA: %Set8bit(!M)                             ;83BFAA;      ;
-                       %Set16bit(!X)                             ;83BFAC;      ;
-                       LDY.W #$0000                         ;83BFAE;      ;
-                       LDA.B [$72],Y                        ;83BFB1;000072;
-                       AND.B #$40                           ;83BFB3;      ;
-                       BEQ CODE_83C01A                      ;83BFB5;83C01A;
-                       LDY.W #$0003                         ;83BFB7;      ;
-                       LDA.B [$72],Y                        ;83BFBA;000072;
-                       BEQ CODE_83BFCC                      ;83BFBC;83BFCC;
-                       DEC A                                ;83BFBE;      ;
-                       STA.B [$72],Y                        ;83BFBF;000072;
-                       LDA.L $7F1F12                        ;83BFC1;7F1F12;
-                       DEC A                                ;83BFC5;      ;
-                       STA.L $7F1F12                        ;83BFC6;7F1F12;
-                       BNE CODE_83C01A                      ;83BFCA;83C01A;
-                                                            ;      ;      ;
-          CODE_83BFCC: LDY.W #$0002                         ;83BFCC;      ;
-                       LDA.B [$72],Y                        ;83BFCF;000072;
-                       CMP.B #$27                           ;83BFD1;      ;
-                       BNE CODE_83C01A                      ;83BFD3;83C01A;
-                       %Set16bit(!M)                             ;83BFD5;      ;
-                       LDA.L $7F1F64                        ;83BFD7;7F1F64;
-                       ORA.W #$0008                         ;83BFDB;      ;
-                       STA.L $7F1F64                        ;83BFDE;7F1F64;
-                       %Set8bit(!M)                             ;83BFE2;      ;
-                       LDY.W #$0000                         ;83BFE4;      ;
-                       LDA.B [$72],Y                        ;83BFE7;000072;
-                       ORA.B #$80                           ;83BFE9;      ;
-                       AND.B #$BF                           ;83BFEB;      ;
-                       STA.B [$72],Y                        ;83BFED;000072;
-                       %Set8bit(!M)                             ;83BFEF;      ;
-                       LDA.B #$14                           ;83BFF1;      ;
-                       STA.L $7F1F2B                        ;83BFF3;7F1F2B;
-                       LDY.W #$0004                         ;83BFF7;      ;
-                       LDA.B [$72],Y                        ;83BFFA;000072;
-                       CMP.B #$60                           ;83BFFC;      ;
-                       BCC CODE_83C018                      ;83BFFE;83C018;
-                       CMP.B #$C0                           ;83C000;      ;
-                       BCC CODE_83C00E                      ;83C002;83C00E;
-                       %Set8bit(!M)                             ;83C004;      ;
-                       LDA.B #$64                           ;83C006;      ;
-                       STA.L $7F1F2B                        ;83C008;7F1F2B;
-                       BRA CODE_83C018                      ;83C00C;83C018;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C00E: %Set8bit(!M)                             ;83C00E;      ;
-                       LDA.B #$32                           ;83C010;      ;
-                       STA.L $7F1F2B                        ;83C012;7F1F2B;
-                       BRA CODE_83C018                      ;83C016;83C018;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C018: BRA CODE_83C01A                      ;83C018;83C01A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C01A: %Set16bit(!MX)                             ;83C01A;      ;
-                       PLX                                  ;83C01C;      ;
-                       INX                                  ;83C01D;      ;
-                       CPX.W #$000C                         ;83C01E;      ;
-                       BEQ CODE_83C026                      ;83C021;83C026;
-                       JMP.W CODE_83BE5B                    ;83C023;83BE5B;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C026: %Set16bit(!MX)                             ;83C026;      ;
+
+;;;loops animals and checks feed, health and age/pregnancy and stuff like that
+CODE_83BC5A: ;83BC5A
+        %Set16bit(!MX)
+        LDA.L $7F1F60
+        AND.W #$0001                         ;TODO
+        BEQ +
+        JMP.W .altcowfeed
+
+      + LDX.W #$0000
+
+    .cowloop:
+        %Set16bit(!MX)
+        PHX
+        PHX
+        TXA
+        JSL.L GetsCowPointer
+        %Set8bit(!M)
+        %Set16bit(!X)
+        PLX
+        LDY.W #$0000
+        LDA.B [$72],Y                        ;Status
+        AND.B #$01                           ;Exists
+        BNE .cowexists
+        JMP.W .skipcow
+
+    .cowexists:
+        %Set8bit(!M)
+        LDY.W #$0000
+        LDA.B [$72],Y                        ;Status
+        AND.B #$02                           ;Baby
+        BEQ .isbaby
+        JMP.W .skipcow
+
+    .isbaby:
+        LDY.W #$0000
+        LDA.B [$72],Y                        ;Status
+        AND.B #$04                           ;Child
+        BEQ .ischild
+        JMP.W .babyonfarm
+
+    .ischild:
+        LDY.W #$0002
+        LDA.B [$72],Y                        ;Map
+        CMP.B #$27                           ;Barn
+        BNE .notinbarn
+        LDY.W #$0000
+        LDA.B [$72],Y                        ;Status
+        AND.B #$40                           ;Pregnant
+        BNE .ispregnant
+        %Set16bit(!M)
+        TXA
+        ASL A
+        TAX
+        LDA.L Cow_Feed_Flags,X
+        AND.W !fed_cows_flags
+        BEQ .cowunfed
+        JMP.W .cowfed
+
+    .ispregnant:
+        %Set16bit(!MX)
+        LDX.W #$0018                         ;Special pregnant cow slot
+        LDA.L Cow_Feed_Flags,X
+        AND.W !fed_cows_flags
+        BEQ .cowunfed
+        JMP.W .cowfed
+
+    .notinbarn:
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDY.W #$0002
+        LDA.B [$72],Y                        ;Map
+        CMP.B #$04                           ;Farm
+        BCS .cowunfed
+        JSL.L CKKKK                          ;TODO
+        %Set16bit(!M)
+        LDA.W $092E
+        BEQ .cowunfed
+        %Set16bit(!M)
+        LDA.W $0196
+        AND.W #$0002
+        BNE .cowunfed
+        LDA.W $0196
+        AND.W #$0008
+        BNE .CODE_83BD20
+        LDA.W $0196
+        AND.W #$0010
+        BNE .CODE_83BD30
+        LDA.W $0196
+        AND.W #$0200
+        BNE .CODE_83BD40
+        JMP.W .cowfed
+
+    .cowunfed:
+        %Set16bit(!M)
+        LDA.W #$FFF8
+        JSL.L AddCowHappiness
+        %Set16bit(!MX)
+        LDY.W #$0004
+        BRA .cowgetsick
+
+    .CODE_83BD20:
+        %Set16bit(!M)
+        LDA.W #$FFF0
+        JSL.L AddCowHappiness
+        %Set16bit(!MX)
+        LDY.W #$0002
+        BRA .cowgetsick
+
+    .CODE_83BD30:
+        %Set16bit(!M)
+        LDA.W #$FFE8
+        JSL.L AddCowHappiness
+        %Set16bit(!MX)
+        LDY.W #$0002
+        BRA .cowgetsick
+
+    .CODE_83BD40:
+        %Set16bit(!M)                             ;83BD40;      ;
+        LDA.W #$FFF8                         ;83BD42;      ;
+        JSL.L AddCowHappiness                    ;83BD45;84A5D4;
+        %Set16bit(!MX)                             ;83BD49;      ;
+        LDY.W #$0008                         ;83BD4B;      ;
+        BRA .cowgetsick                      ;83BD4E;83BD50;
+
+    .cowgetsick: ;param in Y
+        %Set16bit(!MX)
+        TYA
+        JSL.L RNGReturn0toA
+        BNE .cowfed
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDY.W #$0000
+        LDA.B [$72],Y                        ;status
+        AND.B #$40                           ;pregnant
+        BNE .cowfed
+        LDY.W #$0001
+        LDA.B [$72],Y                        ;TODO, milked today?
+        AND.B #$80
+        BNE .cowfed
+        LDY.W #$0000
+        LDA.B [$72],Y                        ;Status
+        AND.B #$20                           ;sick
+        BNE .cowfed
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDY.W #$0000
+        LDA.B [$72],Y                        ;Status
+        ORA.B #$20
+        STA.B [$72],Y                        ;sets Sick
+        LDY.W #$0003
+        LDA.B #$07
+        STA.B [$72],Y                        ;Pregnancy set to 7???
+        %Set16bit(!M)
+        LDA.W #$FFF4
+        JSL.L AddCowHappiness
+        %Set16bit(!MX)
+        LDA.W #$FFE2
+        JSL.L AddPlayerHappiness
+
+    .cowfed:
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDY.W #$0005
+        LDA.B [$72],Y                        ;TODO
+        CMP.B #$0A
+        BEQ .cowgetscranky
+        %Set16bit(!M)
+        LDA.L $7F1F5A                        ;TODO
+        AND.W #$1000
+        BEQ .CODE_83BDD6
+        %Set8bit(!M)
+        LDY.W #$0002
+        LDA.B [$72],Y                        ;Map
+        CMP.B #$27                           ;Barn
+        BEQ .skipcow
+        %Set8bit(!M)
+        LDA.B #$10
+        JSL.L RNGReturn0toA
+        BNE .CODE_83BDD6
+        %Set16bit(!M)
+        LDA.W #$FFF8
+        JSL.L AddCowHappiness
+        BRA .cowgetscranky
+
+    .CODE_83BDD6:
+        %Set16bit(!M)
+        LDA.W $0196                          ;Todo
+        AND.W #$0400
+        BEQ .skipcow
+        %Set8bit(!M)
+        LDY.W #$0002
+        LDA.B [$72],Y                        ;Gets back to barn?
+        CMP.B #$27
+        BEQ .skipcow
+
+    .cowgetscranky:
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDY.W #$0000
+        LDA.B [$72],Y                        ;Status
+        AND.B #$40                           ;Pregnant
+        BNE .skipcow
+        LDY.W #$0001
+        LDA.B [$72],Y                        ;TODO
+        AND.B #$80
+        BNE .skipcow
+        LDY.W #$0000
+        LDA.B [$72],Y                        ;Status
+        AND.B #$20                           ;Sick
+        BNE .skipcow
+        %Set8bit(!M)
+        LDY.W #$0000
+        LDA.B [$72],Y                        ;Status
+        ORA.B #$10                           ;set Cranky
+        STA.B [$72],Y
+        LDY.W #$0003
+        LDA.B #$03                           ;Farm Winter
+        STA.B [$72],Y                        ;Map
+        LDY.W #$0005                         ;TODO
+        LDA.B #$00
+        STA.B [$72],Y
+        %Set16bit(!M)
+        LDA.W #$FFE2
+        JSL.L AddCowHappiness
+        BRA .skipcow
+
+    .babyonfarm:
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDY.W #$0002
+        LDA.B [$72],Y                        ;Map
+        CMP.B #$04                           ;Farm
+        BCS .skipcow
+        JSL.L CKKKK
+
+    .skipcow:
+        %Set16bit(!MX)
+        PLX
+        INX
+        CPX.W #$000C
+        BEQ .altcowfeed
+        JMP.W .cowloop
+
+    .altcowfeed:
+        %Set16bit(!MX)
+        LDA.L $7F1F6E
+        AND.W #$EFBF                         ;TODO
+        STA.L $7F1F6E
+        LDX.W #$0000
+
+    .cowloop2:
+        %Set16bit(!MX)
+        PHX
+        PHX
+        TXA
+        JSL.L GetsCowPointer
+        %Set8bit(!M)
+        %Set16bit(!X)
+        PLX
+        LDY.W #$0000
+        LDA.B [$72],Y                        ;Status
+        AND.B #$01                           ;Exists
+        BNE .cowexists2
+        JMP.W .skipcow2
+
+    .cowexists2:
+        LDY.W #$0004
+        LDA.B [$72],Y                        ;Happines BUG?
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDY.W #$0001
+        LDA.B [$72],Y                        ;TODO
+        AND.B #$F8
+        STA.B [$72],Y
+        LDY.W #$0000
+        LDA.B [$72],Y                        ;Status
+        AND.B #$02
+        BEQ .isbaby2
+        LDY.W #$0003
+        LDA.B [$72],Y                        ;Pregnancy
+        INC A                                ;+1
+        STA.B [$72],Y
+        CMP.B #14
+        BEQ .cowborn
+        JMP.W .skipcow2
+
+    .cowborn:
+        LDA.B #$00
+        STA.B [$72],Y                        ;Pregnancy
+        LDY.W #$0000
+        LDA.B [$72],Y                        ;Status
+        ORA.B #$04
+        AND.B #$FD
+        STA.B [$72],Y                        ;Sets as healthy Adult
+        JMP.W .skipcow2
+
+    .isbaby2:
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDY.W #$0000
+        LDA.B [$72],Y                        ;Status
+        AND.B #$04
+        BEQ .itsadult2
+        %Set8bit(!M)
+        LDY.W #$0003
+        LDA.B [$72],Y                        ;Age
+        INC A
+        STA.B [$72],Y                        ;+1
+        CMP.B #21
+        BEQ .growstochild
+        JMP.W .skipcow2
+
+    .growstochild:
+        LDA.B #$00
+        STA.B [$72],Y                        ;Status
+        LDY.W #$0000
+        LDA.B [$72],Y                        ;Status
+        ORA.B #$08
+        AND.B #$FB
+        STA.B [$72],Y
+        LDY.W #$0003
+        LDA.B #$00
+        STA.B [$72],Y                        ;Sets as healthy Child
+        %Set16bit(!M)
+        LDA.L $7F1F6E
+        ORA.W #$1000                         ;Sets cow "born" flag
+        STA.L $7F1F6E
+        JMP.W .skipcow2
+
+    .itsadult2:
+        %Set16bit(!MX)
+        LDA.L $7F1F6E
+        ORA.W #$1000
+        STA.L $7F1F6E
+        %Set8bit(!M)
+        LDY.W #$0000
+        LDA.B [$72],Y                        ;Status
+        AND.B #$10                           ;Cranky
+        BEQ .itsnotcranky2
+        LDY.W #$0003                         ;Crankyness
+        LDA.B [$72],Y
+        DEC A
+        STA.B [$72],Y                        ;-1
+        BEQ .uncrankyfy2
+        JMP.W .skipcow2
+
+    .uncrankyfy2:
+        LDY.W #$0000
+        LDA.B [$72],Y
+        AND.B #$EF
+        STA.B [$72],Y
+        JMP.W .skipcow2
+
+    .itsnotcranky2:
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDY.W #$0000
+        LDA.B [$72],Y                        ;Status
+        AND.B #$20                           ;Sick
+        BEQ .healthycow2
+        LDY.W #$0003
+        LDA.B [$72],Y
+        BEQ .specialcheck
+        DEC A                                ;83BF3A;      ;
+        STA.B [$72],Y                        ;83BF3B;000072;
+        BEQ .specialcheck                      ;83BF3D;83BF42;
+        JMP.W .skipcow2                    ;83BF3F;83C01A;
+                                                            ;      ;      ;
+                                                            ;      ;      ;
+    .specialcheck:
+        %Set16bit(!MX)
+        LDA.W $0196                          ;TODO
+        AND.W #$001A
+        BEQ .notafestival
+        JMP.W .skipcow2
+
+    .notafestival:
+        %Set8bit(!M)
+        LDA.W !weather_tomorrow
+        CMP.B #$06                           ;Its not a festival/special
+        BCC .cowdied
+        JMP.W .skipcow2
+
+    .cowdied:
+        %Set8bit(!M)
+        LDY.W #$0000
+        LDA.B #$00                           ;No cow
+        STA.B [$72],Y                        ;Status
+        %Set8bit(!M)
+        LDA.L !cow_N
+        DEC A                                ;one less cow
+        STA.L !cow_N
+        %Set16bit(!M)
+        LDA.L $7F1F6E
+        ORA.W #$0040                         ;Cow Funeral flag
+        STA.L $7F1F6E
+        PLX
+        PHX
+        TXA
+        %Set8bit(!M)
+        STA.W $0937                          ;TODO
+        JMP.W .skipcow2
+
+    .healthycow2:
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDY.W #$0001
+        LDA.B [$72],Y                        ;Flags
+        AND.B #$80                           ;TODO
+        BEQ .specialcheck2
+        %Set8bit(!M)
+        LDY.W #$0000
+        LDA.B [$72],Y                        ;Status
+        ORA.B #$40                           ;Sets Pregnant?
+        STA.B [$72],Y
+        LDY.W #$0001
+        LDA.B [$72],Y                        ;TODO
+        AND.B #$7F                           ;Unsets 80
+        STA.B [$72],Y
+        BRA .skipcow2
+
+    .specialcheck2:
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDY.W #$0000
+        LDA.B [$72],Y                        ;Status
+        AND.B #$40                           ;Pregnant?
+        BEQ .skipcow2
+        LDY.W #$0003
+        LDA.B [$72],Y                        ;Pregnancy
+        BEQ .cowbirth2
+        DEC A                                ;-1
+        STA.B [$72],Y
+        LDA.L $7F1F12                        ;TODO
+        DEC A
+        STA.L $7F1F12
+        BNE .skipcow2
+
+    .cowbirth2:
+        LDY.W #$0002
+        LDA.B [$72],Y                        ;Map
+        CMP.B #$27                           ;Barn
+        BNE .skipcow2
+        %Set16bit(!M)
+        LDA.L $7F1F64
+        ORA.W #$0008                         ;TODO Cow Pregnat?
+        STA.L $7F1F64
+        %Set8bit(!M)
+        LDY.W #$0000
+        LDA.B [$72],Y                        ;Status
+        ORA.B #$80
+        AND.B #$BF                           ;Not Pregnant
+        STA.B [$72],Y
+        %Set8bit(!M)
+        LDA.B #20                            ;TODO Starting cow Happiness?
+        STA.L $7F1F2B
+        LDY.W #$0004
+        LDA.B [$72],Y                        ;Happyness
+        CMP.B #96
+        BCC .nextcow2
+        CMP.B #192
+        BCC .lesscowhappyness
+        %Set8bit(!M)
+        LDA.B #100
+        STA.L $7F1F2B                        ;TODO Starting cow Happiness?
+        BRA .nextcow2
+
+    .lesscowhappyness:
+        %Set8bit(!M)
+        LDA.B #50
+        STA.L $7F1F2B                        ;TODO Starting cow Happiness?
+        BRA .nextcow2
+
+    .nextcow2:
+        BRA .skipcow2
+
+    .skipcow2:
+        %Set16bit(!MX)
+        PLX
+        INX
+        CPX.W #12
+        BEQ +
+        JMP.W .cowloop2                    ;83C023;83BE5B;
+
+          + %Set16bit(!MX)                             ;83C026;      ;
                        LDA.L $7F1F60                        ;83C028;7F1F60;
                        AND.W #$0001                         ;83C02C;      ;
                        BEQ CODE_83C034                      ;83C02F;83C034;

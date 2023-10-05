@@ -321,7 +321,7 @@
 ;   p=pregnant,s=sick,c=cranky,a=age(001=baby,010=child,100=adult),e=exists
 ; x7 - (1? 0?)
 ; x8 - Map
-; x9 - Cow 1 Pregnancy
+; x9 - Cow 1 Pregnancy/Age/Crankyness/Sickness
 ; xA - Cow 1 Happiness
 ; xB -
 ; xE - Position X ;16b
