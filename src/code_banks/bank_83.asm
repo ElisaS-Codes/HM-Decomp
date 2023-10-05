@@ -69,7 +69,7 @@ MultiplicationUnsigned: ;838067
         RTS
 
 ;;;;;;;; Division using the RICOH's math coprosessor
-;;;;;;;; Dividend in $00007E, Divisor in $000080, Result in A, Rest on $00007E
+;;;;;;;; Dividend in $7E, Divisor in $80, Result in A, Rest on $7E
 ;;;;;;;; I find it funny it doesnt even check if you are diving by 0, go ahead, git garbage
 DivisionUnsigned: ;838082
         %Set16bit(!MX)
@@ -3411,7 +3411,7 @@ NightReset: ;83ABF0
         %Set8bit(!M)
         LDA.B #$00
         STA.L !shipping_moneyH
-        JSL.L LoadsDateDataFromTables        ;TODO
+        JSL.L LoadsDateNames        ;TODO
         %Set8bit(!M)
         STZ.W $096D
         %Set16bit(!M)

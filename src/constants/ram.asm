@@ -214,7 +214,6 @@
 !kid2_name_long_3 = $08F9
 !kid2_name_long_4 = $08FB
 
-
 ;;Time Data
 !time_running = $0973 ;16b 0:stop, 1:run, 2:skip to next day
 !year = $7F1F18 ;8b
@@ -224,6 +223,9 @@
 !hour = $7F1F1C ;8b military time in hex
 !minutes = $7F1F1D ;8b
 !seconds = $7F1F1E ;8b
+!season_name = $08B3 ;16 * 6
+!weekday_name = $08BF ;16 * 9
+!day_ordinal = $08D1 ;16 * 2
 
 ;;ITEMDATA
 !sprinkler_water = $0926 ;8b
@@ -247,7 +249,8 @@
 !stored_wood = $7F1F0C ;16b
 !wood_need_for_upgrade = $7F1F0E ;16b
 !stored_grass = $7F1F10 ;16b
-!weather_tomorrow = $098C ;8b - 00:Sunny, 01:rain, 03:hurricane, 04:fair, 05:sunny and calm, 06:flower festival, 07:harvest festival, 08:Thanksgiving Festival, 09:Star Night Festival, 0A:festive mood, 0B:annual egg festival, 0C:snow
+!weather_tomorrow = $098C ;8b
+;00:Sunny, 01:rain, 03:hurricane, 04:fair, 05:sunny and calm, 06:flower festival, 07:harvest festival, 08:Thanksgiving Festival, 09:Star Night Festival, 0A:festive mood, 0B:annual egg festival, 0C:snow
 !development_rate = $7F1F35
 !dog_map = $7F1F30 ;8b
 !dog_pos_X = $7F1F2C ;16b

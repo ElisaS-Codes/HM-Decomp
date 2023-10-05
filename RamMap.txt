@@ -85,6 +85,9 @@ where I have a headache. Most real info is on ram.asm
 🗑$7E08A7 = !most_hearts_girl_name_4 - 16b
 🗑$7E08A9 = !most_hearts_girl_name_5 - 16b
 
+🛠️$08B3 = !season_name - 16 * 6
+🛠️$08BF = !weekday_name - 16 * 9
+🛠️$08D1 = !day_ordinal - 16 * 2
 🧢$7E08D5 = !player_name_long_1 - 16b
 🧢$7E08D7 = !player_name_long_2 - 16b
 🧢$7E08D9 = !player_name_long_3 - 16b
