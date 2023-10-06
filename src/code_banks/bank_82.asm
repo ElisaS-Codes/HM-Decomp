@@ -813,7 +813,7 @@ NightReset: ;8282AC
       JSL.L UNK_ScreenTransition
       %Set8bit(!M)
       %Set16bit(!X)
-      LDA.B #$20
+      LDA.B #20
       JSL.L ChangeStamina
       %Set16bit(!MX)
       LDA.L $7F1F5E
