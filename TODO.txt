@@ -7,10 +7,13 @@ PalettePointerTable
 ====Working on
 CODE_83BC5A Cow feeding subrutine?
 CODE_828CF9 Weather tomorrow subrutine?
-CODE_828C09 More weather_tomorrow?
-IncreaseDay
-
+CODE_828C09 More weather?
+NightReset
+LoadsFromSeasonTable
+CHHHH
 Unk_Seasons2
+BOOOO
+CODE_83BC5A
 
 CKKKK
 	$0181? related to map loaded?
@@ -60,8 +63,8 @@ $8A = $6000
 current_graphic_preset,$0196 flag,0181,0182,$92,$93,$8A,$00EF9F
 
 ====Confirm Vars
-$7E09A3 - X Position
-$7E09A5 - X Position ???
+$7E09A3 - X Position ??? coounter
+$7E09A5 - Y Position ???
 
 play with chicken data
 $7F1F2B - Starting cow Happiness?
@@ -216,7 +219,7 @@ $7E08CF -
 $7E08D1 - Data from First Days Table
 $7E08D3 -
 
-$0901 - (what animation?)
+$0901 - (what animation?)player_action copy?
 #$003c - idle?
 #$004B-#$004D = stamina lowering animation
 #008B+4 fishing something
@@ -225,8 +228,8 @@ $0905 - OAM Source pointer? related to 7EA100 block
 
 $0907 - (Related to position X)
 $0909 - (Related to position Y)
-$0911 - (Direction you are looking)
-$0915 - (Related to animation, FFFF when not animating)
+$0911 - (Direction you are looking) copy reset at night
+$0915 - (Related to animation, FFFF when not animating) reset at night
 $0919 - (Related to Walk Cycle)
 $091A - (Related to Run Cycle)
 $091B - (Related to Tool/Anim Cycle?)
@@ -336,32 +339,32 @@ $7F1F45 -
 $7F1F48 - (0)
 $7F1F49 - (0)
 
+These resets at night
 $7F1F5A - (flags? $8000 related to time. #$0400 related to time too)
 $7F1F5C - (some kind of flag, related to palettes?)
 ???? ????
 ?x?? ???u - u: related to $0196 x:wont move
-$7F1F5E - (flags? related to time $8000 checked during night)
+$7F1F5E - (flags? related to time $8000 checked during night, 0004 means no update to 0924)
 ???? ????
 ???? ???b - b:Things in the shipping bin
 $7F1F60 - Flags? $0800 related to 098D? resets during night
 t??? s??? - t:tool related? no stamina? s: Save failed CRC
 ???? c??? - can change stamina?
-
-FishingCastLine
-
 $7F1F62 -
+
+This are more permanent
 $7F1F64 - Player Flags 1
 ???? ????
-hh?? cc?? - hh:House Upgrade (%01 upgrade 1, %10 upgrade 2), c=Cow Pregnat?
-
+hhrr ccf? - hh:House Upgrade (%01 upgrade 1, %10 upgrade 2), c=Cow Pregnat? rr:erased at night: set at night depending on $196
 $7F1F66 - (Which Wife)
 ???? ????
-???w wwww - each bit might be a wife, to select witch one you have
+hh?w wwww - h:house to be upgraded to 2 1 w:each bit might be a wife, to select witch one you have
 $7F1F68 - Flags?
-???? ????
+h??? H??? - h Gold Hammer event borrowed H: Gold Hoe Removed
 d??? h??u - d:dog owned h:horse owned u:when set, it doesnt re-generates $0924 rng number
-
 $7F1F6A - Events Flags?
+???? ????
+???? ????
 $7F1F6C -
 ???t ??pp - t=Turtle Shell p:Related to wife pregnancy
 g??? ???? - g: about to have child
@@ -369,7 +372,10 @@ $7F1F6E - Flags
 wch? ???b - w=cow grown c=Clock Owned; h:egg hatching b:child one age 2?
 ??aa cc?? - cc=childs(%01 child1, %10 child2) a:childs age
 $7F1F70 -
+???? ???? -
+???? ??r? - r:reset at night
 $7F1F72 -
+
 $7F1F74 -
 $7F1F76 -
 $7F1F78 -

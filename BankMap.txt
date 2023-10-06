@@ -146,7 +146,7 @@ Bank 83
 💿8392B1 - UNK_Audio_Table4
 ...
 ❔83A9BE - NewGameSetup
-❔83ABF0 - NightReset
+❔83ABF0 - FirstNightReset
 ...
 ✅83B1C9 - AddMoney
 ✅83B224 - AddWood

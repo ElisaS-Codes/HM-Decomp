@@ -19,7 +19,7 @@ ORG $808000
         JSL.L ForceBlank
         JSL.L ZeroesVRAM
         JSL.L ZeroesCGRAM
-        JSL.L NightReset
+        JSL.L FirstNightReset
         JSL.L UNK_Audio5
         %Set16bit(!M)
         LDA.W #$0100

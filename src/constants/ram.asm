@@ -28,6 +28,8 @@
 !copyof_INIDISP = $24 ;8bit Copy of the value in the Screen Display Register
 
 !game_state = $D2 ;16b
+;w??? ???? - w:walking to transition
+;d??? s?hm - d: carrying dog m: Can Move; h: holding item; s: no stamina; x:
 
 !fade_current_brightness = $25
 !fade_current_frame = $26
@@ -180,7 +182,8 @@
 !idle_animation_timer = $0925 ;8b
 !item_on_hand = $091D ;8b
 ;at the end of TODO, need to find a place for Items
-!tool_selected = $0921 ;8b 00:nothing, 01:sickle, 02:hoe, 03:hammer, 04:axe, 05:yellow seed, 06:red seed, 07:brown seed, 08:white seed, 09:cow medicine, 0A:cow icon, 0B:bell, 0C:grass seed, 0D:paint, 0E:milker, 0F:brush, 10:watering, 11:gold sickle, 12:gold hoe, 13:gold hammer, 14:gold axe, 15:sprinkler, 16:bean, 17:gem, 18:blue feather, 19:chicken feed, 20:cow feed
+!tool_selected = $0921 ;8b
+;00:nothing, 01:sickle, 02:hoe, 03:hammer, 04:axe, 05:yellow seed, 06:red seed, 07:brown seed, 08:white seed, 09:cow medicine, 0A:cow icon, 0B:bell, 0C:grass seed, 0D:paint, 0E:milker, 0F:brush, 10:watering, 11:gold sickle, 12:gold hoe, 13:gold hammer, 14:gold axe, 15:sprinkler, 16:bean, 17:gem, 18:blue feather, 19:chicken feed, 20:cow feed
 !tool_backpack = $0923 ;8b
 !happiness = $7F1F33 ;16b
 !power_berry_N = $7F1F36 ;8b
@@ -252,6 +255,7 @@
 !weather_tomorrow = $098C ;8b
 ;00:Sunny, 01:rain, 03:hurricane, 04:fair, 05:sunny and calm, 06:flower festival, 07:harvest festival, 08:Thanksgiving Festival, 09:Star Night Festival, 0A:festive mood, 0B:annual egg festival, 0C:snow
 !development_rate = $7F1F35
+;Also used too keep track of house upgrade days
 !dog_map = $7F1F30 ;8b
 !dog_pos_X = $7F1F2C ;16b
 !dog_pos_Y = $7F1F2E ;16b

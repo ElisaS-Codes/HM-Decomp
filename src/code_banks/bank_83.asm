@@ -3384,7 +3384,7 @@ NewGameSetup: ;83A9BE
         RTL
 
 ;;;;;;;; TODO Sets a TON of things, lots of Vars to check
-NightReset: ;83ABF0
+FirstNightReset: ;83ABF0
         %Set16bit(!MX)
         STZ.W $0183
         STZ.W $0185
