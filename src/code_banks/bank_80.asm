@@ -3550,7 +3550,7 @@ CMP.B #$12                           ;809CF2;      ;
 BEQ CODE_809CFF                      ;809CF4;809CFF;
 INC A                                ;809CF6;      ;
 STA.L !hour                        ;809CF7;7F1F1C;
-JSL.L BHHHH                          ;809CFB;8280AA;
+JSL.L HaveLunch                          ;809CFB;8280AA;
                                 ;      ;      ;
 CODE_809CFF: %Set16bit(!MX)                             ;809CFF;      ;
 LDA.W $0196                          ;809D01;000196;

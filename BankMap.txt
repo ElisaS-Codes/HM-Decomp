@@ -98,6 +98,26 @@ Bank 81
 
 Bank 82
 ❔828000 - UpdateTime
+✅8280AA - HaveLunch
+❔828131 - SaleScene
+❓828165 - CODE_828165
+...
+❓8282AC - NightReset
+⛔82878E - CODE_82878E
+✅828790 - WifePregnanacyandChilds
+✅8289D6 - LoadsDateNames
+...
+📄828AD9 - Season_Names_Table
+📄828B19 - Weekday_Names_Table
+📄828BF9 - Ordinals_Names_Table
+...
+❔828CF9 - WeatherTomorrow
+💾828EB2 - Hurricane_Chance_Table
+💾828EB6 - Rain_Chance_Table
+💾828EBA - Snow_Chance_Table
+💾828EBE - Thunder_Chance_Table
+💾828EC2 - Snowstorm_Chance_Table
+✅828EC6 - FindMostLovedName
 ...
 ❔82A65A - LoadFarmMap
 ...

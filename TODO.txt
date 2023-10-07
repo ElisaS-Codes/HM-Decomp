@@ -3,6 +3,7 @@ Params A:Control Registers, X:VRAM/CGRAM Dest Addresses, Y(DMA Size), $72 & $74 
 
 ====Re-DECOMP
 PalettePointerTable
+828AD3
 
 ====Working on
 CODE_83BC5A Cow feeding subrutine?
@@ -14,6 +15,15 @@ CHHHH
 Unk_Seasons2
 BOOOO
 CODE_83BC5A
+CODE_84803F
+AA9999
+ClearMemoryPointers1
+A8888
+UNK_PartialMap
+UNK_OperatesOnSeasonTable
+
+0924, idle anim?
+
 
 CKKKK
 	$0181? related to map loaded?
@@ -341,6 +351,8 @@ $7F1F49 - (0)
 
 These resets at night
 $7F1F5A - (flags? $8000 related to time. #$0400 related to time too)
+???? ???? -
+???? ???? -
 $7F1F5C - (some kind of flag, related to palettes?)
 ???? ????
 ?x?? ???u - u: related to $0196 x:wont move

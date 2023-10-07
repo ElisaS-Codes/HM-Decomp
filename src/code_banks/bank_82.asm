@@ -16,9 +16,9 @@ UpdateTime: ;828000
 
      + %Set16bit(!M)
        LDA.L $7F1F5A
-       AND.W #$0400
+       AND.W #$0400                          ;FLAG5A
        BEQ +
-       JMP.W BIIII                           ;TODO
+       JMP.W CODE_828165                     ;TODO
 
      + %Set8bit(!M)
        LDA.L !seconds
@@ -40,8 +40,8 @@ UpdateTime: ;828000
        BEQ .noTimeUpdate
        INC A
        STA.L !hour
-       JSL.L BHHHH
-       JSL.L BGGGG                           ;TODO
+       JSL.L HaveLunch
+       JSL.L SaleScene
        %Set8bit(!M)
        LDA.L !hour
        CMP.B #18
@@ -51,7 +51,7 @@ UpdateTime: ;828000
     .hour6PM:
        %Set16bit(!M)
        LDA.L $7F1F5E
-       AND.W #$8000
+       AND.W #$8000                          ;FLAGS5E
        BNE .noTimeUpdate
        %Set8bit(!M)
        LDA.B #$FF
@@ -77,154 +77,150 @@ UpdateTime: ;828000
     .return:
        RTL
 
-;;;;;;;
-BHHHH: ;8280AA
+;;;;;;;;
+HaveLunch: ;8280AA
        %Set8bit(!M)
        %Set16bit(!X)
        LDA.L !hour
        CMP.B #12
        BEQ .12pm
-       JMP.W $8130                        ;8280B6;828130;
+       JMP.W .return
 
     .12pm:
        %Set8bit(!M)
-       LDA.B #$14
+       LDA.B #20
        JSL.L ChangeStamina
        %Set16bit(!M)
        LDA.B !game_state
-       AND.W #$0430                          ;Check many Flags
-       BEQ .CODE_8280CD
-       JMP.W $8130
+       AND.W #$0430                          ;FLAGD2
+       BEQ .actionchecks
+       JMP.W .return
 
-       .CODE_8280CD:
-       LDA.B !player_action                            ;8280CD;0000D4;
-       CMP.W #$000F                          ;Fishing: casting line
-       BNE .CODE_8280D7                       ;8280D2;8280D7;
-       JMP.W $8130                        ;8280D4;828130;
-                                          ;      ;      ;
-                                          ;      ;      ;
-       .CODE_8280D7:
-       CMP.W #$0010                          ;Fishing casting
-       BNE .CODE_8280DF                      ;8280DA;8280DF;
-       JMP.W $8130                        ;8280DC;828130;
-                                          ;      ;      ;
-                                          ;      ;      ;
-       .CODE_8280DF:
-       CMP.W #$0011                          ;Fishing casted line
-       BNE .CODE_8280E7                      ;8280E2;8280E7;
-       JMP.W $8130                        ;8280E4;828130;
-                                          ;      ;      ;
-                                          ;      ;      ;
-       .CODE_8280E7:
-       CMP.W #$0012                          ;Fishing biting
-       BNE .CODE_8280EF                      ;8280EA;8280EF;
-       JMP.W $8130                        ;8280EC;828130;
-                                          ;      ;      ;
-                                          ;      ;      ;
-       .CODE_8280EF:
-       CMP.W #$0013                          ;Fishing retracting
-       BNE .CODE_8280F7                      ;8280F2;8280F7;
-       JMP.W $8130                        ;8280F4;828130;
-                                          ;      ;      ;
-                                          ;      ;      ;
-       .CODE_8280F7:
-       CMP.W #$0017                          ;Short Hop
-       BNE .CODE_828107                      ;8280FA;8280FF;
-       JMP.W $8130                        ;8280FC;828130;
-                                          ;      ;      ;
-                                          ;      ;      ;
-       .CODE_828107:
-       CMP.W #$0018                          ;Mid Hop
-       BNE .CODE_8280FF                      ;828102;828107;
-       JMP.W $8130                        ;828104;828130;
-                                          ;      ;      ;
-                                          ;      ;      ;
-       .CODE_8280FF:
-       LDA.B !game_state                            ;828107;0000D2;
-       AND.W #$0800                         ;828109;      ;
-       BEQ .CODE_828111                      ;82810C;828111;
-       JMP.W $8130                        ;82810E;828130;
-                                          ;      ;      ;
-                                          ;      ;      ;
-       .CODE_828111:
-       %Set8bit(!M)                             ;828111;      ;
-       LDA.B #$03                           ;828113;      ;
-       JSL.L RNGReturn0toA                  ;828115;8089F9;
-       %Set8bit(!M)                             ;828119;      ;
-       STA.W $0924                          ;82811B;000924;
-       %Set16bit(!MX)                             ;82811E;      ;
-       LDA.B !game_state                            ;828120;0000D2;
-       ORA.W #$0004                         ;828122;      ;
-       STA.B !game_state                            ;828125;0000D2;
-       %Set16bit(!MX)                             ;828127;      ;
-       LDA.B !game_state                            ;828129;0000D2;
-       ORA.W #$0400                         ;82812B;      ;
-       STA.B !game_state                            ;82812E;0000D2;
-                                          ;      ;      ;
+   .actionchecks:
+      LDA.B !player_action
+      CMP.W #$000F                           ;Fishing pre casting line
+      BNE .fishing
+      JMP.W .return
+
+   .fishing:
+      CMP.W #$0010                           ;Fishing casting
+      BNE .fishing2
+      JMP.W .return
+
+   .fishing2:
+      CMP.W #$0011                           ;Fishing waiting
+      BNE .fishing3
+      JMP.W .return
+
+   .fishing3:
+      CMP.W #$0012                           ;Fishing biting
+      BNE .fishing4
+      JMP.W .return
+
+   .fishing4:
+      CMP.W #$0013                           ;Fishing retracting
+      BNE .shorthop
+      JMP.W .return
+
+   .shorthop:
+      CMP.W #$0017                           ;Short Hop
+      BNE .midhop
+      JMP.W .return
+
+   .midhop:
+      CMP.W #$0018                           ;Mid Hop
+      BNE .CODE_8280FF
+      JMP.W .return
+
+   .CODE_8280FF:
+      LDA.B !game_state
+      AND.W #$0800                           ;FLAGD2
+      BEQ .CODE_828111
+      JMP.W .return
+
+   .CODE_828111:
+      %Set8bit(!M)
+      LDA.B #$03
+      JSL.L RNGReturn0toA
+      %Set8bit(!M)
+      STA.W $0924
+      %Set16bit(!MX)
+      LDA.B !game_state
+      ORA.W #$0004                           ;FLAGD2
+      STA.B !game_state
+      %Set16bit(!MX)
+      LDA.B !game_state
+      ORA.W #$0400                           ;FLAGD2
+      STA.B !game_state
+
     .return: RTL                                  ;828130;      ;END_BHHH
 
+;;;;;;;
+SaleScene: ;828131
+      %Set8bit(!M)
+      %Set16bit(!X)
+      LDA.L !hour
+      CMP.B #17
+      BEQ .salescene
+      JMP.W ReturnSales
 
-                BGGGG: %Set8bit(!M)                             ;828131;      ;
-                       %Set16bit(!X)                             ;828133;      ;
-                       LDA.L !hour                        ;828135;7F1F1C;
-                       CMP.B #$11                           ;828139;      ;
-                       BEQ CODE_828140                      ;82813B;828140;
-                       JMP.W $81BF                        ;82813D;8281BF;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_828140: LDA.B !tilemap_to_load                            ;828140;000022;
-                       CMP.B #$04                           ;828142;      ;
-                       BCS $79                          ;828144;8281BF;
-                       LDA.B #$00                           ;828146;      ;
-                       STA.W !inputstate                          ;828148;00019A;
-                       %Set16bit(!M)                             ;82814B;      ;
-                       LDA.L $7F1F5A                        ;82814D;7F1F5A;
-                       ORA.W #$0400                         ;828151;      ;
-                       STA.L $7F1F5A                        ;828154;7F1F5A;
-                       LDA.W #$0006                         ;828158;      ;
-                       LDX.W #$0000                         ;82815B;      ;
-                       LDY.W #$0026                         ;82815E;      ;
-                       JSL.L VIP                            ;828161;848097;
-                                                            ;      ;      ;
-                BIIII: %Set16bit(!M)                             ;828165;      ;
-                       LDA.L $7F1F5A                        ;828167;7F1F5A;
-                       AND.W #$0800                         ;82816B;      ;
-                       BEQ $4F                          ;82816E;8281BF;
-                       %Set16bit(!MX)                             ;828170;      ;
-                       LDA.B !game_state                            ;828172;0000D2;
-                       AND.W #$0040                         ;828174;      ;
-                       BEQ CODE_82817C                      ;828177;82817C;
-                       JMP.W $81BF                        ;828179;8281BF;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_82817C: LDA.W #$0002                         ;82817C;      ;
-                       STA.W !inputstate                          ;82817F;00019A;
-                       LDX.W #$031A                         ;828182;      ;
-                       %Set16bit(!M)                             ;828185;      ;
-                       LDA.L !shipping_moneyL                        ;828187;7F1F07;
-                       BNE CODE_828198                      ;82818B;828198;
-                       %Set8bit(!M)                             ;82818D;      ;
-                       LDA.L !shipping_moneyH                        ;82818F;7F1F09;
-                       BNE CODE_828198                      ;828193;828198;
-                       LDX.W #$031B                         ;828195;      ;
-                                                            ;      ;      ;
-          CODE_828198: %Set8bit(!M)                             ;828198;      ;
-                       LDA.B #$00                           ;82819A;      ;
-                       STA.W $0191                          ;82819C;000191;
-                       JSL.L CODE_83935F                    ;82819F;83935F;
-                       %Set16bit(!M)                             ;8281A3;      ;
-                       LDA.W #$0006                         ;8281A5;      ;
-                       LDX.W #$0000                         ;8281A8;      ;
-                       LDY.W #$0027                         ;8281AB;      ;
-                       JSL.L CODE_84803F                    ;8281AE;84803F;
-                       %Set16bit(!M)                             ;8281B2;      ;
-                       LDA.L $7F1F5A                        ;8281B4;7F1F5A;
-                       AND.W #$FBFF                         ;8281B8;      ;
-                       STA.L $7F1F5A                        ;8281BB;7F1F5A;
-                                                            ;      ;      ;
-              RTL                                  ;8281BF;      ;END_BIIII
-                                                            ;      ;      ;
-                                                            ;      ;      ;
+   .salescene:
+      LDA.B !tilemap_to_load
+      CMP.B #$04
+      BCS ReturnSales                        ;not on farm return next subrutine
+      LDA.B #$00
+      STA.W !inputstate
+      %Set16bit(!M)
+      LDA.L $7F1F5A
+      ORA.W #$0400                           ;FLAG5A
+      STA.L $7F1F5A
+      LDA.W #$0006
+      LDX.W #$0000
+      LDY.W #$0026
+      JSL.L VIP
+
+;;;;;;;;
+CODE_828165: ;828165
+      %Set16bit(!M)
+      LDA.L $7F1F5A
+      AND.W #$0800                           ;FLAG5A
+      BEQ ReturnSales
+      %Set16bit(!MX)
+      LDA.B !game_state
+      AND.W #$0040                           ;FLAGD2
+      BEQ .CODE_82817C
+      JMP.W ReturnSales
+
+   .CODE_82817C:
+      LDA.W #$0002
+      STA.W !inputstate
+      LDX.W #$031A
+      %Set16bit(!M)
+      LDA.L !shipping_moneyL
+      BNE .CODE_828198
+      %Set8bit(!M)
+      LDA.L !shipping_moneyH
+      BNE .CODE_828198
+      LDX.W #$031B
+
+   .CODE_828198:
+      %Set8bit(!M)
+      LDA.B #$00
+      STA.W $0191
+      JSL.L CODE_83935F                      ;TODO
+      %Set16bit(!M)
+      LDA.W #$0006
+      LDX.W #$0000
+      LDY.W #$0027
+      JSL.L CODE_84803F                      ;TODO
+      %Set16bit(!M)
+      LDA.L $7F1F5A
+      AND.W #$FBFF                           ;FLAG5A
+      STA.L $7F1F5A
+
+ReturnSales: RTL
+
+;;;;;;;;
                 BFFFF: %Set8bit(!M)                             ;8281C0;      ;
                        %Set16bit(!X)                             ;8281C2;      ;
                        LDA.B #$00                           ;8281C4;      ;
@@ -343,6 +339,7 @@ BHHHH: ;8280AA
 UNK_Table5_SeasonRelated: db $60,$00,$00,$00,$40,$00,$00,$00,$08,$10,$04,$00,$08,$00,$04,$00;828298;      ;
                        db $00,$40,$20,$00                   ;8282A8;      ;
                                                             ;      ;      ;
+;;;;;;
 NightReset: ;8282AC
       %Set8bit(!M)
       %Set16bit(!X)
@@ -792,7 +789,7 @@ NightReset: ;8282AC
       LDA.B #$1E
       STA.L !day
 
-      .CODE_828733:
+   .CODE_828733:
       %Set8bit(!M)
       STZ.W !time_running
       %Set8bit(!M)
@@ -1059,7 +1056,7 @@ WifePregnanacyandChilds: ;828790
       BCC .return
       BNE .child2growing
       LDA.L $7F1F6E
-      ORA.W #$0010                           ;TODO
+      ORA.W #$0010                           ;FLAG6E
       STA.L $7F1F6E
       %Set16bit(!M)
       LDA.W #$0064
@@ -1084,8 +1081,8 @@ WifePregnanacyandChilds: ;828790
 
    .return: RTL
 
-;;;;;;
-LoadsDateNames:
+;;;;;;;
+LoadsDateNames: ;8289D6
       %Set8bit(!M)
       %Set16bit(!X)
       LDA.B #$00
@@ -1208,38 +1205,29 @@ LoadsDateNames:
 db $69,$01,$CB,$01,$15,$01,$27,$01,$29,$01,$3C,$01,$78,$02,$6C,$01;828AC3;      ;
 db $AA,$01,$38,$01,$E4,$00           ;828AD3;      ;
 
-;                    S       p       r       i       n       g
-Season_Names_Table: db $2C,$00,$0F,$00,$11,$00,$08,$00,$0D,$00,$06,$00,$00,$00,$00,$00;828AD9;      ;
-;                      S       u       m       m       e       r
-                    db $2C,$00,$14,$00,$0C,$00,$0C,$00,$04,$00,$11,$00,$00,$00,$00,$00;828AE9;      ;
-;                      F       a       l       l       " "     " "
-                    db $1F,$00,$00,$00,$0B,$00,$0B,$00,$B1,$00,$B1,$00,$00,$00,$00,$00;828AF9;      ;
-;                      W       i       n        t      e       r
-                    db $30,$00,$08,$00,$0D,$00,$13,$00,$04,$00,$11,$00,$00,$00,$00,$00;828B09;      ;
-;                       S       u       n       d       a       y       " "     " "
-Weekday_Names_Table: db $2C,$00,$14,$00,$0D,$00,$03,$00,$00,$00,$18,$00,$B1,$00,$B1,$00;828B19;      ;
-                     db $B1,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;828B29;      ;
-;                       M       o       n       d       a       y       " "     " "
-                     db $26,$00,$0E,$00,$0D,$00,$03,$00,$00,$00,$18,$00,$B1,$00,$B1,$00;828B39;      ;
-                     db $B1,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;828B49;      ;
-;                       T       u       e       s       d       a       y       " "
-                     db $2D,$00,$14,$00,$04,$00,$12,$00,$03,$00,$00,$00,$18,$00,$B1,$00;828B59;      ;
-                     db $B1,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;828B69;      ;
-;                       W       e       d       n       e       s       d       a
-                     db $30,$00,$04,$00,$03,$00,$0D,$00,$04,$00,$12,$00,$03,$00,$00,$00;828B79;      ;
-;                       y
-                     db $18,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;828B89;      ;
-;                       T       h       u       r       s       d       a       y
-                     db $2D,$00,$07,$00,$14,$00,$11,$00,$12,$00,$03,$00,$00,$00,$18,$00;828B99;      ;
-                     db $B1,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;828BA9;      ;
-;                       F       r       i       d       a       y       " "     " "
-                     db $1F,$00,$11,$00,$08,$00,$03,$00,$00,$00,$18,$00,$B1,$00,$B1,$00;828BB9;      ;
-                     db $B1,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;828BC9;      ;
-;                       S       a       t       u        r      d       a       y
-                     db $2C,$00,$00,$00,$13,$00,$14,$00,$11,$00,$03,$00,$00,$00,$18,$00;828BD9;      ;
-                     db $B1,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;828BE9;      ;
-;                        st              nd              rd              th
-Ordinals_Names_Table: db $12,$00,$13,$00,$0D,$00,$03,$00,$11,$00,$03,$00,$13,$00,$07,$00;828BF9;      ;
+;This is text, it holds the name of the season and spaces
+Season_Names_Table: db $2C,$00,$0F,$00,$11,$00,$08,$00,$0D,$00,$06,$00,$00,$00,$00,$00;828AD9
+                    db $2C,$00,$14,$00,$0C,$00,$0C,$00,$04,$00,$11,$00,$00,$00,$00,$00;828AE9
+                    db $1F,$00,$00,$00,$0B,$00,$0B,$00,$B1,$00,$B1,$00,$00,$00,$00,$00;828AF9
+                    db $30,$00,$08,$00,$0D,$00,$13,$00,$04,$00,$11,$00,$00,$00,$00,$00;828B09
+
+;This is text, it holds the name of the season and spaces at the end
+Weekday_Names_Table: db $2C,$00,$14,$00,$0D,$00,$03,$00,$00,$00,$18,$00,$B1,$00,$B1,$00;828B19
+                     db $B1,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;828B29
+                     db $26,$00,$0E,$00,$0D,$00,$03,$00,$00,$00,$18,$00,$B1,$00,$B1,$00;828B39
+                     db $B1,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;828B49
+                     db $2D,$00,$14,$00,$04,$00,$12,$00,$03,$00,$00,$00,$18,$00,$B1,$00;828B59
+                     db $B1,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;828B69
+                     db $30,$00,$04,$00,$03,$00,$0D,$00,$04,$00,$12,$00,$03,$00,$00,$00;828B79
+                     db $18,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;828B89
+                     db $2D,$00,$07,$00,$14,$00,$11,$00,$12,$00,$03,$00,$00,$00,$18,$00;828B99
+                     db $B1,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;828BA9
+                     db $1F,$00,$11,$00,$08,$00,$03,$00,$00,$00,$18,$00,$B1,$00,$B1,$00;828BB9
+                     db $B1,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;828BC9
+                     db $2C,$00,$00,$00,$13,$00,$14,$00,$11,$00,$03,$00,$00,$00,$18,$00;828BD9
+                     db $B1,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;828BE9
+
+Ordinals_Names_Table: db $12,$00,$13,$00,$0D,$00,$03,$00,$11,$00,$03,$00,$13,$00,$07,$00;828BF9
                                                             ;      ;      ;
           CODE_828C09: %Set16bit(!MX)                             ;828C09;      ;
                        STZ.W $0196                          ;828C0B;000196;
@@ -1433,7 +1421,7 @@ WeatherTomorrow: ;828CF9
     .specialcase:
        %Set16bit(!M)
        LDA.L $7F1F64
-       AND.W #$0002                          ;TODO
+       AND.W #$0002                          ;FLAG64
        BEQ .specialdays
        JMP.W .normalday
 
@@ -1448,7 +1436,7 @@ WeatherTomorrow: ;828CF9
        %Set16bit(!M)
        TAX
        %Set8bit(!M)
-       LDA.L Snowstorm_Chance_Table,X                 ;TODO
+       LDA.L Snowstorm_Chance_Table,X
        BNE .snowstorm
        JMP.W .normalday
 
@@ -1470,7 +1458,7 @@ WeatherTomorrow: ;828CF9
        BNE .nothunder                     ;Year after first
        %Set16bit(!M)
        LDA.L $7F1F64
-       AND.W #$0001                       ;TODO
+       AND.W #$0001                       ;FLAG64
        BNE .nothunder
        %Set8bit(!M)
        LDA.L !day
