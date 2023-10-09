@@ -440,7 +440,7 @@ NightReset: ;8282AC
       JSL.L LoadsDateNames
       JSL.L Unk_Seasons2
       JSL.L BOOOO
-      JSL.L CODE_83BC5A
+      JSL.L CowFeedingandStatus
       JSL.L WeatherTomorrow
       JSL.L FindMostLovedName
       JSL.L WifePregnanacyandChilds
@@ -6959,7 +6959,7 @@ IntroScreen: ;82D75E
        STZ.W $098D
        %Set16bit(!M)
        LDA.L $7F1F60
-       AND.W #$0800                          ;Checks for save failed CRC flag
+       AND.W #$0800                          ;FLAG60 Checks for save failed CRC flag
        BEQ .savefine
 
        %Set8bit(!M)
@@ -7023,10 +7023,10 @@ IntroScreen: ;82D75E
        LDA.W #$0001
        STA.B $AF
 
-    WaitNMI:
+    .WaitNMI:
        %Set8bit(!M)
        LDA.B $00
-       BEQ WaitNMI
+       BEQ .WaitNMI
 
        JSL.L UNK_BigLoop
        JSL.L InputTypeSelector
@@ -7037,7 +7037,8 @@ IntroScreen: ;82D75E
        BNE CODE_82D829
        JML.L CODE_82D8B0
 
-       CODE_82D829: CMP.B #$02                           ;82D829;      ;
+       CODE_82D829:
+       CMP.B #$02                           ;82D829;      ;
        BNE CODE_82D831                      ;82D82B;82D831;
        JML.L CODE_82DA8C                    ;82D82D;82DA8C;
                                           ;      ;      ;

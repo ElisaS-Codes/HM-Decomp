@@ -6,15 +6,19 @@ PalettePointerTable
 828AD3
 
 ====Working on
-CODE_83BC5A Cow feeding subrutine?
-CODE_828CF9 Weather tomorrow subrutine?
+$90, wAiting ?
+
+
+
+
+
+
 CODE_828C09 More weather?
 NightReset
 LoadsFromSeasonTable
 CHHHH
 Unk_Seasons2
 BOOOO
-CODE_83BC5A
 CODE_84803F
 AA9999
 ClearMemoryPointers1
@@ -307,17 +311,16 @@ $7E2400- - Tilemap content
 $7EA000-21E - OAM contents (size on $AF)
 
 $7EA220-31E - ($0000)
+$7EA320-41E - ($0000-$FFFF)
 
-$7EA320-41E - (32b? $0000) CGRAM
-
-$7EA420 -
+$7EA420 - FFFF
 $7EA422 - (Holds DMA Source Address Low)
 $7EA424 - (Holds DMA Source Address High)
 
 
 $7EA4E6\farm data * #$0F00
 $7EA5A6/
-$7EB4E6-B586 - ($00) holds variables to set up around $0974 map?
+$7EB4E6-B5| - ($00) holds variables to set up around $0974 map?
 
 ==============
 

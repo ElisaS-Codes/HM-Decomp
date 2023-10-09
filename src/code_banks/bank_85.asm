@@ -277,82 +277,85 @@
                        RTL                                  ;85820E;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
-InitializeOBJs: %Set16bit(!MX)                             ;85820F;      ;
-                       %Set16bit(!M)                             ;858211;      ;
-                       LDA.B $A1                            ;858213;0000A1;$0000A1
-                       CMP.W #$0262                         ;858215;      ;
-                       BCS .skip1                           ;858218;858224;A1 less than #$0262
-                       %Set8bit(!M)                             ;85821A;      ;
-                       LDA.B #$86                           ;85821C;      ;
-                       STA.B $77                            ;85821E;000077;$000077
-                       STA.B $7A                            ;858220;00007A;$00007A
-                       BRA .skip2                           ;858222;85822C;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-               .skip1: %Set8bit(!M)                             ;858224;      ;
-                       LDA.B #$87                           ;858226;      ;
-                       STA.B $77                            ;858228;000077;$000077
-                       STA.B $7A                            ;85822A;00007A;$00007A
-                                                            ;      ;      ;
-               .skip2: %Set16bit(!MX)                             ;85822C;      ;
-                       LDA.W #$0000                         ;85822E;      ;
-                       STA.W $0086                          ;858231;000086;$000086
-                       LDY.W #$0000                         ;858234;      ;
-                                                            ;      ;      ;
-                .loop: LDX.W $0086                          ;858237;000086;$000086
-                       LDA.W #$0000                         ;85823A;      ;
-                       STA.W $019C,X                        ;85823D;00019C;$00019C
-                       LDA.W #$0000                         ;858240;      ;
-                       STA.W $019E,X                        ;858243;00019E;$00019E
-                       LDA.W #$0000                         ;858246;      ;
-                       STA.W $01A0,X                        ;858249;0001A0;$0001A0
-                       LDA.W #$0000                         ;85824C;      ;
-                       STA.W $01A2,X                        ;85824F;0001A2;$0001A2
-                       LDA.W #$0000                         ;858252;      ;
-                       STA.W $01A4,X                        ;858255;0001A4;$0001A4
-                       LDA.W #$0000                         ;858258;      ;
-                       STA.W $01A6,X                        ;85825B;0001A6;$0001A6
-                       LDA.W #$0000                         ;85825E;      ;
-                       STA.W $01A8,X                        ;858261;0001A8;$0001A8
-                       LDA.W #$0000                         ;858264;      ;
-                       STA.W $01AA,X                        ;858267;0001AA;$0001AA
-                       LDA.W #$0000                         ;85826A;      ;
-                       STA.W $01AC,X                        ;85826D;0001AC;$0001AC
-                       LDA.W #$0000                         ;858270;      ;
-                       STA.W $01AE,X                        ;858273;0001AE;$0001AE
-                       %Set8bit(!M)                             ;858276;      ;
-                       LDA.B #$FF                           ;858278;      ;
-                       STA.W $01B0,X                        ;85827A;0001B0;$0001B0
-                       STA.W $01B1,X                        ;85827D;0001B1;$0001B1
-                       STA.W $01B2,X                        ;858280;0001B2;$0001B2
-                       STA.W $01B3,X                        ;858283;0001B3;$0001B3
-                       STA.W $01B4,X                        ;858286;0001B4;$0001B4
-                       STA.W $01B5,X                        ;858289;0001B5;$0001B5
-                       STA.W $01B6,X                        ;85828C;0001B6;$0001B6
-                       STA.W $01B7,X                        ;85828F;0001B7;$0001B7
-                       STA.W $01B8,X                        ;858292;0001B8;$0001B8
-                       STA.W $01B9,X                        ;858295;0001B9;$0001B9
-                       STA.W $01BA,X                        ;858298;0001BA;$0001BA
-                       STA.W $01BB,X                        ;85829B;0001BB;$0001BB
-                       STA.W $01BC,X                        ;85829E;0001BC;$0001BC
-                       STA.W $01BD,X                        ;8582A1;0001BD;$0001BD
-                       STA.W $01BE,X                        ;8582A4;0001BE;$0001BE
-                       STA.W $01BF,X                        ;8582A7;0001BF;$0001BF
-                       %Set16bit(!M)                             ;8582AA;      ;
-                       LDA.W $0086                          ;8582AC;000086;$000086
-                       CLC                                  ;8582AF;      ;
-                       ADC.W #$0024                         ;8582B0;      ;
-                       STA.W $0086                          ;8582B3;000086;$000086
-                       INY                                  ;8582B6;      ;
-                       CPY.W #$0028                         ;8582B7;      ;
-                       BEQ .skip                            ;8582BA;8582BF;
-                       JMP.W .loop                          ;8582BC;858237;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                .skip: %Set16bit(!M)                             ;8582BF;      ;
-                       STZ.B $DC                            ;8582C1;0000DC;$0000DC
-                       JSR.W PresetsWRAMCopyofOAM           ;8582C3;858647;
-                       RTL                                  ;8582C6;      ;END_PresetsMemory2
+InitializeOBJs: ;85820F
+        %Set16bit(!MX)
+        %Set16bit(!M)
+        LDA.B $A1
+        CMP.W #$0262                         ;TODO
+        BCS .skip1
+        %Set8bit(!M)
+        LDA.B #$86
+        STA.B $77
+        STA.B $7A
+        BRA .skip2
+
+    .skip1:
+        %Set8bit(!M)
+        LDA.B #$87
+        STA.B $77
+        STA.B $7A
+
+    .skip2:
+        %Set16bit(!MX)
+        LDA.W #$0000
+        STA.W $0086
+        LDY.W #$0000
+
+    .loop:
+        LDX.W $0086
+        LDA.W #$0000
+        STA.W $019C,X
+        LDA.W #$0000
+        STA.W $019E,X
+        LDA.W #$0000
+        STA.W $01A0,X
+        LDA.W #$0000
+        STA.W $01A2,X
+        LDA.W #$0000
+        STA.W $01A4,X
+        LDA.W #$0000
+        STA.W $01A6,X
+        LDA.W #$0000
+        STA.W $01A8,X
+        LDA.W #$0000
+        STA.W $01AA,X
+        LDA.W #$0000
+        STA.W $01AC,X
+        LDA.W #$0000
+        STA.W $01AE,X
+        %Set8bit(!M)
+        LDA.B #$FF
+        STA.W $01B0,X
+        STA.W $01B1,X
+        STA.W $01B2,X
+        STA.W $01B3,X
+        STA.W $01B4,X
+        STA.W $01B5,X
+        STA.W $01B6,X
+        STA.W $01B7,X
+        STA.W $01B8,X
+        STA.W $01B9,X
+        STA.W $01BA,X
+        STA.W $01BB,X
+        STA.W $01BC,X
+        STA.W $01BD,X
+        STA.W $01BE,X
+        STA.W $01BF,X
+        %Set16bit(!M)
+        LDA.W $0086
+        CLC
+        ADC.W #$0024
+        STA.W $0086
+        INY
+        CPY.W #$0028
+        BEQ .skip
+        JMP.W .loop
+
+        .skip: %Set16bit(!M)
+        STZ.B $DC
+        JSR.W PresetsWRAMCopyofOAM
+
+        RTL
                                                             ;      ;      ;
                                                             ;      ;      ;
           CODE_8582C7: %Set16bit(!MX)                             ;8582C7;      ;
@@ -1622,37 +1625,43 @@ PresetsWRAMCopyOAMCopy: %Set16bit(!MX)                             ;858896;     
                                                             ;      ;      ;
                                                             ;      ;      ;
               .return: RTL                                  ;858ED6;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-ClearWRAMGraphicsSpace: %Set16bit(!MX)                             ;858ED7;      ;
-                       LDA.W #$FFFF                         ;858ED9;      ;
-                       STA.L $7EA420                        ;858EDC;7EA420;Var $7EA420
-                       STZ.B $BB                            ;858EE0;0000BB;$0000BB
-                       STZ.B $BD                            ;858EE2;0000BD;$0000BD
-                       LDX.W #$0000                         ;858EE4;      ;
-                       LDY.W #$0000                         ;858EE7;      ;
-                                                            ;      ;      ;
-               .loop1: LDA.W #$0000                         ;858EEA;      ;
-                       STA.L $7EA320,X                      ;858EED;7EA320;sets variables $7EA320-A0, every other 2 bytes
-                       LDA.W #$FFFF                         ;858EF1;      ;
-                       STA.L $7EA322,X                      ;858EF4;7EA322;sets addresses $7EA322-A2 every other 2 bytes as $FFFF
-                       STA.L $7EA220,X                      ;858EF8;7EA220;sets addresses $7EA220-A0 every other 2 bytes as $FFFF
-                       INX                                  ;858EFC;      ;
-                       INX                                  ;858EFD;      ;
-                       INX                                  ;858EFE;      ;
-                       INX                                  ;858EFF;      ;
-                       INY                                  ;858F00;      ;
-                       CPY.W #$0040                         ;858F01;      ;
-                       BNE .loop1                           ;858F04;858EEA;
-                       %Set16bit(!MX)                             ;858F06;      ;
-                       LDX.W #$0000                         ;858F08;      ;
-                       LDA.W #$FFFF                         ;858F0B;      ;
-                                                            ;      ;      ;
-               .loop2: STA.L $7F0F00,X                      ;858F0E;7F0F00;sets addresses $7F0F00-1F00 to $FFFF
-                       INX                                  ;858F12;      ;
-                       INX                                  ;858F13;      ;
-                       CPX.W #$1000                         ;858F14;      ;
-                       BNE .loop2                           ;858F17;858F0E;
-                       STZ.W $0846                          ;858F19;000846;$000846
-                       STZ.W $0848                          ;858F1C;000848;$000848
-                       RTL                                  ;858F1F;      ;END_PresetMemory1
+
+;;;;;;;
+ClearWRAMGraphicsSpace: ;858ED7
+        %Set16bit(!MX)
+        LDA.W #$FFFF
+        STA.L $7EA420
+        STZ.B $BB
+        STZ.B $BD
+        LDX.W #$0000
+        LDY.W #$0000
+
+    .loop1:
+        LDA.W #$0000
+        STA.L $7EA320,X
+        LDA.W #$FFFF
+        STA.L $7EA322,X
+        STA.L $7EA220,X
+        INX
+        INX
+        INX
+        INX
+        INY
+        CPY.W #$0040
+        BNE .loop1
+
+        %Set16bit(!MX)
+        LDX.W #$0000
+        LDA.W #$FFFF
+
+    .loop2:
+        STA.L $7F0F00,X
+        INX
+        INX
+        CPX.W #$1000
+        BNE .loop2
+
+        STZ.W $0846
+        STZ.W $0848
+
+        RTL
