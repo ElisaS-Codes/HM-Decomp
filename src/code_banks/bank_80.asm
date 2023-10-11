@@ -736,7 +736,7 @@ UpdateGraphics: ;8086B1
         STA.W !MDMAEN
         STZ.B $9A
         STZ.W !MDMAEN
-        JSL.L CopiesWRAMtoVGRAM              ;TODO
+        JSL.L CopiesWRAMtoOBJVGRAM              ;TODO
         STZ.B $9A
         STZ.W !MDMAEN
 
@@ -1622,7 +1622,7 @@ UNK_BigLoop:
         STZ.B $93
         LDY.W #$0000
         %Set16bit(!M)
-        LDA.W $0196                          ;if its raining
+        LDA.W $0196
         AND.W #$000A
         BNE +
         LDY.W #$0004
@@ -2784,21 +2784,21 @@ UNK_Audio5: ;8095DE
 UNK_PrepareScreenTransition: ;809671
         %Set16bit(!MX)
         LDA.W $0196
-        AND.W #$4000                         ;checks flag, if not set, abort
+        AND.W #$4000                         ;FLAG196
         BNE +
 
         JMP.W ScreenTransitionReturn
 
       + LDA.L $7F1F5E
-        AND.W #$8000                         ;checks flag, if set, transition with no audio change
+        AND.W #$8000                         ;FLAG5E
         BNE +
 
         LDA.L $7F1F60
-        AND.W #$0100                         ;checks flag, if set, transition with audio change
+        AND.W #$0100                         ;FLAG60
 
         BNE ++
         LDA.L $7F1F60
-        AND.W #$0040                         ;checks flag, if not set, abort
+        AND.W #$0040                         ;FLAG60
         BEQ ++
         JMP.W ScreenTransitionReturn
 

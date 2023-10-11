@@ -1,100 +1,102 @@
-                                                            ;      ;      ;
-                       ORG $858000                          ;      ;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858000: %Set16bit(!M)                             ;858000;      ;
-                       LDA.B $A1                            ;858002;0000A1;
-                       CMP.W #$0262                         ;858004;      ;
-                       BCS CODE_858013                      ;858007;858013;
-                       %Set8bit(!M)                             ;858009;      ;
-                       LDA.B #$86                           ;85800B;      ;
-                       STA.B $77                            ;85800D;000077;
-                       STA.B $7A                            ;85800F;00007A;
-                       BRA CODE_85801B                      ;858011;85801B;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858013: %Set8bit(!M)                             ;858013;      ;
-                       LDA.B #$87                           ;858015;      ;
-                       STA.B $77                            ;858017;000077;
-                       STA.B $7A                            ;858019;00007A;
-                                                            ;      ;      ;
-          CODE_85801B: %Set16bit(!MX)                             ;85801B;      ;
-                       %Set16bit(!MX)                             ;85801D;      ;
-                       LDX.W #$0000                         ;85801F;      ;
-                       LDY.W #$0000                         ;858022;      ;
-                       LDA.B $DC                            ;858025;0000DC;
-                       CMP.W #$0028                         ;858027;      ;
-                       BEQ CODE_85802F                      ;85802A;85802F;
-                       INC A                                ;85802C;      ;
-                       STA.B $DC                            ;85802D;0000DC;
-                                                            ;      ;      ;
-          CODE_85802F: LDA.W $019C,X                        ;85802F;00019C;
-                       BEQ CODE_858046                      ;858032;858046;
-                       TXA                                  ;858034;      ;
-                       CLC                                  ;858035;      ;
-                       ADC.W #$0024                         ;858036;      ;
-                       TAX                                  ;858039;      ;
-                       INY                                  ;85803A;      ;
-                       CPY.B $DC                            ;85803B;0000DC;
-                       BNE CODE_85802F                      ;85803D;85802F;
-                       LDA.W #$FFFF                         ;85803F;      ;
-                       STA.B $A7                            ;858042;0000A7;
-                       BRA CODE_8580B8                      ;858044;8580B8;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858046: STY.B $A5                            ;858046;0000A5;
-                       LDA.W #$7777                         ;858048;      ;
-                       STA.W $019C,X                        ;85804B;00019C;
-                       LDA.B $A1                            ;85804E;0000A1;
-                       STA.W $019E,X                        ;858050;00019E;
-                       LDA.B $9F                            ;858053;00009F;
-                       STA.W $01A0,X                        ;858055;0001A0;
-                       LDA.B $A3                            ;858058;0000A3;
-                       STA.W $01A2,X                        ;85805A;0001A2;
-                       LDA.B $9B                            ;85805D;00009B;
-                       STA.W $01A4,X                        ;85805F;0001A4;
-                       LDA.B $9D                            ;858062;00009D;
-                       STA.W $01A6,X                        ;858064;0001A6;
-                       STX.B $A9                            ;858067;0000A9;
-                       LDA.B $A1                            ;858069;0000A1;
-                       CMP.W #$0262                         ;85806B;      ;
-                       BCS CODE_85807D                      ;85806E;85807D;
-                       LDA.W $019E,X                        ;858070;00019E;
-                       ASL A                                ;858073;      ;
-                       TAX                                  ;858074;      ;
-                       LDA.L DATA8_868080,X                 ;858075;868080;
-                       STA.B $75                            ;858079;000075;
-                       BRA CODE_85808C                      ;85807B;85808C;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_85807D: LDA.W $019E,X                        ;85807D;00019E;
-                       SEC                                  ;858080;      ;
-                       SBC.W #$0262                         ;858081;      ;
-                       ASL A                                ;858084;      ;
-                       TAX                                  ;858085;      ;
-                       LDA.L UNK_Table15,X                  ;858086;878080;
-                       STA.B $75                            ;85808A;000075;
-                                                            ;      ;      ;
-          CODE_85808C: LDX.B $A9                            ;85808C;0000A9;
-                       LDA.B $75                            ;85808E;000075;
-                       STA.W $01A8,X                        ;858090;0001A8;
-                       CLC                                  ;858093;      ;
-                       ADC.W #$0003                         ;858094;      ;
-                       STA.W $01AA,X                        ;858097;0001AA;
-                       LDY.W #$0000                         ;85809A;      ;
-                       LDA.B [$75],Y                        ;85809D;000075;
-                       STA.W $01AC,X                        ;85809F;0001AC;
-                       %Set8bit(!M)                             ;8580A2;      ;
-                       LDY.W #$0002                         ;8580A4;      ;
-                       LDA.B [$75],Y                        ;8580A7;000075;
-                       STA.W $01AE,X                        ;8580A9;0001AE;
-                       %Set16bit(!M)                             ;8580AC;      ;
-                       JSR.W CODE_858AE5                    ;8580AE;858AE5;
-                       %Set16bit(!M)                             ;8580B1;      ;
-                       LDA.W #$0000                         ;8580B3;      ;
-                       STA.B $A7                            ;8580B6;0000A7;
-                                                            ;      ;      ;
-          CODE_8580B8: RTL                                  ;8580B8;      ;
+ORG $858000
+
+CODE_858000:
+        %Set16bit(!M)                             ;858000;      ;
+        LDA.B $A1                            ;858002;0000A1;
+        CMP.W #$0262                         ;858004;      ;
+        BCS CODE_858013                      ;858007;858013;
+        %Set8bit(!M)                             ;858009;      ;
+        LDA.B #$86                           ;85800B;      ;
+        STA.B $77                            ;85800D;000077;
+        STA.B $7A                            ;85800F;00007A;
+        BRA CODE_85801B                      ;858011;85801B;
+
+    CODE_858013:
+        %Set8bit(!M)                             ;858013;      ;
+        LDA.B #$87                           ;858015;      ;
+        STA.B $77                            ;858017;000077;
+        STA.B $7A                            ;858019;00007A;
+
+    CODE_85801B:
+        %Set16bit(!MX)                             ;85801B;      ;
+        %Set16bit(!MX)                             ;85801D;      ;
+        LDX.W #$0000                         ;85801F;      ;
+        LDY.W #$0000                         ;858022;      ;
+        LDA.B $DC                            ;858025;0000DC;
+        CMP.W #$0028                         ;858027;      ;
+        BEQ CODE_85802F                      ;85802A;85802F;
+        INC A                                ;85802C;      ;
+        STA.B $DC                            ;85802D;0000DC;
+
+    CODE_85802F:
+        LDA.W $019C,X                        ;85802F;00019C;
+        BEQ CODE_858046                      ;858032;858046;
+        TXA                                  ;858034;      ;
+        CLC                                  ;858035;      ;
+        ADC.W #$0024                         ;858036;      ;
+        TAX                                  ;858039;      ;
+        INY                                  ;85803A;      ;
+        CPY.B $DC                            ;85803B;0000DC;
+        BNE CODE_85802F                      ;85803D;85802F;
+        LDA.W #$FFFF                         ;85803F;      ;
+        STA.B $A7                            ;858042;0000A7;
+        BRA return85                      ;858044;8580B8;
+
+    CODE_858046:
+        STY.B $A5                            ;858046;0000A5;
+        LDA.W #$7777                         ;858048;      ;
+        STA.W $019C,X                        ;85804B;00019C;
+        LDA.B $A1                            ;85804E;0000A1;
+        STA.W $019E,X                        ;858050;00019E;
+        LDA.B $9F                            ;858053;00009F;
+        STA.W $01A0,X                        ;858055;0001A0;
+        LDA.B $A3                            ;858058;0000A3;
+        STA.W $01A2,X                        ;85805A;0001A2;
+        LDA.B $9B                            ;85805D;00009B;
+        STA.W $01A4,X                        ;85805F;0001A4;
+        LDA.B $9D                            ;858062;00009D;
+        STA.W $01A6,X                        ;858064;0001A6;
+        STX.B $A9                            ;858067;0000A9;
+        LDA.B $A1                            ;858069;0000A1;
+        CMP.W #$0262                         ;85806B;      ;
+        BCS CODE_85807D                      ;85806E;85807D;
+        LDA.W $019E,X                        ;858070;00019E;
+        ASL A                                ;858073;      ;
+        TAX                                  ;858074;      ;
+        LDA.L DATA8_868080,X                 ;858075;868080;
+        STA.B $75                            ;858079;000075;
+        BRA CODE_85808C                      ;85807B;85808C;
+
+    CODE_85807D:
+        LDA.W $019E,X                        ;85807D;00019E;
+        SEC                                  ;858080;      ;
+        SBC.W #$0262                         ;858081;      ;
+        ASL A                                ;858084;      ;
+        TAX                                  ;858085;      ;
+        LDA.L UNK_Table15,X                  ;858086;878080;
+        STA.B $75                            ;85808A;000075;
+
+    CODE_85808C:
+        LDX.B $A9                            ;85808C;0000A9;
+        LDA.B $75                            ;85808E;000075;
+        STA.W $01A8,X                        ;858090;0001A8;
+        CLC                                  ;858093;      ;
+        ADC.W #$0003                         ;858094;      ;
+        STA.W $01AA,X                        ;858097;0001AA;
+        LDY.W #$0000                         ;85809A;      ;
+        LDA.B [$75],Y                        ;85809D;000075;
+        STA.W $01AC,X                        ;85809F;0001AC;
+        %Set8bit(!M)                             ;8580A2;      ;
+        LDY.W #$0002                         ;8580A4;      ;
+        LDA.B [$75],Y                        ;8580A7;000075;
+        STA.W $01AE,X                        ;8580A9;0001AE;
+        %Set16bit(!M)                             ;8580AC;      ;
+        JSR.W CODE_858AE5                    ;8580AE;858AE5;
+        %Set16bit(!M)                             ;8580B1;      ;
+        LDA.W #$0000                         ;8580B3;      ;
+        STA.B $A7                            ;8580B6;0000A7;
+
+    return85: RTL
                                                             ;      ;      ;
                                                             ;      ;      ;
           CODE_8580B9: %Set16bit(!M)                             ;8580B9;      ;
@@ -161,7 +163,7 @@
                        STA.B $A9                            ;858127;0000A9;
                        JSR.W CODE_858B7B                    ;858129;858B7B;
                        LDA.B $AF                            ;85812C;0000AF;
-                       BNE CODE_8580B8                      ;85812E;8580B8;
+                       BNE return85                      ;85812E;8580B8;
                        JSR.W CODE_858B41                    ;858130;858B41;
                        %Set16bit(!MX)                             ;858133;      ;
                        LDY.B $A5                            ;858135;0000A5;
@@ -225,7 +227,7 @@
                        JSR.W CODE_858B7B                    ;8581AE;858B7B;
                        LDA.B $AF                            ;8581B1;0000AF;
                        BEQ CODE_8581B8                      ;8581B3;8581B8;
-                       JMP.W CODE_8580B8                    ;8581B5;8580B8;
+                       JMP.W return85                    ;8581B5;8580B8;
                                                             ;      ;      ;
                                                             ;      ;      ;
           CODE_8581B8: JSR.W CODE_858B41                    ;8581B8;858B41;
@@ -827,462 +829,476 @@ InitializeOBJs: ;85820F
                                                             ;      ;      ;
                        db $01,$00,$04,$00,$10,$00,$40,$00,$00,$01,$00,$04,$00,$10,$00,$40;858627;      ;
                        db $FC,$FF,$F3,$FF,$CF,$FF,$3F,$FF,$FF,$FC,$FF,$F3,$FF,$CF,$FF,$3F;858637;      ;
-                                                            ;      ;      ;
- PresetsWRAMCopyofOAM: %Set16bit(!MX)                             ;858647;      ;
-                       LDA.W #$F0F0                         ;858649;      ;
-                       STA.L $7EA000                        ;85864C;7EA000;
-                       STA.L $7EA004                        ;858650;7EA004;
-                       STA.L $7EA008                        ;858654;7EA008;
-                       STA.L $7EA00C                        ;858658;7EA00C;
-                       STA.L $7EA010                        ;85865C;7EA010;
-                       STA.L $7EA014                        ;858660;7EA014;
-                       STA.L $7EA018                        ;858664;7EA018;
-                       STA.L $7EA01C                        ;858668;7EA01C;
-                       STA.L $7EA020                        ;85866C;7EA020;
-                       STA.L $7EA024                        ;858670;7EA024;
-                       STA.L $7EA028                        ;858674;7EA028;
-                       STA.L $7EA02C                        ;858678;7EA02C;
-                       STA.L $7EA030                        ;85867C;7EA030;
-                       STA.L $7EA034                        ;858680;7EA034;
-                       STA.L $7EA038                        ;858684;7EA038;
-                       STA.L $7EA03C                        ;858688;7EA03C;
-                       STA.L $7EA040                        ;85868C;7EA040;
-                       STA.L $7EA044                        ;858690;7EA044;
-                       STA.L $7EA048                        ;858694;7EA048;
-                       STA.L $7EA04C                        ;858698;7EA04C;
-                       STA.L $7EA050                        ;85869C;7EA050;
-                       STA.L $7EA054                        ;8586A0;7EA054;
-                       STA.L $7EA058                        ;8586A4;7EA058;
-                       STA.L $7EA05C                        ;8586A8;7EA05C;
-                       STA.L $7EA060                        ;8586AC;7EA060;
-                       STA.L $7EA064                        ;8586B0;7EA064;
-                       STA.L $7EA068                        ;8586B4;7EA068;
-                       STA.L $7EA06C                        ;8586B8;7EA06C;
-                       STA.L $7EA070                        ;8586BC;7EA070;
-                       STA.L $7EA074                        ;8586C0;7EA074;
-                       STA.L $7EA078                        ;8586C4;7EA078;
-                       STA.L $7EA07C                        ;8586C8;7EA07C;
-                       STA.L $7EA080                        ;8586CC;7EA080;
-                       STA.L $7EA084                        ;8586D0;7EA084;
-                       STA.L $7EA088                        ;8586D4;7EA088;
-                       STA.L $7EA08C                        ;8586D8;7EA08C;
-                       STA.L $7EA090                        ;8586DC;7EA090;
-                       STA.L $7EA094                        ;8586E0;7EA094;
-                       STA.L $7EA098                        ;8586E4;7EA098;
-                       STA.L $7EA09C                        ;8586E8;7EA09C;
-                       STA.L $7EA0A0                        ;8586EC;7EA0A0;
-                       STA.L $7EA0A4                        ;8586F0;7EA0A4;
-                       STA.L $7EA0A8                        ;8586F4;7EA0A8;
-                       STA.L $7EA0AC                        ;8586F8;7EA0AC;
-                       STA.L $7EA0B0                        ;8586FC;7EA0B0;
-                       STA.L $7EA0B4                        ;858700;7EA0B4;
-                       STA.L $7EA0B8                        ;858704;7EA0B8;
-                       STA.L $7EA0BC                        ;858708;7EA0BC;
-                       STA.L $7EA0C0                        ;85870C;7EA0C0;
-                       STA.L $7EA0C4                        ;858710;7EA0C4;
-                       STA.L $7EA0C8                        ;858714;7EA0C8;
-                       STA.L $7EA0CC                        ;858718;7EA0CC;
-                       STA.L $7EA0D0                        ;85871C;7EA0D0;
-                       STA.L $7EA0D4                        ;858720;7EA0D4;
-                       STA.L $7EA0D8                        ;858724;7EA0D8;
-                       STA.L $7EA0DC                        ;858728;7EA0DC;
-                       STA.L $7EA0E0                        ;85872C;7EA0E0;
-                       STA.L $7EA0E4                        ;858730;7EA0E4;
-                       STA.L $7EA0E8                        ;858734;7EA0E8;
-                       STA.L $7EA0EC                        ;858738;7EA0EC;
-                       STA.L $7EA0F0                        ;85873C;7EA0F0;
-                       STA.L $7EA0F4                        ;858740;7EA0F4;
-                       STA.L $7EA0F8                        ;858744;7EA0F8;
-                       STA.L $7EA0FC                        ;858748;7EA0FC;
-                       STA.L $7EA100                        ;85874C;7EA100;
-                       STA.L $7EA104                        ;858750;7EA104;
-                       STA.L $7EA108                        ;858754;7EA108;
-                       STA.L $7EA10C                        ;858758;7EA10C;
-                       STA.L $7EA110                        ;85875C;7EA110;
-                       STA.L $7EA114                        ;858760;7EA114;
-                       STA.L $7EA118                        ;858764;7EA118;
-                       STA.L $7EA11C                        ;858768;7EA11C;
-                       STA.L $7EA120                        ;85876C;7EA120;
-                       STA.L $7EA124                        ;858770;7EA124;
-                       STA.L $7EA128                        ;858774;7EA128;
-                       STA.L $7EA12C                        ;858778;7EA12C;
-                       STA.L $7EA130                        ;85877C;7EA130;
-                       STA.L $7EA134                        ;858780;7EA134;
-                       STA.L $7EA138                        ;858784;7EA138;
-                       STA.L $7EA13C                        ;858788;7EA13C;
-                       STA.L $7EA140                        ;85878C;7EA140;
-                       STA.L $7EA144                        ;858790;7EA144;
-                       STA.L $7EA148                        ;858794;7EA148;
-                       STA.L $7EA14C                        ;858798;7EA14C;
-                       STA.L $7EA150                        ;85879C;7EA150;
-                       STA.L $7EA154                        ;8587A0;7EA154;
-                       STA.L $7EA158                        ;8587A4;7EA158;
-                       STA.L $7EA15C                        ;8587A8;7EA15C;
-                       STA.L $7EA160                        ;8587AC;7EA160;
-                       STA.L $7EA164                        ;8587B0;7EA164;
-                       STA.L $7EA168                        ;8587B4;7EA168;
-                       STA.L $7EA16C                        ;8587B8;7EA16C;
-                       STA.L $7EA170                        ;8587BC;7EA170;
-                       STA.L $7EA174                        ;8587C0;7EA174;
-                       STA.L $7EA178                        ;8587C4;7EA178;
-                       STA.L $7EA17C                        ;8587C8;7EA17C;
-                       STA.L $7EA180                        ;8587CC;7EA180;
-                       STA.L $7EA184                        ;8587D0;7EA184;
-                       STA.L $7EA188                        ;8587D4;7EA188;
-                       STA.L $7EA18C                        ;8587D8;7EA18C;
-                       STA.L $7EA190                        ;8587DC;7EA190;
-                       STA.L $7EA194                        ;8587E0;7EA194;
-                       STA.L $7EA198                        ;8587E4;7EA198;
-                       STA.L $7EA19C                        ;8587E8;7EA19C;
-                       STA.L $7EA1A0                        ;8587EC;7EA1A0;
-                       STA.L $7EA1A4                        ;8587F0;7EA1A4;
-                       STA.L $7EA1A8                        ;8587F4;7EA1A8;
-                       STA.L $7EA1AC                        ;8587F8;7EA1AC;
-                       STA.L $7EA1B0                        ;8587FC;7EA1B0;
-                       STA.L $7EA1B4                        ;858800;7EA1B4;
-                       STA.L $7EA1B8                        ;858804;7EA1B8;
-                       STA.L $7EA1BC                        ;858808;7EA1BC;
-                       STA.L $7EA1C0                        ;85880C;7EA1C0;
-                       STA.L $7EA1C4                        ;858810;7EA1C4;
-                       STA.L $7EA1C8                        ;858814;7EA1C8;
-                       STA.L $7EA1CC                        ;858818;7EA1CC;
-                       STA.L $7EA1D0                        ;85881C;7EA1D0;
-                       STA.L $7EA1D4                        ;858820;7EA1D4;
-                       STA.L $7EA1D8                        ;858824;7EA1D8;
-                       STA.L $7EA1DC                        ;858828;7EA1DC;
-                       STA.L $7EA1E0                        ;85882C;7EA1E0;
-                       STA.L $7EA1E4                        ;858830;7EA1E4;
-                       STA.L $7EA1E8                        ;858834;7EA1E8;
-                       STA.L $7EA1EC                        ;858838;7EA1EC;
-                       STA.L $7EA1F0                        ;85883C;7EA1F0;
-                       STA.L $7EA1F4                        ;858840;7EA1F4;
-                       STA.L $7EA1F8                        ;858844;7EA1F8;
-                       STA.L $7EA1FC                        ;858848;7EA1FC;
-                       LDA.W #$0000                         ;85884C;      ;
-                       STA.L $7EA200                        ;85884F;7EA200;
-                       STA.L $7EA202                        ;858853;7EA202;
-                       STA.L $7EA204                        ;858857;7EA204;
-                       STA.L $7EA206                        ;85885B;7EA206;
-                       STA.L $7EA208                        ;85885F;7EA208;
-                       STA.L $7EA20A                        ;858863;7EA20A;
-                       STA.L $7EA20C                        ;858867;7EA20C;
-                       STA.L $7EA20E                        ;85886B;7EA20E;
-                       STA.L $7EA210                        ;85886F;7EA210;
-                       STA.L $7EA212                        ;858873;7EA212;
-                       STA.L $7EA214                        ;858877;7EA214;
-                       STA.L $7EA216                        ;85887B;7EA216;
-                       STA.L $7EA218                        ;85887F;7EA218;
-                       STA.L $7EA21A                        ;858883;7EA21A;
-                       STA.L $7EA21C                        ;858887;7EA21C;
-                       STA.L $7EA21E                        ;85888B;7EA21E;
-                       LDA.W #$0001                         ;85888F;      ;
-                       STA.W $00B7                          ;858892;0000B7;
-                       RTS                                  ;858895;      ;PresetsOAMCopySetsB7
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-PresetsWRAMCopyOAMCopy: %Set16bit(!MX)                             ;858896;      ;
-                       LDA.W #$F0F0                         ;858898;      ;
-                       STA.L $7EA000                        ;85889B;7EA000;
-                       STA.L $7EA004                        ;85889F;7EA004;
-                       STA.L $7EA008                        ;8588A3;7EA008;
-                       STA.L $7EA00C                        ;8588A7;7EA00C;
-                       STA.L $7EA010                        ;8588AB;7EA010;
-                       STA.L $7EA014                        ;8588AF;7EA014;
-                       STA.L $7EA018                        ;8588B3;7EA018;
-                       STA.L $7EA01C                        ;8588B7;7EA01C;
-                       STA.L $7EA020                        ;8588BB;7EA020;
-                       STA.L $7EA024                        ;8588BF;7EA024;
-                       STA.L $7EA028                        ;8588C3;7EA028;
-                       STA.L $7EA02C                        ;8588C7;7EA02C;
-                       STA.L $7EA030                        ;8588CB;7EA030;
-                       STA.L $7EA034                        ;8588CF;7EA034;
-                       STA.L $7EA038                        ;8588D3;7EA038;
-                       STA.L $7EA03C                        ;8588D7;7EA03C;
-                       STA.L $7EA040                        ;8588DB;7EA040;
-                       STA.L $7EA044                        ;8588DF;7EA044;
-                       STA.L $7EA048                        ;8588E3;7EA048;
-                       STA.L $7EA04C                        ;8588E7;7EA04C;
-                       STA.L $7EA050                        ;8588EB;7EA050;
-                       STA.L $7EA054                        ;8588EF;7EA054;
-                       STA.L $7EA058                        ;8588F3;7EA058;
-                       STA.L $7EA05C                        ;8588F7;7EA05C;
-                       STA.L $7EA060                        ;8588FB;7EA060;
-                       STA.L $7EA064                        ;8588FF;7EA064;
-                       STA.L $7EA068                        ;858903;7EA068;
-                       STA.L $7EA06C                        ;858907;7EA06C;
-                       STA.L $7EA070                        ;85890B;7EA070;
-                       STA.L $7EA074                        ;85890F;7EA074;
-                       STA.L $7EA078                        ;858913;7EA078;
-                       STA.L $7EA07C                        ;858917;7EA07C;
-                       STA.L $7EA080                        ;85891B;7EA080;
-                       STA.L $7EA084                        ;85891F;7EA084;
-                       STA.L $7EA088                        ;858923;7EA088;
-                       STA.L $7EA08C                        ;858927;7EA08C;
-                       STA.L $7EA090                        ;85892B;7EA090;
-                       STA.L $7EA094                        ;85892F;7EA094;
-                       STA.L $7EA098                        ;858933;7EA098;
-                       STA.L $7EA09C                        ;858937;7EA09C;
-                       STA.L $7EA0A0                        ;85893B;7EA0A0;
-                       STA.L $7EA0A4                        ;85893F;7EA0A4;
-                       STA.L $7EA0A8                        ;858943;7EA0A8;
-                       STA.L $7EA0AC                        ;858947;7EA0AC;
-                       STA.L $7EA0B0                        ;85894B;7EA0B0;
-                       STA.L $7EA0B4                        ;85894F;7EA0B4;
-                       STA.L $7EA0B8                        ;858953;7EA0B8;
-                       STA.L $7EA0BC                        ;858957;7EA0BC;
-                       STA.L $7EA0C0                        ;85895B;7EA0C0;
-                       STA.L $7EA0C4                        ;85895F;7EA0C4;
-                       STA.L $7EA0C8                        ;858963;7EA0C8;
-                       STA.L $7EA0CC                        ;858967;7EA0CC;
-                       STA.L $7EA0D0                        ;85896B;7EA0D0;
-                       STA.L $7EA0D4                        ;85896F;7EA0D4;
-                       STA.L $7EA0D8                        ;858973;7EA0D8;
-                       STA.L $7EA0DC                        ;858977;7EA0DC;
-                       STA.L $7EA0E0                        ;85897B;7EA0E0;
-                       STA.L $7EA0E4                        ;85897F;7EA0E4;
-                       STA.L $7EA0E8                        ;858983;7EA0E8;
-                       STA.L $7EA0EC                        ;858987;7EA0EC;
-                       STA.L $7EA0F0                        ;85898B;7EA0F0;
-                       STA.L $7EA0F4                        ;85898F;7EA0F4;
-                       STA.L $7EA0F8                        ;858993;7EA0F8;
-                       STA.L $7EA0FC                        ;858997;7EA0FC;
-                       STA.L $7EA100                        ;85899B;7EA100;
-                       STA.L $7EA104                        ;85899F;7EA104;
-                       STA.L $7EA108                        ;8589A3;7EA108;
-                       STA.L $7EA10C                        ;8589A7;7EA10C;
-                       STA.L $7EA110                        ;8589AB;7EA110;
-                       STA.L $7EA114                        ;8589AF;7EA114;
-                       STA.L $7EA118                        ;8589B3;7EA118;
-                       STA.L $7EA11C                        ;8589B7;7EA11C;
-                       STA.L $7EA120                        ;8589BB;7EA120;
-                       STA.L $7EA124                        ;8589BF;7EA124;
-                       STA.L $7EA128                        ;8589C3;7EA128;
-                       STA.L $7EA12C                        ;8589C7;7EA12C;
-                       STA.L $7EA130                        ;8589CB;7EA130;
-                       STA.L $7EA134                        ;8589CF;7EA134;
-                       STA.L $7EA138                        ;8589D3;7EA138;
-                       STA.L $7EA13C                        ;8589D7;7EA13C;
-                       STA.L $7EA140                        ;8589DB;7EA140;
-                       STA.L $7EA144                        ;8589DF;7EA144;
-                       STA.L $7EA148                        ;8589E3;7EA148;
-                       STA.L $7EA14C                        ;8589E7;7EA14C;
-                       STA.L $7EA150                        ;8589EB;7EA150;
-                       STA.L $7EA154                        ;8589EF;7EA154;
-                       STA.L $7EA158                        ;8589F3;7EA158;
-                       STA.L $7EA15C                        ;8589F7;7EA15C;
-                       STA.L $7EA160                        ;8589FB;7EA160;
-                       STA.L $7EA164                        ;8589FF;7EA164;
-                       STA.L $7EA168                        ;858A03;7EA168;
-                       STA.L $7EA16C                        ;858A07;7EA16C;
-                       STA.L $7EA170                        ;858A0B;7EA170;
-                       STA.L $7EA174                        ;858A0F;7EA174;
-                       STA.L $7EA178                        ;858A13;7EA178;
-                       STA.L $7EA17C                        ;858A17;7EA17C;
-                       STA.L $7EA180                        ;858A1B;7EA180;
-                       STA.L $7EA184                        ;858A1F;7EA184;
-                       STA.L $7EA188                        ;858A23;7EA188;
-                       STA.L $7EA18C                        ;858A27;7EA18C;
-                       STA.L $7EA190                        ;858A2B;7EA190;
-                       STA.L $7EA194                        ;858A2F;7EA194;
-                       STA.L $7EA198                        ;858A33;7EA198;
-                       STA.L $7EA19C                        ;858A37;7EA19C;
-                       STA.L $7EA1A0                        ;858A3B;7EA1A0;
-                       STA.L $7EA1A4                        ;858A3F;7EA1A4;
-                       STA.L $7EA1A8                        ;858A43;7EA1A8;
-                       STA.L $7EA1AC                        ;858A47;7EA1AC;
-                       STA.L $7EA1B0                        ;858A4B;7EA1B0;
-                       STA.L $7EA1B4                        ;858A4F;7EA1B4;
-                       STA.L $7EA1B8                        ;858A53;7EA1B8;
-                       STA.L $7EA1BC                        ;858A57;7EA1BC;
-                       STA.L $7EA1C0                        ;858A5B;7EA1C0;
-                       STA.L $7EA1C4                        ;858A5F;7EA1C4;
-                       STA.L $7EA1C8                        ;858A63;7EA1C8;
-                       STA.L $7EA1CC                        ;858A67;7EA1CC;
-                       STA.L $7EA1D0                        ;858A6B;7EA1D0;
-                       STA.L $7EA1D4                        ;858A6F;7EA1D4;
-                       STA.L $7EA1D8                        ;858A73;7EA1D8;
-                       STA.L $7EA1DC                        ;858A77;7EA1DC;
-                       STA.L $7EA1E0                        ;858A7B;7EA1E0;
-                       STA.L $7EA1E4                        ;858A7F;7EA1E4;
-                       STA.L $7EA1E8                        ;858A83;7EA1E8;
-                       STA.L $7EA1EC                        ;858A87;7EA1EC;
-                       STA.L $7EA1F0                        ;858A8B;7EA1F0;
-                       STA.L $7EA1F4                        ;858A8F;7EA1F4;
-                       STA.L $7EA1F8                        ;858A93;7EA1F8;
-                       STA.L $7EA1FC                        ;858A97;7EA1FC;
-                       LDA.W #$0000                         ;858A9B;      ;
-                       STA.L $7EA200                        ;858A9E;7EA200;
-                       STA.L $7EA202                        ;858AA2;7EA202;
-                       STA.L $7EA204                        ;858AA6;7EA204;
-                       STA.L $7EA206                        ;858AAA;7EA206;
-                       STA.L $7EA208                        ;858AAE;7EA208;
-                       STA.L $7EA20A                        ;858AB2;7EA20A;
-                       STA.L $7EA20C                        ;858AB6;7EA20C;
-                       STA.L $7EA20E                        ;858ABA;7EA20E;
-                       STA.L $7EA210                        ;858ABE;7EA210;
-                       STA.L $7EA212                        ;858AC2;7EA212;
-                       STA.L $7EA214                        ;858AC6;7EA214;
-                       STA.L $7EA216                        ;858ACA;7EA216;
-                       STA.L $7EA218                        ;858ACE;7EA218;
-                       STA.L $7EA21A                        ;858AD2;7EA21A;
-                       STA.L $7EA21C                        ;858AD6;7EA21C;
-                       STA.L $7EA21E                        ;858ADA;7EA21E;
-                       LDA.W #$0001                         ;858ADE;      ;
-                       STA.W $00B7                          ;858AE1;0000B7;
-                       RTS                                  ;858AE4;      ;PresetsOAMCopySetsB7Copy
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858AE5: %Set16bit(!MX)                             ;858AE5;      ;
-                       LDX.B $A9                            ;858AE7;0000A9;
-                       LDA.W $01AC,X                        ;858AE9;0001AC;
-                       STA.B $78                            ;858AEC;000078;
-                       LDY.W #$0000                         ;858AEE;      ;
-                       %Set8bit(!M)                             ;858AF1;      ;
-                       LDA.B [$78],Y                        ;858AF3;000078;
-                       STA.B $AD                            ;858AF5;0000AD;
-                       STA.W $01AF,X                        ;858AF7;0001AF;
-                       STZ.B $AE                            ;858AFA;0000AE;
-                       %Set16bit(!M)                             ;858AFC;      ;
-                       INY                                  ;858AFE;      ;
-                       TXA                                  ;858AFF;      ;
-                       CLC                                  ;858B00;      ;
-                       ADC.W #$019C                         ;858B01;      ;
-                       CLC                                  ;858B04;      ;
-                       ADC.W #$0014                         ;858B05;      ;
-                       STA.B $AF                            ;858B08;0000AF;
-                                                            ;      ;      ;
-          CODE_858B0A: LDA.B $AD                            ;858B0A;0000AD;
-                       BNE CODE_858B10                      ;858B0C;858B10;
-                       BRA CODE_858B3C                      ;858B0E;858B3C;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858B10: LDA.B [$78],Y                        ;858B10;000078;
-                       STA.B $B3                            ;858B12;0000B3;
-                       LDA.B $AF                            ;858B14;0000AF;
-                       STA.B $B5                            ;858B16;0000B5;
-                       %Set16bit(!MX)                             ;858B18;      ;
-                       PHX                                  ;858B1A;      ;
-                       PHY                                  ;858B1B;      ;
-                       JSR.W CODE_858C30                    ;858B1C;858C30;
-                       %Set16bit(!MX)                             ;858B1F;      ;
-                       PLY                                  ;858B21;      ;
-                       PLX                                  ;858B22;      ;
-                       LDA.B $B3                            ;858B23;0000B3;
-                       AND.W #$00FF                         ;858B25;      ;
-                       %Set8bit(!M)                             ;858B28;      ;
-                       STA.W $01B0,X                        ;858B2A;0001B0;
-                       %Set16bit(!M)                             ;858B2D;      ;
-                       INX                                  ;858B2F;      ;
-                       INC.B $AF                            ;858B30;0000AF;
-                       TYA                                  ;858B32;      ;
-                       CLC                                  ;858B33;      ;
-                       ADC.W #$0005                         ;858B34;      ;
-                       TAY                                  ;858B37;      ;
-                       DEC.B $AD                            ;858B38;0000AD;
-                       BRA CODE_858B0A                      ;858B3A;858B0A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858B3C: %Set16bit(!MX)                             ;858B3C;      ;
-                       LDX.B $A9                            ;858B3E;0000A9;
-                       RTS                                  ;858B40;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858B41: %Set16bit(!MX)                             ;858B41;      ;
-                       LDX.B $A9                            ;858B43;0000A9;
-                       %Set8bit(!M)                             ;858B45;      ;
-                       LDA.B #$00                           ;858B47;      ;
-                       XBA                                  ;858B49;      ;
-                       LDA.W $01AF,X                        ;858B4A;0001AF;
-                       %Set16bit(!M)                             ;858B4D;      ;
-                       TAY                                  ;858B4F;      ;
-                       %Set8bit(!M)                             ;858B50;      ;
-                                                            ;      ;      ;
-          CODE_858B52: CPY.W #$0000                         ;858B52;      ;
-                       BEQ CODE_858B76                      ;858B55;858B76;
-                       LDA.W $01B0,X                        ;858B57;0001B0;
-                       CMP.B #$FF                           ;858B5A;      ;
-                       BEQ CODE_858B72                      ;858B5C;858B72;
-                       STA.B $B3                            ;858B5E;0000B3;
-                       STZ.B $B4                            ;858B60;0000B4;
-                       LDA.B #$FF                           ;858B62;      ;
-                       STA.W $01B0,X                        ;858B64;0001B0;
-                       PHY                                  ;858B67;      ;
-                       PHX                                  ;858B68;      ;
-                       JSR.W CODE_858C9F                    ;858B69;858C9F;
-                       %Set8bit(!M)                             ;858B6C;      ;
-                       %Set16bit(!X)                             ;858B6E;      ;
-                       PLX                                  ;858B70;      ;
-                       PLY                                  ;858B71;      ;
-                                                            ;      ;      ;
-          CODE_858B72: INX                                  ;858B72;      ;
-                       DEY                                  ;858B73;      ;
-                       BRA CODE_858B52                      ;858B74;858B52;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858B76: %Set16bit(!MX)                             ;858B76;      ;
-                       LDX.B $A9                            ;858B78;0000A9;
-                       RTS                                  ;858B7A;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858B7B: %Set16bit(!X)                             ;858B7B;      ;
-                       LDX.B $A9                            ;858B7D;0000A9;
-                       %Set8bit(!M)                             ;858B7F;      ;
-                       LDA.B #$00                           ;858B81;      ;
-                       XBA                                  ;858B83;      ;
-                       LDA.W $01AF,X                        ;858B84;0001AF;
-                       %Set16bit(!M)                             ;858B87;      ;
-                       TAY                                  ;858B89;      ;
-                       %Set8bit(!M)                             ;858B8A;      ;
-                                                            ;      ;      ;
-          CODE_858B8C: CPY.W #$0000                         ;858B8C;      ;
-                       BEQ CODE_858BA8                      ;858B8F;858BA8;
-                       LDA.W $01B0,X                        ;858B91;0001B0;
-                       CMP.B #$FF                           ;858B94;      ;
-                       BEQ CODE_858B9C                      ;858B96;858B9C;
-                       INX                                  ;858B98;      ;
-                       DEY                                  ;858B99;      ;
-                       BRA CODE_858B8C                      ;858B9A;858B8C;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858B9C: %Set16bit(!MX)                             ;858B9C;      ;
-                       INC.W $0740                          ;858B9E;000740;
-                       LDA.W #$FFFF                         ;858BA1;      ;
-                       STA.B $AF                            ;858BA4;0000AF;
-                       BRA CODE_858BAF                      ;858BA6;858BAF;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858BA8: %Set16bit(!MX)                             ;858BA8;      ;
-                       LDA.W #$0000                         ;858BAA;      ;
-                       STA.B $AF                            ;858BAD;0000AF;
-                                                            ;      ;      ;
-          CODE_858BAF: RTS                                  ;858BAF;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858BB0: %Set16bit(!MX)                             ;858BB0;      ;
-                       PHA                                  ;858BB2;      ;
-                       LDA.B $9F                            ;858BB3;00009F;
-                       AND.W #$0040                         ;858BB5;      ;
-                       BEQ CODE_858BCE                      ;858BB8;858BCE;
-                       BRA CODE_858BC4                      ;858BBA;858BC4;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858BBC: PHA                                  ;858BBC;      ;
-                       LDA.B $9F                            ;858BBD;00009F;
-                       AND.W #$0080                         ;858BBF;      ;
-                       BEQ CODE_858BCE                      ;858BC2;858BCE;
-                                                            ;      ;      ;
-          CODE_858BC4: PLA                                  ;858BC4;      ;
-                       EOR.W #$FFFF                         ;858BC5;      ;
-                       INC A                                ;858BC8;      ;
-                       CLC                                  ;858BC9;      ;
-                       ADC.W #$FFF0                         ;858BCA;      ;
-                       RTS                                  ;858BCD;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858BCE: PLA                                  ;858BCE;      ;
-                       RTS                                  ;858BCF;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
+
+;;;;;;;; Loops, ever heard of them?
+PresetsWRAMCopyofOAM:
+        %Set16bit(!MX)
+        LDA.W #$F0F0
+        STA.L $7EA000
+        STA.L $7EA004
+        STA.L $7EA008
+        STA.L $7EA00C
+        STA.L $7EA010
+        STA.L $7EA014
+        STA.L $7EA018
+        STA.L $7EA01C
+        STA.L $7EA020
+        STA.L $7EA024
+        STA.L $7EA028
+        STA.L $7EA02C
+        STA.L $7EA030
+        STA.L $7EA034
+        STA.L $7EA038
+        STA.L $7EA03C
+        STA.L $7EA040
+        STA.L $7EA044
+        STA.L $7EA048
+        STA.L $7EA04C
+        STA.L $7EA050
+        STA.L $7EA054
+        STA.L $7EA058
+        STA.L $7EA05C
+        STA.L $7EA060
+        STA.L $7EA064
+        STA.L $7EA068
+        STA.L $7EA06C
+        STA.L $7EA070
+        STA.L $7EA074
+        STA.L $7EA078
+        STA.L $7EA07C
+        STA.L $7EA080
+        STA.L $7EA084
+        STA.L $7EA088
+        STA.L $7EA08C
+        STA.L $7EA090
+        STA.L $7EA094
+        STA.L $7EA098
+        STA.L $7EA09C
+        STA.L $7EA0A0
+        STA.L $7EA0A4
+        STA.L $7EA0A8
+        STA.L $7EA0AC
+        STA.L $7EA0B0
+        STA.L $7EA0B4
+        STA.L $7EA0B8
+        STA.L $7EA0BC
+        STA.L $7EA0C0
+        STA.L $7EA0C4
+        STA.L $7EA0C8
+        STA.L $7EA0CC
+        STA.L $7EA0D0
+        STA.L $7EA0D4
+        STA.L $7EA0D8
+        STA.L $7EA0DC
+        STA.L $7EA0E0
+        STA.L $7EA0E4
+        STA.L $7EA0E8
+        STA.L $7EA0EC
+        STA.L $7EA0F0
+        STA.L $7EA0F4
+        STA.L $7EA0F8
+        STA.L $7EA0FC
+        STA.L $7EA100
+        STA.L $7EA104
+        STA.L $7EA108
+        STA.L $7EA10C
+        STA.L $7EA110
+        STA.L $7EA114
+        STA.L $7EA118
+        STA.L $7EA11C
+        STA.L $7EA120
+        STA.L $7EA124
+        STA.L $7EA128
+        STA.L $7EA12C
+        STA.L $7EA130
+        STA.L $7EA134
+        STA.L $7EA138
+        STA.L $7EA13C
+        STA.L $7EA140
+        STA.L $7EA144
+        STA.L $7EA148
+        STA.L $7EA14C
+        STA.L $7EA150
+        STA.L $7EA154
+        STA.L $7EA158
+        STA.L $7EA15C
+        STA.L $7EA160
+        STA.L $7EA164
+        STA.L $7EA168
+        STA.L $7EA16C
+        STA.L $7EA170
+        STA.L $7EA174
+        STA.L $7EA178
+        STA.L $7EA17C
+        STA.L $7EA180
+        STA.L $7EA184
+        STA.L $7EA188
+        STA.L $7EA18C
+        STA.L $7EA190
+        STA.L $7EA194
+        STA.L $7EA198
+        STA.L $7EA19C
+        STA.L $7EA1A0
+        STA.L $7EA1A4
+        STA.L $7EA1A8
+        STA.L $7EA1AC
+        STA.L $7EA1B0
+        STA.L $7EA1B4
+        STA.L $7EA1B8
+        STA.L $7EA1BC
+        STA.L $7EA1C0
+        STA.L $7EA1C4
+        STA.L $7EA1C8
+        STA.L $7EA1CC
+        STA.L $7EA1D0
+        STA.L $7EA1D4
+        STA.L $7EA1D8
+        STA.L $7EA1DC
+        STA.L $7EA1E0
+        STA.L $7EA1E4
+        STA.L $7EA1E8
+        STA.L $7EA1EC
+        STA.L $7EA1F0
+        STA.L $7EA1F4
+        STA.L $7EA1F8
+        STA.L $7EA1FC
+        LDA.W #$0000
+        STA.L $7EA200
+        STA.L $7EA202
+        STA.L $7EA204
+        STA.L $7EA206
+        STA.L $7EA208
+        STA.L $7EA20A
+        STA.L $7EA20C
+        STA.L $7EA20E
+        STA.L $7EA210
+        STA.L $7EA212
+        STA.L $7EA214
+        STA.L $7EA216
+        STA.L $7EA218
+        STA.L $7EA21A
+        STA.L $7EA21C
+        STA.L $7EA21E
+        LDA.W #$0001
+        STA.W $00B7
+
+        RTS
+
+;;;;;;;; Did a diff, this is EXACTLY the same function that the one above
+PresetsWRAMCopyOAMCopy:
+        %Set16bit(!MX)
+        LDA.W #$F0F0
+        STA.L $7EA000
+        STA.L $7EA004
+        STA.L $7EA008
+        STA.L $7EA00C
+        STA.L $7EA010
+        STA.L $7EA014
+        STA.L $7EA018
+        STA.L $7EA01C
+        STA.L $7EA020
+        STA.L $7EA024
+        STA.L $7EA028
+        STA.L $7EA02C
+        STA.L $7EA030
+        STA.L $7EA034
+        STA.L $7EA038
+        STA.L $7EA03C
+        STA.L $7EA040
+        STA.L $7EA044
+        STA.L $7EA048
+        STA.L $7EA04C
+        STA.L $7EA050
+        STA.L $7EA054
+        STA.L $7EA058
+        STA.L $7EA05C
+        STA.L $7EA060
+        STA.L $7EA064
+        STA.L $7EA068
+        STA.L $7EA06C
+        STA.L $7EA070
+        STA.L $7EA074
+        STA.L $7EA078
+        STA.L $7EA07C
+        STA.L $7EA080
+        STA.L $7EA084
+        STA.L $7EA088
+        STA.L $7EA08C
+        STA.L $7EA090
+        STA.L $7EA094
+        STA.L $7EA098
+        STA.L $7EA09C
+        STA.L $7EA0A0
+        STA.L $7EA0A4
+        STA.L $7EA0A8
+        STA.L $7EA0AC
+        STA.L $7EA0B0
+        STA.L $7EA0B4
+        STA.L $7EA0B8
+        STA.L $7EA0BC
+        STA.L $7EA0C0
+        STA.L $7EA0C4
+        STA.L $7EA0C8
+        STA.L $7EA0CC
+        STA.L $7EA0D0
+        STA.L $7EA0D4
+        STA.L $7EA0D8
+        STA.L $7EA0DC
+        STA.L $7EA0E0
+        STA.L $7EA0E4
+        STA.L $7EA0E8
+        STA.L $7EA0EC
+        STA.L $7EA0F0
+        STA.L $7EA0F4
+        STA.L $7EA0F8
+        STA.L $7EA0FC
+        STA.L $7EA100
+        STA.L $7EA104
+        STA.L $7EA108
+        STA.L $7EA10C
+        STA.L $7EA110
+        STA.L $7EA114
+        STA.L $7EA118
+        STA.L $7EA11C
+        STA.L $7EA120
+        STA.L $7EA124
+        STA.L $7EA128
+        STA.L $7EA12C
+        STA.L $7EA130
+        STA.L $7EA134
+        STA.L $7EA138
+        STA.L $7EA13C
+        STA.L $7EA140
+        STA.L $7EA144
+        STA.L $7EA148
+        STA.L $7EA14C
+        STA.L $7EA150
+        STA.L $7EA154
+        STA.L $7EA158
+        STA.L $7EA15C
+        STA.L $7EA160
+        STA.L $7EA164
+        STA.L $7EA168
+        STA.L $7EA16C
+        STA.L $7EA170
+        STA.L $7EA174
+        STA.L $7EA178
+        STA.L $7EA17C
+        STA.L $7EA180
+        STA.L $7EA184
+        STA.L $7EA188
+        STA.L $7EA18C
+        STA.L $7EA190
+        STA.L $7EA194
+        STA.L $7EA198
+        STA.L $7EA19C
+        STA.L $7EA1A0
+        STA.L $7EA1A4
+        STA.L $7EA1A8
+        STA.L $7EA1AC
+        STA.L $7EA1B0
+        STA.L $7EA1B4
+        STA.L $7EA1B8
+        STA.L $7EA1BC
+        STA.L $7EA1C0
+        STA.L $7EA1C4
+        STA.L $7EA1C8
+        STA.L $7EA1CC
+        STA.L $7EA1D0
+        STA.L $7EA1D4
+        STA.L $7EA1D8
+        STA.L $7EA1DC
+        STA.L $7EA1E0
+        STA.L $7EA1E4
+        STA.L $7EA1E8
+        STA.L $7EA1EC
+        STA.L $7EA1F0
+        STA.L $7EA1F4
+        STA.L $7EA1F8
+        STA.L $7EA1FC
+        LDA.W #$0000
+        STA.L $7EA200
+        STA.L $7EA202
+        STA.L $7EA204
+        STA.L $7EA206
+        STA.L $7EA208
+        STA.L $7EA20A
+        STA.L $7EA20C
+        STA.L $7EA20E
+        STA.L $7EA210
+        STA.L $7EA212
+        STA.L $7EA214
+        STA.L $7EA216
+        STA.L $7EA218
+        STA.L $7EA21A
+        STA.L $7EA21C
+        STA.L $7EA21E
+        LDA.W #$0001
+        STA.W $00B7
+        RTS
+
+;;;;;;;;
+        CODE_858AE5:
+        %Set16bit(!MX)
+        LDX.B $A9
+        LDA.W $01AC,X
+        STA.B $78
+        LDY.W #$0000
+        %Set8bit(!M)
+        LDA.B [$78],Y
+        STA.B $AD
+        STA.W $01AF,X
+        STZ.B $AE
+        %Set16bit(!M)
+        INY
+        TXA
+        CLC
+        ADC.W #$019C
+        CLC
+        ADC.W #$0014
+        STA.B $AF
+
+    .loop:
+        LDA.B $AD
+        BNE .continue
+        BRA .exitloop
+
+    .continue:
+        LDA.B [$78],Y
+        STA.B $B3
+        LDA.B $AF
+        STA.B $B5
+        %Set16bit(!MX)
+        PHX
+        PHY
+        JSR.W CODE_858C30
+        %Set16bit(!MX)
+        PLY
+        PLX
+        LDA.B $B3
+        AND.W #$00FF
+        %Set8bit(!M)
+        STA.W $01B0,X
+        %Set16bit(!M)
+        INX
+        INC.B $AF
+        TYA
+        CLC
+        ADC.W #$0005
+        TAY
+        DEC.B $AD
+        BRA .loop
+
+    .exitloop:
+        %Set16bit(!MX)
+        LDX.B $A9
+
+        RTS
+
+;;;;;;;;
+    CODE_858B41:
+        %Set16bit(!MX)
+        LDX.B $A9
+        %Set8bit(!M)
+        LDA.B #$00
+        XBA
+        LDA.W $01AF,X
+        %Set16bit(!M)
+        TAY
+        %Set8bit(!M)
+
+    .loop:
+        CPY.W #$0000
+        BEQ .escapeloop
+        LDA.W $01B0,X
+        CMP.B #$FF
+        BEQ .next
+        STA.B $B3
+        STZ.B $B4
+        LDA.B #$FF
+        STA.W $01B0,X
+        PHY
+        PHX
+        JSR.W CODE_858C9F
+        %Set8bit(!M)
+        %Set16bit(!X)
+        PLX
+        PLY
+
+    .next:
+        INX
+        DEY
+        BRA .loop
+
+    .escapeloop:
+        %Set16bit(!MX)
+        LDX.B $A9
+
+        RTS
+
+CODE_858B7B:
+        %Set16bit(!X)
+        LDX.B $A9
+        %Set8bit(!M)
+        LDA.B #$00
+        XBA
+        LDA.W $01AF,X
+        %Set16bit(!M)
+        TAY
+        %Set8bit(!M)
+
+    .loop:
+        CPY.W #$0000
+        BEQ .skip1
+        LDA.W $01B0,X
+        CMP.B #$FF
+        BEQ .skip2
+        INX
+        DEY
+        BRA .loop
+
+    .skip2:
+        %Set16bit(!MX)
+        INC.W $0740
+        LDA.W #$FFFF
+        STA.B $AF
+        BRA .return
+
+    .skip1:
+        %Set16bit(!MX)
+        LDA.W #$0000
+        STA.B $AF
+
+    .return: RTS
+
+;;;;;;;;
+CODE_858BB0:
+        %Set16bit(!MX)
+        PHA
+        LDA.B $9F
+        AND.W #$0040
+        BEQ CODE_858BCE
+        BRA CODE_858BC4
+
+;;;;;;;;
+CODE_858BBC:
+        PHA
+        LDA.B $9F
+        AND.W #$0080
+        BEQ CODE_858BCE
+
+CODE_858BC4:
+        PLA
+        EOR.W #$FFFF
+        INC A
+        CLC
+        ADC.W #$FFF0
+        RTS
+
+CODE_858BCE:
+        PLA
+        RTS
+
          DATA8_858BD0: db $01,$00,$04,$00,$10,$00,$40,$00,$00,$01,$00,$04,$00,$10,$00,$40;858BD0;      ;
                                                             ;      ;      ;
           UNK_Table14: db $00,$00,$24,$00,$48,$00,$6C,$00,$90,$00,$B4,$00,$D8,$00,$FC,$00;858BE0;      ;
@@ -1290,343 +1306,364 @@ PresetsWRAMCopyOAMCopy: %Set16bit(!MX)                             ;858896;     
                        db $40,$02,$64,$02,$88,$02,$AC,$02,$D0,$02,$F4,$02,$18,$03,$3C,$03;858C00;      ;
                        db $60,$03,$84,$03,$A8,$03,$CC,$03,$F0,$03,$14,$04,$38,$04,$5C,$04;858C10;      ;
                        db $80,$04,$A4,$04,$C8,$04,$EC,$04,$40,$05,$34,$05,$58,$05,$7C,$05;858C20;      ;
-                                                            ;      ;      ;
-          CODE_858C30: %Set16bit(!MX)                             ;858C30;      ;
-                       %Set8bit(!M)                             ;858C32;      ;
-                       LDX.B $B3                            ;858C34;0000B3;
-                       LDA.B #$00                           ;858C36;      ;
-                       XBA                                  ;858C38;      ;
-                       LDA.L $7F0F00,X                      ;858C39;7F0F00;
-                       %Set16bit(!M)                             ;858C3D;      ;
-                       TAY                                  ;858C3F;      ;
-                       ASL A                                ;858C40;      ;
-                       ASL A                                ;858C41;      ;
-                       TAX                                  ;858C42;      ;
-                       CPY.W #$00FF                         ;858C43;      ;
-                       BNE CODE_858C72                      ;858C46;858C72;
-                       %Set16bit(!M)                             ;858C48;      ;
-                       LDA.B $BD                            ;858C4A;0000BD;
-                       TAX                                  ;858C4C;      ;
-                       CLC                                  ;858C4D;      ;
-                       ADC.W #$0004                         ;858C4E;      ;
-                       CMP.W #$0100                         ;858C51;      ;
-                       BNE CODE_858C59                      ;858C54;858C59;
-                       LDA.W #$0000                         ;858C56;      ;
-                                                            ;      ;      ;
-          CODE_858C59: CMP.B $BB                            ;858C59;0000BB;
-                       BEQ CODE_858C59                      ;858C5B;858C59;
-                       STA.B $BD                            ;858C5D;0000BD;
-                       LDA.B $B3                            ;858C5F;0000B3;
-                       STA.L $7EA220,X                      ;858C61;7EA220;
-                       LDA.B $B5                            ;858C65;0000B5;
-                       STA.L $7EA222,X                      ;858C67;7EA222;
-                       LDA.W #$FFFF                         ;858C6B;      ;
-                       STA.B $B3                            ;858C6E;0000B3;
-                       BRA CODE_858C7E                      ;858C70;858C7E;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858C72: LDA.L $7EA320,X                      ;858C72;7EA320;
-                       INC A                                ;858C76;      ;
-                       STA.L $7EA320,X                      ;858C77;7EA320;
-                       TYA                                  ;858C7B;      ;
-                       STA.B $B3                            ;858C7C;0000B3;
-                                                            ;      ;      ;
-          CODE_858C7E: RTS                                  ;858C7E;      ;
-                                                            ;      ;      ;
-                       dw $0001,$0002,$0004,$0008,$0010,$0020,$0040,$0080;858C7F;      ;
-                       dw $0100,$0200,$0400,$0800,$1000,$2000,$4000,$8000;858C8F;      ;
-                                                            ;      ;      ;
-          CODE_858C9F: %Set16bit(!MX)                             ;858C9F;      ;
-                       LDA.B $B3                            ;858CA1;0000B3;
-                       ASL A                                ;858CA3;      ;
-                       ASL A                                ;858CA4;      ;
-                       TAX                                  ;858CA5;      ;
-                                                            ;      ;      ;
-          CODE_858CA6: LDA.L $7EA320,X                      ;858CA6;7EA320;
-                       BEQ CODE_858CA6                      ;858CAA;858CA6;
-                       DEC A                                ;858CAC;      ;
-                       STA.L $7EA320,X                      ;858CAD;7EA320;
-                       RTS                                  ;858CB1;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858CB2: %Set8bit(!M)                             ;858CB2;      ;
-                       LDA.B #$80                           ;858CB4;      ;
-                       STA.B $7A                            ;858CB6;00007A;
-                       %Set16bit(!MX)                             ;858CB8;      ;
-                       STZ.B $BF                            ;858CBA;0000BF;
-                                                            ;      ;      ;
-          CODE_858CBC: LDA.B $BD                            ;858CBC;0000BD;
-                       CMP.B $BB                            ;858CBE;0000BB;
-                       BNE CODE_858CC5                      ;858CC0;858CC5;
-                       JMP.W CODE_858E28                    ;858CC2;858E28;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858CC5: LDA.B $C7                            ;858CC5;0000C7;
-                       CMP.W #$0100                         ;858CC7;      ;
-                       BCS CODE_858CCF                      ;858CCA;858CCF;
-                       JMP.W CODE_858E28                    ;858CCC;858E28;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858CCF: LDX.B $BB                            ;858CCF;0000BB;
-                       LDA.L $7EA220,X                      ;858CD1;7EA220;
-                       STA.B $C1                            ;858CD5;0000C1;
-                       LDA.L $7EA222,X                      ;858CD7;7EA222;
-                       STA.B $78                            ;858CDB;000078;
-                       LDA.B $C7                            ;858CDD;0000C7;
-                       SEC                                  ;858CDF;      ;
-                       SBC.W #$0100                         ;858CE0;      ;
-                       STA.B $C7                            ;858CE3;0000C7;
-                       LDA.B $BB                            ;858CE5;0000BB;
-                       CLC                                  ;858CE7;      ;
-                       ADC.W #$0004                         ;858CE8;      ;
-                       CMP.W #$0100                         ;858CEB;      ;
-                       BNE CODE_858CF3                      ;858CEE;858CF3;
-                       LDA.W #$0000                         ;858CF0;      ;
-                                                            ;      ;      ;
-          CODE_858CF3: STA.B $BB                            ;858CF3;0000BB;
-                       LDA.W $0848                          ;858CF5;000848;
-                       AND.W #$003F                         ;858CF8;      ;
-                       INC A                                ;858CFB;      ;
-                       STA.W $0848                          ;858CFC;000848;
-                       LDA.W $0846                          ;858CFF;000846;
-                       CMP.W #$0040                         ;858D02;      ;
-                       BEQ CODE_858D12                      ;858D05;858D12;
-                       STA.B $C5                            ;858D07;0000C5;
-                       ASL A                                ;858D09;      ;
-                       ASL A                                ;858D0A;      ;
-                       STA.B $C3                            ;858D0B;0000C3;
-                       INC.W $0846                          ;858D0D;000846;
-                       BRA CODE_858D38                      ;858D10;858D38;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858D12: LDY.W #$0000                         ;858D12;      ;
-                       LDA.W $0848                          ;858D15;000848;
-                       ASL A                                ;858D18;      ;
-                       ASL A                                ;858D19;      ;
-                                                            ;      ;      ;
-          CODE_858D1A: TAX                                  ;858D1A;      ;
-                       LDA.L $7EA320,X                      ;858D1B;7EA320;
-                       BEQ CODE_858D31                      ;858D1F;858D31;
-                       TXA                                  ;858D21;      ;
-                       CLC                                  ;858D22;      ;
-                       ADC.W #$0004                         ;858D23;      ;
-                       AND.W #$00FF                         ;858D26;      ;
-                       INY                                  ;858D29;      ;
-                       CPY.W #$0040                         ;858D2A;      ;
-                       BNE CODE_858D1A                      ;858D2D;858D1A;
-                                                            ;      ;      ;
-          CODE_858D2F: BRA CODE_858D2F                      ;858D2F;858D2F;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858D31: STX.B $C3                            ;858D31;0000C3;
-                       TXA                                  ;858D33;      ;
-                       LSR A                                ;858D34;      ;
-                       LSR A                                ;858D35;      ;
-                       STA.B $C5                            ;858D36;0000C5;
-                                                            ;      ;      ;
-          CODE_858D38: LDA.B $C3                            ;858D38;0000C3;
-                       BMI CODE_858D38                      ;858D3A;858D38;
-                       LDA.B $C5                            ;858D3C;0000C5;
-                       %Set8bit(!M)                             ;858D3E;      ;
-                       STA.B [$78]                          ;858D40;000078;
-                       STA.B $75                            ;858D42;000075;
-                       STZ.B $76                            ;858D44;000076;
-                       %Set16bit(!M)                             ;858D46;      ;
-                       LDX.B $C3                            ;858D48;0000C3;
-                       LDA.W #$0001                         ;858D4A;      ;
-                       STA.L $7EA320,X                      ;858D4D;7EA320;
-                       LDA.L $7EA322,X                      ;858D51;7EA322;
-                       CMP.W #$FFFF                         ;858D55;      ;
-                       BEQ CODE_858D65                      ;858D58;858D65;
-                       PHX                                  ;858D5A;      ;
-                       TAX                                  ;858D5B;      ;
-                       %Set8bit(!M)                             ;858D5C;      ;
-                       LDA.B #$FF                           ;858D5E;      ;
-                       STA.L $7F0F00,X                      ;858D60;7F0F00;
-                       PLX                                  ;858D64;      ;
-                                                            ;      ;      ;
-          CODE_858D65: %Set16bit(!M)                             ;858D65;      ;
-                       LDA.B $C1                            ;858D67;0000C1;
-                       STA.L $7EA322,X                      ;858D69;7EA322;
-                       LDA.B $C3                            ;858D6D;0000C3;
-                       LSR A                                ;858D6F;      ;
-                       LSR A                                ;858D70;      ;
-                       %Set8bit(!M)                             ;858D71;      ;
-                       LDX.B $C1                            ;858D73;0000C1;
-                       STA.L $7F0F00,X                      ;858D75;7F0F00;
-                       %Set16bit(!M)                             ;858D79;      ;
-                       LDA.B $C1                            ;858D7B;0000C1;
-                       AND.W #$FFC0                         ;858D7D;      ;
-                       STA.B $7E                            ;858D80;00007E;
-                       LSR A                                ;858D82;      ;
-                       LSR A                                ;858D83;      ;
-                       LSR A                                ;858D84;      ;
-                       LSR A                                ;858D85;      ;
-                       LSR A                                ;858D86;      ;
-                       LSR A                                ;858D87;      ;
-                       STA.B $C3                            ;858D88;0000C3;
-                       LDA.B $C1                            ;858D8A;0000C1;
-                       SEC                                  ;858D8C;      ;
-                       SBC.B $7E                            ;858D8D;00007E;
-                       STA.B $C1                            ;858D8F;0000C1;
-                       LDA.B $C3                            ;858D91;0000C3;
-                       LSR A                                ;858D93;      ;
-                       LSR A                                ;858D94;      ;
-                       STA.B $7E                            ;858D95;00007E;
-                       CLC                                  ;858D97;      ;
-                       ADC.W #$0088                         ;858D98;      ;
-                       STA.B $C5                            ;858D9B;0000C5;
-                       LDA.B $7E                            ;858D9D;00007E;
-                       ASL A                                ;858D9F;      ;
-                       ASL A                                ;858DA0;      ;
-                       STA.B $7E                            ;858DA1;00007E;
-                       LDA.B $C3                            ;858DA3;0000C3;
-                       SEC                                  ;858DA5;      ;
-                       SBC.B $7E                            ;858DA6;00007E;
-                       STA.B $C3                            ;858DA8;0000C3;
-                       LDA.B $C3                            ;858DAA;0000C3;
-                       ASL A                                ;858DAC;      ;
-                       TAX                                  ;858DAD;      ;
-                       LDA.L Table_of_Multof2000,X          ;858DAE;858E47;
-                       STA.B $C3                            ;858DB2;0000C3;
-                       LDA.B $C1                            ;858DB4;0000C1;
-                       ASL A                                ;858DB6;      ;
-                       TAX                                  ;858DB7;      ;
-                       LDA.L DATA8_868000,X                 ;858DB8;868000;
-                       %Set8bit(!M)                             ;858DBC;      ;
-                       STA.W !WRMPYA                          ;858DBE;004202;
-                       LDA.B #$20                           ;858DC1;      ;
-                       STA.W !WRMPYB                          ;858DC3;004203;
-                       %Set16bit(!M)                             ;858DC6;      ;
-                       NOP                                  ;858DC8;      ;
-                       NOP                                  ;858DC9;      ;
-                       NOP                                  ;858DCA;      ;
-                       NOP                                  ;858DCB;      ;
-                       NOP                                  ;858DCC;      ;
-                       NOP                                  ;858DCD;      ;
-                       NOP                                  ;858DCE;      ;
-                       LDA.W !RDMPYL                          ;858DCF;004216;
-                       STA.B $C1                            ;858DD2;0000C1;
-                       CLC                                  ;858DD4;      ;
-                       ADC.B $C3                            ;858DD5;0000C3;
-                       CLC                                  ;858DD7;      ;
-                       ADC.W #$8000                         ;858DD8;      ;
-                       STA.B $C3                            ;858DDB;0000C3;
-                       LDA.B $75                            ;858DDD;000075;
-                       ASL A                                ;858DDF;      ;
-                       TAX                                  ;858DE0;      ;
-                       LDA.L DATA8_868000,X                 ;858DE1;868000;
-                       %Set8bit(!M)                             ;858DE5;      ;
-                       STA.W !WRMPYA                          ;858DE7;004202;
-                       LDA.B #$10                           ;858DEA;      ;
-                       STA.W !WRMPYB                          ;858DEC;004203;
-                       %Set16bit(!M)                             ;858DEF;      ;
-                       NOP                                  ;858DF1;      ;
-                       NOP                                  ;858DF2;      ;
-                       NOP                                  ;858DF3;      ;
-                       NOP                                  ;858DF4;      ;
-                       NOP                                  ;858DF5;      ;
-                       NOP                                  ;858DF6;      ;
-                       NOP                                  ;858DF7;      ;
-                       LDA.W !RDMPYL                          ;858DF8;004216;
-                       STA.B $75                            ;858DFB;000075;
-                       LDX.B $BF                            ;858DFD;0000BF;
-                       LDA.B $C3                            ;858DFF;0000C3;
-                       STA.L $7EA420,X                      ;858E01;7EA420;
-                       LDA.B $C5                            ;858E05;0000C5;
-                       STA.L $7EA422,X                      ;858E07;7EA422;
-                       LDA.B $75                            ;858E0B;000075;
-                       STA.L $7EA424,X                      ;858E0D;7EA424;
-                       LDA.W #$FFFF                         ;858E11;      ;
-                       STA.L $7EA426,X                      ;858E14;7EA426;
-                       LDA.B $BF                            ;858E18;0000BF;
-                       CLC                                  ;858E1A;      ;
-                       ADC.W #$0006                         ;858E1B;      ;
-                                                            ;      ;      ;
-          CODE_858E1E: CMP.W #$00C0                         ;858E1E;      ;
-                       BEQ CODE_858E1E                      ;858E21;858E1E;
-                       STA.B $BF                            ;858E23;0000BF;
-                       JMP.W CODE_858CBC                    ;858E25;858CBC;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858E28: %Set8bit(!M)                             ;858E28;      ;
-                       LDA.B $BB                            ;858E2A;0000BB;
-                       CMP.B $BD                            ;858E2C;0000BD;
-                       BCS CODE_858E37                      ;858E2E;858E37;
-                       LDA.B $BD                            ;858E30;0000BD;
-                       SEC                                  ;858E32;      ;
-                       SBC.B $BB                            ;858E33;0000BB;
-                       BRA CODE_858E3C                      ;858E35;858E3C;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_858E37: LDA.B $BB                            ;858E37;0000BB;
-                       SEC                                  ;858E39;      ;
-                       SBC.B $BD                            ;858E3A;0000BD;
-                                                            ;      ;      ;
-          CODE_858E3C: LSR A                                ;858E3C;      ;
-                       LSR A                                ;858E3D;      ;
-                       STA.W $0742                          ;858E3E;000742;
-                       STZ.W $0743                          ;858E41;000743;
-                       %Set16bit(!M)                             ;858E44;      ;
-                       RTL                                  ;858E46;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-  Table_of_Multof2000: dw $0000,$2000,$4000,$6000,$8000,$A000,$C000,$E000;858E47;      ;
-                                                            ;      ;      ;
-    CopiesWRAMtoVGRAM: %Set8bit(!M)                             ;858E57;      ;
-                       LDA.B #$80                           ;858E59;      ;
-                       STA.W !VMAIN                          ;858E5B;002115;Video port control
-                       LDA.B #$01                           ;858E5E;      ;
-                       STA.W !DMAP0                          ;858E60;004300;
-                       LDA.B #$18                           ;858E63;      ;VRAM Data Write Registers
-                       STA.W !BBAD0                          ;858E65;004301;
-                       %Set16bit(!MX)                             ;858E68;      ;
-                       LDX.W #$0000                         ;858E6A;      ;
-                       STX.B $BF                            ;858E6D;0000BF;
-                                                            ;      ;      ;
-          CODE_858E6F: LDX.B $BF                            ;858E6F;0000BF;
-                       LDA.L $7EA420,X                      ;858E71;7EA420;
-                       CMP.W #$FFFF                         ;858E75;      ;
-                       BEQ .return                          ;858E78;858ED6;
-                       LDA.L $7EA424,X                      ;858E7A;7EA424;
-                       STA.W !VMADDL                          ;858E7E;002116;VRAM Address Registers
-                       LDA.L $7EA420,X                      ;858E81;7EA420;
-                       STA.W !A1T0L                          ;858E85;004302;DMA Source Address Registers
-                       LDA.W #$0040                         ;858E88;      ;Size $40
-                       STA.W !DAS0L                          ;858E8B;004305;DMA Size Registers
-                       %Set8bit(!M)                             ;858E8E;      ;
-                       LDA.L $7EA422,X                      ;858E90;7EA422;
-                       STA.W !A1B0                          ;858E94;004304;
-                       LDA.B #$01                           ;858E97;      ;
-                       STA.W !MDMAEN                          ;858E99;00420B;
-                       %Set16bit(!MX)                             ;858E9C;      ;
-                       LDX.B $BF                            ;858E9E;0000BF;
-                       LDA.L $7EA424,X                      ;858EA0;7EA424;
-                       CLC                                  ;858EA4;      ;
-                       ADC.W #$0100                         ;858EA5;      ;
-                       STA.W !VMADDL                          ;858EA8;002116;
-                       LDA.L $7EA420,X                      ;858EAB;7EA420;
-                       CLC                                  ;858EAF;      ;
-                       ADC.W #$0200                         ;858EB0;      ;
-                       STA.W !A1T0L                          ;858EB3;004302;
-                       LDA.W #$0040                         ;858EB6;      ;
-                       STA.W !DAS0L                          ;858EB9;004305;
-                       %Set8bit(!M)                             ;858EBC;      ;
-                       LDA.L $7EA422,X                      ;858EBE;7EA422;
-                       STA.W !A1B0                          ;858EC2;004304;
-                       LDA.B #$01                           ;858EC5;      ;
-                       STA.W !MDMAEN                          ;858EC7;00420B;
-                       %Set16bit(!MX)                             ;858ECA;      ;
-                       LDA.B $BF                            ;858ECC;0000BF;
-                       CLC                                  ;858ECE;      ;
-                       ADC.W #$0006                         ;858ECF;      ;
-                       STA.B $BF                            ;858ED2;0000BF;
-                       BRA CODE_858E6F                      ;858ED4;858E6F;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-              .return: RTL                                  ;858ED6;      ;
 
-;;;;;;;
+;;;;;;;; TODO
+CODE_858C30:
+        %Set16bit(!MX)
+        %Set8bit(!M)
+        LDX.B $B3
+        LDA.B #$00
+        XBA
+        LDA.L $7F0F00,X
+        %Set16bit(!M)
+        TAY
+        ASL A
+        ASL A
+        TAX
+        CPY.W #$00FF
+        BNE .skip
+        %Set16bit(!M)
+        LDA.B $BD
+        TAX
+        CLC
+        ADC.W #$0004
+        CMP.W #$0100
+        BNE .loop
+        LDA.W #$0000
+
+    .loop:
+        CMP.B $BB
+        BEQ .loop
+        STA.B $BD
+        LDA.B $B3
+        STA.L $7EA220,X
+        LDA.B $B5
+        STA.L $7EA222,X
+        LDA.W #$FFFF
+        STA.B $B3
+        BRA .return
+
+    .skip:
+        LDA.L $7EA320,X
+        INC A
+        STA.L $7EA320,X
+        TYA
+        STA.B $B3
+
+    .return: RTS
+
+UNUSED_TABLE1: dw $0001,$0002,$0004,$0008,$0010,$0020,$0040,$0080;858C7F
+               dw $0100,$0200,$0400,$0800,$1000,$2000,$4000,$8000;858C8F
+
+;;;;;;; TODO
+CODE_858C9F: ;858C9F
+        %Set16bit(!MX)
+        LDA.B $B3
+        ASL A
+        ASL A
+        TAX
+
+    .loop320:
+        LDA.L $7EA320,X
+        BEQ .loop320                         ;Loop till it finds something that is not 0
+        DEC A
+        STA.L $7EA320,X
+
+        RTS
+
+;;;;;;;; This functions sets what is gonna be copied to the WRAM OBJ temp. TODO
+CODE_858CB2:
+        %Set8bit(!M)
+        LDA.B #128
+        STA.B $7A
+        %Set16bit(!MX)
+        STZ.B $BF
+
+    .loop:
+        LDA.B $BD
+        CMP.B $BB
+        BNE +
+        JMP.W .escapeloop
+
+      + LDA.B $C7
+        CMP.W #$0100
+        BCS +
+        JMP.W .escapeloop
+
+      + LDX.B $BB
+        LDA.L $7EA220,X
+        STA.B $C1
+        LDA.L $7EA222,X
+        STA.B $78
+        LDA.B $C7
+        SEC
+        SBC.W #$0100
+        STA.B $C7
+        LDA.B $BB
+        CLC
+        ADC.W #$0004
+        CMP.W #$0100
+        BNE .CODE_858CF3
+        LDA.W #$0000
+
+    .CODE_858CF3:
+        STA.B $BB
+        LDA.W $0848
+        AND.W #$003F
+        INC A
+        STA.W $0848
+        LDA.W $0846
+        CMP.W #$0040
+        BEQ .CODE_858D12
+        STA.B $C5
+        ASL A
+        ASL A
+        STA.B $C3
+        INC.W $0846
+        BRA .CODE_858D38
+
+    .CODE_858D12:
+        LDY.W #$0000
+        LDA.W $0848
+        ASL A
+        ASL A
+
+    .loop320:
+        TAX
+        LDA.L $7EA320,X
+        BEQ .skip320
+        TXA
+        CLC
+        ADC.W #$0004
+        AND.W #$00FF
+        INY
+        CPY.W #$0040
+        BNE .loop320
+
+    .CODE_858D2F:
+        BRA .CODE_858D2F                      ;infinite loop again???
+
+    .skip320:
+        STX.B $C3
+        TXA
+        LSR A
+        LSR A
+        STA.B $C5
+
+    .CODE_858D38:
+        LDA.B $C3
+        BMI .CODE_858D38
+
+        LDA.B $C5
+        %Set8bit(!M)
+        STA.B [$78]
+        STA.B $75
+        STZ.B $76
+        %Set16bit(!M)
+        LDX.B $C3
+        LDA.W #$0001
+        STA.L $7EA320,X
+        LDA.L $7EA322,X
+        CMP.W #$FFFF
+        BEQ .CODE_858D65
+        PHX
+        TAX
+        %Set8bit(!M)
+        LDA.B #$FF
+        STA.L $7F0F00,X
+        PLX
+
+    .CODE_858D65:
+        %Set16bit(!M)
+        LDA.B $C1
+        STA.L $7EA322,X
+        LDA.B $C3
+        LSR A
+        LSR A
+        %Set8bit(!M)
+        LDX.B $C1
+        STA.L $7F0F00,X
+        %Set16bit(!M)
+        LDA.B $C1
+        AND.W #$FFC0
+        STA.B $7E
+        LSR A
+        LSR A
+        LSR A
+        LSR A
+        LSR A
+        LSR A
+        STA.B $C3
+        LDA.B $C1
+        SEC
+        SBC.B $7E
+        STA.B $C1
+        LDA.B $C3
+        LSR A
+        LSR A
+        STA.B $7E
+        CLC
+        ADC.W #$0088
+        STA.B $C5
+        LDA.B $7E
+        ASL A
+        ASL A
+        STA.B $7E
+        LDA.B $C3
+        SEC
+        SBC.B $7E
+        STA.B $C3
+        LDA.B $C3
+        ASL A
+        TAX
+        LDA.L Table_of_Multof2000,X
+        STA.B $C3
+        LDA.B $C1
+        ASL A
+        TAX
+        LDA.L DATA8_868000,X
+        %Set8bit(!M)
+        STA.W !WRMPYA
+        LDA.B #$20
+        STA.W !WRMPYB
+        %Set16bit(!M)
+        NOP
+        NOP
+        NOP
+        NOP
+        NOP
+        NOP
+        NOP
+        LDA.W !RDMPYL
+        STA.B $C1
+        CLC
+        ADC.B $C3
+        CLC
+        ADC.W #$8000
+        STA.B $C3
+        LDA.B $75
+        ASL A
+        TAX
+        LDA.L DATA8_868000,X
+        %Set8bit(!M)
+        STA.W !WRMPYA
+        LDA.B #$10
+        STA.W !WRMPYB
+        %Set16bit(!M)
+        NOP
+        NOP
+        NOP
+        NOP
+        NOP
+        NOP
+        NOP
+        LDA.W !RDMPYL
+        STA.B $75
+        LDX.B $BF
+        LDA.B $C3
+        STA.L $7EA420,X
+        LDA.B $C5
+        STA.L $7EA422,X
+        LDA.B $75
+        STA.L $7EA424,X
+        LDA.W #$FFFF
+        STA.L $7EA426,X
+        LDA.B $BF
+        CLC
+        ADC.W #$0006
+
+    .infiniteloop:
+        CMP.W #$00C0
+        BEQ .infiniteloop
+
+        STA.B $BF
+        JMP.W .loop
+
+    .escapeloop:
+        %Set8bit(!M)
+        LDA.B $BB
+        CMP.B $BD
+        BCS .CODE_858E37
+        LDA.B $BD
+        SEC
+        SBC.B $BB
+        BRA .CODE_858E3C
+
+    .CODE_858E37:
+        LDA.B $BB
+        SEC
+        SBC.B $BD
+
+    .CODE_858E3C:
+        LSR A
+        LSR A
+        STA.W $0742
+        STZ.W $0743
+        %Set16bit(!M)
+
+        RTL
+
+Table_of_Multof2000: dw $0000,$2000,$4000,$6000,$8000,$A000,$C000,$E000;858E47;      ;
+
+;;;;;;;; This copies a sprite to the VRAM used for OBJs
+CopiesWRAMtoOBJVGRAM:
+        %Set8bit(!M)                         ;prepares the copy
+        LDA.B !VMAIN_16BIT_MODE
+        STA.W !VMAIN
+        LDA.B !DMAPX_16BIT
+        STA.W !DMAP0
+        LDA.B !BBADX_DMA_VRAMPORT
+        STA.W !BBAD0
+        %Set16bit(!MX)
+        LDX.W #$0000
+        STX.B $BF
+
+    .loop:
+        LDX.B $BF
+        LDA.L $7EA420,X
+        CMP.W #$FFFF                         ;No sprite check
+        BEQ .return
+
+        LDA.L $7EA424,X                      ;Copies the first row of 2 8x8 sprites
+        STA.W !VMADDL
+        LDA.L $7EA420,X
+        STA.W !A1T0L
+        LDA.W #$0040                         ;Size 64, a sprite 2 8x8 sprites
+        STA.W !DAS0L
+        %Set8bit(!M)
+        LDA.L $7EA422,X
+        STA.W !A1B0
+        LDA.B #$01
+        STA.W !MDMAEN
+
+        %Set16bit(!MX)                       ;Copies the second row of 2 8x8 sprites
+        LDX.B $BF
+        LDA.L $7EA424,X
+        CLC
+        ADC.W #$0100
+        STA.W !VMADDL
+        LDA.L $7EA420,X
+        CLC
+        ADC.W #$0200
+        STA.W !A1T0L
+        LDA.W #$0040
+        STA.W !DAS0L
+        %Set8bit(!M)
+        LDA.L $7EA422,X
+        STA.W !A1B0
+        LDA.B #$01
+        STA.W !MDMAEN
+
+        %Set16bit(!MX)
+        LDA.B $BF
+        CLC
+        ADC.W #$0006
+        STA.B $BF
+        BRA .loop
+
+    .return: RTL
+
+;;;;;;; TODO
 ClearWRAMGraphicsSpace: ;858ED7
         %Set16bit(!MX)
         LDA.W #$FFFF
@@ -1647,7 +1684,7 @@ ClearWRAMGraphicsSpace: ;858ED7
         INX
         INX
         INY
-        CPY.W #$0040
+        CPY.W #64                            ;16 adresses in total
         BNE .loop1
 
         %Set16bit(!MX)

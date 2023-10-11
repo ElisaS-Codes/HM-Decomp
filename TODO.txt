@@ -101,7 +101,6 @@ $0D - 24b pointer
 
 $12 -
 $16 - flags
-$18 - 16b pointer
 
 $1E - does things when transitioning to places
 
@@ -312,11 +311,13 @@ $7EA000-21E - OAM contents (size on $AF)
 
 $7EA220-31E - ($0000)
 $7EA320-41E - ($0000-$FFFF)
-
-$7EA420 - FFFF
-$7EA422 - (Holds DMA Source Address Low)
-$7EA424 - (Holds DMA Source Address High)
-
+$B3
+$BB
+$BD
+$7EA420 - what to write to VRAM for OBJ. Source. FFFF means End of data - 16
+$7EA422 - Source Add - 16
+$7EA424 - Source Add Banks - 8
+$7F0F00-1F00 - ($FFFF)
 
 $7EA4E6\farm data * #$0F00
 $7EA5A6/
@@ -335,7 +336,7 @@ $7F098B - (#$3C)
 $7F0B00 -
 $7F0D00 -
 
-$7F0F00-1F00 - ($FFFF)
+
 
 $7F1F12 - (set between water counter and some cow data?), some kind of counter down?
 

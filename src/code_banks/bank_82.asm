@@ -5087,104 +5087,108 @@ CKKKK:
                 DAAAA: %Set16bit(!M)                             ;82AC5B;      ;
                        LDA.W #$0000                         ;82AC5D;      ;
                        RTL                                  ;82AC60;      ;END_DAAAA
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                CGGGG: %Set16bit(!MX)                             ;82AC61;      ;
-                       STA.B $82                            ;82AC63;000082;
-                       %Set16bit(!M)                             ;82AC65;      ;
-                       LDA.L $7F1F5C                        ;82AC67;7F1F5C;
-                       AND.W #$0008                         ;82AC6B;      ;
-                       BEQ CODE_82AC73                      ;82AC6E;82AC73;
-                       JMP.W CODE_82ACF5                    ;82AC70;82ACF5;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_82AC73: JSL.L CODE_82B124                    ;82AC73;82B124;
-                       %Set8bit(!M)                             ;82AC77;      ;
-                       XBA                                  ;82AC79;      ;
-                       LDA.B #$00                           ;82AC7A;      ;
-                       XBA                                  ;82AC7C;      ;
-                       TAX                                  ;82AC7D;      ;
-                       %Set16bit(!M)                             ;82AC7E;      ;
-                       PHX                                  ;82AC80;      ;
-                       PHA                                  ;82AC81;      ;
-                       ASL A                                ;82AC82;      ;
-                       ASL A                                ;82AC83;      ;
-                       INC A                                ;82AC84;      ;
-                       INC A                                ;82AC85;      ;
-                       INC A                                ;82AC86;      ;
-                       TAY                                  ;82AC87;      ;
-                       LDA.B !player_direction                            ;82AC88;0000DA;
-                       ASL A                                ;82AC8A;      ;
-                       TAX                                  ;82AC8B;      ;
-                       LDA.L UNK_Table7,X                   ;82AC8C;82ACFE;
-                       STA.B $84                            ;82AC90;000084;
-                       %Set8bit(!M)                             ;82AC92;      ;
-                       LDA.B #$00                           ;82AC94;      ;
-                       XBA                                  ;82AC96;      ;
-                       LDA.B [$0D],Y                        ;82AC97;00000D;
-                       %Set16bit(!M)                             ;82AC99;      ;
-                       AND.B $84                            ;82AC9B;000084;
-                       BEQ CODE_82ACCC                      ;82AC9D;82ACCC;
-                       %Set8bit(!M)                             ;82AC9F;      ;
-                       LDA.B #$00                           ;82ACA1;      ;
-                       XBA                                  ;82ACA3;      ;
-                       LDA.L !season                        ;82ACA4;7F1F19;
-                       %Set16bit(!M)                             ;82ACA8;      ;
-                       ASL A                                ;82ACAA;      ;
-                       TAX                                  ;82ACAB;      ;
-                       LDA.L UNK_Table8,X                   ;82ACAC;82AD06;
-                       STA.B $84                            ;82ACB0;000084;
-                       %Set8bit(!M)                             ;82ACB2;      ;
-                       LDA.B #$00                           ;82ACB4;      ;
-                       XBA                                  ;82ACB6;      ;
-                       LDA.B [$0D],Y                        ;82ACB7;00000D;
-                       %Set16bit(!M)                             ;82ACB9;      ;
-                       AND.B $84                            ;82ACBB;000084;
-                       BEQ CODE_82ACCC                      ;82ACBD;82ACCC;
-                       %Set16bit(!MX)                             ;82ACBF;      ;
-                       PLA                                  ;82ACC1;      ;
-                       PLX                                  ;82ACC2;      ;
-                       ASL A                                ;82ACC3;      ;
-                       ASL A                                ;82ACC4;      ;
-                       ADC.B $82                            ;82ACC5;000082;
-                       TAY                                  ;82ACC7;      ;
-                       LDA.B [$0D],Y                        ;82ACC8;00000D;
-                       BRA CODE_82ACFD                      ;82ACCA;82ACFD;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_82ACCC: %Set16bit(!MX)                             ;82ACCC;      ;
-                       TYA                                  ;82ACCE;      ;
-                       DEC A                                ;82ACCF;      ;
-                       TAY                                  ;82ACD0;      ;
-                       %Set8bit(!M)                             ;82ACD1;      ;
-                       LDA.B [$0D],Y                        ;82ACD3;00000D;
-                       AND.B #$80                           ;82ACD5;      ;
-                       BNE CODE_82ACE9                      ;82ACD7;82ACE9;
-                       %Set16bit(!M)                             ;82ACD9;      ;
-                       PLA                                  ;82ACDB;      ;
-                       PLX                                  ;82ACDC;      ;
-                       ASL A                                ;82ACDD;      ;
-                       ASL A                                ;82ACDE;      ;
-                       ADC.B $82                            ;82ACDF;000082;
-                       TAY                                  ;82ACE1;      ;
-                       LDA.B [$0D],Y                        ;82ACE2;00000D;
-                       LDX.W #$0000                         ;82ACE4;      ;
-                       BRA CODE_82ACFD                      ;82ACE7;82ACFD;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_82ACE9: %Set16bit(!MX)                             ;82ACE9;      ;
-                       PLA                                  ;82ACEB;      ;
-                       PLX                                  ;82ACEC;      ;
-                       LDA.W #$0000                         ;82ACED;      ;
-                       LDX.W #$0000                         ;82ACF0;      ;
-                       BRA CODE_82ACFD                      ;82ACF3;82ACFD;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_82ACF5: %Set16bit(!MX)                             ;82ACF5;      ;
-                       LDA.W #$0000                         ;82ACF7;      ;
-                       LDX.W #$0000                         ;82ACFA;      ;
-                                                            ;      ;      ;
-          CODE_82ACFD: RTL                                  ;82ACFD;      ;END_CGGGG
+
+;;;;;;;; Params in A, return in X, Y TODO
+CGGGG: ;82AC61
+      %Set16bit(!MX)
+      STA.B $82
+      %Set16bit(!M)
+      LDA.L $7F1F5C
+      AND.W #$0008                           ;FLAG5C
+      BEQ .skip
+      JMP.W .default
+
+   .skip:
+      JSL.L CODE_82B124                    ;82AC73;82B124;
+      %Set8bit(!M)                             ;82AC77;      ;
+      XBA                                  ;82AC79;      ;
+      LDA.B #$00                           ;82AC7A;      ;
+      XBA                                  ;82AC7C;      ;
+      TAX                                  ;82AC7D;      ;
+      %Set16bit(!M)                             ;82AC7E;      ;
+      PHX                                  ;82AC80;      ;
+      PHA                                  ;82AC81;      ;
+      ASL A                                ;82AC82;      ;
+      ASL A                                ;82AC83;      ;
+      INC A                                ;82AC84;      ;
+      INC A                                ;82AC85;      ;
+      INC A                                ;82AC86;      ;
+      TAY                                  ;82AC87;      ;
+      LDA.B !player_direction                            ;82AC88;0000DA;
+      ASL A                                ;82AC8A;      ;
+      TAX                                  ;82AC8B;      ;
+      LDA.L UNK_Table7,X                   ;82AC8C;82ACFE;
+      STA.B $84                            ;82AC90;000084;
+      %Set8bit(!M)                             ;82AC92;      ;
+      LDA.B #$00                           ;82AC94;      ;
+      XBA                                  ;82AC96;      ;
+      LDA.B [$0D],Y                        ;82AC97;00000D;
+      %Set16bit(!M)                             ;82AC99;      ;
+      AND.B $84                            ;82AC9B;000084;
+      BEQ .CODE_82ACCC                      ;82AC9D;82ACCC;
+      %Set8bit(!M)                             ;82AC9F;      ;
+      LDA.B #$00                           ;82ACA1;      ;
+      XBA                                  ;82ACA3;      ;
+      LDA.L !season                        ;82ACA4;7F1F19;
+      %Set16bit(!M)                             ;82ACA8;      ;
+      ASL A                                ;82ACAA;      ;
+      TAX                                  ;82ACAB;      ;
+      LDA.L UNK_Table8,X                   ;82ACAC;82AD06;
+      STA.B $84                            ;82ACB0;000084;
+      %Set8bit(!M)                             ;82ACB2;      ;
+      LDA.B #$00                           ;82ACB4;      ;
+      XBA                                  ;82ACB6;      ;
+      LDA.B [$0D],Y                        ;82ACB7;00000D;
+      %Set16bit(!M)                             ;82ACB9;      ;
+      AND.B $84                            ;82ACBB;000084;
+      BEQ .CODE_82ACCC                      ;82ACBD;82ACCC;
+      %Set16bit(!MX)                             ;82ACBF;      ;
+      PLA                                  ;82ACC1;      ;
+      PLX                                  ;82ACC2;      ;
+      ASL A                                ;82ACC3;      ;
+      ASL A                                ;82ACC4;      ;
+      ADC.B $82                            ;82ACC5;000082;
+      TAY                                  ;82ACC7;      ;
+      LDA.B [$0D],Y                        ;82ACC8;00000D;
+      BRA .return                      ;82ACCA;82ACFD;
+                                          ;      ;      ;
+                                          ;      ;      ;
+   .CODE_82ACCC:
+      %Set16bit(!MX)                             ;82ACCC;      ;
+      TYA                                  ;82ACCE;      ;
+      DEC A                                ;82ACCF;      ;
+      TAY                                  ;82ACD0;      ;
+      %Set8bit(!M)                             ;82ACD1;      ;
+      LDA.B [$0D],Y                        ;82ACD3;00000D;
+      AND.B #$80                           ;82ACD5;      ;
+      BNE .CODE_82ACE9                      ;82ACD7;82ACE9;
+      %Set16bit(!M)                             ;82ACD9;      ;
+      PLA                                  ;82ACDB;      ;
+      PLX                                  ;82ACDC;      ;
+      ASL A                                ;82ACDD;      ;
+      ASL A                                ;82ACDE;      ;
+      ADC.B $82                            ;82ACDF;000082;
+      TAY                                  ;82ACE1;      ;
+      LDA.B [$0D],Y                        ;82ACE2;00000D;
+      LDX.W #$0000                         ;82ACE4;      ;
+      BRA .return                      ;82ACE7;82ACFD;
+                                          ;      ;      ;
+                                          ;      ;      ;
+   .CODE_82ACE9:
+      %Set16bit(!MX)                             ;82ACE9;      ;
+      PLA                                  ;82ACEB;      ;
+      PLX                                  ;82ACEC;      ;
+      LDA.W #$0000                         ;82ACED;      ;
+      LDX.W #$0000                         ;82ACF0;      ;
+      BRA .return                      ;82ACF3;82ACFD;
+                                          ;      ;      ;
+                                          ;      ;      ;
+      .default:
+      %Set16bit(!MX)                             ;82ACF5;      ;
+      LDA.W #$0000                         ;82ACF7;      ;
+      LDX.W #$0000                         ;82ACFA;      ;
+                                          ;      ;      ;
+      .return: RTL                                  ;82ACFD;      ;END_CGGGG
                                                             ;      ;      ;
                                                             ;      ;      ;
            UNK_Table7: db $01,$00,$02,$00,$04,$00,$08,$00   ;82ACFE;      ;
@@ -5818,22 +5822,24 @@ UNK_PartialMap: ;82AF00
                        CPY.B $84                            ;82B11F;000084;
                        BNE CODE_82B0E6                      ;82B121;82B0E6;
                        RTL                                  ;82B123;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_82B124: %Set16bit(!MX)                             ;82B124;      ;
-                       JSR.W UNK_OperatesOnSeasonTable      ;82B126;82B13C;
-                       %Set8bit(!M)                             ;82B129;      ;
-                       LDA.W $09B6,X                        ;82B12B;0009B6;
-                       RTL                                  ;82B12E;      ;
-                                                            ;      ;      ;
-                       %Set16bit(!MX)                             ;82B12F;      ;
-                       TXA                                  ;82B131;      ;
-                       AND.W #$FFF0                         ;82B132;      ;
-                       TAX                                  ;82B135;      ;
-                       TYA                                  ;82B136;      ;
-                       AND.W #$FFF0                         ;82B137;      ;
-                       TAY                                  ;82B13A;      ;
-                       RTL                                  ;82B13B;      ;
+
+;;;;;;; TODO
+CODE_82B124: ;82B124
+      %Set16bit(!MX)
+      JSR.W UNK_OperatesOnSeasonTable
+      %Set8bit(!M)
+      LDA.W $09B6,X
+      RTL
+
+      %Set16bit(!MX)
+      TXA
+      AND.W #$FFF0
+      TAX
+      TYA
+      AND.W #$FFF0
+      TAY
+
+      RTL
 
 ;;;;;;; Takes X and Y as parameter
 UNK_OperatesOnSeasonTable: ;82B13C
@@ -7023,10 +7029,10 @@ IntroScreen: ;82D75E
        LDA.W #$0001
        STA.B $AF
 
-    .WaitNMI:
+    WaitNMI:
        %Set8bit(!M)
        LDA.B $00
-       BEQ .WaitNMI
+       BEQ WaitNMI
 
        JSL.L UNK_BigLoop
        JSL.L InputTypeSelector
