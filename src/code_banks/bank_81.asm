@@ -4020,7 +4020,7 @@ BAAAA: ;81A383
                                                             ;      ;      ;
           CODE_81A9E4: RTL                                  ;81A9E4;      ;
                                                             ;      ;      ;
-;;;;;;
+;;;;;;Related to Timemaps
 UNK_ExecuteFromPointers:
       %Set8bit(!M)
       %Set16bit(!X)

@@ -2388,187 +2388,192 @@ GGGG:
                        STZ.B $92                            ;80939D;000092;
                        JSL.L AAAA                           ;80939F;8093A4;
                        RTL                                  ;8093A3;      ;END_BBBB
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                 AAAA: %Set16bit(!MX)                             ;8093A4;      ;
-                       STZ.B $7E                            ;8093A6;00007E;
-                       %Set8bit(!M)                             ;8093A8;      ;
-                       LDA.B $92                            ;8093AA;000092;
-                       BNE .skip                            ;8093AC;8093C0;
-                       LDA.L !hour                        ;8093AE;7F1F1C;Hour
-                       CMP.B #$12                           ;8093B2;      ;
-                       BCC .before6PM                       ;8093B4;8093C7;
-                       LDA.B !tilemap_to_load                            ;8093B6;000022;
-                       CMP.B #$31                           ;8093B8;      ;
-                       BCS .skip                            ;8093BA;8093C0;
-                       CMP.B #$15                           ;8093BC;      ;
-                       BCS .before6PM                       ;8093BE;8093C7;
-                                                            ;      ;      ;
-                .skip: %Set16bit(!M)                             ;8093C0;      ;
-                       LDA.W #$0004                         ;8093C2;      ;
-                       STA.B $7E                            ;8093C5;00007E;
-                                                            ;      ;      ;
-           .before6PM: %Set8bit(!M)                             ;8093C7;      ;
-                       LDA.B #$00                           ;8093C9;      ;
-                       XBA                                  ;8093CB;      ;
-                       LDA.W $0022                          ;8093CC;000022;
-                       CMP.B #$04                           ;8093CF;      ;
-                       BCS .not4                            ;8093D1;8093DF;
-                                                            ;      ;      ;
-   .butBetween10and14: %Set8bit(!M)                             ;8093D3;      ;
-                       LDA.L !season                        ;8093D5;7F1F19;Season
-                       %Set16bit(!M)                             ;8093D9;      ;
-                       STA.B $82                            ;8093DB;000082;
-                       BRA .continue                        ;8093DD;8093F1;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                .not4: %Set8bit(!M)                             ;8093DF;      ;
-                       CMP.B #$10                           ;8093E1;      ;
-                       BCC .butBetween10and14               ;8093E3;8093D3;
-                       CMP.B #$14                           ;8093E5;      ;
-                       BCS .butBetween10and14               ;8093E7;8093D3;
-                       %Set16bit(!M)                             ;8093E9;      ;
-                       SEC                                  ;8093EB;      ;
-                       SBC.W #$0008                         ;8093EC;      ;
-                       STA.B $82                            ;8093EF;000082;
-                                                            ;      ;      ;
-            .continue: %Set8bit(!M)                             ;8093F1;      ;
-                       LDA.B #$00                           ;8093F3;      ;
-                       XBA                                  ;8093F5;      ;
-                       LDA.B $82                            ;8093F6;000082;
-                       CLC                                  ;8093F8;      ;
-                       ADC.B $7E                            ;8093F9;00007E;
-                       STA.B $80                            ;8093FB;000080;
-                       %Set16bit(!M)                             ;8093FD;      ;
-                       ASL A                                ;8093FF;      ;
-                       CLC                                  ;809400;      ;
-                       ADC.B $80                            ;809401;000080;
-                       ASL A                                ;809403;      ;
-                       TAX                                  ;809404;      ;
-                       PHX                                  ;809405;      ;
-                       LDA.L UNK_Table9,X                   ;809406;80BD9C;
-                       LDX.W #$000A                         ;80940A;      ;
-                       LDY.W #$000F                         ;80940D;      ;
-                       JSL.L CODE_80919D                    ;809410;80919D;
-                       %Set16bit(!MX)                             ;809414;      ;
-                       PLX                                  ;809416;      ;
-                       INX                                  ;809417;      ;
-                       INX                                  ;809418;      ;
-                       PHX                                  ;809419;      ;
-                       LDA.L UNK_Table9,X                   ;80941A;80BD9C;
-                       LDX.W #$000B                         ;80941E;      ;
-                       LDY.W #$000F                         ;809421;      ;
-                       JSL.L CODE_80919D                    ;809424;80919D;
-                       %Set16bit(!MX)                             ;809428;      ;
-                       PLX                                  ;80942A;      ;
-                       INX                                  ;80942B;      ;
-                       INX                                  ;80942C;      ;
-                       LDA.L UNK_Table9,X                   ;80942D;80BD9C;
-                       LDX.W #$000C                         ;809431;      ;
-                       LDY.W #$000F                         ;809434;      ;
-                       JSL.L CODE_80919D                    ;809437;80919D;
-                       %Set16bit(!MX)                             ;80943B;      ;
-                       STZ.B $7E                            ;80943D;00007E;
-                       %Set8bit(!M)                             ;80943F;      ;
-                       LDA.B $92                            ;809441;000092;
-                       BNE CODE_809457                      ;809443;809457;
-                       LDA.L !hour                        ;809445;7F1F1C;Hour
-                       CMP.B #$12                           ;809449;      ;
-                       BCC CODE_809460                      ;80944B;809460;
-                       LDA.B !tilemap_to_load                            ;80944D;000022;
-                       CMP.B #$31                           ;80944F;      ;
-                       BCS CODE_809457                      ;809451;809457;
-                       CMP.B #$15                           ;809453;      ;
-                       BCS CODE_809460                      ;809455;809460;
-                                                            ;      ;      ;
-          CODE_809457: %Set16bit(!M)                             ;809457;      ;
-                       LDA.W #$0006                         ;809459;      ;
-                       STA.B $7E                            ;80945C;00007E;
-                       BRA CODE_809460                      ;80945E;809460;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809460: %Set16bit(!MX)                             ;809460;      ;
-                       LDA.L !wife_pregnancy                        ;809462;7F1F3B;Wife Pregnancy
-                       BNE CODE_80946B                      ;809466;80946B;
-                       JMP.W returnAAAA                        ;809468;809500;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80946B: LDA.L $7F1F66                        ;80946B;7F1F66;Which Wife Flag
-                       AND.W #$0001                         ;80946F;      ;
-                       BNE CODE_80949A                      ;809472;80949A;
-                       LDA.L $7F1F66                        ;809474;7F1F66;Which Wife Flag
-                       AND.W #$0002                         ;809478;      ;
-                       BNE CODE_8094A1                      ;80947B;8094A1;
-                       LDA.L $7F1F66                        ;80947D;7F1F66;Which Wife Flag
-                       AND.W #$0004                         ;809481;      ;
-                       BNE CODE_8094A8                      ;809484;8094A8;
-                       LDA.L $7F1F66                        ;809486;7F1F66;Which Wife Flag
-                       AND.W #$0008                         ;80948A;      ;
-                       BNE CODE_8094AF                      ;80948D;8094AF;
-                       LDA.L $7F1F66                        ;80948F;7F1F66;Which Wife Flag
-                       AND.W #$0010                         ;809493;      ;
-                       BNE CODE_8094B6                      ;809496;8094B6;
-                       BRA returnAAAA                          ;809498;809500;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80949A: %Set16bit(!MX)                             ;80949A;      ;
-                       LDA.W #$0001                         ;80949C;      ;
-                       BRA CODE_8094BD                      ;80949F;8094BD;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_8094A1: %Set16bit(!MX)                             ;8094A1;      ;
-                       LDA.W #$0002                         ;8094A3;      ;
-                       BRA CODE_8094BD                      ;8094A6;8094BD;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_8094A8: %Set16bit(!MX)                             ;8094A8;      ;
-                       LDA.W #$0003                         ;8094AA;      ;
-                       BRA CODE_8094BD                      ;8094AD;8094BD;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_8094AF: %Set16bit(!MX)                             ;8094AF;      ;
-                       LDA.W #$0004                         ;8094B1;      ;
-                       BRA CODE_8094BD                      ;8094B4;8094BD;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_8094B6: %Set16bit(!MX)                             ;8094B6;      ;
-                       LDA.W #$0005                         ;8094B8;      ;
-                       BRA CODE_8094BD                      ;8094BB;8094BD;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_8094BD: %Set16bit(!MX)                             ;8094BD;      ;
-                       CLC                                  ;8094BF;      ;
-                       ADC.B $7E                            ;8094C0;00007E;
-                       STA.B $80                            ;8094C2;000080;
-                       ASL A                                ;8094C4;      ;
-                       CLC                                  ;8094C5;      ;
-                       ADC.B $80                            ;8094C6;000080;
-                       ASL A                                ;8094C8;      ;
-                       TAX                                  ;8094C9;      ;
-                       PHX                                  ;8094CA;      ;
-                       LDA.L UNK_Table10,X                  ;8094CB;80BDFC;
-                       LDX.W #$0008                         ;8094CF;      ;
-                       LDY.W #$000B                         ;8094D2;      ;
-                       JSL.L CODE_80919D                    ;8094D5;80919D;
-                       %Set16bit(!MX)                             ;8094D9;      ;
-                       PLX                                  ;8094DB;      ;
-                       INX                                  ;8094DC;      ;
-                       INX                                  ;8094DD;      ;
-                       PHX                                  ;8094DE;      ;
-                       LDA.L UNK_Table10,X                  ;8094DF;80BDFC;
-                       LDX.W #$0009                         ;8094E3;      ;
-                       LDY.W #$000B                         ;8094E6;      ;
-                       JSL.L CODE_80919D                    ;8094E9;80919D;
-                       %Set16bit(!MX)                             ;8094ED;      ;
-                       PLX                                  ;8094EF;      ;
-                       INX                                  ;8094F0;      ;
-                       INX                                  ;8094F1;      ;
-                       LDA.L UNK_Table10,X                  ;8094F2;80BDFC;
-                       LDX.W #$000A                         ;8094F6;      ;
-                       LDY.W #$000B                         ;8094F9;      ;
-                       JSL.L CODE_80919D                    ;8094FC;80919D;
-                                                            ;      ;      ;
-              returnAAAA: RTL                                  ;809500;      ;END_AAAA
+
+;;;;;;;;
+AAAA: ;8093A3
+        %Set16bit(!MX)
+        STZ.B $7E
+        %Set8bit(!M)
+        LDA.B $92                            ;TODO
+        BNE .skip
+        LDA.L !hour
+        CMP.B #18
+        BCC .before6PM
+        LDA.B !tilemap_to_load
+        CMP.B #$31                           ;Map summit spring
+        BCS .skip                            ;most maps
+        CMP.B #$15                           ;seasonal maps
+        BCS .before6PM
+
+    .skip:
+        %Set16bit(!M)
+        LDA.W #$0004
+        STA.B $7E
+
+    .before6PM:
+        %Set8bit(!M)
+        LDA.B #$00
+        XBA
+        LDA.W $0022                          ;tilemap_to_load
+        CMP.B #$04                           ;farm
+        BCS .notfarm
+
+    .seasonloop:
+        %Set8bit(!M)
+        LDA.L !season
+        %Set16bit(!M)
+        STA.B $82
+        BRA .continue
+
+    .notfarm:
+        %Set8bit(!M)
+        CMP.B #$10
+        BCC .seasonloop                      ;Check Fork
+        CMP.B #$14
+        BCS .seasonloop                      ;Check Mountain
+        %Set16bit(!M)
+        SEC
+        SBC.W #$0008
+        STA.B $82
+
+    .continue:
+        %Set8bit(!M)                             ;8093F1;      ;
+        LDA.B #$00                           ;8093F3;      ;
+        XBA                                  ;8093F5;      ;
+        LDA.B $82                            ;8093F6;000082;
+        CLC                                  ;8093F8;      ;
+        ADC.B $7E                            ;8093F9;00007E;
+        STA.B $80                            ;8093FB;000080;
+        %Set16bit(!M)                             ;8093FD;      ;
+        ASL A                                ;8093FF;      ;
+        CLC                                  ;809400;      ;
+        ADC.B $80                            ;809401;000080;
+        ASL A                                ;809403;      ;
+        TAX                                  ;809404;      ;
+        PHX                                  ;809405;      ;
+        LDA.L UNK_Table9,X                   ;809406;80BD9C;
+        LDX.W #$000A                         ;80940A;      ;
+        LDY.W #$000F                         ;80940D;      ;
+        JSL.L CODE_80919D                    ;809410;80919D;
+        %Set16bit(!MX)                             ;809414;      ;
+        PLX                                  ;809416;      ;
+        INX                                  ;809417;      ;
+        INX                                  ;809418;      ;
+        PHX                                  ;809419;      ;
+        LDA.L UNK_Table9,X                   ;80941A;80BD9C;
+        LDX.W #$000B                         ;80941E;      ;
+        LDY.W #$000F                         ;809421;      ;
+        JSL.L CODE_80919D                    ;809424;80919D;
+        %Set16bit(!MX)                             ;809428;      ;
+        PLX                                  ;80942A;      ;
+        INX                                  ;80942B;      ;
+        INX                                  ;80942C;      ;
+        LDA.L UNK_Table9,X                   ;80942D;80BD9C;
+        LDX.W #$000C                         ;809431;      ;
+        LDY.W #$000F                         ;809434;      ;
+        JSL.L CODE_80919D                    ;809437;80919D;
+        %Set16bit(!MX)                             ;80943B;      ;
+        STZ.B $7E                            ;80943D;00007E;
+        %Set8bit(!M)                             ;80943F;      ;
+        LDA.B $92                            ;809441;000092;
+        BNE CODE_809457                      ;809443;809457;
+        LDA.L !hour                        ;809445;7F1F1C;Hour
+        CMP.B #$12                           ;809449;      ;
+        BCC CODE_809460                      ;80944B;809460;
+        LDA.B !tilemap_to_load                            ;80944D;000022;
+        CMP.B #$31                           ;80944F;      ;
+        BCS CODE_809457                      ;809451;809457;
+        CMP.B #$15                           ;809453;      ;
+        BCS CODE_809460                      ;809455;809460;
+                                                ;      ;      ;
+        CODE_809457: %Set16bit(!M)                             ;809457;      ;
+        LDA.W #$0006                         ;809459;      ;
+        STA.B $7E                            ;80945C;00007E;
+        BRA CODE_809460                      ;80945E;809460;
+                                                ;      ;      ;
+                                                ;      ;      ;
+        CODE_809460: %Set16bit(!MX)                             ;809460;      ;
+        LDA.L !wife_pregnancy                        ;809462;7F1F3B;Wife Pregnancy
+        BNE CODE_80946B                      ;809466;80946B;
+        JMP.W returnAAAA                        ;809468;809500;
+                                                ;      ;      ;
+                                                ;      ;      ;
+        CODE_80946B: LDA.L $7F1F66                        ;80946B;7F1F66;Which Wife Flag
+        AND.W #$0001                         ;80946F;      ;
+        BNE CODE_80949A                      ;809472;80949A;
+        LDA.L $7F1F66                        ;809474;7F1F66;Which Wife Flag
+        AND.W #$0002                         ;809478;      ;
+        BNE CODE_8094A1                      ;80947B;8094A1;
+        LDA.L $7F1F66                        ;80947D;7F1F66;Which Wife Flag
+        AND.W #$0004                         ;809481;      ;
+        BNE CODE_8094A8                      ;809484;8094A8;
+        LDA.L $7F1F66                        ;809486;7F1F66;Which Wife Flag
+        AND.W #$0008                         ;80948A;      ;
+        BNE CODE_8094AF                      ;80948D;8094AF;
+        LDA.L $7F1F66                        ;80948F;7F1F66;Which Wife Flag
+        AND.W #$0010                         ;809493;      ;
+        BNE CODE_8094B6                      ;809496;8094B6;
+        BRA returnAAAA                          ;809498;809500;
+                                                ;      ;      ;
+                                                ;      ;      ;
+        CODE_80949A: %Set16bit(!MX)                             ;80949A;      ;
+        LDA.W #$0001                         ;80949C;      ;
+        BRA CODE_8094BD                      ;80949F;8094BD;
+                                                ;      ;      ;
+                                                ;      ;      ;
+        CODE_8094A1: %Set16bit(!MX)                             ;8094A1;      ;
+        LDA.W #$0002                         ;8094A3;      ;
+        BRA CODE_8094BD                      ;8094A6;8094BD;
+                                                ;      ;      ;
+                                                ;      ;      ;
+        CODE_8094A8: %Set16bit(!MX)                             ;8094A8;      ;
+        LDA.W #$0003                         ;8094AA;      ;
+        BRA CODE_8094BD                      ;8094AD;8094BD;
+                                                ;      ;      ;
+                                                ;      ;      ;
+        CODE_8094AF: %Set16bit(!MX)                             ;8094AF;      ;
+        LDA.W #$0004                         ;8094B1;      ;
+        BRA CODE_8094BD                      ;8094B4;8094BD;
+                                                ;      ;      ;
+                                                ;      ;      ;
+        CODE_8094B6: %Set16bit(!MX)                             ;8094B6;      ;
+        LDA.W #$0005                         ;8094B8;      ;
+        BRA CODE_8094BD                      ;8094BB;8094BD;
+                                                ;      ;      ;
+                                                ;      ;      ;
+        CODE_8094BD: %Set16bit(!MX)                             ;8094BD;      ;
+        CLC                                  ;8094BF;      ;
+        ADC.B $7E                            ;8094C0;00007E;
+        STA.B $80                            ;8094C2;000080;
+        ASL A                                ;8094C4;      ;
+        CLC                                  ;8094C5;      ;
+        ADC.B $80                            ;8094C6;000080;
+        ASL A                                ;8094C8;      ;
+        TAX                                  ;8094C9;      ;
+        PHX                                  ;8094CA;      ;
+        LDA.L UNK_Table10,X                  ;8094CB;80BDFC;
+        LDX.W #$0008                         ;8094CF;      ;
+        LDY.W #$000B                         ;8094D2;      ;
+        JSL.L CODE_80919D                    ;8094D5;80919D;
+        %Set16bit(!MX)                             ;8094D9;      ;
+        PLX                                  ;8094DB;      ;
+        INX                                  ;8094DC;      ;
+        INX                                  ;8094DD;      ;
+        PHX                                  ;8094DE;      ;
+        LDA.L UNK_Table10,X                  ;8094DF;80BDFC;
+        LDX.W #$0009                         ;8094E3;      ;
+        LDY.W #$000B                         ;8094E6;      ;
+        JSL.L CODE_80919D                    ;8094E9;80919D;
+        %Set16bit(!MX)                             ;8094ED;      ;
+        PLX                                  ;8094EF;      ;
+        INX                                  ;8094F0;      ;
+        INX                                  ;8094F1;      ;
+        LDA.L UNK_Table10,X                  ;8094F2;80BDFC;
+        LDX.W #$000A                         ;8094F6;      ;
+        LDY.W #$000B                         ;8094F9;      ;
+        JSL.L CODE_80919D                    ;8094FC;80919D;
+                                                ;      ;      ;
+        returnAAAA: RTL                                  ;809500;      ;END_AAAA
                                                             ;      ;      ;
                                                             ;      ;      ;
                  AA9999: %Set8bit(!M)                             ;809501;      ;
@@ -5068,16 +5073,16 @@ TilemapManager: ;80A7C6
         %Set16bit(!MX)
         INY
         LDA.B (!tilemap_pointer),Y
-        ORA.W $0196                          ;flags
+        ORA.W $0196                          ;FLAG196
         STA.W $0196
         %Set16bit(!M)
         LDA.L $7F1F5C
-        AND.W #$0001
+        AND.W #$0001                         ;FLAG5C
         BEQ .skip1
 
         %Set16bit(!MX)
         LDA.W $0196
-        AND.W #$FFDF                         ;resets a flag
+        AND.W #$FFDF                         ;FLAG196
         STA.W $0196
 
     .skip1: %Set16bit(!MX)
@@ -5096,7 +5101,7 @@ TilemapManager: ;80A7C6
 
         %Set16bit(!M)
         LDA.W $0196
-        ORA.W #$0001
+        ORA.W #$0001                         ;FLAG196
         STA.W $0196
 
     .skip2:
@@ -5208,7 +5213,7 @@ TilemapManager: ;80A7C6
         STA.B $77
         %Set16bit(!M)
         LDA.W $0196
-        AND.W #$8000                         ;TODO
+        AND.W #$8000                         ;FLAG196
         BNE .skip5
         JSL.L DecompressTileMap
         BRA .skip6
@@ -5236,20 +5241,20 @@ TilemapManager: ;80A7C6
         LDA.B $93
         CMP.B #$01
         BNE .skip8
-        %Set16bit(!MX)                             ;80A915;      ;
-        LDA.L $7F1F5E                        ;80A917;7F1F5E;$7F1F5E
-        AND.W #$0002                         ;80A91B;      ;
-        BNE .skip8                           ;80A91E;80A924;
-        JSL.L UNK_ExecuteFromPointers                    ;80A920;81A9E5;
-                                        ;      ;      ;
-        .skip8: %Set16bit(!M)                             ;80A924;      ;
-        STZ.B !OBJ_Offset_X                            ;80A926;0000F5;$0000F5
-        STZ.B !OBJ_Offset_Y                           ;80A928;0000F7;$0000F7
-        LDA.W #$0410                         ;80A92A;      ;
-        STA.B $10                            ;80A92D;000010;$000010
-        LDA.W #$0A00                         ;80A92F;      ;
-        STA.B $14                            ;80A932;000014;$000014
-        STZ.B $12                            ;80A934;000012;$000012
+        %Set16bit(!MX)
+        LDA.L $7F1F5E
+        AND.W #$0002                         ;FLAG5E
+        BNE .skip8
+        JSL.L UNK_ExecuteFromPointers
+
+        .skip8: %Set16bit(!M)
+        STZ.B !OBJ_Offset_X
+        STZ.B !OBJ_Offset_Y
+        LDA.W #1040
+        STA.B $10
+        LDA.W #$0A00
+        STA.B $14
+        STZ.B $12
         STZ.B $16                            ;80A936;000016;$000016
         %Set8bit(!M)                             ;80A938;      ;
         STZ.B !BG_subpixel_offset_X                            ;80A93A;000020;$000020
@@ -5319,6 +5324,7 @@ TilemapManager: ;80A7C6
         INC A                                ;80A9B5;      ;
         CMP.W #$0020                         ;80A9B6;      ;
         BNE .loop2                           ;80A9B9;80A977;
+
         %Set8bit(!M)                             ;80A9BB;      ;
         LDA.B !tilemap_to_load                            ;80A9BD;000022;$000022
         CMP.B #$5B                           ;80A9BF;      ;
@@ -5416,7 +5422,7 @@ LoadsFromVRAMwithOffset: ;80AA38
         PLX
         RTS
                                                             ;      ;      ;
-        ;Related to 0181, stored in A1
+        ;Related to 0181, stored in A1, sprite size?
 UNK_Table2: dw $0000,$0040,$0080,$0100,$0100;80AA68;      ;
 UNK_Table3: dw $0000,$1000,$2000,$4000,$4000;80AA72;      ;used on TilemapManager
                                                             ;      ;      ;

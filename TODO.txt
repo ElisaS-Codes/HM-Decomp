@@ -22,41 +22,15 @@ A8888
 UNK_PartialMap
 UNK_OperatesOnSeasonTable
 
-0924, idle anim?
+0924, idle timer?
 
-
-CKKKK
-	$0181? related to map loaded?
-	$092E?
-	$82 = 0
-	$84 = 0
-	double loop that calls UNK_OperatesOnSeasonTable
-
-
-0985 TempX while running;16b
-0987 TempY while running;16b
-0181 = 2
-0182 = 2
-
-
-UNK_BigLoop
-UNK_PartialMap
-UNK_OperatesOnSeasonTable
-
-current_graphic_preset  = 02
-$0196 = sets rain flag???
-
-$7F1F5C check flag
-
-$0196 removes 32 flag
-
-
-db $02,$02,$01,$01,$00,$20, $97,$EF,$9F, $00,$60, $84,$DE,$A5;80B6A3;      ;
+$0196 - flags, related to graphic presets.
+0001: too big file?
 
 0181 = 2
 0182 = 2
-$92 = 1 # of tilemaps
-$93 = 1
+$92 = 1 # of tilesprites
+$93 = 1 # of tilemaps?
 stack $2000 Location
 $72 = $9FEF97
 Decompress + copy to VRAM
@@ -84,7 +58,7 @@ $7F1F2B - Starting cow Happiness?
 $7F1F30 - related to dog?
 $7F1F29 - theory: ammount of planted grass
 
-$0196 - flags, related to graphic presets.
+
 $7F1F48 - (0)
 $7F1F49 - (0)
 
@@ -95,6 +69,7 @@ $0A - 24b Pointer to in ram graphics
 $0C -
 $0D - 24b pointer
 
+$10 - 1040
 $12 -
 $16 - flags
 $18 - 16b pointer
@@ -114,7 +89,8 @@ $9A - DMA ready? 9A - DMA ready but only for Channel 5? its only set in one plac
 ???1 ???? 1=OAM DMA ready?
 ???? ????
 
-$A1 -
+$A1 - sprite size? from table UNK_Table2
+$1C - from table UNK_Table3
 
 $A7
 
@@ -288,7 +264,7 @@ $7E0987 - Related to saves
 $7E098A - Related to Map to transition, if its 00, it moves to next map, if its 0d it stays on same map
 $7E098B - Map to transition
 $7E098C - Weather tomorrow (00:Sunny, 01:rain, 03:hurricane, 04:fair, 05:sunny and calm, 06:flower festival, 07:harvest festival, 08:Thanksgiving Festival, 09:Star Night Festival, 0A:festive mood, 0B:annual egg festival, 0C:snow)
-$7E098D - related to audio? probably not
+$7E098D - related to audio? probably not, maybe a "save corrupted" screen stub
 $7E098E - Related to save?
 $7E098F -
 
