@@ -5649,7 +5649,7 @@ BEEEE: ;81BFB7
                        STA.B !player_action                            ;81C2C3;0000D4;
                        %Set16bit(!M)                             ;81C2C5;      ;
                        LDA.W #$0014                         ;81C2C7;      ;
-                       JSL.L MakeaPointer                   ;81C2CA;84887C;
+                       JSL.L SetCCPoiner                   ;81C2CA;84887C;
                        %Set8bit(!M)                             ;81C2CE;      ;
                        %Set16bit(!X)                             ;81C2D0;      ;
                        LDY.W #$0000                         ;81C2D2;      ;
@@ -8030,7 +8030,7 @@ CODE_81D716: ;81D716
       %Set16bit(!M)
       LDA.W $00CF
       BNE .return
-      JSL.L BFFFF
+      JSL.L SUB_8281C0
       %Set8bit(!M)
       LDA.B #$00
       XBA
@@ -8363,7 +8363,7 @@ CODE_81D716: ;81D716
                        JMP.W CODE_81DA81                    ;81DA04;81DA81;
                                                             ;      ;      ;
                                                             ;      ;      ;
-          CODE_81DA07: JSL.L BFFFF                          ;81DA07;8281C0;
+          CODE_81DA07: JSL.L SUB_8281C0                          ;81DA07;8281C0;
                        %Set8bit(!M)                             ;81DA0B;      ;
                        LDA.B #$00                           ;81DA0D;      ;
                        XBA                                  ;81DA0F;      ;
@@ -8452,7 +8452,7 @@ CODE_81D716: ;81D716
                        JMP.W CODE_81DB37                    ;81DABA;81DB37;
                                                             ;      ;      ;
                                                             ;      ;      ;
-          CODE_81DABD: JSL.L BFFFF                          ;81DABD;8281C0;
+          CODE_81DABD: JSL.L SUB_8281C0                          ;81DABD;8281C0;
                        %Set8bit(!M)                             ;81DAC1;      ;
                        LDA.B #$00                           ;81DAC3;      ;
                        XBA                                  ;81DAC5;      ;
@@ -10388,7 +10388,7 @@ CODE_81D716: ;81D716
                        LDA.B #$00                           ;81EA6D;      ;
                        XBA                                  ;81EA6F;      ;
                        LDA.W $09A0                          ;81EA70;0009A0;
-                       JSL.L MakeaPointer                   ;81EA73;84887C;
+                       JSL.L SetCCPoiner                   ;81EA73;84887C;
                        %Set8bit(!M)                             ;81EA77;      ;
                        %Set16bit(!X)                             ;81EA79;      ;
                        LDY.W #$0001                         ;81EA7B;      ;
@@ -10841,7 +10841,7 @@ CODE_81D716: ;81D716
                        LDA.B #$00                           ;81EE30;      ;
                        XBA                                  ;81EE32;      ;
                        LDA.W $09A1                          ;81EE33;0009A1;
-                       JSL.L MakeaPointer                   ;81EE36;84887C;
+                       JSL.L SetCCPoiner                   ;81EE36;84887C;
                        %Set8bit(!M)                             ;81EE3A;      ;
                        %Set16bit(!X)                             ;81EE3C;      ;
                        LDY.W #$0001                         ;81EE3E;      ;

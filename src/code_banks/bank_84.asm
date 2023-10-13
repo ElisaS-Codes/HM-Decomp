@@ -7,7 +7,7 @@
                                                             ;      ;      ;
                 .loop: PHX                                  ;848005;      ;
                        TXA                                  ;848006;      ;
-                       JSL.L MakeaPointer                   ;848007;84887C;
+                       JSL.L SetCCPoiner                   ;848007;84887C;
                        %Set8bit(!M)                             ;84800B;      ;
                        %Set16bit(!X)                             ;84800D;      ;
                        LDY.W #$0000                         ;84800F;      ;
@@ -22,7 +22,7 @@
                                                             ;      ;      ;
                                                             ;      ;      ;
           CODE_848020: %Set16bit(!MX)                             ;848020;      ;
-                       JSL.L MakeaPointer                   ;848022;84887C;
+                       JSL.L SetCCPoiner                   ;848022;84887C;
                        %Set8bit(!M)                             ;848026;      ;
                        %Set16bit(!X)                             ;848028;      ;
                        LDY.W #$0000                         ;84802A;      ;
@@ -37,7 +37,7 @@
                                                             ;      ;      ;
                                                             ;      ;      ;
           CODE_84803F: %Set16bit(!MX)                             ;84803F;      ;
-                       JSL.L MakeaPointer                   ;848041;84887C;
+                       JSL.L SetCCPoiner                   ;848041;84887C;
                        %Set16bit(!MX)                             ;848045;      ;
                        STX.B $7E                            ;848047;00007E;
                        STY.B $80                            ;848049;000080;
@@ -80,67 +80,70 @@
                        STA.B $CB                            ;848091;0000CB;
                        JSR.W CODE_848961                    ;848093;848961;
                        RTL                                  ;848096;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                  VIP: %Set16bit(!MX)                             ;848097;      ;
-                       PHA                                  ;848099;      ;
-                       JSL.L MakeaPointer                   ;84809A;84887C;
-                       %Set16bit(!MX)                             ;84809E;      ;
-                       STX.B $7E                            ;8480A0;00007E;
-                       STY.B $80                            ;8480A2;000080;
-                       LDX.W #$0000                         ;8480A4;      ;
-                       LDA.L PTR24_8494CD,X                 ;8480A7;8494CD;
-                       STA.B $72                            ;8480AB;000072;
-                       INX                                  ;8480AD;      ;
-                       INX                                  ;8480AE;      ;
-                       %Set8bit(!M)                             ;8480AF;      ;
-                       LDA.L PTR24_8494CD,X                 ;8480B1;8494CD;
-                       STA.B $74                            ;8480B5;000074;
-                       %Set16bit(!M)                             ;8480B7;      ;
-                       LDA.B $7E                            ;8480B9;00007E;
-                       ASL A                                ;8480BB;      ;
-                       CLC                                  ;8480BC;      ;
-                       ADC.B $7E                            ;8480BD;00007E;
-                       TAY                                  ;8480BF;      ;
-                       LDA.B [$72],Y                        ;8480C0;000072;
-                       STA.B $C9                            ;8480C2;0000C9;
-                       INY                                  ;8480C4;      ;
-                       INY                                  ;8480C5;      ;
-                       %Set8bit(!M)                             ;8480C6;      ;
-                       LDA.B [$72],Y                        ;8480C8;000072;
-                       STA.B $CB                            ;8480CA;0000CB;
-                       %Set16bit(!M)                             ;8480CC;      ;
-                       LDA.B $80                            ;8480CE;000080;
-                       ASL A                                ;8480D0;      ;
-                       TAY                                  ;8480D1;      ;
-                       LDA.B [$C9],Y                        ;8480D2;0000C9;
-                       %Set16bit(!MX)                             ;8480D4;      ;
-                       LDY.W #$0030                         ;8480D6;      ;
-                       STA.B [$CC],Y                        ;8480D9;0000CC;
-                       %Set8bit(!M)                             ;8480DB;      ;
-                       LDA.B $CB                            ;8480DD;0000CB;
-                       %Set8bit(!M)                             ;8480DF;      ;
-                       %Set16bit(!X)                             ;8480E1;      ;
-                       LDY.W #$0032                         ;8480E3;      ;
-                       STA.B [$CC],Y                        ;8480E6;0000CC;
-                       JSR.W CODE_8488D4                    ;8480E8;8488D4;
-                       %Set16bit(!MX)                             ;8480EB;      ;
-                       PLA                                  ;8480ED;      ;
-                       %Set8bit(!M)                             ;8480EE;      ;
-                       %Set16bit(!X)                             ;8480F0;      ;
-                       LDY.W #$003F                         ;8480F2;      ;
-                       STA.B [$CC],Y                        ;8480F5;0000CC;
-                       RTL                                  ;8480F7;      ;
+
+;;;;;;;; I think this function controls events, it gets called, A LOT.
+;;;;;;;; params in A X Y
+VIP:
+        %Set16bit(!MX)
+        PHA
+        JSL.L SetCCPoiner
+        %Set16bit(!MX)
+        STX.B $7E
+        STY.B $80
+        LDX.W #$0000
+        LDA.L PTR24_8494CD,X
+        STA.B $72
+        INX
+        INX
+        %Set8bit(!M)
+        LDA.L PTR24_8494CD,X                 ;B38000
+        STA.B $74
+        %Set16bit(!M)
+        LDA.B $7E
+        ASL A
+        CLC
+        ADC.B $7E                            ;X * 3
+        TAY
+        LDA.B [$72],Y                        ;loads pointer from B38000 into it
+        STA.B $C9
+        INY
+        INY
+        %Set8bit(!M)
+        LDA.B [$72],Y
+        STA.B $CB
+        %Set16bit(!M)
+        LDA.B $80
+        ASL A
+        TAY
+        LDA.B [$C9],Y
+        %Set16bit(!MX)
+        LDY.W #$0030
+        STA.B [$CC],Y
+        %Set8bit(!M)
+        LDA.B $CB
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDY.W #$0032
+        STA.B [$CC],Y
+        JSR.W CODE_8488D4
+        %Set16bit(!MX)
+        PLA
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDY.W #$003F
+        STA.B [$CC],Y
+
+        RTL
                                                             ;      ;      ;
                                                             ;      ;      ;
           CODE_8480F8: %Set16bit(!MX)                             ;8480F8;      ;
                        PHA                                  ;8480FA;      ;
-                       JSL.L MakeaPointer                   ;8480FB;84887C;
-                       %Set16bit(!MX)                             ;8480FF;      ;
-                       STX.B $7E                            ;848101;00007E;
-                       STY.B $80                            ;848103;000080;
-                       LDX.W #$0000                         ;848105;      ;
-                       LDA.L PTR24_8494CD,X                 ;848108;8494CD;
+                       JSL.L SetCCPoiner
+                       %Set16bit(!MX)
+                       STX.B $7E
+                       STY.B $80
+                       LDX.W #$0000
+                       LDA.L PTR24_8494CD,X                 ;B38000 or B48000
                        STA.B $72                            ;84810C;000072;
                        INX                                  ;84810E;      ;
                        INX                                  ;84810F;      ;
@@ -1117,24 +1120,25 @@
                        CMP.B #$18                           ;848875;      ;
                        BCC CODE_848817                      ;848877;848817;
                        JMP.W CODE_8487FD                    ;848879;8487FD;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-         MakeaPointer: %Set16bit(!MX)                             ;84887C;      ;Param A return in $CC-$CE
-                       ASL A                                ;84887E;      ;
-                       ASL A                                ;84887F;      ;
-                       ASL A                                ;848880;      ;
-                       ASL A                                ;848881;      ;
-                       ASL A                                ;848882;      ;
-                       ASL A                                ;848883;      ;
-                       STA.B $7E                            ;848884;00007E;
-                       LDA.W #$B586                         ;848886;      ;
-                       CLC                                  ;848889;      ;
-                       ADC.B $7E                            ;84888A;00007E;
-                       STA.B $CC                            ;84888C;0000CC;
-                       %Set8bit(!M)                             ;84888E;      ;
-                       LDA.B #$7E                           ;848890;      ;
-                       STA.B $CE                            ;848892;0000CE;
-                       RTL                                  ;848894;      ;END_MakeaPointer
+
+;;;;;;;; TODO Param A return in $CC
+SetCCPoiner: ;84887C
+        %Set16bit(!MX)
+        ASL A
+        ASL A
+        ASL A
+        ASL A
+        ASL A
+        ASL A                                ;a << 6
+        STA.B $7E
+        LDA.W #$B586                         ;startin from here
+        CLC
+        ADC.B $7E
+        STA.B $CC
+        %Set8bit(!M)
+        LDA.B #$7E                           ;7EB586 + a <<6
+        STA.B $CE
+        RTL
                                                             ;      ;      ;
                                                             ;      ;      ;
           CODE_848895: %Set16bit(!MX)                             ;848895;      ;
@@ -1470,7 +1474,7 @@
                        XBA                                  ;848B2E;      ;
                        LDA.B [$C9]                          ;848B2F;0000C9;
                        %Set16bit(!M)                             ;848B31;      ;
-                       JSL.L MakeaPointer                   ;848B33;84887C;
+                       JSL.L SetCCPoiner                   ;848B33;84887C;
                        %Set8bit(!M)                             ;848B37;      ;
                        %Set16bit(!X)                             ;848B39;      ;
                        PLA                                  ;848B3B;      ;
@@ -2577,7 +2581,7 @@
                        XBA                                  ;84938F;      ;
                        LDA.B [$C9]                          ;849390;0000C9;
                        %Set16bit(!M)                             ;849392;      ;
-                       JSL.L MakeaPointer                   ;849394;84887C;
+                       JSL.L SetCCPoiner                   ;849394;84887C;
                        %Set16bit(!MX)                             ;849398;      ;
                        LDA.B $C9                            ;84939A;0000C9;
                        CLC                                  ;84939C;      ;
@@ -8448,7 +8452,7 @@ NameMenuKeyB: ;84C0AB
 NameMenuKeyA: ;84C0EE
         %Set16bit(!M)
         LDA.W #$0005
-        JSL.L UNK_CursorPharse               ;get what was hit.
+        JSL.L NameCursorPharse               ;get what was hit.
 
         %Set16bit(!M)
         CMP.W #$0001
@@ -8469,7 +8473,7 @@ NameMenuKeyA: ;84C0EE
         BEQ .playsound                       ;No more space
         %Set16bit(!M)
         LDA.W #$0004
-        JSL.L UNK_CursorPharse
+        JSL.L NameCursorPharse
         %Set8bit(!M)
         PHA
         LDA.B #$00
@@ -8580,7 +8584,7 @@ NameMenuKeyA: ;84C0EE
 NameMenuKeyDown: ;84C204
         %Set16bit(!M)
         LDA.W #$0000
-        JSL.L UNK_CursorPharse
+        JSL.L NameCursorPharse
 
         %Set16bit(!M)
         STA.W !menu_pos
@@ -8599,7 +8603,7 @@ NameMenuKeyDown: ;84C204
 NameMenuKeyUp: ;84C225
         %Set16bit(!M)
         LDA.W #$0001
-        JSL.L UNK_CursorPharse
+        JSL.L NameCursorPharse
 
         %Set16bit(!M)
         STA.W !menu_pos
@@ -8618,7 +8622,7 @@ NameMenuKeyUp: ;84C225
 NameMenuKeyLeft: ;84C246
         %Set16bit(!M)
         LDA.W #$0002
-        JSL.L UNK_CursorPharse
+        JSL.L NameCursorPharse
 
         %Set16bit(!M)
         STA.W !menu_pos
@@ -8637,7 +8641,7 @@ NameMenuKeyLeft: ;84C246
 NameMenuKeyRight: ;84C267
         %Set16bit(!M)
         LDA.W #$0003
-        JSL.L UNK_CursorPharse
+        JSL.L NameCursorPharse
 
         %Set16bit(!M)
         STA.W !menu_pos

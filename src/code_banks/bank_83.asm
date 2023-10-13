@@ -5389,7 +5389,7 @@ CheckSRAMIntegrity: ;83BAD4
 
 
 ;;;loops animals and checks feed, health and age/pregnancy and stuff like that
-CODE_83BC5A: ;83BC5A
+CowFeedingandStatus: ;83BC5A
         %Set16bit(!MX)
         LDA.L $7F1F60
         AND.W #$0001                         ;TODO

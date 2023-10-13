@@ -230,7 +230,7 @@
 
 ;Hardware division
 !WRDIVL = $4204 ; Divisor low
-!WRDIVH = $4205 ; 
+!WRDIVH = $4205 ;
 !WRDIVB = $4206 ; Dividend
 
 ;IRQ Timer Registers
@@ -266,8 +266,8 @@
 !RDMPYH = $4217 ;
 
 ;Controller Port Data Registers
-!JOY1L = $4218 ; 
-!JOY1H = $4219 ; 
+!JOY1L = $4218 ;
+!JOY1H = $4219 ;
 !JOY2L = $421A ;
 !JOY2H = $421B ;
 !JOY3L = $421C ;
@@ -297,11 +297,11 @@
 ;     101 => 2 registers write twice alternate (4 bytes: p, p+1, p,   p+1)
 ;     110 => 1 register write twice            (2 bytes: p, p            )
 ;     111 => 2 registers write twice each      (4 bytes: p, p,   p+1, p+1)
-!BBAD0 = $4301; This specifies the Bus B address to access.
-!A1T0L = $4302
+!BBAD0 = $4301 ;This specifies the Bus B address to access.
+!A1T0L = $4302 ;DMA Source Address Registers
 !A1T0H = $4303
-!A1B0 = $4304
-!DAS0L = $4305
+!A1B0 = $4304 ;DMA Source Address Registers Bank
+!DAS0L = $4305 ;DMA Size Registers
 !DAS0H = $4306
 
 

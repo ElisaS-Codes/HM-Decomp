@@ -6,15 +6,19 @@ PalettePointerTable
 828AD3
 
 ====Working on
-CODE_83BC5A Cow feeding subrutine?
-CODE_828CF9 Weather tomorrow subrutine?
-CODE_828C09 More weather?
+$90, wAiting ?
+
+
+
+
+
+
+SetWeatherFlag More weather?
 NightReset
-LoadsFromSeasonTable
+LoadsFromUNK5Table
 CHHHH
 Unk_Seasons2
-BOOOO
-CODE_83BC5A
+SUB_828209
 CODE_84803F
 AA9999
 ClearMemoryPointers1
@@ -72,7 +76,6 @@ $0D - 24b pointer
 $10 - 1040
 $12 -
 $16 - flags
-$18 - 16b pointer
 
 $1E - does things when transitioning to places
 
@@ -166,8 +169,8 @@ $018B -
 $0195 - Graphic mode ?
 $0196 - gets ORed with 0195? feels like flags?
 $0196 - flags? related to time?
-?k?k ??s? k = data keyboard read? t=Skips test and updates during what I think is the transition funciton?
-???? s?r? s= snowing? r=raining
+?n?k ??s? n:name set k = data keyboard read? s=Skips test and updates during what I think is the transition funciton?
+???h sSrf h:Hurracaine s= snowing S:sunny notSummer r=raining, fair
 
 $019A - (sores $04 after setting up) only some values are allowed or goes to 05, anithing not 1 disables movement
 $019B - UNK, changing it sometimes shows the crib sprite?
@@ -269,9 +272,11 @@ $7E098E - Related to save?
 $7E098F -
 
 $7E0990 -
-$7E0991 - menu y index
-$7E0993 -
-$7E0994 - index of character in menu?
+
+$0991 - menu y index
+$0993 -
+$0994 - index of character in menu?
+$099F what is the name being asked
 
 $7E09A3 - X Position
 $7E09A5 - X Position ???
@@ -283,17 +288,18 @@ $7E2400- - Tilemap content
 $7EA000-21E - OAM contents (size on $AF)
 
 $7EA220-31E - ($0000)
-
-$7EA320-41E - (32b? $0000) CGRAM
-
-$7EA420 -
-$7EA422 - (Holds DMA Source Address Low)
-$7EA424 - (Holds DMA Source Address High)
-
+$7EA320-41E - ($0000-$FFFF)
+$B3
+$BB
+$BD
+$7EA420 - what to write to VRAM for OBJ. Source. FFFF means End of data - 16
+$7EA422 - Source Add - 16
+$7EA424 - Source Add Banks - 8
+$7F0F00-1F00 - ($FFFF)
 
 $7EA4E6\farm data * #$0F00
 $7EA5A6/
-$7EB4E6-B586 - ($00) holds variables to set up around $0974 map?
+$7EB4E6-B5| - ($00) holds variables to set up around $0974 map?
 
 ==============
 
@@ -308,7 +314,7 @@ $7F098B - (#$3C)
 $7F0B00 -
 $7F0D00 -
 
-$7F0F00-1F00 - ($FFFF)
+
 
 $7F1F12 - (set between water counter and some cow data?), some kind of counter down?
 
