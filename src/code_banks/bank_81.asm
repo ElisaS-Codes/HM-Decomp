@@ -8030,7 +8030,7 @@ CODE_81D716: ;81D716
       %Set16bit(!M)
       LDA.W $00CF
       BNE .return
-      JSL.L BFFFF
+      JSL.L SUB_8281C0
       %Set8bit(!M)
       LDA.B #$00
       XBA
@@ -8363,7 +8363,7 @@ CODE_81D716: ;81D716
                        JMP.W CODE_81DA81                    ;81DA04;81DA81;
                                                             ;      ;      ;
                                                             ;      ;      ;
-          CODE_81DA07: JSL.L BFFFF                          ;81DA07;8281C0;
+          CODE_81DA07: JSL.L SUB_8281C0                          ;81DA07;8281C0;
                        %Set8bit(!M)                             ;81DA0B;      ;
                        LDA.B #$00                           ;81DA0D;      ;
                        XBA                                  ;81DA0F;      ;
@@ -8452,7 +8452,7 @@ CODE_81D716: ;81D716
                        JMP.W CODE_81DB37                    ;81DABA;81DB37;
                                                             ;      ;      ;
                                                             ;      ;      ;
-          CODE_81DABD: JSL.L BFFFF                          ;81DABD;8281C0;
+          CODE_81DABD: JSL.L SUB_8281C0                          ;81DABD;8281C0;
                        %Set8bit(!M)                             ;81DAC1;      ;
                        LDA.B #$00                           ;81DAC3;      ;
                        XBA                                  ;81DAC5;      ;

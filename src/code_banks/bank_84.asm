@@ -8452,7 +8452,7 @@ NameMenuKeyB: ;84C0AB
 NameMenuKeyA: ;84C0EE
         %Set16bit(!M)
         LDA.W #$0005
-        JSL.L UNK_CursorPharse               ;get what was hit.
+        JSL.L NameCursorPharse               ;get what was hit.
 
         %Set16bit(!M)
         CMP.W #$0001
@@ -8473,7 +8473,7 @@ NameMenuKeyA: ;84C0EE
         BEQ .playsound                       ;No more space
         %Set16bit(!M)
         LDA.W #$0004
-        JSL.L UNK_CursorPharse
+        JSL.L NameCursorPharse
         %Set8bit(!M)
         PHA
         LDA.B #$00
@@ -8584,7 +8584,7 @@ NameMenuKeyA: ;84C0EE
 NameMenuKeyDown: ;84C204
         %Set16bit(!M)
         LDA.W #$0000
-        JSL.L UNK_CursorPharse
+        JSL.L NameCursorPharse
 
         %Set16bit(!M)
         STA.W !menu_pos
@@ -8603,7 +8603,7 @@ NameMenuKeyDown: ;84C204
 NameMenuKeyUp: ;84C225
         %Set16bit(!M)
         LDA.W #$0001
-        JSL.L UNK_CursorPharse
+        JSL.L NameCursorPharse
 
         %Set16bit(!M)
         STA.W !menu_pos
@@ -8622,7 +8622,7 @@ NameMenuKeyUp: ;84C225
 NameMenuKeyLeft: ;84C246
         %Set16bit(!M)
         LDA.W #$0002
-        JSL.L UNK_CursorPharse
+        JSL.L NameCursorPharse
 
         %Set16bit(!M)
         STA.W !menu_pos
@@ -8641,7 +8641,7 @@ NameMenuKeyLeft: ;84C246
 NameMenuKeyRight: ;84C267
         %Set16bit(!M)
         LDA.W #$0003
-        JSL.L UNK_CursorPharse
+        JSL.L NameCursorPharse
 
         %Set16bit(!M)
         STA.W !menu_pos

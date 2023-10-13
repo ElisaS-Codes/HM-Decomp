@@ -253,7 +253,7 @@
 !wood_need_for_upgrade = $7F1F0E ;16b
 !stored_grass = $7F1F10 ;16b
 !weather_tomorrow = $098C ;8b
-;00:Sunny, 01:rain, 03:hurricane, 04:fair, 05:sunny and calm, 06:flower festival, 07:harvest festival, 08:Thanksgiving Festival, 09:Star Night Festival, 0A:festive mood, 0B:annual egg festival, 0C:snow
+;00:Sunny, 01:Rain, 02 Snow, 03:hurricane, 04:fair, 05:sunny and calm, 06:flower festival, 07:harvest festival, 08:Thanksgiving Festival, 09:Star Night Festival, 0A:festive mood, 0B:annual egg festival, 0C:snow
 !development_rate = $7F1F35
 ;Also used too keep track of house upgrade days
 !dog_map = $7F1F30 ;8b

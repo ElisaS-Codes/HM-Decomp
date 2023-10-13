@@ -1,10 +1,10 @@
 ORG $808000
 
 ;;;;;;;; Run right after RESET
-     UNK_RealMainLoop:  ;808000
+UNK_RealMainLoop:  ;808000
         %Set16bit(!MX)
         %Set8bit(!M)
-        LDA.B #$15
+        LDA.B #$15                           ;House lvl 1
         STA.B !tilemap_to_load
         JSL.L UNK_Audio5
         JSL.L UNK_Audio25
@@ -39,7 +39,7 @@ ORG $808000
         JSL.L UNK_ScreenTransition
         %Set16bit(!M)
         LDA.L $7F1F68
-        AND.W #$0001                        ;if climate is set tomorrow? festival?
+        AND.W #$0001                        ;FLAG68
         BEQ fromNightEvents
         %Set8bit(!M)
         LDA.B #$03
@@ -61,7 +61,7 @@ fromNightEvents: ;808083
         LDA.W #$1800
         STA.B $C7
         LDA.W $0196
-        AND.W #$2000
+        AND.W #$2000                         ;FLAG196
         BEQ .skip1
         JMP.W .skip2
 
@@ -426,7 +426,6 @@ SetKid2Name: ;8083AE
 ;;;;;;;; These values are used during the VRAM and OBJRAM Initializers.
 Value_0000: dw $0000 ;808424
 Value_00F0: dw $00F0 ;808426
-
 ;;;;;;;; Reset IRQ location, beguining of the program, basically
 ;;;;;;;; Sets all hardware registers and blanks some WRAM locations
 RESET:   ;808428
@@ -723,7 +722,7 @@ COP_Interrupt: ;808699
         PLB
         RTI
 
-
+;;;;;;;;
 UpdateGraphics: ;8086B1
         PHP
         %Set8bit(!M)
@@ -1370,8 +1369,8 @@ StartProgramedDMA: ;808AF0
         STZ.W !MDMAEN
         RTL
 
+;;;;;;;; Each channels flag
 DMA_Channels_Flag_Table: db $01,$02,$04,$08,$10,$20,$40,$80 ;808B3C
-
 ;The game can be in 11 different "Graphic presets", those set most PPU function Registers
 ;Unknown if all are used, some are repeated.
 ;The current graphic mode is stored in $8019B6 (remap of $7E19B6)
@@ -1594,25 +1593,27 @@ SetsBrightness: ;808E2D
         PLP
         RTL
 
-;;;;;;;;
-  UNK_MemoryWork42_44: %Set8bit(!MX)                             ;808E48;      ;ParamAY
-                       STA.W $015A,X                        ;808E4A;00015A;
-                       TYA                                  ;808E4D;      ;
-                       STA.W $016A,X                        ;808E4E;00016A;
-                       STZ.W $014A,X                        ;808E51;00014A;
-                       %Set16bit(!M)                             ;808E54;      ;
-                       TXA                                  ;808E56;      ;
-                       STA.B $7E                            ;808E57;00007E;
-                       ASL A                                ;808E59;      ;
-                       CLC                                  ;808E5A;      ;
-                       ADC.B $7E                            ;808E5B;00007E;
-                       TAX                                  ;808E5D;      ;
-                       LDA.B $72                            ;808E5E;000072;
-                       STA.B $42,X                          ;808E60;000042;
-                       %Set8bit(!M)                             ;808E62;      ;
-                       LDA.B $74                            ;808E64;000074;
-                       STA.B $44,X                          ;808E66;000044;
-                       RTL                                  ;808E68;      ;END_QQQQ
+;;;;;;;; Params in A, Y, X, 72, 74
+UNK_SetPointer42: ;808E48
+        %Set8bit(!MX)
+        STA.W $015A,X
+        TYA
+        STA.W $016A,X
+        STZ.W $014A,X
+        %Set16bit(!M)
+        TXA
+        STA.B $7E
+        ASL A
+        CLC
+        ADC.B $7E
+        TAX
+        LDA.B $72
+        STA.B $42,X
+        %Set8bit(!M)
+        LDA.B $74
+        STA.B $44,X
+
+        RTL
 
 ;;;;;;;;I think this is Rain/Snow related
 UNK_BigLoop:
@@ -2923,7 +2924,7 @@ ScreenTransitionReturn: ;80972B
                        LDA.B #$0C                           ;8097A8;      ;
                        LDX.B #$00                           ;8097AA;      ;
                        LDY.B #$00                           ;8097AC;      ;
-                       JSL.L UNK_MemoryWork42_44            ;8097AE;808E48;
+                       JSL.L UNK_SetPointer42            ;8097AE;808E48;
                        %Set16bit(!M)                             ;8097B2;      ;
                        %Set8bit(!X)                             ;8097B4;      ;
                        LDA.W #$B9DC                         ;8097B6;      ;
@@ -2935,7 +2936,7 @@ ScreenTransitionReturn: ;80972B
                        LDA.B #$0D                           ;8097C3;      ;
                        LDX.B #$01                           ;8097C5;      ;
                        LDY.B #$00                           ;8097C7;      ;
-                       JSL.L UNK_MemoryWork42_44            ;8097C9;808E48;
+                       JSL.L UNK_SetPointer42            ;8097C9;808E48;
                        %Set16bit(!M)                             ;8097CD;      ;
                        %Set8bit(!X)                             ;8097CF;      ;
                        LDA.W #$B9E2                         ;8097D1;      ;
@@ -2947,7 +2948,7 @@ ScreenTransitionReturn: ;80972B
                        LDA.B #$0E                           ;8097DE;      ;
                        LDX.B #$02                           ;8097E0;      ;
                        LDY.B #$00                           ;8097E2;      ;
-                       JSL.L UNK_MemoryWork42_44            ;8097E4;808E48;
+                       JSL.L UNK_SetPointer42            ;8097E4;808E48;
                        %Set16bit(!M)                             ;8097E8;      ;
                        %Set8bit(!X)                             ;8097EA;      ;
                        LDA.W #$B9DF                         ;8097EC;      ;
@@ -2959,7 +2960,7 @@ ScreenTransitionReturn: ;80972B
                        LDA.B #$0F                           ;8097F9;      ;
                        LDX.B #$03                           ;8097FB;      ;
                        LDY.B #$00                           ;8097FD;      ;
-                       JSL.L UNK_MemoryWork42_44            ;8097FF;808E48;
+                       JSL.L UNK_SetPointer42            ;8097FF;808E48;
                        JMP.W CODE_8098A8                    ;809803;8098A8;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -2999,7 +3000,7 @@ ScreenTransitionReturn: ;80972B
                        LDA.B #$0C                           ;80984D;      ;
                        LDX.B #$00                           ;80984F;      ;
                        LDY.B #$00                           ;809851;      ;
-                       JSL.L UNK_MemoryWork42_44            ;809853;808E48;
+                       JSL.L UNK_SetPointer42            ;809853;808E48;
                        %Set16bit(!M)                             ;809857;      ;
                        %Set8bit(!X)                             ;809859;      ;
                        LDA.W #$B9EF                         ;80985B;      ;
@@ -3011,7 +3012,7 @@ ScreenTransitionReturn: ;80972B
                        LDA.B #$0D                           ;809868;      ;
                        LDX.B #$01                           ;80986A;      ;
                        LDY.B #$00                           ;80986C;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80986E;808E48;
+                       JSL.L UNK_SetPointer42            ;80986E;808E48;
                        %Set16bit(!M)                             ;809872;      ;
                        %Set8bit(!X)                             ;809874;      ;
                        LDA.W #$B9F2                         ;809876;      ;
@@ -3023,7 +3024,7 @@ ScreenTransitionReturn: ;80972B
                        LDA.B #$0E                           ;809883;      ;
                        LDX.B #$02                           ;809885;      ;
                        LDY.B #$00                           ;809887;      ;
-                       JSL.L UNK_MemoryWork42_44            ;809889;808E48;
+                       JSL.L UNK_SetPointer42            ;809889;808E48;
                        %Set16bit(!M)                             ;80988D;      ;
                        %Set8bit(!X)                             ;80988F;      ;
                        LDA.W #$B9F5                         ;809891;      ;
@@ -3035,7 +3036,7 @@ ScreenTransitionReturn: ;80972B
                        LDA.B #$0F                           ;80989E;      ;
                        LDX.B #$03                           ;8098A0;      ;
                        LDY.B #$00                           ;8098A2;      ;
-                       JSL.L UNK_MemoryWork42_44            ;8098A4;808E48;
+                       JSL.L UNK_SetPointer42            ;8098A4;808E48;
                                                             ;      ;      ;
           CODE_8098A8: JSL.L CODE_8392BB                    ;8098A8;8392BB;
                        %Set8bit(!M)                             ;8098AC;      ;
@@ -5644,7 +5645,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80C37D;      ;
                        LDX.B #$04                           ;80C37F;      ;
                        LDY.B #$04                           ;80C381;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C383;808E48;
+                       JSL.L UNK_SetPointer42            ;80C383;808E48;
                        REP #$20                             ;80C387;      ;
                        SEP #$10                             ;80C389;      ;
                        LDA.W #$DD78                         ;80C38B;      ;
@@ -5656,7 +5657,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80C398;      ;
                        LDX.B #$05                           ;80C39A;      ;
                        LDY.B #$04                           ;80C39C;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C39E;808E48;
+                       JSL.L UNK_SetPointer42            ;80C39E;808E48;
                        REP #$20                             ;80C3A2;      ;
                        SEP #$10                             ;80C3A4;      ;
                        LDA.W #$DD95                         ;80C3A6;      ;
@@ -5668,7 +5669,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80C3B3;      ;
                        LDX.B #$06                           ;80C3B5;      ;
                        LDY.B #$04                           ;80C3B7;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C3B9;808E48;
+                       JSL.L UNK_SetPointer42            ;80C3B9;808E48;
                        REP #$20                             ;80C3BD;      ;
                        SEP #$10                             ;80C3BF;      ;
                        LDA.W #$DDB2                         ;80C3C1;      ;
@@ -5680,7 +5681,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80C3CE;      ;
                        LDX.B #$07                           ;80C3D0;      ;
                        LDY.B #$04                           ;80C3D2;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C3D4;808E48;
+                       JSL.L UNK_SetPointer42            ;80C3D4;808E48;
                        RTS                                  ;80C3D8;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -5695,7 +5696,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80C3EA;      ;
                        LDX.B #$04                           ;80C3EC;      ;
                        LDY.B #$04                           ;80C3EE;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C3F0;808E48;
+                       JSL.L UNK_SetPointer42            ;80C3F0;808E48;
                        REP #$20                             ;80C3F4;      ;
                        SEP #$10                             ;80C3F6;      ;
                        LDA.W #$DDEC                         ;80C3F8;      ;
@@ -5707,7 +5708,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80C405;      ;
                        LDX.B #$05                           ;80C407;      ;
                        LDY.B #$04                           ;80C409;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C40B;808E48;
+                       JSL.L UNK_SetPointer42            ;80C40B;808E48;
                        REP #$20                             ;80C40F;      ;
                        SEP #$10                             ;80C411;      ;
                        LDA.W #$DE09                         ;80C413;      ;
@@ -5719,7 +5720,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80C420;      ;
                        LDX.B #$06                           ;80C422;      ;
                        LDY.B #$04                           ;80C424;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C426;808E48;
+                       JSL.L UNK_SetPointer42            ;80C426;808E48;
                        REP #$20                             ;80C42A;      ;
                        SEP #$10                             ;80C42C;      ;
                        LDA.W #$DE26                         ;80C42E;      ;
@@ -5731,7 +5732,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80C43B;      ;
                        LDX.B #$07                           ;80C43D;      ;
                        LDY.B #$04                           ;80C43F;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C441;808E48;
+                       JSL.L UNK_SetPointer42            ;80C441;808E48;
                        RTS                                  ;80C445;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80C446;      ;
@@ -5745,7 +5746,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80C457;      ;
                        LDX.B #$04                           ;80C459;      ;
                        LDY.B #$04                           ;80C45B;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C45D;808E48;
+                       JSL.L UNK_SetPointer42            ;80C45D;808E48;
                        REP #$20                             ;80C461;      ;
                        SEP #$10                             ;80C463;      ;
                        LDA.W #$DE60                         ;80C465;      ;
@@ -5757,7 +5758,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80C472;      ;
                        LDX.B #$05                           ;80C474;      ;
                        LDY.B #$04                           ;80C476;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C478;808E48;
+                       JSL.L UNK_SetPointer42            ;80C478;808E48;
                        REP #$20                             ;80C47C;      ;
                        SEP #$10                             ;80C47E;      ;
                        LDA.W #$DE7D                         ;80C480;      ;
@@ -5769,7 +5770,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80C48D;      ;
                        LDX.B #$06                           ;80C48F;      ;
                        LDY.B #$04                           ;80C491;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C493;808E48;
+                       JSL.L UNK_SetPointer42            ;80C493;808E48;
                        REP #$20                             ;80C497;      ;
                        SEP #$10                             ;80C499;      ;
                        LDA.W #$DE9A                         ;80C49B;      ;
@@ -5781,7 +5782,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80C4A8;      ;
                        LDX.B #$07                           ;80C4AA;      ;
                        LDY.B #$04                           ;80C4AC;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C4AE;808E48;
+                       JSL.L UNK_SetPointer42            ;80C4AE;808E48;
                        RTS                                  ;80C4B2;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80C4B3;      ;
@@ -5795,7 +5796,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80C4C4;      ;
                        LDX.B #$04                           ;80C4C6;      ;
                        LDY.B #$04                           ;80C4C8;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C4CA;808E48;
+                       JSL.L UNK_SetPointer42            ;80C4CA;808E48;
                        REP #$20                             ;80C4CE;      ;
                        SEP #$10                             ;80C4D0;      ;
                        LDA.W #$DED4                         ;80C4D2;      ;
@@ -5807,7 +5808,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80C4DF;      ;
                        LDX.B #$05                           ;80C4E1;      ;
                        LDY.B #$04                           ;80C4E3;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C4E5;808E48;
+                       JSL.L UNK_SetPointer42            ;80C4E5;808E48;
                        REP #$20                             ;80C4E9;      ;
                        SEP #$10                             ;80C4EB;      ;
                        LDA.W #$DEF1                         ;80C4ED;      ;
@@ -5819,7 +5820,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80C4FA;      ;
                        LDX.B #$06                           ;80C4FC;      ;
                        LDY.B #$04                           ;80C4FE;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C500;808E48;
+                       JSL.L UNK_SetPointer42            ;80C500;808E48;
                        REP #$20                             ;80C504;      ;
                        SEP #$10                             ;80C506;      ;
                        LDA.W #$DF0E                         ;80C508;      ;
@@ -5831,7 +5832,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80C515;      ;
                        LDX.B #$07                           ;80C517;      ;
                        LDY.B #$04                           ;80C519;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C51B;808E48;
+                       JSL.L UNK_SetPointer42            ;80C51B;808E48;
                        RTS                                  ;80C51F;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -5846,7 +5847,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80C531;      ;
                        LDX.B #$04                           ;80C533;      ;
                        LDY.B #$04                           ;80C535;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C537;808E48;
+                       JSL.L UNK_SetPointer42            ;80C537;808E48;
                        REP #$20                             ;80C53B;      ;
                        SEP #$10                             ;80C53D;      ;
                        LDA.W #$DF48                         ;80C53F;      ;
@@ -5858,7 +5859,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80C54C;      ;
                        LDX.B #$05                           ;80C54E;      ;
                        LDY.B #$04                           ;80C550;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C552;808E48;
+                       JSL.L UNK_SetPointer42            ;80C552;808E48;
                        REP #$20                             ;80C556;      ;
                        SEP #$10                             ;80C558;      ;
                        LDA.W #$DF65                         ;80C55A;      ;
@@ -5870,7 +5871,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80C567;      ;
                        LDX.B #$06                           ;80C569;      ;
                        LDY.B #$04                           ;80C56B;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C56D;808E48;
+                       JSL.L UNK_SetPointer42            ;80C56D;808E48;
                        REP #$20                             ;80C571;      ;
                        SEP #$10                             ;80C573;      ;
                        LDA.W #$DF82                         ;80C575;      ;
@@ -5882,7 +5883,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80C582;      ;
                        LDX.B #$07                           ;80C584;      ;
                        LDY.B #$04                           ;80C586;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C588;808E48;
+                       JSL.L UNK_SetPointer42            ;80C588;808E48;
                        RTS                                  ;80C58C;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80C58D;      ;
@@ -5896,7 +5897,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80C59E;      ;
                        LDX.B #$04                           ;80C5A0;      ;
                        LDY.B #$04                           ;80C5A2;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C5A4;808E48;
+                       JSL.L UNK_SetPointer42            ;80C5A4;808E48;
                        REP #$20                             ;80C5A8;      ;
                        SEP #$10                             ;80C5AA;      ;
                        LDA.W #$DFBC                         ;80C5AC;      ;
@@ -5908,7 +5909,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80C5B9;      ;
                        LDX.B #$05                           ;80C5BB;      ;
                        LDY.B #$04                           ;80C5BD;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C5BF;808E48;
+                       JSL.L UNK_SetPointer42            ;80C5BF;808E48;
                        REP #$20                             ;80C5C3;      ;
                        SEP #$10                             ;80C5C5;      ;
                        LDA.W #$DFD9                         ;80C5C7;      ;
@@ -5920,7 +5921,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80C5D4;      ;
                        LDX.B #$06                           ;80C5D6;      ;
                        LDY.B #$04                           ;80C5D8;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C5DA;808E48;
+                       JSL.L UNK_SetPointer42            ;80C5DA;808E48;
                        REP #$20                             ;80C5DE;      ;
                        SEP #$10                             ;80C5E0;      ;
                        LDA.W #$DFF6                         ;80C5E2;      ;
@@ -5932,7 +5933,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80C5EF;      ;
                        LDX.B #$07                           ;80C5F1;      ;
                        LDY.B #$04                           ;80C5F3;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C5F5;808E48;
+                       JSL.L UNK_SetPointer42            ;80C5F5;808E48;
                        RTS                                  ;80C5F9;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80C5FA;      ;
@@ -5946,7 +5947,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80C60B;      ;
                        LDX.B #$04                           ;80C60D;      ;
                        LDY.B #$04                           ;80C60F;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C611;808E48;
+                       JSL.L UNK_SetPointer42            ;80C611;808E48;
                        REP #$20                             ;80C615;      ;
                        SEP #$10                             ;80C617;      ;
                        LDA.W #$E030                         ;80C619;      ;
@@ -5958,7 +5959,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80C626;      ;
                        LDX.B #$05                           ;80C628;      ;
                        LDY.B #$04                           ;80C62A;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C62C;808E48;
+                       JSL.L UNK_SetPointer42            ;80C62C;808E48;
                        REP #$20                             ;80C630;      ;
                        SEP #$10                             ;80C632;      ;
                        LDA.W #$E04D                         ;80C634;      ;
@@ -5970,7 +5971,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80C641;      ;
                        LDX.B #$06                           ;80C643;      ;
                        LDY.B #$04                           ;80C645;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C647;808E48;
+                       JSL.L UNK_SetPointer42            ;80C647;808E48;
                        REP #$20                             ;80C64B;      ;
                        SEP #$10                             ;80C64D;      ;
                        LDA.W #$E06A                         ;80C64F;      ;
@@ -5982,7 +5983,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80C65C;      ;
                        LDX.B #$07                           ;80C65E;      ;
                        LDY.B #$04                           ;80C660;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C662;808E48;
+                       JSL.L UNK_SetPointer42            ;80C662;808E48;
                        RTS                                  ;80C666;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80C667;      ;
@@ -5996,7 +5997,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80C678;      ;
                        LDX.B #$04                           ;80C67A;      ;
                        LDY.B #$04                           ;80C67C;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C67E;808E48;
+                       JSL.L UNK_SetPointer42            ;80C67E;808E48;
                        REP #$20                             ;80C682;      ;
                        SEP #$10                             ;80C684;      ;
                        LDA.W #$E0A4                         ;80C686;      ;
@@ -6008,7 +6009,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80C693;      ;
                        LDX.B #$05                           ;80C695;      ;
                        LDY.B #$04                           ;80C697;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C699;808E48;
+                       JSL.L UNK_SetPointer42            ;80C699;808E48;
                        REP #$20                             ;80C69D;      ;
                        SEP #$10                             ;80C69F;      ;
                        LDA.W #$E0C1                         ;80C6A1;      ;
@@ -6020,7 +6021,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80C6AE;      ;
                        LDX.B #$06                           ;80C6B0;      ;
                        LDY.B #$04                           ;80C6B2;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C6B4;808E48;
+                       JSL.L UNK_SetPointer42            ;80C6B4;808E48;
                        REP #$20                             ;80C6B8;      ;
                        SEP #$10                             ;80C6BA;      ;
                        LDA.W #$E0DE                         ;80C6BC;      ;
@@ -6032,7 +6033,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80C6C9;      ;
                        LDX.B #$07                           ;80C6CB;      ;
                        LDY.B #$04                           ;80C6CD;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C6CF;808E48;
+                       JSL.L UNK_SetPointer42            ;80C6CF;808E48;
                        RTS                                  ;80C6D3;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80C6D4;      ;
@@ -6046,7 +6047,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$06                           ;80C6E5;      ;
                        LDX.B #$04                           ;80C6E7;      ;
                        LDY.B #$02                           ;80C6E9;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C6EB;808E48;
+                       JSL.L UNK_SetPointer42            ;80C6EB;808E48;
                        REP #$20                             ;80C6EF;      ;
                        SEP #$10                             ;80C6F1;      ;
                        LDA.W #$E10C                         ;80C6F3;      ;
@@ -6058,7 +6059,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$07                           ;80C700;      ;
                        LDX.B #$05                           ;80C702;      ;
                        LDY.B #$02                           ;80C704;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C706;808E48;
+                       JSL.L UNK_SetPointer42            ;80C706;808E48;
                        REP #$20                             ;80C70A;      ;
                        SEP #$10                             ;80C70C;      ;
                        LDA.W #$E11D                         ;80C70E;      ;
@@ -6070,7 +6071,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80C71B;      ;
                        LDX.B #$06                           ;80C71D;      ;
                        LDY.B #$02                           ;80C71F;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C721;808E48;
+                       JSL.L UNK_SetPointer42            ;80C721;808E48;
                        REP #$20                             ;80C725;      ;
                        SEP #$10                             ;80C727;      ;
                        LDA.W #$E12E                         ;80C729;      ;
@@ -6082,7 +6083,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80C736;      ;
                        LDX.B #$07                           ;80C738;      ;
                        LDY.B #$02                           ;80C73A;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C73C;808E48;
+                       JSL.L UNK_SetPointer42            ;80C73C;808E48;
                        REP #$20                             ;80C740;      ;
                        SEP #$10                             ;80C742;      ;
                        LDA.W #$E13F                         ;80C744;      ;
@@ -6094,7 +6095,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0D                           ;80C751;      ;
                        LDX.B #$08                           ;80C753;      ;
                        LDY.B #$02                           ;80C755;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C757;808E48;
+                       JSL.L UNK_SetPointer42            ;80C757;808E48;
                        REP #$20                             ;80C75B;      ;
                        SEP #$10                             ;80C75D;      ;
                        LDA.W #$E150                         ;80C75F;      ;
@@ -6106,7 +6107,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80C76C;      ;
                        LDX.B #$09                           ;80C76E;      ;
                        LDY.B #$02                           ;80C770;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C772;808E48;
+                       JSL.L UNK_SetPointer42            ;80C772;808E48;
                        REP #$20                             ;80C776;      ;
                        SEP #$10                             ;80C778;      ;
                        LDA.W #$E161                         ;80C77A;      ;
@@ -6118,7 +6119,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0F                           ;80C787;      ;
                        LDX.B #$0A                           ;80C789;      ;
                        LDY.B #$02                           ;80C78B;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C78D;808E48;
+                       JSL.L UNK_SetPointer42            ;80C78D;808E48;
                        RTS                                  ;80C791;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80C792;      ;
@@ -6132,7 +6133,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$02                           ;80C7A3;      ;
                        LDX.B #$04                           ;80C7A5;      ;
                        LDY.B #$03                           ;80C7A7;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C7A9;808E48;
+                       JSL.L UNK_SetPointer42            ;80C7A9;808E48;
                        REP #$20                             ;80C7AD;      ;
                        SEP #$10                             ;80C7AF;      ;
                        LDA.W #$E17D                         ;80C7B1;      ;
@@ -6144,7 +6145,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0D                           ;80C7BE;      ;
                        LDX.B #$05                           ;80C7C0;      ;
                        LDY.B #$03                           ;80C7C2;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C7C4;808E48;
+                       JSL.L UNK_SetPointer42            ;80C7C4;808E48;
                        REP #$20                             ;80C7C8;      ;
                        SEP #$10                             ;80C7CA;      ;
                        LDA.W #$E188                         ;80C7CC;      ;
@@ -6156,7 +6157,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80C7D9;      ;
                        LDX.B #$06                           ;80C7DB;      ;
                        LDY.B #$03                           ;80C7DD;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C7DF;808E48;
+                       JSL.L UNK_SetPointer42            ;80C7DF;808E48;
                        REP #$20                             ;80C7E3;      ;
                        SEP #$10                             ;80C7E5;      ;
                        LDA.W #$E193                         ;80C7E7;      ;
@@ -6168,7 +6169,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0F                           ;80C7F4;      ;
                        LDX.B #$07                           ;80C7F6;      ;
                        LDY.B #$03                           ;80C7F8;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C7FA;808E48;
+                       JSL.L UNK_SetPointer42            ;80C7FA;808E48;
                        RTS                                  ;80C7FE;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80C7FF;      ;
@@ -6182,7 +6183,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$07                           ;80C810;      ;
                        LDX.B #$04                           ;80C812;      ;
                        LDY.B #$01                           ;80C814;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C816;808E48;
+                       JSL.L UNK_SetPointer42            ;80C816;808E48;
                        REP #$20                             ;80C81A;      ;
                        SEP #$10                             ;80C81C;      ;
                        LDA.W #$E1A9                         ;80C81E;      ;
@@ -6194,7 +6195,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$08                           ;80C82B;      ;
                        LDX.B #$05                           ;80C82D;      ;
                        LDY.B #$01                           ;80C82F;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C831;808E48;
+                       JSL.L UNK_SetPointer42            ;80C831;808E48;
                        REP #$20                             ;80C835;      ;
                        SEP #$10                             ;80C837;      ;
                        LDA.W #$E1B4                         ;80C839;      ;
@@ -6206,7 +6207,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80C846;      ;
                        LDX.B #$06                           ;80C848;      ;
                        LDY.B #$01                           ;80C84A;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C84C;808E48;
+                       JSL.L UNK_SetPointer42            ;80C84C;808E48;
                        REP #$20                             ;80C850;      ;
                        SEP #$10                             ;80C852;      ;
                        LDA.W #$E1BF                         ;80C854;      ;
@@ -6218,7 +6219,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80C861;      ;
                        LDX.B #$07                           ;80C863;      ;
                        LDY.B #$02                           ;80C865;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C867;808E48;
+                       JSL.L UNK_SetPointer42            ;80C867;808E48;
                        RTS                                  ;80C86B;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80C86C;      ;
@@ -6232,7 +6233,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$01                           ;80C87D;      ;
                        LDX.B #$04                           ;80C87F;      ;
                        LDY.B #$05                           ;80C881;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C883;808E48;
+                       JSL.L UNK_SetPointer42            ;80C883;808E48;
                        REP #$20                             ;80C887;      ;
                        SEP #$10                             ;80C889;      ;
                        LDA.W #$E1DB                         ;80C88B;      ;
@@ -6244,7 +6245,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$04                           ;80C898;      ;
                        LDX.B #$05                           ;80C89A;      ;
                        LDY.B #$05                           ;80C89C;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C89E;808E48;
+                       JSL.L UNK_SetPointer42            ;80C89E;808E48;
                        REP #$20                             ;80C8A2;      ;
                        SEP #$10                             ;80C8A4;      ;
                        LDA.W #$E1EC                         ;80C8A6;      ;
@@ -6256,7 +6257,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$07                           ;80C8B3;      ;
                        LDX.B #$06                           ;80C8B5;      ;
                        LDY.B #$05                           ;80C8B7;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C8B9;808E48;
+                       JSL.L UNK_SetPointer42            ;80C8B9;808E48;
                        REP #$20                             ;80C8BD;      ;
                        SEP #$10                             ;80C8BF;      ;
                        LDA.W #$E1FD                         ;80C8C1;      ;
@@ -6268,7 +6269,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$08                           ;80C8CE;      ;
                        LDX.B #$07                           ;80C8D0;      ;
                        LDY.B #$05                           ;80C8D2;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C8D4;808E48;
+                       JSL.L UNK_SetPointer42            ;80C8D4;808E48;
                        REP #$20                             ;80C8D8;      ;
                        SEP #$10                             ;80C8DA;      ;
                        LDA.W #$E20E                         ;80C8DC;      ;
@@ -6280,7 +6281,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80C8E9;      ;
                        LDX.B #$08                           ;80C8EB;      ;
                        LDY.B #$05                           ;80C8ED;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C8EF;808E48;
+                       JSL.L UNK_SetPointer42            ;80C8EF;808E48;
                        REP #$20                             ;80C8F3;      ;
                        SEP #$10                             ;80C8F5;      ;
                        LDA.W #$E21F                         ;80C8F7;      ;
@@ -6292,7 +6293,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80C904;      ;
                        LDX.B #$09                           ;80C906;      ;
                        LDY.B #$05                           ;80C908;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C90A;808E48;
+                       JSL.L UNK_SetPointer42            ;80C90A;808E48;
                        REP #$20                             ;80C90E;      ;
                        SEP #$10                             ;80C910;      ;
                        LDA.W #$E230                         ;80C912;      ;
@@ -6304,7 +6305,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0D                           ;80C91F;      ;
                        LDX.B #$0A                           ;80C921;      ;
                        LDY.B #$05                           ;80C923;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C925;808E48;
+                       JSL.L UNK_SetPointer42            ;80C925;808E48;
                        REP #$20                             ;80C929;      ;
                        SEP #$10                             ;80C92B;      ;
                        LDA.W #$E241                         ;80C92D;      ;
@@ -6316,7 +6317,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80C93A;      ;
                        LDX.B #$0B                           ;80C93C;      ;
                        LDY.B #$05                           ;80C93E;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C940;808E48;
+                       JSL.L UNK_SetPointer42            ;80C940;808E48;
                        RTS                                  ;80C944;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -6331,7 +6332,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$08                           ;80C956;      ;
                        LDX.B #$04                           ;80C958;      ;
                        LDY.B #$01                           ;80C95A;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C95C;808E48;
+                       JSL.L UNK_SetPointer42            ;80C95C;808E48;
                        REP #$20                             ;80C960;      ;
                        SEP #$10                             ;80C962;      ;
                        LDA.W #$E25D                         ;80C964;      ;
@@ -6343,7 +6344,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80C971;      ;
                        LDX.B #$05                           ;80C973;      ;
                        LDY.B #$01                           ;80C975;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C977;808E48;
+                       JSL.L UNK_SetPointer42            ;80C977;808E48;
                        REP #$20                             ;80C97B;      ;
                        SEP #$10                             ;80C97D;      ;
                        LDA.W #$E268                         ;80C97F;      ;
@@ -6355,7 +6356,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80C98C;      ;
                        LDX.B #$06                           ;80C98E;      ;
                        LDY.B #$01                           ;80C990;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C992;808E48;
+                       JSL.L UNK_SetPointer42            ;80C992;808E48;
                        REP #$20                             ;80C996;      ;
                        SEP #$10                             ;80C998;      ;
                        LDA.W #$E273                         ;80C99A;      ;
@@ -6367,7 +6368,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0D                           ;80C9A7;      ;
                        LDX.B #$07                           ;80C9A9;      ;
                        LDY.B #$01                           ;80C9AB;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C9AD;808E48;
+                       JSL.L UNK_SetPointer42            ;80C9AD;808E48;
                        RTS                                  ;80C9B1;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80C9B2;      ;
@@ -6381,7 +6382,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$07                           ;80C9C3;      ;
                        LDX.B #$04                           ;80C9C5;      ;
                        LDY.B #$02                           ;80C9C7;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C9C9;808E48;
+                       JSL.L UNK_SetPointer42            ;80C9C9;808E48;
                        REP #$20                             ;80C9CD;      ;
                        SEP #$10                             ;80C9CF;      ;
                        LDA.W #$E289                         ;80C9D1;      ;
@@ -6393,7 +6394,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$08                           ;80C9DE;      ;
                        LDX.B #$05                           ;80C9E0;      ;
                        LDY.B #$02                           ;80C9E2;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C9E4;808E48;
+                       JSL.L UNK_SetPointer42            ;80C9E4;808E48;
                        REP #$20                             ;80C9E8;      ;
                        SEP #$10                             ;80C9EA;      ;
                        LDA.W #$E294                         ;80C9EC;      ;
@@ -6405,7 +6406,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0D                           ;80C9F9;      ;
                        LDX.B #$06                           ;80C9FB;      ;
                        LDY.B #$02                           ;80C9FD;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80C9FF;808E48;
+                       JSL.L UNK_SetPointer42            ;80C9FF;808E48;
                        REP #$20                             ;80CA03;      ;
                        SEP #$10                             ;80CA05;      ;
                        LDA.W #$E29F                         ;80CA07;      ;
@@ -6417,7 +6418,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80CA14;      ;
                        LDX.B #$07                           ;80CA16;      ;
                        LDY.B #$02                           ;80CA18;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CA1A;808E48;
+                       JSL.L UNK_SetPointer42            ;80CA1A;808E48;
                        RTS                                  ;80CA1E;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80CA1F;      ;
@@ -6431,7 +6432,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80CA30;      ;
                        LDX.B #$04                           ;80CA32;      ;
                        LDY.B #$01                           ;80CA34;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CA36;808E48;
+                       JSL.L UNK_SetPointer42            ;80CA36;808E48;
                        REP #$20                             ;80CA3A;      ;
                        SEP #$10                             ;80CA3C;      ;
                        LDA.W #$E2B5                         ;80CA3E;      ;
@@ -6443,7 +6444,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80CA4B;      ;
                        LDX.B #$05                           ;80CA4D;      ;
                        LDY.B #$01                           ;80CA4F;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CA51;808E48;
+                       JSL.L UNK_SetPointer42            ;80CA51;808E48;
                        REP #$20                             ;80CA55;      ;
                        SEP #$10                             ;80CA57;      ;
                        LDA.W #$E2C0                         ;80CA59;      ;
@@ -6455,7 +6456,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80CA66;      ;
                        LDX.B #$06                           ;80CA68;      ;
                        LDY.B #$01                           ;80CA6A;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CA6C;808E48;
+                       JSL.L UNK_SetPointer42            ;80CA6C;808E48;
                        REP #$20                             ;80CA70;      ;
                        SEP #$10                             ;80CA72;      ;
                        LDA.W #$E2CB                         ;80CA74;      ;
@@ -6467,7 +6468,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0D                           ;80CA81;      ;
                        LDX.B #$07                           ;80CA83;      ;
                        LDY.B #$01                           ;80CA85;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CA87;808E48;
+                       JSL.L UNK_SetPointer42            ;80CA87;808E48;
                        RTS                                  ;80CA8B;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80CA8C;      ;
@@ -6481,7 +6482,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0D                           ;80CA9D;      ;
                        LDX.B #$04                           ;80CA9F;      ;
                        LDY.B #$02                           ;80CAA1;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CAA3;808E48;
+                       JSL.L UNK_SetPointer42            ;80CAA3;808E48;
                        REP #$20                             ;80CAA7;      ;
                        SEP #$10                             ;80CAA9;      ;
                        LDA.W #$E2E1                         ;80CAAB;      ;
@@ -6493,7 +6494,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80CAB8;      ;
                        LDX.B #$05                           ;80CABA;      ;
                        LDY.B #$02                           ;80CABC;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CABE;808E48;
+                       JSL.L UNK_SetPointer42            ;80CABE;808E48;
                        REP #$20                             ;80CAC2;      ;
                        SEP #$10                             ;80CAC4;      ;
                        LDA.W #$E2EC                         ;80CAC6;      ;
@@ -6505,7 +6506,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0F                           ;80CAD3;      ;
                        LDX.B #$06                           ;80CAD5;      ;
                        LDY.B #$02                           ;80CAD7;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CAD9;808E48;
+                       JSL.L UNK_SetPointer42            ;80CAD9;808E48;
                        RTS                                  ;80CADD;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80CADE;      ;
@@ -6519,7 +6520,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$06                           ;80CAEF;      ;
                        LDX.B #$04                           ;80CAF1;      ;
                        LDY.B #$02                           ;80CAF3;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CAF5;808E48;
+                       JSL.L UNK_SetPointer42            ;80CAF5;808E48;
                        REP #$20                             ;80CAF9;      ;
                        SEP #$10                             ;80CAFB;      ;
                        LDA.W #$E305                         ;80CAFD;      ;
@@ -6531,7 +6532,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80CB0A;      ;
                        LDX.B #$05                           ;80CB0C;      ;
                        LDY.B #$02                           ;80CB0E;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CB10;808E48;
+                       JSL.L UNK_SetPointer42            ;80CB10;808E48;
                        REP #$20                             ;80CB14;      ;
                        SEP #$10                             ;80CB16;      ;
                        LDA.W #$E313                         ;80CB18;      ;
@@ -6543,7 +6544,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0F                           ;80CB25;      ;
                        LDX.B #$06                           ;80CB27;      ;
                        LDY.B #$02                           ;80CB29;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CB2B;808E48;
+                       JSL.L UNK_SetPointer42            ;80CB2B;808E48;
                        RTS                                  ;80CB2F;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -6558,7 +6559,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$06                           ;80CB41;      ;
                        LDX.B #$04                           ;80CB43;      ;
                        LDY.B #$02                           ;80CB45;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CB47;808E48;
+                       JSL.L UNK_SetPointer42            ;80CB47;808E48;
                        REP #$20                             ;80CB4B;      ;
                        SEP #$10                             ;80CB4D;      ;
                        LDA.W #$E32F                         ;80CB4F;      ;
@@ -6570,7 +6571,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80CB5C;      ;
                        LDX.B #$05                           ;80CB5E;      ;
                        LDY.B #$02                           ;80CB60;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CB62;808E48;
+                       JSL.L UNK_SetPointer42            ;80CB62;808E48;
                        REP #$20                             ;80CB66;      ;
                        SEP #$10                             ;80CB68;      ;
                        LDA.W #$E33D                         ;80CB6A;      ;
@@ -6582,7 +6583,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0F                           ;80CB77;      ;
                        LDX.B #$06                           ;80CB79;      ;
                        LDY.B #$02                           ;80CB7B;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CB7D;808E48;
+                       JSL.L UNK_SetPointer42            ;80CB7D;808E48;
                        RTS                                  ;80CB81;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80CB82;      ;
@@ -6596,7 +6597,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$06                           ;80CB93;      ;
                        LDX.B #$04                           ;80CB95;      ;
                        LDY.B #$02                           ;80CB97;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CB99;808E48;
+                       JSL.L UNK_SetPointer42            ;80CB99;808E48;
                        REP #$20                             ;80CB9D;      ;
                        SEP #$10                             ;80CB9F;      ;
                        LDA.W #$E359                         ;80CBA1;      ;
@@ -6608,7 +6609,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80CBAE;      ;
                        LDX.B #$05                           ;80CBB0;      ;
                        LDY.B #$02                           ;80CBB2;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CBB4;808E48;
+                       JSL.L UNK_SetPointer42            ;80CBB4;808E48;
                        REP #$20                             ;80CBB8;      ;
                        SEP #$10                             ;80CBBA;      ;
                        LDA.W #$E367                         ;80CBBC;      ;
@@ -6620,7 +6621,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0F                           ;80CBC9;      ;
                        LDX.B #$06                           ;80CBCB;      ;
                        LDY.B #$02                           ;80CBCD;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CBCF;808E48;
+                       JSL.L UNK_SetPointer42            ;80CBCF;808E48;
                        RTS                                  ;80CBD3;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80CBD4;      ;
@@ -6634,7 +6635,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$06                           ;80CBE5;      ;
                        LDX.B #$04                           ;80CBE7;      ;
                        LDY.B #$02                           ;80CBE9;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CBEB;808E48;
+                       JSL.L UNK_SetPointer42            ;80CBEB;808E48;
                        REP #$20                             ;80CBEF;      ;
                        SEP #$10                             ;80CBF1;      ;
                        LDA.W #$E383                         ;80CBF3;      ;
@@ -6646,7 +6647,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80CC00;      ;
                        LDX.B #$05                           ;80CC02;      ;
                        LDY.B #$02                           ;80CC04;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CC06;808E48;
+                       JSL.L UNK_SetPointer42            ;80CC06;808E48;
                        REP #$20                             ;80CC0A;      ;
                        SEP #$10                             ;80CC0C;      ;
                        LDA.W #$E391                         ;80CC0E;      ;
@@ -6658,7 +6659,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0F                           ;80CC1B;      ;
                        LDX.B #$06                           ;80CC1D;      ;
                        LDY.B #$02                           ;80CC1F;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CC21;808E48;
+                       JSL.L UNK_SetPointer42            ;80CC21;808E48;
                        REP #$20                             ;80CC25;      ;
                        SEP #$10                             ;80CC27;      ;
                        LDA.W #$E4EF                         ;80CC29;      ;
@@ -6670,7 +6671,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$03                           ;80CC36;      ;
                        LDX.B #$07                           ;80CC38;      ;
                        LDY.B #$02                           ;80CC3A;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CC3C;808E48;
+                       JSL.L UNK_SetPointer42            ;80CC3C;808E48;
                        REP #$20                             ;80CC40;      ;
                        SEP #$10                             ;80CC42;      ;
                        LDA.W #$E500                         ;80CC44;      ;
@@ -6682,7 +6683,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$04                           ;80CC51;      ;
                        LDX.B #$08                           ;80CC53;      ;
                        LDY.B #$02                           ;80CC55;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CC57;808E48;
+                       JSL.L UNK_SetPointer42            ;80CC57;808E48;
                        REP #$20                             ;80CC5B;      ;
                        SEP #$10                             ;80CC5D;      ;
                        LDA.W #$E511                         ;80CC5F;      ;
@@ -6694,7 +6695,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$05                           ;80CC6C;      ;
                        LDX.B #$09                           ;80CC6E;      ;
                        LDY.B #$02                           ;80CC70;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CC72;808E48;
+                       JSL.L UNK_SetPointer42            ;80CC72;808E48;
                        REP #$20                             ;80CC76;      ;
                        SEP #$10                             ;80CC78;      ;
                        LDA.W #$E522                         ;80CC7A;      ;
@@ -6706,7 +6707,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$07                           ;80CC87;      ;
                        LDX.B #$0A                           ;80CC89;      ;
                        LDY.B #$02                           ;80CC8B;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CC8D;808E48;
+                       JSL.L UNK_SetPointer42            ;80CC8D;808E48;
                        RTS                                  ;80CC91;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80CC92;      ;
@@ -6720,7 +6721,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$06                           ;80CCA3;      ;
                        LDX.B #$04                           ;80CCA5;      ;
                        LDY.B #$02                           ;80CCA7;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CCA9;808E48;
+                       JSL.L UNK_SetPointer42            ;80CCA9;808E48;
                        REP #$20                             ;80CCAD;      ;
                        SEP #$10                             ;80CCAF;      ;
                        LDA.W #$E3AD                         ;80CCB1;      ;
@@ -6732,7 +6733,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80CCBE;      ;
                        LDX.B #$05                           ;80CCC0;      ;
                        LDY.B #$02                           ;80CCC2;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CCC4;808E48;
+                       JSL.L UNK_SetPointer42            ;80CCC4;808E48;
                        REP #$20                             ;80CCC8;      ;
                        SEP #$10                             ;80CCCA;      ;
                        LDA.W #$E3BB                         ;80CCCC;      ;
@@ -6744,7 +6745,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0F                           ;80CCD9;      ;
                        LDX.B #$06                           ;80CCDB;      ;
                        LDY.B #$02                           ;80CCDD;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CCDF;808E48;
+                       JSL.L UNK_SetPointer42            ;80CCDF;808E48;
                        RTS                                  ;80CCE3;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80CCE4;      ;
@@ -6758,7 +6759,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$06                           ;80CCF5;      ;
                        LDX.B #$04                           ;80CCF7;      ;
                        LDY.B #$02                           ;80CCF9;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CCFB;808E48;
+                       JSL.L UNK_SetPointer42            ;80CCFB;808E48;
                        REP #$20                             ;80CCFF;      ;
                        SEP #$10                             ;80CD01;      ;
                        LDA.W #$E3D7                         ;80CD03;      ;
@@ -6770,7 +6771,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80CD10;      ;
                        LDX.B #$05                           ;80CD12;      ;
                        LDY.B #$02                           ;80CD14;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CD16;808E48;
+                       JSL.L UNK_SetPointer42            ;80CD16;808E48;
                        REP #$20                             ;80CD1A;      ;
                        SEP #$10                             ;80CD1C;      ;
                        LDA.W #$E3E5                         ;80CD1E;      ;
@@ -6782,7 +6783,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0F                           ;80CD2B;      ;
                        LDX.B #$06                           ;80CD2D;      ;
                        LDY.B #$02                           ;80CD2F;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CD31;808E48;
+                       JSL.L UNK_SetPointer42            ;80CD31;808E48;
                        RTS                                  ;80CD35;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80CD36;      ;
@@ -6796,7 +6797,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$06                           ;80CD47;      ;
                        LDX.B #$04                           ;80CD49;      ;
                        LDY.B #$02                           ;80CD4B;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CD4D;808E48;
+                       JSL.L UNK_SetPointer42            ;80CD4D;808E48;
                        REP #$20                             ;80CD51;      ;
                        SEP #$10                             ;80CD53;      ;
                        LDA.W #$E401                         ;80CD55;      ;
@@ -6808,7 +6809,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80CD62;      ;
                        LDX.B #$05                           ;80CD64;      ;
                        LDY.B #$02                           ;80CD66;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CD68;808E48;
+                       JSL.L UNK_SetPointer42            ;80CD68;808E48;
                        REP #$20                             ;80CD6C;      ;
                        SEP #$10                             ;80CD6E;      ;
                        LDA.W #$E40F                         ;80CD70;      ;
@@ -6820,7 +6821,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0F                           ;80CD7D;      ;
                        LDX.B #$06                           ;80CD7F;      ;
                        LDY.B #$02                           ;80CD81;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CD83;808E48;
+                       JSL.L UNK_SetPointer42            ;80CD83;808E48;
                        RTS                                  ;80CD87;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80CD88;      ;
@@ -6834,7 +6835,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$06                           ;80CD99;      ;
                        LDX.B #$04                           ;80CD9B;      ;
                        LDY.B #$02                           ;80CD9D;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CD9F;808E48;
+                       JSL.L UNK_SetPointer42            ;80CD9F;808E48;
                        REP #$20                             ;80CDA3;      ;
                        SEP #$10                             ;80CDA5;      ;
                        LDA.W #$E42B                         ;80CDA7;      ;
@@ -6846,7 +6847,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80CDB4;      ;
                        LDX.B #$05                           ;80CDB6;      ;
                        LDY.B #$02                           ;80CDB8;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CDBA;808E48;
+                       JSL.L UNK_SetPointer42            ;80CDBA;808E48;
                        REP #$20                             ;80CDBE;      ;
                        SEP #$10                             ;80CDC0;      ;
                        LDA.W #$E439                         ;80CDC2;      ;
@@ -6858,7 +6859,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0F                           ;80CDCF;      ;
                        LDX.B #$06                           ;80CDD1;      ;
                        LDY.B #$02                           ;80CDD3;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CDD5;808E48;
+                       JSL.L UNK_SetPointer42            ;80CDD5;808E48;
                        REP #$20                             ;80CDD9;      ;
                        SEP #$10                             ;80CDDB;      ;
                        LDA.W #$E533                         ;80CDDD;      ;
@@ -6870,7 +6871,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$03                           ;80CDEA;      ;
                        LDX.B #$07                           ;80CDEC;      ;
                        LDY.B #$02                           ;80CDEE;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CDF0;808E48;
+                       JSL.L UNK_SetPointer42            ;80CDF0;808E48;
                        REP #$20                             ;80CDF4;      ;
                        SEP #$10                             ;80CDF6;      ;
                        LDA.W #$E544                         ;80CDF8;      ;
@@ -6882,7 +6883,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$04                           ;80CE05;      ;
                        LDX.B #$08                           ;80CE07;      ;
                        LDY.B #$02                           ;80CE09;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CE0B;808E48;
+                       JSL.L UNK_SetPointer42            ;80CE0B;808E48;
                        REP #$20                             ;80CE0F;      ;
                        SEP #$10                             ;80CE11;      ;
                        LDA.W #$E555                         ;80CE13;      ;
@@ -6894,7 +6895,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$05                           ;80CE20;      ;
                        LDX.B #$09                           ;80CE22;      ;
                        LDY.B #$02                           ;80CE24;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CE26;808E48;
+                       JSL.L UNK_SetPointer42            ;80CE26;808E48;
                        REP #$20                             ;80CE2A;      ;
                        SEP #$10                             ;80CE2C;      ;
                        LDA.W #$E566                         ;80CE2E;      ;
@@ -6906,7 +6907,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$07                           ;80CE3B;      ;
                        LDX.B #$0A                           ;80CE3D;      ;
                        LDY.B #$02                           ;80CE3F;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CE41;808E48;
+                       JSL.L UNK_SetPointer42            ;80CE41;808E48;
                        RTS                                  ;80CE45;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80CE46;      ;
@@ -6920,7 +6921,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$06                           ;80CE57;      ;
                        LDX.B #$04                           ;80CE59;      ;
                        LDY.B #$02                           ;80CE5B;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CE5D;808E48;
+                       JSL.L UNK_SetPointer42            ;80CE5D;808E48;
                        REP #$20                             ;80CE61;      ;
                        SEP #$10                             ;80CE63;      ;
                        LDA.W #$E455                         ;80CE65;      ;
@@ -6932,7 +6933,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80CE72;      ;
                        LDX.B #$05                           ;80CE74;      ;
                        LDY.B #$02                           ;80CE76;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CE78;808E48;
+                       JSL.L UNK_SetPointer42            ;80CE78;808E48;
                        REP #$20                             ;80CE7C;      ;
                        SEP #$10                             ;80CE7E;      ;
                        LDA.W #$E463                         ;80CE80;      ;
@@ -6944,7 +6945,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0F                           ;80CE8D;      ;
                        LDX.B #$06                           ;80CE8F;      ;
                        LDY.B #$02                           ;80CE91;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CE93;808E48;
+                       JSL.L UNK_SetPointer42            ;80CE93;808E48;
                        RTS                                  ;80CE97;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80CE98;      ;
@@ -6958,7 +6959,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$06                           ;80CEA9;      ;
                        LDX.B #$04                           ;80CEAB;      ;
                        LDY.B #$02                           ;80CEAD;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CEAF;808E48;
+                       JSL.L UNK_SetPointer42            ;80CEAF;808E48;
                        REP #$20                             ;80CEB3;      ;
                        SEP #$10                             ;80CEB5;      ;
                        LDA.W #$E47F                         ;80CEB7;      ;
@@ -6970,7 +6971,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80CEC4;      ;
                        LDX.B #$05                           ;80CEC6;      ;
                        LDY.B #$02                           ;80CEC8;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CECA;808E48;
+                       JSL.L UNK_SetPointer42            ;80CECA;808E48;
                        REP #$20                             ;80CECE;      ;
                        SEP #$10                             ;80CED0;      ;
                        LDA.W #$E48D                         ;80CED2;      ;
@@ -6982,7 +6983,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0F                           ;80CEDF;      ;
                        LDX.B #$06                           ;80CEE1;      ;
                        LDY.B #$02                           ;80CEE3;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CEE5;808E48;
+                       JSL.L UNK_SetPointer42            ;80CEE5;808E48;
                        RTS                                  ;80CEE9;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80CEEA;      ;
@@ -6996,7 +6997,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$06                           ;80CEFB;      ;
                        LDX.B #$04                           ;80CEFD;      ;
                        LDY.B #$02                           ;80CEFF;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CF01;808E48;
+                       JSL.L UNK_SetPointer42            ;80CF01;808E48;
                        REP #$20                             ;80CF05;      ;
                        SEP #$10                             ;80CF07;      ;
                        LDA.W #$E4A9                         ;80CF09;      ;
@@ -7008,7 +7009,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80CF16;      ;
                        LDX.B #$05                           ;80CF18;      ;
                        LDY.B #$02                           ;80CF1A;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CF1C;808E48;
+                       JSL.L UNK_SetPointer42            ;80CF1C;808E48;
                        REP #$20                             ;80CF20;      ;
                        SEP #$10                             ;80CF22;      ;
                        LDA.W #$E4B7                         ;80CF24;      ;
@@ -7020,7 +7021,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0F                           ;80CF31;      ;
                        LDX.B #$06                           ;80CF33;      ;
                        LDY.B #$02                           ;80CF35;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CF37;808E48;
+                       JSL.L UNK_SetPointer42            ;80CF37;808E48;
                        RTS                                  ;80CF3B;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80CF3C;      ;
@@ -7034,7 +7035,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$06                           ;80CF4D;      ;
                        LDX.B #$04                           ;80CF4F;      ;
                        LDY.B #$02                           ;80CF51;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CF53;808E48;
+                       JSL.L UNK_SetPointer42            ;80CF53;808E48;
                        REP #$20                             ;80CF57;      ;
                        SEP #$10                             ;80CF59;      ;
                        LDA.W #$E4D3                         ;80CF5B;      ;
@@ -7046,7 +7047,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80CF68;      ;
                        LDX.B #$05                           ;80CF6A;      ;
                        LDY.B #$02                           ;80CF6C;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CF6E;808E48;
+                       JSL.L UNK_SetPointer42            ;80CF6E;808E48;
                        REP #$20                             ;80CF72;      ;
                        SEP #$10                             ;80CF74;      ;
                        LDA.W #$E4E1                         ;80CF76;      ;
@@ -7058,7 +7059,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0F                           ;80CF83;      ;
                        LDX.B #$06                           ;80CF85;      ;
                        LDY.B #$02                           ;80CF87;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CF89;808E48;
+                       JSL.L UNK_SetPointer42            ;80CF89;808E48;
                        REP #$20                             ;80CF8D;      ;
                        SEP #$10                             ;80CF8F;      ;
                        LDA.W #$E577                         ;80CF91;      ;
@@ -7070,7 +7071,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$03                           ;80CF9E;      ;
                        LDX.B #$07                           ;80CFA0;      ;
                        LDY.B #$02                           ;80CFA2;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CFA4;808E48;
+                       JSL.L UNK_SetPointer42            ;80CFA4;808E48;
                        REP #$20                             ;80CFA8;      ;
                        SEP #$10                             ;80CFAA;      ;
                        LDA.W #$E588                         ;80CFAC;      ;
@@ -7082,7 +7083,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$04                           ;80CFB9;      ;
                        LDX.B #$08                           ;80CFBB;      ;
                        LDY.B #$02                           ;80CFBD;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CFBF;808E48;
+                       JSL.L UNK_SetPointer42            ;80CFBF;808E48;
                        REP #$20                             ;80CFC3;      ;
                        SEP #$10                             ;80CFC5;      ;
                        LDA.W #$E599                         ;80CFC7;      ;
@@ -7094,7 +7095,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$05                           ;80CFD4;      ;
                        LDX.B #$09                           ;80CFD6;      ;
                        LDY.B #$02                           ;80CFD8;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CFDA;808E48;
+                       JSL.L UNK_SetPointer42            ;80CFDA;808E48;
                        REP #$20                             ;80CFDE;      ;
                        SEP #$10                             ;80CFE0;      ;
                        LDA.W #$E5AA                         ;80CFE2;      ;
@@ -7106,7 +7107,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$07                           ;80CFEF;      ;
                        LDX.B #$0A                           ;80CFF1;      ;
                        LDY.B #$02                           ;80CFF3;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80CFF5;808E48;
+                       JSL.L UNK_SetPointer42            ;80CFF5;808E48;
                        RTS                                  ;80CFF9;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80CFFA;      ;
@@ -7120,7 +7121,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$03                           ;80D00B;      ;
                        LDX.B #$04                           ;80D00D;      ;
                        LDY.B #$02                           ;80D00F;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D011;808E48;
+                       JSL.L UNK_SetPointer42            ;80D011;808E48;
                        REP #$20                             ;80D015;      ;
                        SEP #$10                             ;80D017;      ;
                        LDA.W #$E5CC                         ;80D019;      ;
@@ -7132,7 +7133,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$04                           ;80D026;      ;
                        LDX.B #$05                           ;80D028;      ;
                        LDY.B #$02                           ;80D02A;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D02C;808E48;
+                       JSL.L UNK_SetPointer42            ;80D02C;808E48;
                        REP #$20                             ;80D030;      ;
                        SEP #$10                             ;80D032;      ;
                        LDA.W #$E5DD                         ;80D034;      ;
@@ -7144,7 +7145,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$05                           ;80D041;      ;
                        LDX.B #$06                           ;80D043;      ;
                        LDY.B #$02                           ;80D045;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D047;808E48;
+                       JSL.L UNK_SetPointer42            ;80D047;808E48;
                        REP #$20                             ;80D04B;      ;
                        SEP #$10                             ;80D04D;      ;
                        LDA.W #$E5EE                         ;80D04F;      ;
@@ -7156,7 +7157,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$07                           ;80D05C;      ;
                        LDX.B #$07                           ;80D05E;      ;
                        LDY.B #$02                           ;80D060;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D062;808E48;
+                       JSL.L UNK_SetPointer42            ;80D062;808E48;
                        RTS                                  ;80D066;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80D067;      ;
@@ -7170,7 +7171,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$08                           ;80D078;      ;
                        LDX.B #$04                           ;80D07A;      ;
                        LDY.B #$03                           ;80D07C;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D07E;808E48;
+                       JSL.L UNK_SetPointer42            ;80D07E;808E48;
                        REP #$20                             ;80D082;      ;
                        SEP #$10                             ;80D084;      ;
                        LDA.W #$E616                         ;80D086;      ;
@@ -7182,7 +7183,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80D093;      ;
                        LDX.B #$05                           ;80D095;      ;
                        LDY.B #$03                           ;80D097;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D099;808E48;
+                       JSL.L UNK_SetPointer42            ;80D099;808E48;
                        REP #$20                             ;80D09D;      ;
                        SEP #$10                             ;80D09F;      ;
                        LDA.W #$E62D                         ;80D0A1;      ;
@@ -7194,7 +7195,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D0AE;      ;
                        LDX.B #$06                           ;80D0B0;      ;
                        LDY.B #$03                           ;80D0B2;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D0B4;808E48;
+                       JSL.L UNK_SetPointer42            ;80D0B4;808E48;
                        REP #$20                             ;80D0B8;      ;
                        SEP #$10                             ;80D0BA;      ;
                        LDA.W #$E644                         ;80D0BC;      ;
@@ -7206,7 +7207,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D0C9;      ;
                        LDX.B #$07                           ;80D0CB;      ;
                        LDY.B #$03                           ;80D0CD;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D0CF;808E48;
+                       JSL.L UNK_SetPointer42            ;80D0CF;808E48;
                        REP #$20                             ;80D0D3;      ;
                        SEP #$10                             ;80D0D5;      ;
                        LDA.W #$E65B                         ;80D0D7;      ;
@@ -7218,7 +7219,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80D0E4;      ;
                        LDX.B #$08                           ;80D0E6;      ;
                        LDY.B #$03                           ;80D0E8;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D0EA;808E48;
+                       JSL.L UNK_SetPointer42            ;80D0EA;808E48;
                        REP #$20                             ;80D0EE;      ;
                        SEP #$10                             ;80D0F0;      ;
                        LDA.W #$EB4C                         ;80D0F2;      ;
@@ -7230,7 +7231,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D0FF;      ;
                        LDX.B #$09                           ;80D101;      ;
                        LDY.B #$04                           ;80D103;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D105;808E48;
+                       JSL.L UNK_SetPointer42            ;80D105;808E48;
                        REP #$20                             ;80D109;      ;
                        SEP #$10                             ;80D10B;      ;
                        LDA.W #$EB5D                         ;80D10D;      ;
@@ -7242,7 +7243,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D11A;      ;
                        LDX.B #$0A                           ;80D11C;      ;
                        LDY.B #$04                           ;80D11E;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D120;808E48;
+                       JSL.L UNK_SetPointer42            ;80D120;808E48;
                        RTS                                  ;80D124;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80D125;      ;
@@ -7256,7 +7257,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$08                           ;80D136;      ;
                        LDX.B #$04                           ;80D138;      ;
                        LDY.B #$03                           ;80D13A;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D13C;808E48;
+                       JSL.L UNK_SetPointer42            ;80D13C;808E48;
                        REP #$20                             ;80D140;      ;
                        SEP #$10                             ;80D142;      ;
                        LDA.W #$E689                         ;80D144;      ;
@@ -7268,7 +7269,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80D151;      ;
                        LDX.B #$05                           ;80D153;      ;
                        LDY.B #$03                           ;80D155;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D157;808E48;
+                       JSL.L UNK_SetPointer42            ;80D157;808E48;
                        REP #$20                             ;80D15B;      ;
                        SEP #$10                             ;80D15D;      ;
                        LDA.W #$E6A0                         ;80D15F;      ;
@@ -7280,7 +7281,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D16C;      ;
                        LDX.B #$06                           ;80D16E;      ;
                        LDY.B #$03                           ;80D170;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D172;808E48;
+                       JSL.L UNK_SetPointer42            ;80D172;808E48;
                        REP #$20                             ;80D176;      ;
                        SEP #$10                             ;80D178;      ;
                        LDA.W #$E6B7                         ;80D17A;      ;
@@ -7292,7 +7293,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D187;      ;
                        LDX.B #$07                           ;80D189;      ;
                        LDY.B #$03                           ;80D18B;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D18D;808E48;
+                       JSL.L UNK_SetPointer42            ;80D18D;808E48;
                        REP #$20                             ;80D191;      ;
                        SEP #$10                             ;80D193;      ;
                        LDA.W #$E6CE                         ;80D195;      ;
@@ -7304,7 +7305,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80D1A2;      ;
                        LDX.B #$08                           ;80D1A4;      ;
                        LDY.B #$03                           ;80D1A6;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D1A8;808E48;
+                       JSL.L UNK_SetPointer42            ;80D1A8;808E48;
                        REP #$20                             ;80D1AC;      ;
                        SEP #$10                             ;80D1AE;      ;
                        LDA.W #$EB6E                         ;80D1B0;      ;
@@ -7316,7 +7317,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D1BD;      ;
                        LDX.B #$09                           ;80D1BF;      ;
                        LDY.B #$04                           ;80D1C1;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D1C3;808E48;
+                       JSL.L UNK_SetPointer42            ;80D1C3;808E48;
                        REP #$20                             ;80D1C7;      ;
                        SEP #$10                             ;80D1C9;      ;
                        LDA.W #$EB7F                         ;80D1CB;      ;
@@ -7328,7 +7329,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D1D8;      ;
                        LDX.B #$0A                           ;80D1DA;      ;
                        LDY.B #$04                           ;80D1DC;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D1DE;808E48;
+                       JSL.L UNK_SetPointer42            ;80D1DE;808E48;
                        RTS                                  ;80D1E2;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80D1E3;      ;
@@ -7342,7 +7343,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$08                           ;80D1F4;      ;
                        LDX.B #$04                           ;80D1F6;      ;
                        LDY.B #$03                           ;80D1F8;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D1FA;808E48;
+                       JSL.L UNK_SetPointer42            ;80D1FA;808E48;
                        REP #$20                             ;80D1FE;      ;
                        SEP #$10                             ;80D200;      ;
                        LDA.W #$E6FC                         ;80D202;      ;
@@ -7354,7 +7355,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80D20F;      ;
                        LDX.B #$05                           ;80D211;      ;
                        LDY.B #$03                           ;80D213;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D215;808E48;
+                       JSL.L UNK_SetPointer42            ;80D215;808E48;
                        REP #$20                             ;80D219;      ;
                        SEP #$10                             ;80D21B;      ;
                        LDA.W #$E713                         ;80D21D;      ;
@@ -7366,7 +7367,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D22A;      ;
                        LDX.B #$06                           ;80D22C;      ;
                        LDY.B #$03                           ;80D22E;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D230;808E48;
+                       JSL.L UNK_SetPointer42            ;80D230;808E48;
                        REP #$20                             ;80D234;      ;
                        SEP #$10                             ;80D236;      ;
                        LDA.W #$E72A                         ;80D238;      ;
@@ -7378,7 +7379,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D245;      ;
                        LDX.B #$07                           ;80D247;      ;
                        LDY.B #$03                           ;80D249;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D24B;808E48;
+                       JSL.L UNK_SetPointer42            ;80D24B;808E48;
                        REP #$20                             ;80D24F;      ;
                        SEP #$10                             ;80D251;      ;
                        LDA.W #$E741                         ;80D253;      ;
@@ -7390,7 +7391,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80D260;      ;
                        LDX.B #$08                           ;80D262;      ;
                        LDY.B #$03                           ;80D264;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D266;808E48;
+                       JSL.L UNK_SetPointer42            ;80D266;808E48;
                        REP #$20                             ;80D26A;      ;
                        SEP #$10                             ;80D26C;      ;
                        LDA.W #$EB90                         ;80D26E;      ;
@@ -7402,7 +7403,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D27B;      ;
                        LDX.B #$09                           ;80D27D;      ;
                        LDY.B #$04                           ;80D27F;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D281;808E48;
+                       JSL.L UNK_SetPointer42            ;80D281;808E48;
                        REP #$20                             ;80D285;      ;
                        SEP #$10                             ;80D287;      ;
                        LDA.W #$EBA1                         ;80D289;      ;
@@ -7414,7 +7415,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D296;      ;
                        LDX.B #$0A                           ;80D298;      ;
                        LDY.B #$04                           ;80D29A;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D29C;808E48;
+                       JSL.L UNK_SetPointer42            ;80D29C;808E48;
                        RTS                                  ;80D2A0;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80D2A1;      ;
@@ -7428,7 +7429,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$08                           ;80D2B2;      ;
                        LDX.B #$04                           ;80D2B4;      ;
                        LDY.B #$03                           ;80D2B6;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D2B8;808E48;
+                       JSL.L UNK_SetPointer42            ;80D2B8;808E48;
                        REP #$20                             ;80D2BC;      ;
                        SEP #$10                             ;80D2BE;      ;
                        LDA.W #$E76F                         ;80D2C0;      ;
@@ -7440,7 +7441,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80D2CD;      ;
                        LDX.B #$05                           ;80D2CF;      ;
                        LDY.B #$03                           ;80D2D1;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D2D3;808E48;
+                       JSL.L UNK_SetPointer42            ;80D2D3;808E48;
                        REP #$20                             ;80D2D7;      ;
                        SEP #$10                             ;80D2D9;      ;
                        LDA.W #$E786                         ;80D2DB;      ;
@@ -7452,7 +7453,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D2E8;      ;
                        LDX.B #$06                           ;80D2EA;      ;
                        LDY.B #$03                           ;80D2EC;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D2EE;808E48;
+                       JSL.L UNK_SetPointer42            ;80D2EE;808E48;
                        REP #$20                             ;80D2F2;      ;
                        SEP #$10                             ;80D2F4;      ;
                        LDA.W #$E79D                         ;80D2F6;      ;
@@ -7464,7 +7465,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D303;      ;
                        LDX.B #$07                           ;80D305;      ;
                        LDY.B #$03                           ;80D307;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D309;808E48;
+                       JSL.L UNK_SetPointer42            ;80D309;808E48;
                        REP #$20                             ;80D30D;      ;
                        SEP #$10                             ;80D30F;      ;
                        LDA.W #$EBB2                         ;80D311;      ;
@@ -7476,7 +7477,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D31E;      ;
                        LDX.B #$08                           ;80D320;      ;
                        LDY.B #$04                           ;80D322;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D324;808E48;
+                       JSL.L UNK_SetPointer42            ;80D324;808E48;
                        REP #$20                             ;80D328;      ;
                        SEP #$10                             ;80D32A;      ;
                        LDA.W #$EBC3                         ;80D32C;      ;
@@ -7488,7 +7489,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D339;      ;
                        LDX.B #$09                           ;80D33B;      ;
                        LDY.B #$04                           ;80D33D;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D33F;808E48;
+                       JSL.L UNK_SetPointer42            ;80D33F;808E48;
                        RTS                                  ;80D343;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80D344;      ;
@@ -7502,7 +7503,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$08                           ;80D355;      ;
                        LDX.B #$04                           ;80D357;      ;
                        LDY.B #$03                           ;80D359;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D35B;808E48;
+                       JSL.L UNK_SetPointer42            ;80D35B;808E48;
                        REP #$20                             ;80D35F;      ;
                        SEP #$10                             ;80D361;      ;
                        LDA.W #$E7CB                         ;80D363;      ;
@@ -7514,7 +7515,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80D370;      ;
                        LDX.B #$05                           ;80D372;      ;
                        LDY.B #$03                           ;80D374;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D376;808E48;
+                       JSL.L UNK_SetPointer42            ;80D376;808E48;
                        REP #$20                             ;80D37A;      ;
                        SEP #$10                             ;80D37C;      ;
                        LDA.W #$E7E2                         ;80D37E;      ;
@@ -7526,7 +7527,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D38B;      ;
                        LDX.B #$06                           ;80D38D;      ;
                        LDY.B #$03                           ;80D38F;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D391;808E48;
+                       JSL.L UNK_SetPointer42            ;80D391;808E48;
                        REP #$20                             ;80D395;      ;
                        SEP #$10                             ;80D397;      ;
                        LDA.W #$E7F9                         ;80D399;      ;
@@ -7538,7 +7539,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D3A6;      ;
                        LDX.B #$07                           ;80D3A8;      ;
                        LDY.B #$03                           ;80D3AA;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D3AC;808E48;
+                       JSL.L UNK_SetPointer42            ;80D3AC;808E48;
                        REP #$20                             ;80D3B0;      ;
                        SEP #$10                             ;80D3B2;      ;
                        LDA.W #$E810                         ;80D3B4;      ;
@@ -7550,7 +7551,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80D3C1;      ;
                        LDX.B #$08                           ;80D3C3;      ;
                        LDY.B #$03                           ;80D3C5;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D3C7;808E48;
+                       JSL.L UNK_SetPointer42            ;80D3C7;808E48;
                        REP #$20                             ;80D3CB;      ;
                        SEP #$10                             ;80D3CD;      ;
                        LDA.W #$EBD4                         ;80D3CF;      ;
@@ -7562,7 +7563,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D3DC;      ;
                        LDX.B #$09                           ;80D3DE;      ;
                        LDY.B #$04                           ;80D3E0;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D3E2;808E48;
+                       JSL.L UNK_SetPointer42            ;80D3E2;808E48;
                        REP #$20                             ;80D3E6;      ;
                        SEP #$10                             ;80D3E8;      ;
                        LDA.W #$EBE5                         ;80D3EA;      ;
@@ -7574,7 +7575,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D3F7;      ;
                        LDX.B #$0A                           ;80D3F9;      ;
                        LDY.B #$04                           ;80D3FB;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D3FD;808E48;
+                       JSL.L UNK_SetPointer42            ;80D3FD;808E48;
                        RTS                                  ;80D401;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80D402;      ;
@@ -7588,7 +7589,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$08                           ;80D413;      ;
                        LDX.B #$04                           ;80D415;      ;
                        LDY.B #$03                           ;80D417;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D419;808E48;
+                       JSL.L UNK_SetPointer42            ;80D419;808E48;
                        REP #$20                             ;80D41D;      ;
                        SEP #$10                             ;80D41F;      ;
                        LDA.W #$E83E                         ;80D421;      ;
@@ -7600,7 +7601,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80D42E;      ;
                        LDX.B #$05                           ;80D430;      ;
                        LDY.B #$03                           ;80D432;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D434;808E48;
+                       JSL.L UNK_SetPointer42            ;80D434;808E48;
                        REP #$20                             ;80D438;      ;
                        SEP #$10                             ;80D43A;      ;
                        LDA.W #$E855                         ;80D43C;      ;
@@ -7612,7 +7613,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D449;      ;
                        LDX.B #$06                           ;80D44B;      ;
                        LDY.B #$03                           ;80D44D;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D44F;808E48;
+                       JSL.L UNK_SetPointer42            ;80D44F;808E48;
                        REP #$20                             ;80D453;      ;
                        SEP #$10                             ;80D455;      ;
                        LDA.W #$E86C                         ;80D457;      ;
@@ -7624,7 +7625,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D464;      ;
                        LDX.B #$07                           ;80D466;      ;
                        LDY.B #$03                           ;80D468;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D46A;808E48;
+                       JSL.L UNK_SetPointer42            ;80D46A;808E48;
                        REP #$20                             ;80D46E;      ;
                        SEP #$10                             ;80D470;      ;
                        LDA.W #$E883                         ;80D472;      ;
@@ -7636,7 +7637,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80D47F;      ;
                        LDX.B #$08                           ;80D481;      ;
                        LDY.B #$03                           ;80D483;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D485;808E48;
+                       JSL.L UNK_SetPointer42            ;80D485;808E48;
                        REP #$20                             ;80D489;      ;
                        SEP #$10                             ;80D48B;      ;
                        LDA.W #$EBF6                         ;80D48D;      ;
@@ -7648,7 +7649,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D49A;      ;
                        LDX.B #$09                           ;80D49C;      ;
                        LDY.B #$04                           ;80D49E;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D4A0;808E48;
+                       JSL.L UNK_SetPointer42            ;80D4A0;808E48;
                        REP #$20                             ;80D4A4;      ;
                        SEP #$10                             ;80D4A6;      ;
                        LDA.W #$EC07                         ;80D4A8;      ;
@@ -7660,7 +7661,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D4B5;      ;
                        LDX.B #$0A                           ;80D4B7;      ;
                        LDY.B #$04                           ;80D4B9;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D4BB;808E48;
+                       JSL.L UNK_SetPointer42            ;80D4BB;808E48;
                        RTS                                  ;80D4BF;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80D4C0;      ;
@@ -7674,7 +7675,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$08                           ;80D4D1;      ;
                        LDX.B #$04                           ;80D4D3;      ;
                        LDY.B #$03                           ;80D4D5;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D4D7;808E48;
+                       JSL.L UNK_SetPointer42            ;80D4D7;808E48;
                        REP #$20                             ;80D4DB;      ;
                        SEP #$10                             ;80D4DD;      ;
                        LDA.W #$E8B1                         ;80D4DF;      ;
@@ -7686,7 +7687,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80D4EC;      ;
                        LDX.B #$05                           ;80D4EE;      ;
                        LDY.B #$03                           ;80D4F0;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D4F2;808E48;
+                       JSL.L UNK_SetPointer42            ;80D4F2;808E48;
                        REP #$20                             ;80D4F6;      ;
                        SEP #$10                             ;80D4F8;      ;
                        LDA.W #$E8C8                         ;80D4FA;      ;
@@ -7698,7 +7699,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D507;      ;
                        LDX.B #$06                           ;80D509;      ;
                        LDY.B #$03                           ;80D50B;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D50D;808E48;
+                       JSL.L UNK_SetPointer42            ;80D50D;808E48;
                        REP #$20                             ;80D511;      ;
                        SEP #$10                             ;80D513;      ;
                        LDA.W #$E8DF                         ;80D515;      ;
@@ -7710,7 +7711,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D522;      ;
                        LDX.B #$07                           ;80D524;      ;
                        LDY.B #$03                           ;80D526;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D528;808E48;
+                       JSL.L UNK_SetPointer42            ;80D528;808E48;
                        REP #$20                             ;80D52C;      ;
                        SEP #$10                             ;80D52E;      ;
                        LDA.W #$EC18                         ;80D530;      ;
@@ -7722,7 +7723,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D53D;      ;
                        LDX.B #$08                           ;80D53F;      ;
                        LDY.B #$04                           ;80D541;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D543;808E48;
+                       JSL.L UNK_SetPointer42            ;80D543;808E48;
                        REP #$20                             ;80D547;      ;
                        SEP #$10                             ;80D549;      ;
                        LDA.W #$EC29                         ;80D54B;      ;
@@ -7734,7 +7735,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D558;      ;
                        LDX.B #$09                           ;80D55A;      ;
                        LDY.B #$04                           ;80D55C;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D55E;808E48;
+                       JSL.L UNK_SetPointer42            ;80D55E;808E48;
                        RTS                                  ;80D562;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80D563;      ;
@@ -7748,7 +7749,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$08                           ;80D574;      ;
                        LDX.B #$04                           ;80D576;      ;
                        LDY.B #$03                           ;80D578;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D57A;808E48;
+                       JSL.L UNK_SetPointer42            ;80D57A;808E48;
                        REP #$20                             ;80D57E;      ;
                        SEP #$10                             ;80D580;      ;
                        LDA.W #$E90D                         ;80D582;      ;
@@ -7760,7 +7761,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80D58F;      ;
                        LDX.B #$05                           ;80D591;      ;
                        LDY.B #$03                           ;80D593;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D595;808E48;
+                       JSL.L UNK_SetPointer42            ;80D595;808E48;
                        REP #$20                             ;80D599;      ;
                        SEP #$10                             ;80D59B;      ;
                        LDA.W #$E924                         ;80D59D;      ;
@@ -7772,7 +7773,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D5AA;      ;
                        LDX.B #$06                           ;80D5AC;      ;
                        LDY.B #$03                           ;80D5AE;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D5B0;808E48;
+                       JSL.L UNK_SetPointer42            ;80D5B0;808E48;
                        REP #$20                             ;80D5B4;      ;
                        SEP #$10                             ;80D5B6;      ;
                        LDA.W #$E93B                         ;80D5B8;      ;
@@ -7784,7 +7785,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D5C5;      ;
                        LDX.B #$07                           ;80D5C7;      ;
                        LDY.B #$03                           ;80D5C9;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D5CB;808E48;
+                       JSL.L UNK_SetPointer42            ;80D5CB;808E48;
                        REP #$20                             ;80D5CF;      ;
                        SEP #$10                             ;80D5D1;      ;
                        LDA.W #$EC3A                         ;80D5D3;      ;
@@ -7796,7 +7797,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D5E0;      ;
                        LDX.B #$08                           ;80D5E2;      ;
                        LDY.B #$04                           ;80D5E4;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D5E6;808E48;
+                       JSL.L UNK_SetPointer42            ;80D5E6;808E48;
                        REP #$20                             ;80D5EA;      ;
                        SEP #$10                             ;80D5EC;      ;
                        LDA.W #$EC4B                         ;80D5EE;      ;
@@ -7808,7 +7809,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D5FB;      ;
                        LDX.B #$09                           ;80D5FD;      ;
                        LDY.B #$04                           ;80D5FF;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D601;808E48;
+                       JSL.L UNK_SetPointer42            ;80D601;808E48;
                        RTS                                  ;80D605;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80D606;      ;
@@ -7822,7 +7823,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$06                           ;80D617;      ;
                        LDX.B #$04                           ;80D619;      ;
                        LDY.B #$03                           ;80D61B;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D61D;808E48;
+                       JSL.L UNK_SetPointer42            ;80D61D;808E48;
                        REP #$20                             ;80D621;      ;
                        SEP #$10                             ;80D623;      ;
                        LDA.W #$E969                         ;80D625;      ;
@@ -7834,7 +7835,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$07                           ;80D632;      ;
                        LDX.B #$05                           ;80D634;      ;
                        LDY.B #$03                           ;80D636;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D638;808E48;
+                       JSL.L UNK_SetPointer42            ;80D638;808E48;
                        REP #$20                             ;80D63C;      ;
                        SEP #$10                             ;80D63E;      ;
                        LDA.W #$E980                         ;80D640;      ;
@@ -7846,7 +7847,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$08                           ;80D64D;      ;
                        LDX.B #$06                           ;80D64F;      ;
                        LDY.B #$03                           ;80D651;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D653;808E48;
+                       JSL.L UNK_SetPointer42            ;80D653;808E48;
                        REP #$20                             ;80D657;      ;
                        SEP #$10                             ;80D659;      ;
                        LDA.W #$E997                         ;80D65B;      ;
@@ -7858,7 +7859,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80D668;      ;
                        LDX.B #$07                           ;80D66A;      ;
                        LDY.B #$03                           ;80D66C;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D66E;808E48;
+                       JSL.L UNK_SetPointer42            ;80D66E;808E48;
                        REP #$20                             ;80D672;      ;
                        SEP #$10                             ;80D674;      ;
                        LDA.W #$E9AE                         ;80D676;      ;
@@ -7870,7 +7871,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D683;      ;
                        LDX.B #$08                           ;80D685;      ;
                        LDY.B #$03                           ;80D687;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D689;808E48;
+                       JSL.L UNK_SetPointer42            ;80D689;808E48;
                        REP #$20                             ;80D68D;      ;
                        SEP #$10                             ;80D68F;      ;
                        LDA.W #$E9C5                         ;80D691;      ;
@@ -7882,7 +7883,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D69E;      ;
                        LDX.B #$09                           ;80D6A0;      ;
                        LDY.B #$03                           ;80D6A2;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D6A4;808E48;
+                       JSL.L UNK_SetPointer42            ;80D6A4;808E48;
                        REP #$20                             ;80D6A8;      ;
                        SEP #$10                             ;80D6AA;      ;
                        LDA.W #$E9DC                         ;80D6AC;      ;
@@ -7894,7 +7895,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80D6B9;      ;
                        LDX.B #$0A                           ;80D6BB;      ;
                        LDY.B #$03                           ;80D6BD;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D6BF;808E48;
+                       JSL.L UNK_SetPointer42            ;80D6BF;808E48;
                        REP #$20                             ;80D6C3;      ;
                        SEP #$10                             ;80D6C5;      ;
                        LDA.W #$EC5C                         ;80D6C7;      ;
@@ -7906,7 +7907,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D6D4;      ;
                        LDX.B #$0B                           ;80D6D6;      ;
                        LDY.B #$04                           ;80D6D8;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D6DA;808E48;
+                       JSL.L UNK_SetPointer42            ;80D6DA;808E48;
                        REP #$20                             ;80D6DE;      ;
                        SEP #$10                             ;80D6E0;      ;
                        LDA.W #$EC6D                         ;80D6E2;      ;
@@ -7918,7 +7919,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D6EF;      ;
                        LDX.B #$0C                           ;80D6F1;      ;
                        LDY.B #$04                           ;80D6F3;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D6F5;808E48;
+                       JSL.L UNK_SetPointer42            ;80D6F5;808E48;
                        RTS                                  ;80D6F9;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80D6FA;      ;
@@ -7932,7 +7933,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$06                           ;80D70B;      ;
                        LDX.B #$04                           ;80D70D;      ;
                        LDY.B #$03                           ;80D70F;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D711;808E48;
+                       JSL.L UNK_SetPointer42            ;80D711;808E48;
                        REP #$20                             ;80D715;      ;
                        SEP #$10                             ;80D717;      ;
                        LDA.W #$EA0A                         ;80D719;      ;
@@ -7944,7 +7945,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$07                           ;80D726;      ;
                        LDX.B #$05                           ;80D728;      ;
                        LDY.B #$03                           ;80D72A;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D72C;808E48;
+                       JSL.L UNK_SetPointer42            ;80D72C;808E48;
                        REP #$20                             ;80D730;      ;
                        SEP #$10                             ;80D732;      ;
                        LDA.W #$EA21                         ;80D734;      ;
@@ -7956,7 +7957,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$08                           ;80D741;      ;
                        LDX.B #$06                           ;80D743;      ;
                        LDY.B #$03                           ;80D745;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D747;808E48;
+                       JSL.L UNK_SetPointer42            ;80D747;808E48;
                        REP #$20                             ;80D74B;      ;
                        SEP #$10                             ;80D74D;      ;
                        LDA.W #$EA38                         ;80D74F;      ;
@@ -7968,7 +7969,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80D75C;      ;
                        LDX.B #$07                           ;80D75E;      ;
                        LDY.B #$03                           ;80D760;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D762;808E48;
+                       JSL.L UNK_SetPointer42            ;80D762;808E48;
                        REP #$20                             ;80D766;      ;
                        SEP #$10                             ;80D768;      ;
                        LDA.W #$EA4F                         ;80D76A;      ;
@@ -7980,7 +7981,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D777;      ;
                        LDX.B #$08                           ;80D779;      ;
                        LDY.B #$03                           ;80D77B;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D77D;808E48;
+                       JSL.L UNK_SetPointer42            ;80D77D;808E48;
                        REP #$20                             ;80D781;      ;
                        SEP #$10                             ;80D783;      ;
                        LDA.W #$EA66                         ;80D785;      ;
@@ -7992,7 +7993,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D792;      ;
                        LDX.B #$09                           ;80D794;      ;
                        LDY.B #$03                           ;80D796;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D798;808E48;
+                       JSL.L UNK_SetPointer42            ;80D798;808E48;
                        REP #$20                             ;80D79C;      ;
                        SEP #$10                             ;80D79E;      ;
                        LDA.W #$EA7D                         ;80D7A0;      ;
@@ -8004,7 +8005,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80D7AD;      ;
                        LDX.B #$0A                           ;80D7AF;      ;
                        LDY.B #$03                           ;80D7B1;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D7B3;808E48;
+                       JSL.L UNK_SetPointer42            ;80D7B3;808E48;
                        REP #$20                             ;80D7B7;      ;
                        SEP #$10                             ;80D7B9;      ;
                        LDA.W #$EC7E                         ;80D7BB;      ;
@@ -8016,7 +8017,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D7C8;      ;
                        LDX.B #$0B                           ;80D7CA;      ;
                        LDY.B #$04                           ;80D7CC;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D7CE;808E48;
+                       JSL.L UNK_SetPointer42            ;80D7CE;808E48;
                        REP #$20                             ;80D7D2;      ;
                        SEP #$10                             ;80D7D4;      ;
                        LDA.W #$EC8F                         ;80D7D6;      ;
@@ -8028,7 +8029,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D7E3;      ;
                        LDX.B #$0C                           ;80D7E5;      ;
                        LDY.B #$04                           ;80D7E7;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D7E9;808E48;
+                       JSL.L UNK_SetPointer42            ;80D7E9;808E48;
                        RTS                                  ;80D7ED;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80D7EE;      ;
@@ -8042,7 +8043,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$08                           ;80D7FF;      ;
                        LDX.B #$04                           ;80D801;      ;
                        LDY.B #$03                           ;80D803;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D805;808E48;
+                       JSL.L UNK_SetPointer42            ;80D805;808E48;
                        REP #$20                             ;80D809;      ;
                        SEP #$10                             ;80D80B;      ;
                        LDA.W #$EAAB                         ;80D80D;      ;
@@ -8054,7 +8055,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80D81A;      ;
                        LDX.B #$05                           ;80D81C;      ;
                        LDY.B #$03                           ;80D81E;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D820;808E48;
+                       JSL.L UNK_SetPointer42            ;80D820;808E48;
                        REP #$20                             ;80D824;      ;
                        SEP #$10                             ;80D826;      ;
                        LDA.W #$EAC2                         ;80D828;      ;
@@ -8066,7 +8067,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D835;      ;
                        LDX.B #$06                           ;80D837;      ;
                        LDY.B #$03                           ;80D839;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D83B;808E48;
+                       JSL.L UNK_SetPointer42            ;80D83B;808E48;
                        REP #$20                             ;80D83F;      ;
                        SEP #$10                             ;80D841;      ;
                        LDA.W #$EAD9                         ;80D843;      ;
@@ -8078,7 +8079,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D850;      ;
                        LDX.B #$07                           ;80D852;      ;
                        LDY.B #$03                           ;80D854;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D856;808E48;
+                       JSL.L UNK_SetPointer42            ;80D856;808E48;
                        REP #$20                             ;80D85A;      ;
                        SEP #$10                             ;80D85C;      ;
                        LDA.W #$ECA0                         ;80D85E;      ;
@@ -8090,7 +8091,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D86B;      ;
                        LDX.B #$08                           ;80D86D;      ;
                        LDY.B #$04                           ;80D86F;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D871;808E48;
+                       JSL.L UNK_SetPointer42            ;80D871;808E48;
                        REP #$20                             ;80D875;      ;
                        SEP #$10                             ;80D877;      ;
                        LDA.W #$ECB1                         ;80D879;      ;
@@ -8102,7 +8103,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D886;      ;
                        LDX.B #$09                           ;80D888;      ;
                        LDY.B #$04                           ;80D88A;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D88C;808E48;
+                       JSL.L UNK_SetPointer42            ;80D88C;808E48;
                        RTS                                  ;80D890;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80D891;      ;
@@ -8116,7 +8117,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$08                           ;80D8A2;      ;
                        LDX.B #$04                           ;80D8A4;      ;
                        LDY.B #$03                           ;80D8A6;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D8A8;808E48;
+                       JSL.L UNK_SetPointer42            ;80D8A8;808E48;
                        REP #$20                             ;80D8AC;      ;
                        SEP #$10                             ;80D8AE;      ;
                        LDA.W #$EB07                         ;80D8B0;      ;
@@ -8128,7 +8129,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80D8BD;      ;
                        LDX.B #$05                           ;80D8BF;      ;
                        LDY.B #$03                           ;80D8C1;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D8C3;808E48;
+                       JSL.L UNK_SetPointer42            ;80D8C3;808E48;
                        REP #$20                             ;80D8C7;      ;
                        SEP #$10                             ;80D8C9;      ;
                        LDA.W #$EB1E                         ;80D8CB;      ;
@@ -8140,7 +8141,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D8D8;      ;
                        LDX.B #$06                           ;80D8DA;      ;
                        LDY.B #$03                           ;80D8DC;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D8DE;808E48;
+                       JSL.L UNK_SetPointer42            ;80D8DE;808E48;
                        REP #$20                             ;80D8E2;      ;
                        SEP #$10                             ;80D8E4;      ;
                        LDA.W #$EB35                         ;80D8E6;      ;
@@ -8152,7 +8153,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D8F3;      ;
                        LDX.B #$07                           ;80D8F5;      ;
                        LDY.B #$03                           ;80D8F7;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D8F9;808E48;
+                       JSL.L UNK_SetPointer42            ;80D8F9;808E48;
                        REP #$20                             ;80D8FD;      ;
                        SEP #$10                             ;80D8FF;      ;
                        LDA.W #$ECC2                         ;80D901;      ;
@@ -8164,7 +8165,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D90E;      ;
                        LDX.B #$08                           ;80D910;      ;
                        LDY.B #$04                           ;80D912;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D914;808E48;
+                       JSL.L UNK_SetPointer42            ;80D914;808E48;
                        REP #$20                             ;80D918;      ;
                        SEP #$10                             ;80D91A;      ;
                        LDA.W #$ECD3                         ;80D91C;      ;
@@ -8176,7 +8177,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D929;      ;
                        LDX.B #$09                           ;80D92B;      ;
                        LDY.B #$04                           ;80D92D;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D92F;808E48;
+                       JSL.L UNK_SetPointer42            ;80D92F;808E48;
                        RTS                                  ;80D933;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80D934;      ;
@@ -8190,7 +8191,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D945;      ;
                        LDX.B #$04                           ;80D947;      ;
                        LDY.B #$04                           ;80D949;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D94B;808E48;
+                       JSL.L UNK_SetPointer42            ;80D94B;808E48;
                        REP #$20                             ;80D94F;      ;
                        SEP #$10                             ;80D951;      ;
                        LDA.W #$ECF5                         ;80D953;      ;
@@ -8202,7 +8203,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D960;      ;
                        LDX.B #$05                           ;80D962;      ;
                        LDY.B #$04                           ;80D964;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D966;808E48;
+                       JSL.L UNK_SetPointer42            ;80D966;808E48;
                        RTS                                  ;80D96A;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80D96B;      ;
@@ -8216,7 +8217,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D97C;      ;
                        LDX.B #$04                           ;80D97E;      ;
                        LDY.B #$04                           ;80D980;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D982;808E48;
+                       JSL.L UNK_SetPointer42            ;80D982;808E48;
                        REP #$20                             ;80D986;      ;
                        SEP #$10                             ;80D988;      ;
                        LDA.W #$ED17                         ;80D98A;      ;
@@ -8228,7 +8229,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D997;      ;
                        LDX.B #$05                           ;80D999;      ;
                        LDY.B #$04                           ;80D99B;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D99D;808E48;
+                       JSL.L UNK_SetPointer42            ;80D99D;808E48;
                        RTS                                  ;80D9A1;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80D9A2;      ;
@@ -8242,7 +8243,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D9B3;      ;
                        LDX.B #$04                           ;80D9B5;      ;
                        LDY.B #$04                           ;80D9B7;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D9B9;808E48;
+                       JSL.L UNK_SetPointer42            ;80D9B9;808E48;
                        REP #$20                             ;80D9BD;      ;
                        SEP #$10                             ;80D9BF;      ;
                        LDA.W #$ED39                         ;80D9C1;      ;
@@ -8254,7 +8255,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80D9CE;      ;
                        LDX.B #$05                           ;80D9D0;      ;
                        LDY.B #$04                           ;80D9D2;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D9D4;808E48;
+                       JSL.L UNK_SetPointer42            ;80D9D4;808E48;
                        RTS                                  ;80D9D8;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80D9D9;      ;
@@ -8268,7 +8269,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80D9EA;      ;
                        LDX.B #$04                           ;80D9EC;      ;
                        LDY.B #$04                           ;80D9EE;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80D9F0;808E48;
+                       JSL.L UNK_SetPointer42            ;80D9F0;808E48;
                        REP #$20                             ;80D9F4;      ;
                        SEP #$10                             ;80D9F6;      ;
                        LDA.W #$ED5B                         ;80D9F8;      ;
@@ -8280,7 +8281,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80DA05;      ;
                        LDX.B #$05                           ;80DA07;      ;
                        LDY.B #$04                           ;80DA09;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DA0B;808E48;
+                       JSL.L UNK_SetPointer42            ;80DA0B;808E48;
                        RTS                                  ;80DA0F;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80DA10;      ;
@@ -8294,7 +8295,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$03                           ;80DA21;      ;
                        LDX.B #$04                           ;80DA23;      ;
                        LDY.B #$04                           ;80DA25;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DA27;808E48;
+                       JSL.L UNK_SetPointer42            ;80DA27;808E48;
                        REP #$20                             ;80DA2B;      ;
                        SEP #$10                             ;80DA2D;      ;
                        LDA.W #$ED83                         ;80DA2F;      ;
@@ -8306,7 +8307,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$05                           ;80DA3C;      ;
                        LDX.B #$05                           ;80DA3E;      ;
                        LDY.B #$04                           ;80DA40;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DA42;808E48;
+                       JSL.L UNK_SetPointer42            ;80DA42;808E48;
                        RTS                                  ;80DA46;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80DA47;      ;
@@ -8320,7 +8321,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80DA58;      ;
                        LDX.B #$04                           ;80DA5A;      ;
                        LDY.B #$04                           ;80DA5C;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DA5E;808E48;
+                       JSL.L UNK_SetPointer42            ;80DA5E;808E48;
                        REP #$20                             ;80DA62;      ;
                        SEP #$10                             ;80DA64;      ;
                        LDA.W #$EDAB                         ;80DA66;      ;
@@ -8332,7 +8333,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80DA73;      ;
                        LDX.B #$05                           ;80DA75;      ;
                        LDY.B #$04                           ;80DA77;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DA79;808E48;
+                       JSL.L UNK_SetPointer42            ;80DA79;808E48;
                        REP #$20                             ;80DA7D;      ;
                        SEP #$10                             ;80DA7F;      ;
                        LDA.W #$EDBC                         ;80DA81;      ;
@@ -8344,7 +8345,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0D                           ;80DA8E;      ;
                        LDX.B #$06                           ;80DA90;      ;
                        LDY.B #$04                           ;80DA92;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DA94;808E48;
+                       JSL.L UNK_SetPointer42            ;80DA94;808E48;
                        REP #$20                             ;80DA98;      ;
                        SEP #$10                             ;80DA9A;      ;
                        LDA.W #$EDCD                         ;80DA9C;      ;
@@ -8356,7 +8357,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80DAA9;      ;
                        LDX.B #$07                           ;80DAAB;      ;
                        LDY.B #$04                           ;80DAAD;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DAAF;808E48;
+                       JSL.L UNK_SetPointer42            ;80DAAF;808E48;
                        RTS                                  ;80DAB3;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80DAB4;      ;
@@ -8370,7 +8371,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80DAC5;      ;
                        LDX.B #$04                           ;80DAC7;      ;
                        LDY.B #$04                           ;80DAC9;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DACB;808E48;
+                       JSL.L UNK_SetPointer42            ;80DACB;808E48;
                        REP #$20                             ;80DACF;      ;
                        SEP #$10                             ;80DAD1;      ;
                        LDA.W #$EDEC                         ;80DAD3;      ;
@@ -8382,7 +8383,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0D                           ;80DAE0;      ;
                        LDX.B #$05                           ;80DAE2;      ;
                        LDY.B #$04                           ;80DAE4;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DAE6;808E48;
+                       JSL.L UNK_SetPointer42            ;80DAE6;808E48;
                        REP #$20                             ;80DAEA;      ;
                        SEP #$10                             ;80DAEC;      ;
                        LDA.W #$EDFA                         ;80DAEE;      ;
@@ -8394,7 +8395,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80DAFB;      ;
                        LDX.B #$06                           ;80DAFD;      ;
                        LDY.B #$04                           ;80DAFF;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DB01;808E48;
+                       JSL.L UNK_SetPointer42            ;80DB01;808E48;
                        RTS                                  ;80DB05;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80DB06;      ;
@@ -8408,7 +8409,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$07                           ;80DB17;      ;
                        LDX.B #$04                           ;80DB19;      ;
                        LDY.B #$01                           ;80DB1B;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DB1D;808E48;
+                       JSL.L UNK_SetPointer42            ;80DB1D;808E48;
                        REP #$20                             ;80DB21;      ;
                        SEP #$10                             ;80DB23;      ;
                        LDA.W #$EE16                         ;80DB25;      ;
@@ -8420,7 +8421,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$08                           ;80DB32;      ;
                        LDX.B #$05                           ;80DB34;      ;
                        LDY.B #$01                           ;80DB36;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DB38;808E48;
+                       JSL.L UNK_SetPointer42            ;80DB38;808E48;
                        REP #$20                             ;80DB3C;      ;
                        SEP #$10                             ;80DB3E;      ;
                        LDA.W #$EE24                         ;80DB40;      ;
@@ -8432,7 +8433,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0D                           ;80DB4D;      ;
                        LDX.B #$06                           ;80DB4F;      ;
                        LDY.B #$01                           ;80DB51;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DB53;808E48;
+                       JSL.L UNK_SetPointer42            ;80DB53;808E48;
                        REP #$20                             ;80DB57;      ;
                        SEP #$10                             ;80DB59;      ;
                        LDA.W #$EE32                         ;80DB5B;      ;
@@ -8444,7 +8445,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80DB68;      ;
                        LDX.B #$07                           ;80DB6A;      ;
                        LDY.B #$01                           ;80DB6C;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DB6E;808E48;
+                       JSL.L UNK_SetPointer42            ;80DB6E;808E48;
                        REP #$20                             ;80DB72;      ;
                        SEP #$10                             ;80DB74;      ;
                        LDA.W #$EE40                         ;80DB76;      ;
@@ -8456,7 +8457,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$06                           ;80DB83;      ;
                        LDX.B #$08                           ;80DB85;      ;
                        LDY.B #$03                           ;80DB87;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DB89;808E48;
+                       JSL.L UNK_SetPointer42            ;80DB89;808E48;
                        REP #$20                             ;80DB8D;      ;
                        SEP #$10                             ;80DB8F;      ;
                        LDA.W #$EE4E                         ;80DB91;      ;
@@ -8468,7 +8469,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$09                           ;80DB9E;      ;
                        LDX.B #$09                           ;80DBA0;      ;
                        LDY.B #$03                           ;80DBA2;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DBA4;808E48;
+                       JSL.L UNK_SetPointer42            ;80DBA4;808E48;
                        REP #$20                             ;80DBA8;      ;
                        SEP #$10                             ;80DBAA;      ;
                        LDA.W #$EE5C                         ;80DBAC;      ;
@@ -8480,7 +8481,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0A                           ;80DBB9;      ;
                        LDX.B #$0A                           ;80DBBB;      ;
                        LDY.B #$03                           ;80DBBD;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DBBF;808E48;
+                       JSL.L UNK_SetPointer42            ;80DBBF;808E48;
                        REP #$20                             ;80DBC3;      ;
                        SEP #$10                             ;80DBC5;      ;
                        LDA.W #$EE6A                         ;80DBC7;      ;
@@ -8492,7 +8493,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0B                           ;80DBD4;      ;
                        LDX.B #$0B                           ;80DBD6;      ;
                        LDY.B #$03                           ;80DBD8;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DBDA;808E48;
+                       JSL.L UNK_SetPointer42            ;80DBDA;808E48;
                        REP #$20                             ;80DBDE;      ;
                        SEP #$10                             ;80DBE0;      ;
                        LDA.W #$EE78                         ;80DBE2;      ;
@@ -8504,7 +8505,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80DBEF;      ;
                        LDX.B #$0C                           ;80DBF1;      ;
                        LDY.B #$03                           ;80DBF3;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DBF5;808E48;
+                       JSL.L UNK_SetPointer42            ;80DBF5;808E48;
                        REP #$20                             ;80DBF9;      ;
                        SEP #$10                             ;80DBFB;      ;
                        LDA.W #$EE86                         ;80DBFD;      ;
@@ -8516,7 +8517,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0D                           ;80DC0A;      ;
                        LDX.B #$0D                           ;80DC0C;      ;
                        LDY.B #$03                           ;80DC0E;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DC10;808E48;
+                       JSL.L UNK_SetPointer42            ;80DC10;808E48;
                        REP #$20                             ;80DC14;      ;
                        SEP #$10                             ;80DC16;      ;
                        LDA.W #$EE94                         ;80DC18;      ;
@@ -8528,7 +8529,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80DC25;      ;
                        LDX.B #$0E                           ;80DC27;      ;
                        LDY.B #$03                           ;80DC29;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DC2B;808E48;
+                       JSL.L UNK_SetPointer42            ;80DC2B;808E48;
                        RTS                                  ;80DC2F;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80DC30;      ;
@@ -8542,7 +8543,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$06                           ;80DC41;      ;
                        LDX.B #$04                           ;80DC43;      ;
                        LDY.B #$02                           ;80DC45;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DC47;808E48;
+                       JSL.L UNK_SetPointer42            ;80DC47;808E48;
                        REP #$20                             ;80DC4B;      ;
                        SEP #$10                             ;80DC4D;      ;
                        LDA.W #$E455                         ;80DC4F;      ;
@@ -8554,7 +8555,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80DC5C;      ;
                        LDX.B #$05                           ;80DC5E;      ;
                        LDY.B #$02                           ;80DC60;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DC62;808E48;
+                       JSL.L UNK_SetPointer42            ;80DC62;808E48;
                        REP #$20                             ;80DC66;      ;
                        SEP #$10                             ;80DC68;      ;
                        LDA.W #$E463                         ;80DC6A;      ;
@@ -8566,7 +8567,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0F                           ;80DC77;      ;
                        LDX.B #$06                           ;80DC79;      ;
                        LDY.B #$02                           ;80DC7B;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DC7D;808E48;
+                       JSL.L UNK_SetPointer42            ;80DC7D;808E48;
                        REP #$20                             ;80DC81;      ;
                        SEP #$10                             ;80DC83;      ;
                        LDA.W #$EEA2                         ;80DC85;      ;
@@ -8578,7 +8579,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0C                           ;80DC92;      ;
                        LDX.B #$07                           ;80DC94;      ;
                        LDY.B #$06                           ;80DC96;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DC98;808E48;
+                       JSL.L UNK_SetPointer42            ;80DC98;808E48;
                        REP #$20                             ;80DC9C;      ;
                        SEP #$10                             ;80DC9E;      ;
                        LDA.W #$EEB3                         ;80DCA0;      ;
@@ -8590,7 +8591,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0D                           ;80DCAD;      ;
                        LDX.B #$08                           ;80DCAF;      ;
                        LDY.B #$06                           ;80DCB1;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DCB3;808E48;
+                       JSL.L UNK_SetPointer42            ;80DCB3;808E48;
                        REP #$20                             ;80DCB7;      ;
                        SEP #$10                             ;80DCB9;      ;
                        LDA.W #$EEC4                         ;80DCBB;      ;
@@ -8602,7 +8603,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0F                           ;80DCC8;      ;
                        LDX.B #$09                           ;80DCCA;      ;
                        LDY.B #$06                           ;80DCCC;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DCCE;808E48;
+                       JSL.L UNK_SetPointer42            ;80DCCE;808E48;
                        REP #$20                             ;80DCD2;      ;
                        SEP #$10                             ;80DCD4;      ;
                        LDA.W #$EED5                         ;80DCD6;      ;
@@ -8614,7 +8615,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$05                           ;80DCE3;      ;
                        LDX.B #$0A                           ;80DCE5;      ;
                        LDY.B #$06                           ;80DCE7;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DCE9;808E48;
+                       JSL.L UNK_SetPointer42            ;80DCE9;808E48;
                        REP #$20                             ;80DCED;      ;
                        SEP #$10                             ;80DCEF;      ;
                        LDA.W #$EEEC                         ;80DCF1;      ;
@@ -8626,7 +8627,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80DCFE;      ;
                        LDX.B #$0B                           ;80DD00;      ;
                        LDY.B #$06                           ;80DD02;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DD04;808E48;
+                       JSL.L UNK_SetPointer42            ;80DD04;808E48;
                        RTS                                  ;80DD08;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80DD09;      ;
@@ -8640,7 +8641,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$07                           ;80DD1A;      ;
                        LDX.B #$04                           ;80DD1C;      ;
                        LDY.B #$02                           ;80DD1E;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DD20;808E48;
+                       JSL.L UNK_SetPointer42            ;80DD20;808E48;
                        REP #$20                             ;80DD24;      ;
                        SEP #$10                             ;80DD26;      ;
                        LDA.W #$EF11                         ;80DD28;      ;
@@ -8652,7 +8653,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0D                           ;80DD35;      ;
                        LDX.B #$05                           ;80DD37;      ;
                        LDY.B #$02                           ;80DD39;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DD3B;808E48;
+                       JSL.L UNK_SetPointer42            ;80DD3B;808E48;
                        REP #$20                             ;80DD3F;      ;
                        SEP #$10                             ;80DD41;      ;
                        LDA.W #$EF1C                         ;80DD43;      ;
@@ -8664,7 +8665,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDA.B #$0E                           ;80DD50;      ;
                        LDX.B #$06                           ;80DD52;      ;
                        LDY.B #$02                           ;80DD54;      ;
-                       JSL.L UNK_MemoryWork42_44            ;80DD56;808E48;
+                       JSL.L UNK_SetPointer42            ;80DD56;808E48;
                        RTS                                  ;80DD5A;      ;
 
 
