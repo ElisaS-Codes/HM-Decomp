@@ -1,7 +1,7 @@
 ORG $808000
 
-;;;;;;;; Run right after RESET
-UNK_RealMainLoop:  ;808000
+;;;;;;;; Spawns you after you start a game, from load or new game
+SpawnAfterLoad:  ;808000
         %Set16bit(!MX)
         %Set8bit(!M)
         LDA.B #$15                           ;House lvl 1
@@ -54,7 +54,7 @@ UNK_RealMainLoop:  ;808000
 ;;;;;;;;
 fromNightEvents: ;808083
         %Set8bit(!M)
-        LDA.B !NMI_Status
+        LDA.B !NMI_Status                    ;Wait for next NMI
         BEQ fromNightEvents
 
         %Set16bit(!M)
@@ -67,7 +67,7 @@ fromNightEvents: ;808083
 
     .skip1:
         JSL.L UNK_PrepareScreenTransition
-        JSL.L A4444
+        JSL.L SUB_809A64
         JSL.L UpdateTime
         JSL.L ADDDDFFFF
         JSL.L Unk_MemoryWork7E0D00
@@ -3213,357 +3213,360 @@ ScreenTransitionReturn: ;80972B
                        STA.B $94                            ;809A5D;000094;
                        JSL.L ScreenFadein                         ;809A5F;8087CE;
                        RTL                                  ;809A63;      ;END_A5555
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-A4444:
-%Set16bit(!MX)                             ;809A64;      ;Gigant Switch
-LDA.W $0878                          ;809A66;000878;
-CMP.W #$00C0                         ;809A69;      ;
-BCS .continue1                       ;809A6C;809A71;less than C0
-JMP.W $9D0A                        ;809A6E;809D0A;
-                                ;      ;      ;
-                                ;      ;      ;
-.continue1: CMP.W #$00D0                         ;809A71;      ;
-BCC .continue2                       ;809A74;809A79;bigger than D0
-JMP.W A3333                           ;809A76;809D0B;
-                                ;      ;      ;
-                                ;      ;      ;
-.continue2: LDA.W $087A                          ;809A79;00087A;
-CMP.W #$00C0                         ;809A7C;      ;
-BCS .continue3                       ;809A7F;809A84;less than C0
-JMP.W $9D0A                        ;809A81;809D0A;
-                                ;      ;      ;
-                                ;      ;      ;
-.continue3: CMP.W #$00D0                         ;809A84;      ;
-BCC .continue4                       ;809A87;809A8C;bigger than D0
-JMP.W A3333                           ;809A89;809D0B;
-                                ;      ;      ;
-                                ;      ;      ;
-.continue4: %Set16bit(!MX)                             ;809A8C;      ;
-LDA.B !game_state                            ;809A8E;0000D2;
-AND.W #$0010                         ;809A90;      ;
-BEQ .continue5                       ;809A93;809A98;
-JMP.W $9D0A                        ;809A95;809D0A;
-                                ;      ;      ;
-                                ;      ;      ;
-.continue5: %Set16bit(!M)                             ;809A98;      ;
-LDA.L $7F1F60                        ;809A9A;7F1F60;
-AND.W #$0006                         ;809A9E;      ;
-BEQ .continue6                       ;809AA1;809AA6;
-JMP.W $9D0A                        ;809AA3;809D0A;
-                                ;      ;      ;
-                                ;      ;      ;
-.continue6: %Set16bit(!M)                             ;809AA6;      ;
-LDA.L $7F1F6C                        ;809AA8;7F1F6C;
-AND.W #$0001                         ;809AAC;      ;
-BEQ .skip1                           ;809AAF;809AD3;
-%Set16bit(!M)                             ;809AB1;      ;
-LDA.W $0878                          ;809AB3;000878;
-ASL A                                ;809AB6;      ;
-ASL A                                ;809AB7;      ;
-TAY                                  ;809AB8;      ;
-%Set8bit(!M)                             ;809AB9;      ;
-LDA.B #$00                           ;809ABB;      ;
-XBA                                  ;809ABD;      ;
-LDA.B [$0D],Y                        ;809ABE;00000D;
-%Set16bit(!M)                             ;809AC0;      ;
-ASL A                                ;809AC2;      ;
-ASL A                                ;809AC3;      ;
-ASL A                                ;809AC4;      ;
-TAX                                  ;809AC5;      ;
-%Set8bit(!M)                             ;809AC6;      ;
-LDA.L Unk_Table13,X                  ;809AC8;80B6F5;
-CMP.B #$1C                           ;809ACC;      ;
-BNE .skip1                           ;809ACE;809AD3;
-JMP.W $9D0A                        ;809AD0;809D0A;
-                                ;      ;      ;
-                                ;      ;      ;
-.skip1: %Set16bit(!MX)                             ;809AD3;      ;
-LDA.W #$0000                         ;809AD5;      ;
-STA.B !player_action                            ;809AD8;0000D4;
-%Set16bit(!MX)                             ;809ADA;      ;
-LDA.B !game_state                            ;809ADC;0000D2;
-ORA.W #$0080                         ;809ADE;      ;
-STA.B !game_state                            ;809AE1;0000D2;
-%Set8bit(!M)                             ;809AE3;      ;
-LDA.W $098A                          ;809AE5;00098A;
-CMP.B #$01                           ;809AE8;      ;
-BNE CODE_809AEF                      ;809AEA;809AEF;
-JMP.W CODE_809C5D                    ;809AEC;809C5D;
-                                ;      ;      ;
-                                ;      ;      ;
-CODE_809AEF: CMP.B #$02                           ;809AEF;      ;
-BCC CODE_809AF6                      ;809AF1;809AF6;
-JMP.W CODE_809C67                    ;809AF3;809C67;
-                                ;      ;      ;
-                                ;      ;      ;
-CODE_809AF6: INC A                                ;809AF6;      ;
-STA.W $098A                          ;809AF7;00098A;
-%Set16bit(!M)                             ;809AFA;      ;
-LDA.W $0878                          ;809AFC;000878;
-                                ;      ;      ;
-CODE_809AFF: ASL A                                ;809AFF;      ;
-ASL A                                ;809B00;      ;
-TAY                                  ;809B01;      ;
-%Set8bit(!M)                             ;809B02;      ;
-LDA.B #$00                           ;809B04;      ;
-XBA                                  ;809B06;      ;
-LDA.B [$0D],Y                        ;809B07;00000D;
-%Set16bit(!M)                             ;809B09;      ;
-ASL A                                ;809B0B;      ;
-ASL A                                ;809B0C;      ;
-ASL A                                ;809B0D;      ;
-TAX                                  ;809B0E;      ;
-%Set8bit(!M)                             ;809B0F;      ;
-LDA.L Unk_Table13,X                  ;809B11;80B6F5;
-STA.W !transition_dest                          ;809B15;00098B;
-INX                                  ;809B18;      ;
-INX                                  ;809B19;      ;
-%Set8bit(!M)                             ;809B1A;      ;
-LDA.L Unk_Table13,X                  ;809B1C;80B6F5;
-STA.B $92                            ;809B20;000092;
-INX                                  ;809B22;      ;
-LDA.L Unk_Table13,X                  ;809B23;80B6F5;
-AND.B #$01                           ;809B27;      ;
-BEQ CODE_809B36                      ;809B29;809B36;
-LDA.W !transition_dest                          ;809B2B;00098B;
-CLC                                  ;809B2E;      ;
-ADC.L !season                        ;809B2F;7F1F19;
-STA.W !transition_dest                          ;809B33;00098B;
-                                ;      ;      ;
-CODE_809B36: %Set8bit(!M)                             ;809B36;      ;
-LDA.L Unk_Table13,X                  ;809B38;80B6F5;
-AND.B #$40                           ;809B3C;      ;
-BEQ CODE_809B7D                      ;809B3E;809B7D;
-LDA.L !day                        ;809B40;7F1F1B;
-CMP.B #$01                           ;809B44;      ;
-BEQ CODE_809B5F                      ;809B46;809B5F;
-CMP.B #$18                           ;809B48;      ;
-BEQ CODE_809B6E                      ;809B4A;809B6E;
-CMP.B #$0A                           ;809B4C;      ;
-BCC CODE_809B7D                      ;809B4E;809B7D;
-CMP.B #$0D                           ;809B50;      ;
-BCS CODE_809B7D                      ;809B52;809B7D;
-LDA.W !transition_dest                          ;809B54;00098B;
-CLC                                  ;809B57;      ;
-ADC.B #$04                           ;809B58;      ;
-STA.W !transition_dest                          ;809B5A;00098B;
-BRA CODE_809B7D                      ;809B5D;809B7D;
-                                ;      ;      ;
-                                ;      ;      ;
-CODE_809B5F: %Set8bit(!M)                             ;809B5F;      ;
-LDA.L !season                        ;809B61;7F1F19;
-BNE CODE_809B7D                      ;809B65;809B7D;
-LDA.B #$3A                           ;809B67;      ;
-STA.W !transition_dest                          ;809B69;00098B;
-BRA CODE_809B7D                      ;809B6C;809B7D;
-                                ;      ;      ;
-                                ;      ;      ;
-CODE_809B6E: %Set8bit(!M)                             ;809B6E;      ;
-LDA.L !season                        ;809B70;7F1F19;
-CMP.B #$03                           ;809B74;      ;
-BNE CODE_809B7D                      ;809B76;809B7D;
-LDA.B #$39                           ;809B78;      ;
-STA.W !transition_dest                          ;809B7A;00098B;
-                                ;      ;      ;
-CODE_809B7D: %Set8bit(!M)                             ;809B7D;      ;
-LDA.B !tilemap_to_load                            ;809B7F;000022;
-CMP.B #$0B                           ;809B81;      ;
-BNE CODE_809B88                      ;809B83;809B88;
-JMP.W CODE_809C14                    ;809B85;809C14;
-                                ;      ;      ;
-                                ;      ;      ;
-CODE_809B88: LDA.L Unk_Table13,X                  ;809B88;80B6F5;
-AND.B #$02                           ;809B8C;      ;
-BEQ CODE_809B9A                      ;809B8E;809B9A;
-LDA.L !hour                        ;809B90;7F1F1C;
-CMP.B #$11                           ;809B94;      ;
-BCC CODE_809B9A                      ;809B96;809B9A;
-BRA CODE_809C14                      ;809B98;809C14;
-                                ;      ;      ;
-                                ;      ;      ;
-CODE_809B9A: %Set8bit(!M)                             ;809B9A;      ;
-LDA.L Unk_Table13,X                  ;809B9C;80B6F5;
-AND.B #$04                           ;809BA0;      ;
-BEQ CODE_809BAE                      ;809BA2;809BAE;
-LDA.L !hour                        ;809BA4;7F1F1C;
-CMP.B #$11                           ;809BA8;      ;
-BCS CODE_809BAE                      ;809BAA;809BAE;
-BRA CODE_809C14                      ;809BAC;809C14;
-                                ;      ;      ;
-                                ;      ;      ;
-CODE_809BAE: %Set8bit(!M)                             ;809BAE;      ;
-LDA.L Unk_Table13,X                  ;809BB0;80B6F5;
-AND.B #$08                           ;809BB4;      ;
-BEQ CODE_809BC4                      ;809BB6;809BC4;
-LDA.L !weekday                        ;809BB8;7F1F1A;
-BEQ CODE_809BC4                      ;809BBC;809BC4;
-CMP.B #$06                           ;809BBE;      ;
-BEQ CODE_809BC4                      ;809BC0;809BC4;
-BRA CODE_809C14                      ;809BC2;809C14;
-                                ;      ;      ;
-                                ;      ;      ;
-CODE_809BC4: %Set8bit(!M)                             ;809BC4;      ;
-LDA.L Unk_Table13,X                  ;809BC6;80B6F5;
-AND.B #$10                           ;809BCA;      ;
-BEQ CODE_809BEC                      ;809BCC;809BEC;
-LDA.L !season                        ;809BCE;7F1F19;
-CMP.B #$03                           ;809BD2;      ;
-BNE CODE_809BE0                      ;809BD4;809BE0;
-LDA.L !day                        ;809BD6;7F1F1B;
-CMP.B #$0A                           ;809BDA;      ;
-BNE CODE_809BE0                      ;809BDC;809BE0;
-BRA CODE_809C14                      ;809BDE;809C14;
-                                ;      ;      ;
-                                ;      ;      ;
-CODE_809BE0: %Set8bit(!M)                             ;809BE0;      ;
-LDA.L !weekday                        ;809BE2;7F1F1A;
-CMP.B #$06                           ;809BE6;      ;
-BNE CODE_809BEC                      ;809BE8;809BEC;
-BRA CODE_809C14                      ;809BEA;809C14;
-                                ;      ;      ;
-                                ;      ;      ;
-CODE_809BEC: %Set8bit(!M)                             ;809BEC;      ;
-LDA.L Unk_Table13,X                  ;809BEE;80B6F5;
-AND.B #$20                           ;809BF2;      ;
-BEQ CODE_809BFE                      ;809BF4;809BFE;
-LDA.L !weekday                        ;809BF6;7F1F1A;
-BNE CODE_809BFE                      ;809BFA;809BFE;
-BRA CODE_809C14                      ;809BFC;809C14;
-                                ;      ;      ;
-                                ;      ;      ;
-CODE_809BFE: %Set8bit(!M)                             ;809BFE;      ;
-LDA.L Unk_Table13,X                  ;809C00;80B6F5;
-AND.B #$80                           ;809C04;      ;
-BEQ CODE_809C30                      ;809C06;809C30;
-%Set16bit(!M)                             ;809C08;      ;
-LDA.W $0196                          ;809C0A;000196;
-AND.W #$0010                         ;809C0D;      ;
-BEQ CODE_809C30                      ;809C10;809C30;
-BRA CODE_809C14                      ;809C12;809C14;
-                                ;      ;      ;
-                                ;      ;      ;
-CODE_809C14: %Set16bit(!MX)                             ;809C14;      ;
-LDA.W #$0080                         ;809C16;      ;
-EOR.W #$FFFF                         ;809C19;      ;
-AND.B !game_state                            ;809C1C;0000D2;
-STA.B !game_state                            ;809C1E;0000D2;
-%Set16bit(!M)                             ;809C20;      ;
-STZ.W $0878                          ;809C22;000878;
-STZ.W $087A                          ;809C25;00087A;
-%Set8bit(!M)                             ;809C28;      ;
-STZ.W $098A                          ;809C2A;00098A;
-JMP.W $9D0A                        ;809C2D;809D0A;
-                                ;      ;      ;
-                                ;      ;      ;
-CODE_809C30: %Set8bit(!M)                             ;809C30;      ;
-STZ.W !time_running                          ;809C32;000973;
-INX                                  ;809C35;      ;
-%Set16bit(!M)                             ;809C36;      ;
-LDA.L Unk_Table13,X                  ;809C38;80B6F5;
-STA.W !transition_dest_X                          ;809C3C;00017D;
-INX                                  ;809C3F;      ;
-INX                                  ;809C40;      ;
-LDA.L Unk_Table13,X                  ;809C41;80B6F5;
-STA.W !transition_dest_Y                          ;809C45;00017F;
-%Set8bit(!M)                             ;809C48;      ;
-LDA.B #$00                           ;809C4A;      ;
-XBA                                  ;809C4C;      ;
-LDA.B $92                            ;809C4D;000092;
-CMP.B #$00                           ;809C4F;      ;
-BNE CODE_809C56                      ;809C51;809C56;
-JMP.W $9D0A                        ;809C53;809D0A;
-                                ;      ;      ;
-                                ;      ;      ;
-CODE_809C56: JSL.L CODE_81A5E1                    ;809C56;81A5E1;
-JMP.W $9D0A                        ;809C5A;809D0A;
-                                ;      ;      ;
-                                ;      ;      ;
-CODE_809C5D: %Set16bit(!M)                             ;809C5D;      ;
-LDA.W $00CF                          ;809C5F;0000CF;
-BEQ CODE_809C67                      ;809C62;809C67;
-JMP.W $9D0A                        ;809C64;809D0A;
-                                ;      ;      ;
-                                ;      ;      ;
-CODE_809C67: %Set8bit(!M)                             ;809C67;      ;
-LDA.W $098A                          ;809C69;00098A;
-CMP.B #$0D                           ;809C6C;      ;
-BEQ CODE_809CD3                      ;809C6E;809CD3;
-INC A                                ;809C70;      ;
-STA.W $098A                          ;809C71;00098A;
-%Set16bit(!MX)                             ;809C74;      ;
-LDA.W #$0001                         ;809C76;      ;
-STA.B !player_action                            ;809C79;0000D4;
-%Set16bit(!M)                             ;809C7B;      ;
-LDA.B !player_direction                            ;809C7D;0000DA;
-CMP.W #$0000                         ;809C7F;      ;
-BEQ CODE_809CA0                      ;809C82;809CA0;
-CMP.W #$0001                         ;809C84;      ;
-BEQ CODE_809CB1                      ;809C87;809CB1;
-CMP.W #$0002                         ;809C89;      ;
-BEQ CODE_809CC2                      ;809C8C;809CC2;
-%Set16bit(!MX)                             ;809C8E;      ;
-LDA.W #$0003                         ;809C90;      ;
-STA.B !player_direction                            ;809C93;0000DA;
-%Set16bit(!MX)                             ;809C95;      ;
-LDA.W #$0003                         ;809C97;      ;
-STA.W $0911                          ;809C9A;000911;
-JMP.W $9D0A                        ;809C9D;809D0A;
-                                ;      ;      ;
-                                ;      ;      ;
-CODE_809CA0: %Set16bit(!MX)                             ;809CA0;      ;
-LDA.W #$0000                         ;809CA2;      ;
-STA.B !player_direction                            ;809CA5;0000DA;
-%Set16bit(!MX)                             ;809CA7;      ;
-LDA.W #$0000                         ;809CA9;      ;
-STA.W $0911                          ;809CAC;000911;
-BRA $59                          ;809CAF;809D0A;
-                                ;      ;      ;
-                                ;      ;      ;
-CODE_809CB1: %Set16bit(!MX)                             ;809CB1;      ;
-LDA.W #$0001                         ;809CB3;      ;
-STA.B !player_direction                            ;809CB6;0000DA;
-%Set16bit(!MX)                             ;809CB8;      ;
-LDA.W #$0001                         ;809CBA;      ;
-STA.W $0911                          ;809CBD;000911;
-BRA $48                          ;809CC0;809D0A;
-                                ;      ;      ;
-                                ;      ;      ;
-CODE_809CC2: %Set16bit(!MX)                             ;809CC2;      ;
-LDA.W #$0002                         ;809CC4;      ;
-STA.B !player_direction                            ;809CC7;0000DA;
-%Set16bit(!MX)                             ;809CC9;      ;
-LDA.W #$0002                         ;809CCB;      ;
-STA.W $0911                          ;809CCE;000911;
-BRA $37                          ;809CD1;809D0A;
-                                ;      ;      ;
-                                ;      ;      ;
-CODE_809CD3: %Set8bit(!M)                             ;809CD3;      ;
-LDA.W $0022                          ;809CD5;000022;
-CMP.B #$04                           ;809CD8;      ;
-BCS CODE_809CE0                      ;809CDA;809CE0;
-JSL.L CIIII                          ;809CDC;82A682;
-                                ;      ;      ;
-CODE_809CE0: %Set8bit(!M)                             ;809CE0;      ;
-LDA.B !tilemap_to_load                            ;809CE2;000022;
-CMP.B #$0C                           ;809CE4;      ;
-BCC CODE_809CFF                      ;809CE6;809CFF;
-LDA.B !tilemap_to_load                            ;809CE8;000022;
-CMP.B #$10                           ;809CEA;      ;
-BCS CODE_809CFF                      ;809CEC;809CFF;
-LDA.L !hour                        ;809CEE;7F1F1C;
-CMP.B #$12                           ;809CF2;      ;
-BEQ CODE_809CFF                      ;809CF4;809CFF;
-INC A                                ;809CF6;      ;
-STA.L !hour                        ;809CF7;7F1F1C;
-JSL.L HaveLunch                          ;809CFB;8280AA;
-                                ;      ;      ;
-CODE_809CFF: %Set16bit(!MX)                             ;809CFF;      ;
-LDA.W $0196                          ;809D01;000196;
-ORA.W #$4000                         ;809D04;      ;
-STA.W $0196                          ;809D07;000196;Stores to 196
-                                ;      ;      ;
-RTL                                  ;809D0A;      ;END_A4444
+
+;;;;;;;; Related to Transition?
+SUB_809A64: ;809A64
+        %Set16bit(!MX)
+        LDA.W $0878
+        CMP.W #192;C0
+        BCS .aboveC0_1
+        JMP.W .return
+
+    .aboveC0_1:
+        CMP.W #208;D0
+        BCC .belowD0_1
+        JMP.W A3333
+
+    .belowD0_1:
+        LDA.W $087A
+        CMP.W #192;C0
+        BCS .aboveC0_2
+        JMP.W .return
+
+    .aboveC0_2:
+        CMP.W #208;D0
+        BCC .belowD0_2
+        JMP.W A3333
+
+    .belowD0_2:
+        %Set16bit(!MX)
+        LDA.B !game_state
+        AND.W #$0010                         ;FLAGD2
+        BEQ .continue
+        JMP.W .return
+
+    .continue:
+        %Set16bit(!M)
+        LDA.L $7F1F60
+        AND.W #$0006                         ;FLAG60
+        BEQ .continue6
+        JMP.W .return
+
+    .continue6:
+        %Set16bit(!M)
+        LDA.L $7F1F6C
+        AND.W #$0001
+        BEQ .skip1
+        %Set16bit(!M)
+        LDA.W $0878
+        ASL A
+        ASL A
+        TAY                                  ;*4
+        %Set8bit(!M)
+        LDA.B #$00
+        XBA
+        LDA.B [$0D],Y
+        %Set16bit(!M)
+        ASL A
+        ASL A
+        ASL A
+        TAX
+        %Set8bit(!M)
+        LDA.L Unk_Table13,X
+        CMP.B #$1C
+        BNE .skip1
+        JMP.W .return
+
+    .skip1:
+        %Set16bit(!MX)
+        LDA.W #$0000
+        STA.B !player_action
+        %Set16bit(!MX)
+        LDA.B !game_state
+        ORA.W #$0080                         ;FLAGD2 Carring dog
+        STA.B !game_state
+        %Set8bit(!M)
+        LDA.W $098A
+        CMP.B #$01
+        BNE .CODE_809AEF
+        JMP.W .CODE_809C5D
+
+    .CODE_809AEF:
+        CMP.B #$02
+        BCC .CODE_809AF6
+        JMP.W .CODE_809C67
+
+    .CODE_809AF6:
+        INC A
+        STA.W $098A
+        %Set16bit(!M)
+        LDA.W $0878
+        ASL A
+        ASL A
+        TAY
+        %Set8bit(!M)
+        LDA.B #$00
+        XBA
+        LDA.B [$0D],Y
+        %Set16bit(!M)
+        ASL A
+        ASL A
+        ASL A
+        TAX
+        %Set8bit(!M)
+        LDA.L Unk_Table13,X
+        STA.W !transition_dest
+        INX
+        INX
+        %Set8bit(!M)
+        LDA.L Unk_Table13,X
+        STA.B $92
+        INX
+        LDA.L Unk_Table13,X
+        AND.B #$01
+        BEQ .CODE_809B36
+        LDA.W !transition_dest
+        CLC
+        ADC.L !season
+        STA.W !transition_dest
+
+    .CODE_809B36:
+        %Set8bit(!M)
+        LDA.L Unk_Table13,X
+        AND.B #$40
+        BEQ .CODE_809B7D
+        LDA.L !day
+        CMP.B #$01
+        BEQ .CODE_809B5F
+        CMP.B #$18
+        BEQ .CODE_809B6E
+        CMP.B #$0A
+        BCC .CODE_809B7D
+        CMP.B #$0D
+        BCS .CODE_809B7D
+        LDA.W !transition_dest
+        CLC
+        ADC.B #$04
+        STA.W !transition_dest
+        BRA .CODE_809B7D
+
+    .CODE_809B5F:
+        %Set8bit(!M)
+        LDA.L !season
+        BNE .CODE_809B7D
+        LDA.B #$3A
+        STA.W !transition_dest
+        BRA .CODE_809B7D
+
+    .CODE_809B6E:
+        %Set8bit(!M)
+        LDA.L !season
+        CMP.B #$03
+        BNE .CODE_809B7D
+        LDA.B #$39
+        STA.W !transition_dest
+
+    .CODE_809B7D:
+        %Set8bit(!M)
+        LDA.B !tilemap_to_load
+        CMP.B #$0B
+        BNE .CODE_809B88
+        JMP.W .CODE_809C14
+
+    .CODE_809B88:
+        LDA.L Unk_Table13,X
+        AND.B #$02
+        BEQ .CODE_809B9A
+        LDA.L !hour
+        CMP.B #$11
+        BCC .CODE_809B9A
+        BRA .CODE_809C14
+
+    .CODE_809B9A:
+        %Set8bit(!M)
+        LDA.L Unk_Table13,X
+        AND.B #$04
+        BEQ .CODE_809BAE
+        LDA.L !hour
+        CMP.B #$11
+        BCS .CODE_809BAE
+        BRA .CODE_809C14
+
+    .CODE_809BAE:
+        %Set8bit(!M)
+        LDA.L Unk_Table13,X
+        AND.B #$08
+        BEQ .CODE_809BC4
+        LDA.L !weekday
+        BEQ .CODE_809BC4
+        CMP.B #$06
+        BEQ .CODE_809BC4
+        BRA .CODE_809C14
+
+    .CODE_809BC4:
+        %Set8bit(!M)
+        LDA.L Unk_Table13,X
+        AND.B #$10
+        BEQ .CODE_809BEC
+        LDA.L !season
+        CMP.B #$03
+        BNE .CODE_809BE0
+        LDA.L !day
+        CMP.B #$0A
+        BNE .CODE_809BE0
+        BRA .CODE_809C14
+
+    .CODE_809BE0:
+        %Set8bit(!M)
+        LDA.L !weekday
+        CMP.B #$06
+        BNE .CODE_809BEC
+        BRA .CODE_809C14
+
+    .CODE_809BEC:
+        %Set8bit(!M)
+        LDA.L Unk_Table13,X
+        AND.B #$20
+        BEQ .CODE_809BFE
+        LDA.L !weekday
+        BNE .CODE_809BFE
+        BRA .CODE_809C14
+
+    .CODE_809BFE:
+        %Set8bit(!M)
+        LDA.L Unk_Table13,X
+        AND.B #$80
+        BEQ .CODE_809C30
+        %Set16bit(!M)
+        LDA.W $0196
+        AND.W #$0010
+        BEQ .CODE_809C30
+        BRA .CODE_809C14
+
+    .CODE_809C14:
+        %Set16bit(!MX)
+        LDA.W #$0080
+        EOR.W #$FFFF
+        AND.B !game_state
+        STA.B !game_state
+        %Set16bit(!M)
+        STZ.W $0878
+        STZ.W $087A
+        %Set8bit(!M)
+        STZ.W $098A
+        JMP.W .return
+
+    .CODE_809C30:
+        %Set8bit(!M)
+        STZ.W !time_running
+        INX
+        %Set16bit(!M)
+        LDA.L Unk_Table13,X
+        STA.W !transition_dest_X
+        INX
+        INX
+        LDA.L Unk_Table13,X
+        STA.W !transition_dest_Y
+        %Set8bit(!M)
+        LDA.B #$00
+        XBA
+        LDA.B $92
+        CMP.B #$00
+        BNE .CODE_809C56
+        JMP.W .return
+
+    .CODE_809C56:
+        JSL.L CODE_81A5E1
+        JMP.W .return
+
+    .CODE_809C5D:
+        %Set16bit(!M)
+        LDA.W $00CF
+        BEQ .CODE_809C67
+        JMP.W .return
+
+    .CODE_809C67:
+        %Set8bit(!M)
+        LDA.W $098A
+        CMP.B #$0D
+        BEQ .CODE_809CD3
+        INC A
+        STA.W $098A
+        %Set16bit(!MX)
+        LDA.W #$0001
+        STA.B !player_action
+        %Set16bit(!M)
+        LDA.B !player_direction
+        CMP.W #$0000
+        BEQ .CODE_809CA0
+        CMP.W #$0001
+        BEQ .CODE_809CB1
+        CMP.W #$0002
+        BEQ .CODE_809CC2
+        %Set16bit(!MX)
+        LDA.W #$0003
+        STA.B !player_direction
+        %Set16bit(!MX)
+        LDA.W #$0003
+        STA.W $0911
+        JMP.W .return
+
+    .CODE_809CA0:
+        %Set16bit(!MX)
+        LDA.W #$0000
+        STA.B !player_direction
+        %Set16bit(!MX)
+        LDA.W #$0000
+        STA.W $0911
+        BRA .return
+
+    .CODE_809CB1:
+        %Set16bit(!MX)                             ;809CB1;      ;
+        LDA.W #$0001                         ;809CB3;      ;
+        STA.B !player_direction                            ;809CB6;0000DA;
+        %Set16bit(!MX)                             ;809CB8;      ;
+        LDA.W #$0001                         ;809CBA;      ;
+        STA.W $0911                          ;809CBD;000911;
+        BRA .return                          ;809CC0;809D0A;
+
+    .CODE_809CC2:
+        %Set16bit(!MX)                             ;809CC2;      ;
+        LDA.W #$0002                         ;809CC4;      ;
+        STA.B !player_direction                            ;809CC7;0000DA;
+        %Set16bit(!MX)                             ;809CC9;      ;
+        LDA.W #$0002                         ;809CCB;      ;
+        STA.W $0911                          ;809CCE;000911;
+        BRA .return                          ;809CD1;809D0A;
+
+    .CODE_809CD3:
+        %Set8bit(!M)                             ;809CD3;      ;
+        LDA.W $0022                          ;809CD5;000022;
+        CMP.B #$04                           ;809CD8;      ;
+        BCS .CODE_809CE0                      ;809CDA;809CE0;
+        JSL.L CIIII                          ;809CDC;82A682;
+
+    .CODE_809CE0:
+        %Set8bit(!M)                             ;809CE0;      ;
+        LDA.B !tilemap_to_load                            ;809CE2;000022;
+        CMP.B #$0C                           ;809CE4;      ;
+        BCC .CODE_809CFF                      ;809CE6;809CFF;
+        LDA.B !tilemap_to_load                            ;809CE8;000022;
+        CMP.B #$10                           ;809CEA;      ;
+        BCS .CODE_809CFF                      ;809CEC;809CFF;
+        LDA.L !hour                        ;809CEE;7F1F1C;
+        CMP.B #$12                           ;809CF2;      ;
+        BEQ .CODE_809CFF                      ;809CF4;809CFF;
+        INC A                                ;809CF6;      ;
+        STA.L !hour                        ;809CF7;7F1F1C;
+        JSL.L HaveLunch                          ;809CFB;8280AA;
+
+    .CODE_809CFF:
+        %Set16bit(!MX)                             ;809CFF;      ;
+        LDA.W $0196                          ;809D01;000196;
+        ORA.W #$4000                         ;809D04;      ;
+        STA.W $0196                          ;809D07;000196;Stores to 196
+
+.return: RTL                                  ;809D0A;      ;END_SUB_809A64
                                                             ;      ;      ;
                                                             ;      ;      ;
                  A3333: %Set8bit(!M)                             ;809D0B;      ;

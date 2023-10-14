@@ -4,6 +4,8 @@ Params A:Control Registers, X:VRAM/CGRAM Dest Addresses, Y(DMA Size), $72 & $74 
 ====Re-DECOMP
 PalettePointerTable
 828AD3
+DATA8_82B294
+CODE_81A58B
 
 ====Working on
 $90, wAiting ?
@@ -189,7 +191,7 @@ $084A -
 
 $7E084A -
 
-$0878 - Flags? related to $E9, related to movement? maybe not flags, checked if less than c0?
+$0878 - related to $E9, related to whats in front of you
 $087A -
 
 $7E08B3 - Data from Season Table
@@ -264,11 +266,11 @@ $0984 - ;8b
 
 $7E0987 - Related to saves
 
-$7E098A - Related to Map to transition, if its 00, it moves to next map, if its 0d it stays on same map
+$7E098A - Related to Map to transition, increases from 00 to 0d during it
 $7E098B - Map to transition
 $7E098C - Weather tomorrow (00:Sunny, 01:rain, 03:hurricane, 04:fair, 05:sunny and calm, 06:flower festival, 07:harvest festival, 08:Thanksgiving Festival, 09:Star Night Festival, 0A:festive mood, 0B:annual egg festival, 0C:snow)
 $7E098D - related to audio? probably not, maybe a "save corrupted" screen stub
-$7E098E - Related to save?
+$7E098E - Related to save? save slot?
 $7E098F -
 
 $7E0990 -

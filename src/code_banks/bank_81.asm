@@ -3207,7 +3207,7 @@ BAAAA: ;81A383
       TAX                                  ;81A43E;      ;
       CPX.W #$0000                         ;81A43F;      ;
       BEQ .increasePointer                 ;81A442;81A4B2;
-      JSR.W (CODE_81A58B,X)                ;81A444;81A58B;
+      JSR.W (DATA8_81A58B,X)                ;81A444;81A58B;
       %Set8bit(!M)                             ;81A447;      ;
       LDY.W #$0000                         ;81A449;      ;
       LDA.W $0974                          ;81A44C;000974;
@@ -3362,7 +3362,7 @@ BAAAA: ;81A383
                        RTL                                  ;81A58A;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
-          CODE_81A58B: SBC.L CODE_809AFF,X                  ;81A58B;809AFF;
+DATA8_81A58B: db $FF,$FF,$9A,$80                   ;81A58B;      ;
                                                             ;      ;      ;
           CODE_81A58F: %Set8bit(!M)                             ;81A58F;      ;
                        %Set16bit(!X)                             ;81A591;      ;

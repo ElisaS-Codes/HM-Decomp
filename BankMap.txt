@@ -13,7 +13,7 @@
 
 Bank 80
 
-❓808000 - UNK_RealMainLoop
+❓808000 - SpawnAfterLoad
 ❓808083 - fromNightEvents
 ✅8080ED - SetPlayerName
 ❔80815F - SetCowName
