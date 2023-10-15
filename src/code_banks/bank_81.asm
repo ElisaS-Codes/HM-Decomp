@@ -5366,7 +5366,7 @@ BEEEE: ;81BFB7
       CODE_81C00E: %Set8bit(!M)                             ;81C00E;      ;
       STZ.W !idle_animation_timer                          ;81C010;000925;
                                           ;      ;      ;
-      CODE_81C013: JSL.L A1111                           ;81C013;809F61;
+      CODE_81C013: JSL.L SUB_809D0B                           ;81C013;809F61;
       %Set16bit(!M)                             ;81C017;      ;
       LDA.W #$0000                         ;81C019;      ;
       STA.B $1E                            ;81C01C;00001E;
@@ -6892,7 +6892,7 @@ BEEEE: ;81BFB7
                        CLC                                  ;81CC32;      ;
                        ADC.B $1E                            ;81CC33;00001E;
                        STA.B !player_pos_Y                            ;81CC35;0000D8;
-                       JSL.L A2222                           ;81CC37;809EBC;
+                       JSL.L SUB_809EBC                           ;81CC37;809EBC;
                        JSL.L UpdateBGOffset                          ;81CC3B;80A0AB;
                        JMP.W CODE_81CE2B                    ;81CC3F;81CE2B;
                                                             ;      ;      ;
@@ -6980,7 +6980,7 @@ BEEEE: ;81BFB7
                        SEC                                  ;81CCD6;      ;
                        SBC.B $1E                            ;81CCD7;00001E;
                        STA.B !player_pos_Y                            ;81CCD9;0000D8;
-                       JSL.L A2222                           ;81CCDB;809EBC;
+                       JSL.L SUB_809EBC                           ;81CCDB;809EBC;
                        JSL.L ATTTT                          ;81CCDF;80A0E1;
                        JMP.W CODE_81CE2B                    ;81CCE3;81CE2B;
                                                             ;      ;      ;
@@ -7068,7 +7068,7 @@ BEEEE: ;81BFB7
                        CLC                                  ;81CD7A;      ;
                        ADC.B $1E                            ;81CD7B;00001E;
                        STA.B !player_pos_X                           ;81CD7D;0000D6;
-                       JSL.L A2222                           ;81CD7F;809EBC;
+                       JSL.L SUB_809EBC                           ;81CD7F;809EBC;
                        JSL.L UNK_StaticMapScroling         ;81CD83;80A11C;
                        JMP.W CODE_81CE2B                    ;81CD87;81CE2B;
                                                             ;      ;      ;
@@ -7156,7 +7156,7 @@ BEEEE: ;81BFB7
                        SEC                                  ;81CE1E;      ;
                        SBC.B $1E                            ;81CE1F;00001E;
                        STA.B !player_pos_X                           ;81CE21;0000D6;
-                       JSL.L A2222                           ;81CE23;809EBC;
+                       JSL.L SUB_809EBC                           ;81CE23;809EBC;
                        JSL.L ARRRR                          ;81CE27;80A152;
                                                             ;      ;      ;
           CODE_81CE2B: %Set8bit(!M)                             ;81CE2B;      ;
