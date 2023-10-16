@@ -40,7 +40,7 @@ SpawnAfterLoad:  ;808000
         %Set16bit(!M)
         LDA.L $7F1F68
         AND.W #$0001                        ;FLAG68
-        BEQ fromNightEvents
+        BEQ GameLoop
         %Set8bit(!M)
         LDA.B #$03
         JSL.L RNGReturn0toA
@@ -51,11 +51,11 @@ SpawnAfterLoad:  ;808000
         ORA.W #$0004
         STA.B !game_state
 
-;;;;;;;;
-fromNightEvents: ;808083
+;;;;;;;; I think this is the Big Main Loop from the topdown part at least
+GameLoop: ;808083
         %Set8bit(!M)
         LDA.B !NMI_Status                    ;Wait for next NMI
-        BEQ fromNightEvents
+        BEQ GameLoop
 
         %Set16bit(!M)
         LDA.W #$1800
@@ -83,7 +83,7 @@ fromNightEvents: ;808083
         JSL.L UNK_BigLoadLoopOAM
         %Set8bit(!M)
         STZ.B !NMI_Status
-        JMP.W fromNightEvents
+        JMP.W GameLoop
 
 
     .skip2:
@@ -93,8 +93,8 @@ fromNightEvents: ;808083
         STA.W $0196
         JML.L CODE_82E80C
 
-;;;;;;;;
-SetPlayerName:
+;;;;;;;; Moves the player name from the temp location to the final location
+SetPlayerName: ;8080ED
         %Set8bit(!M)
         %Set16bit(!X)
         LDA.B #$0F
@@ -131,17 +131,17 @@ SetPlayerName:
         STA.W !player_name_long_4
         %Set16bit(!M)
         LDA.W $0196
-        ORA.W #$4000
+        ORA.W #$4000                         ;FLAG196
         STA.W $0196
         LDA.W #$0100
         STA.W !BG3_Map_Offset_Y
         %Set8bit(!M)
         LDA.B #$01
         STA.W !inputstate
-        JMP.W fromNightEvents
+        JMP.W GameLoop
 
-;;;;;;;;
-SetCowName:
+;;;;;;;; Moves the Cow name from the temp location to the final location, and creates her
+SetCowNameBought: ;80815F
         %Set8bit(!M)
         %Set16bit(!X)
         LDA.B #$0F
@@ -173,20 +173,20 @@ SetCowName:
         STA.B [$72],Y
         %Set16bit(!M)
         LDA.W $0196
-        ORA.W #$4000
+        ORA.W #$4000                         ;FLAG196
         STA.W $0196
         LDA.L $7F1F5A
-        AND.W #$FFFD
+        AND.W #$FFFD                         ;FLAG5A
         STA.L $7F1F5A
         LDA.W #$0100
         STA.W !BG3_Map_Offset_Y
         %Set8bit(!M)
         LDA.B #$01
         STA.W !inputstate
-        JMP.W fromNightEvents
+        JMP.W GameLoop
 
-;;;;;;;;
-SetCowName2: ;8081D2
+;;;;;;;; Moves the Cow name from the temp location to the final location, and creates her
+SetCowNameBorn: ;8081D2
         %Set8bit(!M)
         %Set16bit(!X)
         LDA.B #$0F
@@ -226,16 +226,16 @@ SetCowName2: ;8081D2
         STA.L $7F1F64
         %Set16bit(!M)
         LDA.W $0196
-        ORA.W #$4000
+        ORA.W #$4000                         ;FLAG196
         STA.W $0196
         LDA.W #$0100
         STA.W !BG3_Map_Offset_Y
         %Set8bit(!M)
         LDA.B #$01
         STA.W !inputstate
-        JMP.W fromNightEvents
+        JMP.W GameLoop
 
-;;;;;;;;
+;;;;;;;; Moves the Dog name from the temp location to the final location
 SetDogName: ;808254
         %Set8bit(!M)
         %Set16bit(!X)
@@ -273,16 +273,16 @@ SetDogName: ;808254
         STA.W !dog_name_long_4
         %Set16bit(!M)
         LDA.W $0196
-        ORA.W #$4000
+        ORA.W #$4000                         ;FLAG196
         STA.W $0196
         LDA.W #$0100
         STA.W !BG3_Map_Offset_Y
         %Set8bit(!M)
         LDA.B #$01
         STA.W !inputstate
-        JMP.W fromNightEvents
+        JMP.W GameLoop
 
-;;;;;;;;
+;;;;;;;; Moves the Horse name from the temp location to the final location
 SetHorseName: ;8082C6
         %Set8bit(!M)
         %Set16bit(!X)
@@ -320,16 +320,16 @@ SetHorseName: ;8082C6
         STA.W !horse_name_long_4
         %Set16bit(!M)
         LDA.W $0196
-        ORA.W #$4000
+        ORA.W #$4000                         ;FLAG196
         STA.W $0196
         LDA.W #$0100
         STA.W !BG3_Map_Offset_Y
         %Set8bit(!M)
         LDA.B #$01
         STA.W !inputstate
-        JMP.W fromNightEvents
+        JMP.W GameLoop
 
-;;;;;;;;
+;;;;;;;; Moves the Kid1 name from the temp location to the final location
 SetKid1Name: ;808338
         %Set8bit(!M)
         %Set16bit(!X)
@@ -367,16 +367,16 @@ SetKid1Name: ;808338
         STA.W !kid1_name_long_4
         %Set16bit(!M)
         LDA.W $0196
-        ORA.W #$4000
+        ORA.W #$4000                         ;FLAG196
         STA.W $0196
         LDA.W #$0100
         STA.W !BG3_Map_Offset_Y
         %Set8bit(!M)
         LDA.B #$01
         STA.W !inputstate
-        JMP.W fromNightEvents
+        JMP.W GameLoop
 
-;;;;;;;;
+;;;;;;;; Moves the Kid2 name from the temp location to the final location
 SetKid2Name: ;8083AE
         %Set8bit(!M)
         %Set16bit(!X)
@@ -414,14 +414,14 @@ SetKid2Name: ;8083AE
         STA.W !kid2_name_long_4
         %Set16bit(!M)
         LDA.W $0196
-        ORA.W #$4000
+        ORA.W #$4000                         ;FLAG196
         STA.W $0196
         LDA.W #$0100
         STA.W !BG3_Map_Offset_Y
         %Set8bit(!M)
         LDA.B #$01
         STA.W !inputstate
-        JMP.W fromNightEvents
+        JMP.W GameLoop
 
 ;;;;;;;; These values are used during the VRAM and OBJRAM Initializers.
 Value_0000: dw $0000 ;808424
@@ -628,7 +628,7 @@ RESET:   ;808428
         %Set16bit(!X)
         LDA.B !INIDISP_FORCE_BLANK
         STA.W !INIDISP
-        STZ.W $0148                          ;TODO
+        STZ.W $0148                          ;Is this never used?
         LDA.B !NMITIMEN_ENABLE_NMI_NO_JOY
         STA.W !NMITIMEN
         STZ.W !INIDISP
@@ -722,24 +722,25 @@ COP_Interrupt: ;808699
         PLB
         RTI
 
-;;;;;;;;
+;;;;;;;; This is the main DMA subrutine
 UpdateGraphics: ;8086B1
         PHP
         %Set8bit(!M)
         LDA.B !NMI_Status
 
-        BNE +                                ;skip if not expecting a programed DMA
+        BNE .notwaitingforDMA
         JSL.L StartProgramedDMA
         %Set8bit(!M)
-        LDA.B $9A                            ;DMA Channel 5 seems to be special, is set in Bank 85
+        LDA.B $9A                            ;DMA Channel 4 seems to be special?
         STA.W !MDMAEN
         STZ.B $9A
         STZ.W !MDMAEN
-        JSL.L CopiesWRAMtoOBJVGRAM              ;TODO
+        JSL.L CopiesWRAMtoOBJVGRAM           ;TODO
         STZ.B $9A
         STZ.W !MDMAEN
 
-      + JSR.W ReadJoypad
+    .notwaitingforDMA:
+        JSR.W ReadJoypad
         JSL.L GetRNG
 
     ;Update Offsets
@@ -785,11 +786,11 @@ COP_Return: ;80872A
 ReadJoypad: ;80872B;
         PHP
 
-    ;wait for Joypad register to be available
-      - %Set8bit(!M)
+    .waitforready
+        %Set8bit(!M)
         LDA.W !HVBJOY
         BIT.B !HVBJOY_Joy_Ready
-        BNE -
+        BNE .waitforready
 
     ;Move old imput to last frame's memory location
         %Set16bit(!MX)
@@ -1001,7 +1002,7 @@ ZeroesOAM: ;808887
         LDA.B #$80
         STA.W !A1B0
         %Set16bit(!M)
-        LDA.W #$043F                         ;size -> $043F = 1087 bytes
+        LDA.W #$043F                         ;size -> $043F = 1087 bytes, literally twice the OAM
         STA.W !DAS0L
         %Set8bit(!M)
         LDA.B !MDMAEN_Enable_Channel_1
@@ -1115,7 +1116,7 @@ ZeroesCGRAM: ;808980
         STA.W !MDMAEN
         RTL
 
-;;;;;;;; Clears a chunk of 0FFF of the VRAM. Param: A, the starting location
+;;;;;;;; Clears a chunk of 1000 of the VRAM. Param: A, the starting location
 ZeroesPartialVRAM: ;8089BC
         %Set16bit(!MX)
         STA.W !VMADDL
@@ -1182,7 +1183,6 @@ RNGReturn0toA: ;8089F9
 
 ;;;;;;;; Prepares a DMA channel to later copy during NMI, more info on ram.asm
 ;;;;;;;; Params A:Control Registers, X:VRAM/CGRAM Dest Addresses, Y(DMA Size), $72 & $74 24b src
-;;;;;;;; TODO $C7
 AddProgrammedDMA: ;808A33
         !src_address = $72
         !src_bank = $74
@@ -1238,7 +1238,7 @@ AddProgrammedDMA: ;808A33
         %Set16bit(!M)
         TYA
         STA.W !DAS0L,X
-        LDA.B $C7                            ;
+        LDA.B $C7                            ;TODO
         SEC
         SBC.W !DAS0L,X
         STA.B $C7
@@ -1255,7 +1255,7 @@ AddProgrammedDMA: ;808A33
 
         RTL
 
-;;;;;;;;
+;;;;;;;; Removes a DMA channel
 RemoveProgrammedDMA: ;808AA0
         %Set8bit(!M)
         %Set16bit(!X)
@@ -1554,18 +1554,18 @@ ManageGraphicPresets: ;808C59
         PLP
         RTL
 
-;;;;;;;;
+;;;;;;;; sets the Forces Blank flag
 ForceBlank: ;808E0F
         PHP
         %Set8bit(!M)
         LDA.B !copyof_INIDISP
         ORA.B #$80                           ;modify only the blank bit
         STA.B !copyof_INIDISP
-        STA.L !INIDISP24                     ;24bit direction of INIDISP???
+        STA.L !INIDISP24                     ;24bit direction of INIDISP
         PLP
         RTL
 
-;;;;;;;;
+;;;;;;;; resets the Forces Blank flag
 ResetForceBlank: ;808E1E
         PHP
         %Set8bit(!M)
@@ -1593,6 +1593,7 @@ SetsBrightness: ;808E2D
         PLP
         RTL
 
+;;;;;;;; Sets a number of values and a pointer, indexed by X
 ;;;;;;;; Params in A, Y, X, 72, 74
 UNK_SetPointer42: ;808E48
         %Set8bit(!MX)
@@ -1615,7 +1616,7 @@ UNK_SetPointer42: ;808E48
 
         RTL
 
-;;;;;;;;I think this is Rain/Snow related
+;;;;;;;;
 UNK_BigLoop: ;808E69
         %Set16bit(!MX)
         %Set8bit(!M)
@@ -1781,7 +1782,7 @@ UNK_BigLoop: ;808E69
         JMP.W .bigloop
 
 ;;;;;;;; Param A
-NullsPointersbyA: ;808F82
+ZeroesOne42Pointer: ;808F82
         %Set16bit(!MX)
         STA.B $7E
         ASL A
@@ -1794,9 +1795,11 @@ NullsPointersbyA: ;808F82
 
         RTL
 
-;;;;;;;
-ClearMemoryPointers1: ;808F92
+;;;;;;; clears partially, Param in Y
+ZeroesPartial42Pointers: ;808F92
         %Set16bit(!MX)
+
+    .loop:
         %Set16bit(!M)
         TYA
         STA.B $7E
@@ -1809,11 +1812,12 @@ ClearMemoryPointers1: ;808F92
         STZ.B $44,X
         INY
         CPY.W #$0010
-        BNE $EA
+        BNE .loop
 
         RTL
 
- ClearMemoryPointers2:
+;;;;;;;;
+Zeroes42Pointers: ;808FAB
         %Set16bit(!MX)
         LDY.W #$0000
 
@@ -1834,7 +1838,7 @@ ClearMemoryPointers1: ;808F92
 
         RTL
 
-;;;;;;; Param in A
+;;;;;;;; Param in A
 Sets04withPointerDependingonHour: ;808FC7
         %Set8bit(!M)
         %Set16bit(!X)
@@ -1927,7 +1931,7 @@ Unk_MemoryWork7E0D00: ;80900C
         LDY.W #$0018
         %Set16bit(!M)
         LDA.W $0196
-        AND.W #$0004
+        AND.W #$0004                         ;FLAG196
         BNE .CODE_809074
         LDY.W #$0020
 
@@ -2680,7 +2684,7 @@ SUB_8093A3: ;8093A3
                        CLC                                  ;809587;      ;
                        ADC.W #$000A                         ;809588;      ;
                        TAX                                  ;80958B;      ;
-                       LDA.W UNK_Table12,X                 ;80958C;00BEEC;
+                       LDA.W Subrutines_Table,X                 ;80958C;00BEEC;
                        CMP.W #$FFFF                         ;80958F;      ;
                        BEQ .skipSeasonCheck                 ;809592;80959E;
                        %Set8bit(!M)                             ;809594;      ;
@@ -2694,10 +2698,10 @@ SUB_8093A3: ;8093A3
                        ADC.B $7E                            ;8095A3;00007E;
                        ASL A                                ;8095A5;      ;
                        TAX                                  ;8095A6;      ;
-                       LDA.W UNK_Table12,X                 ;8095A7;00BEEC;
+                       LDA.W Subrutines_Table,X                 ;8095A7;00BEEC;
                        CMP.W #$FFFF                         ;8095AA;      ;
                        BEQ .return                          ;8095AD;8095B2;
-                       JSR.W (UNK_Table12,X)                ;8095AF;80BEEC;
+                       JSR.W (Subrutines_Table,X)                ;8095AF;80BEEC;
                                                             ;      ;      ;
               .return: RTL                                  ;8095B2;      ;END_A8888
 
@@ -2871,7 +2875,7 @@ UNK_ScreenTransition: ;8096D3
         %Set16bit(!M)
         LDA.W #$7000
         JSL.L ZeroesPartialVRAM
-        JSL.L ClearMemoryPointers2
+        JSL.L Zeroes42Pointers
         JSL.L Clears04Pointer
         JSL.L ClearWRAMGraphicsSpace
         JSL.L InitializeOBJs
@@ -2899,7 +2903,7 @@ ScreenTransitionReturn: ;80972B
                        STZ.W !time_running                          ;809735;000973;
                        %Set16bit(!MX)                             ;809738;      ;
                        LDY.W #$0001                         ;80973A;      ;
-                       JSL.L ANNNN                          ;80973D;80A7AE;
+                       JSL.L SUB_80A7AE                          ;80973D;80A7AE;
                        %Set8bit(!M)                             ;809741;      ;
                        PHA                                  ;809743;      ;
                        AND.B #$20                           ;809744;      ;
@@ -3596,226 +3600,253 @@ SUB_809A64: ;809A64
 ;;;;;;;;
 SUB_809D0B: ;809D0B
         %Set8bit(!M)                             ;      ;
-                       %Set16bit(!X)                             ;809D0D;      ;
-                       LDA.B !tilemap_to_load                            ;809D0F;000022;
-                       CMP.B #$04                           ;809D11;      ;
-                       BCS CODE_809D18                      ;809D13;809D18;
-                       JMP.W $9EBB                          ;809D15;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809D18: %Set8bit(!M)                             ;809D18;      ;
-                       LDA.B !tilemap_to_load                            ;809D1A;000022;
-                       CMP.B #$10                           ;809D1C;      ;
-                       BCS CODE_809D23                      ;809D1E;809D23;
-                       JMP.W $9EBB                          ;809D20;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809D23: CMP.B #$14                           ;809D23;      ;
-                       BCC CODE_809D2A                      ;809D25;809D2A;
-                       JMP.W $9EBB                          ;809D27;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809D2A: %Set16bit(!MX)                             ;809D2A;      ;
-                       LDA.W $0196                          ;809D2C;000196;
-                       AND.W #$001A                         ;809D2F;      ;
-                       BEQ CODE_809D37                      ;809D32;809D37;
-                       JMP.W $9EBB                          ;809D34;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809D37: LDA.W $0878                          ;809D37;000878;
-                       CMP.W #$00F9                         ;809D3A;      ;
-                       BNE CODE_809D42                      ;809D3D;809D42;
-                       JMP.W CODE_809DFD                    ;809D3F;809DFD;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809D42: LDA.W $087A                          ;809D42;00087A;
-                       CMP.W #$00F9                         ;809D45;      ;
-                       BNE CODE_809D4D                      ;809D48;809D4D;
-                       JMP.W CODE_809DFD                    ;809D4A;809DFD;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809D4D: LDA.W $0878                          ;809D4D;000878;
-                       CMP.W #$00FA                         ;809D50;      ;
-                       BNE CODE_809D58                      ;809D53;809D58;
-                       JMP.W CODE_809E3F                    ;809D55;809E3F;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809D58: LDA.W $087A                          ;809D58;00087A;
-                       CMP.W #$00FA                         ;809D5B;      ;
-                       BNE CODE_809D63                      ;809D5E;809D63;
-                       JMP.W CODE_809E3F                    ;809D60;809E3F;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809D63: LDA.W $0878                          ;809D63;000878;
-                       CMP.W #$00FB                         ;809D66;      ;
-                       BNE CODE_809D6E                      ;809D69;809D6E;
-                       JMP.W CODE_809E7D                    ;809D6B;809E7D;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809D6E: LDA.W $087A                          ;809D6E;00087A;
-                       CMP.W #$00FB                         ;809D71;      ;
-                       BNE CODE_809D79                      ;809D74;809D79;
-                       JMP.W CODE_809E7D                    ;809D76;809E7D;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809D79: %Set16bit(!M)                             ;809D79;      ;
-                       LDA.L $7F1F5A                        ;809D7B;7F1F5A;
-                       AND.W #$0200                         ;809D7F;      ;
-                       BNE CODE_809D87                      ;809D82;809D87;
-                       JMP.W $9EBB                          ;809D84;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809D87: %Set16bit(!MX)                             ;809D87;      ;
-                       LDA.B !game_state                            ;809D89;0000D2;
-                       AND.W #$0002                         ;809D8B;      ;
-                       BEQ CODE_809D93                      ;809D8E;809D93;
-                       JMP.W $9EBB                          ;809D90;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809D93: %Set16bit(!MX)                             ;809D93;      ;
-                       LDA.B !game_state                            ;809D95;0000D2;
-                       AND.W #$0010                         ;809D97;      ;
-                       BEQ CODE_809D9F                      ;809D9A;809D9F;
-                       JMP.W $9EBB                          ;809D9C;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809D9F: %Set16bit(!MX)                             ;809D9F;      ;
-                       LDA.B !game_state                            ;809DA1;0000D2;
-                       AND.W #$0800                         ;809DA3;      ;
-                       BEQ CODE_809DAB                      ;809DA6;809DAB;
-                       JMP.W $9EBB                          ;809DA8;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809DAB: %Set16bit(!M)                             ;809DAB;      ;
-                       LDA.W $0878                          ;809DAD;000878;
-                       CMP.W #$00F8                         ;809DB0;      ;
-                       BEQ CODE_809DB8                      ;809DB3;809DB8;
-                       JMP.W $9EBB                          ;809DB5;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809DB8: LDA.W $087A                          ;809DB8;00087A;
-                       CMP.W #$00F8                         ;809DBB;      ;
-                       BEQ CODE_809DC3                      ;809DBE;809DC3;
-                       JMP.W $9EBB                          ;809DC0;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809DC3: %Set16bit(!MX)                             ;809DC3;      ;
-                       LDA.B !player_action                            ;809DC5;0000D4;
-                       CMP.W #$0010                         ;809DC7;      ;
-                       BNE CODE_809DCF                      ;809DCA;809DCF;
-                       JMP.W $9EBB                          ;809DCC;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809DCF: %Set16bit(!MX)                             ;809DCF;      ;
-                       LDA.B !player_action                            ;809DD1;0000D4;
-                       CMP.W #$0011                         ;809DD3;      ;
-                       BNE CODE_809DDB                      ;809DD6;809DDB;
-                       JMP.W $9EBB                          ;809DD8;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809DDB: %Set16bit(!MX)                             ;809DDB;      ;
-                       LDA.B !player_action                            ;809DDD;0000D4;
-                       CMP.W #$0012                         ;809DDF;      ;
-                       BNE CODE_809DE7                      ;809DE2;809DE7;
-                       JMP.W $9EBB                          ;809DE4;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809DE7: %Set16bit(!MX)                             ;809DE7;      ;
-                       LDA.B !player_action                            ;809DE9;0000D4;
-                       CMP.W #$0013                         ;809DEB;      ;
-                       BNE CODE_809DF3                      ;809DEE;809DF3;
-                       JMP.W $9EBB                          ;809DF0;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809DF3: %Set16bit(!MX)                             ;809DF3;      ;
-                       LDA.W #$000F                         ;809DF5;      ;
-                       STA.B !player_action                            ;809DF8;0000D4;
-                       JMP.W $9EBB                          ;809DFA;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809DFD: %Set8bit(!M)                             ;809DFD;      ;
-                       %Set16bit(!X)                             ;809DFF;      ;
-                       LDA.L !season                        ;809E01;7F1F19;
-                       BEQ CODE_809E0A                      ;809E05;809E0A;
-                       JMP.W $9EBB                          ;809E07;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809E0A: LDA.B #$10                           ;809E0A;      ;
-                       JSL.L RNGReturn0toA                  ;809E0C;8089F9;
-                       BEQ CODE_809E15                      ;809E10;809E15;
-                       JMP.W $9EBB                          ;809E12;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809E15: %Set16bit(!M)                             ;809E15;      ;
-                       LDA.L $7F1F5C                        ;809E17;7F1F5C;
-                       AND.W #$2000                         ;809E1B;      ;
-                       BEQ CODE_809E23                      ;809E1E;809E23;
-                       JMP.W $9EBB                          ;809E20;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809E23: LDA.L $7F1F5C                        ;809E23;7F1F5C;
-                       ORA.W #$2000                         ;809E27;      ;
-                       STA.L $7F1F5C                        ;809E2A;7F1F5C;
-                       %Set16bit(!MX)                             ;809E2E;      ;
-                       LDA.W #$0011                         ;809E30;      ;
-                       LDX.W #$002C                         ;809E33;      ;
-                       LDY.W #$0000                         ;809E36;      ;
-                       JSL.L VIP                            ;809E39;848097;
-                       BRA $7C                              ;809E3D;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809E3F: %Set8bit(!M)                             ;809E3F;      ;
-                       %Set16bit(!X)                             ;809E41;      ;
-                       LDA.L !season                        ;809E43;7F1F19;
-                       CMP.B #$02                           ;809E47;      ;
-                       BNE $70                              ;809E49;809EBB;
-                       LDA.B #$10                           ;809E4B;      ;
-                       JSL.L RNGReturn0toA                  ;809E4D;8089F9;
-                       BEQ CODE_809E56                      ;809E51;809E56;
-                       JMP.W $9EBB                          ;809E53;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809E56: %Set16bit(!M)                             ;809E56;      ;
-                       LDA.L $7F1F5C                        ;809E58;7F1F5C;
-                       AND.W #$4000                         ;809E5C;      ;
-                       BNE $5A                              ;809E5F;809EBB;
-                       LDA.L $7F1F5C                        ;809E61;7F1F5C;
-                       ORA.W #$4000                         ;809E65;      ;
-                       STA.L $7F1F5C                        ;809E68;7F1F5C;
-                       %Set16bit(!MX)                             ;809E6C;      ;
-                       LDA.W #$0013                         ;809E6E;      ;
-                       LDX.W #$002B                         ;809E71;      ;
-                       LDY.W #$0000                         ;809E74;      ;
-                       JSL.L VIP                            ;809E77;848097;
-                       BRA $3E                              ;809E7B;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809E7D: %Set8bit(!M)                             ;809E7D;      ;
-                       %Set16bit(!X)                             ;809E7F;      ;
-                       LDA.L !season                        ;809E81;7F1F19;
-                       CMP.B #$03                           ;809E85;      ;
-                       BNE !ProgDMA_Destination_Addr_Table                               ;809E87;809EBB;
-                       LDA.B #$10                           ;809E89;      ;
-                       JSL.L RNGReturn0toA                  ;809E8B;8089F9;
-                       BEQ CODE_809E94                      ;809E8F;809E94;
-                       JMP.W $9EBB                          ;809E91;809EBB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809E94: %Set16bit(!M)                             ;809E94;      ;
-                       LDA.L $7F1F5C                        ;809E96;7F1F5C;
-                       AND.W #$8000                         ;809E9A;      ;
-                       BNE $1C                              ;809E9D;809EBB;
-                       LDA.L $7F1F5C                        ;809E9F;7F1F5C;
-                       ORA.W #$8000                         ;809EA3;      ;
-                       STA.L $7F1F5C                        ;809EA6;7F1F5C;
-                       %Set16bit(!MX)                             ;809EAA;      ;
-                       LDA.W #$0012                         ;809EAC;      ;
-                       LDX.W #$002A                         ;809EAF;      ;
-                       LDY.W #$0000                         ;809EB2;      ;
-                       JSL.L VIP                            ;809EB5;848097;
-                       BRA !NMI_Status                              ;809EB9;809EBB;
-                                                            ;      ;      ;
-                       RTL                                  ;809EBB;      ;END_SUB_809D0B
+        %Set16bit(!X)                             ;809D0D;      ;
+        LDA.B !tilemap_to_load                            ;809D0F;000022;
+        CMP.B #$04                           ;809D11;      ;
+        BCS CODE_809D18                      ;809D13;809D18;
+        JMP.W $9EBB                          ;809D15;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809D18: %Set8bit(!M)                             ;809D18;      ;
+        LDA.B !tilemap_to_load                            ;809D1A;000022;
+        CMP.B #$10                           ;809D1C;      ;
+        BCS CODE_809D23                      ;809D1E;809D23;
+        JMP.W $9EBB                          ;809D20;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809D23:
+        CMP.B #$14                           ;809D23;      ;
+        BCC CODE_809D2A                      ;809D25;809D2A;
+        JMP.W $9EBB                          ;809D27;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809D2A:
+        %Set16bit(!MX)                             ;809D2A;      ;
+        LDA.W $0196                          ;809D2C;000196;
+        AND.W #$001A                         ;809D2F;      ;
+        BEQ CODE_809D37                      ;809D32;809D37;
+        JMP.W $9EBB                          ;809D34;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809D37:
+        LDA.W $0878                          ;809D37;000878;
+        CMP.W #$00F9                         ;809D3A;      ;
+        BNE CODE_809D42                      ;809D3D;809D42;
+        JMP.W CODE_809DFD                    ;809D3F;809DFD;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809D42:
+        LDA.W $087A                          ;809D42;00087A;
+        CMP.W #$00F9                         ;809D45;      ;
+        BNE CODE_809D4D                      ;809D48;809D4D;
+        JMP.W CODE_809DFD                    ;809D4A;809DFD;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809D4D:
+        LDA.W $0878                          ;809D4D;000878;
+        CMP.W #$00FA                         ;809D50;      ;
+        BNE CODE_809D58                      ;809D53;809D58;
+        JMP.W CODE_809E3F                    ;809D55;809E3F;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809D58:
+        LDA.W $087A                          ;809D58;00087A;
+        CMP.W #$00FA                         ;809D5B;      ;
+        BNE CODE_809D63                      ;809D5E;809D63;
+        JMP.W CODE_809E3F                    ;809D60;809E3F;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809D63:
+        LDA.W $0878                          ;809D63;000878;
+        CMP.W #$00FB                         ;809D66;      ;
+        BNE CODE_809D6E                      ;809D69;809D6E;
+        JMP.W CODE_809E7D                    ;809D6B;809E7D;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809D6E:
+        LDA.W $087A                          ;809D6E;00087A;
+        CMP.W #$00FB                         ;809D71;      ;
+        BNE CODE_809D79                      ;809D74;809D79;
+        JMP.W CODE_809E7D                    ;809D76;809E7D;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809D79:
+        %Set16bit(!M)                             ;809D79;      ;
+        LDA.L $7F1F5A                        ;809D7B;7F1F5A;
+        AND.W #$0200                         ;809D7F;      ;
+        BNE CODE_809D87                      ;809D82;809D87;
+        JMP.W $9EBB                          ;809D84;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809D87:
+        %Set16bit(!MX)                             ;809D87;      ;
+        LDA.B !game_state                            ;809D89;0000D2;
+        AND.W #$0002                         ;809D8B;      ;
+        BEQ CODE_809D93                      ;809D8E;809D93;
+        JMP.W $9EBB                          ;809D90;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809D93:
+        %Set16bit(!MX)                             ;809D93;      ;
+        LDA.B !game_state                            ;809D95;0000D2;
+        AND.W #$0010                         ;809D97;      ;
+        BEQ CODE_809D9F                      ;809D9A;809D9F;
+        JMP.W $9EBB                          ;809D9C;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809D9F:
+        %Set16bit(!MX)                             ;809D9F;      ;
+        LDA.B !game_state                            ;809DA1;0000D2;
+        AND.W #$0800                         ;809DA3;      ;
+        BEQ CODE_809DAB                      ;809DA6;809DAB;
+        JMP.W $9EBB                          ;809DA8;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809DAB:
+        %Set16bit(!M)                             ;809DAB;      ;
+        LDA.W $0878                          ;809DAD;000878;
+        CMP.W #$00F8                         ;809DB0;      ;
+        BEQ CODE_809DB8                      ;809DB3;809DB8;
+        JMP.W $9EBB                          ;809DB5;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809DB8:
+        LDA.W $087A                          ;809DB8;00087A;
+        CMP.W #$00F8                         ;809DBB;      ;
+        BEQ CODE_809DC3                      ;809DBE;809DC3;
+        JMP.W $9EBB                          ;809DC0;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809DC3:
+        %Set16bit(!MX)                             ;809DC3;      ;
+        LDA.B !player_action                            ;809DC5;0000D4;
+        CMP.W #$0010                         ;809DC7;      ;
+        BNE CODE_809DCF                      ;809DCA;809DCF;
+        JMP.W $9EBB                          ;809DCC;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809DCF:
+        %Set16bit(!MX)                             ;809DCF;      ;
+        LDA.B !player_action                            ;809DD1;0000D4;
+        CMP.W #$0011                         ;809DD3;      ;
+        BNE CODE_809DDB                      ;809DD6;809DDB;
+        JMP.W $9EBB                          ;809DD8;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809DDB:
+        %Set16bit(!MX)                             ;809DDB;      ;
+        LDA.B !player_action                            ;809DDD;0000D4;
+        CMP.W #$0012                         ;809DDF;      ;
+        BNE CODE_809DE7                      ;809DE2;809DE7;
+        JMP.W $9EBB                          ;809DE4;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809DE7:
+        %Set16bit(!MX)                             ;809DE7;      ;
+        LDA.B !player_action                            ;809DE9;0000D4;
+        CMP.W #$0013                         ;809DEB;      ;
+        BNE CODE_809DF3                      ;809DEE;809DF3;
+        JMP.W $9EBB                          ;809DF0;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809DF3:
+        %Set16bit(!MX)                             ;809DF3;      ;
+        LDA.W #$000F                         ;809DF5;      ;
+        STA.B !player_action                            ;809DF8;0000D4;
+        JMP.W $9EBB                          ;809DFA;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809DFD:
+        %Set8bit(!M)                             ;809DFD;      ;
+        %Set16bit(!X)                             ;809DFF;      ;
+        LDA.L !season                        ;809E01;7F1F19;
+        BEQ CODE_809E0A                      ;809E05;809E0A;
+        JMP.W $9EBB                          ;809E07;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809E0A:
+        LDA.B #$10                           ;809E0A;      ;
+        JSL.L RNGReturn0toA                  ;809E0C;8089F9;
+        BEQ CODE_809E15                      ;809E10;809E15;
+        JMP.W $9EBB                          ;809E12;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809E15:
+        %Set16bit(!M)                             ;809E15;      ;
+        LDA.L $7F1F5C                        ;809E17;7F1F5C;
+        AND.W #$2000                         ;809E1B;      ;
+        BEQ CODE_809E23                      ;809E1E;809E23;
+        JMP.W $9EBB                          ;809E20;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809E23:
+        LDA.L $7F1F5C                        ;809E23;7F1F5C;
+        ORA.W #$2000                         ;809E27;      ;
+        STA.L $7F1F5C                        ;809E2A;7F1F5C;
+        %Set16bit(!MX)                             ;809E2E;      ;
+        LDA.W #$0011                         ;809E30;      ;
+        LDX.W #$002C                         ;809E33;      ;
+        LDY.W #$0000                         ;809E36;      ;
+        JSL.L VIP                            ;809E39;848097;
+        BRA $7C                              ;809E3D;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809E3F:
+        %Set8bit(!M)                             ;809E3F;      ;
+        %Set16bit(!X)                             ;809E41;      ;
+        LDA.L !season                        ;809E43;7F1F19;
+        CMP.B #$02                           ;809E47;      ;
+        BNE $70                              ;809E49;809EBB;
+        LDA.B #$10                           ;809E4B;      ;
+        JSL.L RNGReturn0toA                  ;809E4D;8089F9;
+        BEQ CODE_809E56                      ;809E51;809E56;
+        JMP.W $9EBB                          ;809E53;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809E56:
+        %Set16bit(!M)                             ;809E56;      ;
+        LDA.L $7F1F5C                        ;809E58;7F1F5C;
+        AND.W #$4000                         ;809E5C;      ;
+        BNE $5A                              ;809E5F;809EBB;
+        LDA.L $7F1F5C                        ;809E61;7F1F5C;
+        ORA.W #$4000                         ;809E65;      ;
+        STA.L $7F1F5C                        ;809E68;7F1F5C;
+        %Set16bit(!MX)                             ;809E6C;      ;
+        LDA.W #$0013                         ;809E6E;      ;
+        LDX.W #$002B                         ;809E71;      ;
+        LDY.W #$0000                         ;809E74;      ;
+        JSL.L VIP                            ;809E77;848097;
+        BRA $3E                              ;809E7B;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809E7D:
+        %Set8bit(!M)                             ;809E7D;      ;
+        %Set16bit(!X)                             ;809E7F;      ;
+        LDA.L !season                        ;809E81;7F1F19;
+        CMP.B #$03                           ;809E85;      ;
+        BNE !ProgDMA_Destination_Addr_Table                               ;809E87;809EBB;
+        LDA.B #$10                           ;809E89;      ;
+        JSL.L RNGReturn0toA                  ;809E8B;8089F9;
+        BEQ CODE_809E94                      ;809E8F;809E94;
+        JMP.W $9EBB                          ;809E91;809EBB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_809E94:
+        %Set16bit(!M)                             ;809E94;      ;
+        LDA.L $7F1F5C                        ;809E96;7F1F5C;
+        AND.W #$8000                         ;809E9A;      ;
+        BNE $1C                              ;809E9D;809EBB;
+        LDA.L $7F1F5C                        ;809E9F;7F1F5C;
+        ORA.W #$8000                         ;809EA3;      ;
+        STA.L $7F1F5C                        ;809EA6;7F1F5C;
+        %Set16bit(!MX)                             ;809EAA;      ;
+        LDA.W #$0012                         ;809EAC;      ;
+        LDX.W #$002A                         ;809EAF;      ;
+        LDY.W #$0000                         ;809EB2;      ;
+        JSL.L VIP                            ;809EB5;848097;
+        BRA !NMI_Status                              ;809EB9;809EBB;
+                                            ;      ;      ;
+        RTL                                  ;809EBB;      ;END_SUB_809D0B
 
 ;;;;;;;;
 SUB_809EBC: ;809EBC
@@ -3912,196 +3943,195 @@ SUB_809EBC: ;809EBC
         STA.B !OBJ_Offset_Y                           ;809F5E;0000F7;
                                 ;      ;      ;
         .return: RTL                                  ;809F60;      ;END_SUB_809EBC
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-SUB_809D0B: ;809F61
-        %Set8bit(!M)                             ;      ;
-                       %Set16bit(!X)                             ;809F63;      ;
-                       LDA.B !tilemap_to_load                            ;809F65;000022;
-                       CMP.B #$26                           ;809F67;      ;
-                       BNE CODE_809F6E                      ;809F69;809F6E;
-                       JMP.W A1111return                        ;809F6B;80A0AA;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809F6E: CMP.B #$31                           ;809F6E;      ;
-                       BCC CODE_809FB3                      ;809F70;809FB3;
-                       %Set16bit(!M)                             ;809F72;      ;
-                       LDA.B !OBJ_Offset_Y                           ;809F74;0000F7;
-                       CMP.B $EF                            ;809F76;0000EF;
-                       BNE CODE_809F7D                      ;809F78;809F7D;
-                       JMP.W A1111return                        ;809F7A;80A0AA;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809F7D: CMP.B $F3                            ;809F7D;0000F3;
-                       BNE CODE_809F84                      ;809F7F;809F84;
-                       JMP.W A1111return                        ;809F81;80A0AA;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809F84: LDA.B !OBJ_Offset_X                            ;809F84;0000F5;
-                       STA.W !BG2_Map_Offset_X                          ;809F86;000140;
-                       LDA.B $1E                            ;809F89;00001E;
-                       ASL A                                ;809F8B;      ;
-                       STA.B $1E                            ;809F8C;00001E;
-                       %Set16bit(!MX)                             ;809F8E;      ;
-                       LDA.B !player_direction                            ;809F90;0000DA;
-                       CMP.W #$0002                         ;809F92;      ;
-                       BNE CODE_809F9A                      ;809F95;809F9A;
-                       JMP.W A1111return                        ;809F97;80A0AA;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809F9A: %Set16bit(!MX)                             ;809F9A;      ;
-                       LDA.B !player_direction                            ;809F9C;0000DA;
-                       CMP.W #$0003                         ;809F9E;      ;
-                       BNE CODE_809FA6                      ;809FA1;809FA6;
-                       JMP.W A1111return                        ;809FA3;80A0AA;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809FA6: LDA.B !OBJ_Offset_Y                           ;809FA6;0000F7;
-                       LSR A                                ;809FA8;      ;
-                       CLC                                  ;809FA9;      ;
-                       ADC.W #$0080                         ;809FAA;      ;
-                       STA.W !BG2_Map_Offset_Y                          ;809FAD;000142;
-                       JMP.W A1111return                        ;809FB0;80A0AA;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809FB3: %Set16bit(!MX)                             ;809FB3;      ;
-                       LDA.W $0196                          ;809FB5;000196;
-                       AND.W #$0002                         ;809FB8;      ;
-                       BEQ CODE_809FCA                      ;809FBB;809FCA;
-                       LDA.B !OBJ_Offset_X                            ;809FBD;0000F5;
-                       STA.W !BG2_Map_Offset_X                          ;809FBF;000140;
-                       LDA.B !OBJ_Offset_Y                           ;809FC2;0000F7;
-                       STA.W !BG2_Map_Offset_Y                          ;809FC4;000142;
-                       JMP.W A1111return                        ;809FC7;80A0AA;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809FCA: %Set16bit(!MX)                             ;809FCA;      ;
-                       LDA.W $0196                          ;809FCC;000196;
-                       AND.W #$0004                         ;809FCF;      ;
-                       BNE CODE_809FD7                      ;809FD2;809FD7;
-                       JMP.W CODE_80A096                    ;809FD4;80A096;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809FD7: %Set16bit(!MX)                             ;809FD7;      ;
-                       LDA.B !player_direction                            ;809FD9;0000DA;
-                       CMP.W #$0000                         ;809FDB;      ;
-                       BNE CODE_809FE3                      ;809FDE;809FE3;
-                       JMP.W CODE_80A033                    ;809FE0;80A033;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809FE3: %Set16bit(!MX)                             ;809FE3;      ;
-                       LDA.B !player_direction                            ;809FE5;0000DA;
-                       CMP.W #$0001                         ;809FE7;      ;
-                       BNE CODE_809FEF                      ;809FEA;809FEF;
-                       JMP.W CODE_80A04A                    ;809FEC;80A04A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809FEF: %Set16bit(!MX)                             ;809FEF;      ;
-                       LDA.B !player_direction                            ;809FF1;0000DA;
-                       CMP.W #$0002                         ;809FF3;      ;
-                       BNE CODE_809FFB                      ;809FF6;809FFB;
-                       JMP.W CODE_80A061                    ;809FF8;80A061;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_809FFB: %Set16bit(!MX)                             ;809FFB;      ;
-                       LDA.B !player_direction                            ;809FFD;0000DA;
-                       CMP.W #$0003                         ;809FFF;      ;
-                       BNE CODE_80A007                      ;80A002;80A007;
-                       JMP.W CODE_80A078                    ;80A004;80A078;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A007: %Set8bit(!M)                             ;80A007;      ;
-                       LDA.W $091C                          ;80A009;00091C;
-                       INC A                                ;80A00C;      ;
-                       STA.W $091C                          ;80A00D;00091C;
-                       CMP.B #$0A                           ;80A010;      ;
-                       BEQ CODE_80A017                      ;80A012;80A017;
-                       JMP.W A1111return                        ;80A014;80A0AA;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A017: STZ.W $091C                          ;80A017;00091C;
-                       %Set16bit(!M)                             ;80A01A;      ;
-                       LDA.W !BG2_Map_Offset_X                          ;80A01C;000140;
-                       CLC                                  ;80A01F;      ;
-                       ADC.W #$0001                         ;80A020;      ;
-                       STA.W !BG2_Map_Offset_X                          ;80A023;000140;
-                       LDA.W !BG2_Map_Offset_Y                          ;80A026;000142;
-                       SEC                                  ;80A029;      ;
-                       SBC.W #$0001                         ;80A02A;      ;
-                       STA.W !BG2_Map_Offset_Y                          ;80A02D;000142;
-                       JMP.W A1111return                        ;80A030;80A0AA;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A033: %Set16bit(!MX)                             ;80A033;      ;
-                       LDA.B !OBJ_Offset_Y                           ;80A035;0000F7;
-                       CMP.B $EF                            ;80A037;0000EF;
-                       BEQ CODE_80A007                      ;80A039;80A007;
-                       CMP.B $F3                            ;80A03B;0000F3;
-                       BEQ CODE_80A007                      ;80A03D;80A007;
-                       LDA.W !BG2_Map_Offset_Y                          ;80A03F;000142;
-                       CLC                                  ;80A042;      ;
-                       ADC.B $1E                            ;80A043;00001E;
-                       STA.W !BG2_Map_Offset_Y                          ;80A045;000142;
-                       BRA CODE_80A007                      ;80A048;80A007;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A04A: %Set16bit(!MX)                             ;80A04A;      ;
-                       LDA.B !OBJ_Offset_Y                           ;80A04C;0000F7;
-                       CMP.B $EF                            ;80A04E;0000EF;
-                       BEQ CODE_80A007                      ;80A050;80A007;
-                       CMP.B $F3                            ;80A052;0000F3;
-                       BEQ CODE_80A007                      ;80A054;80A007;
-                       LDA.W !BG2_Map_Offset_Y                          ;80A056;000142;
-                       SEC                                  ;80A059;      ;
-                       SBC.B $1E                            ;80A05A;00001E;
-                       STA.W !BG2_Map_Offset_Y                          ;80A05C;000142;
-                       BRA CODE_80A007                      ;80A05F;80A007;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A061: %Set16bit(!MX)                             ;80A061;      ;
-                       LDA.B !OBJ_Offset_X                            ;80A063;0000F5;
-                       CMP.B $ED                            ;80A065;0000ED;
-                       BEQ CODE_80A007                      ;80A067;80A007;
-                       CMP.B $F1                            ;80A069;0000F1;
-                       BEQ CODE_80A007                      ;80A06B;80A007;
-                       LDA.W !BG2_Map_Offset_X                          ;80A06D;000140;
-                       CLC                                  ;80A070;      ;
-                       ADC.B $1E                            ;80A071;00001E;
-                       STA.W !BG2_Map_Offset_X                          ;80A073;000140;
-                       BRA CODE_80A007                      ;80A076;80A007;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A078: %Set16bit(!MX)                             ;80A078;      ;
-                       LDA.B !OBJ_Offset_X                            ;80A07A;0000F5;
-                       CMP.B $ED                            ;80A07C;0000ED;
-                       BNE CODE_80A083                      ;80A07E;80A083;
-                       JMP.W CODE_80A007                    ;80A080;80A007;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A083: CMP.B $F1                            ;80A083;0000F1;
-                       BNE CODE_80A08A                      ;80A085;80A08A;
-                       JMP.W CODE_80A007                    ;80A087;80A007;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A08A: LDA.W !BG2_Map_Offset_X                          ;80A08A;000140;
-                       SEC                                  ;80A08D;      ;
-                       SBC.B $1E                            ;80A08E;00001E;
-                       STA.W !BG2_Map_Offset_X                          ;80A090;000140;
-                       JMP.W CODE_80A007                    ;80A093;80A007;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A096: %Set16bit(!MX)                             ;80A096;      ;
-                       LDA.W $0196                          ;80A098;000196;
-                       AND.W #$0008                         ;80A09B;      ;
-                       BEQ A1111return                          ;80A09E;80A0AA;
-                       LDA.B !OBJ_Offset_X                            ;80A0A0;0000F5;
-                       STA.W !BG2_Map_Offset_X                          ;80A0A2;000140;
-                       LDA.B !OBJ_Offset_Y                           ;80A0A5;0000F7;
-                       STA.W !BG2_Map_Offset_Y                          ;80A0A7;000142;
-                                                            ;      ;      ;
-              A1111return: RTL                                  ;80A0AA;      ;END_1111
-                                                            ;      ;      ;
-                                                            ;      ;      ;
+
+;;;;;;;; I think this checks for map scrolling in locked places, like tool shed
+SUB_809F61: ;809F61
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDA.B !tilemap_to_load
+        CMP.B #$26                           ;Tool Shed
+        BNE +
+        JMP.W .return
+
+      + CMP.B #$31
+        BCC .CODE_809FB3                     ;MapSummitSpring?
+
+        %Set16bit(!M)
+        LDA.B !OBJ_Offset_Y
+        CMP.B $EF
+        BNE .CODE_809F7D
+        JMP.W .return
+
+    .CODE_809F7D:
+        CMP.B $F3
+        BNE .CODE_809F84
+        JMP.W .return
+
+    .CODE_809F84:
+        LDA.B !OBJ_Offset_X
+        STA.W !BG2_Map_Offset_X
+        LDA.B $1E
+        ASL A
+        STA.B $1E
+        %Set16bit(!MX)
+        LDA.B !player_direction
+        CMP.W #$0002                         ;left
+        BNE .CODE_809F9A
+        JMP.W .return
+
+    .CODE_809F9A:
+        %Set16bit(!MX)
+        LDA.B !player_direction
+        CMP.W #$0003                         ;Right
+        BNE .CODE_809FA6
+        JMP.W .return
+
+    .CODE_809FA6:
+        LDA.B !OBJ_Offset_Y
+        LSR A
+        CLC
+        ADC.W #$0080
+        STA.W !BG2_Map_Offset_Y
+        JMP.W .return
+
+    .CODE_809FB3:
+        %Set16bit(!MX)
+        LDA.W $0196
+        AND.W #$0002                         ;FLAG196 not raining???
+        BEQ .CODE_809FCA
+        LDA.B !OBJ_Offset_X
+        STA.W !BG2_Map_Offset_X
+        LDA.B !OBJ_Offset_Y
+        STA.W !BG2_Map_Offset_Y
+        JMP.W .return
+
+    .CODE_809FCA:
+        %Set16bit(!MX)
+        LDA.W $0196
+        AND.W #$0004                         ;FLAG196 Sunny
+        BNE .CODE_809FD7
+        JMP.W .CODE_80A096
+
+    .CODE_809FD7:
+        %Set16bit(!MX)
+        LDA.B !player_direction
+        CMP.W #$0000                         ;down
+        BNE .CODE_809FE3
+        JMP.W .CODE_80A033
+
+    .CODE_809FE3:
+        %Set16bit(!MX)
+        LDA.B !player_direction
+        CMP.W #$0001                         ;up
+        BNE .CODE_809FEF
+        JMP.W .CODE_80A04A
+
+    .CODE_809FEF:
+        %Set16bit(!MX)
+        LDA.B !player_direction
+        CMP.W #$0002                         ;left
+        BNE .CODE_809FFB
+        JMP.W .CODE_80A061
+
+    .CODE_809FFB:
+        %Set16bit(!MX)
+        LDA.B !player_direction
+        CMP.W #$0003                         ;right
+        BNE .CODE_80A007
+        JMP.W .CODE_80A078
+
+    .CODE_80A007:
+        %Set8bit(!M)
+        LDA.W $091C
+        INC A
+        STA.W $091C
+        CMP.B #$0A
+        BEQ .CODE_80A017
+        JMP.W .return
+
+    .CODE_80A017:
+        STZ.W $091C
+        %Set16bit(!M)
+        LDA.W !BG2_Map_Offset_X
+        CLC
+        ADC.W #$0001
+        STA.W !BG2_Map_Offset_X
+        LDA.W !BG2_Map_Offset_Y
+        SEC
+        SBC.W #$0001
+        STA.W !BG2_Map_Offset_Y
+        JMP.W .return
+
+    .CODE_80A033:
+        %Set16bit(!MX)
+        LDA.B !OBJ_Offset_Y
+        CMP.B $EF
+        BEQ .CODE_80A007
+        CMP.B $F3
+        BEQ .CODE_80A007
+        LDA.W !BG2_Map_Offset_Y
+        CLC
+        ADC.B $1E
+        STA.W !BG2_Map_Offset_Y
+        BRA .CODE_80A007
+
+    .CODE_80A04A:
+        %Set16bit(!MX)
+        LDA.B !OBJ_Offset_Y
+        CMP.B $EF
+        BEQ .CODE_80A007
+        CMP.B $F3
+        BEQ .CODE_80A007
+        LDA.W !BG2_Map_Offset_Y
+        SEC
+        SBC.B $1E
+        STA.W !BG2_Map_Offset_Y
+        BRA .CODE_80A007
+
+    .CODE_80A061:
+        %Set16bit(!MX)
+        LDA.B !OBJ_Offset_X
+        CMP.B $ED
+        BEQ .CODE_80A007
+        CMP.B $F1
+        BEQ .CODE_80A007
+        LDA.W !BG2_Map_Offset_X
+        CLC
+        ADC.B $1E
+        STA.W !BG2_Map_Offset_X
+        BRA .CODE_80A007
+
+    .CODE_80A078:
+        %Set16bit(!MX)
+        LDA.B !OBJ_Offset_X
+        CMP.B $ED
+        BNE .CODE_80A083
+        JMP.W .CODE_80A007
+
+    .CODE_80A083:
+        CMP.B $F1
+        BNE .CODE_80A08A
+        JMP.W .CODE_80A007
+    .CODE_80A08A:
+        LDA.W !BG2_Map_Offset_X
+        SEC
+        SBC.B $1E
+        STA.W !BG2_Map_Offset_X
+        JMP.W .CODE_80A007
+
+    .CODE_80A096:
+        %Set16bit(!MX)
+        LDA.W $0196
+        AND.W #$0008
+        BEQ .return
+        LDA.B !OBJ_Offset_X
+        STA.W !BG2_Map_Offset_X
+        LDA.B !OBJ_Offset_Y
+        STA.W !BG2_Map_Offset_Y
+
+    .return: RTL
+
+;;;;;;;;
 UpdateBGOffset: ;80A0AB
         %Set16bit(!MX)
         LDA.B !OBJ_Offset_Y
@@ -4129,953 +4159,1011 @@ UpdateBGOffset: ;80A0AB
         SEC
         SBC.B #$08
         STA.B !BG_subpixel_offset_Y
-        JSL.L AQQQQ
+        JSL.L SUB_80A18D
 
     .return: RTL
 
-                ATTTT: %Set16bit(!MX)                             ;80A0E1;      ;
-                       LDA.B !OBJ_Offset_Y                           ;80A0E3;0000F7;
-                       STA.W !BG1_Map_Offset_Y                          ;80A0E5;00013E;
-                       CMP.B $EF                            ;80A0E8;0000EF;
-                       BEQ $2F                              ;80A0EA;80A11B;
-                       CMP.B $F3                            ;80A0EC;0000F3;
-                       BEQ $2B                              ;80A0EE;80A11B;
-                       LDA.B $F3                            ;80A0F0;0000F3;
-                       SEC                                  ;80A0F2;      ;
-                       SBC.B !OBJ_Offset_Y                           ;80A0F3;0000F7;
-                       CMP.B $1E                            ;80A0F5;00001E;
-                       BCS CODE_80A0FB                      ;80A0F7;80A0FB;
-                       STA.B $1E                            ;80A0F9;00001E;
-                                                            ;      ;      ;
-          CODE_80A0FB: %Set16bit(!M)                             ;80A0FB;      ;
-                       LDA.W $0196                          ;80A0FD;000196;
-                       AND.W #$0001                         ;80A100;      ;
-                       BEQ $16                              ;80A103;80A11B;
-                       %Set8bit(!M)                             ;80A105;      ;
-                       LDA.B !BG_subpixel_offset_Y                            ;80A107;000021;
-                       SEC                                  ;80A109;      ;
-                       SBC.B $1E                            ;80A10A;00001E;
-                       STA.B !BG_subpixel_offset_Y                            ;80A10C;000021;
-                       BPL $0B                              ;80A10E;80A11B;
-                       LDA.B #$08                           ;80A110;      ;
-                       CLC                                  ;80A112;      ;
-                       ADC.B !BG_subpixel_offset_Y                            ;80A113;000021;
-                       STA.B !BG_subpixel_offset_Y                            ;80A115;000021;
-                       JSL.L APPPP                          ;80A117;80A308;
-                       RTL                                  ;80A11B;      ;END_ATTTT
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-UNK_StaticMapScroling: ;80A11C
-        %Set16bit(!MX)                             ;      ;
-                       LDA.B !OBJ_Offset_X                            ;80A11E;0000F5;
-                       STA.W !BG1_Map_Offset_X                          ;80A120;00013C;
-                       CMP.B $ED                            ;80A123;0000ED;
-                       BEQ CODE_80A151                      ;80A125;80A151;
-                       CMP.B $F1                            ;80A127;0000F1;
-                       BEQ CODE_80A151                      ;80A129;80A151;
-                       CMP.B $1E                            ;80A12B;00001E;
-                       BCS CODE_80A131                      ;80A12D;80A131;
-                       STA.B $1E                            ;80A12F;00001E;
-                                                            ;      ;      ;
-          CODE_80A131: %Set16bit(!M)                             ;80A131;      ;
-                       LDA.W $0196                          ;80A133;000196;
-                       AND.W #$0001                         ;80A136;      ;
-                       BEQ CODE_80A151                      ;80A139;80A151;
-                       %Set8bit(!M)                             ;80A13B;      ;
-                       LDA.B !BG_subpixel_offset_X                            ;80A13D;000020;
-                       CLC                                  ;80A13F;      ;
-                       ADC.B $1E                            ;80A140;00001E;
-                       STA.B !BG_subpixel_offset_X                            ;80A142;000020;
-                       CMP.B #$08                           ;80A144;      ;
-                       BCC CODE_80A151                      ;80A146;80A151;
-                       SEC                                  ;80A148;      ;
-                       SBC.B #$08                           ;80A149;      ;
-                       STA.B !BG_subpixel_offset_X                            ;80A14B;000020;
-                       JSL.L AOOOO                          ;80A14D;80A481;
-                                                            ;      ;      ;
-          CODE_80A151: RTL                                  ;80A151;      ;END_ASSSS
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                ARRRR: %Set16bit(!MX)                             ;80A152;      ;
-                       LDA.B !OBJ_Offset_X                            ;80A154;0000F5;
-                       STA.W !BG1_Map_Offset_X                          ;80A156;00013C;
-                       CMP.B $ED                            ;80A159;0000ED;
-                       BEQ CODE_80A18C                      ;80A15B;80A18C;
-                       CMP.B $F1                            ;80A15D;0000F1;
-                       BEQ CODE_80A18C                      ;80A15F;80A18C;
-                       LDA.B $F1                            ;80A161;0000F1;
-                       SEC                                  ;80A163;      ;
-                       SBC.B !OBJ_Offset_X                            ;80A164;0000F5;
-                       CMP.B $1E                            ;80A166;00001E;
-                       BCS CODE_80A16C                      ;80A168;80A16C;
-                       STA.B $1E                            ;80A16A;00001E;
-                                                            ;      ;      ;
-          CODE_80A16C: %Set16bit(!M)                             ;80A16C;      ;
-                       LDA.W $0196                          ;80A16E;000196;
-                       AND.W #$0001                         ;80A171;      ;
-                       BEQ CODE_80A18C                      ;80A174;80A18C;
-                       %Set8bit(!M)                             ;80A176;      ;
-                       LDA.B !BG_subpixel_offset_X                            ;80A178;000020;
-                       SEC                                  ;80A17A;      ;
-                       SBC.B $1E                            ;80A17B;00001E;
-                       STA.B !BG_subpixel_offset_X                            ;80A17D;000020;
-                       BPL CODE_80A18C                      ;80A17F;80A18C;
-                       LDA.B #$08                           ;80A181;      ;
-                       CLC                                  ;80A183;      ;
-                       ADC.B !BG_subpixel_offset_X                            ;80A184;000020;
-                       STA.B !BG_subpixel_offset_X                            ;80A186;000020;
-                       JSL.L CODE_80A617                    ;80A188;80A617;
-                                                            ;      ;      ;
-          CODE_80A18C: RTL                                  ;80A18C;      ;END_ARRRR
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                AQQQQ: %Set16bit(!MX)                             ;80A18D;      ;Some data copying?
-                       LDA.B $12                            ;80A18F;000012;
-                       CMP.W #$0020                         ;80A191;      ;
-                       BCC CODE_80A1B1                      ;80A194;80A1B1;
-                       CMP.W #$0040                         ;80A196;      ;
-                       BCC CODE_80A1BB                      ;80A199;80A1BB;
-                       CMP.W #$0060                         ;80A19B;      ;
-                       BCC CODE_80A1CB                      ;80A19E;80A1CB;
-                       CMP.W #$0080                         ;80A1A0;      ;
-                       BCC CODE_80A1DB                      ;80A1A3;80A1DB;
-                       CMP.W #$00A0                         ;80A1A5;      ;
-                       BCC CODE_80A1EE                      ;80A1A8;80A1EE;
-                       CMP.W #$00C0                         ;80A1AA;      ;
-                       BCC CODE_80A201                      ;80A1AD;80A201;
-                       BRA CODE_80A21A                      ;80A1AF;80A21A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A1B1: STZ.B $7E                            ;80A1B1;00007E;
-                       STZ.B $80                            ;80A1B3;000080;
-                       STZ.B $82                            ;80A1B5;000082;
-                       STZ.B $84                            ;80A1B7;000084;
-                       BRA CODE_80A21A                      ;80A1B9;80A21A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A1BB: LDA.B $12                            ;80A1BB;000012;
-                       SEC                                  ;80A1BD;      ;
-                       SBC.W #$0020                         ;80A1BE;      ;
-                       STA.B $7E                            ;80A1C1;00007E;
-                       STA.B $80                            ;80A1C3;000080;
-                       STZ.B $82                            ;80A1C5;000082;
-                       STZ.B $84                            ;80A1C7;000084;
-                       BRA CODE_80A21A                      ;80A1C9;80A21A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A1CB: LDA.B $12                            ;80A1CB;000012;
-                       SEC                                  ;80A1CD;      ;
-                       SBC.W #$0020                         ;80A1CE;      ;
-                       STA.B $7E                            ;80A1D1;00007E;
-                       STA.B $80                            ;80A1D3;000080;
-                       STZ.B $82                            ;80A1D5;000082;
-                       STZ.B $84                            ;80A1D7;000084;
-                       BRA CODE_80A21A                      ;80A1D9;80A21A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A1DB: LDA.W #$0080                         ;80A1DB;      ;
-                       STA.B $7E                            ;80A1DE;00007E;
-                       STZ.B $80                            ;80A1E0;000080;
-                       LDA.B $12                            ;80A1E2;000012;
-                       SEC                                  ;80A1E4;      ;
-                       SBC.W #$0060                         ;80A1E5;      ;
-                       STA.B $82                            ;80A1E8;000082;
-                       STA.B $84                            ;80A1EA;000084;
-                       BRA CODE_80A21A                      ;80A1EC;80A21A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A1EE: LDA.W #$0080                         ;80A1EE;      ;
-                       STA.B $7E                            ;80A1F1;00007E;
-                       STZ.B $80                            ;80A1F3;000080;
-                       LDA.B $12                            ;80A1F5;000012;
-                       SEC                                  ;80A1F7;      ;
-                       SBC.W #$0060                         ;80A1F8;      ;
-                       STA.B $82                            ;80A1FB;000082;
-                       STA.B $84                            ;80A1FD;000084;
-                       BRA CODE_80A21A                      ;80A1FF;80A21A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A201: LDA.B $12                            ;80A201;000012;
-                       SEC                                  ;80A203;      ;
-                       SBC.W #$0020                         ;80A204;      ;
-                       STA.B $7E                            ;80A207;00007E;
-                       LDA.B $12                            ;80A209;000012;
-                       SEC                                  ;80A20B;      ;
-                       SBC.W #$00A0                         ;80A20C;      ;
-                       STA.B $80                            ;80A20F;000080;
-                       LDA.W #$0080                         ;80A211;      ;
-                       STA.B $82                            ;80A214;000082;
-                       STZ.B $84                            ;80A216;000084;
-                       BRA CODE_80A21A                      ;80A218;80A21A;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A21A: LDA.B $1C                            ;80A21A;00001C;
-                       LSR A                                ;80A21C;      ;
-                       LSR A                                ;80A21D;      ;
-                       STA.B $86                            ;80A21E;000086;
-                       LDA.W #$2000                         ;80A220;      ;
-                       CLC                                  ;80A223;      ;
-                       ADC.B $16                            ;80A224;000016;
-                       ADC.B $1C                            ;80A226;00001C;
-                       SEC                                  ;80A228;      ;
-                       SBC.B $86                            ;80A229;000086;
-                       STA.B $72                            ;80A22B;000072;
-                       CLC                                  ;80A22D;      ;
-                       ADC.W #$0040                         ;80A22E;      ;
-                       STA.B $75                            ;80A231;000075;
-                       %Set8bit(!M)                             ;80A233;      ;
-                       LDA.B #$7E                           ;80A235;      ;
-                       STA.B $74                            ;80A237;000074;
-                       STA.B $77                            ;80A239;000077;
-                       %Set16bit(!M)                             ;80A23B;      ;
-                       LDX.W #$0000                         ;80A23D;      ;
-                                                            ;      ;      ;
-          CODE_80A240: PHX                                  ;80A240;      ;
-                       LDA.B $80                            ;80A241;000080;
-                       CMP.W #$0040                         ;80A243;      ;
-                       BNE CODE_80A252                      ;80A246;80A252;
-                       STZ.B $80                            ;80A248;000080;
-                       LDA.B $7E                            ;80A24A;00007E;
-                       CLC                                  ;80A24C;      ;
-                       ADC.W #$0040                         ;80A24D;      ;
-                       STA.B $7E                            ;80A250;00007E;
-                                                            ;      ;      ;
-          CODE_80A252: LDA.B $84                            ;80A252;000084;
-                       CMP.W #$0040                         ;80A254;      ;
-                       BNE CODE_80A263                      ;80A257;80A263;
-                       STZ.B $84                            ;80A259;000084;
-                       LDA.B $82                            ;80A25B;000082;
-                       CLC                                  ;80A25D;      ;
-                       ADC.W #$0040                         ;80A25E;      ;
-                       STA.B $82                            ;80A261;000082;
-                                                            ;      ;      ;
-          CODE_80A263: LDY.B $7E                            ;80A263;00007E;
-                       LDX.B $80                            ;80A265;000080;
-                       LDA.B [$72],Y                        ;80A267;000072;
-                       STA.W $0746,X                        ;80A269;000746;
-                       LDY.B $82                            ;80A26C;000082;
-                       LDX.B $84                            ;80A26E;000084;
-                       LDA.B [$75],Y                        ;80A270;000075;
-                       STA.W $07C6,X                        ;80A272;0007C6;
-                       INC.B $7E                            ;80A275;00007E;
-                       INC.B $7E                            ;80A277;00007E;
-                       INC.B $80                            ;80A279;000080;
-                       INC.B $80                            ;80A27B;000080;
-                       INC.B $82                            ;80A27D;000082;
-                       INC.B $82                            ;80A27F;000082;
-                       INC.B $84                            ;80A281;000084;
-                       INC.B $84                            ;80A283;000084;
-                       PLX                                  ;80A285;      ;
-                       INX                                  ;80A286;      ;
-                       INX                                  ;80A287;      ;
-                       CPX.W #$0040                         ;80A288;      ;
-                       BNE CODE_80A240                      ;80A28B;80A240;
-                       %Set8bit(!M)                             ;80A28D;      ;
-                       LDA.B #$00                           ;80A28F;      ;
-                       STA.B !ProgDMA_Channel_Index                            ;80A291;000027;
-                       LDA.B #$18                           ;80A293;      ;
-                       STA.B !ProgDMA_Destination_Memory                            ;80A295;000029;
-                       %Set16bit(!M)                             ;80A297;      ;
-                       LDY.W #$0040                         ;80A299;      ;
-                       LDA.B $14                            ;80A29C;000014;
-                       CLC                                  ;80A29E;      ;
-                       ADC.W #$6000                         ;80A29F;      ;
-                       TAX                                  ;80A2A2;      ;
-                       LDA.W #$0746                         ;80A2A3;      ;
-                       STA.B $72                            ;80A2A6;000072;
-                       %Set8bit(!M)                             ;80A2A8;      ;
-                       LDA.B #$80                           ;80A2AA;      ;
-                       STA.B $74                            ;80A2AC;000074;
-                       %Set16bit(!M)                             ;80A2AE;      ;
-                       LDA.W #$0080                         ;80A2B0;      ;
-                       JSL.L AddProgrammedDMA                ;80A2B3;808A33;
-                       %Set8bit(!M)                             ;80A2B7;      ;
-                       LDA.B #$01                           ;80A2B9;      ;
-                       STA.B !ProgDMA_Channel_Index                            ;80A2BB;000027;
-                       LDA.B #$18                           ;80A2BD;      ;
-                       STA.B !ProgDMA_Destination_Memory                            ;80A2BF;000029;
-                       %Set16bit(!M)                             ;80A2C1;      ;
-                       LDY.W #$0040                         ;80A2C3;      ;
-                       LDA.B $14                            ;80A2C6;000014;
-                       CLC                                  ;80A2C8;      ;
-                       ADC.W #$6000                         ;80A2C9;      ;
-                       ADC.W #$0400                         ;80A2CC;      ;
-                       TAX                                  ;80A2CF;      ;
-                       LDA.W #$07C6                         ;80A2D0;      ;
-                       STA.B $72                            ;80A2D3;000072;
-                       %Set8bit(!M)                             ;80A2D5;      ;
-                       LDA.B #$80                           ;80A2D7;      ;
-                       STA.B $74                            ;80A2D9;000074;
-                       %Set16bit(!M)                             ;80A2DB;      ;
-                       LDA.W #$0080                         ;80A2DD;      ;
-                       JSL.L AddProgrammedDMA                ;80A2E0;808A33;
-                       %Set16bit(!MX)                             ;80A2E4;      ;
-                       LDA.B $16                            ;80A2E6;000016;
-                       CLC                                  ;80A2E8;      ;
-                       ADC.B $1A                            ;80A2E9;00001A;
-                       STA.B $16                            ;80A2EB;000016;
-                       LDA.B $14                            ;80A2ED;000014;
-                       CLC                                  ;80A2EF;      ;
-                       ADC.W #$0020                         ;80A2F0;      ;
-                       CMP.W #$0400                         ;80A2F3;      ;
-                       BNE CODE_80A2FD                      ;80A2F6;80A2FD;
-                       LDA.W #$0800                         ;80A2F8;      ;
-                       BRA CODE_80A305                      ;80A2FB;80A305;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A2FD: CMP.W #$0C00                         ;80A2FD;      ;
-                       BNE CODE_80A305                      ;80A300;80A305;
-                       LDA.W #$0000                         ;80A302;      ;
-                                                            ;      ;      ;
-          CODE_80A305: STA.B $14                            ;80A305;000014;
-                       RTL                                  ;80A307;      ;END_AQQQQ
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                APPPP: %Set16bit(!MX)                             ;80A308;      ;
-                       LDA.B $12                            ;80A30A;000012;
-                       CMP.W #$0020                         ;80A30C;      ;
-                       BCC CODE_80A32C                      ;80A30F;80A32C;
-                       CMP.W #$0040                         ;80A311;      ;
-                       BCC CODE_80A336                      ;80A314;80A336;
-                       CMP.W #$0060                         ;80A316;      ;
-                       BCC CODE_80A346                      ;80A319;80A346;
-                       CMP.W #$0080                         ;80A31B;      ;
-                       BCC CODE_80A356                      ;80A31E;80A356;
-                       CMP.W #$00A0                         ;80A320;      ;
-                       BCC CODE_80A369                      ;80A323;80A369;
-                       CMP.W #$00C0                         ;80A325;      ;
-                       BCC CODE_80A37C                      ;80A328;80A37C;
-                       BRA CODE_80A395                      ;80A32A;80A395;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A32C: STZ.B $7E                            ;80A32C;00007E;
-                       STZ.B $80                            ;80A32E;000080;
-                       STZ.B $82                            ;80A330;000082;
-                       STZ.B $84                            ;80A332;000084;
-                       BRA CODE_80A395                      ;80A334;80A395;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A336: LDA.B $12                            ;80A336;000012;
-                       SEC                                  ;80A338;      ;
-                       SBC.W #$0020                         ;80A339;      ;
-                       STA.B $7E                            ;80A33C;00007E;
-                       STA.B $80                            ;80A33E;000080;
-                       STZ.B $82                            ;80A340;000082;
-                       STZ.B $84                            ;80A342;000084;
-                       BRA CODE_80A395                      ;80A344;80A395;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A346: LDA.B $12                            ;80A346;000012;
-                       SEC                                  ;80A348;      ;
-                       SBC.W #$0020                         ;80A349;      ;
-                       STA.B $7E                            ;80A34C;00007E;
-                       STA.B $80                            ;80A34E;000080;
-                       STZ.B $82                            ;80A350;000082;
-                       STZ.B $84                            ;80A352;000084;
-                       BRA CODE_80A395                      ;80A354;80A395;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A356: LDA.W #$0080                         ;80A356;      ;
-                       STA.B $7E                            ;80A359;00007E;
-                       STZ.B $80                            ;80A35B;000080;
-                       LDA.B $12                            ;80A35D;000012;
-                       SEC                                  ;80A35F;      ;
-                       SBC.W #$0060                         ;80A360;      ;
-                       STA.B $82                            ;80A363;000082;
-                       STA.B $84                            ;80A365;000084;
-                       BRA CODE_80A395                      ;80A367;80A395;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A369: LDA.W #$0080                         ;80A369;      ;
-                       STA.B $7E                            ;80A36C;00007E;
-                       STZ.B $80                            ;80A36E;000080;
-                       LDA.B $12                            ;80A370;000012;
-                       SEC                                  ;80A372;      ;
-                       SBC.W #$0060                         ;80A373;      ;
-                       STA.B $82                            ;80A376;000082;
-                       STA.B $84                            ;80A378;000084;
-                       BRA CODE_80A395                      ;80A37A;80A395;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A37C: LDA.B $12                            ;80A37C;000012;
-                       SEC                                  ;80A37E;      ;
-                       SBC.W #$0020                         ;80A37F;      ;
-                       STA.B $7E                            ;80A382;00007E;
-                       LDA.B $12                            ;80A384;000012;
-                       SEC                                  ;80A386;      ;
-                       SBC.W #$00A0                         ;80A387;      ;
-                       STA.B $80                            ;80A38A;000080;
-                       LDA.W #$0080                         ;80A38C;      ;
-                       STA.B $82                            ;80A38F;000082;
-                       STZ.B $84                            ;80A391;000084;
-                       BRA CODE_80A395                      ;80A393;80A395;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A395: LDA.B $1C                            ;80A395;00001C;
-                       LSR A                                ;80A397;      ;
-                       LSR A                                ;80A398;      ;
-                       STA.B $86                            ;80A399;000086;
-                       LDA.W #$2000                         ;80A39B;      ;
-                       CLC                                  ;80A39E;      ;
-                       ADC.B $16                            ;80A39F;000016;
-                       SEC                                  ;80A3A1;      ;
-                       SBC.B $86                            ;80A3A2;000086;
-                       STA.B $72                            ;80A3A4;000072;
-                       CLC                                  ;80A3A6;      ;
-                       ADC.W #$0040                         ;80A3A7;      ;
-                       STA.B $75                            ;80A3AA;000075;
-                       %Set8bit(!M)                             ;80A3AC;      ;
-                       LDA.B #$7E                           ;80A3AE;      ;
-                       STA.B $74                            ;80A3B0;000074;
-                       STA.B $77                            ;80A3B2;000077;
-                       %Set16bit(!M)                             ;80A3B4;      ;
-                       LDX.W #$0000                         ;80A3B6;      ;
-                                                            ;      ;      ;
-          CODE_80A3B9: PHX                                  ;80A3B9;      ;
-                       LDA.B $80                            ;80A3BA;000080;
-                       CMP.W #$0040                         ;80A3BC;      ;
-                       BNE CODE_80A3CB                      ;80A3BF;80A3CB;
-                       STZ.B $80                            ;80A3C1;000080;
-                       LDA.B $7E                            ;80A3C3;00007E;
-                       CLC                                  ;80A3C5;      ;
-                       ADC.W #$0040                         ;80A3C6;      ;
-                       STA.B $7E                            ;80A3C9;00007E;
-                                                            ;      ;      ;
-          CODE_80A3CB: LDA.B $84                            ;80A3CB;000084;
-                       CMP.W #$0040                         ;80A3CD;      ;
-                       BNE CODE_80A3DC                      ;80A3D0;80A3DC;
-                       STZ.B $84                            ;80A3D2;000084;
-                       LDA.B $82                            ;80A3D4;000082;
-                       CLC                                  ;80A3D6;      ;
-                       ADC.W #$0040                         ;80A3D7;      ;
-                       STA.B $82                            ;80A3DA;000082;
-                                                            ;      ;      ;
-          CODE_80A3DC: LDY.B $7E                            ;80A3DC;00007E;
-                       LDX.B $80                            ;80A3DE;000080;
-                       LDA.B [$72],Y                        ;80A3E0;000072;
-                       STA.W $0746,X                        ;80A3E2;000746;
-                       LDY.B $82                            ;80A3E5;000082;
-                       LDX.B $84                            ;80A3E7;000084;
-                       LDA.B [$75],Y                        ;80A3E9;000075;
-                       STA.W $07C6,X                        ;80A3EB;0007C6;
-                       INC.B $7E                            ;80A3EE;00007E;
-                       INC.B $7E                            ;80A3F0;00007E;
-                       INC.B $80                            ;80A3F2;000080;
-                       INC.B $80                            ;80A3F4;000080;
-                       INC.B $82                            ;80A3F6;000082;
-                       INC.B $82                            ;80A3F8;000082;
-                       INC.B $84                            ;80A3FA;000084;
-                       INC.B $84                            ;80A3FC;000084;
-                       PLX                                  ;80A3FE;      ;
-                       INX                                  ;80A3FF;      ;
-                       INX                                  ;80A400;      ;
-                       CPX.W #$0040                         ;80A401;      ;
-                       BNE CODE_80A3B9                      ;80A404;80A3B9;
-                       %Set8bit(!M)                             ;80A406;      ;
-                       LDA.B #$00                           ;80A408;      ;
-                       STA.B !ProgDMA_Channel_Index                            ;80A40A;000027;
-                       LDA.B #$18                           ;80A40C;      ;
-                       STA.B !ProgDMA_Destination_Memory                            ;80A40E;000029;
-                       %Set16bit(!M)                             ;80A410;      ;
-                       LDY.W #$0040                         ;80A412;      ;
-                       LDA.B $14                            ;80A415;000014;
-                       CLC                                  ;80A417;      ;
-                       ADC.W #$6000                         ;80A418;      ;
-                       TAX                                  ;80A41B;      ;
-                       LDA.W #$0746                         ;80A41C;      ;
-                       STA.B $72                            ;80A41F;000072;
-                       %Set8bit(!M)                             ;80A421;      ;
-                       LDA.B #$80                           ;80A423;      ;
-                       STA.B $74                            ;80A425;000074;
-                       %Set16bit(!M)                             ;80A427;      ;
-                       LDA.W #$0080                         ;80A429;      ;
-                       JSL.L AddProgrammedDMA                ;80A42C;808A33;
-                       %Set8bit(!M)                             ;80A430;      ;
-                       LDA.B #$01                           ;80A432;      ;
-                       STA.B !ProgDMA_Channel_Index                            ;80A434;000027;
-                       LDA.B #$18                           ;80A436;      ;
-                       STA.B !ProgDMA_Destination_Memory                            ;80A438;000029;
-                       %Set16bit(!M)                             ;80A43A;      ;
-                       LDY.W #$0040                         ;80A43C;      ;
-                       LDA.B $14                            ;80A43F;000014;
-                       CLC                                  ;80A441;      ;
-                       ADC.W #$6000                         ;80A442;      ;
-                       ADC.W #$0400                         ;80A445;      ;
-                       TAX                                  ;80A448;      ;
-                       LDA.W #$07C6                         ;80A449;      ;
-                       STA.B $72                            ;80A44C;000072;
-                       %Set8bit(!M)                             ;80A44E;      ;
-                       LDA.B #$80                           ;80A450;      ;
-                       STA.B $74                            ;80A452;000074;
-                       %Set16bit(!M)                             ;80A454;      ;
-                       LDA.W #$0080                         ;80A456;      ;
-                       JSL.L AddProgrammedDMA                ;80A459;808A33;
-                       %Set16bit(!MX)                             ;80A45D;      ;
-                       LDA.B $16                            ;80A45F;000016;
-                       SEC                                  ;80A461;      ;
-                       SBC.B $1A                            ;80A462;00001A;
-                       STA.B $16                            ;80A464;000016;
-                       LDA.B $14                            ;80A466;000014;
-                       SEC                                  ;80A468;      ;
-                       SBC.W #$0020                         ;80A469;      ;
-                       CMP.W #$FFE0                         ;80A46C;      ;
-                       BNE CODE_80A476                      ;80A46F;80A476;
-                       LDA.W #$0BE0                         ;80A471;      ;
-                       BRA CODE_80A47E                      ;80A474;80A47E;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A476: CMP.W #$07E0                         ;80A476;      ;
-                       BNE CODE_80A47E                      ;80A479;80A47E;
-                       LDA.W #$03E0                         ;80A47B;      ;
-                                                            ;      ;      ;
-          CODE_80A47E: STA.B $14                            ;80A47E;000014;
-                       RTL                                  ;80A480;      ;END_APPPP
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                AOOOO: %Set16bit(!MX)                             ;80A481;      ;
-                       LDA.B $16                            ;80A483;000016;
-                       CMP.W #$1000                         ;80A485;      ;
-                       BCC CODE_80A4A6                      ;80A488;80A4A6;
-                       CMP.W #$2000                         ;80A48A;      ;
-                       BCC CODE_80A4B1                      ;80A48D;80A4B1;
-                       CMP.W #$3000                         ;80A48F;      ;
-                       BCC CODE_80A4C6                      ;80A492;80A4C6;
-                       CMP.W #$4000                         ;80A494;      ;
-                       BCC CODE_80A4DB                      ;80A497;80A4DB;
-                       CMP.W #$5000                         ;80A499;      ;
-                       BCC CODE_80A4F3                      ;80A49C;80A4F3;
-                       CMP.W #$6000                         ;80A49E;      ;
-                       BCC CODE_80A50B                      ;80A4A1;80A50B;
-                       JMP.W CODE_80A529                    ;80A4A3;80A529;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A4A6: STZ.B $7E                            ;80A4A6;00007E;
-                       STZ.B $80                            ;80A4A8;000080;
-                       STZ.B $82                            ;80A4AA;000082;
-                       STZ.B $84                            ;80A4AC;000084;
-                       JMP.W CODE_80A529                    ;80A4AE;80A529;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A4B1: LDA.B $16                            ;80A4B1;000016;
-                       SEC                                  ;80A4B3;      ;
-                       SBC.W #$1000                         ;80A4B4;      ;
-                       STA.B $7E                            ;80A4B7;00007E;
-                       XBA                                  ;80A4B9;      ;
-                       AND.W #$001F                         ;80A4BA;      ;
-                       ASL A                                ;80A4BD;      ;
-                       STA.B $80                            ;80A4BE;000080;
-                       STZ.B $82                            ;80A4C0;000082;
-                       STZ.B $84                            ;80A4C2;000084;
-                       BRA CODE_80A529                      ;80A4C4;80A529;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A4C6: LDA.B $16                            ;80A4C6;000016;
-                       SEC                                  ;80A4C8;      ;
-                       SBC.W #$1000                         ;80A4C9;      ;
-                       STA.B $7E                            ;80A4CC;00007E;
-                       XBA                                  ;80A4CE;      ;
-                       AND.W #$001F                         ;80A4CF;      ;
-                       ASL A                                ;80A4D2;      ;
-                       STA.B $80                            ;80A4D3;000080;
-                       STZ.B $82                            ;80A4D5;000082;
-                       STZ.B $84                            ;80A4D7;000084;
-                       BRA CODE_80A529                      ;80A4D9;80A529;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A4DB: LDA.W #$4000                         ;80A4DB;      ;
-                       STA.B $7E                            ;80A4DE;00007E;
-                       STZ.B $80                            ;80A4E0;000080;
-                       LDA.B $16                            ;80A4E2;000016;
-                       SEC                                  ;80A4E4;      ;
-                       SBC.W #$3000                         ;80A4E5;      ;
-                       STA.B $82                            ;80A4E8;000082;
-                       XBA                                  ;80A4EA;      ;
-                       AND.W #$001F                         ;80A4EB;      ;
-                       ASL A                                ;80A4EE;      ;
-                       STA.B $84                            ;80A4EF;000084;
-                       BRA CODE_80A529                      ;80A4F1;80A529;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A4F3: LDA.W #$4000                         ;80A4F3;      ;
-                       STA.B $7E                            ;80A4F6;00007E;
-                       STZ.B $80                            ;80A4F8;000080;
-                       LDA.B $16                            ;80A4FA;000016;
-                       SEC                                  ;80A4FC;      ;
-                       SBC.W #$3000                         ;80A4FD;      ;
-                       STA.B $82                            ;80A500;000082;
-                       XBA                                  ;80A502;      ;
-                       AND.W #$001F                         ;80A503;      ;
-                       ASL A                                ;80A506;      ;
-                       STA.B $84                            ;80A507;000084;
-                       BRA CODE_80A529                      ;80A509;80A529;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A50B: LDA.B $16                            ;80A50B;000016;
-                       SEC                                  ;80A50D;      ;
-                       SBC.W #$1000                         ;80A50E;      ;
-                       STA.B $7E                            ;80A511;00007E;
-                       LDA.B $16                            ;80A513;000016;
-                       SEC                                  ;80A515;      ;
-                       SBC.W #$5000                         ;80A516;      ;
-                       XBA                                  ;80A519;      ;
-                       AND.W #$000F                         ;80A51A;      ;
-                       ASL A                                ;80A51D;      ;
-                       STA.B $80                            ;80A51E;000080;
-                       LDA.W #$4000                         ;80A520;      ;
-                       STA.B $82                            ;80A523;000082;
-                       STZ.B $84                            ;80A525;000084;
-                       BRA CODE_80A529                      ;80A527;80A529;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A529: LDA.W #$2000                         ;80A529;      ;
-                       CLC                                  ;80A52C;      ;
-                       ADC.B $12                            ;80A52D;000012;
-                       ADC.W #$0060                         ;80A52F;      ;
-                       STA.B $72                            ;80A532;000072;
-                       ADC.W #$2000                         ;80A534;      ;
-                       STA.B $75                            ;80A537;000075;
-                       %Set8bit(!M)                             ;80A539;      ;
-                       LDA.B #$7E                           ;80A53B;      ;
-                       STA.B $74                            ;80A53D;000074;
-                       STA.B $77                            ;80A53F;000077;
-                       %Set16bit(!M)                             ;80A541;      ;
-                       LDX.W #$0000                         ;80A543;      ;
-                                                            ;      ;      ;
-          CODE_80A546: PHX                                  ;80A546;      ;
-                       LDA.B $80                            ;80A547;000080;
-                       CMP.W #$0040                         ;80A549;      ;
-                       BNE CODE_80A558                      ;80A54C;80A558;
-                       STZ.B $80                            ;80A54E;000080;
-                       LDA.B $7E                            ;80A550;00007E;
-                       CLC                                  ;80A552;      ;
-                       ADC.W #$2000                         ;80A553;      ;
-                       STA.B $7E                            ;80A556;00007E;
-                                                            ;      ;      ;
-          CODE_80A558: LDA.B $84                            ;80A558;000084;
-                       CMP.W #$0040                         ;80A55A;      ;
-                       BNE CODE_80A569                      ;80A55D;80A569;
-                       STZ.B $84                            ;80A55F;000084;
-                       LDA.B $82                            ;80A561;000082;
-                       CLC                                  ;80A563;      ;
-                       ADC.W #$2000                         ;80A564;      ;
-                       STA.B $82                            ;80A567;000082;
-                                                            ;      ;      ;
-          CODE_80A569: LDY.B $7E                            ;80A569;00007E;
-                       LDX.B $80                            ;80A56B;000080;
-                       LDA.B [$72],Y                        ;80A56D;000072;
-                       STA.W $0746,X                        ;80A56F;000746;
-                       LDY.B $82                            ;80A572;000082;
-                       LDX.B $84                            ;80A574;000084;
-                       LDA.B [$75],Y                        ;80A576;000075;
-                       STA.W $07C6,X                        ;80A578;0007C6;
-                       LDA.B $7E                            ;80A57B;00007E;
-                       CLC                                  ;80A57D;      ;
-                       ADC.W #$0100                         ;80A57E;      ;
-                       STA.B $7E                            ;80A581;00007E;
-                       INC.B $80                            ;80A583;000080;
-                       INC.B $80                            ;80A585;000080;
-                       LDA.B $82                            ;80A587;000082;
-                       CLC                                  ;80A589;      ;
-                       ADC.W #$0100                         ;80A58A;      ;
-                       STA.B $82                            ;80A58D;000082;
-                       INC.B $84                            ;80A58F;000084;
-                       INC.B $84                            ;80A591;000084;
-                       PLX                                  ;80A593;      ;
-                       INX                                  ;80A594;      ;
-                       INX                                  ;80A595;      ;
-                       CPX.W #$0040                         ;80A596;      ;
-                       BNE CODE_80A546                      ;80A599;80A546;
-                       %Set8bit(!M)                             ;80A59B;      ;
-                       LDA.B #$00                           ;80A59D;      ;
-                       STA.B !ProgDMA_Channel_Index                            ;80A59F;000027;
-                       LDA.B #$18                           ;80A5A1;      ;
-                       STA.B !ProgDMA_Destination_Memory                            ;80A5A3;000029;
-                       %Set16bit(!M)                             ;80A5A5;      ;
-                       LDY.W #$0040                         ;80A5A7;      ;
-                       LDA.B $10                            ;80A5AA;000010;
-                       CLC                                  ;80A5AC;      ;
-                       ADC.W #$6000                         ;80A5AD;      ;
-                       TAX                                  ;80A5B0;      ;
-                       LDA.W #$0746                         ;80A5B1;      ;
-                       STA.B $72                            ;80A5B4;000072;
-                       %Set8bit(!M)                             ;80A5B6;      ;
-                       LDA.B #$80                           ;80A5B8;      ;
-                       STA.B $74                            ;80A5BA;000074;
-                       %Set16bit(!M)                             ;80A5BC;      ;
-                       LDA.W #$0081                         ;80A5BE;      ;
-                       JSL.L AddProgrammedDMA                ;80A5C1;808A33;
-                       %Set8bit(!M)                             ;80A5C5;      ;
-                       LDA.B #$01                           ;80A5C7;      ;
-                       STA.B !ProgDMA_Channel_Index                            ;80A5C9;000027;
-                       LDA.B #$18                           ;80A5CB;      ;
-                       STA.B !ProgDMA_Destination_Memory                            ;80A5CD;000029;
-                       %Set16bit(!M)                             ;80A5CF;      ;
-                       LDY.W #$0040                         ;80A5D1;      ;
-                       LDA.B $10                            ;80A5D4;000010;
-                       CLC                                  ;80A5D6;      ;
-                       ADC.W #$6000                         ;80A5D7;      ;
-                       ADC.W #$0800                         ;80A5DA;      ;
-                       TAX                                  ;80A5DD;      ;
-                       LDA.W #$07C6                         ;80A5DE;      ;
-                       STA.B $72                            ;80A5E1;000072;
-                       %Set8bit(!M)                             ;80A5E3;      ;
-                       LDA.B #$80                           ;80A5E5;      ;
-                       STA.B $74                            ;80A5E7;000074;
-                       %Set16bit(!M)                             ;80A5E9;      ;
-                       LDA.W #$0081                         ;80A5EB;      ;
-                       JSL.L AddProgrammedDMA                ;80A5EE;808A33;
-                       %Set16bit(!MX)                             ;80A5F2;      ;
-                       LDA.B $12                            ;80A5F4;000012;
-                       CLC                                  ;80A5F6;      ;
-                       ADC.W #$0002                         ;80A5F7;      ;
-                       STA.B $12                            ;80A5FA;000012;
-                       LDA.B $10                            ;80A5FC;000010;
-                       CLC                                  ;80A5FE;      ;
-                       ADC.W #$0001                         ;80A5FF;      ;
-                       CMP.W #$0020                         ;80A602;      ;
-                       BNE CODE_80A60C                      ;80A605;80A60C;
-                       LDA.W #$0400                         ;80A607;      ;
-                       BRA CODE_80A614                      ;80A60A;80A614;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A60C: CMP.W #$0420                         ;80A60C;      ;
-                       BNE CODE_80A614                      ;80A60F;80A614;
-                       LDA.W #$0000                         ;80A611;      ;
-                                                            ;      ;      ;
-          CODE_80A614: STA.B $10                            ;80A614;000010;
-                       RTL                                  ;80A616;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A617: %Set16bit(!MX)                             ;80A617;      ;
-                       LDA.B $16                            ;80A619;000016;
-                       CMP.W #$1000                         ;80A61B;      ;
-                       BCC CODE_80A63C                      ;80A61E;80A63C;
-                       CMP.W #$2000                         ;80A620;      ;
-                       BCC CODE_80A646                      ;80A623;80A646;
-                       CMP.W #$3000                         ;80A625;      ;
-                       BCC CODE_80A65B                      ;80A628;80A65B;
-                       CMP.W #$4000                         ;80A62A;      ;
-                       BCC CODE_80A670                      ;80A62D;80A670;
-                       CMP.W #$5000                         ;80A62F;      ;
-                       BCC CODE_80A688                      ;80A632;80A688;
-                       CMP.W #$6000                         ;80A634;      ;
-                       BCC CODE_80A6A0                      ;80A637;80A6A0;
-                       JMP.W CODE_80A6BE                    ;80A639;80A6BE;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A63C: STZ.B $7E                            ;80A63C;00007E;
-                       STZ.B $80                            ;80A63E;000080;
-                       STZ.B $82                            ;80A640;000082;
-                       STZ.B $84                            ;80A642;000084;
-                       BRA CODE_80A6BE                      ;80A644;80A6BE;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A646: LDA.B $16                            ;80A646;000016;
-                       SEC                                  ;80A648;      ;
-                       SBC.W #$1000                         ;80A649;      ;
-                       STA.B $7E                            ;80A64C;00007E;
-                       XBA                                  ;80A64E;      ;
-                       AND.W #$001F                         ;80A64F;      ;
-                       ASL A                                ;80A652;      ;
-                       STA.B $80                            ;80A653;000080;
-                       STZ.B $82                            ;80A655;000082;
-                       STZ.B $84                            ;80A657;000084;
-                       BRA CODE_80A6BE                      ;80A659;80A6BE;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A65B: LDA.B $16                            ;80A65B;000016;
-                       SEC                                  ;80A65D;      ;
-                       SBC.W #$1000                         ;80A65E;      ;
-                       STA.B $7E                            ;80A661;00007E;
-                       XBA                                  ;80A663;      ;
-                       AND.W #$001F                         ;80A664;      ;
-                       ASL A                                ;80A667;      ;
-                       STA.B $80                            ;80A668;000080;
-                       STZ.B $82                            ;80A66A;000082;
-                       STZ.B $84                            ;80A66C;000084;
-                       BRA CODE_80A6BE                      ;80A66E;80A6BE;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A670: LDA.W #$4000                         ;80A670;      ;
-                       STA.B $7E                            ;80A673;00007E;
-                       STZ.B $80                            ;80A675;000080;
-                       LDA.B $16                            ;80A677;000016;
-                       SEC                                  ;80A679;      ;
-                       SBC.W #$3000                         ;80A67A;      ;
-                       STA.B $82                            ;80A67D;000082;
-                       XBA                                  ;80A67F;      ;
-                       AND.W #$001F                         ;80A680;      ;
-                       ASL A                                ;80A683;      ;
-                       STA.B $84                            ;80A684;000084;
-                       BRA CODE_80A6BE                      ;80A686;80A6BE;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A688: LDA.W #$4000                         ;80A688;      ;
-                       STA.B $7E                            ;80A68B;00007E;
-                       STZ.B $80                            ;80A68D;000080;
-                       LDA.B $16                            ;80A68F;000016;
-                       SEC                                  ;80A691;      ;
-                       SBC.W #$3000                         ;80A692;      ;
-                       STA.B $82                            ;80A695;000082;
-                       XBA                                  ;80A697;      ;
-                       AND.W #$001F                         ;80A698;      ;
-                       ASL A                                ;80A69B;      ;
-                       STA.B $84                            ;80A69C;000084;
-                       BRA CODE_80A6BE                      ;80A69E;80A6BE;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A6A0: LDA.B $16                            ;80A6A0;000016;
-                       SEC                                  ;80A6A2;      ;
-                       SBC.W #$1000                         ;80A6A3;      ;
-                       STA.B $7E                            ;80A6A6;00007E;
-                       LDA.B $16                            ;80A6A8;000016;
-                       SEC                                  ;80A6AA;      ;
-                       SBC.W #$5000                         ;80A6AB;      ;
-                       XBA                                  ;80A6AE;      ;
-                       AND.W #$001F                         ;80A6AF;      ;
-                       ASL A                                ;80A6B2;      ;
-                       STA.B $80                            ;80A6B3;000080;
-                       LDA.W #$4000                         ;80A6B5;      ;
-                       STA.B $82                            ;80A6B8;000082;
-                       STZ.B $84                            ;80A6BA;000084;
-                       BRA CODE_80A6BE                      ;80A6BC;80A6BE;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A6BE: LDA.W #$2000                         ;80A6BE;      ;
-                       CLC                                  ;80A6C1;      ;
-                       ADC.B $12                            ;80A6C2;000012;
-                       SEC                                  ;80A6C4;      ;
-                       SBC.W #$0020                         ;80A6C5;      ;
-                       STA.B $72                            ;80A6C8;000072;
-                       CLC                                  ;80A6CA;      ;
-                       ADC.W #$2000                         ;80A6CB;      ;
-                       STA.B $75                            ;80A6CE;000075;
-                       %Set8bit(!M)                             ;80A6D0;      ;
-                       LDA.B #$7E                           ;80A6D2;      ;
-                       STA.B $74                            ;80A6D4;000074;
-                       STA.B $77                            ;80A6D6;000077;
-                       %Set16bit(!M)                             ;80A6D8;      ;
-                       LDX.W #$0000                         ;80A6DA;      ;
-                                                            ;      ;      ;
-          CODE_80A6DD: PHX                                  ;80A6DD;      ;
-                       LDA.B $80                            ;80A6DE;000080;
-                       CMP.W #$0040                         ;80A6E0;      ;
-                       BNE CODE_80A6EF                      ;80A6E3;80A6EF;
-                       STZ.B $80                            ;80A6E5;000080;
-                       LDA.B $7E                            ;80A6E7;00007E;
-                       CLC                                  ;80A6E9;      ;
-                       ADC.W #$2000                         ;80A6EA;      ;
-                       STA.B $7E                            ;80A6ED;00007E;
-                                                            ;      ;      ;
-          CODE_80A6EF: LDA.B $84                            ;80A6EF;000084;
-                       CMP.W #$0040                         ;80A6F1;      ;
-                       BNE CODE_80A700                      ;80A6F4;80A700;
-                       STZ.B $84                            ;80A6F6;000084;
-                       LDA.B $82                            ;80A6F8;000082;
-                       CLC                                  ;80A6FA;      ;
-                       ADC.W #$2000                         ;80A6FB;      ;
-                       STA.B $82                            ;80A6FE;000082;
-                                                            ;      ;      ;
-          CODE_80A700: LDY.B $7E                            ;80A700;00007E;
-                       LDX.B $80                            ;80A702;000080;
-                       LDA.B [$72],Y                        ;80A704;000072;
-                       STA.W $0746,X                        ;80A706;000746;
-                       LDY.B $82                            ;80A709;000082;
-                       LDX.B $84                            ;80A70B;000084;
-                       LDA.B [$75],Y                        ;80A70D;000075;
-                       STA.W $07C6,X                        ;80A70F;0007C6;
-                       LDA.B $7E                            ;80A712;00007E;
-                       CLC                                  ;80A714;      ;
-                       ADC.W #$0100                         ;80A715;      ;
-                       STA.B $7E                            ;80A718;00007E;
-                       INC.B $80                            ;80A71A;000080;
-                       INC.B $80                            ;80A71C;000080;
-                       LDA.B $82                            ;80A71E;000082;
-                       CLC                                  ;80A720;      ;
-                       ADC.W #$0100                         ;80A721;      ;
-                       STA.B $82                            ;80A724;000082;
-                       INC.B $84                            ;80A726;000084;
-                       INC.B $84                            ;80A728;000084;
-                       PLX                                  ;80A72A;      ;
-                       INX                                  ;80A72B;      ;
-                       INX                                  ;80A72C;      ;
-                       CPX.W #$0040                         ;80A72D;      ;
-                       BNE CODE_80A6DD                      ;80A730;80A6DD;
-                       %Set8bit(!M)                             ;80A732;      ;
-                       LDA.B #$00                           ;80A734;      ;
-                       STA.B !ProgDMA_Channel_Index                            ;80A736;000027;
-                       LDA.B #$18                           ;80A738;      ;
-                       STA.B !ProgDMA_Destination_Memory                            ;80A73A;000029;
-                       %Set16bit(!M)                             ;80A73C;      ;
-                       LDY.W #$0040                         ;80A73E;      ;
-                       LDA.B $10                            ;80A741;000010;
-                       CLC                                  ;80A743;      ;
-                       ADC.W #$6000                         ;80A744;      ;
-                       TAX                                  ;80A747;      ;
-                       LDA.W #$0746                         ;80A748;      ;
-                       STA.B $72                            ;80A74B;000072;
-                       %Set8bit(!M)                             ;80A74D;      ;
-                       LDA.B #$80                           ;80A74F;      ;
-                       STA.B $74                            ;80A751;000074;
-                       %Set16bit(!M)                             ;80A753;      ;
-                       LDA.W #$0081                         ;80A755;      ;
-                       JSL.L AddProgrammedDMA                ;80A758;808A33;
-                       %Set8bit(!M)                             ;80A75C;      ;
-                       LDA.B #$01                           ;80A75E;      ;
-                       STA.B !ProgDMA_Channel_Index                            ;80A760;000027;
-                       LDA.B #$18                           ;80A762;      ;
-                       STA.B !ProgDMA_Destination_Memory                            ;80A764;000029;
-                       %Set16bit(!M)                             ;80A766;      ;
-                       LDY.W #$0040                         ;80A768;      ;
-                       LDA.B $10                            ;80A76B;000010;
-                       CLC                                  ;80A76D;      ;
-                       ADC.W #$6000                         ;80A76E;      ;
-                       ADC.W #$0800                         ;80A771;      ;
-                       TAX                                  ;80A774;      ;
-                       LDA.W #$07C6                         ;80A775;      ;
-                       STA.B $72                            ;80A778;000072;
-                       %Set8bit(!M)                             ;80A77A;      ;
-                       LDA.B #$80                           ;80A77C;      ;
-                       STA.B $74                            ;80A77E;000074;
-                       %Set16bit(!M)                             ;80A780;      ;
-                       LDA.W #$0081                         ;80A782;      ;
-                       JSL.L AddProgrammedDMA                ;80A785;808A33;
-                       %Set16bit(!MX)                             ;80A789;      ;
-                       LDA.B $12                            ;80A78B;000012;
-                       SEC                                  ;80A78D;      ;
-                       SBC.W #$0002                         ;80A78E;      ;
-                       STA.B $12                            ;80A791;000012;
-                       LDA.B $10                            ;80A793;000010;
-                       SEC                                  ;80A795;      ;
-                       SBC.W #$0001                         ;80A796;      ;
-                       CMP.W #$FFFF                         ;80A799;      ;
-                       BNE CODE_80A7A3                      ;80A79C;80A7A3;
-                       LDA.W #$041F                         ;80A79E;      ;
-                       BRA CODE_80A7AB                      ;80A7A1;80A7AB;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_80A7A3: CMP.W #$03FF                         ;80A7A3;      ;
-                       BNE CODE_80A7AB                      ;80A7A6;80A7AB;
-                       LDA.W #$001F                         ;80A7A8;      ;
-                                                            ;      ;      ;
-          CODE_80A7AB: STA.B $10                            ;80A7AB;000010;
-                       RTL                                  ;80A7AD;      ;END_AOOOO
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                ANNNN: %Set8bit(!M)                             ;80A7AE;      ;
-                       %Set16bit(!X)                             ;80A7B0;      ;
-                       LDA.B #$00                           ;80A7B2;      ;
-                       XBA                                  ;80A7B4;      ;
-                       LDA.B !tilemap_to_load                            ;80A7B5;000022;
-                       %Set16bit(!M)                             ;80A7B7;      ;
-                       ASL A                                ;80A7B9;      ;
-                       TAX                                  ;80A7BA;      ;
-                       LDA.L TilemapManagerTable,X                   ;80A7BB;80AA7C;
-                       STA.B !tilemap_pointer                            ;80A7BF;000018;
-                       %Set8bit(!M)                             ;80A7C1;      ;
-                       LDA.B (!tilemap_pointer),Y                        ;80A7C3;000018;
-                       RTL                                  ;80A7C5;      ;END_ANNN
+;;;;;;;;
+SUB_80A0E1: ;80A0E1
+        %Set16bit(!MX)
+        LDA.B !OBJ_Offset_Y
+        STA.W !BG1_Map_Offset_Y
+        CMP.B $EF
+        BEQ $2F
+        CMP.B $F3
+        BEQ $2B
+        LDA.B $F3
+        SEC
+        SBC.B !OBJ_Offset_Y
+        CMP.B $1E
+        BCS .CODE_80A0FB
+        STA.B $1E
 
+    .CODE_80A0FB:
+        %Set16bit(!M)
+        LDA.W $0196
+        AND.W #$0001
+        BEQ $16
+        %Set8bit(!M)
+        LDA.B !BG_subpixel_offset_Y
+        SEC
+        SBC.B $1E
+        STA.B !BG_subpixel_offset_Y
+        BPL $0B
+        LDA.B #$08
+        CLC
+        ADC.B !BG_subpixel_offset_Y
+        STA.B !BG_subpixel_offset_Y
+        JSL.L SUB_80A308
+        RTL
+
+;;;;;;;;
+UNK_StaticMapScroling: ;80A11C
+        %Set16bit(!MX)
+        LDA.B !OBJ_Offset_X
+        STA.W !BG1_Map_Offset_X
+        CMP.B $ED
+        BEQ .return
+        CMP.B $F1
+        BEQ .return
+        CMP.B $1E
+        BCS .CODE_80A131
+        STA.B $1E
+
+    .CODE_80A131:
+        %Set16bit(!M)
+        LDA.W $0196
+        AND.W #$0001                         ;FLAG196 Fair climate?
+        BEQ .return
+        %Set8bit(!M)
+        LDA.B !BG_subpixel_offset_X
+        CLC
+        ADC.B $1E
+        STA.B !BG_subpixel_offset_X
+        CMP.B #$08
+        BCC .return
+        SEC
+        SBC.B #$08
+        STA.B !BG_subpixel_offset_X
+        JSL.L SUB_80A481
+                                            ;      ;      ;
+        .return: RTL                                  ;80A151;      ;END_ASSSS
+
+;;;;;;;;
+SUB_80A152: ;80A152
+        %Set16bit(!MX)                             ;      ;
+        LDA.B !OBJ_Offset_X                            ;80A154;0000F5;
+        STA.W !BG1_Map_Offset_X                          ;80A156;00013C;
+        CMP.B $ED                            ;80A159;0000ED;
+        BEQ CODE_80A18C                      ;80A15B;80A18C;
+        CMP.B $F1                            ;80A15D;0000F1;
+        BEQ CODE_80A18C                      ;80A15F;80A18C;
+        LDA.B $F1                            ;80A161;0000F1;
+        SEC                                  ;80A163;      ;
+        SBC.B !OBJ_Offset_X                            ;80A164;0000F5;
+        CMP.B $1E                            ;80A166;00001E;
+        BCS CODE_80A16C                      ;80A168;80A16C;
+        STA.B $1E                            ;80A16A;00001E;
+                                            ;      ;      ;
+        CODE_80A16C: %Set16bit(!M)                             ;80A16C;      ;
+        LDA.W $0196                          ;80A16E;000196;
+        AND.W #$0001                         ;80A171;      ;
+        BEQ CODE_80A18C                      ;80A174;80A18C;
+        %Set8bit(!M)                             ;80A176;      ;
+        LDA.B !BG_subpixel_offset_X                            ;80A178;000020;
+        SEC                                  ;80A17A;      ;
+        SBC.B $1E                            ;80A17B;00001E;
+        STA.B !BG_subpixel_offset_X                            ;80A17D;000020;
+        BPL CODE_80A18C                      ;80A17F;80A18C;
+        LDA.B #$08                           ;80A181;      ;
+        CLC                                  ;80A183;      ;
+        ADC.B !BG_subpixel_offset_X                            ;80A184;000020;
+        STA.B !BG_subpixel_offset_X                            ;80A186;000020;
+        JSL.L SUB_80A617                    ;80A188;80A617;
+                                            ;      ;      ;
+        CODE_80A18C: RTL                                  ;80A18C;      ;END_SUB_80A152
+
+;;;;;;;;
+SUB_80A18D: ;80A18D
+        %Set16bit(!MX)                             ;      ;Some data copying?
+        LDA.B $12                            ;80A18F;000012;
+        CMP.W #$0020                         ;80A191;      ;
+        BCC CODE_80A1B1                      ;80A194;80A1B1;
+        CMP.W #$0040                         ;80A196;      ;
+        BCC CODE_80A1BB                      ;80A199;80A1BB;
+        CMP.W #$0060                         ;80A19B;      ;
+        BCC CODE_80A1CB                      ;80A19E;80A1CB;
+        CMP.W #$0080                         ;80A1A0;      ;
+        BCC CODE_80A1DB                      ;80A1A3;80A1DB;
+        CMP.W #$00A0                         ;80A1A5;      ;
+        BCC CODE_80A1EE                      ;80A1A8;80A1EE;
+        CMP.W #$00C0                         ;80A1AA;      ;
+        BCC CODE_80A201                      ;80A1AD;80A201;
+        BRA CODE_80A21A                      ;80A1AF;80A21A;
+                                            ;      ;      ;
+                                            ;      ;      ;
+    CODE_80A1B1:
+        STZ.B $7E                            ;80A1B1;00007E;
+        STZ.B $80                            ;80A1B3;000080;
+        STZ.B $82                            ;80A1B5;000082;
+        STZ.B $84                            ;80A1B7;000084;
+        BRA CODE_80A21A                      ;80A1B9;80A21A;
+                                            ;      ;      ;
+                                            ;      ;      ;
+    CODE_80A1BB:
+        LDA.B $12                            ;80A1BB;000012;
+        SEC                                  ;80A1BD;      ;
+        SBC.W #$0020                         ;80A1BE;      ;
+        STA.B $7E                            ;80A1C1;00007E;
+        STA.B $80                            ;80A1C3;000080;
+        STZ.B $82                            ;80A1C5;000082;
+        STZ.B $84                            ;80A1C7;000084;
+        BRA CODE_80A21A                      ;80A1C9;80A21A;
+                                            ;      ;      ;
+                                            ;      ;      ;
+    CODE_80A1CB:
+        LDA.B $12                            ;80A1CB;000012;
+        SEC                                  ;80A1CD;      ;
+        SBC.W #$0020                         ;80A1CE;      ;
+        STA.B $7E                            ;80A1D1;00007E;
+        STA.B $80                            ;80A1D3;000080;
+        STZ.B $82                            ;80A1D5;000082;
+        STZ.B $84                            ;80A1D7;000084;
+        BRA CODE_80A21A                      ;80A1D9;80A21A;
+                                            ;      ;      ;
+                                            ;      ;      ;
+    CODE_80A1DB:
+        LDA.W #$0080                         ;80A1DB;      ;
+        STA.B $7E                            ;80A1DE;00007E;
+        STZ.B $80                            ;80A1E0;000080;
+        LDA.B $12                            ;80A1E2;000012;
+        SEC                                  ;80A1E4;      ;
+        SBC.W #$0060                         ;80A1E5;      ;
+        STA.B $82                            ;80A1E8;000082;
+        STA.B $84                            ;80A1EA;000084;
+        BRA CODE_80A21A                      ;80A1EC;80A21A;
+                                            ;      ;      ;
+                                            ;      ;      ;
+    CODE_80A1EE:
+        LDA.W #$0080                         ;80A1EE;      ;
+        STA.B $7E                            ;80A1F1;00007E;
+        STZ.B $80                            ;80A1F3;000080;
+        LDA.B $12                            ;80A1F5;000012;
+        SEC                                  ;80A1F7;      ;
+        SBC.W #$0060                         ;80A1F8;      ;
+        STA.B $82                            ;80A1FB;000082;
+        STA.B $84                            ;80A1FD;000084;
+        BRA CODE_80A21A                      ;80A1FF;80A21A;
+                                            ;      ;      ;
+                                            ;      ;      ;
+    CODE_80A201:
+        LDA.B $12                            ;80A201;000012;
+        SEC                                  ;80A203;      ;
+        SBC.W #$0020                         ;80A204;      ;
+        STA.B $7E                            ;80A207;00007E;
+        LDA.B $12                            ;80A209;000012;
+        SEC                                  ;80A20B;      ;
+        SBC.W #$00A0                         ;80A20C;      ;
+        STA.B $80                            ;80A20F;000080;
+        LDA.W #$0080                         ;80A211;      ;
+        STA.B $82                            ;80A214;000082;
+        STZ.B $84                            ;80A216;000084;
+        BRA CODE_80A21A                      ;80A218;80A21A;
+                                            ;      ;      ;
+                                            ;      ;      ;
+    CODE_80A21A:
+        LDA.B $1C                            ;80A21A;00001C;
+        LSR A                                ;80A21C;      ;
+        LSR A                                ;80A21D;      ;
+        STA.B $86                            ;80A21E;000086;
+        LDA.W #$2000                         ;80A220;      ;
+        CLC                                  ;80A223;      ;
+        ADC.B $16                            ;80A224;000016;
+        ADC.B $1C                            ;80A226;00001C;
+        SEC                                  ;80A228;      ;
+        SBC.B $86                            ;80A229;000086;
+        STA.B $72                            ;80A22B;000072;
+        CLC                                  ;80A22D;      ;
+        ADC.W #$0040                         ;80A22E;      ;
+        STA.B $75                            ;80A231;000075;
+        %Set8bit(!M)                             ;80A233;      ;
+        LDA.B #$7E                           ;80A235;      ;
+        STA.B $74                            ;80A237;000074;
+        STA.B $77                            ;80A239;000077;
+        %Set16bit(!M)                             ;80A23B;      ;
+        LDX.W #$0000                         ;80A23D;      ;
+                                            ;      ;      ;
+    CODE_80A240:
+        PHX                                  ;80A240;      ;
+        LDA.B $80                            ;80A241;000080;
+        CMP.W #$0040                         ;80A243;      ;
+        BNE CODE_80A252                      ;80A246;80A252;
+        STZ.B $80                            ;80A248;000080;
+        LDA.B $7E                            ;80A24A;00007E;
+        CLC                                  ;80A24C;      ;
+        ADC.W #$0040                         ;80A24D;      ;
+        STA.B $7E                            ;80A250;00007E;
+                                            ;      ;      ;
+    CODE_80A252:
+        LDA.B $84                            ;80A252;000084;
+        CMP.W #$0040                         ;80A254;      ;
+        BNE CODE_80A263                      ;80A257;80A263;
+        STZ.B $84                            ;80A259;000084;
+        LDA.B $82                            ;80A25B;000082;
+        CLC                                  ;80A25D;      ;
+        ADC.W #$0040                         ;80A25E;      ;
+        STA.B $82                            ;80A261;000082;
+                                            ;      ;      ;
+    CODE_80A263:
+        LDY.B $7E                            ;80A263;00007E;
+        LDX.B $80                            ;80A265;000080;
+        LDA.B [$72],Y                        ;80A267;000072;
+        STA.W $0746,X                        ;80A269;000746;
+        LDY.B $82                            ;80A26C;000082;
+        LDX.B $84                            ;80A26E;000084;
+        LDA.B [$75],Y                        ;80A270;000075;
+        STA.W $07C6,X                        ;80A272;0007C6;
+        INC.B $7E                            ;80A275;00007E;
+        INC.B $7E                            ;80A277;00007E;
+        INC.B $80                            ;80A279;000080;
+        INC.B $80                            ;80A27B;000080;
+        INC.B $82                            ;80A27D;000082;
+        INC.B $82                            ;80A27F;000082;
+        INC.B $84                            ;80A281;000084;
+        INC.B $84                            ;80A283;000084;
+        PLX                                  ;80A285;      ;
+        INX                                  ;80A286;      ;
+        INX                                  ;80A287;      ;
+        CPX.W #$0040                         ;80A288;      ;
+        BNE CODE_80A240                      ;80A28B;80A240;
+        %Set8bit(!M)                             ;80A28D;      ;
+        LDA.B #$00                           ;80A28F;      ;
+        STA.B !ProgDMA_Channel_Index                            ;80A291;000027;
+        LDA.B #$18                           ;80A293;      ;
+        STA.B !ProgDMA_Destination_Memory                            ;80A295;000029;
+        %Set16bit(!M)                             ;80A297;      ;
+        LDY.W #$0040                         ;80A299;      ;
+        LDA.B $14                            ;80A29C;000014;
+        CLC                                  ;80A29E;      ;
+        ADC.W #$6000                         ;80A29F;      ;
+        TAX                                  ;80A2A2;      ;
+        LDA.W #$0746                         ;80A2A3;      ;
+        STA.B $72                            ;80A2A6;000072;
+        %Set8bit(!M)                             ;80A2A8;      ;
+        LDA.B #$80                           ;80A2AA;      ;
+        STA.B $74                            ;80A2AC;000074;
+        %Set16bit(!M)                             ;80A2AE;      ;
+        LDA.W #$0080                         ;80A2B0;      ;
+        JSL.L AddProgrammedDMA                ;80A2B3;808A33;
+        %Set8bit(!M)                             ;80A2B7;      ;
+        LDA.B #$01                           ;80A2B9;      ;
+        STA.B !ProgDMA_Channel_Index                            ;80A2BB;000027;
+        LDA.B #$18                           ;80A2BD;      ;
+        STA.B !ProgDMA_Destination_Memory                            ;80A2BF;000029;
+        %Set16bit(!M)                             ;80A2C1;      ;
+        LDY.W #$0040                         ;80A2C3;      ;
+        LDA.B $14                            ;80A2C6;000014;
+        CLC                                  ;80A2C8;      ;
+        ADC.W #$6000                         ;80A2C9;      ;
+        ADC.W #$0400                         ;80A2CC;      ;
+        TAX                                  ;80A2CF;      ;
+        LDA.W #$07C6                         ;80A2D0;      ;
+        STA.B $72                            ;80A2D3;000072;
+        %Set8bit(!M)                             ;80A2D5;      ;
+        LDA.B #$80                           ;80A2D7;      ;
+        STA.B $74                            ;80A2D9;000074;
+        %Set16bit(!M)                             ;80A2DB;      ;
+        LDA.W #$0080                         ;80A2DD;      ;
+        JSL.L AddProgrammedDMA                ;80A2E0;808A33;
+        %Set16bit(!MX)                             ;80A2E4;      ;
+        LDA.B $16                            ;80A2E6;000016;
+        CLC                                  ;80A2E8;      ;
+        ADC.B $1A                            ;80A2E9;00001A;
+        STA.B $16                            ;80A2EB;000016;
+        LDA.B $14                            ;80A2ED;000014;
+        CLC                                  ;80A2EF;      ;
+        ADC.W #$0020                         ;80A2F0;      ;
+        CMP.W #$0400                         ;80A2F3;      ;
+        BNE CODE_80A2FD                      ;80A2F6;80A2FD;
+        LDA.W #$0800                         ;80A2F8;      ;
+        BRA CODE_80A305                      ;80A2FB;80A305;
+                                            ;      ;      ;
+                                            ;      ;      ;
+    CODE_80A2FD:
+        CMP.W #$0C00                         ;80A2FD;      ;
+        BNE CODE_80A305                      ;80A300;80A305;
+        LDA.W #$0000                         ;80A302;      ;
+                                            ;      ;      ;
+    CODE_80A305:
+        STA.B $14                            ;80A305;000014;
+        RTL                                  ;80A307;      ;END_SUB_80A18D
+
+;;;;;;;;
+SUB_80A308: ;80A308
+        %Set16bit(!MX)                             ;      ;
+        LDA.B $12                            ;80A30A;000012;
+        CMP.W #$0020                         ;80A30C;      ;
+        BCC CODE_80A32C                      ;80A30F;80A32C;
+        CMP.W #$0040                         ;80A311;      ;
+        BCC CODE_80A336                      ;80A314;80A336;
+        CMP.W #$0060                         ;80A316;      ;
+        BCC CODE_80A346                      ;80A319;80A346;
+        CMP.W #$0080                         ;80A31B;      ;
+        BCC CODE_80A356                      ;80A31E;80A356;
+        CMP.W #$00A0                         ;80A320;      ;
+        BCC CODE_80A369                      ;80A323;80A369;
+        CMP.W #$00C0                         ;80A325;      ;
+        BCC CODE_80A37C                      ;80A328;80A37C;
+        BRA CODE_80A395                      ;80A32A;80A395;
+                                            ;      ;      ;
+                                            ;      ;      ;
+    CODE_80A32C:
+        STZ.B $7E                            ;80A32C;00007E;
+        STZ.B $80                            ;80A32E;000080;
+        STZ.B $82                            ;80A330;000082;
+        STZ.B $84                            ;80A332;000084;
+        BRA CODE_80A395                      ;80A334;80A395;
+                                            ;      ;      ;
+                                            ;      ;      ;
+    CODE_80A336:
+        LDA.B $12                            ;80A336;000012;
+        SEC                                  ;80A338;      ;
+        SBC.W #$0020                         ;80A339;      ;
+        STA.B $7E                            ;80A33C;00007E;
+        STA.B $80                            ;80A33E;000080;
+        STZ.B $82                            ;80A340;000082;
+        STZ.B $84                            ;80A342;000084;
+        BRA CODE_80A395                      ;80A344;80A395;
+                                            ;      ;      ;
+                                            ;      ;      ;
+    CODE_80A346:
+        LDA.B $12                            ;80A346;000012;
+        SEC                                  ;80A348;      ;
+        SBC.W #$0020                         ;80A349;      ;
+        STA.B $7E                            ;80A34C;00007E;
+        STA.B $80                            ;80A34E;000080;
+        STZ.B $82                            ;80A350;000082;
+        STZ.B $84                            ;80A352;000084;
+        BRA CODE_80A395                      ;80A354;80A395;
+                                            ;      ;      ;
+                                            ;      ;      ;
+    CODE_80A356:
+        LDA.W #$0080                         ;80A356;      ;
+        STA.B $7E                            ;80A359;00007E;
+        STZ.B $80                            ;80A35B;000080;
+        LDA.B $12                            ;80A35D;000012;
+        SEC                                  ;80A35F;      ;
+        SBC.W #$0060                         ;80A360;      ;
+        STA.B $82                            ;80A363;000082;
+        STA.B $84                            ;80A365;000084;
+        BRA CODE_80A395                      ;80A367;80A395;
+                                            ;      ;      ;
+                                            ;      ;      ;
+    CODE_80A369:
+        LDA.W #$0080                         ;80A369;      ;
+        STA.B $7E                            ;80A36C;00007E;
+        STZ.B $80                            ;80A36E;000080;
+        LDA.B $12                            ;80A370;000012;
+        SEC                                  ;80A372;      ;
+        SBC.W #$0060                         ;80A373;      ;
+        STA.B $82                            ;80A376;000082;
+        STA.B $84                            ;80A378;000084;
+        BRA CODE_80A395                      ;80A37A;80A395;
+                                            ;      ;      ;
+                                            ;      ;      ;
+    CODE_80A37C:
+        LDA.B $12                            ;80A37C;000012;
+        SEC                                  ;80A37E;      ;
+        SBC.W #$0020                         ;80A37F;      ;
+        STA.B $7E                            ;80A382;00007E;
+        LDA.B $12                            ;80A384;000012;
+        SEC                                  ;80A386;      ;
+        SBC.W #$00A0                         ;80A387;      ;
+        STA.B $80                            ;80A38A;000080;
+        LDA.W #$0080                         ;80A38C;      ;
+        STA.B $82                            ;80A38F;000082;
+        STZ.B $84                            ;80A391;000084;
+        BRA CODE_80A395                      ;80A393;80A395;
+                                            ;      ;      ;
+                                            ;      ;      ;
+    CODE_80A395:
+        LDA.B $1C                            ;80A395;00001C;
+        LSR A                                ;80A397;      ;
+        LSR A                                ;80A398;      ;
+        STA.B $86                            ;80A399;000086;
+        LDA.W #$2000                         ;80A39B;      ;
+        CLC                                  ;80A39E;      ;
+        ADC.B $16                            ;80A39F;000016;
+        SEC                                  ;80A3A1;      ;
+        SBC.B $86                            ;80A3A2;000086;
+        STA.B $72                            ;80A3A4;000072;
+        CLC                                  ;80A3A6;      ;
+        ADC.W #$0040                         ;80A3A7;      ;
+        STA.B $75                            ;80A3AA;000075;
+        %Set8bit(!M)                             ;80A3AC;      ;
+        LDA.B #$7E                           ;80A3AE;      ;
+        STA.B $74                            ;80A3B0;000074;
+        STA.B $77                            ;80A3B2;000077;
+        %Set16bit(!M)                             ;80A3B4;      ;
+        LDX.W #$0000                         ;80A3B6;      ;
+                                            ;      ;      ;
+    CODE_80A3B9:
+        PHX                                  ;80A3B9;      ;
+        LDA.B $80                            ;80A3BA;000080;
+        CMP.W #$0040                         ;80A3BC;      ;
+        BNE CODE_80A3CB                      ;80A3BF;80A3CB;
+        STZ.B $80                            ;80A3C1;000080;
+        LDA.B $7E                            ;80A3C3;00007E;
+        CLC                                  ;80A3C5;      ;
+        ADC.W #$0040                         ;80A3C6;      ;
+        STA.B $7E                            ;80A3C9;00007E;
+                                            ;      ;      ;
+    CODE_80A3CB:
+        LDA.B $84                            ;80A3CB;000084;
+        CMP.W #$0040                         ;80A3CD;      ;
+        BNE CODE_80A3DC                      ;80A3D0;80A3DC;
+        STZ.B $84                            ;80A3D2;000084;
+        LDA.B $82                            ;80A3D4;000082;
+        CLC                                  ;80A3D6;      ;
+        ADC.W #$0040                         ;80A3D7;      ;
+        STA.B $82                            ;80A3DA;000082;
+                                            ;      ;      ;
+    CODE_80A3DC:
+        LDY.B $7E                            ;80A3DC;00007E;
+        LDX.B $80                            ;80A3DE;000080;
+        LDA.B [$72],Y                        ;80A3E0;000072;
+        STA.W $0746,X                        ;80A3E2;000746;
+        LDY.B $82                            ;80A3E5;000082;
+        LDX.B $84                            ;80A3E7;000084;
+        LDA.B [$75],Y                        ;80A3E9;000075;
+        STA.W $07C6,X                        ;80A3EB;0007C6;
+        INC.B $7E                            ;80A3EE;00007E;
+        INC.B $7E                            ;80A3F0;00007E;
+        INC.B $80                            ;80A3F2;000080;
+        INC.B $80                            ;80A3F4;000080;
+        INC.B $82                            ;80A3F6;000082;
+        INC.B $82                            ;80A3F8;000082;
+        INC.B $84                            ;80A3FA;000084;
+        INC.B $84                            ;80A3FC;000084;
+        PLX                                  ;80A3FE;      ;
+        INX                                  ;80A3FF;      ;
+        INX                                  ;80A400;      ;
+        CPX.W #$0040                         ;80A401;      ;
+        BNE CODE_80A3B9                      ;80A404;80A3B9;
+        %Set8bit(!M)                             ;80A406;      ;
+        LDA.B #$00                           ;80A408;      ;
+        STA.B !ProgDMA_Channel_Index                            ;80A40A;000027;
+        LDA.B #$18                           ;80A40C;      ;
+        STA.B !ProgDMA_Destination_Memory                            ;80A40E;000029;
+        %Set16bit(!M)                             ;80A410;      ;
+        LDY.W #$0040                         ;80A412;      ;
+        LDA.B $14                            ;80A415;000014;
+        CLC                                  ;80A417;      ;
+        ADC.W #$6000                         ;80A418;      ;
+        TAX                                  ;80A41B;      ;
+        LDA.W #$0746                         ;80A41C;      ;
+        STA.B $72                            ;80A41F;000072;
+        %Set8bit(!M)                             ;80A421;      ;
+        LDA.B #$80                           ;80A423;      ;
+        STA.B $74                            ;80A425;000074;
+        %Set16bit(!M)                             ;80A427;      ;
+        LDA.W #$0080                         ;80A429;      ;
+        JSL.L AddProgrammedDMA                ;80A42C;808A33;
+        %Set8bit(!M)                             ;80A430;      ;
+        LDA.B #$01                           ;80A432;      ;
+        STA.B !ProgDMA_Channel_Index                            ;80A434;000027;
+        LDA.B #$18                           ;80A436;      ;
+        STA.B !ProgDMA_Destination_Memory                            ;80A438;000029;
+        %Set16bit(!M)                             ;80A43A;      ;
+        LDY.W #$0040                         ;80A43C;      ;
+        LDA.B $14                            ;80A43F;000014;
+        CLC                                  ;80A441;      ;
+        ADC.W #$6000                         ;80A442;      ;
+        ADC.W #$0400                         ;80A445;      ;
+        TAX                                  ;80A448;      ;
+        LDA.W #$07C6                         ;80A449;      ;
+        STA.B $72                            ;80A44C;000072;
+        %Set8bit(!M)                             ;80A44E;      ;
+        LDA.B #$80                           ;80A450;      ;
+        STA.B $74                            ;80A452;000074;
+        %Set16bit(!M)                             ;80A454;      ;
+        LDA.W #$0080                         ;80A456;      ;
+        JSL.L AddProgrammedDMA                ;80A459;808A33;
+        %Set16bit(!MX)                             ;80A45D;      ;
+        LDA.B $16                            ;80A45F;000016;
+        SEC                                  ;80A461;      ;
+        SBC.B $1A                            ;80A462;00001A;
+        STA.B $16                            ;80A464;000016;
+        LDA.B $14                            ;80A466;000014;
+        SEC                                  ;80A468;      ;
+        SBC.W #$0020                         ;80A469;      ;
+        CMP.W #$FFE0                         ;80A46C;      ;
+        BNE CODE_80A476                      ;80A46F;80A476;
+        LDA.W #$0BE0                         ;80A471;      ;
+        BRA CODE_80A47E                      ;80A474;80A47E;
+                                            ;      ;      ;
+                                            ;      ;      ;
+    CODE_80A476:
+        CMP.W #$07E0                         ;80A476;      ;
+        BNE CODE_80A47E                      ;80A479;80A47E;
+        LDA.W #$03E0                         ;80A47B;      ;
+                                            ;      ;      ;
+    CODE_80A47E:
+        STA.B $14                            ;80A47E;000014;
+        RTL                                  ;80A480;      ;END_SUB_80A308
+
+;;;;;;;;
+SUB_80A481: ;80A481
+        %Set16bit(!MX)                             ;80A481;      ;
+        LDA.B $16                            ;80A483;000016;
+        CMP.W #$1000                         ;80A485;      ;
+        BCC CODE_80A4A6                      ;80A488;80A4A6;
+        CMP.W #$2000                         ;80A48A;      ;
+        BCC CODE_80A4B1                      ;80A48D;80A4B1;
+        CMP.W #$3000                         ;80A48F;      ;
+        BCC CODE_80A4C6                      ;80A492;80A4C6;
+        CMP.W #$4000                         ;80A494;      ;
+        BCC CODE_80A4DB                      ;80A497;80A4DB;
+        CMP.W #$5000                         ;80A499;      ;
+        BCC CODE_80A4F3                      ;80A49C;80A4F3;
+        CMP.W #$6000                         ;80A49E;      ;
+        BCC CODE_80A50B                      ;80A4A1;80A50B;
+        JMP.W CODE_80A529                    ;80A4A3;80A529;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_80A4A6:
+        STZ.B $7E                            ;80A4A6;00007E;
+        STZ.B $80                            ;80A4A8;000080;
+        STZ.B $82                            ;80A4AA;000082;
+        STZ.B $84                            ;80A4AC;000084;
+        JMP.W CODE_80A529                    ;80A4AE;80A529;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_80A4B1:
+        LDA.B $16                            ;80A4B1;000016;
+        SEC                                  ;80A4B3;      ;
+        SBC.W #$1000                         ;80A4B4;      ;
+        STA.B $7E                            ;80A4B7;00007E;
+        XBA                                  ;80A4B9;      ;
+        AND.W #$001F                         ;80A4BA;      ;
+        ASL A                                ;80A4BD;      ;
+        STA.B $80                            ;80A4BE;000080;
+        STZ.B $82                            ;80A4C0;000082;
+        STZ.B $84                            ;80A4C2;000084;
+        BRA CODE_80A529                      ;80A4C4;80A529;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_80A4C6:
+        LDA.B $16                            ;80A4C6;000016;
+        SEC                                  ;80A4C8;      ;
+        SBC.W #$1000                         ;80A4C9;      ;
+        STA.B $7E                            ;80A4CC;00007E;
+        XBA                                  ;80A4CE;      ;
+        AND.W #$001F                         ;80A4CF;      ;
+        ASL A                                ;80A4D2;      ;
+        STA.B $80                            ;80A4D3;000080;
+        STZ.B $82                            ;80A4D5;000082;
+        STZ.B $84                            ;80A4D7;000084;
+        BRA CODE_80A529                      ;80A4D9;80A529;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_80A4DB:
+        LDA.W #$4000                         ;80A4DB;      ;
+        STA.B $7E                            ;80A4DE;00007E;
+        STZ.B $80                            ;80A4E0;000080;
+        LDA.B $16                            ;80A4E2;000016;
+        SEC                                  ;80A4E4;      ;
+        SBC.W #$3000                         ;80A4E5;      ;
+        STA.B $82                            ;80A4E8;000082;
+        XBA                                  ;80A4EA;      ;
+        AND.W #$001F                         ;80A4EB;      ;
+        ASL A                                ;80A4EE;      ;
+        STA.B $84                            ;80A4EF;000084;
+        BRA CODE_80A529                      ;80A4F1;80A529;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_80A4F3:
+        LDA.W #$4000                         ;80A4F3;      ;
+        STA.B $7E                            ;80A4F6;00007E;
+        STZ.B $80                            ;80A4F8;000080;
+        LDA.B $16                            ;80A4FA;000016;
+        SEC                                  ;80A4FC;      ;
+        SBC.W #$3000                         ;80A4FD;      ;
+        STA.B $82                            ;80A500;000082;
+        XBA                                  ;80A502;      ;
+        AND.W #$001F                         ;80A503;      ;
+        ASL A                                ;80A506;      ;
+        STA.B $84                            ;80A507;000084;
+        BRA CODE_80A529                      ;80A509;80A529;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_80A50B:
+        LDA.B $16                            ;80A50B;000016;
+        SEC                                  ;80A50D;      ;
+        SBC.W #$1000                         ;80A50E;      ;
+        STA.B $7E                            ;80A511;00007E;
+        LDA.B $16                            ;80A513;000016;
+        SEC                                  ;80A515;      ;
+        SBC.W #$5000                         ;80A516;      ;
+        XBA                                  ;80A519;      ;
+        AND.W #$000F                         ;80A51A;      ;
+        ASL A                                ;80A51D;      ;
+        STA.B $80                            ;80A51E;000080;
+        LDA.W #$4000                         ;80A520;      ;
+        STA.B $82                            ;80A523;000082;
+        STZ.B $84                            ;80A525;000084;
+        BRA CODE_80A529                      ;80A527;80A529;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_80A529:
+        LDA.W #$2000                         ;80A529;      ;
+        CLC                                  ;80A52C;      ;
+        ADC.B $12                            ;80A52D;000012;
+        ADC.W #$0060                         ;80A52F;      ;
+        STA.B $72                            ;80A532;000072;
+        ADC.W #$2000                         ;80A534;      ;
+        STA.B $75                            ;80A537;000075;
+        %Set8bit(!M)                             ;80A539;      ;
+        LDA.B #$7E                           ;80A53B;      ;
+        STA.B $74                            ;80A53D;000074;
+        STA.B $77                            ;80A53F;000077;
+        %Set16bit(!M)                             ;80A541;      ;
+        LDX.W #$0000                         ;80A543;      ;
+                                            ;      ;      ;
+        CODE_80A546:
+        PHX                                  ;80A546;      ;
+        LDA.B $80                            ;80A547;000080;
+        CMP.W #$0040                         ;80A549;      ;
+        BNE CODE_80A558                      ;80A54C;80A558;
+        STZ.B $80                            ;80A54E;000080;
+        LDA.B $7E                            ;80A550;00007E;
+        CLC                                  ;80A552;      ;
+        ADC.W #$2000                         ;80A553;      ;
+        STA.B $7E                            ;80A556;00007E;
+                                            ;      ;      ;
+        CODE_80A558:
+        LDA.B $84                            ;80A558;000084;
+        CMP.W #$0040                         ;80A55A;      ;
+        BNE CODE_80A569                      ;80A55D;80A569;
+        STZ.B $84                            ;80A55F;000084;
+        LDA.B $82                            ;80A561;000082;
+        CLC                                  ;80A563;      ;
+        ADC.W #$2000                         ;80A564;      ;
+        STA.B $82                            ;80A567;000082;
+                                            ;      ;      ;
+        CODE_80A569:
+        LDY.B $7E                            ;80A569;00007E;
+        LDX.B $80                            ;80A56B;000080;
+        LDA.B [$72],Y                        ;80A56D;000072;
+        STA.W $0746,X                        ;80A56F;000746;
+        LDY.B $82                            ;80A572;000082;
+        LDX.B $84                            ;80A574;000084;
+        LDA.B [$75],Y                        ;80A576;000075;
+        STA.W $07C6,X                        ;80A578;0007C6;
+        LDA.B $7E                            ;80A57B;00007E;
+        CLC                                  ;80A57D;      ;
+        ADC.W #$0100                         ;80A57E;      ;
+        STA.B $7E                            ;80A581;00007E;
+        INC.B $80                            ;80A583;000080;
+        INC.B $80                            ;80A585;000080;
+        LDA.B $82                            ;80A587;000082;
+        CLC                                  ;80A589;      ;
+        ADC.W #$0100                         ;80A58A;      ;
+        STA.B $82                            ;80A58D;000082;
+        INC.B $84                            ;80A58F;000084;
+        INC.B $84                            ;80A591;000084;
+        PLX                                  ;80A593;      ;
+        INX                                  ;80A594;      ;
+        INX                                  ;80A595;      ;
+        CPX.W #$0040                         ;80A596;      ;
+        BNE CODE_80A546                      ;80A599;80A546;
+        %Set8bit(!M)                             ;80A59B;      ;
+        LDA.B #$00                           ;80A59D;      ;
+        STA.B !ProgDMA_Channel_Index                            ;80A59F;000027;
+        LDA.B #$18                           ;80A5A1;      ;
+        STA.B !ProgDMA_Destination_Memory                            ;80A5A3;000029;
+        %Set16bit(!M)                             ;80A5A5;      ;
+        LDY.W #$0040                         ;80A5A7;      ;
+        LDA.B $10                            ;80A5AA;000010;
+        CLC                                  ;80A5AC;      ;
+        ADC.W #$6000                         ;80A5AD;      ;
+        TAX                                  ;80A5B0;      ;
+        LDA.W #$0746                         ;80A5B1;      ;
+        STA.B $72                            ;80A5B4;000072;
+        %Set8bit(!M)                             ;80A5B6;      ;
+        LDA.B #$80                           ;80A5B8;      ;
+        STA.B $74                            ;80A5BA;000074;
+        %Set16bit(!M)                             ;80A5BC;      ;
+        LDA.W #$0081                         ;80A5BE;      ;
+        JSL.L AddProgrammedDMA                ;80A5C1;808A33;
+        %Set8bit(!M)                             ;80A5C5;      ;
+        LDA.B #$01                           ;80A5C7;      ;
+        STA.B !ProgDMA_Channel_Index                            ;80A5C9;000027;
+        LDA.B #$18                           ;80A5CB;      ;
+        STA.B !ProgDMA_Destination_Memory                            ;80A5CD;000029;
+        %Set16bit(!M)                             ;80A5CF;      ;
+        LDY.W #$0040                         ;80A5D1;      ;
+        LDA.B $10                            ;80A5D4;000010;
+        CLC                                  ;80A5D6;      ;
+        ADC.W #$6000                         ;80A5D7;      ;
+        ADC.W #$0800                         ;80A5DA;      ;
+        TAX                                  ;80A5DD;      ;
+        LDA.W #$07C6                         ;80A5DE;      ;
+        STA.B $72                            ;80A5E1;000072;
+        %Set8bit(!M)                             ;80A5E3;      ;
+        LDA.B #$80                           ;80A5E5;      ;
+        STA.B $74                            ;80A5E7;000074;
+        %Set16bit(!M)                             ;80A5E9;      ;
+        LDA.W #$0081                         ;80A5EB;      ;
+        JSL.L AddProgrammedDMA                ;80A5EE;808A33;
+        %Set16bit(!MX)                             ;80A5F2;      ;
+        LDA.B $12                            ;80A5F4;000012;
+        CLC                                  ;80A5F6;      ;
+        ADC.W #$0002                         ;80A5F7;      ;
+        STA.B $12                            ;80A5FA;000012;
+        LDA.B $10                            ;80A5FC;000010;
+        CLC                                  ;80A5FE;      ;
+        ADC.W #$0001                         ;80A5FF;      ;
+        CMP.W #$0020                         ;80A602;      ;
+        BNE CODE_80A60C                      ;80A605;80A60C;
+        LDA.W #$0400                         ;80A607;      ;
+        BRA CODE_80A614                      ;80A60A;80A614;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_80A60C:
+        CMP.W #$0420                         ;80A60C;      ;
+        BNE CODE_80A614                      ;80A60F;80A614;
+        LDA.W #$0000                         ;80A611;      ;
+                                            ;      ;      ;
+        CODE_80A614:
+        STA.B $10                            ;80A614;000010;
+
+        RTL                                  ;80A616;      ;
+
+;;;;;;;;
+SUB_80A617: ;80A617
+        %Set16bit(!MX)                             ;      ;
+        LDA.B $16                            ;80A619;000016;
+        CMP.W #$1000                         ;80A61B;      ;
+        BCC CODE_80A63C                      ;80A61E;80A63C;
+        CMP.W #$2000                         ;80A620;      ;
+        BCC CODE_80A646                      ;80A623;80A646;
+        CMP.W #$3000                         ;80A625;      ;
+        BCC CODE_80A65B                      ;80A628;80A65B;
+        CMP.W #$4000                         ;80A62A;      ;
+        BCC CODE_80A670                      ;80A62D;80A670;
+        CMP.W #$5000                         ;80A62F;      ;
+        BCC CODE_80A688                      ;80A632;80A688;
+        CMP.W #$6000                         ;80A634;      ;
+        BCC CODE_80A6A0                      ;80A637;80A6A0;
+        JMP.W CODE_80A6BE                    ;80A639;80A6BE;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_80A63C:
+        STZ.B $7E                            ;80A63C;00007E;
+        STZ.B $80                            ;80A63E;000080;
+        STZ.B $82                            ;80A640;000082;
+        STZ.B $84                            ;80A642;000084;
+        BRA CODE_80A6BE                      ;80A644;80A6BE;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_80A646:
+        LDA.B $16                            ;80A646;000016;
+        SEC                                  ;80A648;      ;
+        SBC.W #$1000                         ;80A649;      ;
+        STA.B $7E                            ;80A64C;00007E;
+        XBA                                  ;80A64E;      ;
+        AND.W #$001F                         ;80A64F;      ;
+        ASL A                                ;80A652;      ;
+        STA.B $80                            ;80A653;000080;
+        STZ.B $82                            ;80A655;000082;
+        STZ.B $84                            ;80A657;000084;
+        BRA CODE_80A6BE                      ;80A659;80A6BE;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_80A65B:
+        LDA.B $16                            ;80A65B;000016;
+        SEC                                  ;80A65D;      ;
+        SBC.W #$1000                         ;80A65E;      ;
+        STA.B $7E                            ;80A661;00007E;
+        XBA                                  ;80A663;      ;
+        AND.W #$001F                         ;80A664;      ;
+        ASL A                                ;80A667;      ;
+        STA.B $80                            ;80A668;000080;
+        STZ.B $82                            ;80A66A;000082;
+        STZ.B $84                            ;80A66C;000084;
+        BRA CODE_80A6BE                      ;80A66E;80A6BE;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_80A670:
+        LDA.W #$4000                         ;80A670;      ;
+        STA.B $7E                            ;80A673;00007E;
+        STZ.B $80                            ;80A675;000080;
+        LDA.B $16                            ;80A677;000016;
+        SEC                                  ;80A679;      ;
+        SBC.W #$3000                         ;80A67A;      ;
+        STA.B $82                            ;80A67D;000082;
+        XBA                                  ;80A67F;      ;
+        AND.W #$001F                         ;80A680;      ;
+        ASL A                                ;80A683;      ;
+        STA.B $84                            ;80A684;000084;
+        BRA CODE_80A6BE                      ;80A686;80A6BE;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_80A688:
+        LDA.W #$4000                         ;80A688;      ;
+        STA.B $7E                            ;80A68B;00007E;
+        STZ.B $80                            ;80A68D;000080;
+        LDA.B $16                            ;80A68F;000016;
+        SEC                                  ;80A691;      ;
+        SBC.W #$3000                         ;80A692;      ;
+        STA.B $82                            ;80A695;000082;
+        XBA                                  ;80A697;      ;
+        AND.W #$001F                         ;80A698;      ;
+        ASL A                                ;80A69B;      ;
+        STA.B $84                            ;80A69C;000084;
+        BRA CODE_80A6BE                      ;80A69E;80A6BE;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_80A6A0:
+        LDA.B $16                            ;80A6A0;000016;
+        SEC                                  ;80A6A2;      ;
+        SBC.W #$1000                         ;80A6A3;      ;
+        STA.B $7E                            ;80A6A6;00007E;
+        LDA.B $16                            ;80A6A8;000016;
+        SEC                                  ;80A6AA;      ;
+        SBC.W #$5000                         ;80A6AB;      ;
+        XBA                                  ;80A6AE;      ;
+        AND.W #$001F                         ;80A6AF;      ;
+        ASL A                                ;80A6B2;      ;
+        STA.B $80                            ;80A6B3;000080;
+        LDA.W #$4000                         ;80A6B5;      ;
+        STA.B $82                            ;80A6B8;000082;
+        STZ.B $84                            ;80A6BA;000084;
+        BRA CODE_80A6BE                      ;80A6BC;80A6BE;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_80A6BE:
+        LDA.W #$2000                         ;80A6BE;      ;
+        CLC                                  ;80A6C1;      ;
+        ADC.B $12                            ;80A6C2;000012;
+        SEC                                  ;80A6C4;      ;
+        SBC.W #$0020                         ;80A6C5;      ;
+        STA.B $72                            ;80A6C8;000072;
+        CLC                                  ;80A6CA;      ;
+        ADC.W #$2000                         ;80A6CB;      ;
+        STA.B $75                            ;80A6CE;000075;
+        %Set8bit(!M)                             ;80A6D0;      ;
+        LDA.B #$7E                           ;80A6D2;      ;
+        STA.B $74                            ;80A6D4;000074;
+        STA.B $77                            ;80A6D6;000077;
+        %Set16bit(!M)                             ;80A6D8;      ;
+        LDX.W #$0000                         ;80A6DA;      ;
+                                            ;      ;      ;
+        CODE_80A6DD:
+        PHX                                  ;80A6DD;      ;
+        LDA.B $80                            ;80A6DE;000080;
+        CMP.W #$0040                         ;80A6E0;      ;
+        BNE CODE_80A6EF                      ;80A6E3;80A6EF;
+        STZ.B $80                            ;80A6E5;000080;
+        LDA.B $7E                            ;80A6E7;00007E;
+        CLC                                  ;80A6E9;      ;
+        ADC.W #$2000                         ;80A6EA;      ;
+        STA.B $7E                            ;80A6ED;00007E;
+                                            ;      ;      ;
+        CODE_80A6EF:
+        LDA.B $84                            ;80A6EF;000084;
+        CMP.W #$0040                         ;80A6F1;      ;
+        BNE CODE_80A700                      ;80A6F4;80A700;
+        STZ.B $84                            ;80A6F6;000084;
+        LDA.B $82                            ;80A6F8;000082;
+        CLC                                  ;80A6FA;      ;
+        ADC.W #$2000                         ;80A6FB;      ;
+        STA.B $82                            ;80A6FE;000082;
+                                            ;      ;      ;
+        CODE_80A700:
+        LDY.B $7E                            ;80A700;00007E;
+        LDX.B $80                            ;80A702;000080;
+        LDA.B [$72],Y                        ;80A704;000072;
+        STA.W $0746,X                        ;80A706;000746;
+        LDY.B $82                            ;80A709;000082;
+        LDX.B $84                            ;80A70B;000084;
+        LDA.B [$75],Y                        ;80A70D;000075;
+        STA.W $07C6,X                        ;80A70F;0007C6;
+        LDA.B $7E                            ;80A712;00007E;
+        CLC                                  ;80A714;      ;
+        ADC.W #$0100                         ;80A715;      ;
+        STA.B $7E                            ;80A718;00007E;
+        INC.B $80                            ;80A71A;000080;
+        INC.B $80                            ;80A71C;000080;
+        LDA.B $82                            ;80A71E;000082;
+        CLC                                  ;80A720;      ;
+        ADC.W #$0100                         ;80A721;      ;
+        STA.B $82                            ;80A724;000082;
+        INC.B $84                            ;80A726;000084;
+        INC.B $84                            ;80A728;000084;
+        PLX                                  ;80A72A;      ;
+        INX                                  ;80A72B;      ;
+        INX                                  ;80A72C;      ;
+        CPX.W #$0040                         ;80A72D;      ;
+        BNE CODE_80A6DD                      ;80A730;80A6DD;
+        %Set8bit(!M)                             ;80A732;      ;
+        LDA.B #$00                           ;80A734;      ;
+        STA.B !ProgDMA_Channel_Index                            ;80A736;000027;
+        LDA.B #$18                           ;80A738;      ;
+        STA.B !ProgDMA_Destination_Memory                            ;80A73A;000029;
+        %Set16bit(!M)                             ;80A73C;      ;
+        LDY.W #$0040                         ;80A73E;      ;
+        LDA.B $10                            ;80A741;000010;
+        CLC                                  ;80A743;      ;
+        ADC.W #$6000                         ;80A744;      ;
+        TAX                                  ;80A747;      ;
+        LDA.W #$0746                         ;80A748;      ;
+        STA.B $72                            ;80A74B;000072;
+        %Set8bit(!M)                             ;80A74D;      ;
+        LDA.B #$80                           ;80A74F;      ;
+        STA.B $74                            ;80A751;000074;
+        %Set16bit(!M)                             ;80A753;      ;
+        LDA.W #$0081                         ;80A755;      ;
+        JSL.L AddProgrammedDMA                ;80A758;808A33;
+        %Set8bit(!M)                             ;80A75C;      ;
+        LDA.B #$01                           ;80A75E;      ;
+        STA.B !ProgDMA_Channel_Index                            ;80A760;000027;
+        LDA.B #$18                           ;80A762;      ;
+        STA.B !ProgDMA_Destination_Memory                            ;80A764;000029;
+        %Set16bit(!M)                             ;80A766;      ;
+        LDY.W #$0040                         ;80A768;      ;
+        LDA.B $10                            ;80A76B;000010;
+        CLC                                  ;80A76D;      ;
+        ADC.W #$6000                         ;80A76E;      ;
+        ADC.W #$0800                         ;80A771;      ;
+        TAX                                  ;80A774;      ;
+        LDA.W #$07C6                         ;80A775;      ;
+        STA.B $72                            ;80A778;000072;
+        %Set8bit(!M)                             ;80A77A;      ;
+        LDA.B #$80                           ;80A77C;      ;
+        STA.B $74                            ;80A77E;000074;
+        %Set16bit(!M)                             ;80A780;      ;
+        LDA.W #$0081                         ;80A782;      ;
+        JSL.L AddProgrammedDMA                ;80A785;808A33;
+        %Set16bit(!MX)                             ;80A789;      ;
+        LDA.B $12                            ;80A78B;000012;
+        SEC                                  ;80A78D;      ;
+        SBC.W #$0002                         ;80A78E;      ;
+        STA.B $12                            ;80A791;000012;
+        LDA.B $10                            ;80A793;000010;
+        SEC                                  ;80A795;      ;
+        SBC.W #$0001                         ;80A796;      ;
+        CMP.W #$FFFF                         ;80A799;      ;
+        BNE CODE_80A7A3                      ;80A79C;80A7A3;
+        LDA.W #$041F                         ;80A79E;      ;
+        BRA CODE_80A7AB                      ;80A7A1;80A7AB;
+                                            ;      ;      ;
+                                            ;      ;      ;
+        CODE_80A7A3:
+        CMP.W #$03FF                         ;80A7A3;      ;
+        BNE CODE_80A7AB                      ;80A7A6;80A7AB;
+        LDA.W #$001F                         ;80A7A8;      ;
+                                            ;      ;      ;
+        CODE_80A7AB:
+        STA.B $10                            ;80A7AB;000010;
+        RTL                                  ;80A7AD;      ;
+
+;;;;;;;;
+SUB_80A7AE: ;80A7AE
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDA.B #$00
+        XBA
+        LDA.B !tilemap_to_load
+        %Set16bit(!M)
+        ASL A
+        TAX
+        LDA.L TilemapManagerTable,X
+        STA.B !tilemap_pointer
+        %Set8bit(!M)
+        LDA.B (!tilemap_pointer),Y
+        RTL
 
 ;;;;;;;; TODO Does copy stuff to VG graphics, but no idea what
 ;;;;;;;; "param" in $22, used as index on data table
@@ -5599,7 +5687,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        db $6B,$6C,$6B,$6C,$6B,$6C,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF;80BED4;      ;
                        db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF   ;80BEE4;      ;
                                                             ;      ;      ;
-          UNK_Table12: db $6C,$C3,$6C,$C3,$D9,$C3,$46,$C4,$B3,$C4,$FF,$FF,$6C,$C3,$6C,$C3;80BEEC;      ;
+          Subrutines_Table: db $6C,$C3,$6C,$C3,$D9,$C3,$46,$C4,$B3,$C4,$FF,$FF,$6C,$C3,$6C,$C3;80BEEC;      ;
                        db $D9,$C3,$46,$C4,$B3,$C4,$FF,$FF,$20,$C5,$20,$C5,$8D,$C5,$FA,$C5;80BEFC;      ;
                        db $67,$C6,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF;80BF0C;      ;
                        db $FF,$FF,$DE,$CA,$30,$CB,$82,$CB,$D4,$CB,$FF,$FF,$FF,$FF,$92,$CC;80BF1C;      ;
@@ -5671,6 +5759,7 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF;80C33C;      ;
                        db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF;80C34C;      ;
                        db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF;80C35C;      ;
+
                        REP #$20                             ;80C36C;      ;
                        SEP #$10                             ;80C36E;      ;
                        LDA.W #$DD5B                         ;80C370;      ;
@@ -5719,7 +5808,9 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        LDX.B #$07                           ;80C3D0;      ;
                        LDY.B #$04                           ;80C3D2;      ;
                        JSL.L UNK_SetPointer42            ;80C3D4;808E48;
+
                        RTS                                  ;80C3D8;      ;
+
                                                             ;      ;      ;
                                                             ;      ;      ;
                        REP #$20                             ;80C3D9;      ;

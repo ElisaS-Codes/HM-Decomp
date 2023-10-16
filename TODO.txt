@@ -3,15 +3,10 @@ Params A:Control Registers, X:VRAM/CGRAM Dest Addresses, Y(DMA Size), $72 & $74 
 
 ====Re-DECOMP
 PalettePointerTable
-828AD3
-DATA8_82B294
-CODE_81A58B
+Subrutines_Table
 
 ====Working on
-$90, wAiting ?
-
-
-
+SUB_809EBC - SUB_80A152 Big BG/OBJ offset movemetn block
 
 
 
@@ -23,7 +18,7 @@ Unk_Seasons2
 SUB_828209
 CODE_84803F
 AA9999
-ClearMemoryPointers1
+ZeroesPartial42Pointers
 A8888
 UNK_PartialMap
 UNK_OperatesOnSeasonTable
@@ -71,9 +66,7 @@ $7F1F49 - (0)
 
 $04 - 24b pointer
 $07 - 24b Pointer, increases by $10
-$0A - 24b Pointer to in ram graphics
-$0C -
-$0D - 24b pointer
+$0A - 24b Pointer related to audio
 
 $10 - 1040
 $12 -
@@ -128,9 +121,10 @@ $E9 -
 $EB -
 
 $ED - Related to palette? ED->F1->EF->F2 from rom 80A300+
-$EF -
+$EF - related to OBJ Offset Y? fixed map OBG Offset?
 $F1 -
 $F2 -
+$F3 - related to OBJ Offset Y?
 
 $FA -
 

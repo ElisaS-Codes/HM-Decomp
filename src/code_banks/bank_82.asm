@@ -71,7 +71,7 @@ UpdateTime: ;828000
        CMP.W $017B
        BEQ .return
        LDY.W #$0004
-       JSL.L ClearMemoryPointers1            ;TODO
+       JSL.L ZeroesPartial42Pointers            ;TODO
        JSL.L A8888                           ;TODO
 
     .return:
@@ -6589,7 +6589,7 @@ FarmMapPointerTable: dl $A78000,$A78000,$A78000,$A78000,$A79600,$A79600,$A79600,
                        STA.L $7F1F5C                        ;82D2EF;7F1F5C;
                        JSL.L ZeroesVRAM                      ;82D2F3;808846;
                        JSL.L ZeroesCGRAM                     ;82D2F7;808980;
-                       JSL.L ClearMemoryPointers2           ;82D2FB;808FAB;
+                       JSL.L Zeroes42Pointers           ;82D2FB;808FAB;
                        JSL.L ClearWRAMGraphicsSpace         ;82D2FF;858ED7;
                        JSL.L InitializeOBJs         ;82D303;85820F;
                        JSL.L PresetsMemory3                 ;82D307;81A4C7;
@@ -6771,7 +6771,7 @@ FarmMapPointerTable: dl $A78000,$A78000,$A78000,$A78000,$A79600,$A79600,$A79600,
                        STA.L $7F1F5C                        ;82D4F0;7F1F5C;
                        JSL.L ZeroesVRAM                      ;82D4F4;808846;
                        JSL.L ZeroesCGRAM                     ;82D4F8;808980;
-                       JSL.L ClearMemoryPointers2           ;82D4FC;808FAB;
+                       JSL.L Zeroes42Pointers           ;82D4FC;808FAB;
                        JSL.L ClearWRAMGraphicsSpace         ;82D500;858ED7;
                        JSL.L InitializeOBJs         ;82D504;85820F;
                        JSL.L PresetsMemory3                 ;82D508;81A4C7;
@@ -7215,7 +7215,7 @@ IntroScreen: ;82D75E
           CODE_82D8B0: %Set16bit(!MX)                             ;82D8B0;      ;
                        JSL.L ZeroesVRAM                      ;82D8B2;808846;
                        JSL.L ZeroesCGRAM                     ;82D8B6;808980;
-                       JSL.L ClearMemoryPointers2           ;82D8BA;808FAB;
+                       JSL.L Zeroes42Pointers           ;82D8BA;808FAB;
                        JSL.L ClearWRAMGraphicsSpace         ;82D8BE;858ED7;
                        JSL.L InitializeOBJs         ;82D8C2;85820F;
                        JSL.L PresetsMemory3                 ;82D8C6;81A4C7;
@@ -7325,7 +7325,7 @@ IntroScreen: ;82D75E
                        JSL.L ManageGraphicPresets             ;82D9D8;808C59;
                        JSL.L ZeroesVRAM                      ;82D9DC;808846;
                        JSL.L ZeroesCGRAM                     ;82D9E0;808980;
-                       JSL.L ClearMemoryPointers2           ;82D9E4;808FAB;
+                       JSL.L Zeroes42Pointers           ;82D9E4;808FAB;
                        JSL.L ClearWRAMGraphicsSpace         ;82D9E8;858ED7;
                        JSL.L InitializeOBJs         ;82D9EC;85820F;
                        JSL.L PresetsMemory3                 ;82D9F0;81A4C7;
@@ -7464,7 +7464,7 @@ IntroScreen: ;82D75E
                        JSL.L ManageGraphicPresets             ;82DB1D;808C59;
                        JSL.L ZeroesVRAM                      ;82DB21;808846;
                        JSL.L ZeroesCGRAM                     ;82DB25;808980;
-                       JSL.L ClearMemoryPointers2           ;82DB29;808FAB;
+                       JSL.L Zeroes42Pointers           ;82DB29;808FAB;
                        JSL.L ClearWRAMGraphicsSpace         ;82DB2D;858ED7;
                        JSL.L InitializeOBJs         ;82DB31;85820F;
                        JSL.L PresetsMemory3                 ;82DB35;81A4C7;
@@ -7575,7 +7575,7 @@ IntroScreen: ;82D75E
                        JML.L CODE_82D871                    ;82DC2E;82D871;
                                                             ;      ;      ;
                                                             ;      ;      ;
-          CODE_82DC32: JSL.L ClearMemoryPointers2           ;82DC32;808FAB;
+          CODE_82DC32: JSL.L Zeroes42Pointers           ;82DC32;808FAB;
                        %Set16bit(!M)                             ;82DC36;      ;
                        %Set8bit(!X)                             ;82DC38;      ;
                        LDA.W #$F2A4                         ;82DC3A;      ;
@@ -8013,7 +8013,7 @@ IntroScreen: ;82D75E
                        LDA.W #$0001                         ;82E006;      ;
                        LDY.W #$0000                         ;82E009;      ;
                        JSR.W CODE_82E405                    ;82E00C;82E405;
-                       JSL.L ClearMemoryPointers2           ;82E00F;808FAB;
+                       JSL.L Zeroes42Pointers           ;82E00F;808FAB;
                        %Set16bit(!M)                             ;82E013;      ;
                        STZ.W !BG1_Map_Offset_X                          ;82E015;00013C;
                        STZ.W !BG1_Map_Offset_Y                          ;82E018;00013E;
@@ -8289,7 +8289,7 @@ IntroScreen: ;82D75E
                        LDA.W #$0001                         ;82E265;      ;
                        LDY.W #$0001                         ;82E268;      ;
                        JSR.W CODE_82E405                    ;82E26B;82E405;
-                       JSL.L ClearMemoryPointers2           ;82E26E;808FAB;
+                       JSL.L Zeroes42Pointers           ;82E26E;808FAB;
                        %Set8bit(!M)                             ;82E272;      ;
                        LDA.W $098E                          ;82E274;00098E;
                        BEQ CODE_82E27D                      ;82E277;82E27D;
@@ -8875,7 +8875,7 @@ CODE_82E80C: ;82E80C
       JSL.L ScreenFadeout                  ;82E828;80880A;
       JSL.L ForceBlank                     ;82E82C;808E0F;
       JSL.L ZeroesVRAM                      ;82E830;808846;
-      JSL.L ClearMemoryPointers2           ;82E834;808FAB;
+      JSL.L Zeroes42Pointers           ;82E834;808FAB;
       JSL.L ClearWRAMGraphicsSpace         ;82E838;858ED7;
       JSL.L InitializeOBJs         ;82E83C;85820F;
       %Set16bit(!M)                             ;82E840;      ;
@@ -9050,12 +9050,12 @@ CODE_82E80C: ;82E80C
                                        ;      ;      ;
       CODE_82E9E3: CMP.B #$01                           ;82E9E3;      ;
       BNE CODE_82E9EB                      ;82E9E5;82E9EB;
-      JML.L SetCowName                    ;82E9E7;80815F;
+      JML.L SetCowNameBought                    ;82E9E7;80815F;
                                        ;      ;      ;
                                        ;      ;      ;
       CODE_82E9EB: CMP.B #$02                           ;82E9EB;      ;
       BNE CODE_82E9F3                      ;82E9ED;82E9F3;
-      JML.L SetCowName2               ;82E9EF;8081D2;
+      JML.L SetCowNameBorn               ;82E9EF;8081D2;
                                        ;      ;      ;
                                        ;      ;      ;
       CODE_82E9F3: CMP.B #$03                           ;82E9F3;      ;

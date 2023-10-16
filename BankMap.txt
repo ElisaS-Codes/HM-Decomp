@@ -14,10 +14,10 @@
 Bank 80
 
 ❓808000 - SpawnAfterLoad
-❓808083 - fromNightEvents
+❓808083 - GameLoop
 ✅8080ED - SetPlayerName
-❔80815F - SetCowName
-❔8081D2 - SetCowName2
+✅80815F - SetCowNameBought
+✅8081D2 - SetCowNameBorn
 ✅808254 - SetDogName
 ✅8082C6 - SetHorseName
 ✅808338 - SetKid1Name
@@ -74,19 +74,55 @@ Bank 80
 ✅808E0F - ForceBlank
 ✅808E1E - ResetForceBlank
 ✅808E2D - SetsBrightness
-...
+❓808E48 - UNK_SetPointer42
+❓808E69 - UNK_BigLoop
+❓808F82 - ZeroesOne42Pointer
+❓808F92 - ZeroesPartial42Pointers
+❓808FAB - Zeroes42Pointers
+❓808FC7 - Sets04withPointerDependingonHour
+❓80900C - Unk_MemoryWork7E0D00
+❓809157 - Clears04PointerandSets017B
+❓809166 - Clears04Pointer
+❓80916F - SUB_80916F
+❓80919D - SUB_80919D
 ✅8091CF - LoadCGRAM
-...
+❓809241 - SUB_809241
+❓8093A3 - SUB_8093A3
 ❓8095B3 - AutoMapScrolling
 ❓8095DE - UNK_Audio5
 ❓809671 - UNK_PrepareScreenTransition
 ❓8096D3 - UNK_ScreenTransition
 ✅80972B - ScreenTransitionReturn
-...
+❓809A64 - SUB_809A64
+❓809D0B - SUB_809D0B
+❓809EBC - SUB_809EBC
+❓809F61 - SUB_809F61
 ❓80A0AB - UpdateBGOffset
+❓80A0E1 - SUB_80A0E1
+❓80A11C - UNK_StaticMapScroling
+❓80A152 - SUB_80A152
+❓80A18D - SUB_80A18D
+❓80A308 - SUB_80A308
+❓80A481 - SUB_80A481
+❓80A617 - SUB_80A617
+❓80A7AE - SUB_80A7AE
 ❓80A7C6 - TilemapManager
-...
 ❔80AA38 - DMAVRAMWithOffset
+💾80AA68 - UNK_Table2
+💾80AA72 - UNK_Table3
+💾80AA7C - tilemapManagerTable
+💾80B6F5 - Unk_Table13
+💾80B8CD - UNK_AudioTable
+💾80B8E7 - Mayby_Table_AudioTracksbySeason
+💾80B9A7 - Table_AudioTrackbySeasonIndex
+💾80B9FD - PalettePointerTable
+💾80BB5C - Time_Palette_Table
+💾80BD9C - UNK_Table9
+💾80BDFC - UNK_Table10
+💾80BE44 - UNK_Table11
+💾80BEEC - Subrutines_Table
+❓80C36C - 80DD5A - Subrutines called from Subrutines_Table
+💾80DD5B - UNK_RainTable
 
 Bank 81
 ...

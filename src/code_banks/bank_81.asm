@@ -5366,7 +5366,7 @@ BEEEE: ;81BFB7
       CODE_81C00E: %Set8bit(!M)                             ;81C00E;      ;
       STZ.W !idle_animation_timer                          ;81C010;000925;
                                           ;      ;      ;
-      CODE_81C013: JSL.L SUB_809D0B                           ;81C013;809F61;
+      CODE_81C013: JSL.L SUB_809F61                          ;81C013;809F61;
       %Set16bit(!M)                             ;81C017;      ;
       LDA.W #$0000                         ;81C019;      ;
       STA.B $1E                            ;81C01C;00001E;
@@ -6981,7 +6981,7 @@ BEEEE: ;81BFB7
                        SBC.B $1E                            ;81CCD7;00001E;
                        STA.B !player_pos_Y                            ;81CCD9;0000D8;
                        JSL.L SUB_809EBC                           ;81CCDB;809EBC;
-                       JSL.L ATTTT                          ;81CCDF;80A0E1;
+                       JSL.L SUB_80A0E1                          ;81CCDF;80A0E1;
                        JMP.W CODE_81CE2B                    ;81CCE3;81CE2B;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -7157,7 +7157,7 @@ BEEEE: ;81BFB7
                        SBC.B $1E                            ;81CE1F;00001E;
                        STA.B !player_pos_X                           ;81CE21;0000D6;
                        JSL.L SUB_809EBC                           ;81CE23;809EBC;
-                       JSL.L ARRRR                          ;81CE27;80A152;
+                       JSL.L SUB_80A152                          ;81CE27;80A152;
                                                             ;      ;      ;
           CODE_81CE2B: %Set8bit(!M)                             ;81CE2B;      ;
                        %Set16bit(!X)                             ;81CE2D;      ;

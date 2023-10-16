@@ -60,7 +60,7 @@ where I have a headache. Most real info is on ram.asm
 🗺$7E0142 = !BG2_Map_Offset_Y - 16b
 🗺$7E0144 = !BG3_Map_Offset_X - 16b
 🗺$7E0146 = !BG3_Map_Offset_Y - 16b
-
+🗑$7E0148 - 16b ;set as 0 in two places
 
 🛠️$7E017D = !transition_dest_X - 16b
 🛠️$7E017F = !transition_dest_Y - 16b
