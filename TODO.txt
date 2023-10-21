@@ -7,7 +7,9 @@ Subrutines_Table
 
 ====Working on
 SUB_809EBC - SUB_80A152 Big BG/OBJ offset movemetn block
+LoadFirstHalfPaletteToWRAM
 
+090B temp bg pos?
 
 
 SetWeatherFlag More weather?
@@ -17,9 +19,9 @@ CHHHH
 Unk_Seasons2
 SUB_828209
 CODE_84803F
-AA9999
+SUB_809501
 ZeroesPartial42Pointers
-A8888
+SUB_809553
 UNK_PartialMap
 UNK_OperatesOnSeasonTable
 
@@ -64,7 +66,7 @@ $7F1F48 - (0)
 $7F1F49 - (0)
 
 
-$04 - 24b pointer
+$04 - 24b pointer, related to BG2/weather?
 $07 - 24b Pointer, increases by $10
 $0A - 24b Pointer related to audio
 
@@ -120,11 +122,14 @@ $E7 - if player sprite is looking vertical?
 $E9 -
 $EB -
 
-$ED - Related to palette? ED->F1->EF->F2 from rom 80A300+
+ED->F1->EF->F2 from rom 80A300+
+$ED - related to OBJ Offset X. Seems to be mostly 0. Changing it makes it so the background shifst when you get close to a wall
 $EF - related to OBJ Offset Y? fixed map OBG Offset?
 $F1 -
 $F2 -
 $F3 - related to OBJ Offset Y?
+
+090B- temp player position?
 
 $FA -
 
@@ -149,9 +154,9 @@ $016A -
 014f
 0151
 
-$017A - (Related to text Windows? Maybe just disables control)
-$017B - (Next instruction for text? 1 autoadvancing text, 5 click to close, 9 stop for new screen, 81 reading data/formatting?)
-$017C -
+$017A - 8b it holds how long for next pallete during time of day palette swap temp
+$017B - 8b next pallete to load?
+$017C - 8b next hourly pallete to load outside?
 
 $0181 -
 $0182 - (#$03 special value)
@@ -299,8 +304,9 @@ $7EB4E6-B5| - ($00) holds variables to set up around $0974 map?
 
 ==============
 
-$7F0900-09FF - CGRAM content used
-$7F0D00-0DFF - CGRAM content also
+$7F0900-0AFF - CGRAM content used
+$7F0B00-0CFF - CGRAM content also
+$7F0D00-0EFF - CGRAM content also
 
 $7F0000-0800 -
 

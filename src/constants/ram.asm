@@ -77,6 +77,11 @@
 !BG3_Map_Offset_XH = $0145
 !BG3_Map_Offset_YH = $0147
 
+;Palettes data
+!palette_change_countdow = $017A
+!palette_to_load = $017B
+!next_hourly_palette = $017C
+
 ;OBJ data
 !OBJ_Offset_X = $F5 ;16b
 !OBJ_Offset_Y = $F7 ;16b

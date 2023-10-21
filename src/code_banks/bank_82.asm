@@ -65,14 +65,14 @@ UpdateTime: ;828000
        %Set8bit(!M)
        LDA.W $017B                           ;something to do with text?
        PHA
-       JSL.L AA9999
+       JSL.L SUB_809501
        %Set8bit(!M)
        PLA
        CMP.W $017B
        BEQ .return
        LDY.W #$0004
        JSL.L ZeroesPartial42Pointers            ;TODO
-       JSL.L A8888                           ;TODO
+       JSL.L SUB_809553                           ;TODO
 
     .return:
        RTL
@@ -6626,7 +6626,7 @@ FarmMapPointerTable: dl $A78000,$A78000,$A78000,$A78000,$A79600,$A79600,$A79600,
                        JSL.L SUB_809A64                           ;82D35C;809A64;
                        JSL.L UpdateTime                     ;82D360;828000;
                        JSL.L ADDDDFFFF                      ;82D364;83951C;
-                       JSL.L Unk_MemoryWork7E0D00           ;82D368;80900C;
+                       JSL.L TransitionTimeofDayPalettes           ;82D368;80900C;
                        JSL.L UNK_BigLoop                    ;82D36C;808E69;
                        JSL.L InputTypeSelector                          ;82D370;84C034;
                        JSL.L BAAAA                          ;82D374;81A383;
@@ -6996,7 +6996,7 @@ FarmMapPointerTable: dl $A78000,$A78000,$A78000,$A78000,$A79600,$A79600,$A79600,
                        JSL.L SUB_809A64                           ;82D6DE;809A64;
                        JSL.L UpdateTime                     ;82D6E2;828000;
                        JSL.L ADDDDFFFF                      ;82D6E6;83951C;
-                       JSL.L Unk_MemoryWork7E0D00           ;82D6EA;80900C;
+                       JSL.L TransitionTimeofDayPalettes           ;82D6EA;80900C;
                        JSL.L UNK_BigLoop                    ;82D6EE;808E69;
                        JSL.L InputTypeSelector                          ;82D6F2;84C034;
                        JSL.L BAAAA                          ;82D6F6;81A383;
@@ -7077,7 +7077,7 @@ IntroScreen: ;82D75E
        JSL.L TilemapManager
        %Set16bit(!M)
        LDA.W #$006E
-       JSL.L LoadCGRAM
+       JSL.L LoadFirstHalfPaletteToWRAM
        %Set8bit(!M)
        %Set16bit(!X)
        LDA.B #$00
@@ -7272,7 +7272,7 @@ IntroScreen: ;82D75E
                        JSL.L SUB_809A64                           ;82D950;809A64;
                        JSL.L UpdateTime                     ;82D954;828000;
                        JSL.L ADDDDFFFF                      ;82D958;83951C;
-                       JSL.L Unk_MemoryWork7E0D00           ;82D95C;80900C;
+                       JSL.L TransitionTimeofDayPalettes           ;82D95C;80900C;
                        JSL.L UNK_BigLoop                    ;82D960;808E69;
                        JSL.L InputTypeSelector                          ;82D964;84C034;
                        JSL.L BAAAA                          ;82D968;81A383;
@@ -7336,7 +7336,7 @@ IntroScreen: ;82D75E
                        JSL.L TilemapManager           ;82D9FE;80A7C6;
                        %Set16bit(!M)                             ;82DA02;      ;
                        LDA.W #$006D                         ;82DA04;      ;
-                       JSL.L LoadCGRAM                      ;82DA07;8091CF;
+                       JSL.L LoadFirstHalfPaletteToWRAM                      ;82DA07;8091CF;
                        %Set8bit(!M)                             ;82DA0B;      ;
                        %Set16bit(!X)                             ;82DA0D;      ;
                        LDA.B #$00                           ;82DA0F;      ;
@@ -7481,7 +7481,7 @@ IntroScreen: ;82D75E
                        JSL.L TilemapManager           ;82DB52;80A7C6;
                        %Set16bit(!M)                             ;82DB56;      ;
                        LDA.W #$006D                         ;82DB58;      ;
-                       JSL.L LoadCGRAM                ;82DB5B;8091CF;
+                       JSL.L LoadFirstHalfPaletteToWRAM                ;82DB5B;8091CF;
                        %Set8bit(!M)                             ;82DB5F;      ;
                        %Set16bit(!X)                             ;82DB61;      ;
                        LDA.B #$00                           ;82DB63;      ;
@@ -7924,7 +7924,7 @@ IntroScreen: ;82D75E
                        JSL.L TilemapManager           ;82DF20;80A7C6;
                        %Set16bit(!M)                             ;82DF24;      ;
                        LDA.W #$006D                         ;82DF26;      ;
-                       JSL.L LoadCGRAM                ;82DF29;8091CF;
+                       JSL.L LoadFirstHalfPaletteToWRAM                ;82DF29;8091CF;
                        %Set8bit(!M)                             ;82DF2D;      ;
                        %Set16bit(!X)                             ;82DF2F;      ;
                        LDA.B #$00                           ;82DF31;      ;
@@ -7987,7 +7987,7 @@ IntroScreen: ;82D75E
                        JSL.L TilemapManager           ;82DFC2;80A7C6;
                        %Set16bit(!M)                             ;82DFC6;      ;
                        LDA.W #$006F                         ;82DFC8;      ;
-                       JSL.L LoadCGRAM                ;82DFCB;8091CF;
+                       JSL.L LoadFirstHalfPaletteToWRAM                ;82DFCB;8091CF;
                        %Set8bit(!M)                             ;82DFCF;      ;
                        %Set16bit(!X)                             ;82DFD1;      ;
                        LDA.B #$00                           ;82DFD3;      ;
@@ -8263,7 +8263,7 @@ IntroScreen: ;82D75E
                        JSL.L TilemapManager           ;82E221;80A7C6;
                        %Set16bit(!M)                             ;82E225;      ;
                        LDA.W #$006F                         ;82E227;      ;
-                       JSL.L LoadCGRAM                ;82E22A;8091CF;
+                       JSL.L LoadFirstHalfPaletteToWRAM                ;82E22A;8091CF;
                        %Set8bit(!M)                             ;82E22E;      ;
                        %Set16bit(!X)                             ;82E230;      ;
                        LDA.B #$00                           ;82E232;      ;
@@ -8892,7 +8892,7 @@ CODE_82E80C: ;82E80C
       JSL.L TilemapManager           ;82E85D;80A7C6;
       %Set16bit(!M)                             ;82E861;      ;
       LDA.W #$006F                         ;82E863;      ;
-      JSL.L LoadCGRAM                ;82E866;8091CF;
+      JSL.L LoadFirstHalfPaletteToWRAM                ;82E866;8091CF;
       %Set8bit(!M)                             ;82E86A;      ;
       %Set16bit(!X)                             ;82E86C;      ;
       LDA.B #$00                           ;82E86E;      ;

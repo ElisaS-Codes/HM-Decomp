@@ -2557,7 +2557,7 @@ SetCCPoiner: ;84887C
                        STA.B $C9                            ;849360;0000C9;
                        %Set8bit(!M)                             ;849362;      ;
                        LDA.B [$C9]                          ;849364;0000C9;
-                       JSL.L Sets04withPointerDependingonHour;849366;808FC7;
+                       JSL.L SetTimeofDayPalette;849366;808FC7;
                        %Set16bit(!MX)                             ;84936A;      ;
                        LDA.B $C9                            ;84936C;0000C9;
                        CLC                                  ;84936E;      ;

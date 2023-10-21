@@ -70,7 +70,7 @@ GameLoop: ;808083
         JSL.L SUB_809A64
         JSL.L UpdateTime
         JSL.L ADDDDFFFF
-        JSL.L Unk_MemoryWork7E0D00
+        JSL.L TransitionTimeofDayPalettes
         JSL.L UNK_BigLoop
         JSL.L InputTypeSelector
         JSL.L BAAAA
@@ -1838,12 +1838,13 @@ Zeroes42Pointers: ;808FAB
 
         RTL
 
-;;;;;;;; Param in A
-Sets04withPointerDependingonHour: ;808FC7
+;;;;;;;; Sets the next time of day pallete for it to slowly transition
+;;;;;;;; Param in A: next hourly palette
+SetTimeofDayPalette: ;808FC7
         %Set8bit(!M)
         %Set16bit(!X)
         STA.W $017C
-        STZ.W $017A
+        STZ.W !palette_change_countdow
         XBA
         LDA.B #$00
         XBA
@@ -1852,7 +1853,7 @@ Sets04withPointerDependingonHour: ;808FC7
         %Set8bit(!M)
         LDA.L !hour
         CMP.B #$12
-        BCC .after6PM
+        BCC .before6PM
         %Set16bit(!M)
         LDA.W #$0B00
         STA.B $04
@@ -1861,7 +1862,7 @@ Sets04withPointerDependingonHour: ;808FC7
         STA.B $06
         BRA .return
 
-    .after6PM:
+    .before6PM:
         %Set16bit(!M)
         LDA.B $7E
         ASL A
@@ -1878,8 +1879,12 @@ Sets04withPointerDependingonHour: ;808FC7
 
     .return: RTL
 
-;;;;;;;;
-Unk_MemoryWork7E0D00: ;80900C
+;;;;;;;; This function changes the colors of the current palette till its the same as the destination
+;;;;;;;; palette for that hour
+TransitionTimeofDayPalettes: ;80900C
+        !howmuchtocopy = $84
+        !palettechanged = $92
+
         %Set8bit(!M)
         %Set16bit(!X)
         LDA.W !time_running
@@ -1890,77 +1895,77 @@ Unk_MemoryWork7E0D00: ;80900C
     .timenotrunning:
         %Set16bit(!M)
         LDA.B $04
-        BNE .CODE_809029
+        BNE .pointerset
         %Set8bit(!M)
         LDA.B $06
-        BNE .CODE_809029
+        BNE .pointerset
         JMP.W .return
 
-    .CODE_809029:
+    .pointerset:
         %Set8bit(!M)
-        LDA.W $017A
+        LDA.W !palette_change_countdow
         INC A
-        STA.W $017A
+        STA.W !palette_change_countdow
         CMP.B #$20
-        BEQ .CODE_809039
+        BEQ .changepalette
         JMP.W .return
 
-    .CODE_809039:
-        STZ.W $017A
+    .changepalette:
+        STZ.W !palette_change_countdow
         %Set16bit(!M)
         LDA.W #$0100
-        STA.B $84
+        STA.B !howmuchtocopy
         %Set8bit(!M)
         LDA.L !hour
-        CMP.B #$12
-        BCC .CODE_809054
+        CMP.B #18
+        BCC .notnight
         %Set16bit(!M)
         LDA.W #$0200
-        STA.B $84
+        STA.B !howmuchtocopy
 
-    .CODE_809054:
+    .notnight:
         %Set8bit(!M)
-        STZ.B $92
+        STZ.B !palettechanged
         LDY.W #$0000
 
     .loop:
         %Set8bit(!M)
         %Set16bit(!X)
         CPY.W #$0002
-        BNE .CODE_809074
+        BNE .dontchangey
         LDY.W #$0018
         %Set16bit(!M)
         LDA.W $0196
-        AND.W #$0004                         ;FLAG196
-        BNE .CODE_809074
+        AND.W #$0004                         ;FLAG196 Sunny
+        BNE .dontchangey
         LDY.W #$0020
 
-    .CODE_809074:
+    .dontchangey:
         TYX
         %Set16bit(!M)
         LDA.L $7F0D00,X
-        AND.W #$001F
+        AND.W #$001F                         ;separate red
         STA.B $7E
         LDA.B [$04],Y
         AND.W #$001F
         CMP.B $7E
-        BEQ .CODE_809097
-        BCS .CODE_80908F
+        BEQ .comparegreen                    ;color achieved
+        BCS .getredbrighter
         DEC.B $7E
-        BRA .CODE_809091
+        BRA .getreddarker
 
-    .CODE_80908F:
+    .getredbrighter:
         INC.B $7E
 
-    .CODE_809091:
+    .getreddarker:
         %Set8bit(!M)
         LDA.B #$01
-        STA.B $92
+        STA.B !palettechanged
 
-    .CODE_809097:
+    .comparegreen:
         %Set16bit(!M)
         LDA.L $7F0D00,X
-        AND.W #$03E0
+        AND.W #$03E0                         ;separate green
         LSR A
         LSR A
         LSR A
@@ -1975,23 +1980,23 @@ Unk_MemoryWork7E0D00: ;80900C
         LSR A
         LSR A
         CMP.B $80
-        BEQ .CODE_8090C3
-        BCS .CODE_8090BB
+        BEQ .compareblue
+        BCS .getgreenbrighter
         DEC.B $80
-        BRA .CODE_8090BD
+        BRA .getgreendarker
 
-    .CODE_8090BB:
+    .getgreenbrighter:
         INC.B $80
 
-    .CODE_8090BD:
+    .getgreendarker:
         %Set8bit(!M)
         LDA.B #$01
-        STA.B $92
+        STA.B !palettechanged
 
-    .CODE_8090C3:
+    .compareblue:
         %Set16bit(!M)
         LDA.L $7F0D00,X
-        AND.W #$7C00
+        AND.W #$7C00                         ;separate blue
         LSR A
         LSR A
         LSR A
@@ -2016,20 +2021,20 @@ Unk_MemoryWork7E0D00: ;80900C
         LSR A
         LSR A
         CMP.B $82
-        BEQ .CODE_8090F9
-        BCS .CODE_8090F1
+        BEQ .joincolors
+        BCS .getbluebrighter
         DEC.B $82
-        BRA .CODE_8090F3
+        BRA .getbluedarker
 
-    .CODE_8090F1:
+    .getbluebrighter:
         INC.B $82
 
-    .CODE_8090F3:
+    .getbluedarker:
         %Set8bit(!M)
         LDA.B #$01
-        STA.B $92
+        STA.B !palettechanged
 
-    .CODE_8090F9:
+    .joincolors:
         %Set16bit(!M)
         ASL.B $80
         ASL.B $80
@@ -2053,21 +2058,21 @@ Unk_MemoryWork7E0D00: ;80900C
         STA.L $7F0D00,X
         INY
         INY
-        CPY.B $84
-        BEQ .CODE_809130
+        CPY.B !howmuchtocopy
+        BEQ .exitloop
         JMP.W .loop
 
-    .CODE_809130:
+    .exitloop:
         %Set8bit(!M)
-        LDA.B $92
-        BEQ Clears04PointerandSets017B
+        LDA.B !palettechanged                            ;If nothing to change, you are done!
+        BEQ ClearsTimeofDayPaletteIndexandSetsNext
         %Set8bit(!M)
         LDA.B #$06
         STA.B !ProgDMA_Channel_Index
         LDA.B #$22
         STA.B !ProgDMA_Destination_Memory
         %Set16bit(!M)
-        LDY.B $84
+        LDY.B !howmuchtocopy
         LDX.W #$0000
         LDA.W #$0900
         STA.B $72
@@ -2078,8 +2083,8 @@ Unk_MemoryWork7E0D00: ;80900C
 
         .return: RTL
 
-;;;;;;;;
-Clears04PointerandSets017B: ;809157
+;;;;;;;; Resets $04 and moves the next hour's palettes index
+ClearsTimeofDayPaletteIndexandSetsNext: ;809157
         %Set16bit(!M)
         STZ.B $04
         %Set8bit(!M)
@@ -2089,8 +2094,8 @@ Clears04PointerandSets017B: ;809157
 
         RTL
 
-;;;;;;;;
-Clears04Pointer: ;809166
+;;;;;;;; Resets $04
+ClearsTimeofDayPalette: ;809166
         %Set16bit(!MX)
         STZ.B $04
         %Set8bit(!M)
@@ -2099,6 +2104,7 @@ Clears04Pointer: ;809166
         RTL
 
 ;;;;;;;;
+;;;;;;;; Params in A, Y, X and $92
 SUB_80916F: ;80916F
         %Set16bit(!MX)
         STA.B $82
@@ -2131,40 +2137,42 @@ SUB_80916F: ;80916F
     .return: RTL
 
 ;;;;;;;;
+;;;;;;;; Params in A, Y, X and $92:update only B00 copy of cgram
 SUB_80919D: ;80919D
-        %Set16bit(!MX)                             ;      ;
-        STA.B $82                            ;80919F;000082;
-        STY.B $7E                            ;8091A1;00007E;
-        TXA                                  ;8091A3;      ;
-        ASL A                                ;8091A4;      ;
-        STA.B $80                            ;8091A5;000080;
-        LDA.B $7E                            ;8091A7;00007E;
-        ASL A                                ;8091A9;      ;
-        ASL A                                ;8091AA;      ;
-        ASL A                                ;8091AB;      ;
-        ASL A                                ;8091AC;      ;
-        ASL A                                ;8091AD;      ;
-        CLC                                  ;8091AE;      ;
-        ADC.B $80                            ;8091AF;000080;
-        TAX                                  ;8091B1;      ;
-        %Set8bit(!M)                             ;8091B2;      ;
-        LDA.B $92                            ;8091B4;000092;
-        BNE .CODE_8091C6                      ;8091B6;8091C6;
-        %Set16bit(!M)                             ;8091B8;      ;
-        LDA.B $82                            ;8091BA;000082;
-        STA.L $7F0900,X                      ;8091BC;7F0900;
-        STA.L $7F0D00,X                      ;8091C0;7F0D00;
-        BRA .return                      ;8091C4;8091CE;
+        %Set16bit(!MX)
+        STA.B $82
+        STY.B $7E
+        TXA
+        ASL A
+        STA.B $80
+        LDA.B $7E
+        ASL A
+        ASL A
+        ASL A
+        ASL A
+        ASL A
+        CLC
+        ADC.B $80
+        TAX
+        %Set8bit(!M)
+        LDA.B $92
+        BNE .CODE_8091C6
+        %Set16bit(!M)
+        LDA.B $82
+        STA.L $7F0900,X
+        STA.L $7F0D00,X
+        BRA .return
 
     .CODE_8091C6:
-        %Set16bit(!M)                             ;8091C6;      ;
-        LDA.B $82                            ;8091C8;000082;
-        STA.L $7F0B00,X                      ;8091CA;7F0B00;
+        %Set16bit(!M)
+        LDA.B $82
+        STA.L $7F0B00,X
 
-    .return: RTL                                  ;8091CE;      ;END_SUB_80916F
+    .return: RTL
 
+;;;;;;;; Loads first half of a pallete to spaces 7F0900 and 7F0D00
 ;;;;;;;; param in A, index to pointer to palette
-LoadCGRAM: ;8091CF
+LoadFirstHalfPaletteToWRAM: ;8091CF
         %Set16bit(!MX)
         STA.B $7E
         ASL A
@@ -2195,38 +2203,42 @@ LoadCGRAM: ;8091CF
         BNE -
 
         RTL
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                 HHHH: %Set16bit(!MX)                             ;809208;      ;Param in A
-                       STA.B $7E                            ;80920A;00007E;
-                       ASL A                                ;80920C;      ;
-                       CLC                                  ;80920D;      ;
-                       ADC.B $7E                            ;80920E;00007E;
-                       TAX                                  ;809210;      ;
-                       LDA.L PalettePointerTable,X          ;809211;80B9FD;
-                       STA.B $72                            ;809215;000072;
-                       INX                                  ;809217;      ;
-                       INX                                  ;809218;      ;
-                       %Set8bit(!M)                             ;809219;      ;
-                       LDA.L PalettePointerTable,X          ;80921B;80B9FD;
-                       STA.B $74                            ;80921F;000074;
-                       %Set16bit(!M)                             ;809221;      ;
-                       LDA.W #$0100                         ;809223;      ;
-                       STA.B $7E                            ;809226;00007E;
-                       LDX.W #$0100                         ;809228;      ;
-                       LDY.W #$0000                         ;80922B;      ;
-                                                            ;      ;      ;
-          CODE_80922E: LDA.B [$72],Y                        ;80922E;000072;
-                       STA.L $7F0900,X                      ;809230;7F0900;
-                       STA.L $7F0D00,X                      ;809234;7F0D00;
-                       INY                                  ;809238;      ;
-                       INY                                  ;809239;      ;
-                       INX                                  ;80923A;      ;
-                       INX                                  ;80923B;      ;
-                       CPY.B $7E                            ;80923C;00007E;
-                       BNE CODE_80922E                      ;80923E;80922E;
-                       RTL                                  ;809240;      ;END_HHHH
-                                                            ;      ;      ;
+
+;;;;;;;; Loads first half of a pallete to spaces 7F0900 and 7F0D00
+;;;;;;;; Params in A:
+LoadSecondHalfPaletteToWRAM: ;809208
+        %Set16bit(!MX)
+        STA.B $7E
+        ASL A
+        CLC
+        ADC.B $7E                            ; * 3
+        TAX
+        LDA.L PalettePointerTable,X
+        STA.B $72
+        INX
+        INX
+        %Set8bit(!M)
+        LDA.L PalettePointerTable,X
+        STA.B $74
+        %Set16bit(!M)
+        LDA.W #$0100                         ;a whole row
+        STA.B $7E
+        LDX.W #$0100
+        LDY.W #$0000
+
+    .fillcolorloop: ;80922E
+        LDA.B [$72],Y
+        STA.L $7F0900,X
+        STA.L $7F0D00,X
+        INY
+        INY
+        INX
+        INX
+        CPY.B $7E
+        BNE .fillcolorloop
+
+        RTL
+
 ;;;;;;;;
 SUB_809241: ;809241
         %Set8bit(!M)
@@ -2275,6 +2287,7 @@ SUB_809241: ;809241
         INX                                  ;809291;      ;
         CPY.B $7E                            ;809292;00007E;
         BNE CODE_809288                      ;809294;809288;
+
         %Set8bit(!M)                             ;809296;      ;
         LDA.B #$00                           ;809298;      ;
         XBA                                  ;80929A;      ;
@@ -2301,8 +2314,9 @@ SUB_809241: ;809241
         STA.B $7E                            ;8092C1;00007E;
         LDX.W #$0100                         ;8092C3;      ;
         LDY.W #$0000                         ;8092C6;      ;
-                                        ;      ;      ;
-        CODE_8092C9: LDA.B [$72],Y                        ;8092C9;000072;
+
+        CODE_8092C9:
+        LDA.B [$72],Y                        ;8092C9;000072;
         STA.L $7F0B00,X                      ;8092CB;7F0B00;
         INY                                  ;8092CF;      ;
         INY                                  ;8092D0;      ;
@@ -2314,10 +2328,11 @@ SUB_809241: ;809241
         LDA.B #$01                           ;8092D9;      ;
         STA.B $92                            ;8092DB;000092;
         JSL.L SUB_8093A3                           ;8092DD;8093A4;
+
         RTL                                  ;8092E1;      ;END_GGGG
 
- ;;;;;;;
- ChangePalettebyTime: ;8092E2
+;;;;;;;;
+ChangePalettebyTime: ;8092E2
         %Set8bit(!M)
         %Set16bit(!X)
         LDX.W #$0000
@@ -2355,67 +2370,77 @@ SUB_809241: ;809241
         LDA.L Time_Palette_Table,X
         STA.W $017B
         %Set16bit(!M)
-        JSL.L LoadCGRAM
+        JSL.L LoadFirstHalfPaletteToWRAM
 
         RTL
 
-                 EEEE: %Set16bit(!MX)                             ;809329;      ;
-                       LDA.L $7F1F5E                        ;80932B;7F1F5E;
-                       AND.W #$0080                         ;80932F;      ;
-                       BNE DDDD                             ;809332;80936E;
-                       LDA.L $7F1F5E                        ;809334;7F1F5E;
-                       AND.W #$0100                         ;809338;      ;
-                       BNE CCCC                             ;80933B;809380;
-                       LDA.L $7F1F5E                        ;80933D;7F1F5E;
-                       AND.W #$0200                         ;809341;      ;
-                       BNE BBBB                             ;809344;809392;
-                       %Set8bit(!M)                             ;809346;      ;
-                       LDA.B #$00                           ;809348;      ;
-                       XBA                                  ;80934A;      ;
-                       LDA.B !tilemap_to_load                            ;80934B;000022;
-                       ASL A                                ;80934D;      ;
-                       TAX                                  ;80934E;      ;
-                       LDA.L !hour                        ;80934F;7F1F1C;
-                       CMP.B #$12                           ;809353;      ;
-                       BCC CODE_809358                      ;809355;809358;
-                       INX                                  ;809357;      ;
-                                                            ;      ;      ;
-          CODE_809358: %Set8bit(!M)                             ;809358;      ;
-                       %Set16bit(!X)                             ;80935A;      ;
-                       LDA.W UNK_Table11,X                 ;80935C;00BE44;
-                       %Set16bit(!M)                             ;80935F;      ;
-                       JSL.L HHHH                           ;809361;809208;
-                       %Set8bit(!M)                             ;809365;      ;
-                       STZ.B $92                            ;809367;000092;
-                       JSL.L SUB_8093A3                           ;809369;8093A4;
-                       RTL                                  ;80936D;      ;END_EEEE
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                 DDDD: %Set16bit(!MX)                             ;80936E;      ;
-                       LDA.W #$0071                         ;809370;      ;
-                       JSL.L HHHH                           ;809373;809208;
-                       %Set8bit(!M)                             ;809377;      ;
-                       STZ.B $92                            ;809379;000092;
-                       JSL.L SUB_8093A3                           ;80937B;8093A4;
-                       RTL                                  ;80937F;      ;END_DDDD
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                 CCCC: %Set16bit(!MX)                             ;809380;      ;
-                       LDA.W #$0072                         ;809382;      ;
-                       JSL.L HHHH                           ;809385;809208;
-                       %Set8bit(!M)                             ;809389;      ;
-                       STZ.B $92                            ;80938B;000092;
-                       JSL.L SUB_8093A3                           ;80938D;8093A4;
-                       RTL                                  ;809391;      ;END_CCCC
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                 BBBB: %Set16bit(!MX)                             ;809392;      ;
-                       LDA.W #$0073                         ;809394;      ;
-                       JSL.L HHHH                           ;809397;809208;
-                       %Set8bit(!M)                             ;80939B;      ;
-                       STZ.B $92                            ;80939D;000092;
-                       JSL.L SUB_8093A3                           ;80939F;8093A4;
-                       RTL                                  ;8093A3;      ;END_BBBB
+;;;;;;;;
+SUB_809329: ;809329
+        %Set16bit(!MX)
+        LDA.L $7F1F5E
+        AND.W #$0080                         ;Flag5E
+        BNE SUB_80936E
+        LDA.L $7F1F5E
+        AND.W #$0100                         ;Flag5E
+        BNE SUB_809380
+        LDA.L $7F1F5E
+        AND.W #$0200                         ;Flag5E
+        BNE SUB_809392
+        %Set8bit(!M)
+        LDA.B #$00
+        XBA
+        LDA.B !tilemap_to_load
+        ASL A
+        TAX
+        LDA.L !hour
+        CMP.B #$12                           ;18
+        BCC CODE_809358
+        INX
+
+        CODE_809358:
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDA.W UNK_Table11,X
+        %Set16bit(!M)
+        JSL.L LoadSecondHalfPaletteToWRAM
+        %Set8bit(!M)
+        STZ.B $92
+        JSL.L SUB_8093A3
+
+        RTL
+
+;;;;;;;;
+SUB_80936E: ;80936E
+        %Set16bit(!MX)
+        LDA.W #$0071
+        JSL.L LoadSecondHalfPaletteToWRAM
+        %Set8bit(!M)
+        STZ.B $92
+        JSL.L SUB_8093A3
+
+        RTL
+
+;;;;;;;;
+SUB_809380: ;809380
+        %Set16bit(!MX)
+        LDA.W #$0072
+        JSL.L LoadSecondHalfPaletteToWRAM
+        %Set8bit(!M)
+        STZ.B $92
+        JSL.L SUB_8093A3
+
+        RTL
+
+;;;;;;;;
+SUB_809392: ;809392
+        %Set16bit(!MX)
+        LDA.W #$0073
+        JSL.L LoadSecondHalfPaletteToWRAM
+        %Set8bit(!M)
+        STZ.B $92
+        JSL.L SUB_8093A3
+
+        RTL
 
 ;;;;;;;;
 SUB_8093A3: ;8093A3
@@ -2513,19 +2538,17 @@ SUB_8093A3: ;8093A3
         BCS CODE_809457                      ;809451;809457;
         CMP.B #$15                           ;809453;      ;
         BCS CODE_809460                      ;809455;809460;
-                                                ;      ;      ;
+
         CODE_809457: %Set16bit(!M)                             ;809457;      ;
         LDA.W #$0006                         ;809459;      ;
         STA.B $7E                            ;80945C;00007E;
         BRA CODE_809460                      ;80945E;809460;
-                                                ;      ;      ;
-                                                ;      ;      ;
+
         CODE_809460: %Set16bit(!MX)                             ;809460;      ;
         LDA.L !wife_pregnancy                        ;809462;7F1F3B;Wife Pregnancy
         BNE CODE_80946B                      ;809466;80946B;
         JMP.W returnAAAA                        ;809468;809500;
-                                                ;      ;      ;
-                                                ;      ;      ;
+
         CODE_80946B: LDA.L $7F1F66                        ;80946B;7F1F66;Which Wife Flag
         AND.W #$0001                         ;80946F;      ;
         BNE CODE_80949A                      ;809472;80949A;
@@ -2542,33 +2565,27 @@ SUB_8093A3: ;8093A3
         AND.W #$0010                         ;809493;      ;
         BNE CODE_8094B6                      ;809496;8094B6;
         BRA returnAAAA                          ;809498;809500;
-                                                ;      ;      ;
-                                                ;      ;      ;
+
         CODE_80949A: %Set16bit(!MX)                             ;80949A;      ;
         LDA.W #$0001                         ;80949C;      ;
         BRA CODE_8094BD                      ;80949F;8094BD;
-                                                ;      ;      ;
-                                                ;      ;      ;
+
         CODE_8094A1: %Set16bit(!MX)                             ;8094A1;      ;
         LDA.W #$0002                         ;8094A3;      ;
         BRA CODE_8094BD                      ;8094A6;8094BD;
-                                                ;      ;      ;
-                                                ;      ;      ;
+
         CODE_8094A8: %Set16bit(!MX)                             ;8094A8;      ;
         LDA.W #$0003                         ;8094AA;      ;
         BRA CODE_8094BD                      ;8094AD;8094BD;
-                                                ;      ;      ;
-                                                ;      ;      ;
+
         CODE_8094AF: %Set16bit(!MX)                             ;8094AF;      ;
         LDA.W #$0004                         ;8094B1;      ;
         BRA CODE_8094BD                      ;8094B4;8094BD;
-                                                ;      ;      ;
-                                                ;      ;      ;
+
         CODE_8094B6: %Set16bit(!MX)                             ;8094B6;      ;
         LDA.W #$0005                         ;8094B8;      ;
         BRA CODE_8094BD                      ;8094BB;8094BD;
-                                                ;      ;      ;
-                                                ;      ;      ;
+
         CODE_8094BD: %Set16bit(!MX)                             ;8094BD;      ;
         CLC                                  ;8094BF;      ;
         ADC.B $7E                            ;8094C0;00007E;
@@ -2600,110 +2617,112 @@ SUB_8093A3: ;8093A3
         LDX.W #$000A                         ;8094F6;      ;
         LDY.W #$000B                         ;8094F9;      ;
         JSL.L SUB_80919D                    ;8094FC;80919D;
-                                                ;      ;      ;
+
         returnAAAA: RTL                                  ;809500;      ;END_AAAA
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                 AA9999: %Set8bit(!M)                             ;809501;      ;
-                       %Set16bit(!X)                             ;809503;      ;
-                       LDX.W #$0000                         ;809505;      ;
-                       LDA.L !hour                        ;809508;7F1F1C;
-                       CMP.B #$07                           ;80950C;      ;
-                       BCC CODE_809520                      ;80950E;809520;
-                       INX                                  ;809510;      ;
-                       CMP.B #$0F                           ;809511;      ;
-                       BCC CODE_809520                      ;809513;809520;
-                       INX                                  ;809515;      ;
-                       CMP.B #$11                           ;809516;      ;
-                       BCC CODE_809520                      ;809518;809520;
-                       INX                                  ;80951A;      ;
-                       CMP.B #$12                           ;80951B;      ;
-                       BCC CODE_809520                      ;80951D;809520;
-                       INX                                  ;80951F;      ;
-                                                            ;      ;      ;
-          CODE_809520: STX.B $7E                            ;809520;00007E;
-                       LDA.B #$00                           ;809522;      ;
-                       XBA                                  ;809524;      ;
-                       LDA.B !tilemap_to_load                            ;809525;000022;
-                       %Set16bit(!M)                             ;809527;      ;
-                       STA.B $80                            ;809529;000080;
-                       ASL A                                ;80952B;      ;
-                       ASL A                                ;80952C;      ;
-                       CLC                                  ;80952D;      ;
-                       ADC.B $80                            ;80952E;000080;
-                       ADC.B $80                            ;809530;000080;
-                       ADC.B $7E                            ;809532;00007E;
-                       TAX                                  ;809534;      ;
-                       %Set8bit(!M)                             ;809535;      ;
-                       LDA.B #$00                           ;809537;      ;
-                       XBA                                  ;809539;      ;
-                       LDA.L Time_Palette_Table,X                 ;80953A;80BB5C;
-                       CMP.W $017B                          ;80953E;00017B;
-                       BEQ CODE_809552                      ;809541;809552;
-                       CMP.B #$FF                           ;809543;      ;
-                       BEQ CODE_809552                      ;809545;809552;
-                       PHA                                  ;809547;      ;
-                       JSL.L Sets04withPointerDependingonHour;809548;808FC7;
-                       %Set8bit(!M)                             ;80954C;      ;
-                       PLA                                  ;80954E;      ;
-                       STA.W $017B                          ;80954F;00017B;
-                                                            ;      ;      ;
-          CODE_809552: RTL                                  ;809552;      ;END_AA9999
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                 A8888: %Set8bit(!M)                             ;809553;      ;
-                       %Set16bit(!X)                             ;809555;      ;
-                       LDX.W #$0000                         ;809557;      ;
-                       LDA.L !hour                        ;80955A;7F1F1C;Hour
-                       CMP.B #$07                           ;80955E;      ;
-                       BCC .timeFound                       ;809560;809572;Before 7AM
-                       INX                                  ;809562;      ;
-                       CMP.B #$0F                           ;809563;      ;
-                       BCC .timeFound                       ;809565;809572;Before 3PM
-                       INX                                  ;809567;      ;
-                       CMP.B #$11                           ;809568;      ;
-                       BCC .timeFound                       ;80956A;809572;Before 5PM
-                       INX                                  ;80956C;      ;
-                       CMP.B #$12                           ;80956D;      ;
-                       BCC .timeFound                       ;80956F;809572;Before 6PM
-                       INX                                  ;809571;      ;
-                                                            ;      ;      ;
-           .timeFound: STX.B $7E                            ;809572;00007E;
-                       LDA.B #$00                           ;809574;      ;
-                       XBA                                  ;809576;      ;
-                       LDA.B !tilemap_to_load                            ;809577;000022;
-                       %Set16bit(!M)                             ;809579;      ;
-                       STA.B $80                            ;80957B;000080;
-                       ASL A                                ;80957D;      ;
-                       ASL A                                ;80957E;      ;
-                       CLC                                  ;80957F;      ;
-                       ADC.B $80                            ;809580;000080;
-                       ADC.B $80                            ;809582;000080;
-                       STA.B $80                            ;809584;000080;
-                       ASL A                                ;809586;      ;
-                       CLC                                  ;809587;      ;
-                       ADC.W #$000A                         ;809588;      ;
-                       TAX                                  ;80958B;      ;
-                       LDA.W Subrutines_Table,X                 ;80958C;00BEEC;
-                       CMP.W #$FFFF                         ;80958F;      ;
-                       BEQ .skipSeasonCheck                 ;809592;80959E;
-                       %Set8bit(!M)                             ;809594;      ;
-                       LDA.L !season                        ;809596;7F1F19;Season
-                       CMP.B #$02                           ;80959A;      ;
-                       BCC .return                          ;80959C;8095B2;
-                                                            ;      ;      ;
-     .skipSeasonCheck: %Set16bit(!M)                             ;80959E;      ;
-                       LDA.B $80                            ;8095A0;000080;
-                       CLC                                  ;8095A2;      ;
-                       ADC.B $7E                            ;8095A3;00007E;
-                       ASL A                                ;8095A5;      ;
-                       TAX                                  ;8095A6;      ;
-                       LDA.W Subrutines_Table,X                 ;8095A7;00BEEC;
-                       CMP.W #$FFFF                         ;8095AA;      ;
-                       BEQ .return                          ;8095AD;8095B2;
-                       JSR.W (Subrutines_Table,X)                ;8095AF;80BEEC;
-                                                            ;      ;      ;
-              .return: RTL                                  ;8095B2;      ;END_A8888
+
+;;;;;;;;
+SUB_809501: ;809501
+        %Set8bit(!M)                             ;      ;
+        %Set16bit(!X)                             ;809503;      ;
+        LDX.W #$0000                         ;809505;      ;
+        LDA.L !hour                        ;809508;7F1F1C;
+        CMP.B #$07                           ;80950C;      ;
+        BCC CODE_809520                      ;80950E;809520;
+        INX                                  ;809510;      ;
+        CMP.B #$0F                           ;809511;      ;
+        BCC CODE_809520                      ;809513;809520;
+        INX                                  ;809515;      ;
+        CMP.B #$11                           ;809516;      ;
+        BCC CODE_809520                      ;809518;809520;
+        INX                                  ;80951A;      ;
+        CMP.B #$12                           ;80951B;      ;
+        BCC CODE_809520                      ;80951D;809520;
+        INX                                  ;80951F;      ;
+                                            ;      ;      ;
+        CODE_809520: STX.B $7E                            ;809520;00007E;
+        LDA.B #$00                           ;809522;      ;
+        XBA                                  ;809524;      ;
+        LDA.B !tilemap_to_load                            ;809525;000022;
+        %Set16bit(!M)                             ;809527;      ;
+        STA.B $80                            ;809529;000080;
+        ASL A                                ;80952B;      ;
+        ASL A                                ;80952C;      ;
+        CLC                                  ;80952D;      ;
+        ADC.B $80                            ;80952E;000080;
+        ADC.B $80                            ;809530;000080;
+        ADC.B $7E                            ;809532;00007E;
+        TAX                                  ;809534;      ;
+        %Set8bit(!M)                             ;809535;      ;
+        LDA.B #$00                           ;809537;      ;
+        XBA                                  ;809539;      ;
+        LDA.L Time_Palette_Table,X                 ;80953A;80BB5C;
+        CMP.W $017B                          ;80953E;00017B;
+        BEQ CODE_809552                      ;809541;809552;
+        CMP.B #$FF                           ;809543;      ;
+        BEQ CODE_809552                      ;809545;809552;
+        PHA                                  ;809547;      ;
+        JSL.L SetTimeofDayPalette;809548;808FC7;
+        %Set8bit(!M)                             ;80954C;      ;
+        PLA                                  ;80954E;      ;
+        STA.W $017B                          ;80954F;00017B;
+
+        CODE_809552: RTL                                  ;809552;      ;END_SUB_809501
+
+;;;;;;;;
+SUB_809553: ;809553
+        %Set8bit(!M)                             ;      ;
+        %Set16bit(!X)                             ;809555;      ;
+        LDX.W #$0000                         ;809557;      ;
+        LDA.L !hour                        ;80955A;7F1F1C;Hour
+        CMP.B #$07                           ;80955E;      ;
+        BCC .timeFound                       ;809560;809572;Before 7AM
+        INX                                  ;809562;      ;
+        CMP.B #$0F                           ;809563;      ;
+        BCC .timeFound                       ;809565;809572;Before 3PM
+        INX                                  ;809567;      ;
+        CMP.B #$11                           ;809568;      ;
+        BCC .timeFound                       ;80956A;809572;Before 5PM
+        INX                                  ;80956C;      ;
+        CMP.B #$12                           ;80956D;      ;
+        BCC .timeFound                       ;80956F;809572;Before 6PM
+        INX                                  ;809571;      ;
+
+        .timeFound: STX.B $7E                            ;809572;00007E;
+        LDA.B #$00                           ;809574;      ;
+        XBA                                  ;809576;      ;
+        LDA.B !tilemap_to_load                            ;809577;000022;
+        %Set16bit(!M)                             ;809579;      ;
+        STA.B $80                            ;80957B;000080;
+        ASL A                                ;80957D;      ;
+        ASL A                                ;80957E;      ;
+        CLC                                  ;80957F;      ;
+        ADC.B $80                            ;809580;000080;
+        ADC.B $80                            ;809582;000080;
+        STA.B $80                            ;809584;000080;
+        ASL A                                ;809586;      ;
+        CLC                                  ;809587;      ;
+        ADC.W #$000A                         ;809588;      ;
+        TAX                                  ;80958B;      ;
+        LDA.W Subrutines_Table,X                 ;80958C;00BEEC;
+        CMP.W #$FFFF                         ;80958F;      ;
+        BEQ .skipSeasonCheck                 ;809592;80959E;
+        %Set8bit(!M)                             ;809594;      ;
+        LDA.L !season                        ;809596;7F1F19;Season
+        CMP.B #$02                           ;80959A;      ;
+        BCC .return                          ;80959C;8095B2;
+
+        .skipSeasonCheck: %Set16bit(!M)                             ;80959E;      ;
+        LDA.B $80                            ;8095A0;000080;
+        CLC                                  ;8095A2;      ;
+        ADC.B $7E                            ;8095A3;00007E;
+        ASL A                                ;8095A5;      ;
+        TAX                                  ;8095A6;      ;
+        LDA.W Subrutines_Table,X                 ;8095A7;00BEEC;
+        CMP.W #$FFFF                         ;8095AA;      ;
+        BEQ .return                          ;8095AD;8095B2;
+        JSR.W (Subrutines_Table,X)                ;8095AF;80BEEC;
+
+        .return: RTL                                  ;8095B2;      ;END_SUB_809553
 
 ;;;;;;;;
 AutoMapScrolling: ;8095B3
@@ -2876,7 +2895,7 @@ UNK_ScreenTransition: ;8096D3
         LDA.W #$7000
         JSL.L ZeroesPartialVRAM
         JSL.L Zeroes42Pointers
-        JSL.L Clears04Pointer
+        JSL.L ClearsTimeofDayPalette
         JSL.L ClearWRAMGraphicsSpace
         JSL.L InitializeOBJs
         JSL.L PresetsMemory3
@@ -3079,8 +3098,8 @@ ScreenTransitionReturn: ;80972B
                        JSL.L BSSSS                          ;8098B1;82A5FB;
                        JSL.L TilemapManager           ;8098B5;80A7C6;
                        JSL.L ChangePalettebyTime                           ;8098B9;8092E2;
-                       JSL.L EEEE                           ;8098BD;809329;
-                       JSL.L A8888                           ;8098C1;809553;
+                       JSL.L SUB_809329                           ;8098BD;809329;
+                       JSL.L SUB_809553                           ;8098C1;809553;
                        JSL.L SUB_809241                           ;8098C5;809241;
                        JSL.L UNK_BigLoop                    ;8098C9;808E69;
                        %Set8bit(!M)                             ;8098CD;      ;
@@ -3848,101 +3867,105 @@ SUB_809D0B: ;809D0B
                                             ;      ;      ;
         RTL                                  ;809EBB;      ;END_SUB_809D0B
 
-;;;;;;;;
+;;;;;;;; I think this moves the BGs and OBJs offsets to the right position when changing screens
 SUB_809EBC: ;809EBC
         %Set16bit(!MX)
         LDA.B !player_pos_X
         SEC
         SBC.W #$0080                         ;128
         CMP.B $ED
-        BMI CODE_809ECC                      ;809EC6;809ECC;
-        BEQ CODE_809ECC                      ;809EC8;809ECC;
-        BCS CODE_809EE6                      ;809ECA;809EE6;
-                                ;      ;      ;
-        CODE_809ECC: %Set16bit(!M)                             ;809ECC;      ;
-        CLC                                  ;809ECE;      ;
-        ADC.W #$0080                         ;809ECF;      ;
-        SEC                                  ;809ED2;      ;
-        SBC.B $ED                            ;809ED3;0000ED;
-        STA.W $090B                          ;809ED5;00090B;
-        %Set8bit(!M)                             ;809ED8;      ;
-        LDA.B #$00                           ;809EDA;      ;
-        STA.B !BG_subpixel_offset_X                            ;809EDC;000020;
-        %Set16bit(!M)                             ;809EDE;      ;
-        LDA.B $ED                            ;809EE0;0000ED;
-        STA.B !OBJ_Offset_X                            ;809EE2;0000F5;
-        BRA CODE_809F0E                      ;809EE4;809F0E;
-                                ;      ;      ;
-                                ;      ;      ;
-        CODE_809EE6: %Set16bit(!M)                             ;809EE6;      ;
-        CMP.B $F1                            ;809EE8;0000F1;
-        BCS CODE_809EF6                      ;809EEA;809EF6;
-        STA.B !OBJ_Offset_X                            ;809EEC;0000F5;
-        LDA.W #$0080                         ;809EEE;      ;
-        STA.W $090B                          ;809EF1;00090B;
-        BRA CODE_809F0E                      ;809EF4;809F0E;
-                                ;      ;      ;
-                                ;      ;      ;
-        CODE_809EF6: %Set16bit(!M)                             ;809EF6;      ;
-        CLC                                  ;809EF8;      ;
-        ADC.W #$0080                         ;809EF9;      ;
-        SEC                                  ;809EFC;      ;
-        SBC.B $F1                            ;809EFD;0000F1;
-        STA.W $090B                          ;809EFF;00090B;
-        %Set8bit(!M)                             ;809F02;      ;
-        LDA.B #$08                           ;809F04;      ;
-        STA.B !BG_subpixel_offset_X                            ;809F06;000020;
-        %Set16bit(!M)                             ;809F08;      ;
-        LDA.B $F1                            ;809F0A;0000F1;
-        STA.B !OBJ_Offset_X                            ;809F0C;0000F5;
-                                ;      ;      ;
-        CODE_809F0E: %Set16bit(!M)                             ;809F0E;      ;
-        LDA.B !player_pos_Y                            ;809F10;0000D8;
-        SEC                                  ;809F12;      ;
-        SBC.W #$0080                         ;809F13;      ;
-        CMP.B $EF                            ;809F16;0000EF;
-        BMI .CODE_809F1E                      ;809F18;809F1E;
-        BEQ .CODE_809F1E                      ;809F1A;809F1E;
-        BCS .CODE_809F38                      ;809F1C;809F38;
-                                ;      ;      ;
-        .CODE_809F1E: %Set16bit(!M)                             ;809F1E;      ;
-        CLC                                  ;809F20;      ;
-        ADC.W #$0080                         ;809F21;      ;
-        SEC                                  ;809F24;      ;
-        SBC.B $EF                            ;809F25;0000EF;
-        STA.W $090D                          ;809F27;00090D;
-        %Set8bit(!M)                             ;809F2A;      ;
-        LDA.B #$00                           ;809F2C;      ;
-        STA.B !BG_subpixel_offset_Y                            ;809F2E;000021;
-        %Set16bit(!M)                             ;809F30;      ;
-        LDA.B $EF                            ;809F32;0000EF;
-        STA.B !OBJ_Offset_Y                           ;809F34;0000F7;
-        BRA .return                      ;809F36;809F60;
-                                ;      ;      ;
-                                ;      ;      ;
-        .CODE_809F38: %Set16bit(!M)                             ;809F38;      ;
-        CMP.B $F3                            ;809F3A;0000F3;
-        BCS .CODE_809F48                      ;809F3C;809F48;
-        STA.B !OBJ_Offset_Y                           ;809F3E;0000F7;
-        LDA.W #$0080                         ;809F40;      ;
-        STA.W $090D                          ;809F43;00090D;
-        BRA .return                      ;809F46;809F60;
-                                ;      ;      ;
-                                ;      ;      ;
-        .CODE_809F48: %Set16bit(!M)                             ;809F48;      ;
-        CLC                                  ;809F4A;      ;
-        ADC.W #$0080                         ;809F4B;      ;
-        SEC                                  ;809F4E;      ;
-        SBC.B $F3                            ;809F4F;0000F3;
-        STA.W $090D                          ;809F51;00090D;
-        %Set8bit(!M)                             ;809F54;      ;
-        LDA.B #$08                           ;809F56;      ;
-        STA.B !BG_subpixel_offset_Y                            ;809F58;000021;
-        %Set16bit(!M)                             ;809F5A;      ;
-        LDA.B $F3                            ;809F5C;0000F3;
-        STA.B !OBJ_Offset_Y                           ;809F5E;0000F7;
-                                ;      ;      ;
-        .return: RTL                                  ;809F60;      ;END_SUB_809EBC
+        BMI .movableposx
+        BEQ .movableposx
+        BCS .fixedposx
+
+    .movableposx:
+        %Set16bit(!M)
+        CLC
+        ADC.W #$0080                         ;restore the 128
+        SEC
+        SBC.B $ED
+        STA.W $090B
+        %Set8bit(!M)
+        LDA.B #$00
+        STA.B !BG_subpixel_offset_X
+        %Set16bit(!M)
+        LDA.B $ED
+        STA.B !OBJ_Offset_X
+        BRA .ycoordinate
+
+    .fixedposx:
+        %Set16bit(!M)
+        CMP.B $F1
+        BCS .adjustsubpixelx                 ;Too close to the left wall
+        STA.B !OBJ_Offset_X
+        LDA.W #$0080
+        STA.W $090B
+        BRA .ycoordinate
+
+    .adjustsubpixelx:
+        %Set16bit(!M)
+        CLC
+        ADC.W #$0080
+        SEC
+        SBC.B $F1
+        STA.W $090B
+        %Set8bit(!M)
+        LDA.B #$08
+        STA.B !BG_subpixel_offset_X
+        %Set16bit(!M)
+        LDA.B $F1
+        STA.B !OBJ_Offset_X
+
+    .ycoordinate:
+        %Set16bit(!M)
+        LDA.B !player_pos_Y
+        SEC
+        SBC.W #$0080
+        CMP.B $EF
+        BMI .movableposy
+        BEQ .movableposy
+        BCS .fixedposy
+
+    .movableposy:
+        %Set16bit(!M)
+        CLC
+        ADC.W #$0080
+        SEC
+        SBC.B $EF
+        STA.W $090D
+        %Set8bit(!M)
+        LDA.B #$00
+        STA.B !BG_subpixel_offset_Y
+        %Set16bit(!M)
+        LDA.B $EF
+        STA.B !OBJ_Offset_Y
+        BRA .return
+
+    .fixedposy:
+        %Set16bit(!M)
+        CMP.B $F3
+        BCS .adjustsubpixely
+
+        STA.B !OBJ_Offset_Y
+        LDA.W #$0080
+        STA.W $090D
+        BRA .return
+
+    .adjustsubpixely:
+        %Set16bit(!M)
+        CLC
+        ADC.W #$0080
+        SEC
+        SBC.B $F3
+        STA.W $090D
+        %Set8bit(!M)
+        LDA.B #$08
+        STA.B !BG_subpixel_offset_Y
+        %Set16bit(!M)
+        LDA.B $F3
+        STA.B !OBJ_Offset_Y
+
+    .return: RTL
 
 ;;;;;;;; I think this checks for map scrolling in locked places, like tool shed
 SUB_809F61: ;809F61
@@ -5602,28 +5625,123 @@ Table_AudioTrackbySeasonIndex: db $01,$02,$07,$04,$05,$05,$05,$05,$06,$06,$06,$0
                        db $DC,$B9,$80,$10,$52,$28,$FF,$FF,$10,$52,$28,$10,$52,$28,$BD,$7F;80B9E7;      ;
                        db $28,$FE,$FF,$EF,$B9,$80           ;80B9F7;      ;
                                                             ;      ;      ;
-  PalettePointerTable: db $00,$94,$A8,$00,$96,$A8,$00,$98,$A8,$00,$8A,$A8,$00,$8C,$A8,$00;80B9FD
-                       db $8E,$A8,$00,$90,$A8,$00,$92,$A8,$00,$80,$A8,$00,$82,$A8,$00,$84;80BA0D;      ;
-                       db $A8,$00,$86,$A8,$00,$88,$A8,$00,$9A,$A8,$00,$9C,$A8,$00,$9E,$A8;80BA1D;      ;
-                       db $00,$A0,$A8,$00,$A2,$A8,$00,$F4,$A8,$00,$F8,$A8,$00,$FA,$A8,$00;80BA2D;      ;
-                       db $FC,$A8,$00,$BA,$A8,$00,$BC,$A8,$00,$BE,$A8,$00,$C0,$A8,$00,$C2;80BA3D;      ;
-                       db $A8,$00,$C6,$A8,$00,$C8,$A8,$00,$CA,$A8,$00,$80,$A9,$00,$82,$A9;80BA4D;      ;
-                       db $00,$84,$A9,$00,$86,$A9,$00,$F6,$A8,$00,$C4,$A8,$00,$8A,$A9,$00;80BA5D;      ;
-                       db $88,$A9,$00,$FE,$A8,$00,$CC,$A8,$00,$CE,$A8,$00,$D0,$A8,$00,$D2;80BA6D;      ;
-                       db $A8,$00,$D4,$A8,$00,$EA,$A8,$00,$EC,$A8,$00,$EE,$A8,$00,$F0,$A8;80BA7D;      ;
-                       db $00,$F2,$A8,$00,$D6,$A8,$00,$D8,$A8,$00,$DA,$A8,$00,$DC,$A8,$00;80BA8D;      ;
-                       db $DE,$A8,$00,$E0,$A8,$00,$E2,$A8,$00,$E4,$A8,$00,$E6,$A8,$00,$E8;80BA9D;      ;
-                       db $A8,$00,$C8,$A9,$00,$CA,$A9,$00,$CC,$A9,$00,$CE,$A9,$00,$B8,$A9;80BAAD;      ;
-                       db $00,$BA,$A9,$00,$BC,$A9,$00,$BE,$A9,$00,$C0,$A9,$00,$C2,$A9,$00;80BABD;      ;
-                       db $C4,$A9,$00,$C6,$A9,$00,$D0,$A9,$00,$D2,$A9,$00,$D4,$A9,$00,$D6;80BACD;      ;
-                       db $A9,$00,$A6,$A8,$00,$A8,$A8,$00,$AA,$A8,$00,$AC,$A8,$00,$AE,$A8;80BADD;      ;
-                       db $00,$B0,$A8,$00,$B2,$A8,$00,$B4,$A8,$00,$B6,$A8,$00,$B8,$A8,$00;80BAED;      ;
-                       db $8E,$A9,$00,$B6,$A9,$00,$A4,$A8,$00,$92,$A9,$00,$90,$A9,$00,$A6;80BAFD;      ;
-                       db $A9,$00,$A8,$A9,$00,$AA,$A9,$00,$AC,$A9,$00,$9C,$A9,$00,$9E,$A9;80BB0D;      ;
-                       db $00,$A0,$A9,$00,$A2,$A9,$00,$94,$A9,$00,$96,$A9,$00,$98,$A9,$00;80BB1D;      ;
-                       db $9A,$A9,$00,$AE,$A9,$00,$B0,$A9,$00,$B2,$A9,$00,$B4,$A9,$00,$A4;80BB2D;      ;
-                       db $A9,$00,$DE,$A9,$00,$E0,$A9,$00,$D8,$A9,$00,$DA,$A9,$00,$8C,$A9;80BB3D;      ;
-                       db $00,$DC,$A9,$00,$E2,$A9,$00,$E4,$A9,$00,$E6,$A9,$00,$E8,$A9;80BB4D;      ;
+PalettePointerTable: dl Palette01                         ;80B9FD;A89400;1
+                     dl Palette02                         ;80BA00;A89600;2
+                     dl Palette03                         ;80BA03;A89800;3
+                     dl Palette04                         ;80BA06;A88A00;4
+                     dl GFX_A88C00                        ;80BA09;A88C00;5
+                     dl GFX_A88E00                        ;80BA0C;A88E00;6
+                     dl GFX_A89000                        ;80BA0F;A89000;7
+                     dl GFX_A89200                        ;80BA12;A89200;8
+                     dl GFX_A88000                        ;80BA15;A88000;9
+                     dl GFX_A88200                        ;80BA18;A88200;A
+                     dl GFX_A88400                        ;80BA1B;A88400;B
+                     dl GFX_A88600                        ;80BA1E;A88600;C
+                     dl GFX_A88800                        ;80BA21;A88800;D
+                     dl GFX_A89A00                        ;80BA24;A89A00;E
+                     dl GFX_A89C00                        ;80BA27;A89C00;F
+                     dl GFX_A89E00                        ;80BA2A;A89E00;10
+                     dl GFX_A8A000                        ;80BA2D;A8A000;11
+                     dl GFX_A8A200                        ;80BA30;A8A200;12
+                     dl GFX_A8F400                        ;80BA33;A8F400;13
+                     dl GFX_A8F800                        ;80BA36;A8F800;14
+                     dl GFX_A8FA00                        ;80BA39;A8FA00;15
+                     dl GFX_A8FC00                        ;80BA3C;A8FC00;16
+                     dl GFX_A8BA00                        ;80BA3F;A8BA00;17
+                     dl GFX_A8BC00                        ;80BA42;A8BC00;18
+                     dl GFX_A8BE00                        ;80BA45;A8BE00;19
+                     dl GFX_A8C000                        ;80BA48;A8C000;1A
+                     dl GFX_A8C200                        ;80BA4B;A8C200;1B
+                     dl GFX_A8C600                        ;80BA4E;A8C600;1C
+                     dl GFX_A8C800                        ;80BA51;A8C800;1D
+                     dl GFX_A8CA00                        ;80BA54;A8CA00;1F
+                     dl GFX_A98000                        ;80BA57;A98000;20
+                     dl GFX_A98200                        ;80BA5A;A98200;21
+                     dl GFX_A98400                        ;80BA5D;A98400;22
+                     dl GFX_A98600                        ;80BA60;A98600;23
+                     dl GFX_A8F600                        ;80BA63;A8F600;24
+                     dl GFX_A8C400                        ;80BA66;A8C400;25
+                     dl GFX_A98A00                        ;80BA69;A98A00;26
+                     dl GFX_A98800                        ;80BA6C;A98800;27
+                     dl GFX_A8FE00                        ;80BA6F;A8FE00;28
+                     dl GFX_A8CC00                        ;80BA72;A8CC00;29
+                     dl GFX_A8CE00                        ;80BA75;A8CE00;2A
+                     dl GFX_A8D000                        ;80BA78;A8D000;2B
+                     dl GFX_A8D200                        ;80BA7B;A8D200;2C
+                     dl GFX_A8D400                        ;80BA7E;A8D400;2D
+                     dl GFX_A8EA00                        ;80BA81;A8EA00;2E
+                     dl GFX_A8EC00                        ;80BA84;A8EC00;2F
+                     dl GFX_A8EE00                        ;80BA87;A8EE00;30
+                     dl GFX_A8F000                        ;80BA8A;A8F000;31
+                     dl GFX_A8F200                        ;80BA8D;A8F200;32
+                     dl GFX_A8D600                        ;80BA90;A8D600;33
+                     dl GFX_A8D800                        ;80BA93;A8D800;34
+                     dl GFX_A8DA00                        ;80BA96;A8DA00;35
+                     dl GFX_A8DC00                        ;80BA99;A8DC00;36
+                     dl GFX_A8DE00                        ;80BA9C;A8DE00;37
+                     dl GFX_A8E000                        ;80BA9F;A8E000;38
+                     dl GFX_A8E200                        ;80BAA2;A8E200;39
+                     dl GFX_A8E400                        ;80BAA5;A8E400;3A
+                     dl GFX_A8E600                        ;80BAA8;A8E600;3B
+                     dl GFX_A8E800                        ;80BAAB;A8E800;3C
+                     dl GFX_A9C800                        ;80BAAE;A9C800;3D
+                     dl GFX_A9CA00                        ;80BAB1;A9CA00;3E
+                     dl GFX_A9CC00                        ;80BAB4;A9CC00;3F
+                     dl GFX_A9CE00                        ;80BAB7;A9CE00;40
+                     dl GFX_A9B800                        ;80BABA;A9B800;41
+                     dl GFX_A9BA00                        ;80BABD;A9BA00;42
+                     dl GFX_A9BC00                        ;80BAC0;A9BC00;43
+                     dl GFX_A9BE00                        ;80BAC3;A9BE00;44
+                     dl GFX_A9C000                        ;80BAC6;A9C000;45
+                     dl GFX_A9C200                        ;80BAC9;A9C200;46
+                     dl GFX_A9C400                        ;80BACC;A9C400;47
+                     dl GFX_A9C600                        ;80BACF;A9C600;48
+                     dl GFX_A9D000                        ;80BAD2;A9D000;49
+                     dl GFX_A9D200                        ;80BAD5;A9D200;4A
+                     dl GFX_A9D400                        ;80BAD8;A9D400;4B
+                     dl GFX_A9D600                        ;80BADB;A9D600;4C
+                     dl GFX_A8A600                        ;80BADE;A8A600;4D
+                     dl GFX_A8A800                        ;80BAE1;A8A800;4E
+                     dl GFX_A8AA00                        ;80BAE4;A8AA00;4F
+                     dl GFX_A8AC00                        ;80BAE7;A8AC00;50
+                     dl GFX_A8AE00                        ;80BAEA;A8AE00;51
+                     dl GFX_A8B000                        ;80BAED;A8B000;52
+                     dl GFX_A8B200                        ;80BAF0;A8B200;53
+                     dl GFX_A8B400                        ;80BAF3;A8B400;54
+                     dl GFX_A8B600                        ;80BAF6;A8B600;55
+                     dl GFX_A8B800                        ;80BAF9;A8B800;56
+                     dl GFX_A98E00                        ;80BAFC;A98E00;57
+                     dl GFX_A9B600                        ;80BAFF;A9B600;58
+                     dl GFX_A8A400                        ;80BB02;A8A400;59
+                     dl GFX_A99200                        ;80BB05;A99200;5A
+                     dl GFX_A99000                        ;80BB08;A99000;5B
+                     dl GFX_A9A600                        ;80BB0B;A9A600;5C
+                     dl GFX_A9A800                        ;80BB0E;A9A800;5D
+                     dl GFX_A9AA00                        ;80BB11;A9AA00;5E
+                     dl GFX_A9AC00                        ;80BB14;A9AC00;5F
+                     dl GFX_A99C00                        ;80BB17;A99C00;60
+                     dl GFX_A99E00                        ;80BB1A;A99E00;61
+                     dl GFX_A9A000                        ;80BB1D;A9A000;62
+                     dl GFX_A9A200                        ;80BB20;A9A200;63
+                     dl GFX_A99400                        ;80BB23;A99400;64
+                     dl GFX_A99600                        ;80BB26;A99600;65
+                     dl GFX_A99800                        ;80BB29;A99800;66
+                     dl GFX_A99A00                        ;80BB2C;A99A00;67
+                     dl GFX_A9AE00                        ;80BB2F;A9AE00;68
+                     dl GFX_A9B000                        ;80BB32;A9B000;69
+                     dl GFX_A9B200                        ;80BB35;A9B200;6A
+                     dl GFX_A9B400                        ;80BB38;A9B400;6B
+                     dl GFX_A9A400                        ;80BB3B;A9A400;6C
+                     dl GFX_A9DE00                        ;80BB3E;A9DE00;6D
+                     dl GFX_A9E000                        ;80BB41;A9E000;6E
+                     dl GFX_A9D800                        ;80BB44;A9D800;6F
+                     dl CG_Natsume_Title                  ;80BB47;A9DA00;70
+                     dl GFX_A98C00                        ;80BB4A;A98C00;71
+                     dl GFX_A9DC00                        ;80BB4D;A9DC00;72
+                     dl GFX_A9E200                        ;80BB50;A9E200;73
+                     dl GFX_A9E400                        ;80BB53;A9E400;74
+                     dl GFX_A9E600                        ;80BB56;A9E600;75
+                     dl GFX_A9E800                        ;80BB59;A9E800;76
                                                             ;      ;      ;
          Time_Palette_Table: db $00,$01,$02,$06,$07,$FF,$03,$04,$05,$06,$07,$FF,$08,$09,$0A,$0B;80BB5C;      ;
                        db $0C,$FF,$0D,$0E,$0F,$10,$11,$FF,$FF,$12,$13,$14,$15,$FF,$FF,$16;80BB6C;      ;
