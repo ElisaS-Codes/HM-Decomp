@@ -6610,7 +6610,7 @@ FarmMapPointerTable: dl $A78000,$A78000,$A78000,$A78000,$A79600,$A79600,$A79600,
                        JSL.L UNK_Audio5;82D335;8095DE;
                        %Set8bit(!M)                             ;82D339;      ;
                        LDA.W !transition_dest                          ;82D33B;00098B;
-                       JSL.L A5555                           ;82D33E;80972C;
+                       JSL.L SUB_80972C                           ;82D33E;80972C;
                        %Set16bit(!MX)                             ;82D342;      ;
                        LDY.W #$0000                         ;82D344;      ;
                                                             ;      ;      ;
@@ -6980,7 +6980,7 @@ FarmMapPointerTable: dl $A78000,$A78000,$A78000,$A78000,$A79600,$A79600,$A79600,
                        JSL.L UNK_Audio5;82D6B7;8095DE;
                        %Set8bit(!M)                             ;82D6BB;      ;
                        LDA.W !transition_dest                          ;82D6BD;00098B;
-                       JSL.L A5555                           ;82D6C0;80972C;
+                       JSL.L SUB_80972C                           ;82D6C0;80972C;
                        %Set16bit(!MX)                             ;82D6C4;      ;
                        LDY.W #$0000                         ;82D6C6;      ;
                                                             ;      ;      ;
@@ -7258,7 +7258,7 @@ IntroScreen: ;82D75E
                        STA.W $0117                          ;82D92E;000117;
                        %Set8bit(!M)                             ;82D931;      ;
                        LDA.W !transition_dest                          ;82D933;00098B;
-                       JSL.L A5555                           ;82D936;80972C;
+                       JSL.L SUB_80972C                           ;82D936;80972C;
                        %Set16bit(!MX)                             ;82D93A;      ;
                        LDY.W #$0000                         ;82D93C;      ;
                                                             ;      ;      ;

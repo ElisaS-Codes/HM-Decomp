@@ -101,6 +101,7 @@ Bank 80
 ❓809671 - UNK_PrepareScreenTransition
 ❓8096D3 - UNK_ScreenTransition
 ✅80972B - ScreenTransitionReturn
+❓80972C - SUB_80972C
 ❓809A64 - SUB_809A64
 ❓809D0B - SUB_809D0B
 ❓809EBC - SUB_809EBC

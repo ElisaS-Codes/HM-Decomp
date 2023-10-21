@@ -13,6 +13,8 @@ where I have a headache. Most real info is on ram.asm
 
 🛠️$7E0000 = !NMI_Status - 8b
 
+🎨!palette_change_pointer = $04 - 24b
+
 🎨$7E0020 = !BG_subpixel_offset_X - 8b
 🎨$7E0021 = !BG_subpixel_offset_Y - 8b
 🎨$7E0022 = !tilemap_to_load - 8b
@@ -62,6 +64,9 @@ where I have a headache. Most real info is on ram.asm
 🗺$7E0146 = !BG3_Map_Offset_Y - 16b
 🗑$7E0148 - 16b ;set as 0 in two places
 
+🎨$7E017A = !palette_change_countdow - 8b
+🎨$7E017B = !palette_to_load - 8b
+🎨$7E017C = !next_hourly_palette - 8b
 🛠️$7E017D = !transition_dest_X - 16b
 🛠️$7E017F = !transition_dest_Y - 16b
 

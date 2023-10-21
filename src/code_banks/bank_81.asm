@@ -4352,7 +4352,7 @@ UNK_ExecuteFromPointers:
          DATA8_00AC7E: RTS                                  ;81AC7E;      ;
          DATA8_00AC7F: RTS                                  ;81AC7F;      ;
 
-         DATA8_00AC80: REP #$30                             ;81AC80;      ;
+         DATA8_00AC80: %Set16bit(!MX)                             ;81AC80;      ;
                        LDA.W $0196                          ;81AC82;000196;
                        AND.W #$0002                         ;81AC85;      ;
                        BNE CODE_81ACB7                      ;81AC88;81ACB7;

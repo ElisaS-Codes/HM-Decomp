@@ -1,7 +1,4 @@
-                       ;      ;      ;
-                       ;      ;      ;
-                       ;      ;      ;
-                       ;      ;      ;
+
                        EMPTY_FFFFFF = $FFFFFF
                        DATA8_00BE44 = $00BE44               ;      ;      ;
                        DATA8_00BEEC = $00BEEC               ;      ;      ;
