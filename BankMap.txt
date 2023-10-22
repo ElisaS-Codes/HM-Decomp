@@ -94,8 +94,8 @@ Bank 80
 ❓809380 - SUB_809380
 ❓809392 - SUB_809392
 ❓8093A3 - SUB_8093A3
-❓809501 - SUB_809501
-❓809553 - SUB_809553
+❓809501 - SetPaletteToLoad
+❓809553 - CallIndexedSubrutines
 ❓8095B3 - AutoMapScrolling
 ❓8095DE - UNK_Audio5
 ❓809671 - UNK_PrepareScreenTransition
@@ -131,7 +131,7 @@ Bank 80
 💾80BE44 - UNK_Table11
 💾80BEEC - Subrutines_Table
 ❓80C36C - 80DD5A - Subrutines called from Subrutines_Table
-💾80DD5B - UNK_RainTable
+💾80DD5B - UNK_Pointer42_Table
 
 Bank 81
 ...
@@ -144,7 +144,7 @@ Bank 81
 Bank 82
 ❔828000 - UpdateTime
 ✅8280AA - HaveLunch
-❔828131 - SaleScene
+❔828131 - ShippingScene
 ❓828165 - SUB_828165
 ❓8281C0 - SUB_8281C0
 ❓8281FD - UNK_Table6

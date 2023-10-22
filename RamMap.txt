@@ -240,8 +240,6 @@ where I have a headache. Most real info is on ram.asm
 🧢$7F1F43 = !kid2_name_sort_3 - 8b
 🧢$7F1F44 = !kid2_name_sort_4 - 8b
 
-🧢$7F1F3B = !wife_pregnancy - 16b
-
 🧢$7F1F4A = !shipped_corn - 16b
 🧢$7F1F4C = !shipped_tomatoes - 16b
 🧢$7F1F4E = !shipped_turnips - 16b

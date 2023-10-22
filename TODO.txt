@@ -9,8 +9,6 @@ Subrutines_Table
 SUB_809EBC - SUB_80A152 Big BG/OBJ offset movemetn block
 LoadFirstHalfPaletteToWRAM
 
-090B temp bg pos?
-
 
 SetWeatherFlag More weather?
 NightReset
@@ -19,9 +17,9 @@ CHHHH
 Unk_Seasons2
 SUB_828209
 CODE_84803F
-SUB_809501
+SetPaletteToLoad
 ZeroesPartial42Pointers
-SUB_809553
+CallIndexedSubrutines
 UNK_PartialMap
 UNK_OperatesOnSeasonTable
 
@@ -335,7 +333,7 @@ $7F1F49 - (0)
 
 These resets at night
 $7F1F5A - (flags? $8000 related to time. #$0400 related to time too)
-???? ???? -
+???? b??? - b:shipping bin something there
 ???? ???? -
 $7F1F5C - (some kind of flag, related to palettes?)
 ???? ????

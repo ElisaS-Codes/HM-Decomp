@@ -1594,7 +1594,7 @@ SetsBrightness: ;808E2D
         RTL
 
 ;;;;;;;; Sets a number of values and a pointer, indexed by X
-;;;;;;;; Params in A, Y, X, 72: pointer to UNK_RainTable
+;;;;;;;; Params in A, Y, X, 72: pointer to UNK_Pointer42_Table
 UNK_SetPointer42: ;808E48
         %Set8bit(!MX)
         STA.W $015A,X
@@ -1626,10 +1626,11 @@ UNK_BigLoop: ;808E69
         %Set16bit(!M)
         LDA.W $0196
         AND.W #$000A                         ;FLAG196 snowy or raining
-        BNE +
+        BNE .snowyorrainy
         LDY.W #$0004
 
-      + %Set16bit(!M)
+    .snowyorrainy:
+        %Set16bit(!M)
         TYA
         STA.B $7E
         ASL A
@@ -1637,15 +1638,15 @@ UNK_BigLoop: ;808E69
         ADC.B $7E                            ;mult by 3, either 0 or 4
         TAX
         LDA.B $42,X
-        BNE .CODE_808E9D
+        BNE .pointerset
         %Set8bit(!M)
         LDA.B $44,X
-        BNE .CODE_808E9D
+        BNE .pointerset
         CPY.W #$0004
         BCC .smallloop
         JMP.W .CODE_808F2C
 
-    .CODE_808E9D:
+    .pointerset:
         %Set8bit(!M)
         LDA.B #$01
         STA.B $93
@@ -1856,7 +1857,7 @@ SetTimeofDayPalette: ;808FC7
         BCC .before6PM
         %Set16bit(!M)
         LDA.W #$0B00
-        STA.B $04
+        STA.B !palette_change_pointer
         %Set8bit(!M)
         LDA.B #$7F
         STA.B $06
@@ -1870,7 +1871,7 @@ SetTimeofDayPalette: ;808FC7
         ADC.B $7E
         TAX
         LDA.L PalettePointerTable,X
-        STA.B $04
+        STA.B !palette_change_pointer
         INX
         INX
         %Set8bit(!M)
@@ -1894,7 +1895,7 @@ TransitionTimeofDayPalettes: ;80900C
 
     .timenotrunning:
         %Set16bit(!M)
-        LDA.B $04
+        LDA.B !palette_change_pointer
         BNE .pointerset
         %Set8bit(!M)
         LDA.B $06
@@ -1946,7 +1947,7 @@ TransitionTimeofDayPalettes: ;80900C
         LDA.L $7F0D00,X
         AND.W #$001F                         ;separate red
         STA.B $7E
-        LDA.B [$04],Y
+        LDA.B [!palette_change_pointer],Y
         AND.W #$001F
         CMP.B $7E
         BEQ .comparegreen                    ;color achieved
@@ -1972,7 +1973,7 @@ TransitionTimeofDayPalettes: ;80900C
         LSR A
         LSR A
         STA.B $80
-        LDA.B [$04],Y
+        LDA.B [!palette_change_pointer],Y
         AND.W #$03E0
         LSR A
         LSR A
@@ -2008,7 +2009,7 @@ TransitionTimeofDayPalettes: ;80900C
         LSR A
         LSR A
         STA.B $82
-        LDA.B [$04],Y
+        LDA.B [!palette_change_pointer],Y
         AND.W #$7C00
         LSR A
         LSR A
@@ -2083,21 +2084,21 @@ TransitionTimeofDayPalettes: ;80900C
 
         .return: RTL
 
-;;;;;;;; Resets $04 and moves the next hour's palettes index
+;;;;;;;; Resets !palette_change_pointer and moves the next hour's palettes index
 ClearsTimeofDayPaletteIndexandSetsNext: ;809157
         %Set16bit(!M)
-        STZ.B $04
+        STZ.B !palette_change_pointer
         %Set8bit(!M)
         STZ.B $06
         LDA.W $017C
-        STA.W $017B
+        STA.W !palette_to_load
 
         RTL
 
-;;;;;;;; Resets $04
+;;;;;;;; Resets !palette_change_pointer
 ClearsTimeofDayPalette: ;809166
         %Set16bit(!MX)
-        STZ.B $04
+        STZ.B !palette_change_pointer
         %Set8bit(!M)
         STZ.B $06
 
@@ -2368,7 +2369,7 @@ ChangePalettebyTime: ;8092E2
         LDA.B #$00
         XBA
         LDA.L Time_Palette_Table,X
-        STA.W $017B
+        STA.W !palette_to_load
         %Set16bit(!M)
         JSL.L LoadFirstHalfPaletteToWRAM
 
@@ -2621,108 +2622,111 @@ SUB_8093A3: ;8093A3
         returnAAAA: RTL                                  ;809500;      ;END_AAAA
 
 ;;;;;;;;
-SUB_809501: ;809501
-        %Set8bit(!M)                             ;      ;
-        %Set16bit(!X)                             ;809503;      ;
-        LDX.W #$0000                         ;809505;      ;
-        LDA.L !hour                        ;809508;7F1F1C;
-        CMP.B #$07                           ;80950C;      ;
-        BCC CODE_809520                      ;80950E;809520;
-        INX                                  ;809510;      ;
-        CMP.B #$0F                           ;809511;      ;
-        BCC CODE_809520                      ;809513;809520;
-        INX                                  ;809515;      ;
-        CMP.B #$11                           ;809516;      ;
-        BCC CODE_809520                      ;809518;809520;
-        INX                                  ;80951A;      ;
-        CMP.B #$12                           ;80951B;      ;
-        BCC CODE_809520                      ;80951D;809520;
-        INX                                  ;80951F;      ;
-                                            ;      ;      ;
-        CODE_809520: STX.B $7E                            ;809520;00007E;
-        LDA.B #$00                           ;809522;      ;
-        XBA                                  ;809524;      ;
-        LDA.B !tilemap_to_load                            ;809525;000022;
-        %Set16bit(!M)                             ;809527;      ;
-        STA.B $80                            ;809529;000080;
-        ASL A                                ;80952B;      ;
-        ASL A                                ;80952C;      ;
-        CLC                                  ;80952D;      ;
-        ADC.B $80                            ;80952E;000080;
-        ADC.B $80                            ;809530;000080;
-        ADC.B $7E                            ;809532;00007E;
-        TAX                                  ;809534;      ;
-        %Set8bit(!M)                             ;809535;      ;
-        LDA.B #$00                           ;809537;      ;
-        XBA                                  ;809539;      ;
-        LDA.L Time_Palette_Table,X                 ;80953A;80BB5C;
-        CMP.W $017B                          ;80953E;00017B;
-        BEQ CODE_809552                      ;809541;809552;
-        CMP.B #$FF                           ;809543;      ;
-        BEQ CODE_809552                      ;809545;809552;
-        PHA                                  ;809547;      ;
-        JSL.L SetTimeofDayPalette;809548;808FC7;
-        %Set8bit(!M)                             ;80954C;      ;
-        PLA                                  ;80954E;      ;
-        STA.W $017B                          ;80954F;00017B;
+SetPaletteToLoad: ;809501
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDX.W #$0000
+        LDA.L !hour
+        CMP.B #7
+        BCC .hourfound
+        INX
+        CMP.B #15
+        BCC .hourfound
+        INX
+        CMP.B #17
+        BCC .hourfound
+        INX
+        CMP.B #18
+        BCC .hourfound
+        INX
 
-        CODE_809552: RTL                                  ;809552;      ;END_SUB_809501
+    .hourfound:
+        STX.B $7E
+        LDA.B #$00
+        XBA
+        LDA.B !tilemap_to_load
+        %Set16bit(!M)
+        STA.B $80
+        ASL A
+        ASL A
+        CLC
+        ADC.B $80
+        ADC.B $80                           ;tilemap_to_load * 6
+        ADC.B $7E                           ; + hour found index
+        TAX
+        %Set8bit(!M)
+        LDA.B #$00
+        XBA
+        LDA.L Time_Palette_Table,X
+        CMP.W !palette_to_load
+        BEQ .return
+        CMP.B #$FF
+        BEQ .return
+        PHA
+        JSL.L SetTimeofDayPalette
+        %Set8bit(!M)
+        PLA
+        STA.W !palette_to_load
+
+        .return: RTL
 
 ;;;;;;;;
-SUB_809553: ;809553
-        %Set8bit(!M)                             ;      ;
-        %Set16bit(!X)                             ;809555;      ;
-        LDX.W #$0000                         ;809557;      ;
-        LDA.L !hour                        ;80955A;7F1F1C;Hour
-        CMP.B #$07                           ;80955E;      ;
-        BCC .timeFound                       ;809560;809572;Before 7AM
-        INX                                  ;809562;      ;
-        CMP.B #$0F                           ;809563;      ;
-        BCC .timeFound                       ;809565;809572;Before 3PM
-        INX                                  ;809567;      ;
-        CMP.B #$11                           ;809568;      ;
-        BCC .timeFound                       ;80956A;809572;Before 5PM
-        INX                                  ;80956C;      ;
-        CMP.B #$12                           ;80956D;      ;
-        BCC .timeFound                       ;80956F;809572;Before 6PM
-        INX                                  ;809571;      ;
+CallIndexedSubrutines: ;809553
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDX.W #$0000
+        LDA.L !hour
+        CMP.B #07
+        BCC .timeFound
+        INX
+        CMP.B #15
+        BCC .timeFound
+        INX
+        CMP.B #17
+        BCC .timeFound
+        INX
+        CMP.B #18
+        BCC .timeFound
+        INX
 
-        .timeFound: STX.B $7E                            ;809572;00007E;
-        LDA.B #$00                           ;809574;      ;
-        XBA                                  ;809576;      ;
-        LDA.B !tilemap_to_load                            ;809577;000022;
-        %Set16bit(!M)                             ;809579;      ;
-        STA.B $80                            ;80957B;000080;
-        ASL A                                ;80957D;      ;
-        ASL A                                ;80957E;      ;
-        CLC                                  ;80957F;      ;
-        ADC.B $80                            ;809580;000080;
-        ADC.B $80                            ;809582;000080;
-        STA.B $80                            ;809584;000080;
-        ASL A                                ;809586;      ;
-        CLC                                  ;809587;      ;
-        ADC.W #$000A                         ;809588;      ;
-        TAX                                  ;80958B;      ;
-        LDA.W Subrutines_Table,X                 ;80958C;00BEEC;
-        CMP.W #$FFFF                         ;80958F;      ;
-        BEQ .skipSeasonCheck                 ;809592;80959E;
-        %Set8bit(!M)                             ;809594;      ;
-        LDA.L !season                        ;809596;7F1F19;Season
-        CMP.B #$02                           ;80959A;      ;
-        BCC .return                          ;80959C;8095B2;
+    .timeFound:
+        STX.B $7E
+        LDA.B #$00
+        XBA
+        LDA.B !tilemap_to_load
+        %Set16bit(!M)
+        STA.B $80
+        ASL A
+        ASL A
+        CLC
+        ADC.B $80
+        ADC.B $80
+        STA.B $80                           ; * 6
+        ASL A
+        CLC
+        ADC.W #$000A                        ; + #10
+        TAX
+        LDA.W Subrutines_Table,X
+        CMP.W #$FFFF
+        BEQ .skipSeasonCheck
+        %Set8bit(!M)
+        LDA.L !season
+        CMP.B #$02
+        BCC .return                         ;Spring or Summer
 
-        .skipSeasonCheck: %Set16bit(!M)                             ;80959E;      ;
-        LDA.B $80                            ;8095A0;000080;
-        CLC                                  ;8095A2;      ;
-        ADC.B $7E                            ;8095A3;00007E;
-        ASL A                                ;8095A5;      ;
-        TAX                                  ;8095A6;      ;
-        LDA.W Subrutines_Table,X                 ;8095A7;00BEEC;
-        CMP.W #$FFFF                         ;8095AA;      ;
-        BEQ .return                          ;8095AD;8095B2;
-        JSR.W (Subrutines_Table,X)                ;8095AF;80BEEC;
+    .skipSeasonCheck:
+        %Set16bit(!M)
+        LDA.B $80
+        CLC
+        ADC.B $7E
+        ASL A
+        TAX
+        LDA.W Subrutines_Table,X
+        CMP.W #$FFFF
+        BEQ .return
+        JSR.W (Subrutines_Table,X)
 
-        .return: RTL                                  ;8095B2;      ;END_SUB_809553
+        .return: RTL
 
 ;;;;;;;;
 AutoMapScrolling: ;8095B3
@@ -3108,7 +3112,7 @@ SUB_80972C: ;80972C
         JSL.L TilemapManager           ;8098B5;80A7C6;
         JSL.L ChangePalettebyTime                           ;8098B9;8092E2;
         JSL.L SUB_809329                           ;8098BD;809329;
-        JSL.L SUB_809553                           ;8098C1;809553;
+        JSL.L CallIndexedSubrutines                           ;8098C1;809553;
         JSL.L SUB_809241                           ;8098C5;809241;
         JSL.L UNK_BigLoop                    ;8098C9;808E69;
         %Set8bit(!M)                             ;8098CD;      ;
@@ -5822,7 +5826,7 @@ PalettePointerTable: dl Palette01                         ;80B9FD;A89400;1
 incsrc "src/code_banks/bank_80_pointersubrutines.asm"
                                                             ;      ;      ;
 
-        UNK_RainTable: db $79,$7F,$10,$11,$3A,$10,$8E,$6A,$10,$0D,$5E,$10,$D2,$6A,$10,$0D;80DD5B;      ;
+UNK_Pointer42_Table: db $79,$7F,$10,$11,$3A,$10,$8E,$6A,$10,$0D,$5E,$10,$D2,$6A,$10,$0D;80DD5B;      ;
                        db $5E,$10,$8E,$6A,$10,$11,$3A,$10,$FE,$FF,$5B,$DD,$80,$D2,$6A,$10;80DD6B;      ;
                        db $8E,$6A,$10,$0D,$5E,$10,$D2,$6A,$10,$11,$3A,$10,$D2,$6A,$10,$0D;80DD7B;      ;
                        db $5E,$10,$8E,$6A,$10,$FE,$FF,$78,$DD,$80,$8E,$6A,$10,$0D,$5E,$10;80DD8B;      ;

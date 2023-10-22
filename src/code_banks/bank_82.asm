@@ -1,225 +1,226 @@
 ORG $828000
 
-;;;;;;;
+;;;;;;; Updates current time and calls hour related functions
 UpdateTime: ;828000
-       %Set8bit(!M)
-       %Set16bit(!X)
-       LDA.W !time_running
-       AND.B #$02                            ;advance to next day
-       BEQ +
-       JMP.W NightReset
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDA.W !time_running
+        AND.B #$02                            ;advance to next day
+        BEQ +
+        JMP.W NightReset
 
-     + LDA.W !time_running
-       AND.B #$01                            ;clock stopped
-       BNE +
-       JMP.W .return
+    + LDA.W !time_running
+        AND.B #$01                            ;clock stopped
+        BNE +
+        JMP.W .return
 
-     + %Set16bit(!M)
-       LDA.L $7F1F5A
-       AND.W #$0400                          ;FLAG5A
-       BEQ +
-       JMP.W SUB_828165                     ;TODO
+    + %Set16bit(!M)
+        LDA.L $7F1F5A
+        AND.W #$0400                          ;FLAG5A
+        BEQ +
+        JMP.W SUB_828165                      ;TODO
 
-     + %Set8bit(!M)
-       LDA.L !seconds
-       INC A
-       STA.L !seconds
-       CMP.B #60
-       BNE .noTimeUpdate
-       LDA.B #$00
-       STA.L !seconds
-       LDA.L !minutes
-       INC A
-       STA.L !minutes
-       CMP.B #15
-       BNE .noTimeUpdate
-       LDA.B #$00
-       STA.L !minutes
-       LDA.L !hour
-       CMP.B #18
-       BEQ .noTimeUpdate
-       INC A
-       STA.L !hour
-       JSL.L HaveLunch
-       JSL.L SaleScene
-       %Set8bit(!M)
-       LDA.L !hour
-       CMP.B #18
-       BEQ .hour6PM
-       BRA .noTimeUpdate
+    + %Set8bit(!M)
+        LDA.L !seconds
+        INC A
+        STA.L !seconds
+        CMP.B #60
+        BNE .noTimeUpdate
+        LDA.B #$00
+        STA.L !seconds
+        LDA.L !minutes
+        INC A
+        STA.L !minutes
+        CMP.B #15
+        BNE .noTimeUpdate
+        LDA.B #$00
+        STA.L !minutes
+        LDA.L !hour
+        CMP.B #18
+        BEQ .noTimeUpdate
+        INC A
+        STA.L !hour
+        JSL.L HaveLunch
+        JSL.L ShippingScene
+        %Set8bit(!M)
+        LDA.L !hour
+        CMP.B #18
+        BEQ .hour6PM
+        BRA .noTimeUpdate
 
     .hour6PM:
-       %Set16bit(!M)
-       LDA.L $7F1F5E
-       AND.W #$8000                          ;FLAGS5E
-       BNE .noTimeUpdate
-       %Set8bit(!M)
-       LDA.B #$FF
-       STA.W $0117
-       JSL.L UNK_Audio25
-       %Set8bit(!M)
-       LDA.B #$FF
-       STA.W $0110
+        %Set16bit(!M)
+        LDA.L $7F1F5E
+        AND.W #$8000                          ;FLAGS5E
+        BNE .noTimeUpdate
+        %Set8bit(!M)
+        LDA.B #$FF
+        STA.W $0117
+        JSL.L UNK_Audio25
+        %Set8bit(!M)
+        LDA.B #$FF
+        STA.W $0110
 
     .noTimeUpdate:
-       %Set8bit(!M)
-       LDA.W $017B                           ;something to do with text?
-       PHA
-       JSL.L SUB_809501
-       %Set8bit(!M)
-       PLA
-       CMP.W $017B
-       BEQ .return
-       LDY.W #$0004
-       JSL.L ZeroesPartial42Pointers            ;TODO
-       JSL.L SUB_809553                           ;TODO
+        %Set8bit(!M)
+        LDA.W !palette_to_load
+        PHA
+        JSL.L SetPaletteToLoad
+        %Set8bit(!M)
+        PLA
+        CMP.W !palette_to_load
+        BEQ .return
+        LDY.W #$0004
+        JSL.L ZeroesPartial42Pointers         ;TODO
+        JSL.L CallIndexedSubrutines           ;TODO
 
     .return:
-       RTL
+        RTL
 
-;;;;;;;;
+;;;;;;; Increases stamina and plays eating animation
 HaveLunch: ;8280AA
-       %Set8bit(!M)
-       %Set16bit(!X)
-       LDA.L !hour
-       CMP.B #12
-       BEQ .12pm
-       JMP.W .return
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDA.L !hour
+        CMP.B #12
+        BEQ .12pm
+        JMP.W .return
 
     .12pm:
-       %Set8bit(!M)
-       LDA.B #20
-       JSL.L ChangeStamina
-       %Set16bit(!M)
-       LDA.B !game_state
-       AND.W #$0430                          ;FLAGD2
-       BEQ .actionchecks
-       JMP.W .return
+        %Set8bit(!M)
+        LDA.B #20
+        JSL.L ChangeStamina
+        %Set16bit(!M)
+        LDA.B !game_state
+        AND.W #$0430                          ;FLAGD2
+        BEQ .actionchecks
+        JMP.W .return
 
-   .actionchecks:
-      LDA.B !player_action
-      CMP.W #$000F                           ;Fishing pre casting line
-      BNE .fishing
-      JMP.W .return
+    .actionchecks:
+        LDA.B !player_action
+        CMP.W #$000F                           ;Fishing pre casting line
+        BNE .fishing
+        JMP.W .return
 
-   .fishing:
-      CMP.W #$0010                           ;Fishing casting
-      BNE .fishing2
-      JMP.W .return
+    .fishing:
+        CMP.W #$0010                           ;Fishing casting
+        BNE .fishing2
+        JMP.W .return
 
-   .fishing2:
-      CMP.W #$0011                           ;Fishing waiting
-      BNE .fishing3
-      JMP.W .return
+    .fishing2:
+        CMP.W #$0011                           ;Fishing waiting
+        BNE .fishing3
+        JMP.W .return
 
-   .fishing3:
-      CMP.W #$0012                           ;Fishing biting
-      BNE .fishing4
-      JMP.W .return
+    .fishing3:
+        CMP.W #$0012                           ;Fishing biting
+        BNE .fishing4
+        JMP.W .return
 
-   .fishing4:
-      CMP.W #$0013                           ;Fishing retracting
-      BNE .shorthop
-      JMP.W .return
+    .fishing4:
+        CMP.W #$0013                           ;Fishing retracting
+        BNE .shorthop
+        JMP.W .return
 
-   .shorthop:
-      CMP.W #$0017                           ;Short Hop
-      BNE .midhop
-      JMP.W .return
+    .shorthop:
+        CMP.W #$0017                           ;Short Hop
+        BNE .midhop
+        JMP.W .return
 
-   .midhop:
-      CMP.W #$0018                           ;Mid Hop
-      BNE .CODE_8280FF
-      JMP.W .return
+    .midhop:
+        CMP.W #$0018                           ;Mid Hop
+        BNE .CODE_8280FF
+        JMP.W .return
 
-   .CODE_8280FF:
-      LDA.B !game_state
-      AND.W #$0800                           ;FLAGD2
-      BEQ .CODE_828111
-      JMP.W .return
+    .CODE_8280FF:
+        LDA.B !game_state
+        AND.W #$0800                           ;FLAGD2
+        BEQ .CODE_828111
+        JMP.W .return
 
-   .CODE_828111:
-      %Set8bit(!M)
-      LDA.B #$03
-      JSL.L RNGReturn0toA
-      %Set8bit(!M)
-      STA.W $0924
-      %Set16bit(!MX)
-      LDA.B !game_state
-      ORA.W #$0004                           ;FLAGD2
-      STA.B !game_state
-      %Set16bit(!MX)
-      LDA.B !game_state
-      ORA.W #$0400                           ;FLAGD2
-      STA.B !game_state
+    .CODE_828111:
+        %Set8bit(!M)
+        LDA.B #$03
+        JSL.L RNGReturn0toA
+        %Set8bit(!M)
+        STA.W $0924
+        %Set16bit(!MX)
+        LDA.B !game_state
+        ORA.W #$0004                           ;FLAGD2
+        STA.B !game_state
+        %Set16bit(!MX)
+        LDA.B !game_state                      ;BUG
+        ORA.W #$0400                           ;FLAGD2
+        STA.B !game_state
 
-    .return: RTL
+        .return: RTL
 
-;;;;;;;
-SaleScene: ;828131
-      %Set8bit(!M)
-      %Set16bit(!X)
-      LDA.L !hour
-      CMP.B #17
-      BEQ .salescene
-      JMP.W ReturnSales
+;;;;;;; Plays the scene of the sell if you are in the farm. This subrutine
+;;;;;;; flows into the next one
+ShippingScene: ;828131
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDA.L !hour
+        CMP.B #17
+        BEQ .ShippingScene
+        JMP.W ShippingReturn
 
-   .salescene:
-      LDA.B !tilemap_to_load
-      CMP.B #$04
-      BCS ReturnSales                        ;not on farm return next subrutine
-      LDA.B #$00
-      STA.W !inputstate
-      %Set16bit(!M)
-      LDA.L $7F1F5A
-      ORA.W #$0400                           ;FLAG5A
-      STA.L $7F1F5A
-      LDA.W #$0006
-      LDX.W #$0000
-      LDY.W #$0026
-      JSL.L VIP
-
-;;;;;;;
-SUB_828165: ;828165
-      %Set16bit(!M)
-      LDA.L $7F1F5A
-      AND.W #$0800                           ;FLAG5A
-      BEQ ReturnSales
-      %Set16bit(!MX)
-      LDA.B !game_state
-      AND.W #$0040                           ;FLAGD2
-      BEQ .CODE_82817C
-      JMP.W ReturnSales
-
-   .CODE_82817C:
-      LDA.W #$0002
-      STA.W !inputstate
-      LDX.W #$031A
-      %Set16bit(!M)
-      LDA.L !shipping_moneyL
-      BNE .CODE_828198
-      %Set8bit(!M)
-      LDA.L !shipping_moneyH
-      BNE .CODE_828198
-      LDX.W #$031B
-
-   .CODE_828198:
-      %Set8bit(!M)
-      LDA.B #$00
-      STA.W $0191
-      JSL.L CODE_83935F                      ;TODO
-      %Set16bit(!M)
-      LDA.W #$0006
-      LDX.W #$0000
-      LDY.W #$0027
-      JSL.L CODE_84803F                      ;TODO
-      %Set16bit(!M)
-      LDA.L $7F1F5A
-      AND.W #$FBFF                           ;FLAG5A
-      STA.L $7F1F5A
+    .ShippingScene:
+        LDA.B !tilemap_to_load
+        CMP.B #$04
+        BCS ShippingReturn                  ;not on farm return next subrutine
+        LDA.B #$00
+        STA.W !inputstate
+        %Set16bit(!M)
+        LDA.L $7F1F5A
+        ORA.W #$0400                        ;FLAG5A
+        STA.L $7F1F5A
+        LDA.W #$0006
+        LDX.W #$0000
+        LDY.W #$0026
+        JSL.L VIP
 
 ;;;;;;;;
-ReturnSales: RTL
+SUB_828165: ;828165
+        %Set16bit(!M)
+        LDA.L $7F1F5A
+        AND.W #$0800                        ;FLAG5A
+        BEQ ShippingReturn
+        %Set16bit(!MX)
+        LDA.B !game_state
+        AND.W #$0040                        ;FLAGD2
+        BEQ .CODE_82817C
+        JMP.W ShippingReturn
+
+    .CODE_82817C:
+        LDA.W #$0002
+        STA.W !inputstate                   ;FLAGD2
+        LDX.W #$031A
+        %Set16bit(!M)
+        LDA.L !shipping_moneyL
+        BNE .CODE_828198
+        %Set8bit(!M)
+        LDA.L !shipping_moneyH
+        BNE .CODE_828198
+        LDX.W #$031B
+
+    .CODE_828198:
+        %Set8bit(!M)
+        LDA.B #$00
+        STA.W $0191
+        JSL.L CODE_83935F                      ;TODO
+        %Set16bit(!M)
+        LDA.W #$0006
+        LDX.W #$0000
+        LDY.W #$0027
+        JSL.L CODE_84803F                      ;TODO
+        %Set16bit(!M)
+        LDA.L $7F1F5A
+        AND.W #$FBFF                           ;FLAG5A
+        STA.L $7F1F5A
+
+;;;;;;;; This is the return of the last 2 functions
+ShippingReturn: RTL
 ;;;;;;;;
 SUB_8281C0: ;8281C0
       %Set8bit(!M)
@@ -4209,30 +4210,30 @@ UNK_SomethingGrassSeeds: %Set8bit(!M)                             ;829B9D;      
 
 ;;;;;;;
 LoadFarmMap: ;82A65A
-       !src = $72
-       !srcB = $74
+      !src = $72
+      !srcB = $74
 
-       %Set16bit(!MX)
-       LDX.W #$0000
-       LDA.L FarmMapPointerTable,X
-       STA.B !src
-       INX
-       INX
-       %Set8bit(!M)
-       LDA.L FarmMapPointerTable,X
-       STA.B !srcB
-       %Set8bit(!M)
-       LDY.W #$0000
+      %Set16bit(!MX)
+      LDX.W #$0000
+      LDA.L FarmMapPointerTable,X
+      STA.B !src
+      INX
+      INX
+      %Set8bit(!M)
+      LDA.L FarmMapPointerTable,X
+      STA.B !srcB
+      %Set8bit(!M)
+      LDY.W #$0000
 
-    ;data load
-     - TYX
-       LDA.B [!src],Y
-       STA.L $7EA4E6,X
-       INY
-       CPY.W #$1000
-       BNE -
+   ;data load
+   - TYX
+      LDA.B [!src],Y
+      STA.L $7EA4E6,X
+      INY
+      CPY.W #$1000
+      BNE -
 
-       RTL
+      RTL
 
 
                 CIIII: %Set16bit(!MX)                             ;82A682;      ;
@@ -7044,77 +7045,77 @@ FarmMapPointerTable: dl $A78000,$A78000,$A78000,$A78000,$A79600,$A79600,$A79600,
 
 ;;;;;;;TODO
 IntroScreen: ;82D75E
-       %Set16bit(!MX)
-       %Set8bit(!M)
-       LDA.B #$04
-       STA.W !inputstate
-       %Set8bit(!M)
-       STZ.W $098D
-       %Set16bit(!M)
-       LDA.L $7F1F60
-       AND.W #$0800                          ;FLAG60 Checks for save failed CRC flag
-       BEQ .savefine
+      %Set16bit(!MX)
+      %Set8bit(!M)
+      LDA.B #$04
+      STA.W !inputstate
+      %Set8bit(!M)
+      STZ.W $098D
+      %Set16bit(!M)
+      LDA.L $7F1F60
+      AND.W #$0800                          ;FLAG60 Checks for save failed CRC flag
+      BEQ .savefine
 
-       %Set8bit(!M)
-       LDA.B #$02
-       STA.W $098D
+      %Set8bit(!M)
+      LDA.B #$02
+      STA.W $098D
 
-    .savefine:
-       %Set8bit(!M)
-       LDA.B #$00
-       STA.L $7F1F48
-       STA.L $7F1F49
-       JSL.L LoadFarmMap
-       %Set8bit(!M)
-       LDA.B #$03
-       JSL.L ManageGraphicPresets
-       JSL.L ForceBlank
-       JSL.L ZeroesVRAM
+   .savefine:
+      %Set8bit(!M)
+      LDA.B #$00
+      STA.L $7F1F48
+      STA.L $7F1F49
+      JSL.L LoadFarmMap
+      %Set8bit(!M)
+      LDA.B #$03
+      JSL.L ManageGraphicPresets
+      JSL.L ForceBlank
+      JSL.L ZeroesVRAM
 
-       %Set8bit(!M)
-       LDA.B !natsume_logo
-       STA.B !tilemap_to_load
-       JSL.L TilemapManager
-       %Set16bit(!M)
-       LDA.W #$006E
-       JSL.L LoadFirstHalfPaletteToWRAM
-       %Set8bit(!M)
-       %Set16bit(!X)
-       LDA.B #$00
-       STA.B !ProgDMA_Channel_Index
-       LDA.B !BBADX_DMA_CGRAMPORT
-       STA.B !ProgDMA_Destination_Memory
-       %Set16bit(!M)
-       LDY.W #$0200
-       LDX.W #$0000
-       LDA.W #$DA00
-       STA.B $72
-       %Set8bit(!M)
-       LDA.B #$A9
-       STA.B $74
-       JSL.L AddProgrammedDMA
-       JSL.L StartLastPreparedDMA
-       %Set16bit(!M)
-       STZ.W !BG1_Map_Offset_X
-       STZ.W !BG1_Map_Offset_Y
-       STZ.W !BG2_Map_Offset_X
-       STZ.W !BG2_Map_Offset_Y
-       JSL.L ResetForceBlank
-       JSL.L WaitForNMI
-       %Set8bit(!M)
-       LDA.B #$03
-       STA.B !param1
-       LDA.B #$03
-       STA.B !param2
-       LDA.B #$0F
-       STA.B !param3
-       JSL.L ScreenFadein
-       %Set8bit(!M)
-       STZ.B $97
-       %Set16bit(!M)
-       STZ.B $90
-       LDA.W #$0001
-       STA.B $AF
+      %Set8bit(!M)
+      LDA.B !natsume_logo
+      STA.B !tilemap_to_load
+      JSL.L TilemapManager
+      %Set16bit(!M)
+      LDA.W #$006E
+      JSL.L LoadFirstHalfPaletteToWRAM
+      %Set8bit(!M)
+      %Set16bit(!X)
+      LDA.B #$00
+      STA.B !ProgDMA_Channel_Index
+      LDA.B !BBADX_DMA_CGRAMPORT
+      STA.B !ProgDMA_Destination_Memory
+      %Set16bit(!M)
+      LDY.W #$0200
+      LDX.W #$0000
+      LDA.W #$DA00
+      STA.B $72
+      %Set8bit(!M)
+      LDA.B #$A9
+      STA.B $74
+      JSL.L AddProgrammedDMA
+      JSL.L StartLastPreparedDMA
+      %Set16bit(!M)
+      STZ.W !BG1_Map_Offset_X
+      STZ.W !BG1_Map_Offset_Y
+      STZ.W !BG2_Map_Offset_X
+      STZ.W !BG2_Map_Offset_Y
+      JSL.L ResetForceBlank
+      JSL.L WaitForNMI
+      %Set8bit(!M)
+      LDA.B #$03
+      STA.B !param1
+      LDA.B #$03
+      STA.B !param2
+      LDA.B #$0F
+      STA.B !param3
+      JSL.L ScreenFadein
+      %Set8bit(!M)
+      STZ.B $97
+      %Set16bit(!M)
+      STZ.B $90
+      LDA.W #$0001
+      STA.B $AF
 
     WaitNMI:
        %Set8bit(!M)
