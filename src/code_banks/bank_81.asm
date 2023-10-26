@@ -1039,7 +1039,7 @@
                        JSL.L CODE_81A4F1                    ;81882C;81A4F1;
                        %Set8bit(!M)                             ;818830;      ;
                        STZ.W !item_on_hand                          ;818832;00091D;
-                       JSL.L AEEEE                          ;818835;828FF3;
+                       JSL.L SUB_828FF3                          ;818835;828FF3;
                        RTS                                  ;818839;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -5417,7 +5417,7 @@ BEEEE: ;81BFB7
                        STA.W !tool_selected                          ;81C0A7;000921;
                        PLA                                  ;81C0AA;      ;
                        STA.W !tool_backpack                          ;81C0AB;000923;
-                       JSL.L AEEEE                          ;81C0AE;828FF3;
+                       JSL.L SUB_828FF3                          ;81C0AE;828FF3;
                                                             ;      ;      ;
           CODE_81C0B2: JMP.W ResetIdleAnimatioTimer                    ;81C0B2;81C002;
                                                             ;      ;      ;
@@ -5955,7 +5955,7 @@ BEEEE: ;81BFB7
                        LDA.W $0915                          ;81C536;000915;
                        CMP.W #$FFFF                         ;81C539;      ;
                        BNE CODE_81C542                      ;81C53C;81C542;
-                       JSL.L CODE_829260                    ;81C53E;829260;
+                       JSL.L SUB_829260                    ;81C53E;829260;
                                                             ;      ;      ;
           CODE_81C542: %Set8bit(!M)                             ;81C542;      ;
                        LDA.W $091B                          ;81C544;00091B;
@@ -5963,7 +5963,7 @@ BEEEE: ;81BFB7
                        STA.W $091B                          ;81C548;00091B;
                        CMP.B #$18                           ;81C54B;      ;
                        BNE CODE_81C553                      ;81C54D;81C553;
-                       JSL.L AFFFF                          ;81C54F;828FB1;
+                       JSL.L SUB_828FB1                          ;81C54F;828FB1;
                                                             ;      ;      ;
           CODE_81C553: JMP.W ResetIdleAnimatioTimer                    ;81C553;81C002;
                                                             ;      ;      ;
@@ -7953,7 +7953,7 @@ CODE_81D670: ;81D670
       STA.B !game_state
       %Set8bit(!M)
       STZ.W $0119
-      JSL.L AEEEE
+      JSL.L SUB_828FF3
 
    .return: RTS
 
@@ -9539,7 +9539,7 @@ CODE_81D716: ;81D716
                        JSL.L UNK_Audio24                          ;81E37A;8382FE;
                        %Set8bit(!M)                             ;81E37E;      ;
                        STZ.W $0119                          ;81E380;000119;
-                       JSL.L AEEEE                          ;81E383;828FF3;
+                       JSL.L SUB_828FF3                          ;81E383;828FF3;
                        %Set16bit(!MX)                             ;81E387;      ;
                        LDA.W #$0040                         ;81E389;      ;
                        EOR.W #$FFFF                         ;81E38C;      ;

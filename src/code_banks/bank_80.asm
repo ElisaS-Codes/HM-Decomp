@@ -3108,7 +3108,7 @@ SUB_80972C: ;80972C
         %Set8bit(!M)                             ;8098AC;      ;
         PLA                                  ;8098AE;      ;
         STA.B !tilemap_to_load                            ;8098AF;000022;
-        JSL.L BSSSS                          ;8098B1;82A5FB;
+        JSL.L SUB_82A5FB                          ;8098B1;82A5FB;
         JSL.L TilemapManager           ;8098B5;80A7C6;
         JSL.L ChangePalettebyTime                           ;8098B9;8092E2;
         JSL.L SUB_809329                           ;8098BD;809329;
@@ -3242,7 +3242,7 @@ SUB_80972C: ;80972C
         JSL.L UNK_Audio21                    ;8099EB;83841F;
         JSL.L UNK_Audio20                    ;8099EF;8383A4;
         JSL.L UNK_Audio22                    ;8099F3;838380;
-        JSL.L AEEEE                          ;8099F7;828FF3;
+        JSL.L SUB_828FF3                          ;8099F7;828FF3;
         %Set8bit(!M)                             ;8099FB;      ;
         LDA.W $0110                          ;8099FD;000110;
         STA.W $0117                          ;809A00;000117;
@@ -3609,7 +3609,7 @@ SUB_809A64: ;809A64
         LDA.W $0022                          ;809CD5;000022;
         CMP.B #$04                           ;809CD8;      ;
         BCS .CODE_809CE0                      ;809CDA;809CE0;
-        JSL.L CIIII                          ;809CDC;82A682;
+        JSL.L SUB_82A682                          ;809CDC;82A682;
 
     .CODE_809CE0:
         %Set8bit(!M)                             ;809CE0;      ;
@@ -5824,7 +5824,7 @@ PalettePointerTable: dl Palette01                         ;80B9FD;A89400;1
                        db $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF   ;80BEE4;      ;
 
 incsrc "src/code_banks/bank_80_pointersubrutines.asm"
-                                                            ;      ;      ;
+
 
 UNK_Pointer42_Table: db $79,$7F,$10,$11,$3A,$10,$8E,$6A,$10,$0D,$5E,$10,$D2,$6A,$10,$0D;80DD5B;      ;
                        db $5E,$10,$8E,$6A,$10,$11,$3A,$10,$FE,$FF,$5B,$DD,$80,$D2,$6A,$10;80DD6B;      ;

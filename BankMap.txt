@@ -144,8 +144,9 @@ Bank 81
 Bank 82
 ❔828000 - UpdateTime
 ✅8280AA - HaveLunch
-❔828131 - ShippingScene
-❓828165 - SUB_828165
+❓828131 - ShippingScene
+❓828165 - ShippingSceneDialogue
+✅8281BF - ShippingReturn
 ❓8281C0 - SUB_8281C0
 ❓8281FD - UNK_Table6
 ❓828209 - SUB_828209
@@ -168,8 +169,25 @@ Bank 82
 💾828EBE - Thunder_Chance_Table
 💾828EC2 - Snowstorm_Chance_Table
 ✅828EC6 - FindMostLovedName
-...
+❓828FB1 - SUB_828FB1
+❓828FF3 - SUB_828FF3
+❓829054 - DATA8_829054
+❓8290A8 - UNK_ToolUsed
+->bank_82_toolused_subrutines
+❓829260 - SUB_829260
+❓82927D - SUB_82927D
+❓8292A0 - SUB_8292A0
+❓8292BC - SUB_8292BC
+❓8292D6 - SUB_8292D6
+💾8292FA - DATA8_8292FA
+->bank_82_pointersubrutines
+💾82A571 - Cow_Feed_Flags
+💾82A58B - Tool_Used_Table
+💾82A5C3 - Subrutines_Pointer_Table
+❓82A5FB - SUB_82A5FB
 ❔82A65A - LoadFarmMap
+❓82A682 - SUB_82A682
+❓82A6A2 - SUB_82A6A2
 ...
 ❓82D75E - IntroScreen
 ...

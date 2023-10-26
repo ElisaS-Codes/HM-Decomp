@@ -2805,7 +2805,7 @@ SetCCPoiner: ;84887C
                        JSL.L UNK_Audio24                          ;84961B;8382FE;
                        %Set8bit(!M)                             ;84961F;      ;
                        STZ.W $0119                          ;849621;000119;
-                       JSL.L AEEEE                          ;849624;828FF3;
+                       JSL.L SUB_828FF3                          ;849624;828FF3;
                        %Set16bit(!MX)                             ;849628;      ;
                        LDA.B $C9                            ;84962A;0000C9;
                        CLC                                  ;84962C;      ;
@@ -8274,7 +8274,7 @@ AddCowHappiness:
                        %Set16bit(!MX)                             ;84BF94;      ;
                        LDA.W #$000A                         ;84BF96;      ;
                        STA.B !player_action                            ;84BF99;0000D4;
-                       JSL.L ToolUsed                    ;84BF9B;8290A8;
+                       JSL.L UNK_ToolUsed                    ;84BF9B;8290A8;
                                                             ;      ;      ;
           CODE_84BF9F: RTS                                  ;84BF9F;      ;
                                                             ;      ;      ;
@@ -10136,7 +10136,7 @@ PlayerKeyY: ;84CD77
       %Set16bit(!MX)
       LDA.W #$000A                           ;Using Tool
       STA.B !player_action
-      JSL.L ToolUsed
+      JSL.L UNK_ToolUsed
 
   .return: RTL
 
