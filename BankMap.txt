@@ -98,7 +98,7 @@ Bank 80
 ❓809553 - CallIndexedSubrutines
 ❓8095B3 - AutoMapScrolling
 ❓8095DE - UNK_Audio5
-❓809671 - UNK_PrepareScreenTransition
+❓809671 - SetScreenTransition
 ❓8096D3 - UNK_ScreenTransition
 ✅80972B - ScreenTransitionReturn
 ❓80972C - SUB_80972C
@@ -184,7 +184,7 @@ Bank 82
 💾82A571 - Cow_Feed_Flags
 💾82A58B - Tool_Used_Table
 💾82A5C3 - Subrutines_Pointer_Table
-❓82A5FB - SUB_82A5FB
+❓82A5FB - LoadMap
 ❔82A65A - LoadFarmMap
 ❓82A682 - SUB_82A682
 ❓82A6A2 - SUB_82A6A2

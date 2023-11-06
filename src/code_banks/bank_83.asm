@@ -4556,7 +4556,7 @@ LoadGameSlot: ;83B2B1
         LDA.B [!savelocation],Y
         STA.L !shed_items_row_4
 
-        %Set8bit(!M)                         ;name of Dog?
+        %Set8bit(!M)                         ;name of Dog
         LDA.B #$00
         XBA
         LDY.W #$0088
@@ -4583,7 +4583,7 @@ LoadGameSlot: ;83B2B1
         %Set16bit(!M)
         STA.W !dog_name_long_4
 
-        %Set8bit(!M)                         ;name of Horse?
+        %Set8bit(!M)                         ;name of Horse
         LDA.B #$00
         XBA
         LDY.W #$008C

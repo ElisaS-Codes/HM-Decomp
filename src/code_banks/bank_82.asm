@@ -782,7 +782,7 @@ NightReset: ;8282AC
         LDA.W !Joy1_Current
         AND.W #$2030
         EOR.W #$2030
-        BNE .CODE_828733
+        BNE .nocheat
         %Set8bit(!M)
         LDA.B #$02
         STA.L !year
@@ -791,7 +791,7 @@ NightReset: ;8282AC
         LDA.B #$1E
         STA.L !day
 
-    .CODE_828733:
+    .nocheat:
         %Set8bit(!M)
         STZ.W !time_running
         %Set8bit(!M)
@@ -816,7 +816,7 @@ NightReset: ;8282AC
         JSL.L ChangeStamina
         %Set16bit(!MX)
         LDA.L $7F1F5E
-        AND.W #$0004
+        AND.W #$0004                           ;FLAG5E
         BNE .return
         %Set8bit(!M)
         LDA.B #$03
@@ -825,7 +825,7 @@ NightReset: ;8282AC
         STA.W $0924
         %Set16bit(!MX)
         LDA.B !game_state
-        ORA.W #$0004
+        ORA.W #$0004                           ;FLAGD2
         STA.B !game_state
 
     .return: RTL
@@ -1928,108 +1928,110 @@ Subrutines_Pointer_Table: ;82A5C3
         dw $A3FD,$A414,$A4C2,$A570           ;82A5F3;      ;
 
 ;;;;;;;;
-SUB_82A5FB: ;82A5FB
-        %Set8bit(!M)                             ;      ;
-        %Set16bit(!X)                             ;82A5FD;      ;
-        LDA.B #$00                           ;82A5FF;      ;
-        XBA                                  ;82A601;      ;
-        LDA.B !tilemap_to_load                            ;82A602;000022;
-        CMP.B #$04                           ;82A604;      ;
-        BCS .CODE_82A61B                      ;82A606;82A61B;
-        %Set16bit(!M)                             ;82A608;      ;
-        LDA.W #$A4E6                         ;82A60A;      ;
-        STA.B $72                            ;82A60D;000072;
-        %Set8bit(!M)                             ;82A60F;      ;
-        LDA.B #$7E                           ;82A611;      ;
-        STA.B $74                            ;82A613;000074;
-        LDX.W #$0000                         ;82A615;      ;
-        PHX                                  ;82A618;      ;
-        BRA .CODE_82A635                      ;82A619;82A635;
+LoadMap: ;82A5FB
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDA.B #$00
+        XBA
+        LDA.B !tilemap_to_load
+        CMP.B #$04
+        BCS .notfarm
+        %Set16bit(!M)
+        LDA.W #$A4E6                         ;map pointer
+        STA.B $72
+        %Set8bit(!M)
+        LDA.B #$7E
+        STA.B $74
+        LDX.W #$0000
+        PHX
+        BRA .backgroundaudio
 
-    .CODE_82A61B:
-        %Set8bit(!M)                             ;82A61B;      ;
-        ASL A                                ;82A61D;      ;
-        CLC                                  ;82A61E;      ;
-        ADC.B !tilemap_to_load                            ;82A61F;000022;
-        %Set16bit(!M)                             ;82A621;      ;
-        TAX                                  ;82A623;      ;
-        PHX                                  ;82A624;      ;
-        LDA.L FarmMapPointerTable,X            ;82A625;82B174;
-        STA.B $72                            ;82A629;000072;
-        %Set8bit(!M)                             ;82A62B;      ;
-        INX                                  ;82A62D;      ;
-        INX                                  ;82A62E;      ;
-        LDA.L FarmMapPointerTable,X            ;82A62F;82B174;
-        STA.B $74                            ;82A633;000074;
+    .notfarm:
+        %Set8bit(!M)
+        ASL A
+        CLC
+        ADC.B !tilemap_to_load               ;*3
+        %Set16bit(!M)
+        TAX
+        PHX
+        LDA.L FarmMapPointerTable,X
+        STA.B $72
+        %Set8bit(!M)
+        INX
+        INX
+        LDA.L FarmMapPointerTable,X
+        STA.B $74
 
-    .CODE_82A635:
-        %Set16bit(!MX)                             ;82A635;      ;
-        PLX                                  ;82A637;      ;
-        LDA.L UNK_Pointers,X                 ;82A638;82B294;
-        STA.B $0D                            ;82A63C;00000D;
-        INX                                  ;82A63E;      ;
-        INX                                  ;82A63F;      ;
-        %Set8bit(!M)                             ;82A640;      ;
-        LDA.L UNK_Pointers,X                 ;82A642;82B294;
-        STA.B $0F                            ;82A646;00000F;
-        %Set8bit(!M)                             ;82A648;      ;
-        LDY.W #$0000                         ;82A64A;      ;
+    .backgroundaudio:
+        %Set16bit(!MX)
+        PLX
+        LDA.L UNK_Pointers,X
+        STA.B $0D
+        INX
+        INX
+        %Set8bit(!M)
+        LDA.L UNK_Pointers,X
+        STA.B $0F
 
-    .CODE_82A64D:
-        TYX                                  ;82A64D;      ;
-        LDA.B [$72],Y                        ;82A64E;000072;
-        STA.W $09B6,X                        ;82A650;0009B6;
-        INY                                  ;82A653;      ;
-        CPY.W #$1000                         ;82A654;      ;
-        BNE .CODE_82A64D                      ;82A657;82A64D;
+        %Set8bit(!M)
+        LDY.W #$0000
+    .loadmap:
+        TYX
+        LDA.B [$72],Y
+        STA.W $09B6,X
+        INY
+        CPY.W #$1000
+        BNE .loadmap
 
-        RTL                                  ;82A659;      ;END_SUB_82A5FB
+        RTL
 
 ;;;;;;;
 LoadFarmMap: ;82A65A
-      !src = $72
-      !srcB = $74
+        !src = $72
+        !srcB = $74
 
-      %Set16bit(!MX)
-      LDX.W #$0000
-      LDA.L FarmMapPointerTable,X
-      STA.B !src
-      INX
-      INX
-      %Set8bit(!M)
-      LDA.L FarmMapPointerTable,X
-      STA.B !srcB
-      %Set8bit(!M)
-      LDY.W #$0000
+        %Set16bit(!MX)
+        LDX.W #$0000
+        LDA.L FarmMapPointerTable,X
+        STA.B !src
+        INX
+        INX
+        %Set8bit(!M)
+        LDA.L FarmMapPointerTable,X
+        STA.B !srcB
+        %Set8bit(!M)
+        LDY.W #$0000
 
-   ;data load
-   - TYX
-      LDA.B [!src],Y
-      STA.L $7EA4E6,X
-      INY
-      CPY.W #$1000
-      BNE -
+    ;data load
+      - TYX
+        LDA.B [!src],Y
+        STA.L $7EA4E6,X
+        INY
+        CPY.W #$1000
+        BNE -
 
-      RTL
+        RTL
 
-;;;;;;;;
+;;;;;;;; TODO uses the indirect $8009b6 to access 09b6, copies it to A4E6?
 SUB_82A682: ;82A682
-        %Set16bit(!MX)                             ;      ;
-        LDA.W #$09B6                         ;82A684;      ;
-        STA.B $72                            ;82A687;000072;
-        %Set8bit(!M)                             ;82A689;      ;
-        LDA.B #$80                           ;82A68B;      ;
-        STA.B $74                            ;82A68D;000074;
-        %Set8bit(!M)                             ;82A68F;      ;
-        LDY.W #$0000                         ;82A691;      ;
-                                            ;      ;      ;
-        CODE_82A694: TYX                                  ;82A694;      ;
-        LDA.B [$72],Y                        ;82A695;000072;
-        STA.L $7EA4E6,X                      ;82A697;7EA4E6;
-        INY                                  ;82A69B;      ;
-        CPY.W #$1000                         ;82A69C;      ;
-        BNE CODE_82A694                      ;82A69F;82A694;
-        RTL                                  ;82A6A1;      ;END_SUB_82A682
+        %Set16bit(!MX)
+        LDA.W #$09B6
+        STA.B $72
+        %Set8bit(!M)
+        LDA.B #$80
+        STA.B $74
+
+        %Set8bit(!M)
+        LDY.W #$0000
+    .copymap:
+        TYX
+        LDA.B [$72],Y
+        STA.L $7EA4E6,X
+        INY
+        CPY.W #$1000
+        BNE .copymap
+
+        RTL
 
 ;;;;;;;;
 SUB_82A6A2: ;82A6A2
@@ -4405,7 +4407,7 @@ FarmMapPointerTable: dl $A78000,$A78000,$A78000,$A78000,$A79600,$A79600,$A79600,
                        %Set16bit(!M)                             ;82D351;      ;
                        LDA.W #$1800                         ;82D353;      ;
                        STA.B $C7                            ;82D356;0000C7;
-                       JSL.L UNK_PrepareScreenTransition         ;82D358;809671;
+                       JSL.L SetScreenTransition         ;82D358;809671;
                        JSL.L SUB_809A64                           ;82D35C;809A64;
                        JSL.L UpdateTime                     ;82D360;828000;
                        JSL.L ADDDDFFFF                      ;82D364;83951C;
@@ -4775,7 +4777,7 @@ FarmMapPointerTable: dl $A78000,$A78000,$A78000,$A78000,$A79600,$A79600,$A79600,
                        %Set16bit(!M)                             ;82D6D3;      ;
                        LDA.W #$1800                         ;82D6D5;      ;
                        STA.B $C7                            ;82D6D8;0000C7;
-                       JSL.L UNK_PrepareScreenTransition         ;82D6DA;809671;
+                       JSL.L SetScreenTransition         ;82D6DA;809671;
                        JSL.L SUB_809A64                           ;82D6DE;809A64;
                        JSL.L UpdateTime                     ;82D6E2;828000;
                        JSL.L ADDDDFFFF                      ;82D6E6;83951C;
@@ -4827,77 +4829,77 @@ FarmMapPointerTable: dl $A78000,$A78000,$A78000,$A78000,$A79600,$A79600,$A79600,
 
 ;;;;;;;TODO
 IntroScreen: ;82D75E
-      %Set16bit(!MX)
-      %Set8bit(!M)
-      LDA.B #$04
-      STA.W !inputstate
-      %Set8bit(!M)
-      STZ.W $098D
-      %Set16bit(!M)
-      LDA.L $7F1F60
-      AND.W #$0800                          ;FLAG60 Checks for save failed CRC flag
-      BEQ .savefine
+        %Set16bit(!MX)
+        %Set8bit(!M)
+        LDA.B #$04
+        STA.W !inputstate
+        %Set8bit(!M)
+        STZ.W $098D
+        %Set16bit(!M)
+        LDA.L $7F1F60
+        AND.W #$0800                          ;FLAG60 Checks for save failed CRC flag
+        BEQ .savefine
 
-      %Set8bit(!M)
-      LDA.B #$02
-      STA.W $098D
+        %Set8bit(!M)
+        LDA.B #$02
+        STA.W $098D
 
-   .savefine:
-      %Set8bit(!M)
-      LDA.B #$00
-      STA.L $7F1F48
-      STA.L $7F1F49
-      JSL.L LoadFarmMap
-      %Set8bit(!M)
-      LDA.B #$03
-      JSL.L ManageGraphicPresets
-      JSL.L ForceBlank
-      JSL.L ZeroesVRAM
+    .savefine:
+        %Set8bit(!M)
+        LDA.B #$00
+        STA.L $7F1F48
+        STA.L $7F1F49
+        JSL.L LoadFarmMap
+        %Set8bit(!M)
+        LDA.B #$03
+        JSL.L ManageGraphicPresets
+        JSL.L ForceBlank
+        JSL.L ZeroesVRAM
 
-      %Set8bit(!M)
-      LDA.B !natsume_logo
-      STA.B !tilemap_to_load
-      JSL.L TilemapManager
-      %Set16bit(!M)
-      LDA.W #$006E
-      JSL.L LoadFirstHalfPaletteToWRAM
-      %Set8bit(!M)
-      %Set16bit(!X)
-      LDA.B #$00
-      STA.B !ProgDMA_Channel_Index
-      LDA.B !BBADX_DMA_CGRAMPORT
-      STA.B !ProgDMA_Destination_Memory
-      %Set16bit(!M)
-      LDY.W #$0200
-      LDX.W #$0000
-      LDA.W #$DA00
-      STA.B $72
-      %Set8bit(!M)
-      LDA.B #$A9
-      STA.B $74
-      JSL.L AddProgrammedDMA
-      JSL.L StartLastPreparedDMA
-      %Set16bit(!M)
-      STZ.W !BG1_Map_Offset_X
-      STZ.W !BG1_Map_Offset_Y
-      STZ.W !BG2_Map_Offset_X
-      STZ.W !BG2_Map_Offset_Y
-      JSL.L ResetForceBlank
-      JSL.L WaitForNMI
-      %Set8bit(!M)
-      LDA.B #$03
-      STA.B !param1
-      LDA.B #$03
-      STA.B !param2
-      LDA.B #$0F
-      STA.B !param3
-      JSL.L ScreenFadein
-      %Set8bit(!M)
-      STZ.B $97
-      %Set16bit(!M)
-      STZ.B $90
-      LDA.W #$0001
-      STA.B $AF
+        %Set8bit(!M)
+        LDA.B !NATSUME_LOGO
+        STA.B !tilemap_to_load
+        JSL.L TilemapManager
+        %Set16bit(!M)
+        LDA.W #$006E
+        JSL.L LoadFirstHalfPaletteToWRAM
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDA.B #$00
+        STA.B !ProgDMA_Channel_Index
+        LDA.B !BBADX_DMA_CGRAMPORT
+        STA.B !ProgDMA_Destination_Memory
+        %Set16bit(!M)
+        LDY.W #$0200
+        LDX.W #$0000
+        LDA.W #$DA00
+        STA.B $72
+        %Set8bit(!M)
+        LDA.B #$A9
+        STA.B $74
+        JSL.L AddProgrammedDMA
+        JSL.L StartLastPreparedDMA
+        %Set16bit(!M)
+        STZ.W !BG1_Map_Offset_X
+        STZ.W !BG1_Map_Offset_Y
+        STZ.W !BG2_Map_Offset_X
+        STZ.W !BG2_Map_Offset_Y
+        JSL.L ResetForceBlank
+        JSL.L WaitForNMI
+        %Set8bit(!M)
+        LDA.B #$03
+        STA.B !param1
+        LDA.B #$03
+        STA.B !param2
+        LDA.B #$0F
+        STA.B !param3
+        JSL.L ScreenFadein
+        %Set8bit(!M)
+        STZ.B $97
+        %Set16bit(!M)
+        STZ.B $90
+        LDA.W #$0001
+        STA.B $AF
 
     WaitNMI:
        %Set8bit(!M)
@@ -4913,7 +4915,7 @@ IntroScreen: ;82D75E
        BNE CODE_82D829
        JML.L CODE_82D8B0
 
-       CODE_82D829:
+    CODE_82D829:
        CMP.B #$02                           ;82D829;      ;
        BNE CODE_82D831                      ;82D82B;82D831;
        JML.L CODE_82DA8C                    ;82D82D;82DA8C;
@@ -5051,7 +5053,7 @@ IntroScreen: ;82D75E
                        %Set16bit(!M)                             ;82D945;      ;
                        LDA.W #$1800                         ;82D947;      ;
                        STA.B $C7                            ;82D94A;0000C7;
-                       JSL.L UNK_PrepareScreenTransition         ;82D94C;809671;
+                       JSL.L SetScreenTransition         ;82D94C;809671;
                        JSL.L SUB_809A64                           ;82D950;809A64;
                        JSL.L UpdateTime                     ;82D954;828000;
                        JSL.L ADDDDFFFF                      ;82D958;83951C;

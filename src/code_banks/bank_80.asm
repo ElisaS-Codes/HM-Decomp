@@ -66,7 +66,7 @@ GameLoop: ;808083
         JMP.W .skip2
 
     .enterloop:
-        JSL.L UNK_PrepareScreenTransition
+        JSL.L SetScreenTransition
         JSL.L SUB_809A64
         JSL.L UpdateTime
         JSL.L ADDDDFFFF
@@ -622,7 +622,7 @@ RESET:   ;808428
         JSL.L ZeroesOAM
         JSL.L ZeroesCGRAM
         JSL.L ClearWRAMGraphicsSpace         ;TODO
-        JSL.L InitializeOBJs                 ;TODO
+        JSL.L InitializeOBJs
         JSL.L CheckSRAMIntegrity
         %Set8bit(!M)
         %Set16bit(!X)
@@ -2837,42 +2837,46 @@ UNK_Audio5: ;8095DE
         RTL                                  ;809670;      ;Max7E0110
 
 ;;;;;;;; Wrong name TODO
-UNK_PrepareScreenTransition: ;809671
+SetScreenTransition: ;809671
         %Set16bit(!MX)
         LDA.W $0196
         AND.W #$4000                         ;FLAG196
-        BNE +
+        BNE .transitioning
 
         JMP.W ScreenTransitionReturn
 
-      + LDA.L $7F1F5E
+    .transitioning:
+        LDA.L $7F1F5E
         AND.W #$8000                         ;FLAG5E
-        BNE +
+        BNE .skip1
 
         LDA.L $7F1F60
         AND.W #$0100                         ;FLAG60
 
-        BNE ++
+        BNE .loop
         LDA.L $7F1F60
         AND.W #$0040                         ;FLAG60
-        BEQ ++
+        BEQ .loop
         JMP.W ScreenTransitionReturn
 
-     ++ %Set8bit(!M)
+    .loop:
+        %Set8bit(!M)
         LDA.W !transition_dest
         STA.B !tilemap_to_load
         JSL.L UNK_Audio5
         JSL.L UNK_Audio25
 
-      + %Set16bit(!M)
+    .skip1:
+        %Set16bit(!M)
         LDA.L $7F1F60
-        AND.W #$0008                         ;checks flag, if not set,
-        BEQ +
+        AND.W #$0008                         ;FLAG60
+        BEQ .skip2
         %Set8bit(!M)
-        LDA.B #$3C
+        LDA.B #$3C                           ;TODO
         STA.W !transition_dest
 
-      + %Set8bit(!M)                         ;sets a Screen Fadeout
+    .skip2:
+        %Set8bit(!M)
         LDA.B #$0F
         STA.B !param1
         LDA.B #$03
@@ -2886,7 +2890,7 @@ UNK_PrepareScreenTransition: ;809671
 UNK_ScreenTransition: ;8096D3
         %Set16bit(!MX)
         LDA.W $0196
-        AND.W #$3FDE                         ;resets many flags, keeping others
+        AND.W #$3FDE                         ;FLAG196 resets many flags, keeping others
         STA.W $0196
         LDA.L $7F1F5C
         AND.W #$FFF0                         ;FLAG5C resets a nibble
@@ -3108,7 +3112,7 @@ SUB_80972C: ;80972C
         %Set8bit(!M)                             ;8098AC;      ;
         PLA                                  ;8098AE;      ;
         STA.B !tilemap_to_load                            ;8098AF;000022;
-        JSL.L SUB_82A5FB                          ;8098B1;82A5FB;
+        JSL.L LoadMap                          ;8098B1;82A5FB;
         JSL.L TilemapManager           ;8098B5;80A7C6;
         JSL.L ChangePalettebyTime                           ;8098B9;8092E2;
         JSL.L SUB_809329                           ;8098BD;809329;
@@ -5206,9 +5210,7 @@ SUB_80A7AE: ;80A7AE
         LDA.B (!tilemap_pointer),Y
         RTL
 
-;;;;;;;; TODO Does copy stuff to VG graphics, but no idea what
-;;;;;;;; "param" in $22, used as index on data table
-;;;;;;;; Maybe it selects the palletes?
+;;;;;;;; Loads map data, including
 TilemapManager: ;80A7C6
         !number_of_tilemaps = $92
 
