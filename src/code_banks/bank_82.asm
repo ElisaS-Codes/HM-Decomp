@@ -2053,7 +2053,7 @@ SUB_82A6A2: ;82A6A2
         PHX                                  ;82A6BC;      ;
         STX.B $82                            ;82A6BD;000082;
         STY.B $84                            ;82A6BF;000084;
-        JSR.W UNK_OperatesOnSeasonTable      ;82A6C1;82B13C;
+        JSR.W SUB_82B13C      ;82A6C1;82B13C;
         %Set8bit(!M)                             ;82A6C4;      ;
         LDA.L $7EA4E6,X                      ;82A6C6;7EA4E6;
         BNE .CODE_82A6CF                      ;82A6CA;82A6CF;
@@ -2123,7 +2123,7 @@ CHHHH: ;82A713
                        PHX                                  ;82A72B;      ;
                        STX.B $82                            ;82A72C;000082;
                        STY.B $84                            ;82A72E;000084;
-                       JSR.W UNK_OperatesOnSeasonTable      ;82A730;82B13C;
+                       JSR.W SUB_82B13C      ;82A730;82B13C;
                        %Set8bit(!M)                             ;82A733;      ;
                        LDA.L $7EA4E6,X                      ;82A735;7EA4E6;
                        CMP.B #$A0                           ;82A739;      ;
@@ -2265,7 +2265,7 @@ CHHHH: ;82A713
                        PHX                                  ;82A823;      ;
                        STX.B $82                            ;82A824;000082;
                        STY.B $84                            ;82A826;000084;
-                       JSR.W UNK_OperatesOnSeasonTable      ;82A828;82B13C;
+                       JSR.W SUB_82B13C      ;82A828;82B13C;
                        %Set8bit(!M)                             ;82A82B;      ;
                        LDA.L $7EA4E6,X                      ;82A82D;7EA4E6;
                        BNE CODE_82A836                      ;82A831;82A836;
@@ -2492,7 +2492,7 @@ CKKKK:
        PHX
        STX.B $82
        STY.B $84
-       JSR.W UNK_OperatesOnSeasonTable
+       JSR.W SUB_82B13C
        %Set8bit(!M)
        LDA.L $7EA4E6,X                       ;Farm data?
        CMP.B #$76
@@ -2538,64 +2538,68 @@ CKKKK:
 
        .return: RTL
 
-                CLLLL: %Set8bit(!M)                             ;82AA0C;      ;
-                       %Set16bit(!X)                             ;82AA0E;      ;
-                       LDA.B #$04                           ;82AA10;      ;
-                       STA.W $0181                          ;82AA12;000181;
-                       %Set16bit(!M)                             ;82AA15;      ;
-                       LDA.W #$0000                         ;82AA17;      ;
-                       STA.L !ranch_development                        ;82AA1A;7F1F56;
-                       LDY.W #$0000                         ;82AA1E;      ;
-                                                            ;      ;      ;
-          CODE_82AA21: LDX.W #$0000                         ;82AA21;      ;
-                                                            ;      ;      ;
-          CODE_82AA24: PHY                                  ;82AA24;      ;
-                       PHX                                  ;82AA25;      ;
-                       STX.B $82                            ;82AA26;000082;
-                       STY.B $84                            ;82AA28;000084;
-                       JSR.W UNK_OperatesOnSeasonTable      ;82AA2A;82B13C;
-                       %Set8bit(!M)                             ;82AA2D;      ;
-                       LDA.L $7EA4E6,X                      ;82AA2F;7EA4E6;
-                       CMP.B #$A0                           ;82AA33;      ;
-                       BCS CODE_82AA50                      ;82AA35;82AA50;
-                       CMP.B #$05                           ;82AA37;      ;
-                       BEQ CODE_82AA45                      ;82AA39;82AA45;
-                       CMP.B #$06                           ;82AA3B;      ;
-                       BEQ CODE_82AA45                      ;82AA3D;82AA45;
-                       CMP.B #$1D                           ;82AA3F;      ;
-                       BCS CODE_82AA45                      ;82AA41;82AA45;
-                       BRA CODE_82AA50                      ;82AA43;82AA50;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_82AA45: %Set16bit(!M)                             ;82AA45;      ;
-                       LDA.L !ranch_development                        ;82AA47;7F1F56;
-                       INC A                                ;82AA4B;      ;
-                       STA.L !ranch_development                        ;82AA4C;7F1F56;
-                                                            ;      ;      ;
-          CODE_82AA50: %Set16bit(!MX)                             ;82AA50;      ;
-                       PLX                                  ;82AA52;      ;
-                       PLY                                  ;82AA53;      ;
-                       TXA                                  ;82AA54;      ;
-                       CLC                                  ;82AA55;      ;
-                       ADC.W #$0010                         ;82AA56;      ;
-                       TAX                                  ;82AA59;      ;
-                       CPX.W #$0400                         ;82AA5A;      ;
-                       BEQ CODE_82AA62                      ;82AA5D;82AA62;
-                       JMP.W CODE_82AA24                    ;82AA5F;82AA24;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_82AA62: TYA                                  ;82AA62;      ;
-                       CLC                                  ;82AA63;      ;
-                       ADC.W #$0010                         ;82AA64;      ;
-                       TAY                                  ;82AA67;      ;
-                       CPY.W #$0400                         ;82AA68;      ;
-                       BEQ CODE_82AA70                      ;82AA6B;82AA70;
-                       JMP.W CODE_82AA21                    ;82AA6D;82AA21;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_82AA70: RTL                                  ;82AA70;      ;END_CLLLL
-                                                            ;      ;      ;
-                                                            ;      ;      ;
+;;;;;;;;
+CLLLL: ;82AA0C
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDA.B #$04
+        STA.W $0181
+        %Set16bit(!M)
+        LDA.W #$0000
+        STA.L !ranch_development
+        LDY.W #$0000
+
+    .loop:
+        LDX.W #$0000
+
+    .calculatemapusage:
+        PHY
+        PHX
+        STX.B $82
+        STY.B $84
+        JSR.W SUB_82B13C
+        %Set8bit(!M)                             ;82AA2D;      ;
+        LDA.L $7EA4E6,X                      ;82AA2F;7EA4E6;
+        CMP.B #$A0                           ;82AA33;      ;
+        BCS .skip                             ;82AA35;82AA50;
+        CMP.B #$05                           ;82AA37;      ;
+        BEQ .increasescore                      ;82AA39;82AA45;
+        CMP.B #$06                           ;82AA3B;      ;
+        BEQ .increasescore                      ;82AA3D;82AA45;
+        CMP.B #$1D                           ;82AA3F;      ;
+        BCS .increasescore                      ;82AA41;82AA45;
+        BRA .skip                      ;82AA43;82AA50;
+
+    .increasescore:
+        %Set16bit(!M)                             ;82AA45;      ;
+        LDA.L !ranch_development                        ;82AA47;7F1F56;
+        INC A                                ;82AA4B;      ;
+        STA.L !ranch_development                        ;82AA4C;7F1F56;
+
+    .skip:
+        %Set16bit(!MX)                             ;82AA50;      ;
+        PLX                                  ;82AA52;      ;
+        PLY                                  ;82AA53;      ;
+        TXA                                  ;82AA54;      ;
+        CLC                                  ;82AA55;      ;
+        ADC.W #$0010                         ;82AA56;      ;
+        TAX                                  ;82AA59;      ;
+        CPX.W #$0400                         ;82AA5A;      ;
+        BEQ .exit                      ;82AA5D;82AA62;
+        JMP.W .calculatemapusage                    ;82AA5F;82AA24;
+
+    .exitinner:
+        TYA                                  ;82AA62;      ;
+        CLC                                  ;82AA63;      ;
+        ADC.W #$0010                         ;82AA64;      ;
+        TAY                                  ;82AA67;      ;
+        CPY.W #$0400                         ;82AA68;      ;
+        BEQ .return                      ;82AA6B;82AA70;
+        JMP.W .loop                    ;82AA6D;82AA21;
+
+    .return: RTL
+
+;;;;;;;;
                 CMMMM: %Set8bit(!M)                             ;82AA71;      ;BEEEG BRANCH
                        %Set16bit(!X)                             ;82AA73;      ;
                        LDA.W !tool_selected                          ;82AA75;000921;
@@ -3285,7 +3289,7 @@ UNK_PartialMap: ;82AF00
        PHX
        STX.B $82
        STY.B $84
-       JSR.W UNK_OperatesOnSeasonTable
+       JSR.W SUB_82B13C
        %Set8bit(!M)
        %Set16bit(!X)
        LDA.W $09B6,X
@@ -3459,7 +3463,7 @@ UNK_PartialMap: ;82AF00
           UNK_MOVE_FROM_SEASON_TO_09B6: %Set8bit(!M)                             ;82B03A;      ;
                        %Set16bit(!X)                             ;82B03C;      ;
                        PHA                                  ;82B03E;      ;
-                       JSR.W UNK_OperatesOnSeasonTable      ;82B03F;82B13C;
+                       JSR.W SUB_82B13C      ;82B03F;82B13C;
                        %Set8bit(!M)                             ;82B042;      ;
                        PLA                                  ;82B044;      ;
                        STA.W $09B6,X                        ;82B045;0009B6;
@@ -3473,7 +3477,7 @@ UNK_PartialMap: ;82AF00
                        STA.W $0181                          ;82B050;000181;
                        PLA                                  ;82B053;      ;
                        PHA                                  ;82B054;      ;
-                       JSR.W UNK_OperatesOnSeasonTable      ;82B055;82B13C;
+                       JSR.W SUB_82B13C      ;82B055;82B13C;
                        %Set8bit(!M)                             ;82B058;      ;
                        PLA                                  ;82B05A;      ;
                        STA.L $7EA4E6,X                      ;82B05B;7EA4E6;
@@ -3512,7 +3516,7 @@ UNK_PartialMap: ;82AF00
                        CLC                                  ;82B08A;      ;
                        ADC.B $90                            ;82B08B;000090;
                        TAY                                  ;82B08D;      ;
-                       JSR.W UNK_OperatesOnSeasonTable      ;82B08E;82B13C;
+                       JSR.W SUB_82B13C      ;82B08E;82B13C;
                        %Set8bit(!M)                             ;82B091;      ;
                        %Set16bit(!X)                             ;82B093;      ;
                        LDA.B $99                            ;82B095;000099;
@@ -3613,7 +3617,7 @@ UNK_PartialMap: ;82AF00
 ;;;;;;; TODO
 CODE_82B124: ;82B124
       %Set16bit(!MX)
-      JSR.W UNK_OperatesOnSeasonTable
+      JSR.W SUB_82B13C
       %Set8bit(!M)
       LDA.W $09B6,X
       RTL
@@ -3629,7 +3633,7 @@ CODE_82B124: ;82B124
       RTL
 
 ;;;;;;; Takes X and Y as parameter
-UNK_OperatesOnSeasonTable: ;82B13C
+SUB_82B13C: ;82B13C
        %Set16bit(!MX)
        TXA
        LSR A

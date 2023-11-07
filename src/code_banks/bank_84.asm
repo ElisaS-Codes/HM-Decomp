@@ -10368,7 +10368,7 @@ ImmobileInputs:
                        RTL                                  ;84CF6C;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
-          CODE_84CF6D: JSL.L CODE_83932D                    ;84CF6D;83932D;
+          CODE_84CF6D: JSL.L SUB_83932D                    ;84CF6D;83932D;
                        %Set16bit(!M)                             ;84CF71;      ;
                        LDA.W $0187                          ;84CF73;000187;
                        INC A                                ;84CF76;      ;

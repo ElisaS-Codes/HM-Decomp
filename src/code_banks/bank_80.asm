@@ -3108,7 +3108,7 @@ SUB_80972C: ;80972C
         JSL.L UNK_SetPointer42            ;8098A4;808E48;
                                             ;      ;      ;
         CODE_8098A8:
-        JSL.L CODE_8392BB                    ;8098A8;8392BB;
+        JSL.L SUB_8392BB                    ;8098A8;8392BB;
         %Set8bit(!M)                             ;8098AC;      ;
         PLA                                  ;8098AE;      ;
         STA.B !tilemap_to_load                            ;8098AF;000022;

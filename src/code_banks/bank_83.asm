@@ -387,7 +387,7 @@ DecompressTileMap: ;8381F8
         INC A
         INC A
         INC A
-        STA.B !copyN                            ;last 5 bits + 3
+        STA.B !copyN                         ;last 5 bits + 3
         TXA
         AND.W #$00E0                         ;first 3 bits
         ASL A
@@ -429,7 +429,7 @@ DecompressTileMap: ;8381F8
         RTL
 
 
-;;;;;;;; This seems to be unused, not called anywhere
+;;;;;;;;
 UNK_Audio26: ;8382C6
         %Set8bit(!M)
         %Set16bit(!X)
@@ -520,7 +520,7 @@ UNK_Audio18: ;83833E
     .return: RTL
 
 ;;;;;;;; Seems to be unused
-UNK_IncreaseTransitionPointer: ;838376
+UNUSED2: ;838376
         %Set8bit(!M)
         LDA.W $0103
         INC A
@@ -2079,7 +2079,7 @@ UNK_Audio17: ;838EE4
         AND.B #$10
         RTS
 
-
+;;;;;;;;
 UNK_Audio_Table5: dw $10C0,$10C0,$2EE0,$0BB0,$0780,$0D10,$0040,$1F30;838EFF
                   dw $1950,$1300,$02D0,$1B80,$0340,$0670,$0DA0,$1240
                   dw $0FA0,$07D0,$1B40,$1F30,$06B0,$1940,$0730,$03E0
@@ -2087,7 +2087,7 @@ UNK_Audio_Table5: dw $10C0,$10C0,$2EE0,$0BB0,$0780,$0D10,$0040,$1F30;838EFF
                   dw $0BB0,$0BB0,$0BB0,$07C0,$1380,$0340,$07C0,$1F30
 
 UNK_Audio_Table7: dw $02EC,$02EC,$0272,$03AB,$02B6,$0443,$0399,$02AD;838F4F
-                  dw $01F6,$0260,!inputstate,$018E,$01D1,$0293,$023D,$02F2
+                  dw $01F6,$0260,$019A,$018E,$01D1,$0293,$023D,$02F2
                   dw $0435,$0113,$04B7,$007A,$0080,$00DB,$011E,$00B0
                   dw $005C,$00BC
 
@@ -2149,80 +2149,85 @@ UNK_Audio_Table2: db $00,$00,$00,$05,$00,$00,$00,$00,$00,$00,$00,$00,$0D,$13,$1D
 UNK_Audio_Table4: db $17,$18,$19,$1A,$15,$06,$0A,$00,$00,$00;8392B1
 
 ;;;;;;;;
-          CODE_8392BB: %Set16bit(!MX)                             ;8392BB;      ;
-                       %Set16bit(!M)                             ;8392BD;      ;
-                       LDA.W #$CB05                         ;8392BF;      ;
-                       STA.B $72                            ;8392C2;000072;
-                       LDA.W #$2000                         ;8392C4;      ;
-                       STA.B $75                            ;8392C7;000075;
-                       %Set8bit(!M)                             ;8392C9;      ;
-                       LDA.B #$A5                           ;8392CB;      ;
-                       STA.B $74                            ;8392CD;000074;
-                       LDA.B #$7E                           ;8392CF;      ;
-                       STA.B $77                            ;8392D1;000077;
-                       JSL.L DecompressTileMap           ;8392D3;8381F8;
-                       %Set8bit(!M)                             ;8392D7;      ;
-                       LDA.B #$00                           ;8392D9;      ;
-                       STA.B !ProgDMA_Channel_Index                            ;8392DB;000027;
-                       LDA.B #$18                           ;8392DD;      ;
-                       STA.B !ProgDMA_Destination_Memory                            ;8392DF;000029;
-                       %Set16bit(!MX)                             ;8392E1;      ;
-                       LDY.W #$0400                         ;8392E3;      ;
-                       LDX.W #$7800                         ;8392E6;      ;
-                       LDA.W #$2000                         ;8392E9;      ;
-                       STA.B $72                            ;8392EC;000072;
-                       %Set8bit(!M)                             ;8392EE;      ;
-                       LDA.B #$7E                           ;8392F0;      ;
-                       STA.B $74                            ;8392F2;000074;
-                       %Set16bit(!M)                             ;8392F4;      ;
-                       LDA.W #$0080                         ;8392F6;      ;
-                       JSL.L AddProgrammedDMA                ;8392F9;808A33;
-                       JSL.L StartLastPreparedDMA               ;8392FD;808AB2;
-                       %Set8bit(!M)                             ;839301;      ;
-                       LDA.B #$00                           ;839303;      ;
-                       STA.B !ProgDMA_Channel_Index                            ;839305;000027;
-                       LDA.B #$18                           ;839307;      ;
-                       STA.B !ProgDMA_Destination_Memory                            ;839309;000029;
-                       %Set16bit(!MX)                             ;83930B;      ;
-                       LDA.W #$5000                         ;83930D;      ;
-                       TAX                                  ;839310;      ;
-                       LDY.W #$1000                         ;839311;      ;
-                       LDA.W #$BBA3                         ;839314;      ;
-                       STA.B $72                            ;839317;000072;
-                       %Set8bit(!M)                             ;839319;      ;
-                       LDA.B #$9C                           ;83931B;      ;
-                       STA.B $74                            ;83931D;000074;
-                       %Set16bit(!M)                             ;83931F;      ;
-                       LDA.W #$0080                         ;839321;      ;
-                       JSL.L AddProgrammedDMA                ;839324;808A33;
-                       JSL.L StartLastPreparedDMA               ;839328;808AB2;
-                       RTL                                  ;83932C;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83932D: %Set8bit(!M)                             ;83932D;      ;
-                       LDA.B #$06                           ;83932F;      ;
-                       STA.B !ProgDMA_Channel_Index                            ;839331;000027;
-                       LDA.B #$18                           ;839333;      ;
-                       STA.B !ProgDMA_Destination_Memory                            ;839335;000029;
-                       %Set16bit(!MX)                             ;839337;      ;
-                       LDA.W #$5000                         ;839339;      ;
-                       TAX                                  ;83933C;      ;
-                       LDY.W #$0C00                         ;83933D;      ;
-                       LDA.W #$BBA3                         ;839340;      ;
-                       STA.B $72                            ;839343;000072;
-                       %Set8bit(!M)                             ;839345;      ;
-                       LDA.B #$9C                           ;839347;      ;
-                       STA.B $74                            ;839349;000074;
-                       %Set16bit(!M)                             ;83934B;      ;
-                       LDA.W #$0080                         ;83934D;      ;
-                       JSL.L AddProgrammedDMA                ;839350;808A33;
-                       %Set8bit(!M)                             ;839354;      ;
-                       LDA.B #$07                           ;839356;      ;
-                       STA.B !ProgDMA_Channel_Index                            ;839358;000027;
-                       JSL.L RemoveProgrammedDMA                    ;83935A;808AA0;
-                       RTL                                  ;83935E;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
+SUB_8392BB: ;8392BB
+        %Set16bit(!MX)
+        %Set16bit(!M)
+        LDA.W #$CB05
+        STA.B $72
+        LDA.W #$2000
+        STA.B $75
+        %Set8bit(!M)
+        LDA.B #$A5
+        STA.B $74
+        LDA.B #$7E
+        STA.B $77
+        JSL.L DecompressTileMap
+        %Set8bit(!M)
+        LDA.B #$00
+        STA.B !ProgDMA_Channel_Index
+        LDA.B #$18
+        STA.B !ProgDMA_Destination_Memory
+        %Set16bit(!MX)
+        LDY.W #$0400
+        LDX.W #$7800
+        LDA.W #$2000
+        STA.B $72
+        %Set8bit(!M)
+        LDA.B #$7E
+        STA.B $74
+        %Set16bit(!M)
+        LDA.W #$0080
+        JSL.L AddProgrammedDMA
+        JSL.L StartLastPreparedDMA
+
+        %Set8bit(!M)
+        LDA.B #$00
+        STA.B !ProgDMA_Channel_Index
+        LDA.B #$18
+        STA.B !ProgDMA_Destination_Memory
+        %Set16bit(!MX)
+        LDA.W #$5000
+        TAX
+        LDY.W #$1000
+        LDA.W #$BBA3
+        STA.B $72
+        %Set8bit(!M)
+        LDA.B #$9C
+        STA.B $74
+        %Set16bit(!M)
+        LDA.W #$0080
+        JSL.L AddProgrammedDMA
+        JSL.L StartLastPreparedDMA
+
+        RTL
+
+;;;;;;;;
+SUB_83932D: ;83932D
+        %Set8bit(!M)
+        LDA.B #$06
+        STA.B !ProgDMA_Channel_Index
+        LDA.B #$18
+        STA.B !ProgDMA_Destination_Memory
+        %Set16bit(!MX)
+        LDA.W #$5000
+        TAX
+        LDY.W #$0C00
+        LDA.W #$BBA3
+        STA.B $72
+        %Set8bit(!M)
+        LDA.B #$9C
+        STA.B $74
+        %Set16bit(!M)
+        LDA.W #$0080
+        JSL.L AddProgrammedDMA
+        %Set8bit(!M)
+        LDA.B #$07
+        STA.B !ProgDMA_Channel_Index
+        JSL.L RemoveProgrammedDMA
+
+        RTL
+
+;;;;;;;;
           CODE_83935F: %Set16bit(!MX)                             ;83935F;      ;
                        STX.W $0183                          ;839361;000183;
                        LDA.W #$5000                         ;839364;      ;
@@ -2318,7 +2323,7 @@ UNK_Audio_Table4: db $17,$18,$19,$1A,$15,$06,$0A,$00,$00,$00;8392B1
                        CLC                                  ;83941B;      ;
                        ADC.B $7E                            ;83941C;00007E;
                        STA.W !BG3_Map_Offset_Y                          ;83941E;000146;
-                       JSL.L CODE_83932D                    ;839421;83932D;
+                       JSL.L SUB_83932D                    ;839421;83932D;
                        %Set16bit(!M)                             ;839425;      ;
                        LDA.W $0196                          ;839427;000196;
                        AND.W #$0020                         ;83942A;      ;
@@ -11851,97 +11856,101 @@ RanchMasteryCalculator:
 
         RTS
 
+;;;;;;;; empty
+CODE_83F4D7: RTS
 
-        CODE_83F4D7: RTS                                  ;83F4D7;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83F4D8: %Set16bit(!MX)                             ;83F4D8;      ;
-                       LDA.W #$0000                         ;83F4DA;      ;
-                       LDX.W #$002E                         ;83F4DD;      ;
-                       LDY.W #$0000                         ;83F4E0;      ;
-                       JSL.L VIP                            ;83F4E3;848097;
-                       %Set16bit(!MX)                             ;83F4E7;      ;
-                       STZ.W $0196                          ;83F4E9;000196;
-                       LDA.L $7F1F5E                        ;83F4EC;7F1F5E;
-                       ORA.W #$0002                         ;83F4F0;      ;
-                       STA.L $7F1F5E                        ;83F4F3;7F1F5E;
-                       %Set8bit(!M)                             ;83F4F7;      ;
-                       LDA.B #$00                           ;83F4F9;      ;
-                       STA.L $7F1F47                        ;83F4FB;7F1F47;
-                       %Set8bit(!M)                             ;83F4FF;      ;
-                       %Set16bit(!X)                             ;83F501;      ;
-                       STZ.W $09B5                          ;83F503;0009B5;
-                       %Set16bit(!M)                             ;83F506;      ;
-                       LDA.W #$00B1                         ;83F508;      ;
-                       STA.W $0889                          ;83F50B;000889;
-                       STA.W $088B                          ;83F50E;00088B;
-                       STA.W $088D                          ;83F511;00088D;
-                       STA.W $088F                          ;83F514;00088F;
-                       LDX.W #$0000                         ;83F517;      ;
-                                                            ;      ;      ;
-          CODE_83F51A: %Set16bit(!MX)                             ;83F51A;      ;
-                       PHX                                  ;83F51C;      ;
-                       TXA                                  ;83F51D;      ;
-                       JSL.L GetsCowPointer                ;83F51E;83C9A7;
-                       %Set8bit(!M)                             ;83F522;      ;
-                       %Set16bit(!X)                             ;83F524;      ;
-                       LDY.W #$0000                         ;83F526;      ;
-                       LDA.B [$72],Y                        ;83F529;000072;
-                       AND.B #$01                           ;83F52B;      ;
-                       BEQ CODE_83F573                      ;83F52D;83F573;
-                       LDY.W #$0004                         ;83F52F;      ;
-                       LDA.B [$72],Y                        ;83F532;000072;
-                       CMP.W $09B5                          ;83F534;0009B5;
-                       BCS CODE_83F53B                      ;83F537;83F53B;
-                       BRA CODE_83F573                      ;83F539;83F573;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83F53B: %Set8bit(!M)                             ;83F53B;      ;
-                       STA.W $09B5                          ;83F53D;0009B5;
-                       %Set8bit(!M)                             ;83F540;      ;
-                       LDA.B #$00                           ;83F542;      ;
-                       XBA                                  ;83F544;      ;
-                       LDY.W #$000C                         ;83F545;      ;
-                       LDA.B [$72],Y                        ;83F548;000072;
-                       %Set16bit(!M)                             ;83F54A;      ;
-                       STA.W $0889                          ;83F54C;000889;
-                       %Set8bit(!M)                             ;83F54F;      ;
-                       LDY.W #$000D                         ;83F551;      ;
-                       LDA.B [$72],Y                        ;83F554;000072;
-                       %Set16bit(!M)                             ;83F556;      ;
-                       STA.W $088B                          ;83F558;00088B;
-                       %Set8bit(!M)                             ;83F55B;      ;
-                       LDY.W #$000E                         ;83F55D;      ;
-                       LDA.B [$72],Y                        ;83F560;000072;
-                       %Set16bit(!M)                             ;83F562;      ;
-                       STA.W $088D                          ;83F564;00088D;
-                       %Set8bit(!M)                             ;83F567;      ;
-                       LDY.W #$000F                         ;83F569;      ;
-                       LDA.B [$72],Y                        ;83F56C;000072;
-                       %Set16bit(!M)                             ;83F56E;      ;
-                       STA.W $088F                          ;83F570;00088F;
-                                                            ;      ;      ;
-          CODE_83F573: %Set16bit(!MX)                             ;83F573;      ;
-                       PLX                                  ;83F575;      ;
-                       INX                                  ;83F576;      ;
-                       CPX.W #$000C                         ;83F577;      ;
-                       BNE CODE_83F51A                      ;83F57A;83F51A;
-                       JSL.L CLLLL                          ;83F57C;82AA0C;
-                       %Set16bit(!MX)                             ;83F580;      ;
-                       LDA.L !ranch_development                        ;83F582;7F1F56;
-                       STA.B $7E                            ;83F586;00007E;
-                       LDA.W #$000A                         ;83F588;      ;
-                       JSL.L Unk_Audio23                   ;83F58B;838000;
-                       %Set16bit(!MX)                             ;83F58F;      ;
-                       STA.B $7E                            ;83F591;00007E;
-                       LDA.W #$0127                         ;83F593;      ;
-                       STA.B $80                            ;83F596;000080;
-                       JSL.L DivisionUnsigned               ;83F598;838082;
-                       %Set16bit(!MX)                             ;83F59C;      ;
-                       STA.L !ranch_development                        ;83F59E;7F1F56;
-                       CMP.W #$0064                         ;83F5A2;      ;
-                       BCC CODE_83F5AE                      ;83F5A5;83F5AE;
-                       LDA.W #$0064                         ;83F5A7;      ;
-                       STA.L !ranch_development                        ;83F5AA;7F1F56;
-                                                            ;      ;      ;
-          CODE_83F5AE: RTS                                  ;83F5AE;      ;
+;;;;;;;;
+CODE_83F4D8:
+        %Set16bit(!MX)
+        LDA.W #$0000
+        LDX.W #$002E                         ;56
+        LDY.W #$0000
+        JSL.L VIP                            ;TODO
+        %Set16bit(!MX)
+        STZ.W $0196
+        LDA.L $7F1F5E
+        ORA.W #$0002                         ;FLAG5E
+        STA.L $7F1F5E
+        %Set8bit(!M)
+        LDA.B #$00
+        STA.L $7F1F47
+        %Set8bit(!M)
+        %Set16bit(!X)
+        STZ.W $09B5
+        %Set16bit(!M)
+        LDA.W #$00B1
+        STA.W $0889
+        STA.W $088B
+        STA.W $088D
+        STA.W $088F
+        LDX.W #$0000
+
+    .cowloop:
+        %Set16bit(!MX)                             ;83F51A;      ;
+        PHX                                  ;83F51C;      ;
+        TXA                                  ;83F51D;      ;
+        JSL.L GetsCowPointer                ;83F51E;83C9A7;
+        %Set8bit(!M)                             ;83F522;      ;
+        %Set16bit(!X)                             ;83F524;      ;
+        LDY.W #$0000                         ;83F526;      ;
+        LDA.B [$72],Y                        ;83F529;000072;
+        AND.B #$01                           ;83F52B;      ;
+        BEQ .CODE_83F573                      ;83F52D;83F573;
+        LDY.W #$0004                         ;83F52F;      ;
+        LDA.B [$72],Y                        ;83F532;000072;
+        CMP.W $09B5                          ;83F534;0009B5;
+        BCS .CODE_83F53B                      ;83F537;83F53B;
+        BRA .CODE_83F573                      ;83F539;83F573;
+                                            ;      ;      ;
+                                            ;      ;      ;
+    .CODE_83F53B:
+        %Set8bit(!M)                             ;83F53B;      ;
+        STA.W $09B5                          ;83F53D;0009B5;
+        %Set8bit(!M)                             ;83F540;      ;
+        LDA.B #$00                           ;83F542;      ;
+        XBA                                  ;83F544;      ;
+        LDY.W #$000C                         ;83F545;      ;
+        LDA.B [$72],Y                        ;83F548;000072;
+        %Set16bit(!M)                             ;83F54A;      ;
+        STA.W $0889                          ;83F54C;000889;
+        %Set8bit(!M)                             ;83F54F;      ;
+        LDY.W #$000D                         ;83F551;      ;
+        LDA.B [$72],Y                        ;83F554;000072;
+        %Set16bit(!M)                             ;83F556;      ;
+        STA.W $088B                          ;83F558;00088B;
+        %Set8bit(!M)                             ;83F55B;      ;
+        LDY.W #$000E                         ;83F55D;      ;
+        LDA.B [$72],Y                        ;83F560;000072;
+        %Set16bit(!M)                             ;83F562;      ;
+        STA.W $088D                          ;83F564;00088D;
+        %Set8bit(!M)                             ;83F567;      ;
+        LDY.W #$000F                         ;83F569;      ;
+        LDA.B [$72],Y                        ;83F56C;000072;
+        %Set16bit(!M)                             ;83F56E;      ;
+        STA.W $088F                          ;83F570;00088F;
+
+    .CODE_83F573:
+        %Set16bit(!MX)                             ;83F573;      ;
+        PLX                                  ;83F575;      ;
+        INX                                  ;83F576;      ;
+        CPX.W #$000C                         ;83F577;      ;
+        BNE .cowloop                      ;83F57A;83F51A;
+        JSL.L CLLLL                          ;83F57C;82AA0C;
+        %Set16bit(!MX)                             ;83F580;      ;
+        LDA.L !ranch_development                        ;83F582;7F1F56;
+        STA.B $7E                            ;83F586;00007E;
+        LDA.W #$000A                         ;83F588;      ;
+        JSL.L Unk_Audio23                   ;83F58B;838000;
+        %Set16bit(!MX)                             ;83F58F;      ;
+        STA.B $7E                            ;83F591;00007E;
+        LDA.W #$0127                         ;83F593;      ;
+        STA.B $80                            ;83F596;000080;
+        JSL.L DivisionUnsigned               ;83F598;838082;
+        %Set16bit(!MX)                             ;83F59C;      ;
+        STA.L !ranch_development                        ;83F59E;7F1F56;
+        CMP.W #$0064                         ;83F5A2;      ;
+        BCC .CODE_83F5AE                      ;83F5A5;83F5AE;
+        LDA.W #$0064                         ;83F5A7;      ;
+        STA.L !ranch_development                        ;83F5AA;7F1F56;
+                                            ;      ;      ;
+        .CODE_83F5AE: RTS                                  ;83F5AE;      ;

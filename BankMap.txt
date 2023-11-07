@@ -206,7 +206,7 @@ Bank 83
 🎵8382FE - UNK_Audio24
 🎵838332 - UNK_Audio19
 🎵83833E - UNK_Audio18
-✅838376 - UNK_IncreaseTransitionPointer
+⛔838376 - UNUSED2
 🎵838380 - UNK_Audio22
 🎵8383A4 - UNK_Audio20
 🎵838401 - UNK_Audio25

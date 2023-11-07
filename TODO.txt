@@ -7,17 +7,12 @@ Subrutines_Table
 UNK_Table14 -16b
 
 ====
-$7EA000-$7EA1FF - OAM contents Low Table
-$7EA200-$7EA21E - OAM contents High Table
+CLLLL
 
-$7EA4E6 - Farm map compressed?
-$09B6 - current map compressed?
 
-$7E2000-$7E9BFF - Map Uncompressed
 
 ====Working on
-InitializeOBJs
-A1 - ?
+maps
 
 ====Confirm Vars
 $7E09A3 - X Position ??? coounter
@@ -301,6 +296,7 @@ $7F1F31 -
 
 $7F1F45 -
 
+$7F1F47 -
 $7F1F48 - (0)
 $7F1F49 - (0)
 
