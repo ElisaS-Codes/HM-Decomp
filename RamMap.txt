@@ -124,7 +124,7 @@ where I have a headache. Most real info is on ram.asm
 🧢$7E0923 = !tool_backpack - 8b
 
 🧢$7E0925 = !idle_animation_timer - 8b
-🧢$7E0926 = !sprinkler_water - 8b
+🧢$7E0926 = !watering_can_water - 8b
 🧢$7E0927 = !seeds_grass_N - 8b
 🧢$7E0928 = !seeds_corn_N - 8b
 🧢$7E0929 = !seeds_tomato_N - 8b

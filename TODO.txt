@@ -9,7 +9,7 @@ UNK_Table14 -16b
 ====
 CLLLL
 
-
+UNK_ToolUsed SUB_829260
 
 ====Working on
 maps
@@ -24,7 +24,7 @@ $7F1F2B - Starting cow Happiness?
 $7F1F12 (set between water counter and some cow data?), some kind of counter down?
 $7F1F2B - Starting cow Happiness?
 $7F1F30 - related to dog?
-$7F1F29 - theory: ammount of planted grass
+$7F1F29 - ammount of planted grass
 
 
 $7F1F48 - (0)
@@ -201,14 +201,14 @@ $092A -
 $092B -
 $092C -
 $092D -
-$092E -
+$092E - related to cut grass?
 
 $0937 -
 
-$096B -
+$096B - tool used frame?
 $096C - stamina level
 #3: no stamnina left lower more stamina
-$096D - reset during movement?
+$096D - Tool used repetedley (chopping big trees)
 
 $096E - Player interaction?
 $096F - flags 1 skis audio?
@@ -301,15 +301,15 @@ $7F1F48 - (0)
 $7F1F49 - (0)
 
 These resets at night
-$7F1F5A - (flags? $8000 related to time. #$0400 related to time too)
-???? b??? - b:shipping bin something there
-???b ???? - b:bell ringed
+$7F1F5A -
+??fm b??p - f:frog spotted today, m:mole today b:shipping bin something there, p:miracle potion used
+m??b ???? - m: medicine used b:bell ringed
 $7F1F5C - (some kind of flag, related to palettes?)
-???? ????
-?x?? ???u - u: related to $0196 x:wont move
+???m ???p - p: field powerberry today
+cx?? ???u - c: chiken statue broken,  u: related to $0196 x:wont move
 $7F1F5E - (flags? related to time $8000 checked during night, 0004 means no update to 0924)
 ???? ????
-???? ???b - b:Things in the shipping bin
+?f?? ???b - Blue feather used, b:Things in the shipping bin
 $7F1F60 - Flags? $0800 related to 098D? resets during night
 t??? s??? - t:tool related? no stamina? s: Save failed CRC
 ???? c??? - can change stamina?
@@ -317,17 +317,17 @@ $7F1F62 -
 
 This are more permanent
 $7F1F64 - Player Flags 1
-???? ????
+???2 1tc? 1: field berry 1, 2: field berry 2, c: chicken statue berry t: mountain trunk berry
 hhrr ccf? - hh:House Upgrade (%01 upgrade 1, %10 upgrade 2), c=Cow Pregnat? rr:erased at night: set at night depending on $196
 $7F1F66 - (Which Wife)
-???? ????
+???p ppp? - P: painte house section
 hh?w wwww - h:house to be upgraded to 2 1 w:each bit might be a wife, to select witch one you have
 $7F1F68 - Flags?
-h??? H??? - h Gold Hammer event borrowed H: Gold Hoe Removed
+h??? H?b? - h Gold Hammer event borrowed H: Gold Hoe Removed b: magic beans planted
 d??? h??u - d:dog owned h:horse owned u:when set, it doesnt re-generates $0924 rng number
 $7F1F6A - Events Flags?
 ???? ????
-???? ????
+??a? ???? a: golden axe event
 $7F1F6C -
 ???t ??pp - t=Turtle Shell p:Related to wife pregnancy
 g??? ???? - g: about to have child

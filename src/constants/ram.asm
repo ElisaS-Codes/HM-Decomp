@@ -183,6 +183,8 @@
 ;0:down,1:up, 2:left 3:right
 !player_pos_X = $D6 ;16b
 !player_pos_Y = $D8 ;16b
+!tile_in_front_X = $0985
+!tile_in_front_Y = $0987
 !max_stamina = $0917 ;8b
 !current_stamina = $0918 ;8b
 !idle_animation_timer = $0925 ;8b
@@ -237,7 +239,7 @@
 !day_ordinal = $08D1 ;16 * 2
 
 ;;ITEMDATA
-!sprinkler_water = $0926 ;8b
+!watering_can_water = $0926 ;8b
 !seeds_grass_N = $0927 ;8b
 !seeds_corn_N = $0928 ;8b
 !seeds_tomato_N = $0929 ;8b

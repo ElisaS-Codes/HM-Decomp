@@ -182,8 +182,8 @@ Bank 82
 💾8292FA - DATA8_8292FA
 ->bank_82_pointersubrutines
 💾82A571 - Cow_Feed_Flags
-💾82A58B - Tool_Used_Table
-💾82A5C3 - Subrutines_Pointer_Table
+💾82A58B - Tool_Animation_Table
+💾82A5C3 - Tool_Used_Table
 ❓82A5FB - LoadMap
 ❔82A65A - LoadFarmMap
 ❓82A682 - SUB_82A682

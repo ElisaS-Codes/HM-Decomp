@@ -30,7 +30,7 @@
                        LDA.W #$0001                         ;81803A;      ;
                        LDX.W #$0000                         ;81803D;      ;
                        LDY.W #$0000                         ;818040;      ;
-                       JSL.L CODE_81D14E                    ;818043;81D14E;
+                       JSL.L CalculateTileinFront                    ;818043;81D14E;
                        %Set8bit(!M)                             ;818047;      ;
                        %Set16bit(!X)                             ;818049;      ;
                        LDA.B #$00                           ;81804B;      ;
@@ -49,8 +49,8 @@
                        LDA.B #$00                           ;818063;      ;
                        XBA                                  ;818065;      ;
                        LDA.B [$0D],Y                        ;818066;00000D;
-                       LDX.W $0985                          ;818068;000985;
-                       LDY.W $0987                          ;81806B;000987;
+                       LDX.W !tile_in_front_X                          ;818068;000985;
+                       LDY.W !tile_in_front_Y                          ;81806B;000987;
                        JSL.L CODE_81A688                    ;81806E;81A688;
                                                             ;      ;      ;
           CODE_818072: %Set8bit(!M)                             ;818072;      ;
@@ -1456,7 +1456,7 @@
                        LDA.W #$0001                         ;818AC9;      ;
                        LDX.W #$0006                         ;818ACC;      ;
                        LDY.W #$0006                         ;818ACF;      ;
-                       JSL.L CODE_81D14E                    ;818AD2;81D14E;
+                       JSL.L CalculateTileinFront                    ;818AD2;81D14E;
                        %Set8bit(!M)                             ;818AD6;      ;
                        LDA.W $0984                          ;818AD8;000984;
                        CMP.B #$44                           ;818ADB;      ;
@@ -1491,8 +1491,8 @@
                        XBA                                  ;818B09;      ;
                        LDA.B #$00                           ;818B0A;      ;
                        XBA                                  ;818B0C;      ;
-                       LDX.W $0985                          ;818B0D;000985;
-                       LDY.W $0987                          ;818B10;000987;
+                       LDX.W !tile_in_front_X                          ;818B0D;000985;
+                       LDY.W !tile_in_front_Y                          ;818B10;000987;
                        JSL.L CODE_81A688                    ;818B13;81A688;
                        BRA CODE_818B6A                      ;818B17;818B6A;
                                                             ;      ;      ;
@@ -1689,10 +1689,10 @@
                        LDA.W #$0001                         ;818C93;      ;
                        LDX.W #$0006                         ;818C96;      ;
                        LDY.W #$0006                         ;818C99;      ;
-                       JSL.L CODE_81D14E                    ;818C9C;81D14E;
+                       JSL.L CalculateTileinFront                    ;818C9C;81D14E;
                        %Set16bit(!MX)                             ;818CA0;      ;
-                       LDX.W $0985                          ;818CA2;000985;
-                       LDY.W $0987                          ;818CA5;000987;
+                       LDX.W !tile_in_front_X                          ;818CA2;000985;
+                       LDY.W !tile_in_front_Y                          ;818CA5;000987;
                        LDA.W #$0002                         ;818CA8;      ;
                        JSL.L CGGGG                          ;818CAB;82AC61;
                        %Set16bit(!MX)                             ;818CAF;      ;
@@ -1761,10 +1761,10 @@
                        LDA.W #$0001                         ;818D3A;      ;
                        LDX.W #$0006                         ;818D3D;      ;
                        LDY.W #$0006                         ;818D40;      ;
-                       JSL.L CODE_81D14E                    ;818D43;81D14E;
+                       JSL.L CalculateTileinFront                    ;818D43;81D14E;
                        %Set16bit(!MX)                             ;818D47;      ;
-                       LDX.W $0985                          ;818D49;000985;
-                       LDY.W $0987                          ;818D4C;000987;
+                       LDX.W !tile_in_front_X                          ;818D49;000985;
+                       LDY.W !tile_in_front_Y                          ;818D4C;000987;
                        LDA.W #$0002                         ;818D4F;      ;
                        JSL.L CGGGG                          ;818D52;82AC61;
                        %Set16bit(!MX)                             ;818D56;      ;
@@ -1808,7 +1808,7 @@
                        LDA.W #$0001                         ;818DAD;      ;
                        LDX.W #$0006                         ;818DB0;      ;
                        LDY.W #$0006                         ;818DB3;      ;
-                       JSL.L CODE_81D14E                    ;818DB6;81D14E;
+                       JSL.L CalculateTileinFront                    ;818DB6;81D14E;
                        %Set8bit(!M)                             ;818DBA;      ;
                        LDA.B #$00                           ;818DBC;      ;
                        XBA                                  ;818DBE;      ;
@@ -1818,8 +1818,8 @@
                        TAX                                  ;818DC5;      ;
                        %Set8bit(!M)                             ;818DC6;      ;
                        LDA.L Items_Price_Table,X                 ;818DC8;819FDE;
-                       LDX.W $0985                          ;818DCC;000985;
-                       LDY.W $0987                          ;818DCF;000987;
+                       LDX.W !tile_in_front_X                          ;818DCC;000985;
+                       LDY.W !tile_in_front_Y                          ;818DCF;000987;
                        JSL.L CODE_81A688                    ;818DD2;81A688;
                        %Set16bit(!M)                             ;818DD6;      ;
                        LDA.W $0978                          ;818DD8;000978;
@@ -1877,10 +1877,10 @@
                        STA.B [$72],Y                        ;818E43;000072;
                        %Set16bit(!M)                             ;818E45;      ;
                        LDY.W #$0004                         ;818E47;      ;
-                       LDA.W $0985                          ;818E4A;000985;
+                       LDA.W !tile_in_front_X                          ;818E4A;000985;
                        STA.B [$72],Y                        ;818E4D;000072;
                        LDY.W #$0006                         ;818E4F;      ;
-                       LDA.W $0987                          ;818E52;000987;
+                       LDA.W !tile_in_front_Y                          ;818E52;000987;
                        STA.B [$72],Y                        ;818E55;000072;
                                                             ;      ;      ;
           CODE_818E57: %Set16bit(!MX)                             ;818E57;      ;
@@ -1917,10 +1917,10 @@
                        LDA.W #$0001                         ;818E9F;      ;
                        LDX.W #$0006                         ;818EA2;      ;
                        LDY.W #$0006                         ;818EA5;      ;
-                       JSL.L CODE_81D14E                    ;818EA8;81D14E;
+                       JSL.L CalculateTileinFront                    ;818EA8;81D14E;
                        %Set16bit(!MX)                             ;818EAC;      ;
-                       LDX.W $0985                          ;818EAE;000985;
-                       LDY.W $0987                          ;818EB1;000987;
+                       LDX.W !tile_in_front_X                          ;818EAE;000985;
+                       LDY.W !tile_in_front_Y                          ;818EB1;000987;
                        LDA.W #$0000                         ;818EB4;      ;
                        JSL.L CGGGG                          ;818EB7;82AC61;
                        %Set8bit(!M)                             ;818EBB;      ;
@@ -2229,11 +2229,11 @@
                        LDA.W #$0001                         ;81910E;      ;
                        LDX.W #$0000                         ;819111;      ;
                        LDY.W #$0000                         ;819114;      ;
-                       JSL.L CODE_81D14E                    ;819117;81D14E;
+                       JSL.L CalculateTileinFront                    ;819117;81D14E;
                        %Set16bit(!M)                             ;81911B;      ;
                        LDA.W #$0000                         ;81911D;      ;
-                       LDX.W $0985                          ;819120;000985;
-                       LDY.W $0987                          ;819123;000987;
+                       LDX.W !tile_in_front_X                          ;819120;000985;
+                       LDY.W !tile_in_front_Y                          ;819123;000987;
                        JSL.L CGGGG                          ;819126;82AC61;
                        CPX.W #$00F0                         ;81912A;      ;
                        BEQ CODE_819132                      ;81912D;819132;
@@ -2256,9 +2256,9 @@
                                                             ;      ;      ;
                                                             ;      ;      ;
           CODE_81914C: %Set16bit(!M)                             ;81914C;      ;
-                       LDA.W $0985                          ;81914E;000985;
+                       LDA.W !tile_in_front_X                          ;81914E;000985;
                        STA.W $0980                          ;819151;000980;
-                       LDA.W $0987                          ;819154;000987;
+                       LDA.W !tile_in_front_Y                          ;819154;000987;
                        STA.W $0982                          ;819157;000982;
                        LDY.W #$0000                         ;81915A;      ;
                        JSL.L ALLLL                          ;81915D;8180B7;
@@ -2292,11 +2292,11 @@
                        LDA.W #$0001                         ;819197;      ;
                        LDX.W #$0000                         ;81919A;      ;
                        LDY.W #$0000                         ;81919D;      ;
-                       JSL.L CODE_81D14E                    ;8191A0;81D14E;
+                       JSL.L CalculateTileinFront                    ;8191A0;81D14E;
                        %Set16bit(!M)                             ;8191A4;      ;
-                       LDA.W $0985                          ;8191A6;000985;
+                       LDA.W !tile_in_front_X                          ;8191A6;000985;
                        STA.W $0980                          ;8191A9;000980;
-                       LDA.W $0987                          ;8191AC;000987;
+                       LDA.W !tile_in_front_Y                          ;8191AC;000987;
                        STA.W $0982                          ;8191AF;000982;
                        LDY.W #$0000                         ;8191B2;      ;
                        JSL.L ALLLL                          ;8191B5;8180B7;
@@ -2425,11 +2425,11 @@
                        LDA.W #$0000                         ;8192BA;      ;
                        LDX.W #$0007                         ;8192BD;      ;
                        LDY.W #$0007                         ;8192C0;      ;
-                       JSL.L CODE_81D14E                    ;8192C3;81D14E;
+                       JSL.L CalculateTileinFront                    ;8192C3;81D14E;
                        %Set16bit(!M)                             ;8192C7;      ;
                        LDA.W #$0002                         ;8192C9;      ;
-                       LDX.W $0985                          ;8192CC;000985;
-                       LDY.W $0987                          ;8192CF;000987;
+                       LDX.W !tile_in_front_X                          ;8192CC;000985;
+                       LDY.W !tile_in_front_Y                          ;8192CF;000987;
                        JSL.L CGGGG                          ;8192D2;82AC61;
                        %Set8bit(!M)                             ;8192D6;      ;
                        AND.B #$1F                           ;8192D8;      ;
@@ -2446,11 +2446,11 @@
                        LDA.W #$0001                         ;8192E9;      ;
                        LDX.W #$000A                         ;8192EC;      ;
                        LDY.W #$000A                         ;8192EF;      ;
-                       JSL.L CODE_81D14E                    ;8192F2;81D14E;
+                       JSL.L CalculateTileinFront                    ;8192F2;81D14E;
                        %Set16bit(!M)                             ;8192F6;      ;
                        LDA.W #$0002                         ;8192F8;      ;
-                       LDX.W $0985                          ;8192FB;000985;
-                       LDY.W $0987                          ;8192FE;000987;
+                       LDX.W !tile_in_front_X                          ;8192FB;000985;
+                       LDY.W !tile_in_front_Y                          ;8192FE;000987;
                        JSL.L CGGGG                          ;819301;82AC61;
                        %Set8bit(!M)                             ;819305;      ;
                        AND.B #$1F                           ;819307;      ;
@@ -2467,11 +2467,11 @@
                        LDA.W #$0001                         ;819318;      ;
                        LDX.W #$0000                         ;81931B;      ;
                        LDY.W #$0000                         ;81931E;      ;
-                       JSL.L CODE_81D14E                    ;819321;81D14E;
+                       JSL.L CalculateTileinFront                    ;819321;81D14E;
                        %Set16bit(!M)                             ;819325;      ;
                        LDA.W #$0002                         ;819327;      ;
-                       LDX.W $0985                          ;81932A;000985;
-                       LDY.W $0987                          ;81932D;000987;
+                       LDX.W !tile_in_front_X                          ;81932A;000985;
+                       LDY.W !tile_in_front_Y                          ;81932D;000987;
                        JSL.L CGGGG                          ;819330;82AC61;
                        %Set8bit(!M)                             ;819334;      ;
                        AND.B #$1F                           ;819336;      ;
@@ -2542,11 +2542,11 @@
                        LDA.W #$0002                         ;819399;      ;
                        LDX.W #$0000                         ;81939C;      ;
                        LDY.W #$0000                         ;81939F;      ;
-                       JSL.L CODE_81D14E                    ;8193A2;81D14E;
+                       JSL.L CalculateTileinFront                    ;8193A2;81D14E;
                        %Set16bit(!M)                             ;8193A6;      ;
                        LDA.W #$0000                         ;8193A8;      ;
-                       LDX.W $0985                          ;8193AB;000985;
-                       LDY.W $0987                          ;8193AE;000987;
+                       LDX.W !tile_in_front_X                          ;8193AB;000985;
+                       LDY.W !tile_in_front_Y                          ;8193AE;000987;
                        JSL.L CGGGG                          ;8193B1;82AC61;
                        CPX.W #$00F2                         ;8193B5;      ;
                        BEQ CODE_8193BD                      ;8193B8;8193BD;
@@ -2674,11 +2674,11 @@ Droped_on_sale_place:
       LDA.W #$0001
       LDX.W #$0000
       LDY.W #$0000
-      JSL.L CODE_81D14E                      ;TODO
+      JSL.L CalculateTileinFront                      ;TODO
       %Set16bit(!M)
       LDA.W #$0000
-      LDX.W $0985
-      LDY.W $0987
+      LDX.W !tile_in_front_X
+      LDY.W !tile_in_front_Y
       JSL.L CGGGG                            ;TODO
       CPX.W #$00F7
       BEQ +
@@ -2744,10 +2744,10 @@ Droped_on_sale_place:
       LDA.W #$0001
       LDX.W #$0006
       LDY.W #$0006
-      JSL.L CODE_81D14E
+      JSL.L CalculateTileinFront
       %Set16bit(!MX)
-      LDX.W $0985
-      LDY.W $0987
+      LDX.W !tile_in_front_X
+      LDY.W !tile_in_front_Y
       LDA.W #$0002                         ;81956E;      ;
       JSL.L CGGGG                          ;819571;82AC61;
       %Set16bit(!MX)                             ;819575;      ;
@@ -2771,10 +2771,10 @@ Droped_on_sale_place:
       LDA.W #$0001                         ;819592;      ;
       LDX.W #$0006                         ;819595;      ;
       LDY.W #$0006                         ;819598;      ;
-      JSL.L CODE_81D14E                    ;81959B;81D14E;
+      JSL.L CalculateTileinFront                    ;81959B;81D14E;
       %Set16bit(!MX)                             ;81959F;      ;
-      LDX.W $0985                          ;8195A1;000985;
-      LDY.W $0987                          ;8195A4;000987;
+      LDX.W !tile_in_front_X                          ;8195A1;000985;
+      LDY.W !tile_in_front_Y                          ;8195A4;000987;
       LDA.W #$0002                         ;8195A7;      ;
       JSL.L CGGGG                          ;8195AA;82AC61;
       %Set16bit(!MX)                             ;8195AE;      ;
@@ -2871,10 +2871,10 @@ Droped_on_sale_place:
       LDA.W #$0002                         ;81966D;      ;
       LDX.W #$0000                         ;819670;      ;
       LDY.W #$0000                         ;819673;      ;
-      JSL.L CODE_81D14E                    ;819676;81D14E;
-      LDA.W $0985                          ;81967A;000985;
+      JSL.L CalculateTileinFront                    ;819676;81D14E;
+      LDA.W !tile_in_front_X                          ;81967A;000985;
       STA.W $0980                          ;81967D;000980;
-      LDA.W $0987                          ;819680;000987;
+      LDA.W !tile_in_front_Y                          ;819680;000987;
       STA.W $0982                          ;819683;000982;
       %Set8bit(!M)                             ;819686;      ;
       LDA.B #$04                           ;819688;      ;
@@ -5537,9 +5537,9 @@ BEEEE: ;81BFB7
                        STA.B !player_action                            ;81C1C0;0000D4;
                        %Set16bit(!MX)                             ;81C1C2;      ;
                        LDA.L !dog_pos_X                        ;81C1C4;7F1F2C;
-                       STA.W $0985                          ;81C1C8;000985;
+                       STA.W !tile_in_front_X                          ;81C1C8;000985;
                        LDA.L !dog_pos_Y                        ;81C1CB;7F1F2E;
-                       STA.W $0987                          ;81C1CF;000987;
+                       STA.W !tile_in_front_Y                          ;81C1CF;000987;
                        LDA.W #$0016                         ;81C1D2;      ;
                        LDX.W #$0000                         ;81C1D5;      ;
                        LDY.W #$0012                         ;81C1D8;      ;
@@ -7602,58 +7602,64 @@ ChangeStamina: ;81D061
        %Set16bit(!MX)
        RTL
 
-          CODE_81D14E: %Set16bit(!MX)                             ;81D14E;      ;
-                       ASL A                                ;81D150;      ;
-                       ASL A                                ;81D151;      ;
-                       ASL A                                ;81D152;      ;
-                       ASL A                                ;81D153;      ;
-                       STA.B $7E                            ;81D154;00007E;
-                       STX.B $80                            ;81D156;000080;
-                       STY.B $82                            ;81D158;000082;
-                       LDA.B !player_pos_X                           ;81D15A;0000D6;
-                       STA.W $0985                          ;81D15C;000985;
-                       LDA.B !player_pos_Y                            ;81D15F;0000D8;
-                       STA.W $0987                          ;81D161;000987;
-                       LDA.B !player_direction                            ;81D164;0000DA;
-                       CMP.W #$0000                         ;81D166;      ;
-                       BNE CODE_81D177                      ;81D169;81D177;
-                       LDA.B !player_pos_Y                            ;81D16B;0000D8;
-                       CLC                                  ;81D16D;      ;
-                       ADC.B $7E                            ;81D16E;00007E;
-                       ADC.B $82                            ;81D170;000082;
-                       STA.W $0987                          ;81D172;000987;
-                       BRA CODE_81D1A3                      ;81D175;81D1A3;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_81D177: CMP.W #$0001                         ;81D177;      ;
-                       BNE CODE_81D188                      ;81D17A;81D188;
-                       LDA.B !player_pos_Y                            ;81D17C;0000D8;
-                       SEC                                  ;81D17E;      ;
-                       SBC.B $7E                            ;81D17F;00007E;
-                       SBC.B $82                            ;81D181;000082;
-                       STA.W $0987                          ;81D183;000987;
-                       BRA CODE_81D1A3                      ;81D186;81D1A3;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_81D188: CMP.W #$0002                         ;81D188;      ;
-                       BNE CODE_81D199                      ;81D18B;81D199;
-                       LDA.B !player_pos_X                           ;81D18D;0000D6;
-                       CLC                                  ;81D18F;      ;
-                       ADC.B $7E                            ;81D190;00007E;
-                       ADC.B $80                            ;81D192;000080;
-                       STA.W $0985                          ;81D194;000985;
-                       BRA CODE_81D1A3                      ;81D197;81D1A3;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_81D199: LDA.B !player_pos_X                           ;81D199;0000D6;
-                       SEC                                  ;81D19B;      ;
-                       SBC.B $7E                            ;81D19C;00007E;
-                       SBC.B $80                            ;81D19E;000080;
-                       STA.W $0985                          ;81D1A0;000985;
-                                                            ;      ;      ;
-          CODE_81D1A3: RTL                                  ;81D1A3;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
+;;;;;;;; Calculates tile in front?
+;;;;;;;; Params in A, X, Y. A is ammount of tiles, X and Y are offsets
+CalculateTileinFront: ;81D14E
+        %Set16bit(!MX)
+        ASL A
+        ASL A
+        ASL A
+        ASL A
+        STA.B $7E
+        STX.B $80
+        STY.B $82
+        LDA.B !player_pos_X
+        STA.W !tile_in_front_X
+        LDA.B !player_pos_Y
+        STA.W !tile_in_front_Y
+        LDA.B !player_direction
+        CMP.W #$0000
+        BNE .notlookingdown
+
+        LDA.B !player_pos_Y                  ;Looking down
+        CLC
+        ADC.B $7E
+        ADC.B $82
+        STA.W !tile_in_front_Y
+        BRA .return
+
+    .notlookingdown:
+        CMP.W #$0001
+        BNE .notlookingup
+
+        LDA.B !player_pos_Y                  ;Looking up
+        SEC
+        SBC.B $7E
+        SBC.B $82
+        STA.W !tile_in_front_Y
+        BRA .return
+
+    .notlookingup:
+        CMP.W #$0002
+        BNE .notlookingleft
+
+        LDA.B !player_pos_X                  ;Looking left
+        CLC
+        ADC.B $7E
+        ADC.B $80
+        STA.W !tile_in_front_X
+        BRA .return
+
+    .notlookingleft:
+        LDA.B !player_pos_X                  ;Looking right
+        SEC
+        SBC.B $7E
+        SBC.B $80
+        STA.W !tile_in_front_X
+
+    .return: RTL
+
+;;;;;;;;
           CODE_81D1A4: %Set16bit(!MX)                             ;81D1A4;      ;
                        TXA                                  ;81D1A6;      ;
                        ASL A                                ;81D1A7;      ;
@@ -7670,11 +7676,11 @@ ChangeStamina: ;81D061
                        LDA.B !player_pos_X                           ;81D1B4;0000D6;
                        CLC                                  ;81D1B6;      ;
                        ADC.B $7E                            ;81D1B7;00007E;
-                       STA.W $0985                          ;81D1B9;000985;
+                       STA.W !tile_in_front_X                          ;81D1B9;000985;
                        LDA.B !player_pos_Y                            ;81D1BC;0000D8;
                        CLC                                  ;81D1BE;      ;
                        ADC.B $80                            ;81D1BF;000080;
-                       STA.W $0987                          ;81D1C1;000987;
+                       STA.W !tile_in_front_Y                          ;81D1C1;000987;
                        RTL                                  ;81D1C4;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -10956,10 +10962,10 @@ CODE_81D716: ;81D716
                        %Set16bit(!MX)                             ;81EF2F;      ;
                        LDY.W #$0004                         ;81EF31;      ;
                        LDA.B [$72],Y                        ;81EF34;000072;
-                       STA.W $0985                          ;81EF36;000985;
+                       STA.W !tile_in_front_X                          ;81EF36;000985;
                        LDY.W #$0006                         ;81EF39;      ;
                        LDA.B [$72],Y                        ;81EF3C;000072;
-                       STA.W $0987                          ;81EF3E;000987;
+                       STA.W !tile_in_front_Y                          ;81EF3E;000987;
                        LDA.W #$0010                         ;81EF41;      ;
                        LDX.W #$0000                         ;81EF44;      ;
                        LDY.W #$001F                         ;81EF47;      ;
@@ -12028,7 +12034,7 @@ CODE_81D716: ;81D716
                        LDA.W #$0001                         ;81F805;      ;
                        LDX.W #$0000                         ;81F808;      ;
                        LDY.W #$0000                         ;81F80B;      ;
-                       JSL.L CODE_81D14E                    ;81F80E;81D14E;
+                       JSL.L CalculateTileinFront                    ;81F80E;81D14E;
                        %Set8bit(!M)                             ;81F812;      ;
                        LDA.B #$14                           ;81F814;      ;
                        STA.W !item_on_hand                          ;81F816;00091D;
@@ -12041,7 +12047,7 @@ CODE_81D716: ;81D716
                        AND.B !game_state                            ;81F828;0000D2;
                        STA.B !game_state                            ;81F82A;0000D2;
                        %Set16bit(!MX)                             ;81F82C;      ;
-                       LDA.W $0985                          ;81F82E;000985;
+                       LDA.W !tile_in_front_X                          ;81F82E;000985;
                        LSR A                                ;81F831;      ;
                        LSR A                                ;81F832;      ;
                        LSR A                                ;81F833;      ;

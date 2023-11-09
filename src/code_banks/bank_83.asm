@@ -3223,7 +3223,7 @@ NewGameSetup: ;83A9BE
         LDA.B #100
         STA.W !max_stamina
         STZ.W !tool_selected
-        STZ.W !sprinkler_water
+        STZ.W !watering_can_water
         LDA.B #$00
         STA.L $7F1F12
         LDA.B #$00
@@ -4392,7 +4392,7 @@ LoadGameSlot: ;83B2B1
         STA.W !tool_selected
         LDY.W #$0010
         LDA.B [!savelocation],Y
-        STA.W !sprinkler_water
+        STA.W !watering_can_water
         LDY.W #$0011
         LDA.B [!savelocation],Y
         STA.L $7F1F12
@@ -4788,7 +4788,7 @@ SaveGameSlot: ;83B68E
         LDA.W !tool_selected
         STA.B [!savelocation],Y
         LDY.W #$0010
-        LDA.W !sprinkler_water
+        LDA.W !watering_can_water
         STA.B [!savelocation],Y
         LDY.W #$0011
         LDA.L $7F1F12
@@ -6324,10 +6324,10 @@ CowFeedingandStatus: ;83BC5A
           CODE_83C370: %Set16bit(!M)                             ;83C370;      ;
                        LDY.W #$0004                         ;83C372;      ;
                        LDA.B [$72],Y                        ;83C375;000072;
-                       STA.W $0985                          ;83C377;000985;
+                       STA.W !tile_in_front_X                          ;83C377;000985;
                        LDY.W #$0006                         ;83C37A;      ;
                        LDA.B [$72],Y                        ;83C37D;000072;
-                       STA.W $0987                          ;83C37F;000987;
+                       STA.W !tile_in_front_Y                          ;83C37F;000987;
                        %Set8bit(!M)                             ;83C382;      ;
                        LDY.W #$0000                         ;83C384;      ;
                        LDA.B [$72],Y                        ;83C387;000072;
@@ -6443,12 +6443,12 @@ CowFeedingandStatus: ;83BC5A
                        TAX                                  ;83C452;      ;
                        LDY.W #$0008                         ;83C453;      ;
                        LDA.L Table_CowsSpawnPos,X           ;83C456;83CA44;
-                       STA.W $0985                          ;83C45A;000985;
+                       STA.W !tile_in_front_X                          ;83C45A;000985;
                        INX                                  ;83C45D;      ;
                        INX                                  ;83C45E;      ;
                        LDY.W #$000A                         ;83C45F;      ;
                        LDA.L Table_CowsSpawnPos,X           ;83C462;83CA44;
-                       STA.W $0987                          ;83C466;000987;
+                       STA.W !tile_in_front_Y                          ;83C466;000987;
                        PLX                                  ;83C469;      ;
                        JMP.W CODE_83C52E                    ;83C46A;83C52E;
                                                             ;      ;      ;
@@ -6568,10 +6568,10 @@ CowFeedingandStatus: ;83BC5A
           CODE_83C51C: %Set16bit(!M)                             ;83C51C;      ;
                        LDY.W #$0008                         ;83C51E;      ;
                        LDA.B [$72],Y                        ;83C521;000072;
-                       STA.W $0985                          ;83C523;000985;
+                       STA.W !tile_in_front_X                          ;83C523;000985;
                        LDY.W #$000A                         ;83C526;      ;
                        LDA.B [$72],Y                        ;83C529;000072;
-                       STA.W $0987                          ;83C52B;000987;
+                       STA.W !tile_in_front_Y                          ;83C52B;000987;
                                                             ;      ;      ;
           CODE_83C52E: %Set8bit(!M)                             ;83C52E;      ;
                        LDY.W #$0000                         ;83C530;      ;
@@ -6846,9 +6846,9 @@ CowFeedingandStatus: ;83BC5A
                                                             ;      ;      ;
           CODE_83C709: %Set16bit(!MX)                             ;83C709;      ;
                        LDA.L !dog_pos_X                        ;83C70B;7F1F2C;
-                       STA.W $0985                          ;83C70F;000985;
+                       STA.W !tile_in_front_X                          ;83C70F;000985;
                        LDA.L !dog_pos_Y                        ;83C712;7F1F2E;
-                       STA.W $0987                          ;83C716;000987;
+                       STA.W !tile_in_front_Y                          ;83C716;000987;
                        LDA.W #$0016                         ;83C719;      ;
                        LDX.W #$0000                         ;83C71C;      ;
                        LDY.W #$0011                         ;83C71F;      ;
@@ -6961,9 +6961,9 @@ CowFeedingandStatus: ;83BC5A
                                                             ;      ;      ;
           CODE_83C7D7: %Set16bit(!MX)                             ;83C7D7;      ;
                        LDA.W #$0110                         ;83C7D9;      ;
-                       STA.W $0985                          ;83C7DC;000985;
+                       STA.W !tile_in_front_X                          ;83C7DC;000985;
                        LDA.W #$0140                         ;83C7DF;      ;
-                       STA.W $0987                          ;83C7E2;000987;
+                       STA.W !tile_in_front_Y                          ;83C7E2;000987;
                        LDY.W #$0013                         ;83C7E5;      ;
                        %Set8bit(!M)                             ;83C7E8;      ;
                        LDA.L $7F1F32                        ;83C7EA;7F1F32;
@@ -9546,9 +9546,9 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        AND.W #$4000                         ;83DF29;      ;
                        BNE CODE_83DF47                      ;83DF2C;83DF47;
                        LDA.W #$009C                         ;83DF2E;      ;
-                       STA.W $0985                          ;83DF31;000985;
+                       STA.W !tile_in_front_X                          ;83DF31;000985;
                        LDA.W #$0090                         ;83DF34;      ;
-                       STA.W $0987                          ;83DF37;000987;
+                       STA.W !tile_in_front_Y                          ;83DF37;000987;
                        LDA.W #$0010                         ;83DF3A;      ;
                        LDX.W #$0000                         ;83DF3D;      ;
                        LDY.W #$001F                         ;83DF40;      ;
@@ -10151,9 +10151,9 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        AND.W #$0040                         ;83E4D1;      ;
                        BNE CODE_83E4EF                      ;83E4D4;83E4EF;
                        LDA.W #$00E0                         ;83E4D6;      ;
-                       STA.W $0985                          ;83E4D9;000985;
+                       STA.W !tile_in_front_X                          ;83E4D9;000985;
                        LDA.W #$0180                         ;83E4DC;      ;
-                       STA.W $0987                          ;83E4DF;000987;
+                       STA.W !tile_in_front_Y                          ;83E4DF;000987;
                        LDA.W #$0010                         ;83E4E2;      ;
                        LDX.W #$0000                         ;83E4E5;      ;
                        LDY.W #$001F                         ;83E4E8;      ;
