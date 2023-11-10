@@ -176,9 +176,9 @@ Bank 82
 ->bank_82_toolused_subrutines
 ❓829260 - SUB_829260
 ❓82927D - SUB_82927D
-❓8292A0 - SUB_8292A0
-❓8292BC - SUB_8292BC
-❓8292D6 - SUB_8292D6
+❓8292A0 - PreCheckToolSuccess
+❓8292BC - PreCheckToolSuccessLine
+❓8292D6 - PreCheckToolSuccessSquare
 💾8292FA - DATA8_8292FA
 ->bank_82_pointersubrutines
 💾82A571 - Cow_Feed_Flags

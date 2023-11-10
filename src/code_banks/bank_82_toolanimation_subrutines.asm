@@ -132,7 +132,7 @@ ToolAnimationBrush: ;82919B
 ToolAnimationWateringCan: ;8291A9
         %Set8bit(!M)
         %Set16bit(!X)
-        JSR.W SUB_8292A0
+        JSR.W PreCheckToolSuccess
         %Set8bit(!M)
         CMP.B #$02
         BEQ .CODE_8291D5

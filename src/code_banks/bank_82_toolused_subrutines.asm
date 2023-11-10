@@ -18,11 +18,11 @@ ToolUsedNoAction: ;82931E
 ;;;;;;;;
 ToolUsedSickle: ;829328
         %Set16bit(!MX)
-        JSR.W SUB_8292A0
-        BNE .CODE_829332
+        JSR.W PreCheckToolSuccess
+        BNE .tilecuttable
         JMP.W .return
 
-    .CODE_829332:
+    .tilecuttable:
         %Set8bit(!M)
         LDA.L !season
         CMP.B #$03
@@ -34,7 +34,7 @@ ToolUsedSickle: ;829328
         CMP.B #$04
         BCC .inthefarm
         %Set16bit(!M)
-        CPX.W #$0035                         ;TODO
+        CPX.W #$0035
         BEQ .CODE_829352
         LDA.W #$00DD
         JMP.W .cutother
@@ -47,13 +47,13 @@ ToolUsedSickle: ;829328
     .inthefarm:
         %Set16bit(!M)
         CPX.W #$0003
-        BEQ .CODE_82936C
+        BEQ .cutweed
         CPX.W #$0079
         BEQ .cutgrass
         LDA.W #$0017
         JMP.W .cutother
 
-    .CODE_82936C:
+    .cutweed:
         %Set16bit(!M)
         LDA.W #$000E
         JMP.W .cutother
@@ -156,7 +156,7 @@ ToolUsedSickle: ;829328
 ;;;;;;;;
 ToolUsedHoe: ;829460
         %Set16bit(!MX)
-        JSR.W SUB_8292A0
+        JSR.W PreCheckToolSuccess
         BNE .molecheck
         JMP.W .return
 
@@ -299,7 +299,7 @@ ToolUsedHoe: ;829460
 ;;;;;;;;
 ToolUsedHammer: ;8295C0
         %Set16bit(!MX)
-        JSR.W SUB_8292A0
+        JSR.W PreCheckToolSuccess
         BNE .CODE_8295CA
         JMP.W .forkstatuecheck
 
@@ -527,7 +527,7 @@ ToolUsedHammer: ;8295C0
 ;;;;;;;;
 ToolUsedAxe: ;8297BD
         %Set16bit(!MX)
-        JSR.W SUB_8292A0
+        JSR.W PreCheckToolSuccess
         BNE .cuttinglog
         JMP.W .goldenaxeeventcheck
 
@@ -745,7 +745,7 @@ ToolUsedCornSeeds: ;82A9999
         LDA.B #$00
         XBA
         LDA.W $096B
-        JSR.W SUB_8292D6
+        JSR.W PreCheckToolSuccessSquare
         BNE .CODE_8299AB
         JMP.W .planting
 
@@ -797,7 +797,7 @@ ToolUsedTomatoSeeds: ;8299F8
         LDA.B #$00
         XBA
         LDA.W $096B
-        JSR.W SUB_8292D6
+        JSR.W PreCheckToolSuccessSquare
         BNE .CODE_829A0A
         JMP.W .planting
 
@@ -849,7 +849,7 @@ ToolUsedPotatoSeeds: ;829A57
         LDA.B #$00
         XBA
         LDA.W $096B
-        JSR.W SUB_8292D6
+        JSR.W PreCheckToolSuccessSquare
         BNE .CODE_829A69
         JMP.W .planting
 
@@ -900,7 +900,7 @@ ToolUsedTurnipSeeds: ;829AB4
         LDA.B #$00
         XBA
         LDA.W $096B
-        JSR.W SUB_8292D6
+        JSR.W PreCheckToolSuccessSquare
         BNE .CODE_829AC6
         JMP.W .planting
 
@@ -994,7 +994,7 @@ ToolUsedGrassSeeds: ;829B61
         LDA.B #$00
         XBA
         LDA.W $096B
-        JSR.W SUB_8292D6
+        JSR.W PreCheckToolSuccessSquare
         BNE .CODE_829B73
         JMP.W .CODE_829B9D
 
@@ -1046,7 +1046,7 @@ ToolUsedGrassSeeds: ;829B61
 ;;;;;;;;
 ToolUsedPaint: ;829BCB
         %Set16bit(!MX)
-        JSR.W SUB_8292A0
+        JSR.W PreCheckToolSuccess
         BNE .CODE_829BD5
         JMP.W .CODE_829CB0
 
@@ -1178,7 +1178,7 @@ ToolUsedWateringCan: ;829CD8
         LDA.B #$07
         STA.W $0115
         JSL.L UNK_Audio19
-        JSR.W SUB_8292A0
+        JSR.W PreCheckToolSuccess
         %Set8bit(!M)
         CMP.B #$02
         BEQ .return
@@ -1186,7 +1186,7 @@ ToolUsedWateringCan: ;829CD8
         BEQ .return
         DEC A
         STA.W !watering_can_water
-        JSR.W SUB_8292A0
+        JSR.W PreCheckToolSuccess
         BNE .CODE_829D08
         JMP.W .return
 
@@ -1230,7 +1230,7 @@ ToolUsedGoldSickle: ;829D42
         LDA.B #$00
         XBA
         LDA.W $096B
-        JSR.W SUB_8292D6
+        JSR.W PreCheckToolSuccessSquare
         BNE .CODE_829D54
         JMP.W .CODE_829E6E
 
@@ -1380,7 +1380,7 @@ ToolUsedGoldHoe: ;829E8E
         LDA.B #$00
         XBA
         LDA.W $096B
-        JSR.W SUB_8292BC
+        JSR.W PreCheckToolSuccessLine
         BNE .molecheck
         JMP.W .CODE_829FF0
 
@@ -1532,7 +1532,7 @@ ToolUsedGoldHoe: ;829E8E
 ;;;;;;;;
 ToolUsedGoldHammer: ;82A005
         %Set16bit(!MX)
-        JSR.W SUB_8292A0
+        JSR.W PreCheckToolSuccess
         BNE .CODE_82A00F
         JMP.W .CODE_82A141
 
@@ -1731,7 +1731,7 @@ ToolUsedGoldHammer: ;82A005
 ;;;;;;;;
 ToolUsedGoldAxe: ;82A1BF
         %Set16bit(!MX)
-        JSR.W SUB_8292A0
+        JSR.W PreCheckToolSuccess
         BNE .CODE_82A1C9
         JMP.W .CODE_82A2F7
 
@@ -1893,7 +1893,7 @@ ToolUsedSprinkler: ;82A307
         LDA.B #$00
         XBA
         LDA.W $096B
-        JSR.W SUB_8292D6
+        JSR.W PreCheckToolSuccessSquare
         BNE .CODE_82A32D
         JMP.W .CODE_82A357
 
@@ -1982,7 +1982,7 @@ ToolUsedGemSeed: ;82A3AA
         LDX.W !tile_in_front_X
         LDY.W !tile_in_front_Y
         LDA.W #$0000
-        JSL.L CGGGG
+        JSL.L UNK_CheckTileProperty
         %Set16bit(!MX)
         CPX.W #$00F6
         BNE .CODE_82A3F5
@@ -2030,7 +2030,7 @@ ToolUsedChickenFeed: ;82A414
         LDX.W !tile_in_front_X
         LDY.W !tile_in_front_Y
         LDA.W #$0000
-        JSL.L CGGGG
+        JSL.L UNK_CheckTileProperty
         CPX.W #$00E2
         BCC .CODE_82A473
         CPX.W #$00EF
@@ -2109,7 +2109,7 @@ ToolUsedCowFeed: ;82A4C2
         LDX.W !tile_in_front_X
         LDY.W !tile_in_front_Y
         LDA.W #$0000
-        JSL.L CGGGG
+        JSL.L UNK_CheckTileProperty
         CPX.W #$00E2
         BCC .CODE_82A521
         CPX.W #$00EF

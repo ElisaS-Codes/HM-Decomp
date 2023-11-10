@@ -1694,7 +1694,7 @@
                        LDX.W !tile_in_front_X                          ;818CA2;000985;
                        LDY.W !tile_in_front_Y                          ;818CA5;000987;
                        LDA.W #$0002                         ;818CA8;      ;
-                       JSL.L CGGGG                          ;818CAB;82AC61;
+                       JSL.L UNK_CheckTileProperty                          ;818CAB;82AC61;
                        %Set16bit(!MX)                             ;818CAF;      ;
                        CPX.W #$0001                         ;818CB1;      ;
                        BEQ CODE_818CF9                      ;818CB4;818CF9;
@@ -1766,7 +1766,7 @@
                        LDX.W !tile_in_front_X                          ;818D49;000985;
                        LDY.W !tile_in_front_Y                          ;818D4C;000987;
                        LDA.W #$0002                         ;818D4F;      ;
-                       JSL.L CGGGG                          ;818D52;82AC61;
+                       JSL.L UNK_CheckTileProperty                          ;818D52;82AC61;
                        %Set16bit(!MX)                             ;818D56;      ;
                        CPX.W #$0001                         ;818D58;      ;
                        BEQ CODE_818DAB                      ;818D5B;818DAB;
@@ -1922,7 +1922,7 @@
                        LDX.W !tile_in_front_X                          ;818EAE;000985;
                        LDY.W !tile_in_front_Y                          ;818EB1;000987;
                        LDA.W #$0000                         ;818EB4;      ;
-                       JSL.L CGGGG                          ;818EB7;82AC61;
+                       JSL.L UNK_CheckTileProperty                          ;818EB7;82AC61;
                        %Set8bit(!M)                             ;818EBB;      ;
                        %Set16bit(!X)                             ;818EBD;      ;
                        LDA.B !tilemap_to_load                            ;818EBF;000022;
@@ -2234,7 +2234,7 @@
                        LDA.W #$0000                         ;81911D;      ;
                        LDX.W !tile_in_front_X                          ;819120;000985;
                        LDY.W !tile_in_front_Y                          ;819123;000987;
-                       JSL.L CGGGG                          ;819126;82AC61;
+                       JSL.L UNK_CheckTileProperty                          ;819126;82AC61;
                        CPX.W #$00F0                         ;81912A;      ;
                        BEQ CODE_819132                      ;81912D;819132;
                        JMP.W CODE_81917E                    ;81912F;81917E;
@@ -2430,7 +2430,7 @@
                        LDA.W #$0002                         ;8192C9;      ;
                        LDX.W !tile_in_front_X                          ;8192CC;000985;
                        LDY.W !tile_in_front_Y                          ;8192CF;000987;
-                       JSL.L CGGGG                          ;8192D2;82AC61;
+                       JSL.L UNK_CheckTileProperty                          ;8192D2;82AC61;
                        %Set8bit(!M)                             ;8192D6;      ;
                        AND.B #$1F                           ;8192D8;      ;
                        BEQ CODE_8192DF                      ;8192DA;8192DF;
@@ -2451,7 +2451,7 @@
                        LDA.W #$0002                         ;8192F8;      ;
                        LDX.W !tile_in_front_X                          ;8192FB;000985;
                        LDY.W !tile_in_front_Y                          ;8192FE;000987;
-                       JSL.L CGGGG                          ;819301;82AC61;
+                       JSL.L UNK_CheckTileProperty                          ;819301;82AC61;
                        %Set8bit(!M)                             ;819305;      ;
                        AND.B #$1F                           ;819307;      ;
                        BEQ CODE_81930E                      ;819309;81930E;
@@ -2472,7 +2472,7 @@
                        LDA.W #$0002                         ;819327;      ;
                        LDX.W !tile_in_front_X                          ;81932A;000985;
                        LDY.W !tile_in_front_Y                          ;81932D;000987;
-                       JSL.L CGGGG                          ;819330;82AC61;
+                       JSL.L UNK_CheckTileProperty                          ;819330;82AC61;
                        %Set8bit(!M)                             ;819334;      ;
                        AND.B #$1F                           ;819336;      ;
                        BEQ CODE_81933D                      ;819338;81933D;
@@ -2547,7 +2547,7 @@
                        LDA.W #$0000                         ;8193A8;      ;
                        LDX.W !tile_in_front_X                          ;8193AB;000985;
                        LDY.W !tile_in_front_Y                          ;8193AE;000987;
-                       JSL.L CGGGG                          ;8193B1;82AC61;
+                       JSL.L UNK_CheckTileProperty                          ;8193B1;82AC61;
                        CPX.W #$00F2                         ;8193B5;      ;
                        BEQ CODE_8193BD                      ;8193B8;8193BD;
                        JMP.W Droped_on_special_place                    ;8193BA;819497;
@@ -2679,7 +2679,7 @@ Droped_on_sale_place:
       LDA.W #$0000
       LDX.W !tile_in_front_X
       LDY.W !tile_in_front_Y
-      JSL.L CGGGG                            ;TODO
+      JSL.L UNK_CheckTileProperty                            ;TODO
       CPX.W #$00F7
       BEQ +
       JMP.W .nothatchableegg
@@ -2749,7 +2749,7 @@ Droped_on_sale_place:
       LDX.W !tile_in_front_X
       LDY.W !tile_in_front_Y
       LDA.W #$0002                         ;81956E;      ;
-      JSL.L CGGGG                          ;819571;82AC61;
+      JSL.L UNK_CheckTileProperty                          ;819571;82AC61;
       %Set16bit(!MX)                             ;819575;      ;
       LDA.W #$0006                         ;819577;      ;
       CPX.W #$00F0                         ;81957A;      ;
@@ -2776,7 +2776,7 @@ Droped_on_sale_place:
       LDX.W !tile_in_front_X                          ;8195A1;000985;
       LDY.W !tile_in_front_Y                          ;8195A4;000987;
       LDA.W #$0002                         ;8195A7;      ;
-      JSL.L CGGGG                          ;8195AA;82AC61;
+      JSL.L UNK_CheckTileProperty                          ;8195AA;82AC61;
       %Set16bit(!MX)                             ;8195AE;      ;
       LDA.W #$0000                         ;8195B0;      ;
       CPX.W #$00F0                         ;8195B3;      ;
@@ -3381,7 +3381,7 @@ DATA8_81A58B: db $FF,$FF,$9A,$80                   ;81A58B;      ;
                        LDA.W #$0000                         ;81A5AB;      ;
                        LDX.W $0907                          ;81A5AE;000907;
                        LDY.W $0909                          ;81A5B1;000909;
-                       JSL.L CGGGG                          ;81A5B4;82AC61;
+                       JSL.L UNK_CheckTileProperty                          ;81A5B4;82AC61;
                        %Set16bit(!MX)                             ;81A5B8;      ;
                        TXA                                  ;81A5BA;      ;
                        CMP.W #$0001                         ;81A5BB;      ;

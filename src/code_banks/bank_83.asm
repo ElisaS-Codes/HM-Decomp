@@ -4066,7 +4066,7 @@ FirstNightReset: ;83ABF0
                        LDA.W #$0000                         ;83B10E;      ;
                        STA.B $90                            ;83B111;000090;
                        LDA.W #$0002                         ;83B113;      ;
-                       JSL.L CGGGG                          ;83B116;82AC61;
+                       JSL.L UNK_CheckTileProperty                          ;83B116;82AC61;
                        %Set8bit(!M)                             ;83B11A;      ;
                        %Set16bit(!X)                             ;83B11C;      ;
                        STA.B $92                            ;83B11E;000092;

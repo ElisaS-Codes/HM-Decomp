@@ -3,16 +3,39 @@ Params A:Control Registers, X:VRAM/CGRAM Dest Addresses, Y(DMA Size), $72 & $74 
 
 ====Re-DECOMP
 PalettePointerTable
-Subrutines_Table
-UNK_Table14 -16b
 
 ====
-CLLLL
+$09B6 - real map?
+$7EA4E6
 
-UNK_ToolUsed SUB_829260
+$096D - Tool used repetedley (chopping big trees)
+$096C - stamina level
+
+$7F1F5C - #$0008 what happens if set
+research 0D
+
+ToolUsedSickle
+>PreCheckToolSuccess
+    A - 1
+    X - 0
+    Y - 0
+<>CalculateTileinFront - A is ammount of tiles, X and Y are offsets
+    A - Trash
+    X - tile_in_front_X
+    Y - tile_in_front_Y
+>CheckToolSuccess - checks what tools is used, and calls other subs
+>CNNNN - sicle sub
+    A - 1
+>UNK_CheckTileProperty -
+    $82 - 1 (a)
+    $84 - for checking flags
+
+>GetTileContent - Get tile content
+>GetTileIndex - Gets map index
+
 
 ====Working on
-maps
+tools, sickle
 
 ====Confirm Vars
 $7E09A3 - X Position ??? coounter
@@ -245,7 +268,8 @@ $099F what is the name being asked
 
 $7E09A3 - X Position
 $7E09A5 - X Position ???
-$7E09B6 - map related?
+
+$7E09B6 - map
 
 $7E2000 - VRAM
 

@@ -1844,7 +1844,7 @@ SUB_82927D: ;82927D
         %Set16bit(!M)                             ;82928C;      ;
         LDX.W !tile_in_front_X                          ;82928E;000985;
         LDY.W !tile_in_front_Y                          ;829291;000987;
-        JSL.L CMMMM                          ;829294;82AA71;
+        JSL.L CheckToolSuccess                          ;829294;82AA71;
         %Set8bit(!M)                             ;829298;      ;
         %Set16bit(!X)                             ;82929A;      ;
         STA.W $0922                          ;82929C;000922;
@@ -1852,21 +1852,21 @@ SUB_82927D: ;82927D
         RTS                                  ;82929F;      ;
 
 ;;;;;;;;
-SUB_8292A0: ;8292A0
-        %Set16bit(!MX)                             ;      ;
-        LDA.W #$0001                         ;8292A2;      ;
-        LDX.W #$0000                         ;8292A5;      ;
-        LDY.W #$0000                         ;8292A8;      ;
-        JSL.L CalculateTileinFront                    ;8292AB;81D14E;
-        %Set16bit(!M)                             ;8292AF;      ;
-        LDX.W !tile_in_front_X                          ;8292B1;000985;
-        LDY.W !tile_in_front_Y                          ;8292B4;000987;
-        JSL.L CMMMM                          ;8292B7;82AA71;
+PreCheckToolSuccess: ;8292A0
+        %Set16bit(!MX)
+        LDA.W #$0001
+        LDX.W #$0000
+        LDY.W #$0000
+        JSL.L CalculateTileinFront
+        %Set16bit(!M)
+        LDX.W !tile_in_front_X
+        LDY.W !tile_in_front_Y
+        JSL.L CheckToolSuccess
 
-        RTS                                  ;8292BB;      ;
+        RTS
 
 ;;;;;;;;
-SUB_8292BC: ;8292BC
+PreCheckToolSuccessLine: ;8292BC
         %Set16bit(!MX)                             ;      ;
         INC A                                ;8292BE;      ;
         LDX.W #$0000                         ;8292BF;      ;
@@ -1875,12 +1875,12 @@ SUB_8292BC: ;8292BC
         %Set16bit(!M)                             ;8292C9;      ;
         LDX.W !tile_in_front_X                          ;8292CB;000985;
         LDY.W !tile_in_front_Y                          ;8292CE;000987;
-        JSL.L CMMMM                          ;8292D1;82AA71;
+        JSL.L CheckToolSuccess                          ;8292D1;82AA71;
 
         RTS                                  ;8292D5;      ;
 
 ;;;;;;;;
-SUB_8292D6: ;8292D6
+PreCheckToolSuccessSquare: ;8292D6
         %Set16bit(!MX)                             ;      ;
         ASL A                                ;8292D8;      ;
         ASL A                                ;8292D9;      ;
@@ -1897,7 +1897,7 @@ SUB_8292D6: ;8292D6
         %Set16bit(!M)                             ;8292ED;      ;
         LDX.W !tile_in_front_X                          ;8292EF;000985;
         LDY.W !tile_in_front_Y                          ;8292F2;000987;
-        JSL.L CMMMM                          ;8292F5;82AA71;
+        JSL.L CheckToolSuccess                          ;8292F5;82AA71;
 
         RTS                                  ;8292F9;      ;
 
@@ -2100,7 +2100,7 @@ SUB_82A6A2: ;82A6A2
         PHX                                  ;82A6BC;      ;
         STX.B $82                            ;82A6BD;000082;
         STY.B $84                            ;82A6BF;000084;
-        JSR.W SUB_82B13C      ;82A6C1;82B13C;
+        JSR.W GetTileIndex      ;82A6C1;82B13C;
         %Set8bit(!M)                             ;82A6C4;      ;
         LDA.L $7EA4E6,X                      ;82A6C6;7EA4E6;
         BNE .CODE_82A6CF                      ;82A6CA;82A6CF;
@@ -2170,7 +2170,7 @@ CHHHH: ;82A713
                        PHX                                  ;82A72B;      ;
                        STX.B $82                            ;82A72C;000082;
                        STY.B $84                            ;82A72E;000084;
-                       JSR.W SUB_82B13C      ;82A730;82B13C;
+                       JSR.W GetTileIndex      ;82A730;82B13C;
                        %Set8bit(!M)                             ;82A733;      ;
                        LDA.L $7EA4E6,X                      ;82A735;7EA4E6;
                        CMP.B #$A0                           ;82A739;      ;
@@ -2312,7 +2312,7 @@ CHHHH: ;82A713
                        PHX                                  ;82A823;      ;
                        STX.B $82                            ;82A824;000082;
                        STY.B $84                            ;82A826;000084;
-                       JSR.W SUB_82B13C      ;82A828;82B13C;
+                       JSR.W GetTileIndex      ;82A828;82B13C;
                        %Set8bit(!M)                             ;82A82B;      ;
                        LDA.L $7EA4E6,X                      ;82A82D;7EA4E6;
                        BNE CODE_82A836                      ;82A831;82A836;
@@ -2539,7 +2539,7 @@ CKKKK:
        PHX
        STX.B $82
        STY.B $84
-       JSR.W SUB_82B13C
+       JSR.W GetTileIndex
        %Set8bit(!M)
        LDA.L $7EA4E6,X                       ;Farm data?
        CMP.B #$76
@@ -2604,7 +2604,7 @@ CLLLL: ;82AA0C
         PHX
         STX.B $82
         STY.B $84
-        JSR.W SUB_82B13C
+        JSR.W GetTileIndex
         %Set8bit(!M)                             ;82AA2D;      ;
         LDA.L $7EA4E6,X                      ;82AA2F;7EA4E6;
         CMP.B #$A0                           ;82AA33;      ;
@@ -2647,393 +2647,388 @@ CLLLL: ;82AA0C
     .return: RTL
 
 ;;;;;;;; Params in X Y, tile in front.
-CMMMM: ;82AA71
+CheckToolSuccess: ;82AA71
         %Set8bit(!M)
         %Set16bit(!X)
         LDA.W !tool_selected
         CMP.B #$01                           ;sickle
-        BEQ CNNNN
+        BEQ .sickleused
         CMP.B #$11                           ;gold sickle
-        BEQ CNNNN
-        CMP.B #$02                           ;hoe
-        BNE CODE_82AA87
-        JMP.W COOOO
-                                            ;      ;      ;
-                                            ;      ;      ;
-        CODE_82AA87: CMP.B #$12                           ;82AA87;      ;
-        BEQ COOOO                            ;82AA89;82AB0A;
-        CMP.B #$03                           ;82AA8B;      ;
-        BNE CODE_82AA92                      ;82AA8D;82AA92;
-        JMP.W CQQQQ                          ;82AA8F;82AB2F;
-                                            ;      ;      ;
-                                            ;      ;      ;
-        CODE_82AA92: CMP.B #$13                           ;82AA92;      ;
-        BNE CODE_82AA99                      ;82AA94;82AA99;
-        JMP.W CQQQQ                          ;82AA96;82AB2F;
-                                            ;      ;      ;
-                                            ;      ;      ;
-        CODE_82AA99: CMP.B #$04                           ;82AA99;      ;
-        BNE CODE_82AAA0                      ;82AA9B;82AAA0;
-        JMP.W CSSSS                          ;82AA9D;82AB54;
-                                            ;      ;      ;
-                                            ;      ;      ;
-        CODE_82AAA0: CMP.B #$14                           ;82AAA0;      ;
-        BNE CODE_82AAA7                      ;82AAA2;82AAA7;
-        JMP.W CSSSS                          ;82AAA4;82AB54;
-                                            ;      ;      ;
-                                            ;      ;      ;
-        CODE_82AAA7: CMP.B #$10                           ;82AAA7;      ;
-        BNE CODE_82AAAE                      ;82AAA9;82AAAE;
-        JMP.W CTTTT                          ;82AAAB;82AB79;
-                                            ;      ;      ;
-                                            ;      ;      ;
-        CODE_82AAAE: CMP.B #$15                           ;82AAAE;      ;
-        BNE CODE_82AAB5                      ;82AAB0;82AAB5;
-        JMP.W CWWWW                          ;82AAB2;82ABEB;
-                                            ;      ;      ;
-                                            ;      ;      ;
-        CODE_82AAB5: CMP.B #$0C                           ;82AAB5;      ;
-        BNE CODE_82AABC                      ;82AAB7;82AABC;
-        JMP.W CYYYY                          ;82AAB9;82AC10;
-                                            ;      ;      ;
-                                            ;      ;      ;
-        CODE_82AABC: CMP.B #$05                           ;82AABC;      ;
-        BNE CODE_82AAC3                      ;82AABE;82AAC3;
-        JMP.W CYYYY                          ;82AAC0;82AC10;
-                                            ;      ;      ;
-                                            ;      ;      ;
-        CODE_82AAC3: CMP.B #$06                           ;82AAC3;      ;
-        BNE CODE_82AACA                      ;82AAC5;82AACA;
-        JMP.W CYYYY                          ;82AAC7;82AC10;
-                                            ;      ;      ;
-                                            ;      ;      ;
-        CODE_82AACA: CMP.B #$07                           ;82AACA;      ;
-        BNE CODE_82AAD1                      ;82AACC;82AAD1;
-        JMP.W CYYYY                          ;82AACE;82AC10;
-                                            ;      ;      ;
-                                            ;      ;      ;
-        CODE_82AAD1: CMP.B #$08                           ;82AAD1;      ;
-        BNE CODE_82AAD8                      ;82AAD3;82AAD8;
-        JMP.W CYYYY                          ;82AAD5;82AC10;
-                                            ;      ;      ;
-                                            ;      ;      ;
-        CODE_82AAD8: CMP.B #$0D                           ;82AAD8;      ;
-        BNE CODE_82AADF                      ;82AADA;82AADF;
-        JMP.W CZZZZ                          ;82AADC;82AC35;
-                                            ;      ;      ;
-                                            ;      ;      ;
-        CODE_82AADF: %Set16bit(!M)                             ;82AADF;      ;
-        LDA.W #$0001                         ;82AAE1;      ;
-        RTL                                  ;82AAE4;      ;END_CMMMM
+        BEQ .sickleused
 
-;;;;;;;; sickle Used?
-CNNNN:
+        CMP.B #$02                           ;hoe
+        BNE .goldhoe
+        JMP.W .hoeused
+    .goldhoe:
+        CMP.B #$12
+        BEQ .hoeused
+
+        CMP.B #$03                           ;hammer
+        BNE .goldhammer
+        JMP.W .hammerused
+    .goldhammer:
+        CMP.B #$13
+        BNE .axe
+        JMP.W .hammerused
+
+    .axe:
+        CMP.B #$04
+        BNE .goldaxe
+        JMP.W .axeused
+    .goldaxe:
+        CMP.B #$14
+        BNE .wateringcan
+        JMP.W .axeused
+
+    .wateringcan:
+        CMP.B #$10
+        BNE .sprinkler
+        JMP.W .wateringcanused
+
+    .sprinkler:
+        CMP.B #$15
+        BNE .grassseed
+        JMP.W .sprinklerused
+
+    .grassseed:
+        CMP.B #$0C
+        BNE .cornseed
+        JMP.W .seedused
+
+    .cornseed:
+        CMP.B #$05
+        BNE .tomatoseed
+        JMP.W .seedused
+
+    .tomatoseed:
+        CMP.B #$06
+        BNE .potatoseed
+        JMP.W .seedused
+
+    .potatoseed:
+        CMP.B #$07
+        BNE .turnipseed
+        JMP.W .seedused
+
+    .turnipseed:
+        CMP.B #$08
+        BNE .paint
+        JMP.W .seedused
+
+    .paint:
+        CMP.B #$0D
+        BNE .fail
+        JMP.W .paintused
+
+    .fail:
+        %Set16bit(!M)
+        LDA.W #$0001
+        RTL
+
+    .sickleused: ;82AAE5
         %Set16bit(!MX)
         LDA.W #$0001
-        JSL.L CGGGG
-        CPX.W #$00A0                         ;82AAEE;      ;
-        BCS CODE_82AB04                      ;82AAF1;82AB04;
-        CPX.W #$0000                         ;82AAF3;      ;
-        BEQ CODE_82AB04                      ;82AAF6;82AB04;
-        %Set8bit(!M)                             ;82AAF8;      ;
-        AND.B #$01                           ;82AAFA;      ;
-        BEQ CODE_82AB04                      ;82AAFC;82AB04;
-        %Set16bit(!M)                             ;82AAFE;      ;
-        LDA.W #$0001                         ;82AB00;      ;
-        RTL                                  ;82AB03;      ;
-                                                                    ;      ;      ;
-                                                                    ;      ;      ;
-        CODE_82AB04:
-        %Set16bit(!M)                             ;82AB04;      ;
-        LDA.W #$0000                         ;82AB06;      ;
-        RTL                                  ;82AB09;      ;END_CNNNN
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                COOOO: %Set16bit(!MX)                             ;82AB0A;      ;
-                       LDA.W #$0001                         ;82AB0C;      ;
-                       JSL.L CGGGG                          ;82AB0F;82AC61;
-                       CPX.W #$00A0                         ;82AB13;      ;
-                       BCS CPPPP                            ;82AB16;82AB29;
-                       CPX.W #$0000                         ;82AB18;      ;
-                       BEQ CPPPP                            ;82AB1B;82AB29;
-                       %Set8bit(!M)                             ;82AB1D;      ;
-                       AND.B #$02                           ;82AB1F;      ;
-                       BEQ CPPPP                            ;82AB21;82AB29;
-                       %Set16bit(!M)                             ;82AB23;      ;
-                       LDA.W #$0001                         ;82AB25;      ;
-                       RTL                                  ;82AB28;      ;END_COOO
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                CPPPP: %Set16bit(!M)                             ;82AB29;      ;
-                       LDA.W #$0000                         ;82AB2B;      ;
-                       RTL                                  ;82AB2E;      ;END_CPPPP
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                CQQQQ: %Set16bit(!MX)                             ;82AB2F;      ;
-                       LDA.W #$0001                         ;82AB31;      ;
-                       JSL.L CGGGG                          ;82AB34;82AC61;
-                       CPX.W #$00A0                         ;82AB38;      ;
-                       BCS CRRRR                            ;82AB3B;82AB4E;
-                       CPX.W #$0000                         ;82AB3D;      ;
-                       BEQ CRRRR                            ;82AB40;82AB4E;
-                       %Set8bit(!M)                             ;82AB42;      ;
-                       AND.B #$04                           ;82AB44;      ;
-                       BEQ CRRRR                            ;82AB46;82AB4E;
-                       %Set16bit(!M)                             ;82AB48;      ;
-                       LDA.W #$0001                         ;82AB4A;      ;
-                       RTL                                  ;82AB4D;      ;END_CQQQQ
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                CRRRR: %Set16bit(!M)                             ;82AB4E;      ;
-                       LDA.W #$0000                         ;82AB50;      ;
-                       RTL                                  ;82AB53;      ;END_CRRRR
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                CSSSS: %Set16bit(!MX)                             ;82AB54;      ;
-                       LDA.W #$0001                         ;82AB56;      ;
-                       JSL.L CGGGG                          ;82AB59;82AC61;
-                       CPX.W #$00A0                         ;82AB5D;      ;
-                       BCS CODE_82AB73                      ;82AB60;82AB73;
-                       CPX.W #$0000                         ;82AB62;      ;
-                       BEQ CODE_82AB73                      ;82AB65;82AB73;
-                       %Set8bit(!M)                             ;82AB67;      ;
-                       AND.B #$08                           ;82AB69;      ;
-                       BEQ CODE_82AB73                      ;82AB6B;82AB73;
-                       %Set16bit(!M)                             ;82AB6D;      ;
-                       LDA.W #$0001                         ;82AB6F;      ;
-                       RTL                                  ;82AB72;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_82AB73: %Set16bit(!M)                             ;82AB73;      ;
-                       LDA.W #$0000                         ;82AB75;      ;
-                       RTL                                  ;82AB78;      ;END_CSSSS
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                CTTTT: %Set8bit(!M)                             ;82AB79;      ;
-                       LDA.B !tilemap_to_load                            ;82AB7B;000022;
-                       CMP.B #$04                           ;82AB7D;      ;
-                       BCC CODE_82ABA2                      ;82AB7F;82ABA2;
-                       CMP.B #$10                           ;82AB81;      ;
-                       BCC CVVVV                            ;82AB83;82ABE5;
-                       CMP.B #$3D                           ;82AB85;      ;
-                       BCS CODE_82ABA2                      ;82AB87;82ABA2;
-                       CMP.B #$14                           ;82AB89;      ;
-                       BCS CVVVV                            ;82AB8B;82ABE5;
-                       %Set16bit(!MX)                             ;82AB8D;      ;
-                       LDA.W #$0001                         ;82AB8F;      ;
-                       JSL.L CGGGG                          ;82AB92;82AC61;
-                       CPX.W #$00F0                         ;82AB96;      ;
-                       BEQ CUUUU                            ;82AB99;82ABDF;
-                       CPX.W #$00F4                         ;82AB9B;      ;
-                       BEQ CUUUU                            ;82AB9E;82ABDF;
-                       BRA CVVVV                            ;82ABA0;82ABE5;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_82ABA2: %Set16bit(!MX)                             ;82ABA2;      ;
-                       LDA.W #$0001                         ;82ABA4;      ;
-                       JSL.L CGGGG                          ;82ABA7;82AC61;
-                       CPX.W #$00F0                         ;82ABAB;      ;
-                       BEQ CUUUU                            ;82ABAE;82ABDF;
-                       CPX.W #$00F9                         ;82ABB0;      ;
-                       BEQ CUUUU                            ;82ABB3;82ABDF;
-                       CPX.W #$00FA                         ;82ABB5;      ;
-                       BEQ CUUUU                            ;82ABB8;82ABDF;
-                       CPX.W #$00FB                         ;82ABBA;      ;
-                       BEQ CUUUU                            ;82ABBD;82ABDF;
-                       CPX.W #$00FC                         ;82ABBF;      ;
-                       BEQ CUUUU                            ;82ABC2;82ABDF;
-                       CPX.W #$00FD                         ;82ABC4;      ;
-                       BEQ CUUUU                            ;82ABC7;82ABDF;
-                       CPX.W #$00A0                         ;82ABC9;      ;
-                       BCS CVVVV                            ;82ABCC;82ABE5;
-                       CPX.W #$0000                         ;82ABCE;      ;
-                       BEQ CVVVV                            ;82ABD1;82ABE5;
-                       %Set8bit(!M)                             ;82ABD3;      ;
-                       AND.B #$10                           ;82ABD5;      ;
-                       BEQ CVVVV                            ;82ABD7;82ABE5;
-                       %Set16bit(!M)                             ;82ABD9;      ;
-                       LDA.W #$0001                         ;82ABDB;      ;
-                       RTL                                  ;82ABDE;      ;END_CTTTT
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                CUUUU: %Set16bit(!M)                             ;82ABDF;      ;
-                       LDA.W #$0002                         ;82ABE1;      ;
-                       RTL                                  ;82ABE4;      ;END_CUUUU
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                CVVVV: %Set16bit(!M)                             ;82ABE5;      ;
-                       LDA.W #$0000                         ;82ABE7;      ;
-                       RTL                                  ;82ABEA;      ;END_CVVVV
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                CWWWW: %Set16bit(!MX)                             ;82ABEB;      ;
-                       LDA.W #$0001                         ;82ABED;      ;
-                       JSL.L CGGGG                          ;82ABF0;82AC61;
-                       CPX.W #$00A0                         ;82ABF4;      ;
-                       BCS CXXXX                            ;82ABF7;82AC0A;
-                       CPX.W #$0000                         ;82ABF9;      ;
-                       BEQ CXXXX                            ;82ABFC;82AC0A;
-                       %Set8bit(!M)                             ;82ABFE;      ;
-                       AND.B #$10                           ;82AC00;      ;
-                       BEQ CXXXX                            ;82AC02;82AC0A;
-                       %Set16bit(!M)                             ;82AC04;      ;
-                       LDA.W #$0001                         ;82AC06;      ;
-                       RTL                                  ;82AC09;      ;END_CWWWW
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                CXXXX: %Set16bit(!M)                             ;82AC0A;      ;
-                       LDA.W #$0000                         ;82AC0C;      ;
-                       RTL                                  ;82AC0F;      ;END_CXXXX
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                CYYYY: %Set16bit(!MX)                             ;82AC10;      ;
-                       LDA.W #$0001                         ;82AC12;      ;
-                       JSL.L CGGGG                          ;82AC15;82AC61;
-                       CPX.W #$00A0                         ;82AC19;      ;
-                       BCS DYYYY                            ;82AC1C;82AC2F;
-                       CPX.W #$0000                         ;82AC1E;      ;
-                       BEQ DYYYY                            ;82AC21;82AC2F;
-                       %Set8bit(!M)                             ;82AC23;      ;
-                       AND.B #$20                           ;82AC25;      ;
-                       BEQ DYYYY                            ;82AC27;82AC2F;
-                       %Set16bit(!M)                             ;82AC29;      ;
-                       LDA.W #$0001                         ;82AC2B;      ;
-                       RTL                                  ;82AC2E;      ;END_CXXXX
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                DYYYY: %Set16bit(!M)                             ;82AC2F;      ;
-                       LDA.W #$0000                         ;82AC31;      ;
-                       RTL                                  ;82AC34;      ;END_CYYYY
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                CZZZZ: %Set8bit(!M)                             ;82AC35;      ;
-                       LDA.B !tilemap_to_load                            ;82AC37;000022;
-                       CMP.B #$04                           ;82AC39;      ;
-                       BCS DAAAA                            ;82AC3B;82AC5B;
-                       %Set16bit(!MX)                             ;82AC3D;      ;
-                       LDA.W #$0001                         ;82AC3F;      ;
-                       JSL.L CGGGG                          ;82AC42;82AC61;
-                       CPX.W #$00C3                         ;82AC46;      ;
-                       BEQ CODE_82AC55                      ;82AC49;82AC55;
-                       CPX.W #$00E2                         ;82AC4B;      ;
-                       BCC DAAAA                            ;82AC4E;82AC5B;
-                       CPX.W #$00E5                         ;82AC50;      ;
-                       BCS DAAAA                            ;82AC53;82AC5B;
-                                                            ;      ;      ;
-          CODE_82AC55: %Set16bit(!M)                             ;82AC55;      ;
-                       LDA.W #$0001                         ;82AC57;      ;
-                       RTL                                  ;82AC5A;      ;END_CZZZZ
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-                DAAAA: %Set16bit(!M)                             ;82AC5B;      ;
-                       LDA.W #$0000                         ;82AC5D;      ;
-                       RTL                                  ;82AC60;      ;END_DAAAA
+        JSL.L UNK_CheckTileProperty
+        CPX.W #$00A0
+        BCS .sicklefails
+        CPX.W #$0000
+        BEQ .sicklefails
+        %Set8bit(!M)
+        AND.B #$01
+        BEQ .sicklefails
+        %Set16bit(!M)
+        LDA.W #$0001
+        RTL
 
-;;;;;;;; Params in A, return in X, Y TODO
-CGGGG: ;82AC61
+    .sicklefails:
+        %Set16bit(!M)
+        LDA.W #$0000
+        RTL
+
+    .hoeused:
+        %Set16bit(!MX)
+        LDA.W #$0001
+        JSL.L UNK_CheckTileProperty
+        CPX.W #$00A0
+        BCS .hoefails
+        CPX.W #$0000
+        BEQ .hoefails
+        %Set8bit(!M)
+        AND.B #$02
+        BEQ .hoefails
+        %Set16bit(!M)
+        LDA.W #$0001
+        RTL
+
+    .hoefails:
+        %Set16bit(!M)
+        LDA.W #$0000
+        RTL
+
+    .hammerused:
+        %Set16bit(!MX)
+        LDA.W #$0001
+        JSL.L UNK_CheckTileProperty
+        CPX.W #$00A0
+        BCS .hammerfails
+        CPX.W #$0000
+        BEQ .hammerfails
+        %Set8bit(!M)
+        AND.B #$04
+        BEQ .hammerfails
+        %Set16bit(!M)
+        LDA.W #$0001
+        RTL
+
+    .hammerfails:
+        %Set16bit(!M)
+        LDA.W #$0000
+        RTL
+
+    .axeused:
+        %Set16bit(!MX)
+        LDA.W #$0001
+        JSL.L UNK_CheckTileProperty
+        CPX.W #$00A0
+        BCS .axefails
+        CPX.W #$0000
+        BEQ .axefails
+        %Set8bit(!M)
+        AND.B #$08
+        BEQ .axefails
+        %Set16bit(!M)
+        LDA.W #$0001
+        RTL
+
+    .axefails:
+        %Set16bit(!M)
+        LDA.W #$0000
+        RTL
+
+    .wateringcanused:
+        %Set8bit(!M)
+        LDA.B !tilemap_to_load
+        CMP.B #$04                           ;Farm
+        BCC .chackiffilling
+        CMP.B #$10                           ;Mountain
+        BCC .watercanfails
+        CMP.B #$3D                           ;?
+        BCS .chackiffilling
+        CMP.B #$14                           ;?
+        BCS .watercanfails
+        %Set16bit(!MX)
+        LDA.W #$0001
+        JSL.L UNK_CheckTileProperty
+        CPX.W #$00F0
+        BEQ .watercanfilled
+        CPX.W #$00F4
+        BEQ .watercanfilled
+        BRA .watercanfails
+
+    .chackiffilling:
+        %Set16bit(!MX)
+        LDA.W #$0001
+        JSL.L UNK_CheckTileProperty
+        CPX.W #$00F0
+        BEQ .watercanfilled
+        CPX.W #$00F9
+        BEQ .watercanfilled
+        CPX.W #$00FA
+        BEQ .watercanfilled
+        CPX.W #$00FB
+        BEQ .watercanfilled
+        CPX.W #$00FC
+        BEQ .watercanfilled
+        CPX.W #$00FD
+        BEQ .watercanfilled
+        CPX.W #$00A0
+        BCS .watercanfails
+        CPX.W #$0000
+        BEQ .watercanfails
+        %Set8bit(!M)
+        AND.B #$10
+        BEQ .watercanfails
+        %Set16bit(!M)
+        LDA.W #$0001
+        RTL
+
+    .watercanfilled:
+        %Set16bit(!M)                             ;82ABDF;      ;
+        LDA.W #$0002                         ;82ABE1;      ;
+        RTL                                  ;82ABE4;      ;END_.watercanfilled
+
+    .watercanfails:
+        %Set16bit(!M)                             ;82ABE5;      ;
+        LDA.W #$0000                         ;82ABE7;      ;
+        RTL                                  ;82ABEA;      ;END_.watercanfails
+
+    .sprinklerused:
+        %Set16bit(!MX)
+        LDA.W #$0001
+        JSL.L UNK_CheckTileProperty
+        CPX.W #$00A0
+        BCS .sprinklerfails
+        CPX.W #$0000
+        BEQ .sprinklerfails
+        %Set8bit(!M)
+        AND.B #$10
+        BEQ .sprinklerfails
+        %Set16bit(!M)
+        LDA.W #$0001
+        RTL
+
+    .sprinklerfails:
+        %Set16bit(!M)
+        LDA.W #$0000
+        RTL
+
+    .seedused:
+        %Set16bit(!MX)
+        LDA.W #$0001
+        JSL.L UNK_CheckTileProperty
+        CPX.W #$00A0
+        BCS .seedfails
+        CPX.W #$0000
+        BEQ .seedfails
+        %Set8bit(!M)
+        AND.B #$20
+        BEQ .seedfails
+        %Set16bit(!M)
+        LDA.W #$0001
+        RTL
+
+    .seedfails:
+        %Set16bit(!M)
+        LDA.W #$0000
+        RTL
+
+    .paintused:
+        %Set8bit(!M)
+        LDA.B !tilemap_to_load
+        CMP.B #$04
+        BCS .paintfails
+        %Set16bit(!MX)
+        LDA.W #$0001
+        JSL.L UNK_CheckTileProperty
+        CPX.W #$00C3
+        BEQ .paintsuccess
+        CPX.W #$00E2
+        BCC .paintfails
+        CPX.W #$00E5
+        BCS .paintfails
+
+    .paintsuccess:
+        %Set16bit(!M)
+        LDA.W #$0001
+        RTL
+
+    .paintfails:
+        %Set16bit(!M)
+        LDA.W #$0000
+        RTL
+
+;;;;;;;; Params in A, returns in A: ? X: tilecontent
+;;;;;;;; Theory: this checks tiles properties
+UNK_CheckTileProperty: ;82AC61
         %Set16bit(!MX)
         STA.B $82
         %Set16bit(!M)
         LDA.L $7F1F5C
         AND.W #$0008                           ;FLAG5C
-        BEQ .skip
-        JMP.W .default
+        BEQ .continue
+        JMP.W .abort
 
-    .skip:
-        JSL.L CODE_82B124                    ;82AC73;82B124;
-        %Set8bit(!M)                             ;82AC77;      ;
-        XBA                                  ;82AC79;      ;
-        LDA.B #$00                           ;82AC7A;      ;
-        XBA                                  ;82AC7C;      ;
-        TAX                                  ;82AC7D;      ;
-        %Set16bit(!M)                             ;82AC7E;      ;
-        PHX                                  ;82AC80;      ;
-        PHA                                  ;82AC81;      ;
-        ASL A                                ;82AC82;      ;
-        ASL A                                ;82AC83;      ;
-        INC A                                ;82AC84;      ;
-        INC A                                ;82AC85;      ;
-        INC A                                ;82AC86;      ;
-        TAY                                  ;82AC87;      ;
-        LDA.B !player_direction                            ;82AC88;0000DA;
-        ASL A                                ;82AC8A;      ;
-        TAX                                  ;82AC8B;      ;
-        LDA.L UNK_Table7,X                   ;82AC8C;82ACFE;
-        STA.B $84                            ;82AC90;000084;
-        %Set8bit(!M)                             ;82AC92;      ;
-        LDA.B #$00                           ;82AC94;      ;
-        XBA                                  ;82AC96;      ;
-        LDA.B [$0D],Y                        ;82AC97;00000D;
-        %Set16bit(!M)                             ;82AC99;      ;
-        AND.B $84                            ;82AC9B;000084;
-        BEQ .CODE_82ACCC                      ;82AC9D;82ACCC;
-        %Set8bit(!M)                             ;82AC9F;      ;
-        LDA.B #$00                           ;82ACA1;      ;
-        XBA                                  ;82ACA3;      ;
-        LDA.L !season                        ;82ACA4;7F1F19;
-        %Set16bit(!M)                             ;82ACA8;      ;
-        ASL A                                ;82ACAA;      ;
-        TAX                                  ;82ACAB;      ;
-        LDA.L UNK_Table8,X                   ;82ACAC;82AD06;
-        STA.B $84                            ;82ACB0;000084;
-        %Set8bit(!M)                             ;82ACB2;      ;
-        LDA.B #$00                           ;82ACB4;      ;
-        XBA                                  ;82ACB6;      ;
-        LDA.B [$0D],Y                        ;82ACB7;00000D;
-        %Set16bit(!M)                             ;82ACB9;      ;
-        AND.B $84                            ;82ACBB;000084;
-        BEQ .CODE_82ACCC                      ;82ACBD;82ACCC;
-        %Set16bit(!MX)                             ;82ACBF;      ;
-        PLA                                  ;82ACC1;      ;
-        PLX                                  ;82ACC2;      ;
-        ASL A                                ;82ACC3;      ;
-        ASL A                                ;82ACC4;      ;
-        ADC.B $82                            ;82ACC5;000082;
-        TAY                                  ;82ACC7;      ;
-        LDA.B [$0D],Y                        ;82ACC8;00000D;
-        BRA .return                      ;82ACCA;82ACFD;
+    .continue:
+        JSL.L GetTileContent
+        %Set8bit(!M)
+        XBA
+        LDA.B #$00
+        XBA
+        TAX
+        %Set16bit(!M)
+        PHX
+        PHA
+        ASL A
+        ASL A
+        INC A
+        INC A
+        INC A                                ;* 4 + 3???
+        TAY
+        LDA.B !player_direction
+        ASL A
+        TAX
+        LDA.L Direction_Flag_Table,X
+        STA.B $84
+        %Set8bit(!M)
+        LDA.B #$00
+        XBA
+        LDA.B [$0D],Y                        ;Theory, tile properties
+        %Set16bit(!M)
+        AND.B $84
+        BEQ .checkprevious
+        %Set8bit(!M)
+        LDA.B #$00
+        XBA
+        LDA.L !season
+        %Set16bit(!M)
+        ASL A
+        TAX
+        LDA.L Season_Flag_Table,X
+        STA.B $84
+        %Set8bit(!M)
+        LDA.B #$00
+        XBA
+        LDA.B [$0D],Y
+        %Set16bit(!M)
+        AND.B $84
+        BEQ .checkprevious
+        %Set16bit(!MX)
+        PLA
+        PLX
+        ASL A
+        ASL A
+        ADC.B $82                            ;*3
+        TAY
+        LDA.B [$0D],Y
+        BRA .return
 
-    .CODE_82ACCC:
-        %Set16bit(!MX)                             ;82ACCC;      ;
-        TYA                                  ;82ACCE;      ;
-        DEC A                                ;82ACCF;      ;
-        TAY                                  ;82ACD0;      ;
-        %Set8bit(!M)                             ;82ACD1;      ;
-        LDA.B [$0D],Y                        ;82ACD3;00000D;
-        AND.B #$80                           ;82ACD5;      ;
-        BNE .CODE_82ACE9                      ;82ACD7;82ACE9;
-        %Set16bit(!M)                             ;82ACD9;      ;
-        PLA                                  ;82ACDB;      ;
-        PLX                                  ;82ACDC;      ;
-        ASL A                                ;82ACDD;      ;
-        ASL A                                ;82ACDE;      ;
-        ADC.B $82                            ;82ACDF;000082;
-        TAY                                  ;82ACE1;      ;
-        LDA.B [$0D],Y                        ;82ACE2;00000D;
-        LDX.W #$0000                         ;82ACE4;      ;
-        BRA .return                      ;82ACE7;82ACFD;
-                                            ;      ;      ;
-                                            ;      ;      ;
-    .CODE_82ACE9:
-        %Set16bit(!MX)                             ;82ACE9;      ;
-        PLA                                  ;82ACEB;      ;
-        PLX                                  ;82ACEC;      ;
-        LDA.W #$0000                         ;82ACED;      ;
-        LDX.W #$0000                         ;82ACF0;      ;
-        BRA .return                      ;82ACF3;82ACFD;
-                                            ;      ;      ;
-                                            ;      ;      ;
-        .default:
-        %Set16bit(!MX)                             ;82ACF5;      ;
-        LDA.W #$0000                         ;82ACF7;      ;
-        LDX.W #$0000                         ;82ACFA;      ;
-                                            ;      ;      ;
-        .return: RTL                                  ;82ACFD;      ;END_CGGGG
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-           UNK_Table7: db $01,$00,$02,$00,$04,$00,$08,$00   ;82ACFE;      ;
-                                                            ;      ;      ;
-           UNK_Table8: db $10,$00,$20,$00,$40,$00,$80,$00   ;82AD06;      ;
+    .checkprevious:
+        %Set16bit(!MX)
+        TYA
+        DEC A
+        TAY
+        %Set8bit(!M)
+        LDA.B [$0D],Y
+        AND.B #$80
+        BNE .default
+        %Set16bit(!M)
+        PLA
+        PLX
+        ASL A
+        ASL A
+        ADC.B $82
+        TAY
+        LDA.B [$0D],Y
+        LDX.W #$0000
+        BRA .return
+
+    .default:
+        %Set16bit(!MX)
+        PLA
+        PLX
+        LDA.W #$0000
+        LDX.W #$0000
+        BRA .return
+
+    .abort:
+        %Set16bit(!MX)
+        LDA.W #$0000
+        LDX.W #$0000
+
+    .return: RTL
+
+Direction_Flag_Table: db $01,$00,$02,$00,$04,$00,$08,$00   ;82ACFE;      ;
+Season_Flag_Table: db $10,$00,$20,$00,$40,$00,$80,$00   ;82AD06;      ;
                                                             ;      ;      ;
           CODE_82AD0E: %Set8bit(!M)                             ;82AD0E;      ;
                        %Set16bit(!X)                             ;82AD10;      ;
@@ -3338,7 +3333,7 @@ UNK_PartialMap: ;82AF00
        PHX
        STX.B $82
        STY.B $84
-       JSR.W SUB_82B13C
+       JSR.W GetTileIndex
        %Set8bit(!M)
        %Set16bit(!X)
        LDA.W $09B6,X
@@ -3512,7 +3507,7 @@ UNK_PartialMap: ;82AF00
           UNK_MOVE_FROM_SEASON_TO_09B6: %Set8bit(!M)                             ;82B03A;      ;
                        %Set16bit(!X)                             ;82B03C;      ;
                        PHA                                  ;82B03E;      ;
-                       JSR.W SUB_82B13C      ;82B03F;82B13C;
+                       JSR.W GetTileIndex      ;82B03F;82B13C;
                        %Set8bit(!M)                             ;82B042;      ;
                        PLA                                  ;82B044;      ;
                        STA.W $09B6,X                        ;82B045;0009B6;
@@ -3526,7 +3521,7 @@ UNK_PartialMap: ;82AF00
                        STA.W $0181                          ;82B050;000181;
                        PLA                                  ;82B053;      ;
                        PHA                                  ;82B054;      ;
-                       JSR.W SUB_82B13C      ;82B055;82B13C;
+                       JSR.W GetTileIndex      ;82B055;82B13C;
                        %Set8bit(!M)                             ;82B058;      ;
                        PLA                                  ;82B05A;      ;
                        STA.L $7EA4E6,X                      ;82B05B;7EA4E6;
@@ -3565,7 +3560,7 @@ UNK_PartialMap: ;82AF00
                        CLC                                  ;82B08A;      ;
                        ADC.B $90                            ;82B08B;000090;
                        TAY                                  ;82B08D;      ;
-                       JSR.W SUB_82B13C      ;82B08E;82B13C;
+                       JSR.W GetTileIndex      ;82B08E;82B13C;
                        %Set8bit(!M)                             ;82B091;      ;
                        %Set16bit(!X)                             ;82B093;      ;
                        LDA.B $99                            ;82B095;000099;
@@ -3664,13 +3659,15 @@ UNK_PartialMap: ;82AF00
                        RTL                                  ;82B123;      ;
 
 ;;;;;;; TODO
-CODE_82B124: ;82B124
-      %Set16bit(!MX)
-      JSR.W SUB_82B13C
-      %Set8bit(!M)
-      LDA.W $09B6,X
-      RTL
+GetTileContent: ;82B124
+        %Set16bit(!MX)
+        JSR.W GetTileIndex
+        %Set8bit(!M)
+        LDA.W $09B6,X
 
+        RTL
+
+;;;;;;;;
       %Set16bit(!MX)
       TXA
       AND.W #$FFF0
@@ -3681,8 +3678,8 @@ CODE_82B124: ;82B124
 
       RTL
 
-;;;;;;; Takes X and Y as parameter
-SUB_82B13C: ;82B13C
+;;;;;;; Parameters in X and Y. Returns tile index in X
+GetTileIndex: ;82B13C
        %Set16bit(!MX)
        TXA
        LSR A
