@@ -2295,7 +2295,7 @@ SUB_83932D: ;83932D
                        STZ.W !time_running                          ;8393E8;000973;
                        %Set16bit(!M)                             ;8393EB;      ;
                        LDA.L $7F1F5A                        ;8393ED;7F1F5A;
-                       ORA.W #$4000                         ;8393F1;      ;
+                       ORA.W #$4000                         ;FLAG5A
                        STA.L $7F1F5A                        ;8393F4;7F1F5A;
                        RTL                                  ;8393F8;      ;
                                                             ;      ;      ;
@@ -2335,7 +2335,7 @@ SUB_83932D: ;83932D
                                                             ;      ;      ;
           CODE_839439: %Set16bit(!M)                             ;839439;      ;
                        LDA.L $7F1F5A                        ;83943B;7F1F5A;
-                       AND.W #$BFFF                         ;83943F;      ;
+                       AND.W #$BFFF                         ;FLAG5A
                        STA.L $7F1F5A                        ;839442;7F1F5A;
                        RTL                                  ;839446;      ;
                                                             ;      ;      ;
@@ -3385,7 +3385,7 @@ NewGameSetup: ;83A9BE
         STA.W !horse_name_long_3
         STA.W !horse_name_long_4
 
-        JSL.L LoadFarmMap
+        JSL.L LoadDefaultFarmMap
         RTL
 
 ;;;;;;;; TODO Sets a TON of things, lots of Vars to check
@@ -4698,14 +4698,14 @@ LoadGameSlot: ;83B2B1
         LDA.B !savelocationBank
         STA.B $77
 
-        JSL.L LoadFarmMap
+        JSL.L LoadDefaultFarmMap
 
         %Set8bit(!M)                         ;copy farm data
         LDY.W #$01C0
         LDX.W #$00C0
     .farmData:
         LDA.B [$75],Y
-        STA.L $7EA4E6,X
+        STA.L !farm_map_array,X
         INY
         INX
         CPX.W #$0F00
@@ -5024,7 +5024,7 @@ SaveGameSlot: ;83B68E
         %Set8bit(!M)                         ;Farm Data
         LDY.W #$01C0
         LDX.W #$00C0
-      - LDA.L $7EA4E6,X
+      - LDA.L !farm_map_array,X
         STA.B [!savelocation],Y
         INY
         INX
@@ -5561,7 +5561,7 @@ CowFeedingandStatus: ;83BC5A
         BEQ .cowgetscranky
         %Set16bit(!M)
         LDA.L $7F1F5A                        ;TODO
-        AND.W #$1000
+        AND.W #$1000                         ;FLAG5A
         BEQ .CODE_83BDD6
         %Set8bit(!M)
         LDY.W #$0002
@@ -7651,7 +7651,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                                                             ;      ;      ;
           CODE_83CE5B: %Set16bit(!MX)                             ;83CE5B;      ;
                        LDA.L $7F1F5A                        ;83CE5D;7F1F5A;
-                       AND.W #$0002                         ;83CE61;      ;
+                       AND.W #$0002                         ;FLAG5A
                        BEQ CODE_83CE93                      ;83CE64;83CE93;
                        %Set16bit(!M)                             ;83CE66;      ;
                        LDA.W #$0007                         ;83CE68;      ;
@@ -9572,55 +9572,55 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.B #$02                           ;83DF6C;      ;
                        LDX.W #$0240                         ;83DF6E;      ;
                        LDY.W #$02C0                         ;83DF71;      ;
-                       JSL.L CODE_82B049                    ;83DF74;82B049;
+                       JSL.L EditTileonMapandsets0181                    ;83DF74;82B049;
                        %Set8bit(!M)                             ;83DF78;      ;
                        %Set16bit(!X)                             ;83DF7A;      ;
                        LDA.B #$02                           ;83DF7C;      ;
                        LDX.W #$0250                         ;83DF7E;      ;
                        LDY.W #$02C0                         ;83DF81;      ;
-                       JSL.L CODE_82B049                    ;83DF84;82B049;
+                       JSL.L EditTileonMapandsets0181                    ;83DF84;82B049;
                        %Set8bit(!M)                             ;83DF88;      ;
                        %Set16bit(!X)                             ;83DF8A;      ;
                        LDA.B #$02                           ;83DF8C;      ;
                        LDX.W #$0260                         ;83DF8E;      ;
                        LDY.W #$02C0                         ;83DF91;      ;
-                       JSL.L CODE_82B049                    ;83DF94;82B049;
+                       JSL.L EditTileonMapandsets0181                    ;83DF94;82B049;
                        %Set8bit(!M)                             ;83DF98;      ;
                        %Set16bit(!X)                             ;83DF9A;      ;
                        LDA.B #$02                           ;83DF9C;      ;
                        LDX.W #$0240                         ;83DF9E;      ;
                        LDY.W #$02D0                         ;83DFA1;      ;
-                       JSL.L CODE_82B049                    ;83DFA4;82B049;
+                       JSL.L EditTileonMapandsets0181                    ;83DFA4;82B049;
                        %Set8bit(!M)                             ;83DFA8;      ;
                        %Set16bit(!X)                             ;83DFAA;      ;
                        LDA.B #$02                           ;83DFAC;      ;
                        LDX.W #$0250                         ;83DFAE;      ;
                        LDY.W #$02D0                         ;83DFB1;      ;
-                       JSL.L CODE_82B049                    ;83DFB4;82B049;
+                       JSL.L EditTileonMapandsets0181                    ;83DFB4;82B049;
                        %Set8bit(!M)                             ;83DFB8;      ;
                        %Set16bit(!X)                             ;83DFBA;      ;
                        LDA.B #$02                           ;83DFBC;      ;
                        LDX.W #$0260                         ;83DFBE;      ;
                        LDY.W #$02D0                         ;83DFC1;      ;
-                       JSL.L CODE_82B049                    ;83DFC4;82B049;
+                       JSL.L EditTileonMapandsets0181                    ;83DFC4;82B049;
                        %Set8bit(!M)                             ;83DFC8;      ;
                        %Set16bit(!X)                             ;83DFCA;      ;
                        LDA.B #$02                           ;83DFCC;      ;
                        LDX.W #$0240                         ;83DFCE;      ;
                        LDY.W #$02E0                         ;83DFD1;      ;
-                       JSL.L CODE_82B049                    ;83DFD4;82B049;
+                       JSL.L EditTileonMapandsets0181                    ;83DFD4;82B049;
                        %Set8bit(!M)                             ;83DFD8;      ;
                        %Set16bit(!X)                             ;83DFDA;      ;
                        LDA.B #$02                           ;83DFDC;      ;
                        LDX.W #$0250                         ;83DFDE;      ;
                        LDY.W #$02E0                         ;83DFE1;      ;
-                       JSL.L CODE_82B049                    ;83DFE4;82B049;
+                       JSL.L EditTileonMapandsets0181                    ;83DFE4;82B049;
                        %Set8bit(!M)                             ;83DFE8;      ;
                        %Set16bit(!X)                             ;83DFEA;      ;
                        LDA.B #$02                           ;83DFEC;      ;
                        LDX.W #$0260                         ;83DFEE;      ;
                        LDY.W #$02E0                         ;83DFF1;      ;
-                       JSL.L CODE_82B049                    ;83DFF4;82B049;
+                       JSL.L EditTileonMapandsets0181                    ;83DFF4;82B049;
                                                             ;      ;      ;
           CODE_83DFF8: %Set16bit(!MX)                             ;83DFF8;      ;
                        LDA.L $7F1F6E                        ;83DFFA;7F1F6E;

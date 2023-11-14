@@ -3,9 +3,9 @@ lorom
 ;DiztinGUIshLabels
 incsrc "labels.asm"
 
-incsrc "constants/registers.asm" 
-incsrc "constants/constants.asm" 
-incsrc "constants/ram.asm" 
+incsrc "constants/registers.asm"
+incsrc "constants/constants.asm"
+incsrc "constants/ram.asm"
 incsrc "constants/header.asm"
 
 ;Code Banks
@@ -22,7 +22,7 @@ incsrc "data_banks/bank_87.asm"
 incsrc "data_banks/bank_88.asm"
 incsrc "data_banks/bank_89.asm"
 incsrc "data_banks/bank_8A.asm"
-incsrc "data_banks/bank_8B.asm" 
+incsrc "data_banks/bank_8B.asm"
 incsrc "data_banks/bank_8C.asm"
 incsrc "data_banks/bank_8D.asm"
 incsrc "data_banks/bank_8E.asm"
@@ -50,7 +50,7 @@ incsrc "data_banks/bank_A3.asm"
 incsrc "data_banks/bank_A4.asm"
 incsrc "data_banks/bank_A5.asm"     ;Tilemaps
 incsrc "data_banks/bank_A6.asm"
-incsrc "data_banks/bank_A7.asm"     ;Graphics?
+incsrc "data_banks/bank_A7.asm"     ;Maps
 incsrc "data_banks/bank_A8.asm"     ;Palettes
 incsrc "data_banks/bank_A9.asm"     ;Palettes
 incsrc "data_banks/bank_AA.asm"     ;Empty

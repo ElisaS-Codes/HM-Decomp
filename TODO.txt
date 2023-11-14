@@ -5,8 +5,9 @@ Params A:Control Registers, X:VRAM/CGRAM Dest Addresses, Y(DMA Size), $72 & $74 
 PalettePointerTable
 
 ====
-$09B6 - real map?
-$7EA4E6
+$09B6 - current map logical tile
+$7E2000 - current map graphical tile
+$7EA4E6 - farm logical tile
 
 $096D - Tool used repetedley (chopping big trees)
 $096C - stamina level
@@ -24,8 +25,6 @@ ToolUsedSickle
     X - tile_in_front_X
     Y - tile_in_front_Y
 >CheckToolSuccess - checks what tools is used, and calls other subs
->CNNNN - sicle sub
-    A - 1
 >UNK_CheckTileProperty -
     $82 - 1 (a)
     $84 - for checking flags

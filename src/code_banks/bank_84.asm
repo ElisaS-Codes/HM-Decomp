@@ -7581,7 +7581,7 @@ AddCowHappiness:
                        PLX                                  ;84BA48;      ;
                        %Set8bit(!M)                             ;84BA49;      ;
                        PLA                                  ;84BA4B;      ;
-                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;84BA4C;82B03A;
+                       JSL.L EditTileonMap                    ;84BA4C;82B03A;
                        RTS                                  ;84BA50;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;84BA51;      ;
@@ -8327,7 +8327,7 @@ AddCowHappiness:
                        PLX                                  ;84BFF7;      ;
                        %Set8bit(!M)                             ;84BFF8;      ;
                        PLA                                  ;84BFFA;      ;
-                       JSL.L CODE_82B049                    ;84BFFB;82B049;
+                       JSL.L EditTileonMapandsets0181                    ;84BFFB;82B049;
                        RTS                                  ;84BFFF;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;84C000;      ;

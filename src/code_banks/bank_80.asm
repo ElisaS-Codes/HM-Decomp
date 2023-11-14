@@ -903,8 +903,8 @@ ScreenFadein: ;8087CE
         BRA --
 
       + %Set16bit(!M)
-        LDA.L $7F1F5A                        ;Flags, related to time
-        ORA.W #$8000
+        LDA.L $7F1F5A
+        ORA.W #$8000                         ;FLAG5A
         STA.L $7F1F5A
         RTL
 
@@ -946,8 +946,8 @@ ScreenFadeout: ;80880A
         BRA --
 
       + %Set16bit(!M)
-        LDA.L $7F1F5A                        ;Flags, related to time
-        AND.W #$7FFF
+        LDA.L $7F1F5A
+        AND.W #$7FFF                         ;FLAG5A
         STA.L $7F1F5A
         RTL
 
@@ -3154,7 +3154,7 @@ SUB_80972C: ;80972C
         STZ.W $091C                          ;809914;00091C;
         %Set16bit(!M)                             ;809917;      ;
         LDA.L $7F1F5A                        ;809919;7F1F5A;
-        AND.W #$FDFF                         ;80991D;      ;
+        AND.W #$FDFF                         ;FLAG5A
         STA.L $7F1F5A                        ;809920;7F1F5A;
         LDA.W #$0000                         ;809924;      ;
         STA.L $7F1F7A                        ;809927;7F1F7A;
@@ -3613,7 +3613,7 @@ SUB_809A64: ;809A64
         LDA.W $0022                          ;809CD5;000022;
         CMP.B #$04                           ;809CD8;      ;
         BCS .CODE_809CE0                      ;809CDA;809CE0;
-        JSL.L SUB_82A682                          ;809CDC;82A682;
+        JSL.L CopyCurrentMaptoFarmMap                          ;809CDC;82A682;
 
     .CODE_809CE0:
         %Set8bit(!M)                             ;809CE0;      ;
@@ -3714,7 +3714,7 @@ SUB_809D0B: ;809D0B
         CODE_809D79:
         %Set16bit(!M)                             ;809D79;      ;
         LDA.L $7F1F5A                        ;809D7B;7F1F5A;
-        AND.W #$0200                         ;809D7F;      ;
+        AND.W #$0200                         ;FLAG5A
         BNE CODE_809D87                      ;809D82;809D87;
         JMP.W $9EBB                          ;809D84;809EBB;
                                             ;      ;      ;

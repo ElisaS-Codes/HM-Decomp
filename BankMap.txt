@@ -185,13 +185,13 @@ Bank 82
 💾82A58B - Tool_Animation_Table
 💾82A5C3 - Tool_Used_Table
 ❓82A5FB - LoadMap
-❔82A65A - LoadFarmMap
-❓82A682 - SUB_82A682
+❔82A65A - LoadDefaultFarmMap
+❓82A682 - CopyCurrentMaptoFarmMap
 ❓82A6A2 - SUB_82A6A2
 ...
 ❓82D75E - IntroScreen
 ...
-❔82B173 - FarmMapPointerTable
+❔82B173 - MapPointerTable
 
 Bank 83
 🎵838000 - Unk_Audio23

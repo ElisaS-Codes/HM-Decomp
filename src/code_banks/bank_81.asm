@@ -295,7 +295,7 @@
                        LDA.W #$00A1                         ;81821F;      ;
                        LDX.W $09AD                          ;818222;0009AD;
                        LDY.W $09AF                          ;818225;0009AF;
-                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;818228;82B03A;
+                       JSL.L EditTileonMap                    ;818228;82B03A;
                                                             ;      ;      ;
           CODE_81822C: JSR.W CODE_8188E5                    ;81822C;8188E5;
                        %Set8bit(!M)                             ;81822F;      ;
@@ -329,7 +329,7 @@
                        LDA.W #$00A1                         ;818261;      ;
                        LDX.W $09AD                          ;818264;0009AD;
                        LDY.W $09AF                          ;818267;0009AF;
-                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;81826A;82B03A;
+                       JSL.L EditTileonMap                    ;81826A;82B03A;
                                                             ;      ;      ;
           CODE_81826E: JSR.W CODE_8188E5                    ;81826E;8188E5;
                        %Set8bit(!M)                             ;818271;      ;
@@ -363,7 +363,7 @@
                        LDA.W #$00A1                         ;8182A3;      ;
                        LDX.W $09AD                          ;8182A6;0009AD;
                        LDY.W $09AF                          ;8182A9;0009AF;
-                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;8182AC;82B03A;
+                       JSL.L EditTileonMap                    ;8182AC;82B03A;
                                                             ;      ;      ;
           CODE_8182B0: JSR.W CODE_8188E5                    ;8182B0;8188E5;
                        %Set8bit(!M)                             ;8182B3;      ;
@@ -394,7 +394,7 @@
                        LDA.W #$00A1                         ;8182E2;      ;
                        LDX.W $09AD                          ;8182E5;0009AD;
                        LDY.W $09AF                          ;8182E8;0009AF;
-                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;8182EB;82B03A;
+                       JSL.L EditTileonMap                    ;8182EB;82B03A;
                                                             ;      ;      ;
           CODE_8182EF: JSR.W CODE_8188E5                    ;8182EF;8188E5;
                        %Set8bit(!M)                             ;8182F2;      ;
@@ -419,7 +419,7 @@
                        LDA.W #$00A1                         ;81831B;      ;
                        LDX.W $09AD                          ;81831E;0009AD;
                        LDY.W $09AF                          ;818321;0009AF;
-                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;818324;82B03A;
+                       JSL.L EditTileonMap                    ;818324;82B03A;
                                                             ;      ;      ;
           CODE_818328: JSR.W CODE_8188E5                    ;818328;8188E5;
                        %Set8bit(!M)                             ;81832B;      ;
@@ -2711,7 +2711,7 @@ Droped_on_sale_place:
       LDA.W #$00A1
       LDX.W #$00E0
       LDY.W #$00B0
-      JSL.L UNK_MOVE_FROM_SEASON_TO_09B6
+      JSL.L EditTileonMap
       %Set16bit(!MX)
       LDA.W $0978
       STA.B $A5
@@ -3538,7 +3538,7 @@ DATA8_81A58B: db $FF,$FF,$9A,$80                   ;81A58B;      ;
                        STA.B $88                            ;81A6B6;000088;
                        LDA.B $84                            ;81A6B8;000084;
                        BEQ CODE_81A6C0                      ;81A6BA;81A6C0;
-                       JSL.L CODE_82B060                    ;81A6BC;82B060;
+                       JSL.L SUB_82B060                    ;81A6BC;82B060;
                                                             ;      ;      ;
           CODE_81A6C0: RTL                                  ;81A6C0;      ;
                                                             ;      ;      ;
@@ -3728,7 +3728,7 @@ DATA8_81A58B: db $FF,$FF,$9A,$80                   ;81A58B;      ;
                        LDA.B $84                            ;81A7F6;000084;
                        BEQ CODE_81A800                      ;81A7F8;81A800;
                        %Set8bit(!M)                             ;81A7FA;      ;
-                       JSL.L CODE_82B060                    ;81A7FC;82B060;
+                       JSL.L SUB_82B060                    ;81A7FC;82B060;
                                                             ;      ;      ;
           CODE_81A800: RTL                                  ;81A800;      ;
                                                             ;      ;      ;
@@ -4146,7 +4146,7 @@ UNK_ExecuteFromPointers:
                        PLY                                  ;81AAD3;      ;
                        PLX                                  ;81AAD4;      ;
                        PLA                                  ;81AAD5;      ;
-                       JSL.L CODE_82B0A7                    ;81AAD6;82B0A7;
+                       JSL.L SUB_82B0A7                    ;81AAD6;82B0A7;
                                                             ;      ;      ;
           CODE_81AADA: %Set16bit(!MX)                             ;81AADA;      ;
                        LDA.L $7F1F64                        ;81AADC;7F1F64;
@@ -4163,7 +4163,7 @@ UNK_ExecuteFromPointers:
                        PLY                                  ;81AAF7;      ;
                        PLX                                  ;81AAF8;      ;
                        PLA                                  ;81AAF9;      ;
-                       JSL.L CODE_82B0A7                    ;81AAFA;82B0A7;
+                       JSL.L SUB_82B0A7                    ;81AAFA;82B0A7;
                                                             ;      ;      ;
           CODE_81AAFE: %Set16bit(!MX)                             ;81AAFE;      ;
                        LDA.L $7F1F64                        ;81AB00;7F1F64;
@@ -4181,7 +4181,7 @@ UNK_ExecuteFromPointers:
                        PLY                                  ;81AB1D;      ;
                        PLX                                  ;81AB1E;      ;
                        PLA                                  ;81AB1F;      ;
-                       JSL.L CODE_82B0A7                    ;81AB20;82B0A7;
+                       JSL.L SUB_82B0A7                    ;81AB20;82B0A7;
                        BRA CODE_81AB4C                      ;81AB24;81AB4C;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -4201,7 +4201,7 @@ UNK_ExecuteFromPointers:
                        PLY                                  ;81AB45;      ;
                        PLX                                  ;81AB46;      ;
                        PLA                                  ;81AB47;      ;
-                       JSL.L CODE_82B0A7                    ;81AB48;82B0A7;
+                       JSL.L SUB_82B0A7                    ;81AB48;82B0A7;
                                                             ;      ;      ;
           CODE_81AB4C: %Set8bit(!M)                             ;81AB4C;      ;
                        %Set16bit(!X)                             ;81AB4E;      ;
@@ -4235,7 +4235,7 @@ UNK_ExecuteFromPointers:
                        PLY                                  ;81AB7F;      ;
                        PLX                                  ;81AB80;      ;
                        PLA                                  ;81AB81;      ;
-                       JSL.L CODE_82B0A7                    ;81AB82;82B0A7;
+                       JSL.L SUB_82B0A7                    ;81AB82;82B0A7;
                        %Set8bit(!M)                             ;81AB86;      ;
                        %Set16bit(!X)                             ;81AB88;      ;
                        PLA                                  ;81AB8A;      ;
@@ -4259,7 +4259,7 @@ UNK_ExecuteFromPointers:
                        PLY                                  ;81ABB1;      ;
                        PLX                                  ;81ABB2;      ;
                        PLA                                  ;81ABB3;      ;
-                       JSL.L CODE_82B0A7                    ;81ABB4;82B0A7;
+                       JSL.L SUB_82B0A7                    ;81ABB4;82B0A7;
                                                             ;      ;      ;
           CODE_81ABB8: %Set16bit(!MX)                             ;81ABB8;      ;
                        LDA.L $7F1F66                        ;81ABBA;7F1F66;
@@ -4276,7 +4276,7 @@ UNK_ExecuteFromPointers:
                        PLY                                  ;81ABD5;      ;
                        PLX                                  ;81ABD6;      ;
                        PLA                                  ;81ABD7;      ;
-                       JSL.L CODE_82B0A7                    ;81ABD8;82B0A7;
+                       JSL.L SUB_82B0A7                    ;81ABD8;82B0A7;
                                                             ;      ;      ;
           CODE_81ABDC: %Set16bit(!MX)                             ;81ABDC;      ;
                        LDA.L $7F1F66                        ;81ABDE;7F1F66;
@@ -4293,7 +4293,7 @@ UNK_ExecuteFromPointers:
                        PLY                                  ;81ABF9;      ;
                        PLX                                  ;81ABFA;      ;
                        PLA                                  ;81ABFB;      ;
-                       JSL.L CODE_82B0A7                    ;81ABFC;82B0A7;
+                       JSL.L SUB_82B0A7                    ;81ABFC;82B0A7;
                                                             ;      ;      ;
           CODE_81AC00: %Set16bit(!MX)                             ;81AC00;      ;
                        LDA.L $7F1F66                        ;81AC02;7F1F66;
@@ -4310,7 +4310,7 @@ UNK_ExecuteFromPointers:
                        PLY                                  ;81AC1D;      ;
                        PLX                                  ;81AC1E;      ;
                        PLA                                  ;81AC1F;      ;
-                       JSL.L CODE_82B0A7                    ;81AC20;82B0A7;
+                       JSL.L SUB_82B0A7                    ;81AC20;82B0A7;
                                                             ;      ;      ;
           CODE_81AC24: %Set16bit(!MX)                             ;81AC24;      ;
                        LDA.L $7F1F68                        ;81AC26;7F1F68;
@@ -4327,7 +4327,7 @@ UNK_ExecuteFromPointers:
                        PLY                                  ;81AC41;      ;
                        PLX                                  ;81AC42;      ;
                        PLA                                  ;81AC43;      ;
-                       JSL.L CODE_82B0A7                    ;81AC44;82B0A7;
+                       JSL.L SUB_82B0A7                    ;81AC44;82B0A7;
                                                             ;      ;      ;
           CODE_81AC48: RTS                                  ;81AC48;      ;
                                                             ;      ;      ;
@@ -4375,7 +4375,7 @@ UNK_ExecuteFromPointers:
                        PLY                                  ;81ACAF;      ;
                        PLX                                  ;81ACB0;      ;
                        PLA                                  ;81ACB1;      ;
-                       JSL.L CODE_82B0A7                    ;81ACB2;82B0A7;
+                       JSL.L SUB_82B0A7                    ;81ACB2;82B0A7;
                                                             ;      ;      ;
           CODE_81ACB6: RTS                                  ;81ACB6;      ;
                                                             ;      ;      ;
@@ -4416,7 +4416,7 @@ UNK_ExecuteFromPointers:
                        LDA.W #$00D7                         ;81ACFD;      ;
                        LDX.W #$0090                         ;81AD00;      ;
                        LDY.W #$0050                         ;81AD03;      ;
-                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;81AD06;82B03A;
+                       JSL.L EditTileonMap                    ;81AD06;82B03A;
                                                             ;      ;      ;
           CODE_81AD0A: %Set16bit(!MX)                             ;81AD0A;      ;
                        LDA.L $7F1F6E                        ;81AD0C;7F1F6E;
@@ -4450,7 +4450,7 @@ UNK_ExecuteFromPointers:
                        LDA.W #$00D7                         ;81AD54;      ;
                        LDX.W #$0090                         ;81AD57;      ;
                        LDY.W #$0050                         ;81AD5A;      ;
-                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;81AD5D;82B03A;
+                       JSL.L EditTileonMap                    ;81AD5D;82B03A;
                                                             ;      ;      ;
           CODE_81AD61: %Set16bit(!MX)                             ;81AD61;      ;
                        LDA.L $7F1F6E                        ;81AD63;7F1F6E;
@@ -4484,7 +4484,7 @@ UNK_ExecuteFromPointers:
                        LDA.W #$00D7                         ;81ADAB;      ;
                        LDX.W #$0140                         ;81ADAE;      ;
                        LDY.W #$0060                         ;81ADB1;      ;
-                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;81ADB4;82B03A;
+                       JSL.L EditTileonMap                    ;81ADB4;82B03A;
                                                             ;      ;      ;
           CODE_81ADB8: %Set16bit(!MX)                             ;81ADB8;      ;
                        LDA.L $7F1F6E                        ;81ADBA;7F1F6E;
@@ -4839,7 +4839,7 @@ UNK_ExecuteFromPointers:
                        PLY                                  ;81B0A0;      ;
                        PLX                                  ;81B0A1;      ;
                        PLA                                  ;81B0A2;      ;
-                       JSL.L CODE_82B0A7                    ;81B0A3;82B0A7;
+                       JSL.L SUB_82B0A7                    ;81B0A3;82B0A7;
                                                             ;      ;      ;
           CODE_81B0A7: RTS                                  ;81B0A7;      ;
                                                             ;      ;      ;
@@ -4909,10 +4909,10 @@ UNK_ExecuteFromPointers:
 
          DATA8_00B26D: %Set16bit(!MX)                             ;81B26D;      ;
                        LDA.L $7F1F5A                        ;81B26F;7F1F5A;
-                       AND.W #$0001                         ;81B273;      ;
+                       AND.W #$0001                         ;FLAG5A
                        BNE CODE_81B292                      ;81B276;81B292;
                        LDA.L $7F1F5A                        ;81B278;7F1F5A;
-                       ORA.W #$0001                         ;81B27C;      ;
+                       ORA.W #$0001                         ;FLAG5A
                        STA.L $7F1F5A                        ;81B27F;7F1F5A;
                        %Set16bit(!M)                             ;81B283;      ;
                        LDA.W #$009B                         ;81B285;      ;
@@ -5905,7 +5905,7 @@ BEEEE: ;81BFB7
                        BNE CODE_81C4E9                      ;81C4D5;81C4E9;
                        %Set16bit(!M)                             ;81C4D7;      ;
                        LDA.L $7F1F5A                        ;81C4D9;7F1F5A;
-                       AND.W #$4000                         ;81C4DD;      ;
+                       AND.W #$4000                         ;FLAG5A
                        BNE CODE_81C4E9                      ;81C4E0;81C4E9;
                        %Set16bit(!MX)                             ;81C4E2;      ;
                        LDA.W #$0000                         ;81C4E4;      ;
@@ -7937,7 +7937,7 @@ CODE_81D670: ;81D670
       JSL.L UNK_Audio19
       %Set16bit(!M)
       LDA.L $7F1F5A
-      ORA.W #$0010
+      ORA.W #$0010                           ;FLAG5A
       STA.L $7F1F5A
       %Set16bit(!M)
       LDA.W #$0044
@@ -8983,7 +8983,7 @@ CODE_81D716: ;81D716
                                                             ;      ;      ;
           CODE_81DEBC: %Set16bit(!M)                             ;81DEBC;      ;
                        LDA.L $7F1F5A                        ;81DEBE;7F1F5A;
-                       AND.W #$0020                         ;81DEC2;      ;
+                       AND.W #$0020                         ;FLAG5A
                        BNE CODE_81DEF1                      ;81DEC5;81DEF1;
                        %Set8bit(!M)                             ;81DEC7;      ;
                        LDA.L !cow_N                        ;81DEC9;7F1F0A;
@@ -9022,7 +9022,7 @@ CODE_81D716: ;81D716
                                                             ;      ;      ;
           CODE_81DF13: %Set16bit(!M)                             ;81DF13;      ;
                        LDA.L $7F1F5A                        ;81DF15;7F1F5A;
-                       AND.W #$0020                         ;81DF19;      ;
+                       AND.W #$0020                         ;FLAG5A
                        BNE CODE_81DF48                      ;81DF1C;81DF48;
                        %Set8bit(!M)                             ;81DF1E;      ;
                        LDA.L !chicks_N                        ;81DF20;7F1F0B;
@@ -9073,7 +9073,7 @@ CODE_81D716: ;81D716
                        STA.B !game_state                            ;81DF87;0000D2;
                        %Set16bit(!M)                             ;81DF89;      ;
                        LDA.L $7F1F5A                        ;81DF8B;7F1F5A;
-                       ORA.W #$0008                         ;81DF8F;      ;
+                       ORA.W #$0008                         ;FLAG5A
                        STA.L $7F1F5A                        ;81DF92;7F1F5A;
                        JMP.W CODE_81E221                    ;81DF96;81E221;
                                                             ;      ;      ;
@@ -9092,7 +9092,7 @@ CODE_81D716: ;81D716
                        STA.B !game_state                            ;81DFB6;0000D2;
                        %Set16bit(!M)                             ;81DFB8;      ;
                        LDA.L $7F1F5A                        ;81DFBA;7F1F5A;
-                       ORA.W #$0004                         ;81DFBE;      ;
+                       ORA.W #$0004                         ;FLAG5A
                        STA.L $7F1F5A                        ;81DFC1;7F1F5A;
                        JMP.W CODE_81E221                    ;81DFC5;81E221;
                                                             ;      ;      ;
@@ -9205,7 +9205,7 @@ CODE_81D716: ;81D716
                        STA.B !game_state                            ;81E0A7;0000D2;
                        %Set16bit(!M)                             ;81E0A9;      ;
                        LDA.L $7F1F5A                        ;81E0AB;7F1F5A;
-                       ORA.W #$0022                         ;81E0AF;      ;
+                       ORA.W #$0022                         ;FLAG5A
                        STA.L $7F1F5A                        ;81E0B2;7F1F5A;
                        %Set8bit(!M)                             ;81E0B6;      ;
                        LDA.L !cow_N                        ;81E0B8;7F1F0A;
@@ -9347,7 +9347,7 @@ CODE_81D716: ;81D716
                        JSL.L AddNewChicken                  ;81E1D9;83C807;
                        %Set16bit(!M)                             ;81E1DD;      ;
                        LDA.L $7F1F5A                        ;81E1DF;7F1F5A;
-                       ORA.W #$0020                         ;81E1E3;      ;
+                       ORA.W #$0020                         ;FLAG5A
                        STA.L $7F1F5A                        ;81E1E6;7F1F5A;
                        %Set8bit(!M)                             ;81E1EA;      ;
                        LDA.L !chicks_N                        ;81E1EC;7F1F0B;
@@ -11734,7 +11734,7 @@ CODE_81D716: ;81D716
                        LDA.W #$00A1                         ;81F596;      ;
                        LDX.W $09AD                          ;81F599;0009AD;
                        LDY.W $09AF                          ;81F59C;0009AF;
-                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;81F59F;82B03A;
+                       JSL.L EditTileonMap                    ;81F59F;82B03A;
                        %Set16bit(!MX)                             ;81F5A3;      ;
                        LDA.W #$0040                         ;81F5A5;      ;
                        EOR.W #$FFFF                         ;81F5A8;      ;

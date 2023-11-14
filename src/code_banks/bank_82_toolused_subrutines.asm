@@ -1198,7 +1198,7 @@ ToolUsedWateringCan: ;829CD8
         %Set8bit(!M)
         LDX.W !tile_in_front_X
         LDY.W !tile_in_front_Y
-        JSL.L UNK_MOVE_FROM_SEASON_TO_09B6
+        JSL.L EditTileonMap
         %Set16bit(!M)
         PLA
         ASL A
@@ -1905,7 +1905,7 @@ ToolUsedSprinkler: ;82A307
         %Set8bit(!M)
         LDX.W !tile_in_front_X
         LDY.W !tile_in_front_Y
-        JSL.L UNK_MOVE_FROM_SEASON_TO_09B6
+        JSL.L EditTileonMap
         %Set16bit(!M)
         PLA
         ASL A

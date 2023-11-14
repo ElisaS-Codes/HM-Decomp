@@ -41,6 +41,11 @@
 !RNG_mem_2 = $0101
 !RNG_mem_3 = $0102
 
+;Map Data
+!current_map_array = $09B6 ;4096 * 8b
+!farm_map_array = $7EA4E6 ;4096 * 8b
+!current_map_vram_array = $7E2000 ; * 16b
+
 ;Joypad Registers, all 16b
 !Joy1_Key_Pressed_Timer = $23
 !Joy1_Current = $0124          ;Keys current
