@@ -69,4 +69,4 @@ endmacro
 !map_house_1 = #$15
 !map_barn = #$27
 !map_coop = #$28
-!natsume_logo = #$5D
+!NATSUME_LOGO = #$5D

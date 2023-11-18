@@ -98,7 +98,7 @@ Bank 80
 ❓809553 - CallIndexedSubrutines
 ❓8095B3 - AutoMapScrolling
 ❓8095DE - UNK_Audio5
-❓809671 - UNK_PrepareScreenTransition
+❓809671 - SetScreenTransition
 ❓8096D3 - UNK_ScreenTransition
 ✅80972B - ScreenTransitionReturn
 ❓80972C - SUB_80972C
@@ -176,22 +176,22 @@ Bank 82
 ->bank_82_toolused_subrutines
 ❓829260 - SUB_829260
 ❓82927D - SUB_82927D
-❓8292A0 - SUB_8292A0
-❓8292BC - SUB_8292BC
-❓8292D6 - SUB_8292D6
+❓8292A0 - PreCheckToolSuccess
+❓8292BC - PreCheckToolSuccessLine
+❓8292D6 - PreCheckToolSuccessSquare
 💾8292FA - DATA8_8292FA
 ->bank_82_pointersubrutines
 💾82A571 - Cow_Feed_Flags
-💾82A58B - Tool_Used_Table
-💾82A5C3 - Subrutines_Pointer_Table
-❓82A5FB - SUB_82A5FB
-❔82A65A - LoadFarmMap
-❓82A682 - SUB_82A682
-❓82A6A2 - SUB_82A6A2
+💾82A58B - Tool_Animation_Table
+💾82A5C3 - Tool_Used_Table
+❓82A5FB - LoadMap
+❔82A65A - LoadDefaultFarmMap
+❓82A682 - CopyCurrentMaptoFarmMap
+❓82A6A2 - MonthlyFarmTilesCheck
 ...
 ❓82D75E - IntroScreen
 ...
-❔82B173 - FarmMapPointerTable
+❔82B173 - MapPointerTable
 
 Bank 83
 🎵838000 - Unk_Audio23
@@ -206,7 +206,7 @@ Bank 83
 🎵8382FE - UNK_Audio24
 🎵838332 - UNK_Audio19
 🎵83833E - UNK_Audio18
-✅838376 - UNK_IncreaseTransitionPointer
+⛔838376 - UNUSED2
 🎵838380 - UNK_Audio22
 🎵8383A4 - UNK_Audio20
 🎵838401 - UNK_Audio25

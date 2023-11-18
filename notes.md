@@ -39,9 +39,16 @@ The function decompress to both a space on bank $7E specified by a pointer, that
 copy of the VRAM the game keeps, it also copies the same data to a hardcoded space on
 the $7F bank, to be used for immediate copy.
 
-#Text
+# Map
 
-Text is stored in 16 bits, even if it could be 8 bits. $#FFFF means the dialogue ends. More info TODO
+Theres 3 maps to be aware of.
+* $09B6 () holds the current map, in 1 byte per 16x16 tile. Its the map that the game uses internally for collisions, checking tools etc. They are stored as is.
+* $7EA4E6 () holds a copy of the farm data at all time, 1 byte per 16x16 tile.
+* $7E2000 () holds the graphical data of the current map, 1 byte per 8x8 internal sprite.
+
+# Text
+
+Text is stored in 16 bits, even if it could be 8 bits. Every character is stored #$00XX $#FFFF means the dialogue ends. More info TODO
 
 
 

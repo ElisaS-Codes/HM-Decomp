@@ -185,11 +185,11 @@ VIP:
                        LDY.W #$003F                         ;848153;      ;
                        STA.B [$CC],Y                        ;848156;0000CC;
                        %Set16bit(!MX)                             ;848158;      ;
-                       LDA.W $0985                          ;84815A;000985;
+                       LDA.W !tile_in_front_X                          ;84815A;000985;
                        %Set16bit(!MX)                             ;84815D;      ;
                        LDY.W #$001A                         ;84815F;      ;
                        STA.B [$CC],Y                        ;848162;0000CC;
-                       LDA.W $0987                          ;848164;000987;
+                       LDA.W !tile_in_front_Y                          ;848164;000987;
                        %Set16bit(!MX)                             ;848167;      ;
                        LDY.W #$001C                         ;848169;      ;
                        STA.B [$CC],Y                        ;84816C;0000CC;
@@ -7581,7 +7581,7 @@ AddCowHappiness:
                        PLX                                  ;84BA48;      ;
                        %Set8bit(!M)                             ;84BA49;      ;
                        PLA                                  ;84BA4B;      ;
-                       JSL.L UNK_MOVE_FROM_SEASON_TO_09B6                    ;84BA4C;82B03A;
+                       JSL.L EditTileonMap                    ;84BA4C;82B03A;
                        RTS                                  ;84BA50;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;84BA51;      ;
@@ -8327,7 +8327,7 @@ AddCowHappiness:
                        PLX                                  ;84BFF7;      ;
                        %Set8bit(!M)                             ;84BFF8;      ;
                        PLA                                  ;84BFFA;      ;
-                       JSL.L CODE_82B049                    ;84BFFB;82B049;
+                       JSL.L EditTileonMapandsets0181                    ;84BFFB;82B049;
                        RTS                                  ;84BFFF;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;84C000;      ;
@@ -9680,12 +9680,12 @@ PlayerKeyB:
     + LDA.W #$0000                         ;84CA29;      ;
       LDX.W #$0007                         ;84CA2C;      ;
       LDY.W #$0007                         ;84CA2F;      ;
-      JSL.L CODE_81D14E                    ;84CA32;81D14E;
+      JSL.L CalculateTileinFront                    ;84CA32;81D14E;
       %Set16bit(!MX)                             ;84CA36;      ;
-      LDX.W $0985                          ;84CA38;000985;
-      LDY.W $0987                          ;84CA3B;000987;
+      LDX.W !tile_in_front_X                          ;84CA38;000985;
+      LDY.W !tile_in_front_Y                          ;84CA3B;000987;
       LDA.W #$0002                         ;84CA3E;      ;
-      JSL.L CGGGG                          ;84CA41;82AC61;
+      JSL.L UNK_CheckTileProperty                          ;84CA41;82AC61;
       %Set8bit(!M)                             ;84CA45;      ;
       AND.B #$60                           ;84CA47;      ;
       BEQ .running                      ;84CA49;84CA9D;
@@ -9765,13 +9765,13 @@ PlayerKeyA:
       LDA.W #$0000
       LDX.W #$0007
       LDY.W #$0007
-      JSL.L CODE_81D14E
+      JSL.L CalculateTileinFront
       %Set16bit(!MX)
-      LDX.W $0985
-      LDY.W $0987
+      LDX.W !tile_in_front_X
+      LDY.W !tile_in_front_Y
       LDA.W #$0002
-      JSL.L CGGGG
-      JSL.L CODE_82AD0E
+      JSL.L UNK_CheckTileProperty
+      JSL.L SUB_82AD0E
 
       RTL
 
@@ -9787,12 +9787,12 @@ PlayerKeyA:
       LDA.W #$0000                         ;84CB00;      ;
       LDX.W #$0007                         ;84CB03;      ;
       LDY.W #$0007                         ;84CB06;      ;
-      JSL.L CODE_81D14E                    ;84CB09;81D14E;
+      JSL.L CalculateTileinFront                    ;84CB09;81D14E;
       %Set16bit(!MX)                             ;84CB0D;      ;
-      LDX.W $0985                          ;84CB0F;000985;
-      LDY.W $0987                          ;84CB12;000987;
+      LDX.W !tile_in_front_X                          ;84CB0F;000985;
+      LDY.W !tile_in_front_Y                          ;84CB12;000987;
       LDA.W #$0000                         ;84CB15;      ;
-      JSL.L CGGGG                          ;84CB18;82AC61;
+      JSL.L UNK_CheckTileProperty                          ;84CB18;82AC61;
       %Set16bit(!MX)                             ;84CB1C;      ;
       CPX.W #$00F5                         ;84CB1E;      ;
       BNE .return                      ;84CB21;84CB2A;
@@ -9824,12 +9824,12 @@ PlayerKeyA:
                        LDA.W #$0000                         ;84CB50;      ;
                        LDX.W #$0007                         ;84CB53;      ;
                        LDY.W #$0007                         ;84CB56;      ;
-                       JSL.L CODE_81D14E                    ;84CB59;81D14E;
+                       JSL.L CalculateTileinFront                    ;84CB59;81D14E;
                        %Set16bit(!M)                             ;84CB5D;      ;
                        LDA.W #$0002                         ;84CB5F;      ;
-                       LDX.W $0985                          ;84CB62;000985;
-                       LDY.W $0987                          ;84CB65;000987;
-                       JSL.L CGGGG                          ;84CB68;82AC61;
+                       LDX.W !tile_in_front_X                          ;84CB62;000985;
+                       LDY.W !tile_in_front_Y                          ;84CB65;000987;
+                       JSL.L UNK_CheckTileProperty                          ;84CB68;82AC61;
                        %Set8bit(!M)                             ;84CB6C;      ;
                        AND.B #$1F                           ;84CB6E;      ;
                        BEQ CODE_84CB75                      ;84CB70;84CB75;
@@ -9845,12 +9845,12 @@ PlayerKeyA:
                        LDA.W #$0001                         ;84CB7F;      ;
                        LDX.W #$000A                         ;84CB82;      ;
                        LDY.W #$000A                         ;84CB85;      ;
-                       JSL.L CODE_81D14E                    ;84CB88;81D14E;
+                       JSL.L CalculateTileinFront                    ;84CB88;81D14E;
                        %Set16bit(!M)                             ;84CB8C;      ;
                        LDA.W #$0002                         ;84CB8E;      ;
-                       LDX.W $0985                          ;84CB91;000985;
-                       LDY.W $0987                          ;84CB94;000987;
-                       JSL.L CGGGG                          ;84CB97;82AC61;
+                       LDX.W !tile_in_front_X                          ;84CB91;000985;
+                       LDY.W !tile_in_front_Y                          ;84CB94;000987;
+                       JSL.L UNK_CheckTileProperty                          ;84CB97;82AC61;
                        %Set8bit(!M)                             ;84CB9B;      ;
                        AND.B #$1F                           ;84CB9D;      ;
                        BEQ CODE_84CBA4                      ;84CB9F;84CBA4;
@@ -9866,12 +9866,12 @@ PlayerKeyA:
                        LDA.W #$0001                         ;84CBAE;      ;
                        LDX.W #$0000                         ;84CBB1;      ;
                        LDY.W #$0000                         ;84CBB4;      ;
-                       JSL.L CODE_81D14E                    ;84CBB7;81D14E;
+                       JSL.L CalculateTileinFront                    ;84CBB7;81D14E;
                        %Set16bit(!M)                             ;84CBBB;      ;
                        LDA.W #$0002                         ;84CBBD;      ;
-                       LDX.W $0985                          ;84CBC0;000985;
-                       LDY.W $0987                          ;84CBC3;000987;
-                       JSL.L CGGGG                          ;84CBC6;82AC61;
+                       LDX.W !tile_in_front_X                          ;84CBC0;000985;
+                       LDY.W !tile_in_front_Y                          ;84CBC3;000987;
+                       JSL.L UNK_CheckTileProperty                          ;84CBC6;82AC61;
                        %Set8bit(!M)                             ;84CBCA;      ;
                        AND.B #$1F                           ;84CBCC;      ;
                        BEQ CODE_84CBD3                      ;84CBCE;84CBD3;
@@ -9896,9 +9896,9 @@ PlayerKeyA:
                                                             ;      ;      ;
                                                             ;      ;      ;
           CODE_84CBEF: %Set16bit(!MX)                             ;84CBEF;      ;
-                       LDA.W $0985                          ;84CBF1;000985;
+                       LDA.W !tile_in_front_X                          ;84CBF1;000985;
                        STA.L !dog_pos_X                        ;84CBF4;7F1F2C;
-                       LDA.W $0987                          ;84CBF8;000987;
+                       LDA.W !tile_in_front_Y                          ;84CBF8;000987;
                        STA.L !dog_pos_Y                        ;84CBFB;7F1F2E;
                        %Set8bit(!M)                             ;84CBFF;      ;
                        LDA.B !tilemap_to_load                            ;84CC01;000022;
@@ -10018,9 +10018,9 @@ PlayerKeyA:
                        STA.B !player_action                            ;84CCED;0000D4;
                        %Set16bit(!MX)                             ;84CCEF;      ;
                        LDA.B !player_pos_X                           ;84CCF1;0000D6;
-                       STA.W $0985                          ;84CCF3;000985;
+                       STA.W !tile_in_front_X                          ;84CCF3;000985;
                        LDA.B !player_pos_Y                            ;84CCF6;0000D8;
-                       STA.W $0987                          ;84CCF8;000987;
+                       STA.W !tile_in_front_Y                          ;84CCF8;000987;
                        LDA.W #$0017                         ;84CCFB;      ;
                        LDX.W #$0000                         ;84CCFE;      ;
                        LDY.W #$0014                         ;84CD01;      ;
@@ -10096,13 +10096,13 @@ PlayerKeyY: ;84CD77
 
     + %Set16bit(!MX)
       LDA.B !game_state
-      AND.W #$0010                           ;TODO
+      AND.W #$0010                           ;FLAGD2
       BEQ +
       JMP.W .return
 
     + %Set16bit(!MX)
       LDA.B !game_state
-      AND.W #$0800                           ;TODO
+      AND.W #$0800                           ;FLAGD2
       BEQ +
       JMP.W .return
 
@@ -10368,7 +10368,7 @@ ImmobileInputs:
                        RTL                                  ;84CF6C;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
-          CODE_84CF6D: JSL.L CODE_83932D                    ;84CF6D;83932D;
+          CODE_84CF6D: JSL.L SUB_83932D                    ;84CF6D;83932D;
                        %Set16bit(!M)                             ;84CF71;      ;
                        LDA.W $0187                          ;84CF73;000187;
                        INC A                                ;84CF76;      ;

@@ -3,49 +3,39 @@ Params A:Control Registers, X:VRAM/CGRAM Dest Addresses, Y(DMA Size), $72 & $74 
 
 ====Re-DECOMP
 PalettePointerTable
-Subrutines_Table
+sub after GetTileContent
+
+====
+$09B6 - current map logical tile
+$7E2000 - current map graphical tile
+$7EA4E6 - farm logical tile
+
+$096D - Tool used repetedley (chopping big trees)
+$096C - stamina level
+
+$7F1F5C - #$0008 what happens if set
+research 0D
+
+ToolUsedSickle
+>PreCheckToolSuccess
+    A - 1
+    X - 0
+    Y - 0
+<>CalculateTileinFront - A is ammount of tiles, X and Y are offsets
+    A - Trash
+    X - tile_in_front_X
+    Y - tile_in_front_Y
+>CheckToolSuccess - checks what tools is used, and calls other subs
+>UNK_CheckTileProperty -
+    $82 - 1 (a)
+    $84 - for checking flags
+
+>GetTileContent - Get tile content
+>GetTileIndex - Gets map index
+
 
 ====Working on
-SUB_809EBC - SUB_80A152 Big BG/OBJ offset movemetn block
-LoadFirstHalfPaletteToWRAM
-
-
-SetWeatherFlag More weather?
-NightReset
-LoadsFromUNK5Table
-CHHHH
-Unk_Seasons2
-SUB_828209
-CODE_84803F
-SetPaletteToLoad
-ZeroesPartial42Pointers
-CallIndexedSubrutines
-UNK_PartialMap
-UNK_OperatesOnSeasonTable
-
-0924, idle timer?
-
-$0196 - flags, related to graphic presets.
-0001: too big file?
-
-0181 = 2
-0182 = 2
-$92 = 1 # of tilesprites
-$93 = 1 # of tilemaps?
-stack $2000 Location
-$72 = $9FEF97
-Decompress + copy to VRAM
-
-$8A = $6000
-72 $A5DE84
-
-10 = $0410
-12 = 0000
-14 = $0A00
-16 = 0000 pointers?
-
-
-current_graphic_preset,$0196 flag,0181,0182,$92,$93,$8A,$00EF9F
+tools, sickle
 
 ====Confirm Vars
 $7E09A3 - X Position ??? coounter
@@ -57,7 +47,7 @@ $7F1F2B - Starting cow Happiness?
 $7F1F12 (set between water counter and some cow data?), some kind of counter down?
 $7F1F2B - Starting cow Happiness?
 $7F1F30 - related to dog?
-$7F1F29 - theory: ammount of planted grass
+$7F1F29 - ammount of planted grass
 
 
 $7F1F48 - (0)
@@ -66,8 +56,8 @@ $7F1F49 - (0)
 
 $04 - 24b pointer, related to BG2/weather?
 $07 - 24b Pointer, increases by $10
-$0A - 24b Pointer related to audio
-
+$0A - 24b Pointer, related to audio
+$0D - 24b Pointer, related to map and audio. Map background audio?
 $10 - 1040
 $12 -
 $16 - flags
@@ -96,7 +86,7 @@ $7E00A9 - stores temp data from 01A6
 
 $7E00AD -
 $7E00AF - OAM Memory Size ($7EA000)
-$7E00B7 - Something related to OAM copy on WRAM
+$7E00B7 - Something related to OAM copy on WRAM. Next sprite empty?
 
 $7E00BB - (related to $7EA420)
 $7E00BD - (related to $7EA420)
@@ -166,7 +156,6 @@ $0187 - something to do with text writing
 $018B -
 
 $0195 - Graphic mode ?
-$0196 - gets ORed with 0195? feels like flags?
 $0196 - flags? related to time?
 ?n?k ??s? n:name set k = data keyboard read? s=Skips test and updates during what I think is the transition funciton?
 ???h sSrf h:Hurracaine s= snowing S:sunny notSummer r=raining, fair
@@ -180,7 +169,7 @@ $019C - OBJs data table?
 $01B0 -
 ++
 
-$01A6+ - Pointers related to OAM?
+$01A6+ - List related to OAM?
 
 $01AD - sorute frame
 
@@ -235,14 +224,14 @@ $092A -
 $092B -
 $092C -
 $092D -
-$092E -
+$092E - related to cut grass?
 
 $0937 -
 
-$096B -
+$096B - tool used frame?
 $096C - stamina level
 #3: no stamnina left lower more stamina
-$096D - reset during movement?
+$096D - Tool used repetedley (chopping big trees)
 
 $096E - Player interaction?
 $096F - flags 1 skis audio?
@@ -280,11 +269,14 @@ $099F what is the name being asked
 $7E09A3 - X Position
 $7E09A5 - X Position ???
 
+$7E09B6 - map
+
 $7E2000 - VRAM
 
 $7E2400- - Tilemap content
 
-$7EA000-21E - OAM contents (size on $AF)
+$7EA000-$7EA1FF - OAM contents Low Table
+$7EA200-$7EA21E - OAM contents High Table
 
 $7EA220-31E - ($0000)
 $7EA320-41E - ($0000-$FFFF)
@@ -328,19 +320,20 @@ $7F1F31 -
 
 $7F1F45 -
 
+$7F1F47 -
 $7F1F48 - (0)
 $7F1F49 - (0)
 
 These resets at night
-$7F1F5A - (flags? $8000 related to time. #$0400 related to time too)
-???? b??? - b:shipping bin something there
-???b ???? - b:bell ringed
+$7F1F5A -
+??fm b??p - f:frog spotted today, m:mole today b:shipping bin something there, p:miracle potion used
+m??b ???? - m: medicine used b:bell ringed
 $7F1F5C - (some kind of flag, related to palettes?)
-???? ????
-?x?? ???u - u: related to $0196 x:wont move
+???m ???p - p: field powerberry today
+cx?? ???u - c: chiken statue broken,  u: related to $0196 x:wont move
 $7F1F5E - (flags? related to time $8000 checked during night, 0004 means no update to 0924)
 ???? ????
-???? ???b - b:Things in the shipping bin
+?f?? ???b - Blue feather used, b:Things in the shipping bin
 $7F1F60 - Flags? $0800 related to 098D? resets during night
 t??? s??? - t:tool related? no stamina? s: Save failed CRC
 ???? c??? - can change stamina?
@@ -348,17 +341,17 @@ $7F1F62 -
 
 This are more permanent
 $7F1F64 - Player Flags 1
-???? ????
+???2 1tc? 1: field berry 1, 2: field berry 2, c: chicken statue berry t: mountain trunk berry
 hhrr ccf? - hh:House Upgrade (%01 upgrade 1, %10 upgrade 2), c=Cow Pregnat? rr:erased at night: set at night depending on $196
 $7F1F66 - (Which Wife)
-???? ????
+???p ppp? - P: painte house section
 hh?w wwww - h:house to be upgraded to 2 1 w:each bit might be a wife, to select witch one you have
 $7F1F68 - Flags?
-h??? H??? - h Gold Hammer event borrowed H: Gold Hoe Removed
+h??? H?b? - h Gold Hammer event borrowed H: Gold Hoe Removed b: magic beans planted
 d??? h??u - d:dog owned h:horse owned u:when set, it doesnt re-generates $0924 rng number
 $7F1F6A - Events Flags?
 ???? ????
-???? ????
+??a? ???? a: golden axe event
 $7F1F6C -
 ???t ??pp - t=Turtle Shell p:Related to wife pregnancy
 g??? ???? - g: about to have child
