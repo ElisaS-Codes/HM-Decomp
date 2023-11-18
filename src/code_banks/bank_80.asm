@@ -91,7 +91,7 @@ GameLoop: ;808083
         LDA.W $0196
         AND.W #$DFFF
         STA.W $0196
-        JML.L CODE_82E80C
+        JML.L Unk_NamesInput
 
 ;;;;;;;; Moves the player name from the temp location to the final location
 SetPlayerName: ;8080ED

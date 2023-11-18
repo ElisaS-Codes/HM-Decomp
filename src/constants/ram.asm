@@ -45,6 +45,8 @@
 !current_map_array = $09B6 ;4096 * 8b
 !farm_map_array = $7EA4E6 ;4096 * 8b
 !current_map_vram_array = $7E2000 ; * 16b
+;01:empty, 02:empty, 03:grass, 04:stone, 05:fence, 06:broken fence, 07:tiled soil, 08:watered soil
+;1D:grass seed, 1E: Seed 1, 1F: Seed 1 Watered; 1E: Seed 2
 
 ;Joypad Registers, all 16b
 !Joy1_Key_Pressed_Timer = $23
@@ -265,6 +267,7 @@
 !stored_wood = $7F1F0C ;16b
 !wood_need_for_upgrade = $7F1F0E ;16b
 !stored_grass = $7F1F10 ;16b
+!planted_grass = $7F1F29 ;16b
 !weather_tomorrow = $098C ;8b
 ;00:Sunny, 01:Rain, 02 Snow, 03:hurricane, 04:fair, 05:sunny and calm, 06:flower festival, 07:harvest festival, 08:Thanksgiving Festival, 09:Star Night Festival, 0A:festive mood, 0B:annual egg festival, 0C:snow
 !development_rate = $7F1F35

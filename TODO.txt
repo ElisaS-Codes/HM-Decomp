@@ -3,6 +3,7 @@ Params A:Control Registers, X:VRAM/CGRAM Dest Addresses, Y(DMA Size), $72 & $74 
 
 ====Re-DECOMP
 PalettePointerTable
+sub after GetTileContent
 
 ====
 $09B6 - current map logical tile

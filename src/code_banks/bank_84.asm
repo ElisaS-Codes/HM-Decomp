@@ -9771,7 +9771,7 @@ PlayerKeyA:
       LDY.W !tile_in_front_Y
       LDA.W #$0002
       JSL.L UNK_CheckTileProperty
-      JSL.L CODE_82AD0E
+      JSL.L SUB_82AD0E
 
       RTL
 

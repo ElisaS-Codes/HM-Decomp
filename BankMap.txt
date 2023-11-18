@@ -187,7 +187,7 @@ Bank 82
 ❓82A5FB - LoadMap
 ❔82A65A - LoadDefaultFarmMap
 ❓82A682 - CopyCurrentMaptoFarmMap
-❓82A6A2 - SUB_82A6A2
+❓82A6A2 - MonthlyFarmTilesCheck
 ...
 ❓82D75E - IntroScreen
 ...

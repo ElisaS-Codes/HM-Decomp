@@ -1006,9 +1006,9 @@ ToolUsedGrassSeeds: ;829B61
         CMP.B #$02
         BCS .CODE_829B90
         %Set16bit(!M)
-        LDA.L $7F1F29
+        LDA.L !planted_grass
         INC A
-        STA.L $7F1F29
+        STA.L !planted_grass
         LDX.W #$001E
 
     .CODE_829B90:

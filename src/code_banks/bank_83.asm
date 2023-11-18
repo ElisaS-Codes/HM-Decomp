@@ -3250,7 +3250,7 @@ NewGameSetup: ;83A9BE
         STA.L !stored_grass
         STZ.W $0196
         LDA.W #$0000
-        STA.L $7F1F29
+        STA.L !planted_grass
         LDA.W #$0000
         STA.L !hearts_maria
         LDA.W #$0000
@@ -4435,7 +4435,7 @@ LoadGameSlot: ;83B2B1
         STA.W $0196
         LDY.W #$0046
         LDA.B [!savelocation],Y
-        STA.L $7F1F29
+        STA.L !planted_grass
         LDY.W #$0048
         LDA.B [!savelocation],Y
         STA.L !hearts_maria
@@ -4831,7 +4831,7 @@ SaveGameSlot: ;83B68E
         LDA.W $0196
         STA.B [!savelocation],Y
         LDY.W #$0046
-        LDA.L $7F1F29
+        LDA.L !planted_grass
         STA.B [!savelocation],Y
         LDY.W #$0048
         LDA.L !hearts_maria
@@ -5466,7 +5466,7 @@ CowFeedingandStatus: ;83BC5A
         LDA.B [$72],Y                        ;Map
         CMP.B #$04                           ;Farm
         BCS .cowunfed
-        JSL.L CKKKK                          ;TODO
+        JSL.L Sub_82A9A0                          ;TODO
         %Set16bit(!M)
         LDA.W $092E
         BEQ .cowunfed
@@ -5626,7 +5626,7 @@ CowFeedingandStatus: ;83BC5A
         LDA.B [$72],Y                        ;Map
         CMP.B #$04                           ;Farm
         BCS .skipcow
-        JSL.L CKKKK
+        JSL.L Sub_82A9A0
 
     .skipcow:
         %Set16bit(!MX)
@@ -5948,7 +5948,7 @@ CowFeedingandStatus: ;83BC5A
                        LDA.B [$72],Y                        ;83C0B2;000072;
                        CMP.B #$04                           ;83C0B4;      ;
                        BCS CODE_83C0CF                      ;83C0B6;83C0CF;
-                       JSL.L CKKKK                          ;83C0B8;82A9A0;
+                       JSL.L Sub_82A9A0                          ;83C0B8;82A9A0;
                        %Set16bit(!M)                             ;83C0BC;      ;
                        LDA.W $092E                          ;83C0BE;00092E;
                        BEQ CODE_83C0CF                      ;83C0C1;83C0CF;
@@ -11935,7 +11935,7 @@ CODE_83F4D8:
         INX                                  ;83F576;      ;
         CPX.W #$000C                         ;83F577;      ;
         BNE .cowloop                      ;83F57A;83F51A;
-        JSL.L CLLLL                          ;83F57C;82AA0C;
+        JSL.L CalculateFarmDevelopment                          ;83F57C;82AA0C;
         %Set16bit(!MX)                             ;83F580;      ;
         LDA.L !ranch_development                        ;83F582;7F1F56;
         STA.B $7E                            ;83F586;00007E;

@@ -9133,7 +9133,7 @@ CODE_81D716: ;81D716
                        CLC                                  ;81DFFF;      ;
                        ADC.B $7E                            ;81E000;00007E;
                        STA.B $7E                            ;81E002;00007E;
-                       LDA.L $7F1F29                        ;81E004;7F1F29;
+                       LDA.L !planted_grass                        ;81E004;7F1F29;
                        CMP.B $7E                            ;81E008;00007E;
                        BCS CODE_81E050                      ;81E00A;81E050;
                        %Set8bit(!M)                             ;81E00C;      ;
@@ -9268,7 +9268,7 @@ CODE_81D716: ;81D716
                        CLC                                  ;81E126;      ;
                        ADC.B $7E                            ;81E127;00007E;
                        STA.B $7E                            ;81E129;00007E;
-                       LDA.L $7F1F29                        ;81E12B;7F1F29;
+                       LDA.L !planted_grass                        ;81E12B;7F1F29;
                        CMP.B $7E                            ;81E12F;00007E;
                        BCC CODE_81E136                      ;81E131;81E136;
                        JMP.W CODE_81E17C                    ;81E133;81E17C;
