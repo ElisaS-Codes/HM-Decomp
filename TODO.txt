@@ -1,4 +1,4 @@
-bcs if bigger, bcc if lower
+bcs if bigger or equal, bcc if lower
 Params A:Control Registers, X:VRAM/CGRAM Dest Addresses, Y(DMA Size), $72 & $74 24b src
 
 ====Re-DECOMP
@@ -62,6 +62,8 @@ $0D - 24b Pointer, related to map and audio. Map background audio?
 $10 - 1040
 $12 -
 $16 - flags
+$1A -
+$1C -
 
 $1E - does things when transitioning to places
 
@@ -159,7 +161,7 @@ $018B -
 $0195 - Graphic mode ?
 $0196 - flags? related to time?
 ?n?k ??s? n:name set k = data keyboard read? s=Skips test and updates during what I think is the transition funciton?
-???h sSrf h:Hurracaine s= snowing S:sunny notSummer r=raining, fair
+???h sSrf h:Hurracaine s= snowing S:sunny notSummer f=raining, fair, second layer?
 
 $019A - (sores $04 after setting up) only some values are allowed or goes to 05, anithing not 1 disables movement
 $019B - UNK, changing it sometimes shows the crib sprite?
@@ -334,7 +336,7 @@ $7F1F5C - (some kind of flag, related to palettes?)
 cx?? ???u - c: chiken statue broken,  u: related to $0196 x:wont move
 $7F1F5E - (flags? related to time $8000 checked during night, 0004 means no update to 0924)
 ???? ????
-?f?? ???b - Blue feather used, b:Things in the shipping bin
+?f?? ???b - f:Blue feather used, b:Things in the shipping bin
 $7F1F60 - Flags? $0800 related to 098D? resets during night
 t??? s??? - t:tool related? no stamina? s: Save failed CRC
 ???? c??? - can change stamina?
@@ -343,7 +345,7 @@ $7F1F62 -
 This are more permanent
 $7F1F64 - Player Flags 1
 ???2 1tc? 1: field berry 1, 2: field berry 2, c: chicken statue berry t: mountain trunk berry
-hhrr ccf? - hh:House Upgrade (%01 upgrade 1, %10 upgrade 2), c=Cow Pregnat? rr:erased at night: set at night depending on $196
+hhrr ccf? - hh:House Upgrade (%01 upgrade 1, %10 upgrade 2), c=Cow Pregnat? rr:erased at night f:set at night depending on $196
 $7F1F66 - (Which Wife)
 ???p ppp? - P: painte house section
 hh?w wwww - h:house to be upgraded to 2 1 w:each bit might be a wife, to select witch one you have

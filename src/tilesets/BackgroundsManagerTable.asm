@@ -2,7 +2,7 @@
 ;
 
 
-TilemapManagerTable: ;80AA7C
+BackgroundsManagerTable: ;80AA7C
     dw MapFarmSpring                     ;80AA7C;00AB3C;0
     dw MapFarmSummer                     ;80AA7E;00AB5F;1
     dw MapFarmFall                       ;80AA80;00AB82;2
@@ -96,18 +96,20 @@ TilemapManagerTable: ;80AA7C
     dw UNK_DataReffed55                  ;80AB26;00B5F5;55
     dw UNK_DataReffed56                  ;80AB28;00B618;56
 
-    ;;;;;;Splash Screens
+    ;Single tilemaps
     dw LayerRain                         ;80AB2A;00B640;57
     dw LayerClouds                       ;80AB2C;00B64E;58
     dw LayerSnow                         ;80AB2E;00B65C;59
     dw LayerHeavySnow                    ;80AB30;00B66A;5A
+
+    ;Splash tilemaps
     dw IntroFarmScroll                   ;80AB32;00B678;5B
     dw HarvestMoonLogo                   ;80AB34;00B69A;5C
     dw NatsumeLogo                       ;80AB36;00B6A3;5D
     dw MenuScreenBackgrounds             ;80AB38;00B6B1;5E
     dw MenuCharacters                    ;80AB3A;00B6D3;5F
 
-TilemapManagerInfo:
+BackgroundsManagerInfo:
 MapFarmSpring:          db $00,$E0,$80,$04,$04,$03,$01,$00,$00,$00,$03,$00,$00,$00,$03,$00;80AB3C;      ;pointer directs from 80A7C6
                         db $20,$AB,$D3,$92,$00,$30,$00,$80,$93,$00,$40,$8E,$9E,$93,$00,$60;80AB4C;      ;
                         db $00,$80,$A1                       ;80AB5C;      ;
@@ -428,7 +430,7 @@ UNK_DataReffed56:       db $05,$00,$00,$02,$02,$04,$01,$00,$00,$00,$01,$00,$00,$
                         db $20,$3D,$EB,$9E,$00,$30,$00,$80,$A0,$00,$40,$E9,$88,$A0,$00,$50;80B628;      ;
                         db $AF,$CA,$A0,$00,$60,$96,$99,$A6   ;80B638;      ;
 
-;;;;;;Splash Screens
+;Single tilemaps
 LayerRain:              db $01,$02,$01,$01,$00,$50,$00,$80,$92,$00,$70,$00,$80,$A4;80B640
 
 LayerClouds:            db $01,$02,$01,$01,$00,$50,$1A,$B1,$97,$00,$70,$E2,$C3,$A4;80B64E
@@ -437,13 +439,14 @@ LayerSnow:              db $01,$02,$01,$01,$00,$50,$6D,$9C,$9E,$00,$70,$55,$C9,$
 
 LayerHeavySnow:         db $01,$02,$01,$01,$00,$50,$41,$84,$9B,$00,$70,$D5,$A3,$A5;80B66A
 
+;Splash tilemaps
 IntroFarmScroll:        db $02,$02,$04,$02,$00,$20,$00,$80,$9F,$00,$30,$6C,$94,$9F,$00,$40;80B678
                         db $75,$AA,$9F,$00,$50,$4C,$C0,$9F,$00,$60,$88,$CD,$A5,$00,$70,$4C
                         db $D4,$A5
 
-HarvestMoonLogo:        db $02,$02,$00,$01,$00,$60,$4A,$D9,$A5;80B69A
+HarvestMoonLogo:        db $02,$02, $00,$01, $00,$60, $4A,$D9,$A5;80B69A
 
-NatsumeLogo:            db $02,$02,$01,$01,$00,$20,$97,$EF,$9F,$00,$60,$84,$DE,$A5;80B6A3
+NatsumeLogo:            db $02,$02, $01,$01, $00,$20, $97,$EF,$9F, $00,$60, $84,$DE,$A5;80B6A3
 
 MenuScreenBackgrounds:  db $02,$02,$04,$02,$00,$20,$97,$BF,$9A,$00,$30,$89,$C4,$9A,$00,$40;80B6B1
                         db $41,$CB,$9A,$00,$50,$57,$D3,$9A,$00,$10,$00,$80,$A5,$00,$60,$0F

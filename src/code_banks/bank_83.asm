@@ -300,7 +300,8 @@ UNK_SetDMA2: ;8381B7
 
 ;;;;;;;; This is a decompression function, I think that its a cut part of a bigger
 ;;;;;;;; algorith, as some parts are cut, some data is skipped, might be wrong.
-;;;;;;;; Params $75: WRAM pointer, $72: Graphics pointer
+;;;;;;;; better explained in notes
+;;;;;;;; Params $72: Compressed info pointer, $75: Destination pointer
 DecompressTileMap: ;8381F8
         !datapointer = $72
         !destpointer = $75
@@ -315,12 +316,12 @@ DecompressTileMap: ;8381F8
         %Set16bit(!MX)
         LDA.W #$0000
         TAX
-
-      - STA.L $7F0000,X                      ;clear temp memory space
-        INX
-        INX
-        CPX.W #$0800
-        BCC -
+        .clearmemory
+            STA.L $7F0000,X
+            INX
+            INX
+            CPX.W #$0800
+            BCC .clearmemory
 
         %Set16bit(!M)
         LDA.B [!datapointer]
@@ -337,89 +338,89 @@ DecompressTileMap: ;8381F8
         LDA.B !remainingdata
         BNE .getNextAction                   ;useless branch
 
-    .getNextAction
-        DEC.B !currentbit                    ;first time, it will result negative
-        BPL .copySingleByte
-        %Set16bit(!M)
-        LDA.B [!datapointer]                 ;read next Control bit
-        INC.B !datapointer
-        AND.W #$00FF
-        STA.B !controlbits
-        LDA.W #$0007                         ;max ammount of control bits
-        STA.B !currentbit
+        .getNextAction
+            DEC.B !currentbit                ;first time, it will result negative
+            BPL .copySingleByte
+            %Set16bit(!M)
+            LDA.B [!datapointer]             ;read next Control bit
+            INC.B !datapointer
+            AND.W #$00FF
+            STA.B !controlbits
+            LDA.W #$0007                     ;max ammount of control bits
+            STA.B !currentbit
 
-    .copySingleByte:
-        LSR.B !controlbits                   ;Sets the next control bit on the Carry flag
-        BCC .specialCase                     ;if its 0, its a special copy
+        .copySingleByte:
+            LSR.B !controlbits               ;Sets the next control bit on the Carry flag
+            BCC .specialCase                 ;if its 0, its a special copy
 
-        %Set16bit(!M)                        ;if its 1, just copy a single byte, src to dst
-        LDA.B [!datapointer]
-        INC.B !datapointer
-        AND.W #$00FF
-        %Set8bit(!M)
-        STA.B [!destpointer]
-        %Set16bit(!MX)
-        INC.B !destpointer
-        DEC.B !remainingdata
-        BEQ .return                          ;Finished copying
-        LDX.B !7Findex
-        %Set8bit(!M)
-        STA.L $7F0000,X                      ;Writes a copy on the temp place?
-        %Set16bit(!MX)
-        TXA
-        INC A
-        AND.W #$07FF                         ;2047, max size?
-        STA.B !7Findex
-        BRA .getNextAction
+            %Set16bit(!M)                    ;if its 1, just copy a single byte, src to dst
+            LDA.B [!datapointer]
+            INC.B !datapointer
+            AND.W #$00FF
+            %Set8bit(!M)
+            STA.B [!destpointer]
+            %Set16bit(!MX)
+            INC.B !destpointer
+            DEC.B !remainingdata
+            BEQ .return                      ;Finished copying
+            LDX.B !7Findex
+            %Set8bit(!M)
+            STA.L $7F0000,X                  ;Writes a copy on the temp place?
+            %Set16bit(!MX)
+            TXA
+            INC A
+            AND.W #$07FF                     ;2047, max size?
+            STA.B !7Findex
+            BRA .getNextAction
 
-    .specialCase:
-        %Set16bit(!M)
-        LDA.B [!datapointer]
-        INC.B !datapointer
-        AND.W #$00FF
-        STA.B !offset
-        %Set16bit(!M)
-        LDA.B [!datapointer]
-        INC.B !datapointer
-        AND.W #$00FF
-        TAX
-        AND.W #$001F                         ;separate last 5 bits
-        INC A
-        INC A
-        INC A
-        STA.B !copyN                         ;last 5 bits + 3
-        TXA
-        AND.W #$00E0                         ;first 3 bits
-        ASL A
-        ASL A
-        ASL A
-        ORA.B !offset                        ;used as high byte, it give us a max of
-        STA.B !offset                        ;2047, the max size.
+        .specialCase:
+            %Set16bit(!M)
+            LDA.B [!datapointer]
+            INC.B !datapointer
+            AND.W #$00FF
+            STA.B !offset
+            %Set16bit(!M)
+            LDA.B [!datapointer]
+            INC.B !datapointer
+            AND.W #$00FF
+            TAX
+            AND.W #$001F                     ;separate last 5 bits
+            INC A
+            INC A
+            INC A
+            STA.B !copyN                     ;last 5 bits + 3
+            TXA
+            AND.W #$00E0                     ;first 3 bits
+            ASL A
+            ASL A
+            ASL A
+            ORA.B !offset                    ;used as high byte, it give us a max of
+            STA.B !offset                    ;2047, the max size.
 
-    .repeatSpecialCopy:
-        LDX.B !offset
-        LDA.L $7F0000,X
-        AND.W #$00FF
-        %Set8bit(!M)
-        STA.B [!destpointer]
-        %Set16bit(!MX)
-        INC.B !destpointer
-        DEC.B !remainingdata
-        BEQ .return
-        LDX.B !7Findex
-        %Set8bit(!M)
-        STA.L $7F0000,X
-        %Set16bit(!MX)
-        TXA
-        INC A
-        AND.W #$07FF
-        STA.B !7Findex
-        LDA.B !offset
-        INC A
-        AND.W #$07FF
-        STA.B !offset
-        DEC.B !copyN
-        BNE .repeatSpecialCopy
+            .repeatSpecialCopy:
+                LDX.B !offset
+                LDA.L $7F0000,X
+                AND.W #$00FF
+                %Set8bit(!M)
+                STA.B [!destpointer]
+                %Set16bit(!MX)
+                INC.B !destpointer
+                DEC.B !remainingdata
+                BEQ .return
+                LDX.B !7Findex
+                %Set8bit(!M)
+                STA.L $7F0000,X
+                %Set16bit(!MX)
+                TXA
+                INC A
+                AND.W #$07FF
+                STA.B !7Findex
+                LDA.B !offset
+                INC A
+                AND.W #$07FF
+                STA.B !offset
+                DEC.B !copyN
+                BNE .repeatSpecialCopy
 
         JMP.W .getNextAction
 

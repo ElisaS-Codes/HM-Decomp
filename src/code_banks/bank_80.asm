@@ -2978,7 +2978,7 @@ SUB_80972C: ;80972C
         %Set8bit(!M)                             ;80978D;      ;
         LDA.B #$57                           ;80978F;      ;
         STA.B !tilemap_to_load                            ;809791;000022;
-        JSL.L TilemapManager           ;809793;80A7C6;
+        JSL.L BackgroundsManager           ;809793;80A7C6;
         %Set16bit(!M)                             ;809797;      ;
         %Set8bit(!X)                             ;809799;      ;
         LDA.W #$B9D7                         ;80979B;      ;
@@ -3045,7 +3045,7 @@ SUB_80972C: ;80972C
         CODE_80981D:
         LDA.B #$58                           ;80981D;      ;
         STA.B !tilemap_to_load                            ;80981F;000022;
-        JSL.L TilemapManager           ;809821;80A7C6;
+        JSL.L BackgroundsManager           ;809821;80A7C6;
         JMP.W CODE_8098A8                    ;809825;8098A8;
                                             ;      ;      ;
                                             ;      ;      ;
@@ -3057,7 +3057,7 @@ SUB_80972C: ;80972C
         %Set8bit(!M)                             ;809832;      ;
         LDA.B #$59                           ;809834;      ;
         STA.B !tilemap_to_load                            ;809836;000022;
-        JSL.L TilemapManager           ;809838;80A7C6;
+        JSL.L BackgroundsManager           ;809838;80A7C6;
         %Set16bit(!M)                             ;80983C;      ;
         %Set8bit(!X)                             ;80983E;      ;
         LDA.W #$B9EA                         ;809840;      ;
@@ -3113,7 +3113,7 @@ SUB_80972C: ;80972C
         PLA                                  ;8098AE;      ;
         STA.B !tilemap_to_load                            ;8098AF;000022;
         JSL.L LoadMap                          ;8098B1;82A5FB;
-        JSL.L TilemapManager           ;8098B5;80A7C6;
+        JSL.L BackgroundsManager           ;8098B5;80A7C6;
         JSL.L ChangePalettebyTime                           ;8098B9;8092E2;
         JSL.L SUB_809329                           ;8098BD;809329;
         JSL.L CallIndexedSubrutines                           ;8098C1;809553;
@@ -5204,15 +5204,16 @@ SUB_80A7AE: ;80A7AE
         %Set16bit(!M)
         ASL A
         TAX
-        LDA.L TilemapManagerTable,X
+        LDA.L BackgroundsManagerTable,X
         STA.B !tilemap_pointer
         %Set8bit(!M)
         LDA.B (!tilemap_pointer),Y
         RTL
 
 ;;;;;;;; Loads map data, including
-TilemapManager: ;80A7C6
+BackgroundsManager: ;80A7C6
         !number_of_tilemaps = $92
+        !number_of_charactermaps = $93
 
         %Set8bit(!M)
         %Set16bit(!X)
@@ -5222,13 +5223,13 @@ TilemapManager: ;80A7C6
         %Set16bit(!M)
         ASL A
         TAX
-        LDA.L TilemapManagerTable,X
+        LDA.L BackgroundsManagerTable,X
         STA.B !tilemap_pointer
         %Set8bit(!M)
         LDY.W #$0000
         LDA.B !tilemap_to_load
         CMP.B #$57                           ;after that value, theres splash screens
-        BCS .notsplashscreen
+        BCS .singletilemapskip
 
         LDA.B (!tilemap_pointer),Y
         STA.W !current_graphic_preset
@@ -5252,14 +5253,14 @@ TilemapManager: ;80A7C6
         INY
         INY
 
-    .notsplashscreen:
+    .singletilemapskip:
         %Set8bit(!M)
         LDA.B (!tilemap_pointer),Y
-        STA.W $0181
+        STA.W $0181                          ;related to tables
         INY
         LDA.B (!tilemap_pointer),Y
-        STA.W $0182                          ;lower than 3?
-        CMP.B #$03
+        STA.W $0182                          ;never used except here?
+        CMP.B #$03                           ;TODO
         BCC .skip2
 
         %Set16bit(!M)
@@ -5274,11 +5275,11 @@ TilemapManager: ;80A7C6
         STA.B !number_of_tilemaps
         INY
         LDA.B (!tilemap_pointer),Y
-        STA.B $93
+        STA.B !number_of_charactermaps
         INY
         LDA.B !tilemap_to_load
         CMP.B #$57
-        BCS .notsplashscreen2
+        BCS .singletilemapskip2
 
         %Set16bit(!M)
         LDA.B (!tilemap_pointer),Y
@@ -5298,263 +5299,272 @@ TilemapManager: ;80A7C6
         INY
         INY
 
-    .notsplashscreen2:
+    .singletilemapskip2:
         %Set8bit(!M)
         LDA.B !number_of_tilemaps
-        BEQ .noTilemap
+        BEQ .charactermaploop
 
     .tilemaploop:
-        %Set16bit(!M)
-        LDA.B (!tilemap_pointer),Y
-        PHA
-        INY
-        INY
-        LDA.B (!tilemap_pointer),Y
-        STA.B $72
-        INY
-        INY
-        %Set8bit(!M)
-        LDA.B (!tilemap_pointer),Y
-        STA.B $74
-        %Set16bit(!M)
-        INY
-        PHY
-        LDA.W #$2000
-        STA.B $75
-        %Set8bit(!M)
-        LDA.B #$7E
-        STA.B $77                            ;Vram
-        JSL.L DecompressTileMap
-        %Set8bit(!M)
-        LDA.B #$00
-        STA.B !ProgDMA_Channel_Index
-        LDA.B !BBADX_DMA_VRAMPORT
-        STA.B !ProgDMA_Destination_Memory
-        %Set16bit(!MX)
-        PLY
-        PLA
-        PHY
-        TAX
-        LDY.W #$2000
-        LDA.W #$2000
-        STA.B $72
-        %Set8bit(!M)
-        LDA.B #$7E
-        STA.B $74
-        %Set16bit(!M)
-        LDA.W #$0080
-        JSL.L AddProgrammedDMA
-        JSL.L StartLastPreparedDMA
-        %Set16bit(!MX)
-        PLY
-        %Set8bit(!M)
-        LDA.B !number_of_tilemaps
-        DEC A
-        STA.B !number_of_tilemaps
-        BNE .tilemaploop
+            %Set16bit(!M)
+            LDA.B (!tilemap_pointer),Y       ;loads destination in VRAM
+            PHA
+            INY
+            INY
+            LDA.B (!tilemap_pointer),Y       ;loads compressed map location
+            STA.B $72
+            INY
+            INY
+            %Set8bit(!M)
+            LDA.B (!tilemap_pointer),Y       ;loads compressed map location bank
+            STA.B $74
+            %Set16bit(!M)
+            INY
+            PHY
+            LDA.W #$2000
+            STA.B $75
+            %Set8bit(!M)
+            LDA.B #$7E                      ;Destination adress, current graphical map
+            STA.B $77
+            JSL.L DecompressTileMap
+            %Set8bit(!M)
+            LDA.B #$00
+            STA.B !ProgDMA_Channel_Index
+            LDA.B !BBADX_DMA_VRAMPORT
+            STA.B !ProgDMA_Destination_Memory
+            %Set16bit(!MX)
+            PLY
+            PLA
+            PHY
+            TAX                              ;destination in VRAM
+            LDY.W #$2000                     ;size
+            LDA.W #$2000
+            STA.B $72
+            %Set8bit(!M)
+            LDA.B #$7E                       ;source
+            STA.B $74
+            %Set16bit(!M)
+            LDA.W #$0080
+            JSL.L AddProgrammedDMA
+            JSL.L StartLastPreparedDMA
+            %Set16bit(!MX)
+            PLY
+            %Set8bit(!M)
+            LDA.B !number_of_tilemaps
+            DEC A
+            STA.B !number_of_tilemaps
+            BNE .tilemaploop
 
-    .noTilemap:
-        %Set16bit(!MX)
-        LDA.B (!tilemap_pointer),Y
-        STA.B $8A
-        INY
-        INY
-        LDA.B (!tilemap_pointer),Y
-        STA.B $72
-        INY
-        INY
-        %Set8bit(!M)
-        LDA.B (!tilemap_pointer),Y
-        STA.B $74
-        %Set16bit(!M)
-        INY
-        PHY
-        LDA.W #$2000
-        STA.B $75
-        %Set8bit(!M)
-        LDA.B #$7E
-        STA.B $77
-        %Set16bit(!M)
-        LDA.W $0196
-        AND.W #$8000                         ;FLAG196
-        BNE .skip5
-        JSL.L DecompressTileMap
-        BRA .skip6
+    .charactermaploop:
+            %Set16bit(!MX)
+            LDA.B (!tilemap_pointer),Y       ;dest?
+            STA.B $8A
+            INY
+            INY
+            LDA.B (!tilemap_pointer),Y
+            STA.B $72
+            INY
+            INY
+            %Set8bit(!M)
+            LDA.B (!tilemap_pointer),Y       ;source?
+            STA.B $74
+            %Set16bit(!M)
+            INY
+            PHY
+            LDA.W #$2000
+            STA.B $75
+            %Set8bit(!M)
+            LDA.B #$7E
+            STA.B $77
+            %Set16bit(!M)
+            LDA.W $0196
+            AND.W #$8000                         ;FLAG196
+            BNE .skip5                           ;TODO
+            JSL.L DecompressTileMap
+            BRA .farmcheck
 
-    .skip5: %Set16bit(!MX)
-        LDY.W #$0000
+        .skip5:
+            %Set16bit(!MX)
+            LDY.W #$0000
 
-    .extradatareadloop:
-        LDA.B [$72],Y                        ;TODO Why?
-        STA.B [$75],Y
-        INY
-        INY
-        CPY.W #$8000
-        BNE .extradatareadloop
+            .extradatareadloop:
+                LDA.B [$72],Y                    ;TODO
+                STA.B [$75],Y
+                INY
+                INY
+                CPY.W #$8000
+                BNE .extradatareadloop
 
-    .skip6:
+        .farmcheck:
+            %Set8bit(!M)
+            LDA.B !tilemap_to_load
+            CMP.B #$04
+            BCS .notfarm                         ;Farms by season
+            JSL.L UNK_PartialMap                 ;TODO
+
+        .notfarm:
+            %Set8bit(!M)
+            LDA.B !number_of_charactermaps
+            CMP.B #$01
+            BNE .setoffsets
+            %Set16bit(!MX)
+            LDA.L $7F1F5E
+            AND.W #$0002                         ;FLAG5E
+            BNE .setoffsets
+            JSL.L UNK_ExecuteFromPointers
+
+        .setoffsets:
+            %Set16bit(!M)
+            STZ.B !OBJ_Offset_X
+            STZ.B !OBJ_Offset_Y
+            LDA.W #$410
+            STA.B $10
+            LDA.W #$0A00
+            STA.B $14
+            STZ.B $12
+            STZ.B $16
+            %Set8bit(!M)
+            STZ.B !BG_subpixel_offset_X
+            STZ.B !BG_subpixel_offset_Y
+            %Set16bit(!M)
+            STZ.B !player_pos_X
+            STZ.B !player_pos_Y
+            %Set8bit(!M)
+            LDA.B #$00
+            XBA
+            LDA.W $0181
+            %Set16bit(!M)
+            ASL A
+            TAX
+            LDA.L UNK_Table2,X
+            STA.B $1A
+            SEC
+            SBC.W #$0040
+            STA.B $80
+            LDA.L UNK_Table3,X
+            STA.B $1C
+            %Set16bit(!M)
+            LDA.W #$0000
+            STA.B $7E
+            LDX.B $8A
+            LDY.W #$0040
+            LDA.W #$0000
+
+            .copycharacters40atatime:
+                %Set16bit(!M)
+                PHA
+                LDA.W #$0000
+
+                .loop2:
+                    %Set16bit(!MX)
+                    PHA
+                    JSR.W LoadsFromVRAMwithOffset
+                    %Set16bit(!MX)
+                    LDA.B $7E
+                    CLC
+                    ADC.W #$0040
+                    STA.B $7E
+                    TXA
+                    CLC
+                    ADC.W #$0400
+                    TAX
+                    %Set8bit(!M)
+                    LDA.B !tilemap_to_load
+                    CMP.B #$5B               ;splash screens
+                    BCS .skip9
+                    LDY.B $8A
+                    CPY.W #$7000
+                    BEQ .skip10
+
+                .skip9:
+                    LDY.W #$0040
+                    JSR.W LoadsFromVRAMwithOffset
+
+                .skip10:
+                    %Set16bit(!MX)
+                    LDA.B $7E
+                    CLC
+                    ADC.B $80
+                    STA.B $7E
+                    TXA
+                    SEC
+                    SBC.W #$03E0
+                    TAX
+                    LDY.W #$0040
+                    PLA
+                    INC A
+                    CMP.W #$0020
+                    BNE .loop2
+
+                %Set8bit(!M)
+                LDA.B !tilemap_to_load
+                CMP.B #$5B
+                BCS .skip11
+                LDY.B $8A
+                CPY.W #$7000
+                BEQ .skip12
+
+            .skip11:
+                %Set16bit(!M)
+                TXA
+                CLC
+                ADC.W #$0400
+                TAX
+
+            .skip12:
+                %Set16bit(!MX)
+                LDY.W #$0040
+                PLA
+                INC A
+                CMP.W #$0002
+                BNE .copycharacters40atatime
+
+            %Set16bit(!MX)
+            PLY
+            %Set8bit(!M)
+            LDA.B !number_of_charactermaps
+            DEC A
+            STA.B !number_of_charactermaps
+            BEQ .exitcharactermaploop
+            JMP.W .charactermaploop
+
+    .exitcharactermaploop:
         %Set8bit(!M)
         LDA.B !tilemap_to_load
-        CMP.B #$04
-        BCS .skip7                           ;Farms by season
-        JSL.L UNK_PartialMap
-
-    .skip7:
+        CMP.B #$57
+        BCS .return
         %Set8bit(!M)
-        LDA.B $93
-        CMP.B #$01
-        BNE .skip8
-        %Set16bit(!MX)
-        LDA.L $7F1F5E
-        AND.W #$0002                         ;FLAG5E
-        BNE .skip8
-        JSL.L UNK_ExecuteFromPointers
+        LDA.B #$08
+        STA.B $1E
 
-        .skip8: %Set16bit(!M)
-        STZ.B !OBJ_Offset_X
-        STZ.B !OBJ_Offset_Y
-        LDA.W #1040
-        STA.B $10
-        LDA.W #$0A00
-        STA.B $14
-        STZ.B $12
-        STZ.B $16                            ;80A936;000016;$000016
-        %Set8bit(!M)                             ;80A938;      ;
-        STZ.B !BG_subpixel_offset_X                            ;80A93A;000020;$000020
-        STZ.B !BG_subpixel_offset_Y                            ;80A93C;000021;$000021
-        %Set16bit(!M)                             ;80A93E;      ;
-        STZ.B !player_pos_X                           ;80A940;0000D6;$0000D6
-        STZ.B !player_pos_Y                           ;80A942;0000D8;$0000D8
-        %Set8bit(!M)                             ;80A944;      ;
-        LDA.B #$00                           ;80A946;      ;
-        XBA                                  ;80A948;      ;
-        LDA.W $0181                          ;80A949;000181;$000181
-        %Set16bit(!M)                             ;80A94C;      ;
-        ASL A                                ;80A94E;      ;
-        TAX                                  ;80A94F;      ;
-        LDA.L UNK_Table2,X                   ;80A950;80AA68;
-        STA.B $1A                            ;80A954;00001A;$00001A
-        SEC                                  ;80A956;      ;
-        SBC.W #$0040                         ;80A957;      ;
-        STA.B $80                            ;80A95A;000080;$000080
-        LDA.L UNK_Table3,X                   ;80A95C;80AA72;
-        STA.B $1C                            ;80A960;00001C;$00001C
-        %Set16bit(!M)                             ;80A962;      ;
-        LDA.W #$0000                         ;80A964;      ;
-        STA.B $7E                            ;80A967;00007E;$00007E
-        LDX.B $8A                            ;80A969;00008A;$00008A
-        LDY.W #$0040                         ;80A96B;      ;
-        LDA.W #$0000                         ;80A96E;      ;
-                                        ;      ;      ;
-        .loop34: %Set16bit(!M)                             ;80A971;      ;
-        PHA                                  ;80A973;      ;
-        LDA.W #$0000                         ;80A974;      ;
-                                        ;      ;      ;
-        .loop2: %Set16bit(!MX)                             ;80A977;      ;
-        PHA                                  ;80A979;      ;
-        JSR.W LoadsFromVRAMwithOffset                          ;80A97A;80AA38;
-        %Set16bit(!MX)                             ;80A97D;      ;
-        LDA.B $7E                            ;80A97F;00007E;$00007E
-        CLC                                  ;80A981;      ;
-        ADC.W #$0040                         ;80A982;      ;
-        STA.B $7E                            ;80A985;00007E;$00007E
-        TXA                                  ;80A987;      ;
-        CLC                                  ;80A988;      ;
-        ADC.W #$0400                         ;80A989;      ;
-        TAX                                  ;80A98C;      ;
-        %Set8bit(!M)                             ;80A98D;      ;
-        LDA.B !tilemap_to_load                            ;80A98F;000022;$000022
-        CMP.B #$5B                           ;80A991;      ;
-        BCS .skip9                           ;80A993;80A99C;
-        LDY.B $8A                            ;80A995;00008A;$00008A
-        CPY.W #$7000                         ;80A997;      ;
-        BEQ .skip10                          ;80A99A;80A9A2;
-                                        ;      ;      ;
-        .skip9: LDY.W #$0040                         ;80A99C;      ;
-        JSR.W LoadsFromVRAMwithOffset                          ;80A99F;80AA38;
-                                        ;      ;      ;
-        .skip10: %Set16bit(!MX)                             ;80A9A2;      ;
-        LDA.B $7E                            ;80A9A4;00007E;$00007E
-        CLC                                  ;80A9A6;      ;
-        ADC.B $80                            ;80A9A7;000080;$000080
-        STA.B $7E                            ;80A9A9;00007E;$00007E
-        TXA                                  ;80A9AB;      ;
-        SEC                                  ;80A9AC;      ;
-        SBC.W #$03E0                         ;80A9AD;      ;
-        TAX                                  ;80A9B0;      ;
-        LDY.W #$0040                         ;80A9B1;      ;
-        PLA                                  ;80A9B4;      ;
-        INC A                                ;80A9B5;      ;
-        CMP.W #$0020                         ;80A9B6;      ;
-        BNE .loop2                           ;80A9B9;80A977;
+        .loop33:
+            %Set16bit(!M)
+            LDA.B !player_pos_X
+            CMP.W !transition_dest_X
+            BEQ .skip14
+            LDA.B !player_pos_X
+            CLC
+            ADC.B $1E
+            STA.B !player_pos_X
+            JSL.L SUB_809EBC
+            JSL.L UNK_StaticMapScroling
+            JSL.L StartProgramedDMA
+            BRA .loop33
 
-        %Set8bit(!M)                             ;80A9BB;      ;
-        LDA.B !tilemap_to_load                            ;80A9BD;000022;$000022
-        CMP.B #$5B                           ;80A9BF;      ;
-        BCS .skip11                          ;80A9C1;80A9CA;
-        LDY.B $8A                            ;80A9C3;00008A;$00008A
-        CPY.W #$7000                         ;80A9C5;      ;
-        BEQ .skip12                          ;80A9C8;80A9D2;
-                                        ;      ;      ;
-        .skip11: %Set16bit(!M)                             ;80A9CA;      ;
-        TXA                                  ;80A9CC;      ;
-        CLC                                  ;80A9CD;      ;
-        ADC.W #$0400                         ;80A9CE;      ;
-        TAX                                  ;80A9D1;      ;
-                                        ;      ;      ;
-        .skip12: %Set16bit(!MX)                             ;80A9D2;      ;
-        LDY.W #$0040                         ;80A9D4;      ;
-        PLA                                  ;80A9D7;      ;
-        INC A                                ;80A9D8;      ;
-        CMP.W #$0002                         ;80A9D9;      ;
-        BNE .loop34                          ;80A9DC;80A971;
-        %Set16bit(!MX)                             ;80A9DE;      ;
-        PLY                                  ;80A9E0;      ;
-        %Set8bit(!M)                             ;80A9E1;      ;
-        LDA.B $93                            ;80A9E3;000093;$000093
-        DEC A                                ;80A9E5;      ;
-        STA.B $93                            ;80A9E6;000093;$000093
-        BEQ .skip13                          ;80A9E8;80A9ED;
-        JMP.W .noTilemap                    ;80A9EA;80A8BE;
-                                        ;      ;      ;
-                                        ;      ;      ;
-        .skip13: %Set8bit(!M)                             ;80A9ED;      ;
-        LDA.B !tilemap_to_load                            ;80A9EF;000022;$000022
-        CMP.B #$57                           ;80A9F1;      ;
-        BCS .return                          ;80A9F3;80AA37;
-        %Set8bit(!M)                             ;80A9F5;      ;
-        LDA.B #$08                           ;80A9F7;      ;
-        STA.B $1E                            ;80A9F9;00001E;$00001E
-                                        ;      ;      ;
-        .loop33: %Set16bit(!M)                             ;80A9FB;      ;
-        LDA.B !player_pos_X                           ;80A9FD;0000D6;$0000D6
-        CMP.W !transition_dest_X                          ;80A9FF;00017D;$00017D
-        BEQ .skip14                          ;80AA02;80AA19;
-        LDA.B !player_pos_X                           ;80AA04;0000D6;$0000D6
-        CLC                                  ;80AA06;      ;
-        ADC.B $1E                            ;80AA07;00001E;$00001E
-        STA.B !player_pos_X                           ;80AA09;0000D6;$0000D6
-        JSL.L SUB_809EBC                          ;80AA0B;809EBC;
-        JSL.L UNK_StaticMapScroling          ;80AA0F;80A11C;
-        JSL.L StartProgramedDMA           ;80AA13;808AF0;
-        BRA .loop33                          ;80AA17;80A9FB;
-                                        ;      ;      ;
-                                        ;      ;      ;
-        .skip14: %Set16bit(!M)                             ;80AA19;      ;
-        LDA.B !player_pos_Y                           ;80AA1B;0000D8;$0000D8
-        CMP.W !transition_dest_Y                          ;80AA1D;00017F;$00017F
-        BEQ .return                          ;80AA20;80AA37;
-        LDA.B !player_pos_Y                           ;80AA22;0000D8;$0000D8
-        CLC                                  ;80AA24;      ;
-        ADC.B $1E                            ;80AA25;00001E;$00001E
-        STA.B !player_pos_Y                           ;80AA27;0000D8;$0000D8
-        JSL.L SUB_809EBC                          ;80AA29;809EBC;
-        JSL.L UpdateBGOffset                          ;80AA2D;80A0AB;
-        JSL.L StartProgramedDMA           ;80AA31;808AF0;
-        BRA .skip14                          ;80AA35;80AA19;
-                                        ;      ;      ;
-                                        ;      ;      ;
-        .return: RTL                                  ;80AA37;      ;END_UNK_MemoryShuffling
+    .skip14:
+        %Set16bit(!M)
+        LDA.B !player_pos_Y
+        CMP.W !transition_dest_Y
+        BEQ .return
+        LDA.B !player_pos_Y
+        CLC
+        ADC.B $1E
+        STA.B !player_pos_Y
+        JSL.L SUB_809EBC
+        JSL.L UpdateBGOffset
+        JSL.L StartProgramedDMA
+        BRA .skip14
+
+    .return: RTL
 
 ;;;;;;; Params $7E: offset to add, X: VRAM/CGRAM Dest Addresses and Y:DMA Size
 LoadsFromVRAMwithOffset: ;80AA38
@@ -5587,9 +5597,9 @@ LoadsFromVRAMwithOffset: ;80AA38
                                                             ;      ;      ;
         ;Related to 0181, stored in A1, sprite size?
 UNK_Table2: dw $0000,$0040,$0080,$0100,$0100;80AA68;      ;
-UNK_Table3: dw $0000,$1000,$2000,$4000,$4000;80AA72;      ;used on TilemapManager
+UNK_Table3: dw $0000,$1000,$2000,$4000,$4000;80AA72;      ;used on BackgroundsManager
                                                             ;      ;      ;
-incsrc "../tilesets/tilemapManagerTable.asm"
+incsrc "../tilesets/BackgroundsManagerTable.asm"
                                                             ;      ;      ;
           Unk_Table13: db $0C,$00,$00,$01,$E8,$00,$80,$00,$15,$01,$0D,$00,$80,$00,$C8,$00;80B6F5;      ;
                        db $16,$01,$0D,$00,$80,$00,$C8,$00,$17,$01,$0D,$00,$80,$00,$C8,$00;80B705;      ;

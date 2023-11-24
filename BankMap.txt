@@ -115,11 +115,11 @@ Bank 80
 ❓80A481 - SUB_80A481
 ❓80A617 - SUB_80A617
 ❓80A7AE - SUB_80A7AE
-❓80A7C6 - TilemapManager
+❓80A7C6 - BackgroundsManager
 ❔80AA38 - DMAVRAMWithOffset
 💾80AA68 - UNK_Table2
 💾80AA72 - UNK_Table3
-💾80AA7C - tilemapManagerTable
+💾80AA7C - BackgroundsManagerTable
 💾80B6F5 - Unk_Table13
 💾80B8CD - UNK_AudioTable
 💾80B8E7 - Mayby_Table_AudioTracksbySeason

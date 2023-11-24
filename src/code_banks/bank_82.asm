@@ -4952,7 +4952,7 @@ IntroScreen: ;82D75E
         %Set8bit(!M)
         LDA.B !NATSUME_LOGO
         STA.B !tilemap_to_load
-        JSL.L TilemapManager
+        JSL.L BackgroundsManager
         %Set16bit(!M)
         LDA.W #$006E
         JSL.L LoadFirstHalfPaletteToWRAM
@@ -5215,7 +5215,7 @@ SUB_82D871:
                        %Set8bit(!M)                             ;82D9F8;      ;
                        LDA.B #$5B                           ;82D9FA;      ;
                        STA.B !tilemap_to_load                            ;82D9FC;000022;
-                       JSL.L TilemapManager           ;82D9FE;80A7C6;
+                       JSL.L BackgroundsManager           ;82D9FE;80A7C6;
                        %Set16bit(!M)                             ;82DA02;      ;
                        LDA.W #$006D                         ;82DA04;      ;
                        JSL.L LoadFirstHalfPaletteToWRAM                      ;82DA07;8091CF;
@@ -5363,7 +5363,7 @@ SUB_82D871:
                        %Set8bit(!M)                             ;82DB4C;      ;
                        LDA.B #$5B                           ;82DB4E;      ;
                        STA.B !tilemap_to_load                            ;82DB50;000022;
-                       JSL.L TilemapManager           ;82DB52;80A7C6;
+                       JSL.L BackgroundsManager           ;82DB52;80A7C6;
                        %Set16bit(!M)                             ;82DB56;      ;
                        LDA.W #$006D                         ;82DB58;      ;
                        JSL.L LoadFirstHalfPaletteToWRAM                ;82DB5B;8091CF;
@@ -5416,7 +5416,7 @@ SUB_82D871:
                        STZ.W !transition_dest_X                          ;82DBC6;00017D;
                        STZ.W !transition_dest_Y                          ;82DBC9;00017F;
                        STZ.W $0196                          ;82DBCC;000196;
-                       JSL.L TilemapManager           ;82DBCF;80A7C6;
+                       JSL.L BackgroundsManager           ;82DBCF;80A7C6;
                        JSL.L UNK_Audio21                    ;82DBD3;83841F;
                        JSL.L UNK_Audio20                    ;82DBD7;8383A4;
                        JSL.L UNK_Audio22                    ;82DBDB;838380;
@@ -5809,11 +5809,11 @@ SUB_82D871:
                        %Set8bit(!M)                             ;82DF10;      ;
                        LDA.B #$5B                           ;82DF12;      ;
                        STA.B !tilemap_to_load                            ;82DF14;000022;
-                       JSL.L TilemapManager           ;82DF16;80A7C6;
+                       JSL.L BackgroundsManager           ;82DF16;80A7C6;
                        %Set8bit(!M)                             ;82DF1A;      ;
                        LDA.B #$5C                           ;82DF1C;      ;
                        STA.B !tilemap_to_load                            ;82DF1E;000022;
-                       JSL.L TilemapManager           ;82DF20;80A7C6;
+                       JSL.L BackgroundsManager           ;82DF20;80A7C6;
                        %Set16bit(!M)                             ;82DF24;      ;
                        LDA.W #$006D                         ;82DF26;      ;
                        JSL.L LoadFirstHalfPaletteToWRAM                ;82DF29;8091CF;
@@ -5877,7 +5877,7 @@ SUB_82D871:
                        %Set8bit(!M)                             ;82DFBA;      ;
                        LDA.B #$04                           ;82DFBC;      ;
                        JSL.L ManageGraphicPresets             ;82DFBE;808C59;
-                       JSL.L TilemapManager           ;82DFC2;80A7C6;
+                       JSL.L BackgroundsManager           ;82DFC2;80A7C6;
                        %Set16bit(!M)                             ;82DFC6;      ;
                        LDA.W #$006F                         ;82DFC8;      ;
                        JSL.L LoadFirstHalfPaletteToWRAM                ;82DFCB;8091CF;
@@ -6162,7 +6162,7 @@ SUB_82E1F1:
         %Set8bit(!M)                             ;82E219;      ;
         LDA.B #$04                           ;82E21B;      ;
         JSL.L ManageGraphicPresets             ;82E21D;808C59;
-        JSL.L TilemapManager           ;82E221;80A7C6;
+        JSL.L BackgroundsManager           ;82E221;80A7C6;
         %Set16bit(!M)                             ;82E225;      ;
         LDA.W #$006F                         ;82E227;      ;
         JSL.L LoadFirstHalfPaletteToWRAM                ;82E22A;8091CF;
@@ -6809,7 +6809,7 @@ Unk_NamesInput: ;82E80C
         %Set8bit(!M)
         LDA.B #$04
         JSL.L ManageGraphicPresets
-        JSL.L TilemapManager
+        JSL.L BackgroundsManager
         %Set16bit(!M)
         LDA.W #$006F
         JSL.L LoadFirstHalfPaletteToWRAM
