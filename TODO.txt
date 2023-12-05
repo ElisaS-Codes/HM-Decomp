@@ -5,6 +5,9 @@ Params A:Control Registers, X:VRAM/CGRAM Dest Addresses, Y(DMA Size), $72 & $74 
 PalettePointerTable
 sub after GetTileContent
 DATA8_81A58B
+DATA8_81B363 - 16bit
+81AC49 -16bit
+81B121 - code
 
 ====
 $09B6 - current map logical tile
@@ -161,7 +164,7 @@ $018B -
 $0195 - Graphic mode ?
 $0196 - flags? related to time?
 ?n?k ??s? n:name set k = data keyboard read? s=Skips test and updates during what I think is the transition funciton?
-???h sSrf h:Hurracaine s= snowing S:sunny notSummer f=raining, fair, second layer?
+???h sSrf h:Hurracaine s= snowing S:sunny notSummer, r:raining, f:fair, second layer?
 
 $019A - (sores $04 after setting up) only some values are allowed or goes to 05, anithing not 1 disables movement
 $019B - UNK, changing it sometimes shows the crib sprite?
@@ -354,7 +357,7 @@ h??? H?b? - h Gold Hammer event borrowed H: Gold Hoe Removed b: magic beans plan
 d??? h??u - d:dog owned h:horse owned u:when set, it doesnt re-generates $0924 rng number
 $7F1F6A - Events Flags?
 ???? ????
-??a? ???? a: golden axe event
+??A? amhs A: golden axe event, a:axe quest failed?, m:hammer quest failed?, h:hoe quest failed?, s:Sickle event failed?
 $7F1F6C -
 ???t ??pp - t=Turtle Shell p:Related to wife pregnancy
 g??? ???? - g: about to have child

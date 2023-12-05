@@ -74,7 +74,7 @@ GameLoop: ;808083
         JSL.L UNK_BigLoop
         JSL.L InputTypeSelector
         JSL.L BAAAA
-        JSL.L BEEEE
+        JSL.L SUB_81BFB7
         JSL.L AutoMapScrolling
         JSL.L CODE_84816F
         JSL.L CODE_81A600
@@ -3232,7 +3232,7 @@ SUB_80972C: ;80972C
                                             ;      ;      ;
         CODE_8099CD:
         JSL.L CODE_81CFA0                    ;8099CD;81CFA0;
-        JSL.L BEEEE                          ;8099D1;81BFB7;
+        JSL.L SUB_81BFB7                          ;8099D1;81BFB7;
         %Set16bit(!MX)                             ;8099D5;      ;
         LDA.L $7F1F5E                        ;8099D7;7F1F5E;
         AND.W #$0002                         ;8099DB;      ;

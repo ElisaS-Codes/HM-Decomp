@@ -3495,7 +3495,7 @@ UNK_PartialMap: ;82AF00
             %Set16bit(!MX)                             ;82AFFF;      ;
             LDX.B $82                            ;82B001;000082;
             LDY.B $84                            ;82B003;000084;
-            JSL.L UUUU                           ;82B005;81A83A;
+            JSL.L SUB_81A83A                           ;82B005;81A83A;
 
         .skiploop:
             %Set16bit(!MX)                             ;82B009;      ;
@@ -3609,7 +3609,7 @@ SUB_82B0A7: ;82B0A7
         %Set16bit(!MX)
         STX.B $8E
         STY.B $90
-        JSL.L CODE_81A801
+        JSL.L SUB_81A801
         %Set16bit(!MX)
         LDA.W #$F500
         STA.B $72
@@ -4503,7 +4503,7 @@ SUB_82D1C0: ;82D1C0
         JSL.L UNK_BigLoop                    ;82D36C;808E69;
         JSL.L InputTypeSelector                          ;82D370;84C034;
         JSL.L BAAAA                          ;82D374;81A383;
-        JSL.L BEEEE                          ;82D378;81BFB7;
+        JSL.L SUB_81BFB7                          ;82D378;81BFB7;
         JSL.L AutoMapScrolling               ;82D37C;8095B3;
         JSL.L CODE_84816F                    ;82D380;84816F;
         JSL.L CODE_81A600                    ;82D384;81A600;
@@ -4877,7 +4877,7 @@ SUB_82D3C7:
         JSL.L UNK_BigLoop                    ;82D6EE;808E69;
         JSL.L InputTypeSelector                          ;82D6F2;84C034;
         JSL.L BAAAA                          ;82D6F6;81A383;
-        JSL.L BEEEE                          ;82D6FA;81BFB7;
+        JSL.L SUB_81BFB7                          ;82D6FA;81BFB7;
         JSL.L AutoMapScrolling               ;82D6FE;8095B3;
         JSL.L CODE_84816F                    ;82D702;84816F;
         JSL.L CODE_81A600                    ;82D706;81A600;
@@ -5157,7 +5157,7 @@ SUB_82D871:
         JSL.L UNK_BigLoop                    ;82D960;808E69;
         JSL.L InputTypeSelector                          ;82D964;84C034;
         JSL.L BAAAA                          ;82D968;81A383;
-        JSL.L BEEEE                          ;82D96C;81BFB7;
+        JSL.L SUB_81BFB7                          ;82D96C;81BFB7;
         JSL.L AutoMapScrolling               ;82D970;8095B3;
         JSL.L CODE_84816F                    ;82D974;84816F;
         JSL.L CODE_81A600                    ;82D978;81A600;
