@@ -109,38 +109,182 @@ BackgroundsManagerTable: ;80AA7C
     dw MenuScreenBackgrounds             ;80AB38;00B6B1;5E
     dw MenuCharacters                    ;80AB3A;00B6D3;5F
 
-BackgroundsManagerInfo:
-MapFarmSpring:          db $00,$E0,$80,$04,$04,$03,$01,$00,$00,$00,$03,$00,$00,$00,$03,$00;80AB3C;      ;pointer directs from 80A7C6
-                        db $20,$AB,$D3,$92,$00,$30,$00,$80,$93,$00,$40,$8E,$9E,$93,$00,$60;80AB4C;      ;
-                        db $00,$80,$A1                       ;80AB5C;      ;
+;Backgrounds
+MapFarmSpring: ;80AB3C
+        db $00      ;Graphic Preset
+        dw $80E0    ;ored with 196
+        db $04      ;$0181
+        db $04      ;$0182
+        db $03      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0300    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0300    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $92D3AB  ;Compressed Location 1
+        dw $3000    ;Destination in VRAM 2
+        dl $938000  ;Compressed Location 2
+        dw $4000    ;Destination in VRAM 3
+        dl $939E8E  ;Compressed Location 3
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A18000  ;Compressed Location
 
-MapFarmSummer:          db $00,$E0,$80,$04,$04,$03,$01,$00,$00,$00,$03,$00,$00,$00,$03,$00;80AB5F;      ;
-                        db $20,$AB,$D3,$92,$00,$30,$00,$80,$93,$00,$40,$8E,$9E,$93,$00,$60;80AB6F;      ;
-                        db $00,$80,$A1                       ;80AB7F;      ;
+MapFarmSummer: ;80AB5F
+        db $00      ;Graphic Preset
+        dw $80E0    ;ored with 196
+        db $04      ;$0181
+        db $04      ;$0182
+        db $03      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0300    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0300    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $92D3AB  ;Compressed Location 1
+        dw $3000    ;Destination in VRAM 2
+        dl $938000  ;Compressed Location 2
+        dw $4000    ;Destination in VRAM 3
+        dl $939E8E  ;Compressed Location 3
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A18000  ;Compressed Location
 
-MapFarmFall:            db $00,$E0,$80,$04,$04,$03,$01,$00,$00,$00,$03,$00,$00,$00,$03,$00;80AB82;      ;
-                        db $20,$CB,$82,$92,$00,$30,$10,$9D,$92,$00,$40,$03,$BB,$92,$00,$60;80AB92;      ;
-                        db $00,$80,$A1                       ;80ABA2;      ;
+MapFarmFall: ;80AB82
+        db $00      ;Graphic Preset
+        dw $80E0    ;ored with 196
+        db $04      ;$0181
+        db $04      ;$0182
+        db $03      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0300    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0300    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $9282CB  ;Compressed Location 1
+        dw $3000    ;Destination in VRAM 2
+        dl $929D10  ;Compressed Location 2
+        dw $4000    ;Destination in VRAM 3
+        dl $92BB03  ;Compressed Location 3
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A18000  ;Compressed Location
 
-MapFarmWinter:          db $00,$E0,$80,$04,$04,$03,$01,$00,$00,$00,$03,$00,$00,$00,$03,$00;80ABA5;      ;
-                        db $20,$36,$B7,$93,$00,$30,$49,$D0,$93,$00,$40,$2B,$E1,$93,$00,$60;80ABB5;      ;
-                        db $00,$80,$A1                       ;80ABC5;      ;
+MapFarmWinter: ;80ABA5
+        db $00      ;Graphic Preset
+        dw $80E0    ;ored with 196
+        db $04      ;$0181
+        db $04      ;$0182
+        db $03      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0300    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0300    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $93B736  ;Compressed Location 1
+        dw $3000    ;Destination in VRAM 2
+        dl $93D049  ;Compressed Location 2
+        dw $4000    ;Destination in VRAM 3
+        dl $93E12B  ;Compressed Location 3
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A18000  ;Compressed Location
 
-MapTownSpring:          db $00,$60,$80,$04,$04,$03,$01,$00,$00,$00,$02,$00,$00,$00,$03,$00;80ABC8;      ;
-                        db $20,$5F,$B4,$97,$00,$30,$00,$80,$99,$00,$40,$74,$9A,$99,$00,$60;80ABD8;      ;
-                        db $00,$80,$A3                       ;80ABE8;      ;
+MapTownSpring: ;80ABC8
+        db $00      ;Graphic Preset
+        dw $8060    ;ored with 196
+        db $04      ;$0181
+        db $04      ;$0182
+        db $03      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0200    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0300    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $97B45F  ;Compressed Location 1
+        dw $3000    ;Destination in VRAM 2
+        dl $998000  ;Compressed Location 2
+        dw $4000    ;Destination in VRAM 3
+        dl $999A74  ;Compressed Location 3
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A38000  ;Compressed Location
 
-MapTownSummer:          db $00,$60,$80,$04,$04,$03,$01,$00,$00,$00,$02,$00,$00,$00,$03,$00;80ABEB;      ;
-                        db $20,$5F,$B4,$97,$00,$30,$20,$CD,$97,$00,$40,$A2,$E7,$97,$00,$60;80ABFB;      ;
-                        db $00,$80,$A3                       ;80AC0B;      ;
+MapTownSummer: ;80ABEB
+        db $00      ;Graphic Preset
+        dw $8060    ;ored with 196
+        db $04      ;$0181
+        db $04      ;$0182
+        db $03      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0200    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0300    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $97B45F  ;Compressed Location 1
+        dw $3000    ;Destination in VRAM 2
+        dl $97CD20  ;Compressed Location 2
+        dw $4000    ;Destination in VRAM 3
+        dl $97E7A2  ;Compressed Location 3
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A38000  ;Compressed Location
 
-MapTownFall:            db $00,$60,$80,$04,$04,$03,$01,$00,$00,$00,$02,$00,$00,$00,$03,$00;80AC0E;      ;
-                        db $20,$5F,$B4,$97,$00,$30,$00,$80,$98,$00,$40,$52,$9A,$98,$00,$60;80AC1E;      ;
-                        db $00,$80,$A3                       ;80AC2E;      ;
+MapTownFall: ;80AC0E
+        db $00      ;Graphic Preset
+        dw $8060    ;ored with 196
+        db $04      ;$0181
+        db $04      ;$0182
+        db $03      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0200    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0300    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $97B45F  ;Compressed Location 1
+        dw $3000    ;Destination in VRAM 2
+        dl $988000  ;Compressed Location 2
+        dw $4000    ;Destination in VRAM 3
+        dl $989A52  ;Compressed Location 3
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A38000  ;Compressed Location
 
-MapTownWinter:          db $00,$60,$80,$04,$04,$03,$01,$00,$00,$00,$02,$00,$00,$00,$03,$00;80AC31;      ;
-                        db $20,$BD,$DC,$99,$00,$30,$00,$80,$9A,$00,$40,$21,$99,$9A,$00,$60;80AC41;      ;
-                        db $00,$80,$A3                       ;80AC51;      ;
+MapTownWinter: ;80AC31
+        db $00      ;Graphic Preset
+        dw $8060    ;ored with 196
+        db $04      ;$0181
+        db $04      ;$0182
+        db $03      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0200    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0300    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $99DCBD  ;Compressed Location 1
+        dw $3000    ;Destination in VRAM 2
+        dl $9A8000  ;Compressed Location 2
+        dw $4000    ;Destination in VRAM 3
+        dl $9A9921  ;Compressed Location 3
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A38000  ;Compressed Location
 
 MapFlowerFestival:      db $00,$60,$00,$02,$02,$03,$01,$00,$00,$00,$01,$00,$00,$00,$01,$00;80AC54;      ;
                         db $20,$5F,$B4,$97,$00,$30,$00,$80,$99,$00,$40,$C3,$AE,$99,$00,$60;80AC64;      ;
@@ -440,7 +584,7 @@ LayerSnow:              db $01,$02,$01,$01,$00,$50,$6D,$9C,$9E,$00,$70,$55,$C9,$
 LayerHeavySnow:         db $01,$02,$01,$01,$00,$50,$41,$84,$9B,$00,$70,$D5,$A3,$A5;80B66A
 
 ;Splash tilemaps
-IntroFarmScroll:        db $02,$02,$04,$02,$00,$20,$00,$80,$9F,$00,$30,$6C,$94,$9F,$00,$40;80B678
+IntroFarmScroll:        db $02,$02, $04,$02, $00,$20, $00,$80,$9F,$00,$30,$6C,$94,$9F,$00,$40;80B678
                         db $75,$AA,$9F,$00,$50,$4C,$C0,$9F,$00,$60,$88,$CD,$A5,$00,$70,$4C
                         db $D4,$A5
 
@@ -448,7 +592,7 @@ HarvestMoonLogo:        db $02,$02, $00,$01, $00,$60, $4A,$D9,$A5;80B69A
 
 NatsumeLogo:            db $02,$02, $01,$01, $00,$20, $97,$EF,$9F, $00,$60, $84,$DE,$A5;80B6A3
 
-MenuScreenBackgrounds:  db $02,$02,$04,$02,$00,$20,$97,$BF,$9A,$00,$30,$89,$C4,$9A,$00,$40;80B6B1
+MenuScreenBackgrounds:  db $02,$02, $04,$02, $00,$20, $97,$BF,$9A, $00,$30,$89,$C4,$9A,$00,$40;80B6B1
                         db $41,$CB,$9A,$00,$50,$57,$D3,$9A,$00,$10,$00,$80,$A5,$00,$60,$0F
                         db $97,$A5
 
