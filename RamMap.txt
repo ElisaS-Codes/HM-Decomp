@@ -12,9 +12,19 @@ where I have a headache. Most real info is on ram.asm
 🧢Player/Farm data
 
 🛠️$7E0000 = !NMI_Status - 8b
-
-🎨!palette_change_pointer = $04 - 24b
-
+$7E0001 =  - 24b pointer text related?
+🎨$7E0004 = !palette_change_pointer - 24b
+$7E0007 =  - 24b pointer
+$7E000A =  - 24b pointer audio related?
+$7E000D =  - 24b pointer map related?
+$7E0010 =  - 16b
+$7E0012 =  - 16b
+$7E0014 =  - 16b
+$7E0016 =  - 16b
+🛠️$7E0018 = !tilemap_pointer - 16b
+$7E001A =  - 16b
+$7E001C =  - 16b
+$7E001E =  - 16b
 🎨$7E0020 = !BG_subpixel_offset_X - 8b
 🎨$7E0021 = !BG_subpixel_offset_Y - 8b
 🎨$7E0022 = !tilemap_to_load - 8b
@@ -27,20 +37,52 @@ where I have a headache. Most real info is on ram.asm
 🛠️$7E0029 = !ProgDMA_Destination_Memory - 8b
 🛠️$7E002A - $7E0031 = !ProgDMA_Control_Register_Table - 8b
 🛠️$7E0032 - $7E0041 = !ProgDMA_Destination_Addr_Table - 16b
-
-📝$7E0070 - $7E0093 = Scratch memory region
+$7E0042 =  - 24b Pointer
+$7E0045 =  - 24b Pointer
+$7E0048 =  - 24b Pointer
+... more pointers?
+📝$7E0070 - $7E00A0 = Scratch memory region
 
 🧢$7E00D4 = !player_action - 16b
 🧢$7E00D6 = !player_pos_X - 16b
 🧢$7E00D8 = !player_pos_Y - 16b
+🧢$7E00DA = !player_direction - 16b
 
+$7E00DC =  - 16b
+$7E00DE =  - 8b Random rng number?
+
+$7E00DF =  - 16b copy of player pos x?
+$7E00E1 =  - 16b copy of player pos y?
+$7E00E3 =  - 16b
+$7E00E5 =  - 16b copy of $1E sometimes
+$7E00E7 =  - 16b copy of $1E the other times
+
+$7E00E9 =  - 16b
+$7E00EB =  - 16b
+
+🎨$7E00ED = !OBJ_clamp_left - 16b
+🎨$7E00EF = !OBJ_clamp_up - 16b
+🎨$7E00F1 = !OBJ_clamp_right - 16b
+🎨$7E00F3 = !OBJ_clamp_down - 16b
 🎨$7E00F5 = !OBJ_Offset_X - 16b
 🎨$7E00F7 = !OBJ_Offset_Y - 16b
 
 🛠️$7E0100 = !RNG_mem_1 - 8b
 🛠️$7E0101 = !RNG_mem_2 - 8b
 🛠️$7E0102 = !RNG_mem_3 - 8b
-
+$7E0103 =  - 8b audio related
+$7E0104 - $7E010E =  - 8b audio related
+$7E010F =  - 8b audio related
+$7E0110 =  - 8b audio related
+$7E0111 =  - 8b audio related
+$7E0112 =  - 8b audio related
+$7E0113 =  - 8b audio related
+$7E0114 =  - 8b audio related
+$7E0115 =  - 8b audio related
+$7E0116 =  - 8b audio related
+$7E0117 =  - 8b audio related
+$7E0118 =  - 8b audio related
+$7E0119 =  - 8b audio related
 📝$7E011A = !multiplicand - 8b
 📝$7E011B = !multiplier - 8b
 

@@ -3895,7 +3895,7 @@ SUB_809EBC: ;809EBC
         LDA.B !player_pos_X
         SEC
         SBC.W #$0080                         ;128
-        CMP.B $ED
+        CMP.B !OBJ_clamp_left
         BMI .movableposx
         BEQ .movableposx
         BCS .fixedposx
@@ -3905,19 +3905,19 @@ SUB_809EBC: ;809EBC
         CLC
         ADC.W #$0080                         ;restore the 128
         SEC
-        SBC.B $ED
+        SBC.B !OBJ_clamp_left
         STA.W $090B
         %Set8bit(!M)
         LDA.B #$00
         STA.B !BG_subpixel_offset_X
         %Set16bit(!M)
-        LDA.B $ED
+        LDA.B !OBJ_clamp_left
         STA.B !OBJ_Offset_X
         BRA .ycoordinate
 
     .fixedposx:
         %Set16bit(!M)
-        CMP.B $F1
+        CMP.B !OBJ_clamp_right
         BCS .adjustsubpixelx                 ;Too close to the left wall
         STA.B !OBJ_Offset_X
         LDA.W #$0080
@@ -3929,13 +3929,13 @@ SUB_809EBC: ;809EBC
         CLC
         ADC.W #$0080
         SEC
-        SBC.B $F1
+        SBC.B !OBJ_clamp_right
         STA.W $090B
         %Set8bit(!M)
         LDA.B #$08
         STA.B !BG_subpixel_offset_X
         %Set16bit(!M)
-        LDA.B $F1
+        LDA.B !OBJ_clamp_right
         STA.B !OBJ_Offset_X
 
     .ycoordinate:
@@ -3943,7 +3943,7 @@ SUB_809EBC: ;809EBC
         LDA.B !player_pos_Y
         SEC
         SBC.W #$0080
-        CMP.B $EF
+        CMP.B !OBJ_clamp_up
         BMI .movableposy
         BEQ .movableposy
         BCS .fixedposy
@@ -3953,19 +3953,19 @@ SUB_809EBC: ;809EBC
         CLC
         ADC.W #$0080
         SEC
-        SBC.B $EF
+        SBC.B !OBJ_clamp_up
         STA.W $090D
         %Set8bit(!M)
         LDA.B #$00
         STA.B !BG_subpixel_offset_Y
         %Set16bit(!M)
-        LDA.B $EF
+        LDA.B !OBJ_clamp_up
         STA.B !OBJ_Offset_Y
         BRA .return
 
     .fixedposy:
         %Set16bit(!M)
-        CMP.B $F3
+        CMP.B !OBJ_clamp_down
         BCS .adjustsubpixely
 
         STA.B !OBJ_Offset_Y
@@ -3978,13 +3978,13 @@ SUB_809EBC: ;809EBC
         CLC
         ADC.W #$0080
         SEC
-        SBC.B $F3
+        SBC.B !OBJ_clamp_down
         STA.W $090D
         %Set8bit(!M)
         LDA.B #$08
         STA.B !BG_subpixel_offset_Y
         %Set16bit(!M)
-        LDA.B $F3
+        LDA.B !OBJ_clamp_down
         STA.B !OBJ_Offset_Y
 
     .return: RTL
@@ -4003,12 +4003,12 @@ SUB_809F61: ;809F61
 
         %Set16bit(!M)
         LDA.B !OBJ_Offset_Y
-        CMP.B $EF
+        CMP.B !OBJ_clamp_up
         BNE .CODE_809F7D
         JMP.W .return
 
     .CODE_809F7D:
-        CMP.B $F3
+        CMP.B !OBJ_clamp_down
         BNE .CODE_809F84
         JMP.W .return
 
@@ -4110,9 +4110,9 @@ SUB_809F61: ;809F61
     .CODE_80A033:
         %Set16bit(!MX)
         LDA.B !OBJ_Offset_Y
-        CMP.B $EF
+        CMP.B !OBJ_clamp_up
         BEQ .CODE_80A007
-        CMP.B $F3
+        CMP.B !OBJ_clamp_down
         BEQ .CODE_80A007
         LDA.W !BG2_Map_Offset_Y
         CLC
@@ -4123,9 +4123,9 @@ SUB_809F61: ;809F61
     .CODE_80A04A:
         %Set16bit(!MX)
         LDA.B !OBJ_Offset_Y
-        CMP.B $EF
+        CMP.B !OBJ_clamp_up
         BEQ .CODE_80A007
-        CMP.B $F3
+        CMP.B !OBJ_clamp_down
         BEQ .CODE_80A007
         LDA.W !BG2_Map_Offset_Y
         SEC
@@ -4136,9 +4136,9 @@ SUB_809F61: ;809F61
     .CODE_80A061:
         %Set16bit(!MX)
         LDA.B !OBJ_Offset_X
-        CMP.B $ED
+        CMP.B !OBJ_clamp_left
         BEQ .CODE_80A007
-        CMP.B $F1
+        CMP.B !OBJ_clamp_right
         BEQ .CODE_80A007
         LDA.W !BG2_Map_Offset_X
         CLC
@@ -4149,12 +4149,12 @@ SUB_809F61: ;809F61
     .CODE_80A078:
         %Set16bit(!MX)
         LDA.B !OBJ_Offset_X
-        CMP.B $ED
+        CMP.B !OBJ_clamp_left
         BNE .CODE_80A083
         JMP.W .CODE_80A007
 
     .CODE_80A083:
-        CMP.B $F1
+        CMP.B !OBJ_clamp_right
         BNE .CODE_80A08A
         JMP.W .CODE_80A007
     .CODE_80A08A:
@@ -4181,9 +4181,9 @@ UpdateBGOffset: ;80A0AB
         %Set16bit(!MX)
         LDA.B !OBJ_Offset_Y
         STA.W !BG1_Map_Offset_Y
-        CMP.B $EF
+        CMP.B !OBJ_clamp_up
         BEQ .return
-        CMP.B $F3
+        CMP.B !OBJ_clamp_down
         BEQ .return
         CMP.B $1E
         BCS .bigger
@@ -4213,11 +4213,11 @@ SUB_80A0E1: ;80A0E1
         %Set16bit(!MX)
         LDA.B !OBJ_Offset_Y
         STA.W !BG1_Map_Offset_Y
-        CMP.B $EF
+        CMP.B !OBJ_clamp_up
         BEQ $2F
-        CMP.B $F3
+        CMP.B !OBJ_clamp_down
         BEQ $2B
-        LDA.B $F3
+        LDA.B !OBJ_clamp_down
         SEC
         SBC.B !OBJ_Offset_Y
         CMP.B $1E
@@ -4247,9 +4247,9 @@ UNK_StaticMapScroling: ;80A11C
         %Set16bit(!MX)
         LDA.B !OBJ_Offset_X
         STA.W !BG1_Map_Offset_X
-        CMP.B $ED
+        CMP.B !OBJ_clamp_left
         BEQ .return
-        CMP.B $F1
+        CMP.B !OBJ_clamp_right
         BEQ .return
         CMP.B $1E
         BCS .CODE_80A131
@@ -4279,11 +4279,11 @@ SUB_80A152: ;80A152
         %Set16bit(!MX)                             ;      ;
         LDA.B !OBJ_Offset_X                            ;80A154;0000F5;
         STA.W !BG1_Map_Offset_X                          ;80A156;00013C;
-        CMP.B $ED                            ;80A159;0000ED;
+        CMP.B !OBJ_clamp_left                            ;80A159;0000ED;
         BEQ CODE_80A18C                      ;80A15B;80A18C;
-        CMP.B $F1                            ;80A15D;0000F1;
+        CMP.B !OBJ_clamp_right                            ;80A15D;0000F1;
         BEQ CODE_80A18C                      ;80A15F;80A18C;
-        LDA.B $F1                            ;80A161;0000F1;
+        LDA.B !OBJ_clamp_right                            ;80A161;0000F1;
         SEC                                  ;80A163;      ;
         SBC.B !OBJ_Offset_X                            ;80A164;0000F5;
         CMP.B $1E                            ;80A166;00001E;
@@ -5283,19 +5283,19 @@ BackgroundsManager: ;80A7C6
 
         %Set16bit(!M)
         LDA.B (!tilemap_pointer),Y
-        STA.B $ED
+        STA.B !OBJ_clamp_left
         INY
         INY
         LDA.B (!tilemap_pointer),Y
-        STA.B $F1
+        STA.B !OBJ_clamp_right
         INY
         INY
         LDA.B (!tilemap_pointer),Y
-        STA.B $EF
+        STA.B !OBJ_clamp_up
         INY
         INY
         LDA.B (!tilemap_pointer),Y
-        STA.B $F3
+        STA.B !OBJ_clamp_down
         INY
         INY
 

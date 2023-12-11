@@ -4528,17 +4528,17 @@ ReplaceTilesHouse3: ;81AD7A
         %Set16bit(!MX)
         LDA.W $0196
         AND.W #$0010                         ;FLAG196
-        BEQ .CODE_81AD91
+        BEQ .turtleshellcheck
         LDA.W #$00EE
         LDX.W #$0070
         LDY.W #$00C0
         JSL.L SUB_81A7CE
 
-    .CODE_81AD91:
+    .turtleshellcheck:
         %Set16bit(!MX)
         LDA.L $7F1F6C
         AND.W #$1000                         ;FLAG6C
-        BEQ .turtleshell
+        BEQ .clockcheck
         LDA.W #$00FD
         LDX.W #$0140
         LDY.W #$0050
@@ -4549,7 +4549,7 @@ ReplaceTilesHouse3: ;81AD7A
         LDY.W #$0060
         JSL.L EditTileonMap
 
-    .turtleshell:
+    .clockcheck:
         %Set16bit(!MX)
         LDA.L $7F1F6E                        ;clock
         AND.W #$4000                         ;FLAG6E

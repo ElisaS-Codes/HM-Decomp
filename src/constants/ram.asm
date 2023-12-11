@@ -91,6 +91,10 @@
 !next_hourly_palette = $017C ;8b
 
 ;OBJ data
+!OBJ_clamp_left = $ED ;16b
+!OBJ_clamp_up = $EF ;16b
+!OBJ_clamp_right = $F1 ;16b
+!OBJ_clamp_down = $F3 ;16b
 !OBJ_Offset_X = $F5 ;16b
 !OBJ_Offset_Y = $F7 ;16b
 

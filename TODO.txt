@@ -75,6 +75,7 @@ $21 - Camera Offset Subtile Y?
 $42 - pointers related to rain
 $45 - pointers related to rain
 $48 - pointers related to rain
+
 $89 - Tile in front X?
 $8A - Tile in front Y?
 
@@ -109,7 +110,7 @@ $D2 -Flags?
 "0008" set when you have no stamina
 w??? ???? - w:walking to transition
 d??? s?hm - d: carrying dog m: Can Move; h: holding item; s: no stamina; x:
-$DA - Player sprite to load?
+
 $DC -
 $E5 - if player sprite is looking horizontal?
 $E7 - if player sprite is looking vertical?
