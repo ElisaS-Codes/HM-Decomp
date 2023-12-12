@@ -3,111 +3,111 @@
 
 
 BackgroundsManagerTable: ;80AA7C
-    dw MapFarmSpring                     ;80AA7C;00AB3C;0
-    dw MapFarmSummer                     ;80AA7E;00AB5F;1
-    dw MapFarmFall                       ;80AA80;00AB82;2
-    dw MapFarmWinter                     ;80AA82;00ABA5;3
-    dw MapTownSpring                     ;80AA84;00ABC8;4
-    dw MapTownSummer                     ;80AA86;00ABEB;5
-    dw MapTownFall                       ;80AA88;00AC0E;6
-    dw MapTownWinter                     ;80AA8A;00AC31;7
-    dw MapFlowerFestival                 ;80AA8C;00AC54;8 FLOWER FESTIVAL
-    dw MapHarvestFestival                ;80AA8E;00AC77;9 HARVEST FESTIVAL
+    dw MapFarmSpring                     ;00
+    dw MapFarmSummer                     ;01
+    dw MapFarmFall                       ;02
+    dw MapFarmWinter                     ;03
+    dw MapTownSpring                     ;04
+    dw MapTownSummer                     ;05
+    dw MapTownFall                       ;06
+    dw MapTownWinter                     ;07
+    dw MapFlowerFestival                 ;08
+    dw MapHarvestFestival                ;09
+    dw MapStarNightFestivalSquare        ;0A
+    dw MapEggFestival                    ;0B
+    dw MapForkSpring                     ;0C
+    dw MapForkSummer                     ;0D
+    dw MapForkFall                       ;0E
+    dw MapForkWinter                     ;0F
+    dw MapMountainSpring                 ;10
+    dw MapMountainSummer                 ;11
+    dw MapMountainFall                   ;12
+    dw MapMountainWinter                 ;13
+    dw MapStarNightFestivalSpa           ;14
+    dw MapHouselvl1                      ;15
+    dw MapHouselvl2                      ;16
+    dw MapHouselvl3                      ;17
+    dw MapMayorHouse                     ;18
+    dw MapMayorHouseHall                 ;19
+    dw MapMariasRoom                     ;1A
+    dw MapChurch                         ;1B
+    dw MapFlowerShop                     ;1C
+    dw MapFlowerShopRooms                ;1D
+    dw MapBar                            ;1E
+    dw MapBarRooms                       ;1F
+    dw MapRestaurant                     ;20
+    dw MapRestaurantRooms                ;21
+    dw MapGeneralStore                   ;22
+    dw MapGeneralStoreRooms              ;23
+    dw MapAnimalShop                     ;24
+    dw MapWitchHouse                     ;25
+    dw MapToolShed                       ;26
+    dw MapBarn                           ;27
+    dw MapCoop                           ;28
+    dw MapMountainCave                   ;29
+    dw MapElfTunnel                      ;2A
 
-    dw UNK_DataReffedA                   ;80AA90;00AC9A;A
-    dw UNK_DataReffedB                   ;80AA92;00ACBD;B
+    dw UNK_DataReffed2B                  ;2B
+    dw UNK_DataReffed2C                  ;2C
+    dw UNK_DataReffed2D                  ;2D
+    dw UNK_DataReffed2E                  ;2E
+    dw UNK_DataReffed2F                  ;2F
+    dw UNK_DataReffed30                  ;30 HANGS GAME
 
-    dw MapForkSpring                     ;80AA94;00ACE0;C
-    dw MapForkSummer                     ;80AA96;00ACF9;D
-    dw MapForkFall                       ;80AA98;00AD12;E
-    dw MapForkWinter                     ;80AA9A;00AD2B;F
-    dw MapMountainSpring                 ;80AA9C;00AD44;10
-    dw MapMountainSummer                 ;80AA9E;00AD67;11
-    dw MapMountainFall                   ;80AAA0;00AD8A;12
-    dw MapMountainWinter                 ;80AAA2;00ADAD;13
+    dw MapSummitSpring                   ;31
+    dw MapSummitSummer                   ;32
+    dw MapSummitFall                     ;33
+    dw MapSummitWinter                   ;34
 
-    dw UNK_DataReffed14                  ;80AAA4;00ADD0;14
+    dw UNK_DataReffed35                  ;35
+    dw UNK_DataReffed36                  ;36
+    dw UNK_DataReffed37                  ;37
+    dw UNK_DataReffed38                  ;38
 
-    dw MapHouselvl1                      ;80AAA6;00ADF3;15
-    dw MapHouselvl2                      ;80AAA8;00AE11;16
-    dw MapHouselvl3                      ;80AAAA;00AE2F;17
-    dw MapMayorHouse                     ;80AAAC;00AE4D;18
-    dw MapMayorHouseHall                 ;80AAAE;00AE66;19
-    dw MapMariasRoom                     ;80AAB0;00AE7F;1A
-    dw MapChurch                         ;80AAB2;00AE98;1B
-    dw MapFlowerShop                     ;80AAB4;00AEB1;1C
-    dw MapFlowerShopRooms                ;80AAB6;00AECA;1D
-    dw MapBar                            ;80AAB8;00AEE3;1E
-    dw MapBarRooms                       ;80AABA;00AEFC;1F
-    dw MapRestaurant                     ;80AABC;00AF15;20
-    dw MapRestaurantRooms                ;80AABE;00AF2E;21
-    dw MapGeneralStore                   ;80AAC0;00AF47;22
-    dw MapGeneralStoreRooms              ;80AAC2;00AF60;23
-    dw MapAnimalShop                     ;80AAC4;00AF79;24
-    dw MapWitchHouse                     ;80AAC6;00AF92;25
-    dw MapToolShed                       ;80AAC8;00AFAB;26
-    dw MapBarn                           ;80AACA;00AFCE;27
-    dw MapCoop                           ;80AACC;00AFE7;28
-    dw MapMountainCave                   ;80AACE;00B000;29
-    dw MapElfTunnel                      ;80AAD0;00B019;2A
+    dw MapStarNightFestivalMountainTop   ;39
+    dw MapNewYearsFestival               ;3A
 
-    dw UNK_DataReffed2B                  ;80AAD2;00B032;2B
-    dw UNK_DataReffed2C                  ;80AAD4;00B04B;2C
-    dw UNK_DataReffed2D                  ;80AAD6;00B064;2D
-    dw UNK_DataReffed2E                  ;80AAD8;00B087;2E
-    dw UNK_DataReffed2F                  ;80AADA;00B0AA;2F
-    dw UNK_DataReffed30                  ;80AADC;00B0CD;30 HANGS GAME
-    dw MapSummitSpring                   ;80AADE;00B0F0;31
-    dw MapSummitSummer                   ;80AAE0;00B113;32
-    dw MapSummitFall                     ;80AAE2;00B136;33
-    dw MapSummitWinter                   ;80AAE4;00B159;34
-    dw UNK_DataReffed35                  ;80AAE6;00B17C;35
-    dw UNK_DataReffed36                  ;80AAE8;00B19F;36
-    dw UNK_DataReffed37                  ;80AAEA;00B1C2;37
-    dw UNK_DataReffed38                  ;80AAEC;00B1E5;38
-    dw UNK_DataReffed39                  ;80AAEE;00B208;39
-    dw UNK_DataReffed3A                  ;80AAF0;00B22B;3A
-    dw UNK_DataReffed3B                  ;80AAF2;00B24E;3B
-    dw UNK_DataReffed3C                  ;80AAF4;00B271;3C Intro Scene
-    dw UNK_DataReffed3D                  ;80AAF6;00B28A;3D
-    dw UNK_DataReffed3E                  ;80AAF8;00B2AD;3E
-    dw UNK_DataReffed3F                  ;80AAFA;00B2D0;3F
-    dw UNK_DataReffed40                  ;80AAFC;00B2F3;40
-    dw UNK_DataReffed41                  ;80AAFE;00B316;41
-    dw UNK_DataReffed42                  ;80AB00;00B339;42
-    dw UNK_DataReffed43                  ;80AB02;00B35C;43
-    dw UNK_DataReffed44                  ;80AB04;00B37F;44
-    dw UNK_DataReffed45                  ;80AB06;00B3A2;45
-    dw UNK_DataReffed46                  ;80AB08;00B3C5;46
-    dw UNK_DataReffed47                  ;80AB0A;00B3E8;47
-    dw UNK_DataReffed48                  ;80AB0C;00B40B;48
-    dw UNK_DataReffed49                  ;80AB0E;00B42E;49
-    dw UNK_DataReffed4A                  ;80AB10;00B451;4A
-    dw UNK_DataReffed4B                  ;80AB12;00B474;4B
-    dw UNK_DataReffed4C                  ;80AB14;00B49C;4C
-    dw UNK_DataReffed4D                  ;80AB16;00B4C4;4D
-    dw UNK_DataReffed4E                  ;80AB18;00B4EC;4E
-    dw UNK_DataReffed4F                  ;80AB1A;00B514;4F
-    dw UNK_DataReffed50                  ;80AB1C;00B537;50
-    dw UNK_DataReffed51                  ;80AB1E;00B55F;51
-    dw UNK_DataReffed52                  ;80AB20;00B587;52
-    dw UNK_DataReffed53                  ;80AB22;00B5AF;53
-    dw UNK_DataReffed54                  ;80AB24;00B5D2;54
-    dw UNK_DataReffed55                  ;80AB26;00B5F5;55
-    dw UNK_DataReffed56                  ;80AB28;00B618;56
+    dw UNK_DataReffed3B                  ;3B
+    dw UNK_DataReffed3C                  ;3C Intro Scene
+    dw UNK_DataReffed3D                  ;3D
+    dw UNK_DataReffed3E                  ;3E
+    dw UNK_DataReffed3F                  ;3F
+    dw UNK_DataReffed40                  ;40
+    dw UNK_DataReffed41                  ;41
+    dw UNK_DataReffed42                  ;42
+    dw UNK_DataReffed43                  ;43
+    dw UNK_DataReffed44                  ;44
+    dw UNK_DataReffed45                  ;45
+    dw UNK_DataReffed46                  ;46
+    dw UNK_DataReffed47                  ;47
+    dw UNK_DataReffed48                  ;48
+    dw UNK_DataReffed49                  ;49
+    dw UNK_DataReffed4A                  ;4A
+    dw UNK_DataReffed4B                  ;4B
+    dw UNK_DataReffed4C                  ;4C
+    dw UNK_DataReffed4D                  ;4D
+    dw UNK_DataReffed4E                  ;4E
+    dw UNK_DataReffed4F                  ;4F
+    dw UNK_DataReffed50                  ;50
+    dw UNK_DataReffed51                  ;51
+    dw UNK_DataReffed52                  ;52
+    dw UNK_DataReffed53                  ;53
+    dw UNK_DataReffed54                  ;54
+    dw UNK_DataReffed55                  ;55
+    dw UNK_DataReffed56                  ;56
 
     ;Single tilemaps
-    dw LayerRain                         ;80AB2A;00B640;57
-    dw LayerClouds                       ;80AB2C;00B64E;58
-    dw LayerSnow                         ;80AB2E;00B65C;59
-    dw LayerHeavySnow                    ;80AB30;00B66A;5A
+    dw LayerRain                         ;57
+    dw LayerClouds                       ;58
+    dw LayerSnow                         ;59
+    dw LayerHeavySnow                    ;5A
 
     ;Splash tilemaps
-    dw IntroFarmScroll                   ;80AB32;00B678;5B
-    dw HarvestMoonLogo                   ;80AB34;00B69A;5C
-    dw NatsumeLogo                       ;80AB36;00B6A3;5D
-    dw MenuScreenBackgrounds             ;80AB38;00B6B1;5E
-    dw MenuCharacters                    ;80AB3A;00B6D3;5F
+    dw IntroFarmScroll                   ;5B
+    dw HarvestMoonLogo                   ;5C
+    dw NatsumeLogo                       ;5D
+    dw MenuScreenBackgrounds             ;5E
+    dw MenuCharacters                    ;5F
 
 ;Backgrounds
 MapFarmSpring: ;80AB3C
@@ -286,86 +286,479 @@ MapTownWinter: ;80AC31
         dw $6000    ;Destination in VRAM
         dl $A38000  ;Compressed Location
 
-MapFlowerFestival:      db $00,$60,$00,$02,$02,$03,$01,$00,$00,$00,$01,$00,$00,$00,$01,$00;80AC54;      ;
-                        db $20,$5F,$B4,$97,$00,$30,$00,$80,$99,$00,$40,$C3,$AE,$99,$00,$60;80AC64;      ;
-                        db $79,$D3,$A4                       ;80AC74;      ;
+MapFlowerFestival: ;80AC54
+        db $00      ;Graphic Preset
+        dw $0060    ;ored with 196
+        db $02      ;$0181
+        db $02      ;$0182
+        db $03      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0100    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0100    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $97B45F  ;Compressed Location 1
+        dw $3000    ;Destination in VRAM 2
+        dl $998000  ;Compressed Location 2
+        dw $4000    ;Destination in VRAM 3
+        dl $99AEC3  ;Compressed Location 3
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A4D379  ;Compressed Location
 
-MapHarvestFestival:     db $00,$60,$00,$02,$02,$03,$01,$00,$00,$00,$01,$00,$00,$00,$01,$00;80AC77;      ;
-                        db $20,$5F,$B4,$97,$00,$30,$00,$80,$98,$00,$40,$DB,$AE,$98,$00,$60;80AC87;      ;
-                        db $DE,$C5,$A4                       ;80AC97;      ;
+MapHarvestFestival: ;80AC77
+        db $00      ;Graphic Preset
+        dw $0060    ;ored with 196
+        db $02      ;$0181
+        db $02      ;$0182
+        db $03      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0100    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0100    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $97B45F  ;Compressed Location 1
+        dw $3000    ;Destination in VRAM 2
+        dl $988000  ;Compressed Location 2
+        dw $4000    ;Destination in VRAM 3
+        dl $98AEDB  ;Compressed Location 3
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A4C5DE  ;Compressed Location
 
-UNK_DataReffedA:        db $00,$60,$00,$02,$02,$03,$01,$00,$00,$00,$01,$00,$00,$00,$01,$00;80AC9A;      ;
-                        db $20,$BD,$DC,$99,$00,$30,$00,$80,$9A,$00,$40,$AB,$AE,$9A,$00,$60;80ACAA;      ;
-                        db $27,$83,$A5                       ;80ACBA;      ;
+MapStarNightFestivalSquare: ;80AC9A
+        db $00      ;Graphic Preset
+        dw $0060    ;ored with 196
+        db $02      ;$0181
+        db $02      ;$0182
+        db $03      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0100    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0100    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $99DCBD  ;Compressed Location 1
+        dw $3000    ;Destination in VRAM 2
+        dl $9A8000  ;Compressed Location 2
+        dw $4000    ;Destination in VRAM 3
+        dl $9AAEAB  ;Compressed Location 3
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A58327  ;Compressed Location
 
-UNK_DataReffedB:        db $00,$60,$00,$04,$04,$03,$01,$00,$00,$00,$02,$00,$00,$00,$03,$00;80ACBD;      ;
-                        db $20,$5F,$B4,$97,$00,$30,$00,$80,$98,$00,$40,$F2,$C3,$99,$00,$60;80ACCD;      ;
-                        db $7E,$DC,$A4                       ;80ACDD;      ;
+MapEggFestival: ;80ACBD
+        db $00      ;Graphic Preset
+        dw $0060    ;ored with 196
+        db $04      ;$0181
+        db $04      ;$0182
+        db $03      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0200    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0300    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $97B45F  ;Compressed Location 1
+        dw $3000    ;Destination in VRAM 2
+        dl $988000  ;Compressed Location 2
+        dw $4000    ;Destination in VRAM 3
+        dl $99C3F2  ;Compressed Location 3
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A4DC7E  ;Compressed Location
 
-MapForkSpring:          db $00,$60,$00,$01,$01,$01,$01,$00,$00,$00,$00,$00,$00,$00,$00,$00;80ACE0;      ;
-                        db $20,$6B,$CC,$98,$00,$60,$AB,$CF,$A4;80ACF0;      ;
+MapForkSpring: ;80ACE0
+        db $00      ;Graphic Preset
+        dw $0060    ;ored with 196
+        db $01      ;$0181
+        db $01      ;$0182
+        db $01      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0000    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0000    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $98CC6B  ;Compressed Location 1
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A4CFAB  ;Compressed Location
 
-MapForkSummer:          db $00,$60,$00,$01,$01,$01,$01,$00,$00,$00,$00,$00,$00,$00,$00,$00;80ACF9;      ;
-                        db $20,$6B,$CC,$98,$00,$60,$AB,$CF,$A4;80AD09;      ;
+MapForkSummer: ;80ACF9
+        db $00      ;Graphic Preset
+        dw $0060    ;ored with 196
+        db $01      ;$0181
+        db $01      ;$0182
+        db $01      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0000    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0000    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $98CC6B  ;Compressed Location 1
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A4CFAB  ;Compressed Location
 
-MapForkFall:            db $00,$60,$00,$01,$01,$01,$01,$00,$00,$00,$00,$00,$00,$00,$00,$00;80AD12;      ;
-                        db $20,$6B,$CC,$98,$00,$60,$AB,$CF,$A4;80AD22;      ;
+MapForkFall: ;80AD12
+        db $00      ;Graphic Preset
+        dw $0060    ;ored with 196
+        db $01      ;$0181
+        db $01      ;$0182
+        db $01      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0000    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0000    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $98CC6B  ;Compressed Location 1
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A4CFAB  ;Compressed Location
 
-MapForkWinter:          db $00,$60,$00,$01,$01,$01,$01,$00,$00,$00,$00,$00,$00,$00,$00,$00;80AD2B;      ;
-                        db $20,$1D,$E4,$98,$00,$60,$AB,$CF,$A4;80AD3B;      ;
+MapForkWinter: ;80AD2B
+        db $00      ;Graphic Preset
+        dw $0060    ;ored with 196
+        db $01      ;$0181
+        db $01      ;$0182
+        db $01      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0000    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0000    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $98E41D  ;Compressed Location 1
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A4CFAB  ;Compressed Location
 
-MapMountainSpring:      db $00,$E0,$80,$04,$04,$03,$01,$00,$00,$00,$02,$00,$00,$00,$02,$00;80AD44;      ;
-                        db $20,$CE,$E7,$9D,$00,$30,$00,$80,$9E,$00,$40,$00,$80,$9D,$00,$60;80AD54;      ;
-                        db $00,$80,$A2                       ;80AD64;      ;
+MapMountainSpring: ;80AD44
+        db $00      ;Graphic Preset
+        dw $80E0    ;ored with 196
+        db $04      ;$0181
+        db $04      ;$0182
+        db $03      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0200    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0200    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $9DE7CE  ;Compressed Location 1
+        dw $3000    ;Destination in VRAM 2
+        dl $9E8000  ;Compressed Location 2
+        dw $4000    ;Destination in VRAM 3
+        dl $9D8000  ;Compressed Location 3
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A28000  ;Compressed Location
 
-MapMountainSummer:      db $00,$E0,$80,$04,$04,$03,$01,$00,$00,$00,$02,$00,$00,$00,$02,$00;80AD67;      ;
-                        db $20,$A3,$CB,$9C,$00,$30,$7D,$E3,$9C,$00,$40,$00,$80,$9D,$00,$60;80AD77;      ;
-                        db $00,$80,$A2                       ;80AD87;      ;
+MapMountainSummer: ;80AD67
+        db $00      ;Graphic Preset
+        dw $80E0    ;ored with 196
+        db $04      ;$0181
+        db $04      ;$0182
+        db $03      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0200    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0200    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $9CCBA3  ;Compressed Location 1
+        dw $3000    ;Destination in VRAM 2
+        dl $9CE37D  ;Compressed Location 2
+        dw $4000    ;Destination in VRAM 3
+        dl $9D8000  ;Compressed Location 3
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A28000  ;Compressed Location
 
-MapMountainFall:        db $00,$E0,$80,$04,$04,$03,$01,$00,$00,$00,$02,$00,$00,$00,$02,$00;80AD8A;      ;
-                        db $20,$1C,$99,$9D,$00,$30,$5E,$B1,$9D,$00,$40,$31,$CE,$9D,$00,$60;80AD9A;      ;
-                        db $00,$80,$A2                       ;80ADAA;      ;
+MapMountainFall: ;80AD8A
+        db $00      ;Graphic Preset
+        dw $80E0    ;ored with 196
+        db $04      ;$0181
+        db $04      ;$0182
+        db $03      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0200    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0200    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $9D991C  ;Compressed Location 1
+        dw $3000    ;Destination in VRAM 2
+        dl $9DB15E  ;Compressed Location 2
+        dw $4000    ;Destination in VRAM 3
+        dl $9DCE31  ;Compressed Location 3
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A28000  ;Compressed Location
 
-MapMountainWinter:      db $00,$E0,$80,$04,$04,$03,$01,$00,$00,$00,$02,$00,$00,$00,$02,$00;80ADAD;      ;
-                        db $20,$DC,$9E,$9E,$00,$30,$5D,$B7,$9E,$00,$40,$08,$D2,$9E,$00,$60;80ADBD;      ;
-                        db $00,$80,$A2                       ;80ADCD;      ;
+MapMountainWinter: ;80ADAD
+        db $00      ;Graphic Preset
+        dw $80E0    ;ored with 196
+        db $04      ;$0181
+        db $04      ;$0182
+        db $03      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0200    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0200    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $9E9EDC  ;Compressed Location 1
+        dw $3000    ;Destination in VRAM 2
+        dl $9EB75D  ;Compressed Location 2
+        dw $4000    ;Destination in VRAM 3
+        dl $9ED208  ;Compressed Location 3
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A28000  ;Compressed Location
 
-UNK_DataReffed14:       db $00,$E0,$00,$01,$01,$03,$01,$00,$00,$00,$00,$00,$00,$00,$00,$00;80ADD0;      ;
-                        db $20,$DC,$9E,$9E,$00,$30,$5D,$B7,$9E,$00,$40,$08,$D2,$9E,$00,$60;80ADE0;      ;
-                        db $0B,$9E,$A5                       ;80ADF0;      ;
+MapStarNightFestivalSpa: ;80ADD0
+        db $00      ;Graphic Preset
+        dw $00E0    ;ored with 196
+        db $01      ;$0181
+        db $01      ;$0182
+        db $03      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0000    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0000    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $9E9EDC  ;Compressed Location 1
+        dw $3000    ;Destination in VRAM 2
+        dl $9EB75D  ;Compressed Location 2
+        dw $4000    ;Destination in VRAM 3
+        dl $9ED208  ;Compressed Location 3
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A59E0B  ;Compressed Location
 
-MapHouselvl1:           db $00,$00,$00,$01,$01,$02,$01,$00,$00,$00,$00,$00,$00,$00,$00,$00;80ADF3;      ;
-                        db $20,$00,$C0,$95,$00,$30,$E2,$D6,$95,$00,$60,$84,$9B,$A4;80AE03;      ;
+MapHouselvl1: ;80ADF3
+        db $00      ;Graphic Preset
+        dw $0000    ;ored with 196
+        db $01      ;$0181
+        db $01      ;$0182
+        db $02      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0000    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0000    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $95C000  ;Compressed Location 1
+        dw $3000    ;Destination in VRAM 2
+        dl $95D6E2  ;Compressed Location 2
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A49B84  ;Compressed Location
 
-MapHouselvl2:           db $00,$00,$00,$01,$01,$02,$01,$00,$00,$00,$00,$00,$00,$00,$00,$00;80AE11;      ;
-                        db $20,$00,$C0,$95,$00,$30,$E2,$D6,$95,$00,$60,$5C,$94,$A4;80AE21;      ;
+MapHouselvl2: ;80AE11
+        db $00      ;Graphic Preset
+        dw $0000    ;ored with 196
+        db $01      ;$0181
+        db $01      ;$0182
+        db $02      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0000    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0000    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $95C000  ;Compressed Location 1
+        dw $3000    ;Destination in VRAM 2
+        dl $95D6E2  ;Compressed Location 2
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A4945C  ;Compressed Location
 
-MapHouselvl3:           db $00,$00,$00,$02,$01,$02,$01,$00,$00,$A0,$00,$00,$00,$00,$00,$00;80AE2F;      ;
-                        db $20,$00,$C0,$95,$00,$30,$E2,$D6,$95,$00,$60,$45,$97,$A4;80AE3F;      ;
+MapHouselvl3: ;80AE2F
+        db $00      ;Graphic Preset
+        dw $0000    ;ored with 196
+        db $02      ;$0181
+        db $01      ;$0182
+        db $02      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $00A0    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0000    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $95C000  ;Compressed Location 1
+        dw $3000    ;Destination in VRAM 2
+        dl $95D6E2  ;Compressed Location 2
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A49745  ;Compressed Location
 
-MapMayorHouse:          db $00,$00,$00,$02,$02,$01,$01,$10,$00,$C0,$00,$00,$00,$00,$00,$00;80AE4D;      ;
-                        db $20,$A3,$E8,$95,$00,$60,$2E,$9E,$A4;80AE5D;      ;
+MapMayorHouse: ;80AE4D
+        db $00      ;Graphic Preset
+        dw $0000    ;ored with 196
+        db $02      ;$0181
+        db $02      ;$0182
+        db $01      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0010    ;OBJ_clamp_left
+        dw $00C0    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0000    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $95E8A3  ;Compressed Location 1
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A49E2E  ;Compressed Location
 
-MapMayorHouseHall:      db $00,$00,$00,$02,$02,$01,$01,$00,$01,$00,$01,$00,$01,$00,$01,$00;80AE66;      ;
-                        db $20,$A3,$E8,$95,$00,$60,$2E,$9E,$A4;80AE76;      ;
+MapMayorHouseHall: ;80AE66
+        db $00      ;Graphic Preset
+        dw $0000    ;ored with 196
+        db $02      ;$0181
+        db $02      ;$0182
+        db $01      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0100    ;OBJ_clamp_left
+        dw $0100    ;OBJ_clamp_right
+        dw $0100    ;OBJ_clamp_up
+        dw $0100    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $95E8A3  ;Compressed Location 1
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A49E2E  ;Compressed Location
 
-MapMariasRoom:          db $00,$00,$00,$02,$02,$01,$01,$00,$00,$00,$00,$00,$01,$00,$01,$00;80AE7F;      ;
-                        db $20,$A3,$E8,$95,$00,$60,$2E,$9E,$A4;80AE8F;      ;
+MapMariasRoom: ;80AE7F
+        db $00      ;Graphic Preset
+        dw $0000    ;ored with 196
+        db $02      ;$0181
+        db $02      ;$0182
+        db $01      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0000    ;OBJ_clamp_right
+        dw $0100    ;OBJ_clamp_up
+        dw $0100    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $95E8A3  ;Compressed Location 1
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A49E2E  ;Compressed Location
 
-MapChurch:              db $00,$00,$00,$01,$02,$01,$01,$00,$00,$00,$00,$00,$00,$00,$01,$00;80AE98;      ;
-                        db $20,$00,$80,$96,$00,$60,$97,$A5,$A4;80AEA8;      ;
+MapChurch: ;80AE98
+        db $00      ;Graphic Preset
+        dw $0000    ;ored with 196
+        db $01      ;$0181
+        db $02      ;$0182
+        db $01      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0000    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0100    ;OBJ_clamp_down
+        ;Tile maps
+        dw $2000    ;Destination in VRAM 1
+        dl $968000  ;Compressed Location 1
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A4A597  ;Compressed Location
 
-MapFlowerShop:          db $00,$00,$00,$01,$02,$01,$01,$00,$00,$00,$00,$00,$01,$00,$01,$00;80AEB1;      ;
-                        db $30,$37,$94,$96,$00,$60,$99,$AA,$A4;80AEC1;      ;
+MapFlowerShop: ;80AEB1
+        db $00      ;Graphic Preset
+        dw $0000    ;ored with 196
+        db $01      ;$0181
+        db $02      ;$0182
+        db $01      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0000    ;OBJ_clamp_right
+        dw $0100    ;OBJ_clamp_up
+        dw $0100    ;OBJ_clamp_down
+        ;Tile maps
+        dw $3000    ;Destination in VRAM 1
+        dl $969437  ;Compressed Location 1
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A4AA99  ;Compressed Location
 
-MapFlowerShopRooms:     db $00,$00,$00,$01,$02,$01,$01,$00,$00,$00,$00,$00,$00,$00,$00,$00;80AECA;      ;
-                        db $30,$37,$94,$96,$00,$60,$99,$AA,$A4;80AEDA;      ;
+MapFlowerShopRooms: ;80AECA
+        db $00      ;Graphic Preset
+        dw $0000    ;ored with 196
+        db $01      ;$0181
+        db $02      ;$0182
+        db $01      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0000    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0000    ;OBJ_clamp_down
+        ;Tile maps
+        dw $3000    ;Destination in VRAM 1
+        dl $969437  ;Compressed Location 1
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A4AA99  ;Compressed Location
 
-MapBar:                 db $00,$00,$00,$01,$02,$01,$01,$00,$00,$00,$00,$00,$01,$00,$01,$00;80AEE3;      ;
-                        db $30,$11,$AD,$96,$00,$60,$95,$AE,$A4;80AEF3;      ;
+MapBar: ;80AEE3
+        db $00      ;Graphic Preset
+        dw $0000    ;ored with 196
+        db $01      ;$0181
+        db $02      ;$0182
+        db $01      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0000    ;OBJ_clamp_right
+        dw $0100    ;OBJ_clamp_up
+        dw $0100    ;OBJ_clamp_down
+        ;Tile maps
+        dw $3000    ;Destination in VRAM 1
+        dl $96AD11  ;Compressed Location 1
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A4AE95  ;Compressed Location
 
-MapBarRooms:            db $00,$00,$00,$01,$02,$01,$01,$00,$00,$00,$00,$00,$00,$00,$00,$00;80AEFC;      ;
-                        db $30,$11,$AD,$96,$00,$60,$95,$AE,$A4;80AF0C;      ;
+MapBarRooms: ;80AEFC
+        db $00      ;Graphic Preset
+        dw $0000    ;ored with 196
+        db $01      ;$0181
+        db $02      ;$0182
+        db $01      ;number_of_tilemaps
+        db $01      ;number_of_charactermaps
+        dw $0000    ;OBJ_clamp_left
+        dw $0000    ;OBJ_clamp_right
+        dw $0000    ;OBJ_clamp_up
+        dw $0000    ;OBJ_clamp_down
+        ;Tile maps
+        dw $3000    ;Destination in VRAM 1
+        dl $96AD11  ;Compressed Location 1
+        ;Character maps
+        dw $6000    ;Destination in VRAM
+        dl $A4AE95  ;Compressed Location
 
 MapRestaurant:          db $00,$00,$00,$01,$02,$01,$01,$00,$00,$00,$00,$00,$01,$00,$01,$00;80AF15;      ;
                         db $30,$89,$C4,$96,$00,$60,$D1,$B3,$A4;80AF25;      ;
@@ -455,11 +848,11 @@ UNK_DataReffed38:       db $01,$20,$00,$01,$02,$02,$02,$00,$00,$00,$00,$00,$00,$
                         db $20,$8F,$CF,$9B,$00,$30,$5F,$96,$9C,$00,$60,$43,$B9,$A5,$00,$70;80B1F5;      ;
                         db $42,$B0,$A5                       ;80B205;      ;
 
-UNK_DataReffed39:       db $01,$20,$00,$01,$02,$02,$02,$00,$00,$00,$00,$00,$00,$00,$01,$00;80B208;      ;
+MapStarNightFestivalMountainTop:       db $01,$20,$00,$01,$02,$02,$02,$00,$00,$00,$00,$00,$00,$00,$01,$00;80B208;      ;
                         db $20,$8F,$CF,$9B,$00,$30,$5F,$96,$9C,$00,$60,$43,$B9,$A5,$00,$70;80B218;      ;
                         db $61,$B3,$A5                       ;80B228;      ;
 
-UNK_DataReffed3A:       db $01,$20,$00,$01,$02,$02,$02,$00,$00,$00,$00,$00,$00,$00,$01,$00;80B22B;      ;
+MapNewYearsFestival:       db $01,$20,$00,$01,$02,$02,$02,$00,$00,$00,$00,$00,$00,$00,$01,$00;80B22B;      ;
                         db $20,$6D,$B7,$9B,$00,$30,$00,$80,$9C,$00,$60,$43,$B9,$A5,$00,$70;80B23B;      ;
                         db $17,$AD,$A5                       ;80B24B;      ;
 
