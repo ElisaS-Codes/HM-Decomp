@@ -164,7 +164,7 @@ $018B -
 
 $0195 - Graphic mode ?
 $0196 - flags? related to time?
-?n?k ??s? n:name set k = data keyboard read? s=Skips test and updates during what I think is the transition funciton?
+?n?k ?ts? n:name set k = data keyboard read? s=Skips test and updates during what I think is the transition funciton? t:transitions screen
 ???h sSrf h:Hurracaine s= snowing S:sunny notSummer, r:raining, f:fair, second layer?
 
 $019A - (sores $04 after setting up) only some values are allowed or goes to 05, anithing not 1 disables movement
@@ -349,7 +349,7 @@ $7F1F62 -
 This are more permanent
 $7F1F64 - Player Flags 1
 ???2 1tc? 1: field berry 1, 2: field berry 2, c: chicken statue berry t: mountain trunk berry
-hhrr ccf? - hh:House Upgrade (%01 upgrade 1, %10 upgrade 2), c=Cow Pregnat? rr:erased at night f:set at night depending on $196
+hhHr cc?? - hh:House Upgrade (%01 upgrade 1, %10 upgrade 2), c=Cow Pregnat? r:erased at night H:hurricane
 $7F1F66 - (Which Wife)
 ???p ppp? - P: painte house section
 hh?w wwww - h:house to be upgraded to 2 1 w:each bit might be a wife, to select witch one you have
