@@ -33,6 +33,8 @@ def topng(dinput, doutput):
     #Sanitazion and formatting
     with open(dinput,'r') as file:
         for line in file:
+            if "ORG" in line:
+                continue
             line = line.split(";")[0]
             line = line.replace("db ", "")
             line = line.replace("$", "")

@@ -29,27 +29,27 @@ incsrc "data_banks/bank_8E.asm"
 incsrc "data_banks/bank_8F.asm"
 incsrc "data_banks/bank_90.asm"
 incsrc "data_banks/bank_91.asm"
-incsrc "data_banks/bank_92.asm"
-incsrc "data_banks/bank_93.asm"
-incsrc "data_banks/bank_94.asm"
-incsrc "data_banks/bank_95.asm"
-incsrc "data_banks/bank_96.asm"
-incsrc "data_banks/bank_97.asm"
-incsrc "data_banks/bank_98.asm"
-incsrc "data_banks/bank_99.asm"
-incsrc "data_banks/bank_9A.asm"
-incsrc "data_banks/bank_9B.asm"
-incsrc "data_banks/bank_9C.asm"
-incsrc "data_banks/bank_9D.asm"
-incsrc "data_banks/bank_9E.asm"
-incsrc "data_banks/bank_9F.asm"
-incsrc "data_banks/bank_A0.asm"
-incsrc "data_banks/bank_A1.asm"
-incsrc "data_banks/bank_A2.asm"
-incsrc "data_banks/bank_A3.asm"
-incsrc "data_banks/bank_A4.asm"
-incsrc "data_banks/bank_A5.asm"     ;Tilemaps
-incsrc "data_banks/bank_A6.asm"
+incsrc "data_banks/bank_92.asm"     ;Tile maps
+incsrc "data_banks/bank_93.asm"     ;Tile maps
+incsrc "data_banks/bank_94.asm"     ;Tile maps
+incsrc "data_banks/bank_95.asm"     ;Tile maps
+incsrc "data_banks/bank_96.asm"     ;Tile maps
+incsrc "data_banks/bank_97.asm"     ;Tile maps
+incsrc "data_banks/bank_98.asm"     ;Tile maps
+incsrc "data_banks/bank_99.asm"     ;Tile maps
+incsrc "data_banks/bank_9A.asm"     ;Tile maps
+incsrc "data_banks/bank_9B.asm"     ;Tile maps
+incsrc "data_banks/bank_9C.asm"     ;Tile maps
+incsrc "data_banks/bank_9D.asm"     ;Tile maps
+incsrc "data_banks/bank_9E.asm"     ;Tile maps
+incsrc "data_banks/bank_9F.asm"     ;Tile maps
+incsrc "data_banks/bank_A0.asm"     ;Tile maps
+incsrc "data_banks/bank_A1.asm"     ;Character maps
+incsrc "data_banks/bank_A2.asm"     ;Character maps
+incsrc "data_banks/bank_A3.asm"     ;Character maps
+incsrc "data_banks/bank_A4.asm"     ;Character maps
+incsrc "data_banks/bank_A5.asm"     ;Character maps
+incsrc "data_banks/bank_A6.asm"     ;Character maps
 incsrc "data_banks/bank_A7.asm"     ;Maps
 incsrc "data_banks/bank_A8.asm"     ;Palettes
 incsrc "data_banks/bank_A9.asm"     ;Palettes
