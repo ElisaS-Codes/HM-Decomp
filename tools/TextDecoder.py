@@ -1,5 +1,5 @@
 ### Harvest Moon SNES Text Interpreter
-### 031 - 2023
+### 0.1 - 2023
 
 # This program decodes the ingame text into ascii
 

@@ -1,8 +1,8 @@
-### Harvest Moon Bitplane Interpreter
+### Harvest Moon Sprite Decompressor
 ### 0.1 - 2023
 # Requires pypng
 
-#I hate pypng, a ton of weird array things to make it work.
+#Sprites are not technically compressed... but I named this to keep with the trend
 
 import sys, getopt, png
 
@@ -24,7 +24,8 @@ def get8x8(data):
 
     return tile
 
-def topng(dinput, doutput):
+def openasm(dinput):
+    name = dinput.split(".")[0]
     data = []
     output = ""
     height = 1
@@ -35,6 +36,8 @@ def topng(dinput, doutput):
         for line in file:
             if "ORG" in line:
                 continue
+            if ":" in line:
+                line = line.split(":")[1]
             line = line.split(";")[0]
             line = line.replace("db ", "")
             line = line.replace("$", "")
@@ -75,12 +78,13 @@ def topng(dinput, doutput):
         result += [line0]+[line1]+[line2]+[line3]+[line4]+[line5]+[line6]+[line7]
 
     writer = png.Writer(width=width*8,height=height*8,palette=palette,bitdepth=4)
-    f = open (doutput, 'wb')
+    f = open (name + ".png", 'wb')
     writer.write(f, result)
     f.close()
 
-
-    output = ""
+def compressor(dinput, doutput):
+    print ('TODO')
+    sys.exit()
 
 def main(argv):
     dinput = ""
@@ -89,21 +93,23 @@ def main(argv):
     debug = False
 
     try:
-        opts, args = getopt.getopt(argv,"hi:o:",["input=","output="])
+        opts, args = getopt.getopt(argv,"hci:",["input="])
     except:
-        print ("test.py -i input_file -o output_file")
+        print ("test.py [-c] -i input_file -o output_file")
         sys.exit()
 
     for opt, arg in opts:
         if opt == "-h":
-            print ("test.py input_file output_file")
+            print ("test.py [-c: compress] -i <input_file> -o <output_file>")
             sys.exit()
+        elif opt == "-c":
+            decomp = False
         elif opt in ("-i", "--input"):
             dinput = arg
         elif opt in ("-o", "--output"):
             doutput = arg
     if decomp:
-        topng(dinput, doutput)
+        openasm(dinput)
     else:
         compressor
 

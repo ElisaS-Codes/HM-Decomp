@@ -19,16 +19,16 @@ incsrc "code_banks/bank_85.asm"     ;
 ;Data Banks
 incsrc "data_banks/bank_86.asm"
 incsrc "data_banks/bank_87.asm"
-incsrc "data_banks/bank_88.asm"
-incsrc "data_banks/bank_89.asm"
-incsrc "data_banks/bank_8A.asm"
-incsrc "data_banks/bank_8B.asm"
-incsrc "data_banks/bank_8C.asm"
-incsrc "data_banks/bank_8D.asm"
-incsrc "data_banks/bank_8E.asm"
-incsrc "data_banks/bank_8F.asm"
-incsrc "data_banks/bank_90.asm"
-incsrc "data_banks/bank_91.asm"
+incsrc "data_banks/bank_88.asm"     ;Sprites
+incsrc "data_banks/bank_89.asm"     ;Sprites
+incsrc "data_banks/bank_8A.asm"     ;Sprites
+incsrc "data_banks/bank_8B.asm"     ;Sprites
+incsrc "data_banks/bank_8C.asm"     ;Sprites
+incsrc "data_banks/bank_8D.asm"     ;Sprites
+incsrc "data_banks/bank_8E.asm"     ;Sprites
+incsrc "data_banks/bank_8F.asm"     ;Sprites
+incsrc "data_banks/bank_90.asm"     ;Sprites
+incsrc "data_banks/bank_91.asm"     ;Sprites
 incsrc "data_banks/bank_92.asm"     ;Tile maps
 incsrc "data_banks/bank_93.asm"     ;Tile maps
 incsrc "data_banks/bank_94.asm"     ;Tile maps
