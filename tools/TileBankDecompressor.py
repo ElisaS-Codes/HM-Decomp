@@ -161,6 +161,7 @@ def openasm(dinput):
     data = []
     offsetadjust = 0
     offset = 0
+    oldoffset = 0
 
     #Sanitazion and formatting
     with open(dinput,'r') as file:
@@ -193,9 +194,11 @@ def openasm(dinput):
         offset, result, height = decompressor(data, offset)
 
         writer = png.Writer(width=128,height=height*8,palette=palette,bitdepth=4)
-        f = open ("Tilemap" + str(hex(offsetadjust + offset)) + ".png", 'wb')
+        f = open ("Tilemap" + str(hex(offsetadjust + oldoffset)) + ".png", 'wb')
         writer.write(f, result)
         f.close()
+
+        oldoffset = offset
 
 
 def compressor(dinput, doutput):

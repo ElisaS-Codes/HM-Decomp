@@ -119,7 +119,7 @@ Bank 80
 ❔80AA38 - DMAVRAMWithOffset
 💾80AA68 - UNK_Table2
 💾80AA72 - UNK_Table3
-💾80AA7C - BackgroundsManagerTable
+💾80AA7C - Maps_Graphics_Table
 💾80B6F5 - Unk_Table13
 💾80B8CD - UNK_AudioTable
 💾80B8E7 - Mayby_Table_AudioTracksbySeason
