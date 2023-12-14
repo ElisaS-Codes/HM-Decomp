@@ -5204,7 +5204,7 @@ SUB_80A7AE: ;80A7AE
         %Set16bit(!M)
         ASL A
         TAX
-        LDA.L BackgroundsManagerTable,X
+        LDA.L Maps_Graphics_Table,X
         STA.B !tilemap_pointer
         %Set8bit(!M)
         LDA.B (!tilemap_pointer),Y
@@ -5223,7 +5223,7 @@ BackgroundsManager: ;80A7C6
         %Set16bit(!M)
         ASL A
         TAX
-        LDA.L BackgroundsManagerTable,X
+        LDA.L Maps_Graphics_Table,X
         STA.B !tilemap_pointer
         %Set8bit(!M)
         LDY.W #$0000
@@ -5599,7 +5599,7 @@ LoadsFromVRAMwithOffset: ;80AA38
 UNK_Table2: dw $0000,$0040,$0080,$0100,$0100;80AA68;      ;
 UNK_Table3: dw $0000,$1000,$2000,$4000,$4000;80AA72;      ;used on BackgroundsManager
                                                             ;      ;      ;
-incsrc "../tilesets/BackgroundsManagerTable.asm"
+incsrc "../maps/Maps_Graphics.asm"
                                                             ;      ;      ;
           Unk_Table13: db $0C,$00,$00,$01,$E8,$00,$80,$00,$15,$01,$0D,$00,$80,$00,$C8,$00;80B6F5;      ;
                        db $16,$01,$0D,$00,$80,$00,$C8,$00,$17,$01,$0D,$00,$80,$00,$C8,$00;80B705;      ;
@@ -6126,4 +6126,7 @@ UNK_Pointer42_Table: db $79,$7F,$10,$11,$3A,$10,$8E,$6A,$10,$0D,$5E,$10,$D2,$6A,
 
                        ;these are required for asar or it adds random stuff at the end
                        db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
-                       db $00,$00,$00,$00,$00,$00,$00,$00,$00
+                       db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+                       db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+                       db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+                       db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00

@@ -24,7 +24,7 @@
 ;NMI reads the value other than 0 to know if it needs to update graphics,
 ;And sets it as 1 after it finish. NMI Loops waits for it to change to 1.
 !tilemap_pointer = $18
-!tilemap_to_load = $22 ;8b more data on BackgroundsManagerTable.asm
+!tilemap_to_load = $22 ;8b more data on Maps_Graphics_Table.asm
 !copyof_INIDISP = $24 ;8bit Copy of the value in the Screen Display Register
 
 !game_state = $D2 ;16b
