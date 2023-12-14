@@ -149,9 +149,9 @@ Bank 82
 ✅8281BF - ShippingReturn
 ❓8281C0 - SUB_8281C0
 ❓8281FD - UNK_Table6
-❓828209 - SUB_828209
-❓828270 - LoadsFromUNK5Table
-❓828298 - UNK_Table5
+❓828209 - ClimateFarmDamagePrep
+❓828270 - LoadsDamageProbabilities
+❓828298 - DamageProbabilityTable
 ❓8282AC - NightReset
 ⛔82878E - SUB_82878E
 ✅828790 - WifePregnanacyandChilds
@@ -171,7 +171,7 @@ Bank 82
 ✅828EC6 - FindMostLovedName
 ❓828FB1 - SUB_828FB1
 ❓828FF3 - SUB_828FF3
-❓829054 - DATA8_829054
+❓829054 - Tool_Noise_Table
 ❓8290A8 - UNK_ToolUsed
 ->bank_82_toolused_subrutines
 ❓829260 - SUB_829260

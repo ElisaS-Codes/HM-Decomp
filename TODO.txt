@@ -220,7 +220,7 @@ $091B - (Related to Tool/Anim Cycle?)
 $091C - (related to animals?)
 $091E -
 $091F -
-$0920 - (rng 0-3)
+$0920 - related to chickens
 $0922 -
 $0924 - (hold an rng 0-3)
 

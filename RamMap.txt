@@ -162,9 +162,9 @@ $7E0119 =  - 8b audio related
 🧢$7E091D = !item_on_hand - 8b
 
 🧢$7E0921 = !tool_selected - 8b
-
+🧢$7E0922 = !tool_used_sound - 8b
 🧢$7E0923 = !tool_backpack - 8b
-
+🧢$7E0924 = !what_to_eat - 8b
 🧢$7E0925 = !idle_animation_timer - 8b
 🧢$7E0926 = !watering_can_water - 8b
 🧢$7E0927 = !seeds_grass_N - 8b

@@ -143,7 +143,7 @@ HaveLunch: ;8280AA
         LDA.B #$03
         JSL.L RNGReturn0toA
         %Set8bit(!M)
-        STA.W $0924
+        STA.W !what_to_eat
         %Set16bit(!MX)
         LDA.B !game_state
         ORA.W #$0004                           ;FLAGD2
@@ -236,13 +236,13 @@ SUB_8281C0: ;8281C0
         %Set16bit(!M)
         LDA.W $0196
         AND.W #$0010                           ;FLAG196
-        BNE .CODE_8281EA
+        BNE .hurricane
         LDA.W $0196
         AND.W #$0200                           ;FLAG196
         BNE .CODE_8281F3
         BRA .return
 
-    .CODE_8281EA:
+    .hurricane:
         %Set8bit(!M)
         LDA.B #$0B
         STA.W $0990
@@ -257,18 +257,19 @@ SUB_8281C0: ;8281C0
 
 ;;;;;;;;
 UNK_Table6: db $00,$01,$02,$03,$00,$00,$05,$06,$07,$08,$09,$0A;8281FD
+
 ;;;;;;;;
-SUB_828209: ;828209
+ClimateFarmDamagePrep: ;828209
         %Set16bit(!MX)
         LDA.W $0196
-        AND.W #$0002                           ;FLAG196 raining
-        BNE .CODE_828234
+        AND.W #$0002                           ;FLAG196 Raining
+        BNE .raining
         LDA.W $0196
-        AND.W #$0008                           ;FLAG196 snowing
-        BNE .CODE_828242
+        AND.W #$0008                           ;FLAG196 Snowing
+        BNE .snowing
         LDA.W $0196
-        AND.W #$0010                           ;FLAG196
-        BNE .CODE_828250
+        AND.W #$0010                           ;FLAG196 Hurricane
+        BNE .hurricane
         LDA.W $0196
         AND.W #$0100                           ;FLAG196
         BNE .CODE_82825E
@@ -278,25 +279,25 @@ SUB_828209: ;828209
 
     .return: RTL
 
-    .CODE_828234:
+    .raining:
         %Set16bit(!M)
         LDA.W #$0000
-        JSR.W LoadsFromUNK5Table
-        JSL.L SUB_82A713
+        JSR.W LoadsDamageProbabilities
+        JSL.L ClimateFarmDamageCheck
         BRA .return
 
-    .CODE_828242:
+    .snowing:
         %Set16bit(!M)
         LDA.W #$0001
-        JSR.W LoadsFromUNK5Table
-        JSL.L SUB_82A713
+        JSR.W LoadsDamageProbabilities
+        JSL.L ClimateFarmDamageCheck
         BRA .return
 
-    .CODE_828250:
+    .hurricane:
         %Set16bit(!M)
         LDA.W #$0002
-        JSR.W LoadsFromUNK5Table
-        JSL.L SUB_82A713
+        JSR.W LoadsDamageProbabilities
+        JSL.L ClimateFarmDamageCheck
         BRA .return
 
     .CODE_82825E:
@@ -305,32 +306,32 @@ SUB_828209: ;828209
     .CODE_828260:
         %Set16bit(!M)
         LDA.W #$0003
-        JSR.W LoadsFromUNK5Table
-        JSL.L SUB_82A713
+        JSR.W LoadsDamageProbabilities
+        JSL.L ClimateFarmDamageCheck
         BRA .return
 
         BRA .return
 
-;;;;;;;; Param in A ($04?) Return in A,X,Y
-LoadsFromUNK5Table: ;828270
+;;;;;;;; Param in A, Return in A,X,Y
+LoadsDamageProbabilities: ;828270
         %Set16bit(!MX)
         ASL A
-        ASL A
+        ASL A                                ;Sets 4 values, but only reads 3
         TAX
         %Set8bit(!M)
         LDA.B #$00
         XBA
-        LDA.L UNK_Table5,X
+        LDA.L DamageProbabilityTable,X       ;Fence
         %Set16bit(!M)
         PHA
         INX
         %Set8bit(!M)
-        LDA.L UNK_Table5,X
+        LDA.L DamageProbabilityTable,X       ;Grass
         %Set16bit(!M)
         PHA
         INX
         %Set8bit(!M)
-        LDA.L UNK_Table5,X
+        LDA.L DamageProbabilityTable,X       ;Crops
         %Set16bit(!M)
         TAY
         PLX
@@ -338,9 +339,14 @@ LoadsFromUNK5Table: ;828270
 
         RTS
 
-;;;;;;;;
-UNK_Table5: db $60,$00,$00,$00,$40,$00,$00,$00,$08,$10,$04,$00,$08,$00,$04,$00;828298
-            db $00,$40,$20,$00
+;;;;;;;; Fourth is never used
+DamageProbabilityTable: ;828298
+        db $60,$00,$00,$00  ;Rain
+        db $40,$00,$00,$00  ;Snow
+        db $08,$10,$04,$00  ;Hurricaine
+        db $08,$00,$04,$00  ;?
+        db $00,$40,$20,$00  ;New Year
+
 ;;;;;;;;
 NightReset: ;8282AC
         %Set8bit(!M)
@@ -368,8 +374,8 @@ NightReset: ;8282AC
         STA.L !year
         %Set16bit(!M)
         LDA.W #$0004
-        JSR.W LoadsFromUNK5Table
-        JSL.L SUB_82A713
+        JSR.W LoadsDamageProbabilities
+        JSL.L ClimateFarmDamageCheck
         %Set8bit(!M)
         LDA.B #$00
 
@@ -404,7 +410,7 @@ NightReset: ;8282AC
         AND.W #$FFFD                           ;FLAG70
         STA.L $7F1F70
         %Set16bit(!MX)
-        LDA.W $0196
+        LDA.W $0196                            ;FLAG196
         AND.W #$0010
         BEQ .skipflagset
         LDA.L $7F1F64
@@ -441,7 +447,7 @@ NightReset: ;8282AC
         STA.L !seconds
         JSL.L LoadsDateNames
         JSL.L NightlyFarmTilesCheck
-        JSL.L SUB_828209
+        JSL.L ClimateFarmDamagePrep
         JSL.L CowFeedingandStatus
         JSL.L WeatherTomorrow
         JSL.L FindMostLovedName
@@ -822,7 +828,7 @@ NightReset: ;8282AC
         LDA.B #$03
         JSL.L RNGReturn0toA
         %Set8bit(!M)
-        STA.W $0924
+        STA.W !what_to_eat
         %Set16bit(!MX)
         LDA.B !game_state
         ORA.W #$0004                           ;FLAGD2
@@ -1343,7 +1349,7 @@ SetWeatherFlags: ;828C09
 
 ;;;;;;;;
 Climate_Flag_Table: ;828CED
-        db $04,$00,$02,$00,$08,$00,$10,$00,$00,$02,$00,$01
+        dw $0004,$0002,$0008,$0010,$0200,$0100
 
 ;;;;;;;; Set weather for tomorrow TODO, give it a second pass
 WeatherTomorrow: ;828CF9
@@ -1692,7 +1698,7 @@ SUB_828FB1: ;828FB1
         %Set8bit(!M)                             ;      ;
         LDA.B #$00                           ;828FB3;      ;
         XBA                                  ;828FB5;      ;
-        LDA.W $0922                          ;828FB6;000922;
+        LDA.W !tool_used_sound                          ;828FB6;000922;
         CMP.B #$02                           ;828FB9;      ;
         BEQ .return                      ;828FBB;828FF2;
         %Set16bit(!M)                             ;828FBD;      ;
@@ -1708,7 +1714,7 @@ SUB_828FB1: ;828FB1
         ADC.B $7E                            ;828FCF;00007E;
         TAX                                  ;828FD1;      ;
         %Set8bit(!M)                             ;828FD2;      ;
-        LDA.L DATA8_829054,X                 ;828FD4;829054;
+        LDA.L Tool_Noise_Table,X                 ;828FD4;829054;
         STA.W $0115                          ;828FD8;000115;
         INX                                  ;828FDB;      ;
         %Set16bit(!M)                             ;828FDC;      ;
@@ -1717,7 +1723,7 @@ SUB_828FB1: ;828FB1
         ADC.B $80                            ;828FE0;000080;
         TAX                                  ;828FE2;      ;
         %Set8bit(!M)                             ;828FE3;      ;
-        LDA.L DATA8_829054,X                 ;828FE5;829054;
+        LDA.L Tool_Noise_Table,X                 ;828FE5;829054;
         BEQ .return                      ;828FE9;828FF2;
         STA.W $0114                          ;828FEB;000114;
         JSL.L UNK_Audio19                    ;828FEE;838332;
@@ -1739,12 +1745,12 @@ SUB_828FF3: ;828FF3
         ADC.B $7E                            ;829006;00007E;
         TAX                                  ;829008;      ;
         %Set8bit(!M)                             ;829009;      ;
-        LDA.L DATA8_829054,X                 ;82900B;829054;
+        LDA.L Tool_Noise_Table,X                 ;82900B;829054;
         BEQ .CODE_82904B                      ;82900F;82904B;
         STA.W $0115                          ;829011;000115;
         INX                                  ;829014;      ;
         PHX                                  ;829015;      ;
-        LDA.L DATA8_829054,X                 ;829016;829054;
+        LDA.L Tool_Noise_Table,X                 ;829016;829054;
         BEQ .CODE_829038                      ;82901A;829038;
         STA.W $0114                          ;82901C;000114;
         %Set8bit(!M)                             ;82901F;      ;
@@ -1764,7 +1770,7 @@ SUB_828FF3: ;828FF3
         %Set16bit(!X)                             ;82903A;      ;
         PLX                                  ;82903C;      ;
         INX                                  ;82903D;      ;
-        LDA.L DATA8_829054,X                 ;82903E;829054;
+        LDA.L Tool_Noise_Table,X                 ;82903E;829054;
         BEQ .CODE_82904B                      ;829042;82904B;
         STA.W $0114                          ;829044;000114;
         JSL.L UNK_Audio18                    ;829047;83833E;
@@ -1776,7 +1782,7 @@ SUB_828FF3: ;828FF3
         RTL                                  ;829053;      ;END_SUB_828FF3
 
 ;;;;;;;;
-DATA8_829054: ;829054
+Tool_Noise_Table: ;829054
         db $00,$00,$00,$06,$14,$12,$06,$11,$0F,$06,$17,$17,$06,$11,$15,$06;      ;
         db $1B,$1B,$06,$1B,$1B,$06,$1B,$1B,$06,$1B,$1B,$06,$00,$00,$06,$00;829064;      ;
         db $00,$06,$00,$19,$06,$1B,$1B,$06,$00,$00,$06,$00,$00,$06,$00,$00;829074;      ;
@@ -1848,7 +1854,7 @@ SUB_82927D: ;82927D
         JSL.L CheckToolSuccess                          ;829294;82AA71;
         %Set8bit(!M)                             ;829298;      ;
         %Set16bit(!X)                             ;82929A;      ;
-        STA.W $0922                          ;82929C;000922;
+        STA.W !tool_used_sound                          ;82929C;000922;
 
         RTS                                  ;82929F;      ;
 
@@ -2155,14 +2161,14 @@ MonthlyFarmTilesCheck: ;82A6A2
 
 ;;;;;;;; Params in A,X,Y
 ;;;;;;;; A: fence break chance, X: grass break chance, Y:crop/tiled break chance
-SUB_82A713: ;82A713
+ClimateFarmDamageCheck: ;82A713
         %Set16bit(!MX)
         STA.B $86
         STX.B $88
         STY.B $8A
         %Set8bit(!M)
         LDA.B #$04
-        STA.W $0181
+        STA.W $0181                          ;Map variable TODO
         %Set16bit(!M)
         LDY.W #$0000
 
@@ -3725,7 +3731,7 @@ GetTileIndex: ;82B13C
         AND.W #$FFF0                          ;4 bits from Y
         STA.B $80
         %Set8bit(!M)
-        LDA.W $0181
+        LDA.W $0181                           ;Map Variable TODO
         CMP.B #$01
         BEQ .skip1
         %Set16bit(!M)

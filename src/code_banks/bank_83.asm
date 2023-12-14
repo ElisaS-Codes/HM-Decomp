@@ -3511,7 +3511,7 @@ FirstNightReset: ;83ABF0
         STZ.W $098F
         %Set8bit(!M)
         STZ.W !exaustion_level
-        STZ.W $0922
+        STZ.W !tool_used_sound
         %Set8bit(!M)
         STZ.W $0110                          ;audio
         STZ.W $0114                          ;audio

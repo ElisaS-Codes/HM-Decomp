@@ -6871,7 +6871,7 @@ SUB_81BFB7: ;81BFB7
                        ORA.W #$8000                         ;81CB28;      ;
                        STA.B !game_state                            ;81CB2B;0000D2;
                        %Set8bit(!M)                             ;81CB2D;      ;
-                       LDA.W $0924                          ;81CB2F;000924;
+                       LDA.W !what_to_eat                          ;81CB2F;000924;
                        CLC                                  ;81CB32;      ;
                        ADC.B #$30                           ;81CB33;      ;
                        STA.W $0901                          ;81CB35;000901;

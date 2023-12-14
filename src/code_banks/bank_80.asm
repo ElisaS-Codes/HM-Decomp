@@ -45,7 +45,7 @@ SpawnAfterLoad:  ;808000
         LDA.B #$03
         JSL.L RNGReturn0toA
         %Set8bit(!M)
-        STA.W $0924
+        STA.W !what_to_eat
         %Set16bit(!MX)
         LDA.B !game_state
         ORA.W #$0004
