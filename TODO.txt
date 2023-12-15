@@ -13,29 +13,42 @@ DATA8_81B363 - 16bit
 $09B6 - current map logical tile
 $7E2000 - current map graphical tile
 $7EA4E6 - farm logical tile
+$7F0900-0AFF - Palette
+$7F0D00-0EFF - Palette copy
 
-$096D - Tool used repetedley (chopping big trees)
-$096C - stamina level
+$94
+!intro_stage = $95
+!demo_timer = $90
+$97
+$AF
 
-$7F1F5C - #$0008 what happens if set
-research 0D
+A: 0
+X: 9
+Y: 0
 
-ToolUsedSickle
->PreCheckToolSuccess
-    A - 1
-    X - 0
-    Y - 0
-<>CalculateTileinFront - A is ammount of tiles, X and Y are offsets
-    A - Trash
-    X - tile_in_front_X
-    Y - tile_in_front_Y
->CheckToolSuccess - checks what tools is used, and calls other subs
->UNK_CheckTileProperty -
-    $82 - 1 (a)
-    $84 - for checking flags
+ok ok, no, focus, CC is a pointer to a collection of structures, I know that. Its $40 bytes long, aka 64 bytes. Thats a ton of info!
+$00 is always one, probably a "its not used" flag, as there is a subrutine that sets all $00s to 0, that resets the whole structures.
+some values are 8bits, some are 16 bits, some are important enough to be cleaned before using, most are not
+$0F seems to be important? its reset out of order
+$3F holds the index of the stuct... weird cause you need the index to access the struct...
 
->GetTileContent - Get tile content
->GetTileIndex - Gets map index
+struct $CC
+00: "used" flag? -8
+01:r -8b
+03:r -8b
+04:r -8b
+05:r -8b
+06:r -8b
+0C:r -8b
+0F:r -8b
+12:r -8b
+14:r -16b
+10:r -16b
+1A:r -16b
+1C:r -16b
+30: Data from B38000 -16b
+32: bank of C9? -8b
+3F: Index of struct -8
 
 
 ====Working on
@@ -72,9 +85,7 @@ $1E - does things when transitioning to places
 
 $20 - Camera Offset Subtile X?
 $21 - Camera Offset Subtile Y?
-$42 - pointers related to rain
-$45 - pointers related to rain
-$48 - pointers related to rain
+$42 - pointers *10
 
 $89 - Tile in front X?
 $8A - Tile in front Y?
@@ -287,6 +298,7 @@ $7EA200-$7EA21E - OAM contents High Table
 
 $7EA220-31E - ($0000)
 $7EA320-41E - ($0000-$FFFF)
+$B7
 $B3
 $BB
 $BD

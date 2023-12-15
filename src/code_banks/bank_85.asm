@@ -1689,7 +1689,7 @@ CopiesWRAMtoOBJVGRAM:
     .return: RTL
 
 ;;;;;;; TODO
-ClearWRAMGraphicsSpace: ;858ED7
+UNK_UNKClearWRAMSpace: ;858ED7
         %Set16bit(!MX)
         LDA.W #$FFFF
         STA.L $7EA420

@@ -1472,7 +1472,7 @@ MapUnknown42: ;80B339
         dl $97E7A2  ;Compressed Location 3
         ;Character maps
         dw $6000    ;Destination in VRAM 1
-        dl $A5F95C  ;Compressed Location 1                  ;80B359;      ;
+        dl $A5F95C  ;Compressed Location 1
 
 MapUnknown43: ;80B35C
         db $00      ;Graphic Preset

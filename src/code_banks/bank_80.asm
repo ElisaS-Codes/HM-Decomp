@@ -621,7 +621,7 @@ RESET:   ;808428
         JSL.L ZeroesVRAM
         JSL.L ZeroesOAM
         JSL.L ZeroesCGRAM
-        JSL.L ClearWRAMGraphicsSpace         ;TODO
+        JSL.L UNK_UNKClearWRAMSpace         ;TODO
         JSL.L InitializeOBJs
         JSL.L CheckSRAMIntegrity
         %Set8bit(!M)
@@ -949,6 +949,7 @@ ScreenFadeout: ;80880A
         LDA.L $7F1F5A
         AND.W #$7FFF                         ;FLAG5A
         STA.L $7F1F5A
+
         RTL
 
 ;;;;;;;; Initializes the VRAM with 0s
@@ -2904,10 +2905,10 @@ UNK_ScreenTransition: ;8096D3
         JSL.L ZeroesPartialVRAM
         JSL.L Zeroes42Pointers
         JSL.L ClearsTimeofDayPalette
-        JSL.L ClearWRAMGraphicsSpace
+        JSL.L UNK_UNKClearWRAMSpace
         JSL.L InitializeOBJs
-        JSL.L PresetsMemory3
-        JSL.L SUB_848000
+        JSL.L UNK_PresetsMemory3
+        JSL.L UNK_ClearsStartofAllCCPointers
         %Set8bit(!M)
         LDA.W !transition_dest
         STA.B !tilemap_to_load

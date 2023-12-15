@@ -4467,10 +4467,10 @@ SUB_82D1C0: ;82D1C0
         JSL.L ZeroesVRAM                      ;82D2F3;808846;
         JSL.L ZeroesCGRAM                     ;82D2F7;808980;
         JSL.L Zeroes42Pointers           ;82D2FB;808FAB;
-        JSL.L ClearWRAMGraphicsSpace         ;82D2FF;858ED7;
+        JSL.L UNK_UNKClearWRAMSpace         ;82D2FF;858ED7;
         JSL.L InitializeOBJs         ;82D303;85820F;
-        JSL.L PresetsMemory3                 ;82D307;81A4C7;
-        JSL.L SUB_848000                 ;82D30B;848000;
+        JSL.L UNK_PresetsMemory3                 ;82D307;81A4C7;
+        JSL.L UNK_ClearsStartofAllCCPointers                 ;82D30B;848000;
         JSL.L LoadDefaultFarmMap                ;82D30F;82A65A;
         %Set16bit(!M)                             ;82D313;      ;
         LDA.W #$0100                         ;82D315;      ;
@@ -4541,10 +4541,10 @@ SUB_82D1C0: ;82D1C0
         STA.B $95                            ;82D3BD;000095;
         %Set16bit(!M)                             ;82D3BF;      ;
         STZ.B $90                            ;82D3C1;000090;
-        JML.L SUB_82D871                    ;82D3C3;82D871;
+        JML.L IntroScreen_democheck                    ;82D3C3;82D871;
 
 ;;;;;;;;
-SUB_82D3C7:
+DemoPresentation:
         %Set8bit(!M)                             ;82D3C7;      ;
         %Set16bit(!X)                             ;82D3C9;      ;
         LDA.B #$0F                           ;82D3CB;      ;
@@ -4654,10 +4654,10 @@ SUB_82D3C7:
         JSL.L ZeroesVRAM                      ;82D4F4;808846;
         JSL.L ZeroesCGRAM                     ;82D4F8;808980;
         JSL.L Zeroes42Pointers           ;82D4FC;808FAB;
-        JSL.L ClearWRAMGraphicsSpace         ;82D500;858ED7;
+        JSL.L UNK_UNKClearWRAMSpace         ;82D500;858ED7;
         JSL.L InitializeOBJs         ;82D504;85820F;
-        JSL.L PresetsMemory3                 ;82D508;81A4C7;
-        JSL.L SUB_848000                 ;82D50C;848000;
+        JSL.L UNK_PresetsMemory3                 ;82D508;81A4C7;
+        JSL.L UNK_ClearsStartofAllCCPointers                 ;82D50C;848000;
         JSL.L LoadDefaultFarmMap                ;82D510;82A65A;
         %Set16bit(!M)                             ;82D514;      ;
         LDA.W #$0100                         ;82D516;      ;
@@ -4924,10 +4924,15 @@ SUB_82D3C7:
         STA.B $95                            ;82D754;000095;
         %Set16bit(!M)                             ;82D756;      ;
         STZ.B $90                            ;82D758;000090;
-        JML.L SUB_82D871                    ;82D75A;82D871;
+        JML.L IntroScreen_democheck                    ;82D75A;82D871;
 
-;;;;;;;;TODO
+;;;;;;;; This subrutine is a monster, manages all the intro screens and menus
+;;;;;;;; The subrutine is not that clearly delimitated, so expect some wonkiness in
+;;;;;;;; the naming, and some subrutines that are actually part of this one.
 IntroScreen: ;82D75E
+        !intro_stage = $95
+        !demo_timer = $90
+
         %Set16bit(!MX)
         %Set8bit(!M)
         LDA.B #$04
@@ -4996,23 +5001,23 @@ IntroScreen: ;82D75E
         %Set8bit(!M)
         STZ.B $97
         %Set16bit(!M)
-        STZ.B $90
+        STZ.B !demo_timer
         LDA.W #$0001
         STA.B $AF
 
-    WaitNMIIntro:
+    .waitNMI:
         %Set8bit(!M)
         LDA.B $00
-        BEQ WaitNMIIntro
+        BEQ .waitNMI
 
         JSL.L UNK_BigLoop
         JSL.L InputTypeSelector
         %Set8bit(!M)
-        LDA.B $95
-        BEQ CODE_82D883
+        LDA.B !intro_stage
+        BEQ .natsumescreen
         CMP.B #$01
         BNE .CODE_82D829
-        JML.L CODE_82D8B0
+        JML.L .CODE_82D8B0
 
     .CODE_82D829:
         CMP.B #$02                           ;82D829;      ;
@@ -5056,82 +5061,85 @@ IntroScreen: ;82D75E
 
     .CODE_82D869:
        CMP.B #$0A                           ;82D869;      ;
-       BNE SUB_82D871                      ;82D86B;82D871;
+       BNE .democheck                      ;82D86B;82D871;
        JML.L SUB_82D1C0                    ;82D86D;82D1C0;
 
-;;;;;;;;
-SUB_82D871:
-        %Set8bit(!M)                             ;82D871;      ;
-        STZ.B $00                            ;82D873;000000;
-        %Set16bit(!M)                             ;82D875;      ;
-        LDA.B $90                            ;82D877;000090;
-        CMP.W #$0258                         ;82D879;      ;
-        BNE .CODE_82D881                      ;82D87C;82D881;
-        JMP.W SUB_82D3C7                    ;82D87E;82D3C7;
 
-    .CODE_82D881:
-        BRA WaitNMIIntro                      ;82D881;82D80D;END_MainLoop?
+    ;;;; checks if it should start the demo
+    .democheck:
+        %Set8bit(!M)
+        STZ.B !NMI_Status
+        %Set16bit(!M)
+        LDA.B !demo_timer
+        CMP.W #600                           ;10 seconds
+        BNE ..skip
+        JMP.W DemoPresentation
 
-    CODE_82D883:
-        LDY.W #$0000                         ;82D883;      ;
+        ..skip:
+            BRA .waitNMI                      ;82D881;82D80D;END_MainLoop?
 
-    .CODE_82D886:
-        PHY                                  ;82D886;      ;
-        JSL.L WaitForNMI               ;82D887;808645;
-        %Set16bit(!MX)                             ;82D88B;      ;
-        PLY                                  ;82D88D;      ;
-        INY                                  ;82D88E;      ;
-        CPY.W #$0078                         ;82D88F;      ;
-        BNE .CODE_82D886                      ;82D892;82D886;
-        %Set8bit(!M)                             ;82D894;      ;
-        LDA.B #$0F                           ;82D896;      ;
-        STA.B $92                            ;82D898;000092;
-        LDA.B #$03                           ;82D89A;      ;
-        STA.B $93                            ;82D89C;000093;
-        LDA.B #$01                           ;82D89E;      ;
-        STA.B $94                            ;82D8A0;000094;
-        JSL.L ScreenFadeout                  ;82D8A2;80880A;
-        %Set8bit(!M)                             ;82D8A6;      ;
-        LDA.B #$01                           ;82D8A8;      ;
-        STA.B $95                            ;82D8AA;000095;
-        STZ.B $94                            ;82D8AC;000094;
-        BRA SUB_82D871                      ;82D8AE;82D871;
+    ;;;; Just wait for the natsume logo to pass
+    .natsumescreen:
+        LDY.W #$0000
 
-    CODE_82D8B0:
-        %Set16bit(!MX)                             ;82D8B0;      ;
-        JSL.L ZeroesVRAM                      ;82D8B2;808846;
-        JSL.L ZeroesCGRAM                     ;82D8B6;808980;
-        JSL.L Zeroes42Pointers           ;82D8BA;808FAB;
-        JSL.L ClearWRAMGraphicsSpace         ;82D8BE;858ED7;
-        JSL.L InitializeOBJs         ;82D8C2;85820F;
-        JSL.L PresetsMemory3                 ;82D8C6;81A4C7;
-        JSL.L SUB_848000                 ;82D8CA;848000;
-        %Set16bit(!M)                             ;82D8CE;      ;
-        %Set16bit(!MX)                             ;82D8D0;      ;
-        LDA.B !game_state                            ;82D8D2;0000D2;
-        ORA.W #$0001                         ;82D8D4;      ;
-        STA.B !game_state                            ;82D8D7;0000D2;
-        %Set16bit(!MX)                             ;82D8D9;      ;
-        LDA.W #$0000                         ;82D8DB;      ;
-        STA.B !player_action                            ;82D8DE;0000D4;
-        %Set16bit(!MX)                             ;82D8E0;      ;
-        LDA.W #$0000                         ;82D8E2;      ;
-        STA.B !player_direction                            ;82D8E5;0000DA;
-        %Set16bit(!MX)                             ;82D8E7;      ;
-        LDA.W #$0000                         ;82D8E9;      ;
-        STA.W $0911                          ;82D8EC;000911;
-        %Set16bit(!MX)                             ;82D8EF;      ;
-        LDA.W #$0000                         ;82D8F1;      ;
-        STA.W $0901                          ;82D8F4;000901;
-        %Set16bit(!M)                             ;82D8F7;      ;
-        LDA.W #$0100                         ;82D8F9;      ;
-        STA.W !BG3_Map_Offset_Y                          ;82D8FC;000146;
-        %Set16bit(!MX)                             ;82D8FF;      ;
-        LDA.W #$0000                         ;82D901;      ;
-        LDX.W #$0009                         ;82D904;      ;
-        LDY.W #$0000                         ;82D907;      ;
-        JSL.L SUB_848097                            ;82D90A;848097;
-        JSL.L CODE_84816F                    ;82D90E;84816F;
+        ..wait:
+            PHY
+            JSL.L WaitForNMI
+            %Set16bit(!MX)
+            PLY
+            INY
+            CPY.W #120                       ;2 secs
+            BNE ..wait
+
+        %Set8bit(!M)
+        LDA.B #$0F
+        STA.B $92
+        LDA.B #$03
+        STA.B $93
+        LDA.B #$01
+        STA.B $94
+        JSL.L ScreenFadeout
+        %Set8bit(!M)
+        LDA.B #$01
+        STA.B !intro_stage
+        STZ.B $94
+        BRA .democheck
+
+    .CODE_82D8B0:
+        %Set16bit(!MX)
+        JSL.L ZeroesVRAM
+        JSL.L ZeroesCGRAM
+        JSL.L Zeroes42Pointers
+        JSL.L UNK_UNKClearWRAMSpace
+        JSL.L InitializeOBJs
+        JSL.L UNK_PresetsMemory3
+        JSL.L UNK_ClearsStartofAllCCPointers
+        %Set16bit(!M)
+        %Set16bit(!MX)
+        LDA.B !game_state
+        ORA.W #$0001
+        STA.B !game_state
+        %Set16bit(!MX)
+        LDA.W #$0000
+        STA.B !player_action
+        %Set16bit(!MX)
+        LDA.W #$0000
+        STA.B !player_direction
+        %Set16bit(!MX)
+        LDA.W #$0000
+        STA.W $0911
+        %Set16bit(!MX)
+        LDA.W #$0000
+        STA.W $0901
+        %Set16bit(!M)
+        LDA.W #$0100                         ;Sets BG3 out of the screen
+        STA.W !BG3_Map_Offset_Y
+        %Set16bit(!MX)
+        LDA.W #$0000
+        LDX.W #$0009
+        LDY.W #$0000
+        JSL.L SUB_848097
+        JSL.L CODE_84816F
         %Set8bit(!M)                             ;82D912;      ;
         LDA.W !transition_dest                          ;82D914;00098B;
         STA.B !tilemap_to_load                            ;82D917;000022;
@@ -5196,7 +5204,7 @@ SUB_82D871:
                        LDA.B $95                            ;82D9B5;000095;
                        CMP.B #$09                           ;82D9B7;      ;
                        BNE CODE_82D9BE                      ;82D9B9;82D9BE;
-                       JMP.W SUB_82D871                    ;82D9BB;82D871;
+                       JMP.W IntroScreen_democheck                    ;82D9BB;82D871;
 
           CODE_82D9BE:
           %Set8bit(!M)                             ;82D9BE;      ;
@@ -5214,10 +5222,10 @@ SUB_82D871:
                        JSL.L ZeroesVRAM                      ;82D9DC;808846;
                        JSL.L ZeroesCGRAM                     ;82D9E0;808980;
                        JSL.L Zeroes42Pointers           ;82D9E4;808FAB;
-                       JSL.L ClearWRAMGraphicsSpace         ;82D9E8;858ED7;
+                       JSL.L UNK_UNKClearWRAMSpace         ;82D9E8;858ED7;
                        JSL.L InitializeOBJs         ;82D9EC;85820F;
-                       JSL.L PresetsMemory3                 ;82D9F0;81A4C7;
-                       JSL.L SUB_848000                 ;82D9F4;848000;
+                       JSL.L UNK_PresetsMemory3                 ;82D9F0;81A4C7;
+                       JSL.L UNK_ClearsStartofAllCCPointers                 ;82D9F4;848000;
                        %Set8bit(!M)                             ;82D9F8;      ;
                        LDA.B #$5B                           ;82D9FA;      ;
                        STA.B !tilemap_to_load                            ;82D9FC;000022;
@@ -5272,7 +5280,7 @@ SUB_82D871:
                        STA.B $95                            ;82DA82;000095;
                        STZ.B $94                            ;82DA84;000094;
                        STZ.B $96                            ;82DA86;000096;
-                       JML.L SUB_82D871                    ;82DA88;82D871;
+                       JML.L IntroScreen_democheck                    ;82DA88;82D871;
 
           CODE_82DA8C:
           %Set8bit(!M)                             ;82DA8C;      ;
@@ -5292,7 +5300,7 @@ SUB_82D871:
           CODE_82DAA6:
           %Set8bit(!M)                             ;82DAA6;      ;
                        INC.B $94                            ;82DAA8;000094;
-                       JML.L SUB_82D871                    ;82DAAA;82D871;
+                       JML.L IntroScreen_democheck                    ;82DAAA;82D871;
 
           CODE_82DAAE:
           %Set8bit(!M)                             ;82DAAE;      ;
@@ -5308,7 +5316,7 @@ SUB_82D871:
                        LDA.B #$03                           ;82DABF;      ;
                        STA.B $95                            ;82DAC1;000095;
                        STZ.B $94                            ;82DAC3;000094;
-                       JML.L SUB_82D871                    ;82DAC5;82D871;
+                       JML.L IntroScreen_democheck                    ;82DAC5;82D871;
 
           CODE_82DAC9:
           %Set8bit(!M)                             ;82DAC9;      ;
@@ -5333,7 +5341,7 @@ SUB_82D871:
           CODE_82DAED:
           %Set8bit(!M)                             ;82DAED;      ;
                        INC.B $94                            ;82DAEF;000094;
-                       JML.L SUB_82D871                    ;82DAF1;82D871;
+                       JML.L IntroScreen_democheck                    ;82DAF1;82D871;
 
           CODE_82DAF5:
           %Set8bit(!M)                             ;82DAF5;      ;
@@ -5356,10 +5364,10 @@ SUB_82D871:
                        JSL.L ZeroesVRAM                      ;82DB21;808846;
                        JSL.L ZeroesCGRAM                     ;82DB25;808980;
                        JSL.L Zeroes42Pointers           ;82DB29;808FAB;
-                       JSL.L ClearWRAMGraphicsSpace         ;82DB2D;858ED7;
+                       JSL.L UNK_UNKClearWRAMSpace         ;82DB2D;858ED7;
                        JSL.L InitializeOBJs         ;82DB31;85820F;
-                       JSL.L PresetsMemory3                 ;82DB35;81A4C7;
-                       JSL.L SUB_848000                 ;82DB39;848000;
+                       JSL.L UNK_PresetsMemory3                 ;82DB35;81A4C7;
+                       JSL.L UNK_ClearsStartofAllCCPointers                 ;82DB39;848000;
                        %Set16bit(!M)                             ;82DB3D;      ;
                        STZ.B !player_pos_X                           ;82DB3F;0000D6;
                        STZ.B !player_pos_Y                            ;82DB41;0000D8;
@@ -5443,7 +5451,7 @@ SUB_82D871:
                        LDA.B #$04                           ;82DC03;      ;
                        STA.B $95                            ;82DC05;000095;
                        STZ.B $94                            ;82DC07;000094;
-                       JML.L SUB_82D871                    ;82DC09;82D871;
+                       JML.L IntroScreen_democheck                    ;82DC09;82D871;
 
           CODE_82DC0D:
           %Set8bit(!M)                             ;82DC0D;      ;
@@ -5465,7 +5473,7 @@ SUB_82D871:
                        BEQ CODE_82DC32                      ;82DC28;82DC32;
                        %Set8bit(!M)                             ;82DC2A;      ;
                        INC.B $94                            ;82DC2C;000094;
-                       JML.L SUB_82D871                    ;82DC2E;82D871;
+                       JML.L IntroScreen_democheck                    ;82DC2E;82D871;
 
           CODE_82DC32:
           JSL.L Zeroes42Pointers           ;82DC32;808FAB;
@@ -5626,7 +5634,7 @@ SUB_82D871:
                        LDA.B #$05                           ;82DD82;      ;
                        STA.B $95                            ;82DD84;000095;
                        STZ.B $94                            ;82DD86;000094;
-                       JML.L SUB_82D871                    ;82DD88;82D871;
+                       JML.L IntroScreen_democheck                    ;82DD88;82D871;
 
           CODE_82DD8C:
           %Set8bit(!M)                             ;82DD8C;      ;
@@ -5780,7 +5788,7 @@ SUB_82D871:
           CODE_82DEBD:
           %Set16bit(!MX)                             ;82DEBD;      ;
                        INC.B $90                            ;82DEBF;000090;
-                       JML.L SUB_82D871                    ;82DEC1;82D871;
+                       JML.L IntroScreen_democheck                    ;82DEC1;82D871; End of intro screen?
                                                             ;      ;      ;
                                                             ;      ;      ;
           CODE_82DEC5:
@@ -5861,7 +5869,7 @@ SUB_82D871:
                        STZ.B $94                            ;82DF88;000094;
                        %Set16bit(!M)                             ;82DF8A;      ;
                        STZ.B $90                            ;82DF8C;000090;
-                       JML.L SUB_82D871                    ;82DF8E;82D871;
+                       JML.L IntroScreen_democheck                    ;82DF8E;82D871;
                                                             ;      ;      ;
                                                             ;      ;      ;
           CODE_82DF92:
@@ -6802,7 +6810,7 @@ Unk_NamesInput: ;82E80C
         JSL.L ForceBlank
         JSL.L ZeroesVRAM
         JSL.L Zeroes42Pointers
-        JSL.L ClearWRAMGraphicsSpace
+        JSL.L UNK_UNKClearWRAMSpace
         JSL.L InitializeOBJs
         %Set16bit(!M)
         LDA.W $0196
@@ -6850,7 +6858,7 @@ Unk_NamesInput: ;82E80C
         STA.B $74
         JSL.L AddProgrammedDMA
         JSL.L StartProgramedDMA
-        JSL.L PresetsMemory3
+        JSL.L UNK_PresetsMemory3
         %Set16bit(!M)
         LDA.W #$0219
         STA.B $A1

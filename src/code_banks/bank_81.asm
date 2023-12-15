@@ -3268,7 +3268,7 @@ BAAAA: ;81A383
     .return: RTL                                  ;81A4C6;      ;END_BAAAA
 
 ;;;;;;;;
-PresetsMemory3:
+UNK_PresetsMemory3:
         %Set16bit(!MX)                             ;81A4C7;      ;$7EB4E6 to
         LDA.W #$B4E6                         ;81A4C9;      ;
         STA.B $07                            ;81A4CC;000007;

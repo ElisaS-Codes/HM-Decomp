@@ -1,7 +1,7 @@
 ORG $848000
 
 ;;;;;;;;
-SUB_848000: ;848000
+UNK_ClearsStartofAllCCPointers: ;848000
         %Set16bit(!MX)
         LDX.W #$0000
 
@@ -87,8 +87,8 @@ SUB_84803F: ;84803F
 
         RTL
 
-;;;;;;;; I think this function controls events, it gets called, A LOT.
-;;;;;;;; params in A X Y
+;;;;;;;;
+;;;;;;;; params in A: $CC Pointer index, X: index to B38000 data Y: $C9 pointer index
 SUB_848097: ;848097
         %Set16bit(!MX)
         PHA
