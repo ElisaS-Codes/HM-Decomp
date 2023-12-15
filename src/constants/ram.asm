@@ -158,6 +158,11 @@
 
 ;$7E009A - DMA ready but only for Channel 5? its only set in one place directly
 
+;;Sound
+!run_step_sound = $091A ;8b
+!counter_tool_sound = $091B ;8b
+!tool_used_sound = $0922 ;8b
+
 ;; Auto Map Scrolling
 !map_scrolling_X_speed = $087C
 !map_scrolling_Y_speed = $087E
@@ -202,10 +207,10 @@
 ;0: Onigiri 1: Croisant 2: Dumpling
 !idle_animation_timer = $0925 ;8b
 !item_on_hand = $091D ;8b
+!old_item_on_hand = $091E ;8b
 ;at the end of TODO, need to find a place for Items
 !tool_selected = $0921 ;8b
 ;00:nothing, 01:sickle, 02:hoe, 03:hammer, 04:axe, 05:yellow seed, 06:red seed, 07:brown seed, 08:white seed, 09:cow medicine, 0A:miracle potion, 0B:bell, 0C:grass seed, 0D:paint, 0E:milker, 0F:brush, 10:watering, 11:gold sickle, 12:gold hoe, 13:gold hammer, 14:gold axe, 15:sprinkler, 16:bean, 17:gem, 18:blue feather, 19:chicken feed, 1A:cow feed
-!tool_used_sound = $0922 ;8b
 !tool_backpack = $0923 ;8b
 !happiness = $7F1F33 ;16b
 !power_berry_N = $7F1F36 ;8b
