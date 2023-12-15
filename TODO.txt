@@ -297,7 +297,8 @@ $7F0F00-1F00 - ($FFFF)
 
 $7EA4E6\farm data * #$0F00
 $7EA5A6/
-$7EB4E6-B5| - ($00) holds variables to set up around $0974 map?
+$7EB4E6-B585 - ($00) holds variables to set up around $0974 map?
+$7EB586 - $CC struct size 64?
 
 ==============
 

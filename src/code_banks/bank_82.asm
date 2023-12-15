@@ -178,7 +178,7 @@ ShippingScene: ;828131
         LDA.W #$0006
         LDX.W #$0000
         LDY.W #$0026
-        JSL.L VIP
+        JSL.L SUB_848097
 
 ;;;;;;;;
 ShippingSceneDialogue: ;828165
@@ -213,7 +213,7 @@ ShippingSceneDialogue: ;828165
         LDA.W #$0006
         LDX.W #$0000
         LDY.W #$0027
-        JSL.L CODE_84803F                      ;TODO
+        JSL.L SUB_84803F                      ;TODO
         %Set16bit(!M)
         LDA.L $7F1F5A
         AND.W #$FBFF                           ;FLAG5A
@@ -4470,7 +4470,7 @@ SUB_82D1C0: ;82D1C0
         JSL.L ClearWRAMGraphicsSpace         ;82D2FF;858ED7;
         JSL.L InitializeOBJs         ;82D303;85820F;
         JSL.L PresetsMemory3                 ;82D307;81A4C7;
-        JSL.L PresetsMemory4                 ;82D30B;848000;
+        JSL.L SUB_848000                 ;82D30B;848000;
         JSL.L LoadDefaultFarmMap                ;82D30F;82A65A;
         %Set16bit(!M)                             ;82D313;      ;
         LDA.W #$0100                         ;82D315;      ;
@@ -4479,7 +4479,7 @@ SUB_82D1C0: ;82D1C0
         LDA.W #$0000                         ;82D31D;      ;
         LDX.W #$0047                         ;82D320;      ;
         LDY.W #$0000                         ;82D323;      ;
-        JSL.L VIP                            ;82D326;848097;
+        JSL.L SUB_848097                            ;82D326;848097;
         JSL.L CODE_84816F                    ;82D32A;84816F;
         %Set8bit(!M)                             ;82D32E;      ;
         LDA.W !transition_dest                          ;82D330;00098B;
@@ -4657,7 +4657,7 @@ SUB_82D3C7:
         JSL.L ClearWRAMGraphicsSpace         ;82D500;858ED7;
         JSL.L InitializeOBJs         ;82D504;85820F;
         JSL.L PresetsMemory3                 ;82D508;81A4C7;
-        JSL.L PresetsMemory4                 ;82D50C;848000;
+        JSL.L SUB_848000                 ;82D50C;848000;
         JSL.L LoadDefaultFarmMap                ;82D510;82A65A;
         %Set16bit(!M)                             ;82D514;      ;
         LDA.W #$0100                         ;82D516;      ;
@@ -4727,7 +4727,7 @@ SUB_82D3C7:
         LDA.W #$0000                         ;82D576;      ;
         LDX.W #$0047                         ;82D579;      ;
         LDY.W #$0002                         ;82D57C;      ;
-        JSL.L VIP                            ;82D57F;848097;
+        JSL.L SUB_848097                            ;82D57F;848097;
         %Set8bit(!M)                             ;82D583;      ;
         LDA.B #$01                           ;82D585;      ;
         STA.L $7F1F48                        ;82D587;7F1F48;
@@ -4738,7 +4738,7 @@ SUB_82D3C7:
         LDA.W #$0000                         ;82D590;      ;
         LDX.W #$0047                         ;82D593;      ;
         LDY.W #$0004                         ;82D596;      ;
-        JSL.L VIP                            ;82D599;848097;
+        JSL.L SUB_848097                            ;82D599;848097;
         %Set8bit(!M)                             ;82D59D;      ;
         LDA.B #$02                           ;82D59F;      ;
         STA.L $7F1F48                        ;82D5A1;7F1F48;
@@ -4749,7 +4749,7 @@ SUB_82D3C7:
         LDA.W #$0000                         ;82D5AA;      ;
         LDX.W #$0047                         ;82D5AD;      ;
         LDY.W #$0006                         ;82D5B0;      ;
-        JSL.L VIP                            ;82D5B3;848097;
+        JSL.L SUB_848097                            ;82D5B3;848097;
         %Set8bit(!M)                             ;82D5B7;      ;
         LDA.B #$03                           ;82D5B9;      ;
         STA.L $7F1F48                        ;82D5BB;7F1F48;
@@ -4760,7 +4760,7 @@ SUB_82D3C7:
         LDA.W #$0000                         ;82D5C4;      ;
         LDX.W #$0047                         ;82D5C7;      ;
         LDY.W #$0007                         ;82D5CA;      ;
-        JSL.L VIP                            ;82D5CD;848097;
+        JSL.L SUB_848097                            ;82D5CD;848097;
         %Set8bit(!M)                             ;82D5D1;      ;
         LDA.B #$04                           ;82D5D3;      ;
         STA.L $7F1F48                        ;82D5D5;7F1F48;
@@ -4771,7 +4771,7 @@ SUB_82D3C7:
         LDA.W #$0000                         ;82D5DE;      ;
         LDX.W #$0047                         ;82D5E1;      ;
         LDY.W #$0009                         ;82D5E4;      ;
-        JSL.L VIP                            ;82D5E7;848097;
+        JSL.L SUB_848097                            ;82D5E7;848097;
         %Set8bit(!M)                             ;82D5EB;      ;
         LDA.B #$05                           ;82D5ED;      ;
         STA.L $7F1F48                        ;82D5EF;7F1F48;
@@ -4782,7 +4782,7 @@ SUB_82D3C7:
         LDA.W #$0000                         ;82D5F8;      ;
         LDX.W #$0047                         ;82D5FB;      ;
         LDY.W #$000B                         ;82D5FE;      ;
-        JSL.L VIP                            ;82D601;848097;
+        JSL.L SUB_848097                            ;82D601;848097;
         %Set8bit(!M)                             ;82D605;      ;
         LDA.B #$06                           ;82D607;      ;
         STA.L $7F1F48                        ;82D609;7F1F48;
@@ -4793,7 +4793,7 @@ SUB_82D3C7:
         LDA.W #$0000                         ;82D612;      ;
         LDX.W #$0047                         ;82D615;      ;
         LDY.W #$000D                         ;82D618;      ;
-        JSL.L VIP                            ;82D61B;848097;
+        JSL.L SUB_848097                            ;82D61B;848097;
         %Set8bit(!M)                             ;82D61F;      ;
         LDA.B #$07                           ;82D621;      ;
         STA.L $7F1F48                        ;82D623;7F1F48;
@@ -4804,7 +4804,7 @@ SUB_82D3C7:
         LDA.W #$0000                         ;82D62C;      ;
         LDX.W #$0047                         ;82D62F;      ;
         LDY.W #$0011                         ;82D632;      ;
-        JSL.L VIP                            ;82D635;848097;
+        JSL.L SUB_848097                            ;82D635;848097;
         %Set8bit(!M)                             ;82D639;      ;
         LDA.B #$08                           ;82D63B;      ;
         STA.L $7F1F48                        ;82D63D;7F1F48;
@@ -4815,7 +4815,7 @@ SUB_82D3C7:
         LDA.W #$0000                         ;82D646;      ;
         LDX.W #$0047                         ;82D649;      ;
         LDY.W #$0015                         ;82D64C;      ;
-        JSL.L VIP                            ;82D64F;848097;
+        JSL.L SUB_848097                            ;82D64F;848097;
         %Set8bit(!M)                             ;82D653;      ;
         LDA.B #$09                           ;82D655;      ;
         STA.L $7F1F48                        ;82D657;7F1F48;
@@ -4826,7 +4826,7 @@ SUB_82D3C7:
         LDA.W #$0000                         ;82D660;      ;
         LDX.W #$0047                         ;82D663;      ;
         LDY.W #$0017                         ;82D666;      ;
-        JSL.L VIP                            ;82D669;848097;
+        JSL.L SUB_848097                            ;82D669;848097;
         %Set8bit(!M)                             ;82D66D;      ;
         LDA.B #$0A                           ;82D66F;      ;
         STA.L $7F1F48                        ;82D671;7F1F48;
@@ -4837,7 +4837,7 @@ SUB_82D3C7:
         LDA.W #$0000                         ;82D67A;      ;
         LDX.W #$0047                         ;82D67D;      ;
         LDY.W #$0019                         ;82D680;      ;
-        JSL.L VIP                            ;82D683;848097;
+        JSL.L SUB_848097                            ;82D683;848097;
         %Set8bit(!M)                             ;82D687;      ;
         LDA.B #$0B                           ;82D689;      ;
         STA.L $7F1F48                        ;82D68B;7F1F48;
@@ -4848,7 +4848,7 @@ SUB_82D3C7:
         LDA.W #$0000                         ;82D694;      ;
         LDX.W #$0047                         ;82D697;      ;
         LDY.W #$001B                         ;82D69A;      ;
-        JSL.L VIP                            ;82D69D;848097;
+        JSL.L SUB_848097                            ;82D69D;848097;
         %Set8bit(!M)                             ;82D6A1;      ;
         LDA.B #$00                           ;82D6A3;      ;
         STA.L $7F1F48                        ;82D6A5;7F1F48;
@@ -5105,7 +5105,7 @@ SUB_82D871:
         JSL.L ClearWRAMGraphicsSpace         ;82D8BE;858ED7;
         JSL.L InitializeOBJs         ;82D8C2;85820F;
         JSL.L PresetsMemory3                 ;82D8C6;81A4C7;
-        JSL.L PresetsMemory4                 ;82D8CA;848000;
+        JSL.L SUB_848000                 ;82D8CA;848000;
         %Set16bit(!M)                             ;82D8CE;      ;
         %Set16bit(!MX)                             ;82D8D0;      ;
         LDA.B !game_state                            ;82D8D2;0000D2;
@@ -5130,7 +5130,7 @@ SUB_82D871:
         LDA.W #$0000                         ;82D901;      ;
         LDX.W #$0009                         ;82D904;      ;
         LDY.W #$0000                         ;82D907;      ;
-        JSL.L VIP                            ;82D90A;848097;
+        JSL.L SUB_848097                            ;82D90A;848097;
         JSL.L CODE_84816F                    ;82D90E;84816F;
         %Set8bit(!M)                             ;82D912;      ;
         LDA.W !transition_dest                          ;82D914;00098B;
@@ -5217,7 +5217,7 @@ SUB_82D871:
                        JSL.L ClearWRAMGraphicsSpace         ;82D9E8;858ED7;
                        JSL.L InitializeOBJs         ;82D9EC;85820F;
                        JSL.L PresetsMemory3                 ;82D9F0;81A4C7;
-                       JSL.L PresetsMemory4                 ;82D9F4;848000;
+                       JSL.L SUB_848000                 ;82D9F4;848000;
                        %Set8bit(!M)                             ;82D9F8;      ;
                        LDA.B #$5B                           ;82D9FA;      ;
                        STA.B !tilemap_to_load                            ;82D9FC;000022;
@@ -5359,7 +5359,7 @@ SUB_82D871:
                        JSL.L ClearWRAMGraphicsSpace         ;82DB2D;858ED7;
                        JSL.L InitializeOBJs         ;82DB31;85820F;
                        JSL.L PresetsMemory3                 ;82DB35;81A4C7;
-                       JSL.L PresetsMemory4                 ;82DB39;848000;
+                       JSL.L SUB_848000                 ;82DB39;848000;
                        %Set16bit(!M)                             ;82DB3D;      ;
                        STZ.B !player_pos_X                           ;82DB3F;0000D6;
                        STZ.B !player_pos_Y                            ;82DB41;0000D8;

@@ -134,7 +134,7 @@ ToolUsedSickle: ;829328
         LDA.W #$0012
         LDX.W #$0000
         LDY.W #$0032
-        JSL.L CODE_8480F8                    ;TODO Spawn frog subrutine?
+        JSL.L SUB_8480F8                    ;TODO Spawn frog subrutine?
         %Set16bit(!MX)
         LDA.W #$0002
         JSL.L AddPlayerHappiness             ; :3
@@ -185,7 +185,7 @@ ToolUsedHoe: ;829460
         LDA.W #$0011
         LDX.W #$0000
         LDY.W #$0030
-        JSL.L CODE_8480F8
+        JSL.L SUB_8480F8
         %Set8bit(!M)
         STZ.W $093A
         %Set16bit(!M)
@@ -213,7 +213,7 @@ ToolUsedHoe: ;829460
         LDA.W #$000F
         LDX.W #$0000
         LDY.W #$003A
-        JSL.L CODE_8480F8
+        JSL.L SUB_8480F8
         %Set16bit(!M)
         LDA.W #$0001
         STA.B $72
@@ -236,7 +236,7 @@ ToolUsedHoe: ;829460
         LDA.W #$000F
         LDX.W #$0000
         LDY.W #$003B
-        JSL.L CODE_8480F8
+        JSL.L SUB_8480F8
         %Set16bit(!M)
         LDA.W #$0005
         STA.B $72
@@ -283,7 +283,7 @@ ToolUsedHoe: ;829460
         LDA.W #$0010
         LDX.W #$0000
         LDY.W #$001F
-        JSL.L CODE_8480F8
+        JSL.L SUB_8480F8
         BRA .return
 
     .return:
@@ -492,7 +492,7 @@ ToolUsedHammer: ;8295C0
         LDA.W #$0015
         LDX.W #$0000
         LDY.W #$0016
-        JSL.L CODE_84803F                    ;TODO
+        JSL.L SUB_84803F                    ;TODO
         %Set8bit(!M)
         LDA.B #$04
         JSL.L RNGReturn0toA
@@ -516,7 +516,7 @@ ToolUsedHammer: ;8295C0
         LDA.W #$0010
         LDX.W #$0000
         LDY.W #$001F
-        JSL.L CODE_8480F8                    ;TODO
+        JSL.L SUB_8480F8                    ;TODO
         %Set16bit(!MX)
         LDA.L $7F1F5C
         ORA.W #$0080                         ;FLAG5C
@@ -625,7 +625,7 @@ ToolUsedAxe: ;8297BD
         LDA.W #$0010
         LDX.W #$0000
         LDY.W #$001F
-        JSL.L CODE_8480F8
+        JSL.L SUB_8480F8
         %Set16bit(!MX)
         LDA.W !tile_in_front_X
         SEC
@@ -726,7 +726,7 @@ ToolUsedAxe: ;8297BD
         LDA.W #$0000
         LDX.W #$0017
         LDY.W #$0000
-        JSL.L VIP
+        JSL.L SUB_848097
 
     .return:
         %Set16bit(!MX)
@@ -1346,7 +1346,7 @@ ToolUsedGoldSickle: ;829D42
         LDA.W #$0012
         LDX.W #$0000
         LDY.W #$0032
-        JSL.L CODE_8480F8
+        JSL.L SUB_8480F8
         %Set16bit(!MX)
         LDA.W #$0002
         JSL.L AddPlayerHappiness
@@ -1410,7 +1410,7 @@ ToolUsedGoldHoe: ;829E8E
         LDA.W #$0011
         LDX.W #$0000
         LDY.W #$0030
-        JSL.L CODE_8480F8
+        JSL.L SUB_8480F8
         %Set16bit(!M)
         LDA.L $7F1F5A
         ORA.W #$1000                         ;FLAG5A
@@ -1436,7 +1436,7 @@ ToolUsedGoldHoe: ;829E8E
         LDA.W #$000F
         LDX.W #$0000
         LDY.W #$003A
-        JSL.L CODE_8480F8
+        JSL.L SUB_8480F8
         %Set16bit(!M)
         LDA.W #$0001
         STA.B $72
@@ -1459,7 +1459,7 @@ ToolUsedGoldHoe: ;829E8E
         LDA.W #$000F
         LDX.W #$0000
         LDY.W #$003B
-        JSL.L CODE_8480F8
+        JSL.L SUB_8480F8
         %Set16bit(!M)
         LDA.W #$0005
         STA.B $72
@@ -1506,7 +1506,7 @@ ToolUsedGoldHoe: ;829E8E
         LDA.W #$0010
         LDX.W #$0000
         LDY.W #$001F
-        JSL.L CODE_8480F8
+        JSL.L SUB_8480F8
         BRA .CODE_829FE3
 
     .CODE_829FE3:
@@ -1697,7 +1697,7 @@ ToolUsedGoldHammer: ;82A005
         LDA.W #$0015
         LDX.W #$0000
         LDY.W #$0016
-        JSL.L CODE_84803F
+        JSL.L SUB_84803F
         %Set8bit(!M)
         LDA.B #$04
         JSL.L RNGReturn0toA
@@ -1721,7 +1721,7 @@ ToolUsedGoldHammer: ;82A005
         LDA.W #$0010
         LDX.W #$0000
         LDY.W #$001F
-        JSL.L CODE_8480F8
+        JSL.L SUB_8480F8
         %Set16bit(!MX)
         LDA.L $7F1F5C
         ORA.W #$0080
@@ -1812,7 +1812,7 @@ ToolUsedGoldAxe: ;82A1BF
         LDA.W #$0010
         LDX.W #$0000
         LDY.W #$001F
-        JSL.L CODE_8480F8
+        JSL.L SUB_8480F8
         %Set16bit(!MX)
         LDA.W !tile_in_front_X
         SEC
@@ -1990,7 +1990,7 @@ ToolUsedGemSeed: ;82A3AA
         LDA.W #$0000
         LDX.W #$0012
         LDY.W #$0000
-        JSL.L VIP
+        JSL.L SUB_848097
         %Set8bit(!M)
         STZ.W !tool_selected
 

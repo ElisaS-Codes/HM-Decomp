@@ -2907,7 +2907,7 @@ UNK_ScreenTransition: ;8096D3
         JSL.L ClearWRAMGraphicsSpace
         JSL.L InitializeOBJs
         JSL.L PresetsMemory3
-        JSL.L PresetsMemory4
+        JSL.L SUB_848000
         %Set8bit(!M)
         LDA.W !transition_dest
         STA.B !tilemap_to_load
@@ -3828,7 +3828,7 @@ SUB_809D0B: ;809D0B
         LDA.W #$0011                         ;809E30;      ;
         LDX.W #$002C                         ;809E33;      ;
         LDY.W #$0000                         ;809E36;      ;
-        JSL.L VIP                            ;809E39;848097;
+        JSL.L SUB_848097                            ;809E39;848097;
         BRA $7C                              ;809E3D;809EBB;
                                             ;      ;      ;
                                             ;      ;      ;
@@ -3856,7 +3856,7 @@ SUB_809D0B: ;809D0B
         LDA.W #$0013                         ;809E6E;      ;
         LDX.W #$002B                         ;809E71;      ;
         LDY.W #$0000                         ;809E74;      ;
-        JSL.L VIP                            ;809E77;848097;
+        JSL.L SUB_848097                            ;809E77;848097;
         BRA $3E                              ;809E7B;809EBB;
                                             ;      ;      ;
                                             ;      ;      ;
@@ -3884,7 +3884,7 @@ SUB_809D0B: ;809D0B
         LDA.W #$0012                         ;809EAC;      ;
         LDX.W #$002A                         ;809EAF;      ;
         LDY.W #$0000                         ;809EB2;      ;
-        JSL.L VIP                            ;809EB5;848097;
+        JSL.L SUB_848097                            ;809EB5;848097;
         BRA !NMI_Status                              ;809EB9;809EBB;
                                             ;      ;      ;
         RTL                                  ;809EBB;      ;END_SUB_809D0B

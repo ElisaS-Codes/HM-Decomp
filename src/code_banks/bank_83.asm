@@ -6340,7 +6340,7 @@ CowFeedingandStatus: ;83BC5A
                        ADC.W #$0024                         ;83C391;      ;
                        LDX.W #$0000                         ;83C394;      ;
                        LDY.W #$0000                         ;83C397;      ;
-                       JSL.L CODE_8480F8                    ;83C39A;8480F8;
+                       JSL.L SUB_8480F8                    ;83C39A;8480F8;
                        %Set8bit(!M)                             ;83C39E;      ;
                        %Set16bit(!X)                             ;83C3A0;      ;
                        LDY.W #$0000                         ;83C3A2;      ;
@@ -6360,7 +6360,7 @@ CowFeedingandStatus: ;83BC5A
                        ADC.W #$0024                         ;83C3BA;      ;
                        LDX.W #$0000                         ;83C3BD;      ;
                        LDY.W #$0001                         ;83C3C0;      ;
-                       JSL.L CODE_8480F8                    ;83C3C3;8480F8;
+                       JSL.L SUB_8480F8                    ;83C3C3;8480F8;
                        BRA CODE_83C401                      ;83C3C7;83C401;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -6375,7 +6375,7 @@ CowFeedingandStatus: ;83BC5A
                        ADC.W #$0024                         ;83C3D8;      ;
                        LDX.W #$0000                         ;83C3DB;      ;
                        LDY.W #$0002                         ;83C3DE;      ;
-                       JSL.L CODE_8480F8                    ;83C3E1;8480F8;
+                       JSL.L SUB_8480F8                    ;83C3E1;8480F8;
                        %Set16bit(!MX)                             ;83C3E5;      ;
                        PLA                                  ;83C3E7;      ;
                        PHA                                  ;83C3E8;      ;
@@ -6391,7 +6391,7 @@ CowFeedingandStatus: ;83BC5A
                        ADC.W #$0024                         ;83C3F4;      ;
                        LDX.W #$0000                         ;83C3F7;      ;
                        LDY.W #$005F                         ;83C3FA;      ;
-                       JSL.L CODE_8480F8                    ;83C3FD;8480F8;
+                       JSL.L SUB_8480F8                    ;83C3FD;8480F8;
                                                             ;      ;      ;
           CODE_83C401: %Set16bit(!MX)                             ;83C401;      ;
                        PLX                                  ;83C403;      ;
@@ -6600,7 +6600,7 @@ CowFeedingandStatus: ;83BC5A
                        CLC                                  ;83C55B;      ;
                        ADC.W #$0018                         ;83C55C;      ;
                        LDX.W #$0000                         ;83C55F;      ;
-                       JSL.L CODE_8480F8                    ;83C562;8480F8;
+                       JSL.L SUB_8480F8                    ;83C562;8480F8;
                        %Set16bit(!MX)                             ;83C566;      ;
                        PLA                                  ;83C568;      ;
                        PHA                                  ;83C569;      ;
@@ -6636,7 +6636,7 @@ CowFeedingandStatus: ;83BC5A
                        CLC                                  ;83C59F;      ;
                        ADC.W #$0018                         ;83C5A0;      ;
                        LDX.W #$0000                         ;83C5A3;      ;
-                       JSL.L CODE_8480F8                    ;83C5A6;8480F8;
+                       JSL.L SUB_8480F8                    ;83C5A6;8480F8;
                        %Set16bit(!MX)                             ;83C5AA;      ;
                        PLA                                  ;83C5AC;      ;
                        PHA                                  ;83C5AD;      ;
@@ -6709,7 +6709,7 @@ CowFeedingandStatus: ;83BC5A
                        CLC                                  ;83C627;      ;
                        ADC.W #$0018                         ;83C628;      ;
                        LDX.W #$0000                         ;83C62B;      ;
-                       JSL.L CODE_8480F8                    ;83C62E;8480F8;
+                       JSL.L SUB_8480F8                    ;83C62E;8480F8;
                        %Set16bit(!MX)                             ;83C632;      ;
                        PLA                                  ;83C634;      ;
                        PHA                                  ;83C635;      ;
@@ -6853,7 +6853,7 @@ CowFeedingandStatus: ;83BC5A
                        LDA.W #$0016                         ;83C719;      ;
                        LDX.W #$0000                         ;83C71C;      ;
                        LDY.W #$0011                         ;83C71F;      ;
-                       JSL.L CODE_8480F8                    ;83C722;8480F8;
+                       JSL.L SUB_8480F8                    ;83C722;8480F8;
                        %Set16bit(!M)                             ;83C726;      ;
                        LDA.W #$0001                         ;83C728;      ;
                        STA.L $7F1F58                        ;83C72B;7F1F58;
@@ -6975,7 +6975,7 @@ CowFeedingandStatus: ;83BC5A
           CODE_83C7F5: %Set16bit(!MX)                             ;83C7F5;      ;
                        LDA.W #$0017                         ;83C7F7;      ;
                        LDX.W #$0000                         ;83C7FA;      ;
-                       JSL.L CODE_8480F8                    ;83C7FD;8480F8;
+                       JSL.L SUB_8480F8                    ;83C7FD;8480F8;
                        %Set8bit(!M)                             ;83C801;      ;
                        STZ.W $0939                          ;83C803;000939;
                                                             ;      ;      ;
@@ -7362,7 +7362,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0013                         ;83CB93;      ;
                        LDX.W #$0044                         ;83CB96;      ;
                        LDY.W #$0000                         ;83CB99;      ;
-                       JSL.L VIP                            ;83CB9C;848097;
+                       JSL.L SUB_848097                            ;83CB9C;848097;
                        BRA CODE_83CBC4                      ;83CBA0;83CBC4;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -7370,7 +7370,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0013                         ;83CBA4;      ;
                        LDX.W #$0044                         ;83CBA7;      ;
                        LDY.W #$0002                         ;83CBAA;      ;
-                       JSL.L VIP                            ;83CBAD;848097;
+                       JSL.L SUB_848097                            ;83CBAD;848097;
                        BRA CODE_83CBC4                      ;83CBB1;83CBC4;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -7378,7 +7378,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0013                         ;83CBB5;      ;
                        LDX.W #$0044                         ;83CBB8;      ;
                        LDY.W #$0003                         ;83CBBB;      ;
-                       JSL.L VIP                            ;83CBBE;848097;
+                       JSL.L SUB_848097                            ;83CBBE;848097;
                        BRA CODE_83CBC4                      ;83CBC2;83CBC4;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -7393,7 +7393,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0014                         ;83CBDA;      ;
                        LDX.W #$0045                         ;83CBDD;      ;
                        LDY.W #$0001                         ;83CBE0;      ;
-                       JSL.L VIP                            ;83CBE3;848097;
+                       JSL.L SUB_848097                            ;83CBE3;848097;
                                                             ;      ;      ;
           CODE_83CBE7: %Set16bit(!MX)                             ;83CBE7;      ;
                        LDA.L $7F1F6E                        ;83CBE9;7F1F6E;
@@ -7406,7 +7406,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0015                         ;83CBFD;      ;
                        LDX.W #$0045                         ;83CC00;      ;
                        LDY.W #$0004                         ;83CC03;      ;
-                       JSL.L VIP                            ;83CC06;848097;
+                       JSL.L SUB_848097                            ;83CC06;848097;
                                                             ;      ;      ;
           CODE_83CC0A: %Set16bit(!MX)                             ;83CC0A;      ;
                        LDA.W $0196                          ;83CC0C;000196;
@@ -7510,7 +7510,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83CCD6;      ;
                        LDX.W #$0019                         ;83CCD9;      ;
                        LDY.W #$0000                         ;83CCDC;      ;
-                       JSL.L VIP                            ;83CCDF;848097;
+                       JSL.L SUB_848097                            ;83CCDF;848097;
                        %Set8bit(!M)                             ;83CCE3;      ;
                        STZ.W $09A3                          ;83CCE5;0009A3;
                        RTS                                  ;83CCE8;      ;
@@ -7539,7 +7539,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83CD25;      ;
                        LDX.W #$001A                         ;83CD28;      ;
                        LDY.W #$0000                         ;83CD2B;      ;
-                       JSL.L VIP                            ;83CD2E;848097;
+                       JSL.L SUB_848097                            ;83CD2E;848097;
                        %Set8bit(!M)                             ;83CD32;      ;
                        STZ.W $09A3                          ;83CD34;0009A3;
                        RTS                                  ;83CD37;      ;
@@ -7571,7 +7571,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83CD7D;      ;
                        LDX.W #$001B                         ;83CD80;      ;
                        LDY.W #$0000                         ;83CD83;      ;
-                       JSL.L VIP                            ;83CD86;848097;
+                       JSL.L SUB_848097                            ;83CD86;848097;
                        %Set8bit(!M)                             ;83CD8A;      ;
                        STZ.W $09A3                          ;83CD8C;0009A3;
                        RTS                                  ;83CD8F;      ;
@@ -7606,7 +7606,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83CDDE;      ;
                        LDX.W #$001C                         ;83CDE1;      ;
                        LDY.W #$0000                         ;83CDE4;      ;
-                       JSL.L VIP                            ;83CDE7;848097;
+                       JSL.L SUB_848097                            ;83CDE7;848097;
                        %Set8bit(!M)                             ;83CDEB;      ;
                        STZ.W $09A3                          ;83CDED;0009A3;
                        RTS                                  ;83CDF0;      ;
@@ -7644,7 +7644,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83CE48;      ;
                        LDX.W #$001D                         ;83CE4B;      ;
                        LDY.W #$0000                         ;83CE4E;      ;
-                       JSL.L VIP                            ;83CE51;848097;
+                       JSL.L SUB_848097                            ;83CE51;848097;
                        %Set8bit(!M)                             ;83CE55;      ;
                        STZ.W $09A3                          ;83CE57;0009A3;
                        RTS                                  ;83CE5A;      ;
@@ -7658,7 +7658,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0007                         ;83CE68;      ;
                        LDX.W #$0000                         ;83CE6B;      ;
                        LDY.W #$0020                         ;83CE6E;      ;
-                       JSL.L VIP                            ;83CE71;848097;
+                       JSL.L SUB_848097                            ;83CE71;848097;
                        %Set8bit(!M)                             ;83CE75;      ;
                        LDA.B #$42                           ;83CE77;      ;
                        STA.W $096E                          ;83CE79;00096E;
@@ -7682,7 +7682,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83CEA0;      ;
                        LDX.W #$000A                         ;83CEA3;      ;
                        LDY.W #$0002                         ;83CEA6;      ;
-                       JSL.L VIP                            ;83CEA9;848097;
+                       JSL.L SUB_848097                            ;83CEA9;848097;
                        RTS                                  ;83CEAD;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -7694,7 +7694,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83CEBB;      ;
                        LDX.W #$000C                         ;83CEBE;      ;
                        LDY.W #$0000                         ;83CEC1;      ;
-                       JSL.L VIP                            ;83CEC4;848097;
+                       JSL.L SUB_848097                            ;83CEC4;848097;
                        %Set16bit(!M)                             ;83CEC8;      ;
                        LDA.L $7F1F68                        ;83CECA;7F1F68;
                        ORA.W #$0020                         ;83CECE;      ;
@@ -7713,7 +7713,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83CEEA;      ;
                        LDX.W #$000C                         ;83CEED;      ;
                        LDY.W #$0001                         ;83CEF0;      ;
-                       JSL.L VIP                            ;83CEF3;848097;
+                       JSL.L SUB_848097                            ;83CEF3;848097;
                        %Set16bit(!M)                             ;83CEF7;      ;
                        LDA.W #$0078                         ;83CEF9;      ;
                        STA.L !dog_pos_X                        ;83CEFC;7F1F2C;
@@ -7744,7 +7744,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0006                         ;83CF34;      ;
                        LDX.W #$0024                         ;83CF37;      ;
                        LDY.W #$0000                         ;83CF3A;      ;
-                       JSL.L VIP                            ;83CF3D;848097;
+                       JSL.L SUB_848097                            ;83CF3D;848097;
                        RTS                                  ;83CF41;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -7764,7 +7764,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0006                         ;83CF65;      ;
                        LDX.W #$0024                         ;83CF68;      ;
                        LDY.W #$0002                         ;83CF6B;      ;
-                       JSL.L VIP                            ;83CF6E;848097;
+                       JSL.L SUB_848097                            ;83CF6E;848097;
                        RTS                                  ;83CF72;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -7784,7 +7784,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0006                         ;83CF96;      ;
                        LDX.W #$0024                         ;83CF99;      ;
                        LDY.W #$0003                         ;83CF9C;      ;
-                       JSL.L VIP                            ;83CF9F;848097;
+                       JSL.L SUB_848097                            ;83CF9F;848097;
                        RTS                                  ;83CFA3;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -7816,7 +7816,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$000B                         ;83CFEA;      ;
                        LDX.W #$0024                         ;83CFED;      ;
                        LDY.W #$0001                         ;83CFF0;      ;
-                       JSL.L VIP                            ;83CFF3;848097;
+                       JSL.L SUB_848097                            ;83CFF3;848097;
                        RTS                                  ;83CFF7;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -7828,7 +7828,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0009                         ;83D005;      ;
                        LDX.W #$0000                         ;83D008;      ;
                        LDY.W #$002C                         ;83D00B;      ;
-                       JSL.L VIP                            ;83D00E;848097;
+                       JSL.L SUB_848097                            ;83D00E;848097;
                        %Set8bit(!M)                             ;83D012;      ;
                        LDA.B #$47                           ;83D014;      ;
                        STA.W $096E                          ;83D016;00096E;
@@ -7859,7 +7859,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D052;      ;
                        LDX.W #$0000                         ;83D055;      ;
                        LDY.W #$002E                         ;83D058;      ;
-                       JSL.L VIP                            ;83D05B;848097;
+                       JSL.L SUB_848097                            ;83D05B;848097;
                        RTS                                  ;83D05F;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -7874,12 +7874,12 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0009                         ;83D078;      ;
                        LDX.W #$0000                         ;83D07B;      ;
                        LDY.W #$0036                         ;83D07E;      ;
-                       JSL.L VIP                            ;83D081;848097;
+                       JSL.L SUB_848097                            ;83D081;848097;
                        %Set16bit(!MX)                             ;83D085;      ;
                        LDA.W #$000A                         ;83D087;      ;
                        LDX.W #$0000                         ;83D08A;      ;
                        LDY.W #$0037                         ;83D08D;      ;
-                       JSL.L VIP                            ;83D090;848097;
+                       JSL.L SUB_848097                            ;83D090;848097;
                        %Set8bit(!M)                             ;83D094;      ;
                        LDA.B #$48                           ;83D096;      ;
                        STA.W $096E                          ;83D098;00096E;
@@ -7910,7 +7910,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$000B                         ;83D0D4;      ;
                        LDX.W #$0000                         ;83D0D7;      ;
                        LDY.W #$001D                         ;83D0DA;      ;
-                       JSL.L VIP                            ;83D0DD;848097;
+                       JSL.L SUB_848097                            ;83D0DD;848097;
                        %Set8bit(!M)                             ;83D0E1;      ;
                        LDA.B #$49                           ;83D0E3;      ;
                        STA.W $096E                          ;83D0E5;00096E;
@@ -7957,7 +7957,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D148;      ;
                        LDX.W #$0013                         ;83D14B;      ;
                        LDY.W #$0000                         ;83D14E;      ;
-                       JSL.L VIP                            ;83D151;848097;
+                       JSL.L SUB_848097                            ;83D151;848097;
                        %Set16bit(!M)                             ;83D155;      ;
                        LDA.L $7F1F68                        ;83D157;7F1F68;
                        ORA.W #$0400                         ;83D15B;      ;
@@ -8003,7 +8003,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D1C0;      ;
                        LDX.W #$0016                         ;83D1C3;      ;
                        LDY.W #$0000                         ;83D1C6;      ;
-                       JSL.L VIP                            ;83D1C9;848097;
+                       JSL.L SUB_848097                            ;83D1C9;848097;
                        RTS                                  ;83D1CD;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8051,7 +8051,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D230;      ;
                        LDX.W #$0018                         ;83D233;      ;
                        LDY.W #$0000                         ;83D236;      ;
-                       JSL.L VIP                            ;83D239;848097;
+                       JSL.L SUB_848097                            ;83D239;848097;
                        RTS                                  ;83D23D;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8088,7 +8088,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D290;      ;
                        LDX.W #$0029                         ;83D293;      ;
                        LDY.W #$0000                         ;83D296;      ;
-                       JSL.L VIP                            ;83D299;848097;
+                       JSL.L SUB_848097                            ;83D299;848097;
                        RTS                                  ;83D29D;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8111,7 +8111,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D2C8;      ;
                        LDX.W #$0023                         ;83D2CB;      ;
                        LDY.W #$0000                         ;83D2CE;      ;
-                       JSL.L VIP                            ;83D2D1;848097;
+                       JSL.L SUB_848097                            ;83D2D1;848097;
                        %Set16bit(!MX)                             ;83D2D5;      ;
                        LDA.W #$0002                         ;83D2D7;      ;
                        JSL.L AddPlayerHappiness                   ;83D2DA;83B282;
@@ -8131,7 +8131,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D2F6;      ;
                        LDX.W #$0014                         ;83D2F9;      ;
                        LDY.W #$0003                         ;83D2FC;      ;
-                       JSL.L VIP                            ;83D2FF;848097;
+                       JSL.L SUB_848097                            ;83D2FF;848097;
                        RTS                                  ;83D303;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8159,7 +8159,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0015                         ;83D32B;      ;
                        LDX.W #$0000                         ;83D32E;      ;
                        LDY.W #$007E                         ;83D331;      ;
-                       JSL.L VIP                            ;83D334;848097;
+                       JSL.L SUB_848097                            ;83D334;848097;
                        %Set16bit(!M)                             ;83D338;      ;
                        STZ.B $7E                            ;83D33A;00007E;
                        %Set8bit(!M)                             ;83D33C;      ;
@@ -8216,7 +8216,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D3AA;      ;
                        LDX.W #$0028                         ;83D3AD;      ;
                        LDY.W #$0002                         ;83D3B0;      ;
-                       JSL.L VIP                            ;83D3B3;848097;
+                       JSL.L SUB_848097                            ;83D3B3;848097;
                        RTS                                  ;83D3B7;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8234,7 +8234,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D3D4;      ;
                        LDX.W #$000E                         ;83D3D7;      ;
                        LDY.W #$0000                         ;83D3DA;      ;
-                       JSL.L VIP                            ;83D3DD;848097;
+                       JSL.L SUB_848097                            ;83D3DD;848097;
                        RTS                                  ;83D3E1;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8253,7 +8253,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D400;      ;
                        LDX.W #$0026                         ;83D403;      ;
                        LDY.W #$0000                         ;83D406;      ;
-                       JSL.L VIP                            ;83D409;848097;
+                       JSL.L SUB_848097                            ;83D409;848097;
                        RTS                                  ;83D40D;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8272,7 +8272,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D42C;      ;
                        LDX.W #$0027                         ;83D42F;      ;
                        LDY.W #$0000                         ;83D432;      ;
-                       JSL.L VIP                            ;83D435;848097;
+                       JSL.L SUB_848097                            ;83D435;848097;
                        RTS                                  ;83D439;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8283,7 +8283,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0015                         ;83D445;      ;
                        LDX.W #$0000                         ;83D448;      ;
                        LDY.W #$007E                         ;83D44B;      ;
-                       JSL.L VIP                            ;83D44E;848097;
+                       JSL.L SUB_848097                            ;83D44E;848097;
                                                             ;      ;      ;
           CODE_83D452: %Set16bit(!MX)                             ;83D452;      ;
                        LDA.L $7F1F68                        ;83D454;7F1F68;
@@ -8293,7 +8293,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D45F;      ;
                        LDX.W #$000B                         ;83D462;      ;
                        LDY.W #$0000                         ;83D465;      ;
-                       JSL.L VIP                            ;83D468;848097;
+                       JSL.L SUB_848097                            ;83D468;848097;
                        RTS                                  ;83D46C;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8324,7 +8324,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D4A9;      ;
                        LDX.W #$0001                         ;83D4AC;      ;
                        LDY.W #$0000                         ;83D4AF;      ;
-                       JSL.L VIP                            ;83D4B2;848097;
+                       JSL.L SUB_848097                            ;83D4B2;848097;
                                                             ;      ;      ;
           CODE_83D4B6: RTS                                  ;83D4B6;      ;
                                                             ;      ;      ;
@@ -8333,7 +8333,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D4B9;      ;
                        LDX.W #$0003                         ;83D4BC;      ;
                        LDY.W #$0000                         ;83D4BF;      ;
-                       JSL.L VIP                            ;83D4C2;848097;
+                       JSL.L SUB_848097                            ;83D4C2;848097;
                        RTS                                  ;83D4C6;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8341,7 +8341,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D4C9;      ;
                        LDX.W #$0002                         ;83D4CC;      ;
                        LDY.W #$0000                         ;83D4CF;      ;
-                       JSL.L VIP                            ;83D4D2;848097;
+                       JSL.L SUB_848097                            ;83D4D2;848097;
                        RTS                                  ;83D4D6;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;83D4D7;      ;
@@ -8359,7 +8359,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D4F1;      ;
                        LDX.W #$0022                         ;83D4F4;      ;
                        LDY.W #$0003                         ;83D4F7;      ;
-                       JSL.L VIP                            ;83D4FA;848097;
+                       JSL.L SUB_848097                            ;83D4FA;848097;
                        RTS                                  ;83D4FE;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8378,7 +8378,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D51D;      ;
                        LDX.W #$0027                         ;83D520;      ;
                        LDY.W #$0003                         ;83D523;      ;
-                       JSL.L VIP                            ;83D526;848097;
+                       JSL.L SUB_848097                            ;83D526;848097;
                        RTS                                  ;83D52A;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8390,7 +8390,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D538;      ;
                        LDX.W #$000B                         ;83D53B;      ;
                        LDY.W #$0001                         ;83D53E;      ;
-                       JSL.L VIP                            ;83D541;848097;
+                       JSL.L SUB_848097                            ;83D541;848097;
                        RTS                                  ;83D545;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8425,7 +8425,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D589;      ;
                        LDX.W #$0001                         ;83D58C;      ;
                        LDY.W #$0001                         ;83D58F;      ;
-                       JSL.L VIP                            ;83D592;848097;
+                       JSL.L SUB_848097                            ;83D592;848097;
                        RTS                                  ;83D596;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8433,7 +8433,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D599;      ;
                        LDX.W #$0002                         ;83D59C;      ;
                        LDY.W #$0001                         ;83D59F;      ;
-                       JSL.L VIP                            ;83D5A2;848097;
+                       JSL.L SUB_848097                            ;83D5A2;848097;
                        RTS                                  ;83D5A6;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8441,7 +8441,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D5A9;      ;
                        LDX.W #$0004                         ;83D5AC;      ;
                        LDY.W #$0000                         ;83D5AF;      ;
-                       JSL.L VIP                            ;83D5B2;848097;
+                       JSL.L SUB_848097                            ;83D5B2;848097;
                        RTS                                  ;83D5B6;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8449,7 +8449,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D5B9;      ;
                        LDX.W #$0007                         ;83D5BC;      ;
                        LDY.W #$0000                         ;83D5BF;      ;
-                       JSL.L VIP                            ;83D5C2;848097;
+                       JSL.L SUB_848097                            ;83D5C2;848097;
                        RTS                                  ;83D5C6;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8457,7 +8457,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D5C9;      ;
                        LDX.W #$0006                         ;83D5CC;      ;
                        LDY.W #$0000                         ;83D5CF;      ;
-                       JSL.L VIP                            ;83D5D2;848097;
+                       JSL.L SUB_848097                            ;83D5D2;848097;
                        RTS                                  ;83D5D6;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8465,7 +8465,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D5D9;      ;
                        LDX.W #$0008                         ;83D5DC;      ;
                        LDY.W #$0000                         ;83D5DF;      ;
-                       JSL.L VIP                            ;83D5E2;848097;
+                       JSL.L SUB_848097                            ;83D5E2;848097;
                        RTS                                  ;83D5E6;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;83D5E7;      ;
@@ -8486,7 +8486,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D605;      ;
                        LDX.W #$0022                         ;83D608;      ;
                        LDY.W #$0004                         ;83D60B;      ;
-                       JSL.L VIP                            ;83D60E;848097;
+                       JSL.L SUB_848097                            ;83D60E;848097;
                        RTS                                  ;83D612;      ;
                                                             ;      ;      ;
                        %Set8bit(!M)                             ;83D613;      ;
@@ -8504,7 +8504,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D631;      ;
                        LDX.W #$0027                         ;83D634;      ;
                        LDY.W #$0002                         ;83D637;      ;
-                       JSL.L VIP                            ;83D63A;848097;
+                       JSL.L SUB_848097                            ;83D63A;848097;
                        RTS                                  ;83D63E;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8524,7 +8524,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D660;      ;
                        LDX.W #$000F                         ;83D663;      ;
                        LDY.W #$0002                         ;83D666;      ;
-                       JSL.L VIP                            ;83D669;848097;
+                       JSL.L SUB_848097                            ;83D669;848097;
                        RTS                                  ;83D66D;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8536,7 +8536,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D67B;      ;
                        LDX.W #$000B                         ;83D67E;      ;
                        LDY.W #$000C                         ;83D681;      ;
-                       JSL.L VIP                            ;83D684;848097;
+                       JSL.L SUB_848097                            ;83D684;848097;
                        RTS                                  ;83D688;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8584,7 +8584,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D6E0;      ;
                        LDX.W #$0001                         ;83D6E3;      ;
                        LDY.W #$0002                         ;83D6E6;      ;
-                       JSL.L VIP                            ;83D6E9;848097;
+                       JSL.L SUB_848097                            ;83D6E9;848097;
                                                             ;      ;      ;
           CODE_83D6ED: RTS                                  ;83D6ED;      ;
                                                             ;      ;      ;
@@ -8593,7 +8593,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D6F0;      ;
                        LDX.W #$0003                         ;83D6F3;      ;
                        LDY.W #$0001                         ;83D6F6;      ;
-                       JSL.L VIP                            ;83D6F9;848097;
+                       JSL.L SUB_848097                            ;83D6F9;848097;
                        RTS                                  ;83D6FD;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8601,7 +8601,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D700;      ;
                        LDX.W #$0002                         ;83D703;      ;
                        LDY.W #$0002                         ;83D706;      ;
-                       JSL.L VIP                            ;83D709;848097;
+                       JSL.L SUB_848097                            ;83D709;848097;
                        RTS                                  ;83D70D;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8609,7 +8609,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D710;      ;
                        LDX.W #$0004                         ;83D713;      ;
                        LDY.W #$0001                         ;83D716;      ;
-                       JSL.L VIP                            ;83D719;848097;
+                       JSL.L SUB_848097                            ;83D719;848097;
                        RTS                                  ;83D71D;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8617,7 +8617,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D720;      ;
                        LDX.W #$0007                         ;83D723;      ;
                        LDY.W #$0001                         ;83D726;      ;
-                       JSL.L VIP                            ;83D729;848097;
+                       JSL.L SUB_848097                            ;83D729;848097;
                        RTS                                  ;83D72D;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8625,7 +8625,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D730;      ;
                        LDX.W #$0006                         ;83D733;      ;
                        LDY.W #$0001                         ;83D736;      ;
-                       JSL.L VIP                            ;83D739;848097;
+                       JSL.L SUB_848097                            ;83D739;848097;
                        RTS                                  ;83D73D;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8633,7 +8633,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D740;      ;
                        LDX.W #$0008                         ;83D743;      ;
                        LDY.W #$0001                         ;83D746;      ;
-                       JSL.L VIP                            ;83D749;848097;
+                       JSL.L SUB_848097                            ;83D749;848097;
                        RTS                                  ;83D74D;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;83D74E;      ;
@@ -8651,7 +8651,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D768;      ;
                        LDX.W #$0022                         ;83D76B;      ;
                        LDY.W #$0007                         ;83D76E;      ;
-                       JSL.L VIP                            ;83D771;848097;
+                       JSL.L SUB_848097                            ;83D771;848097;
                        RTS                                  ;83D775;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8663,7 +8663,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D783;      ;
                        LDX.W #$000B                         ;83D786;      ;
                        LDY.W #$0003                         ;83D789;      ;
-                       JSL.L VIP                            ;83D78C;848097;
+                       JSL.L SUB_848097                            ;83D78C;848097;
                        RTS                                  ;83D790;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8694,7 +8694,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D7CA;      ;
                        LDX.W #$0001                         ;83D7CD;      ;
                        LDY.W #$0003                         ;83D7D0;      ;
-                       JSL.L VIP                            ;83D7D3;848097;
+                       JSL.L SUB_848097                            ;83D7D3;848097;
                        RTS                                  ;83D7D7;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8702,7 +8702,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D7DA;      ;
                        LDX.W #$0004                         ;83D7DD;      ;
                        LDY.W #$0002                         ;83D7E0;      ;
-                       JSL.L VIP                            ;83D7E3;848097;
+                       JSL.L SUB_848097                            ;83D7E3;848097;
                        RTS                                  ;83D7E7;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8710,7 +8710,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D7EA;      ;
                        LDX.W #$0007                         ;83D7ED;      ;
                        LDY.W #$0002                         ;83D7F0;      ;
-                       JSL.L VIP                            ;83D7F3;848097;
+                       JSL.L SUB_848097                            ;83D7F3;848097;
                        RTS                                  ;83D7F7;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8718,7 +8718,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D7FA;      ;
                        LDX.W #$0006                         ;83D7FD;      ;
                        LDY.W #$0002                         ;83D800;      ;
-                       JSL.L VIP                            ;83D803;848097;
+                       JSL.L SUB_848097                            ;83D803;848097;
                        RTS                                  ;83D807;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8726,7 +8726,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D80A;      ;
                        LDX.W #$0008                         ;83D80D;      ;
                        LDY.W #$0002                         ;83D810;      ;
-                       JSL.L VIP                            ;83D813;848097;
+                       JSL.L SUB_848097                            ;83D813;848097;
                        RTS                                  ;83D817;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;83D818;      ;
@@ -8747,7 +8747,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D836;      ;
                        LDX.W #$0022                         ;83D839;      ;
                        LDY.W #$0008                         ;83D83C;      ;
-                       JSL.L VIP                            ;83D83F;848097;
+                       JSL.L SUB_848097                            ;83D83F;848097;
                        RTS                                  ;83D843;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;83D844;      ;
@@ -8765,7 +8765,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D85E;      ;
                        LDX.W #$0022                         ;83D861;      ;
                        LDY.W #$0005                         ;83D864;      ;
-                       JSL.L VIP                            ;83D867;848097;
+                       JSL.L SUB_848097                            ;83D867;848097;
                        RTS                                  ;83D86B;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8777,7 +8777,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D879;      ;
                        LDX.W #$001A                         ;83D87C;      ;
                        LDY.W #$0001                         ;83D87F;      ;
-                       JSL.L VIP                            ;83D882;848097;
+                       JSL.L SUB_848097                            ;83D882;848097;
                        RTS                                  ;83D886;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8789,7 +8789,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D894;      ;
                        LDX.W #$000B                         ;83D897;      ;
                        LDY.W #$0002                         ;83D89A;      ;
-                       JSL.L VIP                            ;83D89D;848097;
+                       JSL.L SUB_848097                            ;83D89D;848097;
                        RTS                                  ;83D8A1;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8820,7 +8820,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D8DB;      ;
                        LDX.W #$0001                         ;83D8DE;      ;
                        LDY.W #$0004                         ;83D8E1;      ;
-                       JSL.L VIP                            ;83D8E4;848097;
+                       JSL.L SUB_848097                            ;83D8E4;848097;
                        RTS                                  ;83D8E8;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8828,7 +8828,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D8EB;      ;
                        LDX.W #$0004                         ;83D8EE;      ;
                        LDY.W #$0003                         ;83D8F1;      ;
-                       JSL.L VIP                            ;83D8F4;848097;
+                       JSL.L SUB_848097                            ;83D8F4;848097;
                        RTS                                  ;83D8F8;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8836,7 +8836,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D8FB;      ;
                        LDX.W #$0007                         ;83D8FE;      ;
                        LDY.W #$0003                         ;83D901;      ;
-                       JSL.L VIP                            ;83D904;848097;
+                       JSL.L SUB_848097                            ;83D904;848097;
                        RTS                                  ;83D908;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8844,7 +8844,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D90B;      ;
                        LDX.W #$0006                         ;83D90E;      ;
                        LDY.W #$0003                         ;83D911;      ;
-                       JSL.L VIP                            ;83D914;848097;
+                       JSL.L SUB_848097                            ;83D914;848097;
                        RTS                                  ;83D918;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8852,7 +8852,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D91B;      ;
                        LDX.W #$0008                         ;83D91E;      ;
                        LDY.W #$0003                         ;83D921;      ;
-                       JSL.L VIP                            ;83D924;848097;
+                       JSL.L SUB_848097                            ;83D924;848097;
                        RTS                                  ;83D928;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;83D929;      ;
@@ -8873,7 +8873,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D947;      ;
                        LDX.W #$0022                         ;83D94A;      ;
                        LDY.W #$0006                         ;83D94D;      ;
-                       JSL.L VIP                            ;83D950;848097;
+                       JSL.L SUB_848097                            ;83D950;848097;
                        RTS                                  ;83D954;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;83D955;      ;
@@ -8891,7 +8891,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D96F;      ;
                        LDX.W #$0022                         ;83D972;      ;
                        LDY.W #$0009                         ;83D975;      ;
-                       JSL.L VIP                            ;83D978;848097;
+                       JSL.L SUB_848097                            ;83D978;848097;
                        RTS                                  ;83D97C;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8903,7 +8903,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D98A;      ;
                        LDX.W #$000B                         ;83D98D;      ;
                        LDY.W #$0004                         ;83D990;      ;
-                       JSL.L VIP                            ;83D993;848097;
+                       JSL.L SUB_848097                            ;83D993;848097;
                        RTS                                  ;83D997;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8934,7 +8934,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D9D1;      ;
                        LDX.W #$0001                         ;83D9D4;      ;
                        LDY.W #$0005                         ;83D9D7;      ;
-                       JSL.L VIP                            ;83D9DA;848097;
+                       JSL.L SUB_848097                            ;83D9DA;848097;
                        RTS                                  ;83D9DE;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8942,7 +8942,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D9E1;      ;
                        LDX.W #$0004                         ;83D9E4;      ;
                        LDY.W #$0004                         ;83D9E7;      ;
-                       JSL.L VIP                            ;83D9EA;848097;
+                       JSL.L SUB_848097                            ;83D9EA;848097;
                        RTS                                  ;83D9EE;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8950,7 +8950,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83D9F1;      ;
                        LDX.W #$0007                         ;83D9F4;      ;
                        LDY.W #$0004                         ;83D9F7;      ;
-                       JSL.L VIP                            ;83D9FA;848097;
+                       JSL.L SUB_848097                            ;83D9FA;848097;
                        RTS                                  ;83D9FE;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8958,7 +8958,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DA01;      ;
                        LDX.W #$0006                         ;83DA04;      ;
                        LDY.W #$0004                         ;83DA07;      ;
-                       JSL.L VIP                            ;83DA0A;848097;
+                       JSL.L SUB_848097                            ;83DA0A;848097;
                        RTS                                  ;83DA0E;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -8966,7 +8966,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DA11;      ;
                        LDX.W #$0008                         ;83DA14;      ;
                        LDY.W #$0004                         ;83DA17;      ;
-                       JSL.L VIP                            ;83DA1A;848097;
+                       JSL.L SUB_848097                            ;83DA1A;848097;
                        RTS                                  ;83DA1E;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;83DA1F;      ;
@@ -8987,7 +8987,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DA3D;      ;
                        LDX.W #$0022                         ;83DA40;      ;
                        LDY.W #$000A                         ;83DA43;      ;
-                       JSL.L VIP                            ;83DA46;848097;
+                       JSL.L SUB_848097                            ;83DA46;848097;
                        RTS                                  ;83DA4A;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;83DA4B;      ;
@@ -8998,7 +8998,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DA58;      ;
                        LDX.W #$000B                         ;83DA5B;      ;
                        LDY.W #$0005                         ;83DA5E;      ;
-                       JSL.L VIP                            ;83DA61;848097;
+                       JSL.L SUB_848097                            ;83DA61;848097;
                        RTS                                  ;83DA65;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9029,7 +9029,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DA9F;      ;
                        LDX.W #$0001                         ;83DAA2;      ;
                        LDY.W #$0006                         ;83DAA5;      ;
-                       JSL.L VIP                            ;83DAA8;848097;
+                       JSL.L SUB_848097                            ;83DAA8;848097;
                        RTS                                  ;83DAAC;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9037,7 +9037,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DAAF;      ;
                        LDX.W #$0004                         ;83DAB2;      ;
                        LDY.W #$0005                         ;83DAB5;      ;
-                       JSL.L VIP                            ;83DAB8;848097;
+                       JSL.L SUB_848097                            ;83DAB8;848097;
                        RTS                                  ;83DABC;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9045,7 +9045,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DABF;      ;
                        LDX.W #$0007                         ;83DAC2;      ;
                        LDY.W #$0005                         ;83DAC5;      ;
-                       JSL.L VIP                            ;83DAC8;848097;
+                       JSL.L SUB_848097                            ;83DAC8;848097;
                        RTS                                  ;83DACC;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9053,7 +9053,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DACF;      ;
                        LDX.W #$0006                         ;83DAD2;      ;
                        LDY.W #$0005                         ;83DAD5;      ;
-                       JSL.L VIP                            ;83DAD8;848097;
+                       JSL.L SUB_848097                            ;83DAD8;848097;
                        RTS                                  ;83DADC;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9061,7 +9061,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DADF;      ;
                        LDX.W #$0008                         ;83DAE2;      ;
                        LDY.W #$0005                         ;83DAE5;      ;
-                       JSL.L VIP                            ;83DAE8;848097;
+                       JSL.L SUB_848097                            ;83DAE8;848097;
                        RTS                                  ;83DAEC;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;83DAED;      ;
@@ -9072,7 +9072,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DAFA;      ;
                        LDX.W #$000B                         ;83DAFD;      ;
                        LDY.W #$0006                         ;83DB00;      ;
-                       JSL.L VIP                            ;83DB03;848097;
+                       JSL.L SUB_848097                            ;83DB03;848097;
                        RTS                                  ;83DB07;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9103,7 +9103,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DB41;      ;
                        LDX.W #$0001                         ;83DB44;      ;
                        LDY.W #$0007                         ;83DB47;      ;
-                       JSL.L VIP                            ;83DB4A;848097;
+                       JSL.L SUB_848097                            ;83DB4A;848097;
                        RTS                                  ;83DB4E;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9111,7 +9111,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DB51;      ;
                        LDX.W #$0004                         ;83DB54;      ;
                        LDY.W #$0006                         ;83DB57;      ;
-                       JSL.L VIP                            ;83DB5A;848097;
+                       JSL.L SUB_848097                            ;83DB5A;848097;
                        RTS                                  ;83DB5E;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9119,7 +9119,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DB61;      ;
                        LDX.W #$0007                         ;83DB64;      ;
                        LDY.W #$0006                         ;83DB67;      ;
-                       JSL.L VIP                            ;83DB6A;848097;
+                       JSL.L SUB_848097                            ;83DB6A;848097;
                        RTS                                  ;83DB6E;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9127,7 +9127,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DB71;      ;
                        LDX.W #$0006                         ;83DB74;      ;
                        LDY.W #$0006                         ;83DB77;      ;
-                       JSL.L VIP                            ;83DB7A;848097;
+                       JSL.L SUB_848097                            ;83DB7A;848097;
                        RTS                                  ;83DB7E;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9135,7 +9135,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DB81;      ;
                        LDX.W #$0008                         ;83DB84;      ;
                        LDY.W #$0006                         ;83DB87;      ;
-                       JSL.L VIP                            ;83DB8A;848097;
+                       JSL.L SUB_848097                            ;83DB8A;848097;
                        RTS                                  ;83DB8E;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;83DB8F;      ;
@@ -9153,7 +9153,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DBA9;      ;
                        LDX.W #$0022                         ;83DBAC;      ;
                        LDY.W #$000B                         ;83DBAF;      ;
-                       JSL.L VIP                            ;83DBB2;848097;
+                       JSL.L SUB_848097                            ;83DBB2;848097;
                        RTS                                  ;83DBB6;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9173,7 +9173,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DBD8;      ;
                        LDX.W #$000F                         ;83DBDB;      ;
                        LDY.W #$0003                         ;83DBDE;      ;
-                       JSL.L VIP                            ;83DBE1;848097;
+                       JSL.L SUB_848097                            ;83DBE1;848097;
                        RTS                                  ;83DBE5;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9185,7 +9185,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DBF3;      ;
                        LDX.W #$000B                         ;83DBF6;      ;
                        LDY.W #$0007                         ;83DBF9;      ;
-                       JSL.L VIP                            ;83DBFC;848097;
+                       JSL.L SUB_848097                            ;83DBFC;848097;
                        %Set16bit(!MX)                             ;83DC00;      ;
                        LDA.L $7F1F68                        ;83DC02;7F1F68;
                        ORA.W #$0002                         ;83DC06;      ;
@@ -9197,7 +9197,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DC10;      ;
                        LDX.W #$0005                         ;83DC13;      ;
                        LDY.W #$0000                         ;83DC16;      ;
-                       JSL.L VIP                            ;83DC19;848097;
+                       JSL.L SUB_848097                            ;83DC19;848097;
                        RTS                                  ;83DC1D;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;83DC1E;      ;
@@ -9218,7 +9218,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DC3C;      ;
                        LDX.W #$0022                         ;83DC3F;      ;
                        LDY.W #$000C                         ;83DC42;      ;
-                       JSL.L VIP                            ;83DC45;848097;
+                       JSL.L SUB_848097                            ;83DC45;848097;
                        RTS                                  ;83DC49;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;83DC4A;      ;
@@ -9229,7 +9229,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DC57;      ;
                        LDX.W #$000B                         ;83DC5A;      ;
                        LDY.W #$0009                         ;83DC5D;      ;
-                       JSL.L VIP                            ;83DC60;848097;
+                       JSL.L SUB_848097                            ;83DC60;848097;
                        %Set16bit(!M)                             ;83DC64;      ;
                        LDA.L $7F1F68                        ;83DC66;7F1F68;
                        ORA.W #$0004                         ;83DC6A;      ;
@@ -9245,7 +9245,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DC7F;      ;
                        LDX.W #$001D                         ;83DC82;      ;
                        LDY.W #$0003                         ;83DC85;      ;
-                       JSL.L VIP                            ;83DC88;848097;
+                       JSL.L SUB_848097                            ;83DC88;848097;
                        RTS                                  ;83DC8C;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9257,7 +9257,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DC9A;      ;
                        LDX.W #$001D                         ;83DC9D;      ;
                        LDY.W #$0001                         ;83DCA0;      ;
-                       JSL.L VIP                            ;83DCA3;848097;
+                       JSL.L SUB_848097                            ;83DCA3;848097;
                        RTS                                  ;83DCA7;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9272,7 +9272,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0009                         ;83DCBE;      ;
                        LDX.W #$001C                         ;83DCC1;      ;
                        LDY.W #$0001                         ;83DCC4;      ;
-                       JSL.L VIP                            ;83DCC7;848097;
+                       JSL.L SUB_848097                            ;83DCC7;848097;
                        BRA CODE_83DD3F                      ;83DCCB;83DD3F;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9280,7 +9280,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0009                         ;83DCCF;      ;
                        LDX.W #$001C                         ;83DCD2;      ;
                        LDY.W #$0002                         ;83DCD5;      ;
-                       JSL.L VIP                            ;83DCD8;848097;
+                       JSL.L SUB_848097                            ;83DCD8;848097;
                        JMP.W CODE_83DD74                    ;83DCDC;83DD74;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9323,7 +9323,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0009                         ;83DD30;      ;
                        LDX.W #$0021                         ;83DD33;      ;
                        LDY.W #$0000                         ;83DD36;      ;
-                       JSL.L VIP                            ;83DD39;848097;
+                       JSL.L SUB_848097                            ;83DD39;848097;
                        BRA CODE_83DD3F                      ;83DD3D;83DD3F;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9346,7 +9346,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DD67;      ;
                        LDX.W #$0001                         ;83DD6A;      ;
                        LDY.W #$0008                         ;83DD6D;      ;
-                       JSL.L VIP                            ;83DD70;848097;
+                       JSL.L SUB_848097                            ;83DD70;848097;
                                                             ;      ;      ;
           CODE_83DD74: RTS                                  ;83DD74;      ;
                                                             ;      ;      ;
@@ -9355,7 +9355,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DD77;      ;
                        LDX.W #$0003                         ;83DD7A;      ;
                        LDY.W #$0002                         ;83DD7D;      ;
-                       JSL.L VIP                            ;83DD80;848097;
+                       JSL.L SUB_848097                            ;83DD80;848097;
                        RTS                                  ;83DD84;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9363,7 +9363,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DD87;      ;
                        LDX.W #$0002                         ;83DD8A;      ;
                        LDY.W #$0003                         ;83DD8D;      ;
-                       JSL.L VIP                            ;83DD90;848097;
+                       JSL.L SUB_848097                            ;83DD90;848097;
                        RTS                                  ;83DD94;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;83DD95;      ;
@@ -9377,7 +9377,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DDAB;      ;
                        LDX.W #$0019                         ;83DDAE;      ;
                        LDY.W #$0001                         ;83DDB1;      ;
-                       JSL.L VIP                            ;83DDB4;848097;
+                       JSL.L SUB_848097                            ;83DDB4;848097;
                        RTS                                  ;83DDB8;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9401,7 +9401,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DDE2;      ;
                        LDX.W #$000B                         ;83DDE5;      ;
                        LDY.W #$000A                         ;83DDE8;      ;
-                       JSL.L VIP                            ;83DDEB;848097;
+                       JSL.L SUB_848097                            ;83DDEB;848097;
                        %Set16bit(!M)                             ;83DDEF;      ;
                        LDA.L $7F1F68                        ;83DDF1;7F1F68;
                        ORA.W #$0008                         ;83DDF5;      ;
@@ -9428,7 +9428,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DE26;      ;
                        LDX.W #$0001                         ;83DE29;      ;
                        LDY.W #$0009                         ;83DE2C;      ;
-                       JSL.L VIP                            ;83DE2F;848097;
+                       JSL.L SUB_848097                            ;83DE2F;848097;
                        RTS                                  ;83DE33;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9436,7 +9436,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DE36;      ;
                        LDX.W #$0004                         ;83DE39;      ;
                        LDY.W #$0007                         ;83DE3C;      ;
-                       JSL.L VIP                            ;83DE3F;848097;
+                       JSL.L SUB_848097                            ;83DE3F;848097;
                        RTS                                  ;83DE43;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9444,7 +9444,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DE46;      ;
                        LDX.W #$0007                         ;83DE49;      ;
                        LDY.W #$0007                         ;83DE4C;      ;
-                       JSL.L VIP                            ;83DE4F;848097;
+                       JSL.L SUB_848097                            ;83DE4F;848097;
                        RTS                                  ;83DE53;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9452,7 +9452,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DE56;      ;
                        LDX.W #$0008                         ;83DE59;      ;
                        LDY.W #$0007                         ;83DE5C;      ;
-                       JSL.L VIP                            ;83DE5F;848097;
+                       JSL.L SUB_848097                            ;83DE5F;848097;
                        RTS                                  ;83DE63;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;83DE64;      ;
@@ -9463,7 +9463,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DE71;      ;
                        LDX.W #$0015                         ;83DE74;      ;
                        LDY.W #$0000                         ;83DE77;      ;
-                       JSL.L VIP                            ;83DE7A;848097;
+                       JSL.L SUB_848097                            ;83DE7A;848097;
                        RTS                                  ;83DE7E;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9475,7 +9475,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83DE8C;      ;
                        LDX.W #$0001                         ;83DE8F;      ;
                        LDY.W #$000A                         ;83DE92;      ;
-                       JSL.L VIP                            ;83DE95;848097;
+                       JSL.L SUB_848097                            ;83DE95;848097;
                        RTS                                  ;83DE99;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9489,7 +9489,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0015                         ;83DEA8;      ;
                        LDX.W #$0000                         ;83DEAB;      ;
                        LDY.W #$0025                         ;83DEAE;      ;
-                       JSL.L VIP                            ;83DEB1;848097;
+                       JSL.L SUB_848097                            ;83DEB1;848097;
                        %Set8bit(!M)                             ;83DEB5;      ;
                        LDA.B #$45                           ;83DEB7;      ;
                        STA.W $096E                          ;83DEB9;00096E;
@@ -9553,7 +9553,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0010                         ;83DF3A;      ;
                        LDX.W #$0000                         ;83DF3D;      ;
                        LDY.W #$001F                         ;83DF40;      ;
-                       JSL.L CODE_8480F8                    ;83DF43;8480F8;
+                       JSL.L SUB_8480F8                    ;83DF43;8480F8;
                                                             ;      ;      ;
           CODE_83DF47: %Set16bit(!MX)                             ;83DF47;      ;
                        LDA.L $7F1F6E                        ;83DF49;7F1F6E;
@@ -9683,7 +9683,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E093;      ;
                        LDX.W #$001F                         ;83E096;      ;
                        LDY.W #$0000                         ;83E099;      ;
-                       JSL.L VIP                            ;83E09C;848097;
+                       JSL.L SUB_848097                            ;83E09C;848097;
                        RTS                                  ;83E0A0;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9691,7 +9691,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E0A3;      ;
                        LDX.W #$001F                         ;83E0A6;      ;
                        LDY.W #$0001                         ;83E0A9;      ;
-                       JSL.L VIP                            ;83E0AC;848097;
+                       JSL.L SUB_848097                            ;83E0AC;848097;
                        %Set16bit(!M)                             ;83E0B0;      ;
                        LDA.L !kid1_age                        ;83E0B2;7F1F37;
                        CMP.W #$003C                         ;83E0B6;      ;
@@ -9712,7 +9712,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E0CD;      ;
                        LDX.W #$001F                         ;83E0D0;      ;
                        LDY.W #$0002                         ;83E0D3;      ;
-                       JSL.L VIP                            ;83E0D6;848097;
+                       JSL.L SUB_848097                            ;83E0D6;848097;
                        RTS                                  ;83E0DA;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9756,7 +9756,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E136;      ;
                        LDX.W #$0020                         ;83E139;      ;
                        LDY.W #$0000                         ;83E13C;      ;
-                       JSL.L VIP                            ;83E13F;848097;
+                       JSL.L SUB_848097                            ;83E13F;848097;
                        RTS                                  ;83E143;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9837,7 +9837,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E1E8;      ;
                        LDX.W #$0022                         ;83E1EB;      ;
                        LDY.W #$0000                         ;83E1EE;      ;
-                       JSL.L VIP                            ;83E1F1;848097;
+                       JSL.L SUB_848097                            ;83E1F1;848097;
                        %Set16bit(!MX)                             ;83E1F5;      ;
                        LDA.L $7F1F6E                        ;83E1F7;7F1F6E;
                        ORA.W #$0003                         ;83E1FB;      ;
@@ -9896,7 +9896,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0013                         ;83E273;      ;
                        LDX.W #$0043                         ;83E276;      ;
                        LDY.W #$0000                         ;83E279;      ;
-                       JSL.L VIP                            ;83E27C;848097;
+                       JSL.L SUB_848097                            ;83E27C;848097;
                        BRA CODE_83E2C6                      ;83E280;83E2C6;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9904,7 +9904,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0013                         ;83E284;      ;
                        LDX.W #$0043                         ;83E287;      ;
                        LDY.W #$0001                         ;83E28A;      ;
-                       JSL.L VIP                            ;83E28D;848097;
+                       JSL.L SUB_848097                            ;83E28D;848097;
                        BRA CODE_83E2C6                      ;83E291;83E2C6;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9912,7 +9912,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0013                         ;83E295;      ;
                        LDX.W #$0043                         ;83E298;      ;
                        LDY.W #$0002                         ;83E29B;      ;
-                       JSL.L VIP                            ;83E29E;848097;
+                       JSL.L SUB_848097                            ;83E29E;848097;
                        BRA CODE_83E2C6                      ;83E2A2;83E2C6;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9920,7 +9920,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0013                         ;83E2A6;      ;
                        LDX.W #$0043                         ;83E2A9;      ;
                        LDY.W #$0003                         ;83E2AC;      ;
-                       JSL.L VIP                            ;83E2AF;848097;
+                       JSL.L SUB_848097                            ;83E2AF;848097;
                        BRA CODE_83E2C6                      ;83E2B3;83E2C6;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9928,7 +9928,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0013                         ;83E2B7;      ;
                        LDX.W #$0043                         ;83E2BA;      ;
                        LDY.W #$0004                         ;83E2BD;      ;
-                       JSL.L VIP                            ;83E2C0;848097;
+                       JSL.L SUB_848097                            ;83E2C0;848097;
                        BRA CODE_83E2C6                      ;83E2C4;83E2C6;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9943,7 +9943,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0014                         ;83E2DC;      ;
                        LDX.W #$0045                         ;83E2DF;      ;
                        LDY.W #$0000                         ;83E2E2;      ;
-                       JSL.L VIP                            ;83E2E5;848097;
+                       JSL.L SUB_848097                            ;83E2E5;848097;
                                                             ;      ;      ;
           CODE_83E2E9: %Set16bit(!MX)                             ;83E2E9;      ;
                        LDA.L $7F1F6E                        ;83E2EB;7F1F6E;
@@ -9956,7 +9956,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0015                         ;83E2FF;      ;
                        LDX.W #$0045                         ;83E302;      ;
                        LDY.W #$0003                         ;83E305;      ;
-                       JSL.L VIP                            ;83E308;848097;
+                       JSL.L SUB_848097                            ;83E308;848097;
                                                             ;      ;      ;
           CODE_83E30C: %Set16bit(!MX)                             ;83E30C;      ;
                        LDA.L $7F1F60                        ;83E30E;7F1F60;
@@ -9969,7 +9969,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E322;      ;
                        LDX.W #$000A                         ;83E325;      ;
                        LDY.W #$0000                         ;83E328;      ;
-                       JSL.L VIP                            ;83E32B;848097;
+                       JSL.L SUB_848097                            ;83E32B;848097;
                        RTS                                  ;83E32F;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -9977,7 +9977,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E332;      ;
                        LDX.W #$000A                         ;83E335;      ;
                        LDY.W #$0003                         ;83E338;      ;
-                       JSL.L VIP                            ;83E33B;848097;
+                       JSL.L SUB_848097                            ;83E33B;848097;
                        RTS                                  ;83E33F;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -10003,7 +10003,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E372;      ;
                        LDX.W #$000A                         ;83E375;      ;
                        LDY.W #$0004                         ;83E378;      ;
-                       JSL.L VIP                            ;83E37B;848097;
+                       JSL.L SUB_848097                            ;83E37B;848097;
                        RTS                                  ;83E37F;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -10029,7 +10029,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E3B2;      ;
                        LDX.W #$000A                         ;83E3B5;      ;
                        LDY.W #$0005                         ;83E3B8;      ;
-                       JSL.L VIP                            ;83E3BB;848097;
+                       JSL.L SUB_848097                            ;83E3BB;848097;
                        RTS                                  ;83E3BF;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -10044,7 +10044,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E3D4;      ;
                        LDX.W #$0028                         ;83E3D7;      ;
                        LDY.W #$0000                         ;83E3DA;      ;
-                       JSL.L VIP                            ;83E3DD;848097;
+                       JSL.L SUB_848097                            ;83E3DD;848097;
                        RTS                                  ;83E3E1;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -10060,7 +10060,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E3F8;      ;
                        LDX.W #$000F                         ;83E3FB;      ;
                        LDY.W #$0000                         ;83E3FE;      ;
-                       JSL.L VIP                            ;83E401;848097;
+                       JSL.L SUB_848097                            ;83E401;848097;
                        RTS                                  ;83E405;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -10074,7 +10074,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0015                         ;83E416;      ;
                        LDX.W #$0000                         ;83E419;      ;
                        LDY.W #$0015                         ;83E41C;      ;
-                       JSL.L VIP                            ;83E41F;848097;
+                       JSL.L SUB_848097                            ;83E41F;848097;
                        %Set16bit(!M)                             ;83E423;      ;
                        LDA.L $7F1F68                        ;83E425;7F1F68;
                        AND.W #$0001                         ;83E429;      ;
@@ -10086,7 +10086,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E439;      ;
                        LDX.W #$000A                         ;83E43C;      ;
                        LDY.W #$0001                         ;83E43F;      ;
-                       JSL.L VIP                            ;83E442;848097;
+                       JSL.L SUB_848097                            ;83E442;848097;
                        %Set16bit(!M)                             ;83E446;      ;
                        LDA.L $7F1F68                        ;83E448;7F1F68;
                        ORA.W #$0010                         ;83E44C;      ;
@@ -10098,7 +10098,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E456;      ;
                        LDX.W #$000B                         ;83E459;      ;
                        LDY.W #$000B                         ;83E45C;      ;
-                       JSL.L VIP                            ;83E45F;848097;
+                       JSL.L SUB_848097                            ;83E45F;848097;
                        RTS                                  ;83E463;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -10119,7 +10119,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E485;      ;
                        LDX.W #$000D                         ;83E488;      ;
                        LDY.W #$0000                         ;83E48B;      ;
-                       JSL.L VIP                            ;83E48E;848097;
+                       JSL.L SUB_848097                            ;83E48E;848097;
                        %Set16bit(!M)                             ;83E492;      ;
                        LDA.L $7F1F68                        ;83E494;7F1F68;
                        ORA.W #$0040                         ;83E498;      ;
@@ -10138,7 +10138,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E4B4;      ;
                        LDX.W #$000D                         ;83E4B7;      ;
                        LDY.W #$0001                         ;83E4BA;      ;
-                       JSL.L VIP                            ;83E4BD;848097;
+                       JSL.L SUB_848097                            ;83E4BD;848097;
                        %Set8bit(!M)                             ;83E4C1;      ;
                        LDA.B #$00                           ;83E4C3;      ;
                        STA.L $7F1F31                        ;83E4C5;7F1F31;
@@ -10158,7 +10158,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0010                         ;83E4E2;      ;
                        LDX.W #$0000                         ;83E4E5;      ;
                        LDY.W #$001F                         ;83E4E8;      ;
-                       JSL.L CODE_8480F8                    ;83E4EB;8480F8;
+                       JSL.L SUB_8480F8                    ;83E4EB;8480F8;
                                                             ;      ;      ;
           CODE_83E4EF: %Set16bit(!MX)                             ;83E4EF;      ;
                        LDA.B !player_pos_Y                            ;83E4F1;0000D8;
@@ -10198,7 +10198,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E542;      ;
                        LDX.W #$001D                         ;83E545;      ;
                        LDY.W #$0002                         ;83E548;      ;
-                       JSL.L VIP                            ;83E54B;848097;
+                       JSL.L SUB_848097                            ;83E54B;848097;
                        RTS                                  ;83E54F;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -10210,7 +10210,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E55D;      ;
                        LDX.W #$001B                         ;83E560;      ;
                        LDY.W #$0001                         ;83E563;      ;
-                       JSL.L VIP                            ;83E566;848097;
+                       JSL.L SUB_848097                            ;83E566;848097;
                        RTS                                  ;83E56A;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -10222,7 +10222,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E577;      ;
                        LDX.W #$0002                         ;83E57A;      ;
                        LDY.W #$0004                         ;83E57D;      ;
-                       JSL.L VIP                            ;83E580;848097;
+                       JSL.L SUB_848097                            ;83E580;848097;
                        RTS                                  ;83E584;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -10236,7 +10236,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E593;      ;
                        LDX.W #$0014                         ;83E596;      ;
                        LDY.W #$0001                         ;83E599;      ;
-                       JSL.L VIP                            ;83E59C;848097;
+                       JSL.L SUB_848097                            ;83E59C;848097;
                        RTS                                  ;83E5A0;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -10247,7 +10247,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E5A6;      ;
                        LDX.W #$0014                         ;83E5A9;      ;
                        LDY.W #$0002                         ;83E5AC;      ;
-                       JSL.L VIP                            ;83E5AF;848097;
+                       JSL.L SUB_848097                            ;83E5AF;848097;
                        RTS                                  ;83E5B3;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;83E5B4;      ;
@@ -10257,7 +10257,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0015                         ;83E5BF;      ;
                        LDX.W #$0000                         ;83E5C2;      ;
                        LDY.W #$007F                         ;83E5C5;      ;
-                       JSL.L VIP                            ;83E5C8;848097;
+                       JSL.L SUB_848097                            ;83E5C8;848097;
                                                             ;      ;      ;
           CODE_83E5CC: RTS                                  ;83E5CC;      ;
                                                             ;      ;      ;
@@ -10266,7 +10266,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E5D1;      ;
                        LDX.W #$001E                         ;83E5D4;      ;
                        LDY.W #$0000                         ;83E5D7;      ;
-                       JSL.L VIP                            ;83E5DA;848097;
+                       JSL.L SUB_848097                            ;83E5DA;848097;
                        RTS                                  ;83E5DE;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;83E5DF;      ;
@@ -10274,7 +10274,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E5E3;      ;
                        LDX.W #$000E                         ;83E5E6;      ;
                        LDY.W #$0001                         ;83E5E9;      ;
-                       JSL.L VIP                            ;83E5EC;848097;
+                       JSL.L SUB_848097                            ;83E5EC;848097;
                        RTS                                  ;83E5F0;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;83E5F1;      ;
@@ -10282,7 +10282,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E5F5;      ;
                        LDX.W #$0026                         ;83E5F8;      ;
                        LDY.W #$0001                         ;83E5FB;      ;
-                       JSL.L VIP                            ;83E5FE;848097;
+                       JSL.L SUB_848097                            ;83E5FE;848097;
                        RTS                                  ;83E602;      ;
                                                             ;      ;      ;
                        %Set8bit(!M)                             ;83E603;      ;
@@ -10301,7 +10301,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E624;      ;
                        LDX.W #$000F                         ;83E627;      ;
                        LDY.W #$0001                         ;83E62A;      ;
-                       JSL.L VIP                            ;83E62D;848097;
+                       JSL.L SUB_848097                            ;83E62D;848097;
                                                             ;      ;      ;
           CODE_83E631: RTS                                  ;83E631;      ;
                                                             ;      ;      ;
@@ -10321,7 +10321,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E653;      ;
                        LDX.W #$000F                         ;83E656;      ;
                        LDY.W #$0004                         ;83E659;      ;
-                       JSL.L VIP                            ;83E65C;848097;
+                       JSL.L SUB_848097                            ;83E65C;848097;
                                                             ;      ;      ;
           CODE_83E660: RTS                                  ;83E660;      ;
                                                             ;      ;      ;
@@ -10341,7 +10341,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E682;      ;
                        LDX.W #$000F                         ;83E685;      ;
                        LDY.W #$0005                         ;83E688;      ;
-                       JSL.L VIP                            ;83E68B;848097;
+                       JSL.L SUB_848097                            ;83E68B;848097;
                                                             ;      ;      ;
           CODE_83E68F: RTS                                  ;83E68F;      ;
                                                             ;      ;      ;
@@ -10356,7 +10356,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E6A4;      ;
                        LDX.W #$0028                         ;83E6A7;      ;
                        LDY.W #$0001                         ;83E6AA;      ;
-                       JSL.L VIP                            ;83E6AD;848097;
+                       JSL.L SUB_848097                            ;83E6AD;848097;
                                                             ;      ;      ;
           CODE_83E6B1: RTS                                  ;83E6B1;      ;
                                                             ;      ;      ;
@@ -10365,7 +10365,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E6B6;      ;
                        LDX.W #$0028                         ;83E6B9;      ;
                        LDY.W #$0003                         ;83E6BC;      ;
-                       JSL.L VIP                            ;83E6BF;848097;
+                       JSL.L SUB_848097                            ;83E6BF;848097;
                        RTS                                  ;83E6C3;      ;
                                                             ;      ;      ;
                        %Set16bit(!MX)                             ;83E6C4;      ;
@@ -10385,7 +10385,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0013                         ;83E6E5;      ;
                        LDX.W #$0044                         ;83E6E8;      ;
                        LDY.W #$0001                         ;83E6EB;      ;
-                       JSL.L VIP                            ;83E6EE;848097;
+                       JSL.L SUB_848097                            ;83E6EE;848097;
                        BRA CODE_83E705                      ;83E6F2;83E705;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -10393,7 +10393,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0013                         ;83E6F6;      ;
                        LDX.W #$0044                         ;83E6F9;      ;
                        LDY.W #$0004                         ;83E6FC;      ;
-                       JSL.L VIP                            ;83E6FF;848097;
+                       JSL.L SUB_848097                            ;83E6FF;848097;
                        BRA CODE_83E705                      ;83E703;83E705;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -10408,7 +10408,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0014                         ;83E71B;      ;
                        LDX.W #$0045                         ;83E71E;      ;
                        LDY.W #$0002                         ;83E721;      ;
-                       JSL.L VIP                            ;83E724;848097;
+                       JSL.L SUB_848097                            ;83E724;848097;
                                                             ;      ;      ;
           CODE_83E728: %Set16bit(!MX)                             ;83E728;      ;
                        LDA.L $7F1F6E                        ;83E72A;7F1F6E;
@@ -10421,7 +10421,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0015                         ;83E73E;      ;
                        LDX.W #$0045                         ;83E741;      ;
                        LDY.W #$0005                         ;83E744;      ;
-                       JSL.L VIP                            ;83E747;848097;
+                       JSL.L SUB_848097                            ;83E747;848097;
                                                             ;      ;      ;
           CODE_83E74B: RTS                                  ;83E74B;      ;
                                                             ;      ;      ;
@@ -10454,7 +10454,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E8AF;      ;
                        LDX.W #$0047                         ;83E8B2;      ;
                        LDY.W #$0001                         ;83E8B5;      ;
-                       JSL.L VIP                            ;83E8B8;848097;
+                       JSL.L SUB_848097                            ;83E8B8;848097;
                        %Set8bit(!M)                             ;83E8BC;      ;
                        LDA.B #$01                           ;83E8BE;      ;
                        STA.L $7F1F49                        ;83E8C0;7F1F49;
@@ -10464,7 +10464,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E8C7;      ;
                        LDX.W #$0047                         ;83E8CA;      ;
                        LDY.W #$0002                         ;83E8CD;      ;
-                       JSL.L VIP                            ;83E8D0;848097;
+                       JSL.L SUB_848097                            ;83E8D0;848097;
                        %Set8bit(!M)                             ;83E8D4;      ;
                        LDA.B #$02                           ;83E8D6;      ;
                        STA.L $7F1F49                        ;83E8D8;7F1F49;
@@ -10474,7 +10474,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E8DF;      ;
                        LDX.W #$0047                         ;83E8E2;      ;
                        LDY.W #$0003                         ;83E8E5;      ;
-                       JSL.L VIP                            ;83E8E8;848097;
+                       JSL.L SUB_848097                            ;83E8E8;848097;
                        %Set8bit(!M)                             ;83E8EC;      ;
                        LDA.B #$03                           ;83E8EE;      ;
                        STA.L $7F1F49                        ;83E8F0;7F1F49;
@@ -10484,7 +10484,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E8F7;      ;
                        LDX.W #$0047                         ;83E8FA;      ;
                        LDY.W #$0004                         ;83E8FD;      ;
-                       JSL.L VIP                            ;83E900;848097;
+                       JSL.L SUB_848097                            ;83E900;848097;
                        %Set8bit(!M)                             ;83E904;      ;
                        LDA.B #$04                           ;83E906;      ;
                        STA.L $7F1F49                        ;83E908;7F1F49;
@@ -10494,7 +10494,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E90F;      ;
                        LDX.W #$0047                         ;83E912;      ;
                        LDY.W #$0005                         ;83E915;      ;
-                       JSL.L VIP                            ;83E918;848097;
+                       JSL.L SUB_848097                            ;83E918;848097;
                        %Set8bit(!M)                             ;83E91C;      ;
                        LDA.B #$05                           ;83E91E;      ;
                        STA.L $7F1F49                        ;83E920;7F1F49;
@@ -10504,7 +10504,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E927;      ;
                        LDX.W #$0047                         ;83E92A;      ;
                        LDY.W #$0006                         ;83E92D;      ;
-                       JSL.L VIP                            ;83E930;848097;
+                       JSL.L SUB_848097                            ;83E930;848097;
                        %Set8bit(!M)                             ;83E934;      ;
                        LDA.B #$06                           ;83E936;      ;
                        STA.L $7F1F49                        ;83E938;7F1F49;
@@ -10514,7 +10514,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E93F;      ;
                        LDX.W #$0047                         ;83E942;      ;
                        LDY.W #$0007                         ;83E945;      ;
-                       JSL.L VIP                            ;83E948;848097;
+                       JSL.L SUB_848097                            ;83E948;848097;
                        %Set8bit(!M)                             ;83E94C;      ;
                        LDA.B #$07                           ;83E94E;      ;
                        STA.L $7F1F49                        ;83E950;7F1F49;
@@ -10535,7 +10535,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E977;      ;
                        LDX.W #$0047                         ;83E97A;      ;
                        LDY.W #$0008                         ;83E97D;      ;
-                       JSL.L VIP                            ;83E980;848097;
+                       JSL.L SUB_848097                            ;83E980;848097;
                        %Set8bit(!M)                             ;83E984;      ;
                        LDA.B #$08                           ;83E986;      ;
                        STA.L $7F1F49                        ;83E988;7F1F49;
@@ -10545,7 +10545,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E98F;      ;
                        LDX.W #$0047                         ;83E992;      ;
                        LDY.W #$0009                         ;83E995;      ;
-                       JSL.L VIP                            ;83E998;848097;
+                       JSL.L SUB_848097                            ;83E998;848097;
                        %Set8bit(!M)                             ;83E99C;      ;
                        LDA.B #$09                           ;83E99E;      ;
                        STA.L $7F1F49                        ;83E9A0;7F1F49;
@@ -10555,7 +10555,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E9A7;      ;
                        LDX.W #$0047                         ;83E9AA;      ;
                        LDY.W #$000A                         ;83E9AD;      ;
-                       JSL.L VIP                            ;83E9B0;848097;
+                       JSL.L SUB_848097                            ;83E9B0;848097;
                        %Set8bit(!M)                             ;83E9B4;      ;
                        LDA.B #$0A                           ;83E9B6;      ;
                        STA.L $7F1F49                        ;83E9B8;7F1F49;
@@ -10565,7 +10565,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E9BF;      ;
                        LDX.W #$0047                         ;83E9C2;      ;
                        LDY.W #$000B                         ;83E9C5;      ;
-                       JSL.L VIP                            ;83E9C8;848097;
+                       JSL.L SUB_848097                            ;83E9C8;848097;
                        %Set8bit(!M)                             ;83E9CC;      ;
                        LDA.B #$0B                           ;83E9CE;      ;
                        STA.L $7F1F49                        ;83E9D0;7F1F49;
@@ -10575,7 +10575,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E9D7;      ;
                        LDX.W #$0047                         ;83E9DA;      ;
                        LDY.W #$000C                         ;83E9DD;      ;
-                       JSL.L VIP                            ;83E9E0;848097;
+                       JSL.L SUB_848097                            ;83E9E0;848097;
                        %Set8bit(!M)                             ;83E9E4;      ;
                        LDA.B #$0C                           ;83E9E6;      ;
                        STA.L $7F1F49                        ;83E9E8;7F1F49;
@@ -10585,7 +10585,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83E9EF;      ;
                        LDX.W #$0047                         ;83E9F2;      ;
                        LDY.W #$000D                         ;83E9F5;      ;
-                       JSL.L VIP                            ;83E9F8;848097;
+                       JSL.L SUB_848097                            ;83E9F8;848097;
                        %Set8bit(!M)                             ;83E9FC;      ;
                        LDA.B #$0D                           ;83E9FE;      ;
                        STA.L $7F1F49                        ;83EA00;7F1F49;
@@ -10606,7 +10606,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EA27;      ;
                        LDX.W #$0047                         ;83EA2A;      ;
                        LDY.W #$000E                         ;83EA2D;      ;
-                       JSL.L VIP                            ;83EA30;848097;
+                       JSL.L SUB_848097                            ;83EA30;848097;
                        %Set8bit(!M)                             ;83EA34;      ;
                        LDA.B #$0E                           ;83EA36;      ;
                        STA.L $7F1F49                        ;83EA38;7F1F49;
@@ -10616,7 +10616,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EA3F;      ;
                        LDX.W #$0047                         ;83EA42;      ;
                        LDY.W #$000F                         ;83EA45;      ;
-                       JSL.L VIP                            ;83EA48;848097;
+                       JSL.L SUB_848097                            ;83EA48;848097;
                        %Set8bit(!M)                             ;83EA4C;      ;
                        LDA.B #$0F                           ;83EA4E;      ;
                        STA.L $7F1F49                        ;83EA50;7F1F49;
@@ -10626,7 +10626,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EA57;      ;
                        LDX.W #$0047                         ;83EA5A;      ;
                        LDY.W #$0010                         ;83EA5D;      ;
-                       JSL.L VIP                            ;83EA60;848097;
+                       JSL.L SUB_848097                            ;83EA60;848097;
                        %Set8bit(!M)                             ;83EA64;      ;
                        LDA.B #$10                           ;83EA66;      ;
                        STA.L $7F1F49                        ;83EA68;7F1F49;
@@ -10636,7 +10636,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EA6F;      ;
                        LDX.W #$0047                         ;83EA72;      ;
                        LDY.W #$0011                         ;83EA75;      ;
-                       JSL.L VIP                            ;83EA78;848097;
+                       JSL.L SUB_848097                            ;83EA78;848097;
                        %Set8bit(!M)                             ;83EA7C;      ;
                        LDA.B #$11                           ;83EA7E;      ;
                        STA.L $7F1F49                        ;83EA80;7F1F49;
@@ -10646,7 +10646,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EA87;      ;
                        LDX.W #$0047                         ;83EA8A;      ;
                        LDY.W #$0012                         ;83EA8D;      ;
-                       JSL.L VIP                            ;83EA90;848097;
+                       JSL.L SUB_848097                            ;83EA90;848097;
                        %Set8bit(!M)                             ;83EA94;      ;
                        LDA.B #$12                           ;83EA96;      ;
                        STA.L $7F1F49                        ;83EA98;7F1F49;
@@ -10656,7 +10656,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EA9F;      ;
                        LDX.W #$0047                         ;83EAA2;      ;
                        LDY.W #$0013                         ;83EAA5;      ;
-                       JSL.L VIP                            ;83EAA8;848097;
+                       JSL.L SUB_848097                            ;83EAA8;848097;
                        %Set8bit(!M)                             ;83EAAC;      ;
                        LDA.B #$13                           ;83EAAE;      ;
                        STA.L $7F1F49                        ;83EAB0;7F1F49;
@@ -10666,7 +10666,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EAB7;      ;
                        LDX.W #$0047                         ;83EABA;      ;
                        LDY.W #$0014                         ;83EABD;      ;
-                       JSL.L VIP                            ;83EAC0;848097;
+                       JSL.L SUB_848097                            ;83EAC0;848097;
                        %Set8bit(!M)                             ;83EAC4;      ;
                        LDA.B #$14                           ;83EAC6;      ;
                        STA.L $7F1F49                        ;83EAC8;7F1F49;
@@ -10676,7 +10676,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EACF;      ;
                        LDX.W #$0047                         ;83EAD2;      ;
                        LDY.W #$0015                         ;83EAD5;      ;
-                       JSL.L VIP                            ;83EAD8;848097;
+                       JSL.L SUB_848097                            ;83EAD8;848097;
                        %Set8bit(!M)                             ;83EADC;      ;
                        LDA.B #$15                           ;83EADE;      ;
                        STA.L $7F1F49                        ;83EAE0;7F1F49;
@@ -10686,7 +10686,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EAE7;      ;
                        LDX.W #$0047                         ;83EAEA;      ;
                        LDY.W #$0016                         ;83EAED;      ;
-                       JSL.L VIP                            ;83EAF0;848097;
+                       JSL.L SUB_848097                            ;83EAF0;848097;
                        %Set8bit(!M)                             ;83EAF4;      ;
                        LDA.B #$16                           ;83EAF6;      ;
                        STA.L $7F1F49                        ;83EAF8;7F1F49;
@@ -10696,7 +10696,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EAFF;      ;
                        LDX.W #$0047                         ;83EB02;      ;
                        LDY.W #$0017                         ;83EB05;      ;
-                       JSL.L VIP                            ;83EB08;848097;
+                       JSL.L SUB_848097                            ;83EB08;848097;
                        %Set8bit(!M)                             ;83EB0C;      ;
                        LDA.B #$17                           ;83EB0E;      ;
                        STA.L $7F1F49                        ;83EB10;7F1F49;
@@ -10706,7 +10706,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EB17;      ;
                        LDX.W #$0047                         ;83EB1A;      ;
                        LDY.W #$0018                         ;83EB1D;      ;
-                       JSL.L VIP                            ;83EB20;848097;
+                       JSL.L SUB_848097                            ;83EB20;848097;
                        %Set8bit(!M)                             ;83EB24;      ;
                        LDA.B #$18                           ;83EB26;      ;
                        STA.L $7F1F49                        ;83EB28;7F1F49;
@@ -10716,7 +10716,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EB2F;      ;
                        LDX.W #$0047                         ;83EB32;      ;
                        LDY.W #$0019                         ;83EB35;      ;
-                       JSL.L VIP                            ;83EB38;848097;
+                       JSL.L SUB_848097                            ;83EB38;848097;
                        %Set8bit(!M)                             ;83EB3C;      ;
                        LDA.B #$19                           ;83EB3E;      ;
                        STA.L $7F1F49                        ;83EB40;7F1F49;
@@ -10726,7 +10726,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EB47;      ;
                        LDX.W #$0047                         ;83EB4A;      ;
                        LDY.W #$001A                         ;83EB4D;      ;
-                       JSL.L VIP                            ;83EB50;848097;
+                       JSL.L SUB_848097                            ;83EB50;848097;
                        %Set8bit(!M)                             ;83EB54;      ;
                        LDA.B #$1A                           ;83EB56;      ;
                        STA.L $7F1F49                        ;83EB58;7F1F49;
@@ -10736,7 +10736,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EB5F;      ;
                        LDX.W #$0047                         ;83EB62;      ;
                        LDY.W #$001B                         ;83EB65;      ;
-                       JSL.L VIP                            ;83EB68;848097;
+                       JSL.L SUB_848097                            ;83EB68;848097;
                        %Set8bit(!M)                             ;83EB6C;      ;
                        LDA.B #$1B                           ;83EB6E;      ;
                        STA.L $7F1F49                        ;83EB70;7F1F49;
@@ -10746,7 +10746,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EB77;      ;
                        LDX.W #$0047                         ;83EB7A;      ;
                        LDY.W #$001C                         ;83EB7D;      ;
-                       JSL.L VIP                            ;83EB80;848097;
+                       JSL.L SUB_848097                            ;83EB80;848097;
                        %Set8bit(!M)                             ;83EB84;      ;
                        LDA.B #$1C                           ;83EB86;      ;
                        STA.L $7F1F49                        ;83EB88;7F1F49;
@@ -10756,7 +10756,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EB8F;      ;
                        LDX.W #$0047                         ;83EB92;      ;
                        LDY.W #$001D                         ;83EB95;      ;
-                       JSL.L VIP                            ;83EB98;848097;
+                       JSL.L SUB_848097                            ;83EB98;848097;
                        %Set8bit(!M)                             ;83EB9C;      ;
                        LDA.B #$1D                           ;83EB9E;      ;
                        STA.L $7F1F49                        ;83EBA0;7F1F49;
@@ -11017,7 +11017,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83ED44;      ;
                        LDX.W #$002F                         ;83ED47;      ;
                        LDY.W #$0000                         ;83ED4A;      ;
-                       JSL.L VIP                            ;83ED4D;848097;
+                       JSL.L SUB_848097                            ;83ED4D;848097;
                        %Set8bit(!M)                             ;83ED51;      ;
                        LDA.B #$14                           ;83ED53;      ;
                        STA.L $7F1F47                        ;83ED55;7F1F47;
@@ -11037,7 +11037,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83ED75;      ;
                        LDX.W #$0030                         ;83ED78;      ;
                        LDY.W #$0000                         ;83ED7B;      ;
-                       JSL.L VIP                            ;83ED7E;848097;
+                       JSL.L SUB_848097                            ;83ED7E;848097;
                        %Set8bit(!M)                             ;83ED82;      ;
                        LDA.B #$02                           ;83ED84;      ;
                        STA.L $7F1F47                        ;83ED86;7F1F47;
@@ -11054,7 +11054,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83ED9B;      ;
                        LDX.W #$0031                         ;83ED9E;      ;
                        LDY.W #$0000                         ;83EDA1;      ;
-                       JSL.L VIP                            ;83EDA4;848097;
+                       JSL.L SUB_848097                            ;83EDA4;848097;
                        %Set8bit(!M)                             ;83EDA8;      ;
                        LDA.B #$03                           ;83EDAA;      ;
                        STA.L $7F1F47                        ;83EDAC;7F1F47;
@@ -11069,7 +11069,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EDBD;      ;
                        LDX.W #$0032                         ;83EDC0;      ;
                        LDY.W #$0000                         ;83EDC3;      ;
-                       JSL.L VIP                            ;83EDC6;848097;
+                       JSL.L SUB_848097                            ;83EDC6;848097;
                        %Set8bit(!M)                             ;83EDCA;      ;
                        LDA.B #$04                           ;83EDCC;      ;
                        STA.L $7F1F47                        ;83EDCE;7F1F47;
@@ -11085,7 +11085,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EDE0;      ;
                        LDX.W #$0033                         ;83EDE3;      ;
                        LDY.W #$0000                         ;83EDE6;      ;
-                       JSL.L VIP                            ;83EDE9;848097;
+                       JSL.L SUB_848097                            ;83EDE9;848097;
                        %Set8bit(!M)                             ;83EDED;      ;
                        LDA.B #$05                           ;83EDEF;      ;
                        STA.L $7F1F47                        ;83EDF1;7F1F47;
@@ -11100,7 +11100,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EE03;      ;
                        LDX.W #$0034                         ;83EE06;      ;
                        LDY.W #$0000                         ;83EE09;      ;
-                       JSL.L VIP                            ;83EE0C;848097;
+                       JSL.L SUB_848097                            ;83EE0C;848097;
                        %Set8bit(!M)                             ;83EE10;      ;
                        LDA.B #$06                           ;83EE12;      ;
                        STA.L $7F1F47                        ;83EE14;7F1F47;
@@ -11115,7 +11115,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EE26;      ;
                        LDX.W #$0035                         ;83EE29;      ;
                        LDY.W #$0000                         ;83EE2C;      ;
-                       JSL.L VIP                            ;83EE2F;848097;
+                       JSL.L SUB_848097                            ;83EE2F;848097;
                        %Set8bit(!M)                             ;83EE33;      ;
                        LDA.B #$07                           ;83EE35;      ;
                        STA.L $7F1F47                        ;83EE37;7F1F47;
@@ -11130,7 +11130,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EE49;      ;
                        LDX.W #$0037                         ;83EE4C;      ;
                        LDY.W #$0000                         ;83EE4F;      ;
-                       JSL.L VIP                            ;83EE52;848097;
+                       JSL.L SUB_848097                            ;83EE52;848097;
                        %Set8bit(!M)                             ;83EE56;      ;
                        LDA.B #$08                           ;83EE58;      ;
                        STA.L $7F1F47                        ;83EE5A;7F1F47;
@@ -11145,7 +11145,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EE6C;      ;
                        LDX.W #$0036                         ;83EE6F;      ;
                        LDY.W #$0000                         ;83EE72;      ;
-                       JSL.L VIP                            ;83EE75;848097;
+                       JSL.L SUB_848097                            ;83EE75;848097;
                        %Set8bit(!M)                             ;83EE79;      ;
                        LDA.B #$09                           ;83EE7B;      ;
                        STA.L $7F1F47                        ;83EE7D;7F1F47;
@@ -11163,7 +11163,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EE98;      ;
                        LDX.W #$0038                         ;83EE9B;      ;
                        LDY.W #$0000                         ;83EE9E;      ;
-                       JSL.L VIP                            ;83EEA1;848097;
+                       JSL.L SUB_848097                            ;83EEA1;848097;
                        %Set8bit(!M)                             ;83EEA5;      ;
                        LDA.B #$0A                           ;83EEA7;      ;
                        STA.L $7F1F47                        ;83EEA9;7F1F47;
@@ -11181,7 +11181,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EEC4;      ;
                        LDX.W #$0039                         ;83EEC7;      ;
                        LDY.W #$0000                         ;83EECA;      ;
-                       JSL.L VIP                            ;83EECD;848097;
+                       JSL.L SUB_848097                            ;83EECD;848097;
                        %Set8bit(!M)                             ;83EED1;      ;
                        LDA.B #$0B                           ;83EED3;      ;
                        STA.L $7F1F47                        ;83EED5;7F1F47;
@@ -11196,7 +11196,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EEE7;      ;
                        LDX.W #$003A                         ;83EEEA;      ;
                        LDY.W #$0000                         ;83EEED;      ;
-                       JSL.L VIP                            ;83EEF0;848097;
+                       JSL.L SUB_848097                            ;83EEF0;848097;
                        %Set8bit(!M)                             ;83EEF4;      ;
                        LDA.B #$21                           ;83EEF6;      ;
                        STA.L $7F1F47                        ;83EEF8;7F1F47;
@@ -11207,7 +11207,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EEFF;      ;
                        LDX.W #$003A                         ;83EF02;      ;
                        LDY.W #$0001                         ;83EF05;      ;
-                       JSL.L VIP                            ;83EF08;848097;
+                       JSL.L SUB_848097                            ;83EF08;848097;
                        %Set8bit(!M)                             ;83EF0C;      ;
                        LDA.B #$0C                           ;83EF0E;      ;
                        STA.L $7F1F47                        ;83EF10;7F1F47;
@@ -11222,7 +11222,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EF22;      ;
                        LDX.W #$003B                         ;83EF25;      ;
                        LDY.W #$0000                         ;83EF28;      ;
-                       JSL.L VIP                            ;83EF2B;848097;
+                       JSL.L SUB_848097                            ;83EF2B;848097;
                        %Set8bit(!M)                             ;83EF2F;      ;
                        LDA.B #$22                           ;83EF31;      ;
                        STA.L $7F1F47                        ;83EF33;7F1F47;
@@ -11233,7 +11233,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EF3A;      ;
                        LDX.W #$003B                         ;83EF3D;      ;
                        LDY.W #$0001                         ;83EF40;      ;
-                       JSL.L VIP                            ;83EF43;848097;
+                       JSL.L SUB_848097                            ;83EF43;848097;
                        %Set8bit(!M)                             ;83EF47;      ;
                        LDA.B #$0D                           ;83EF49;      ;
                        STA.L $7F1F47                        ;83EF4B;7F1F47;
@@ -11248,7 +11248,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EF5D;      ;
                        LDX.W #$003C                         ;83EF60;      ;
                        LDY.W #$0000                         ;83EF63;      ;
-                       JSL.L VIP                            ;83EF66;848097;
+                       JSL.L SUB_848097                            ;83EF66;848097;
                        %Set8bit(!M)                             ;83EF6A;      ;
                        LDA.B #$23                           ;83EF6C;      ;
                        STA.L $7F1F47                        ;83EF6E;7F1F47;
@@ -11259,7 +11259,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EF75;      ;
                        LDX.W #$003C                         ;83EF78;      ;
                        LDY.W #$0001                         ;83EF7B;      ;
-                       JSL.L VIP                            ;83EF7E;848097;
+                       JSL.L SUB_848097                            ;83EF7E;848097;
                        %Set8bit(!M)                             ;83EF82;      ;
                        LDA.B #$0E                           ;83EF84;      ;
                        STA.L $7F1F47                        ;83EF86;7F1F47;
@@ -11274,7 +11274,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EF98;      ;
                        LDX.W #$003D                         ;83EF9B;      ;
                        LDY.W #$0000                         ;83EF9E;      ;
-                       JSL.L VIP                            ;83EFA1;848097;
+                       JSL.L SUB_848097                            ;83EFA1;848097;
                        %Set8bit(!M)                             ;83EFA5;      ;
                        LDA.B #$24                           ;83EFA7;      ;
                        STA.L $7F1F47                        ;83EFA9;7F1F47;
@@ -11285,7 +11285,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EFB0;      ;
                        LDX.W #$003D                         ;83EFB3;      ;
                        LDY.W #$0001                         ;83EFB6;      ;
-                       JSL.L VIP                            ;83EFB9;848097;
+                       JSL.L SUB_848097                            ;83EFB9;848097;
                        %Set8bit(!M)                             ;83EFBD;      ;
                        LDA.B #$0F                           ;83EFBF;      ;
                        STA.L $7F1F47                        ;83EFC1;7F1F47;
@@ -11300,7 +11300,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83EFD3;      ;
                        LDX.W #$003E                         ;83EFD6;      ;
                        LDY.W #$0000                         ;83EFD9;      ;
-                       JSL.L VIP                            ;83EFDC;848097;
+                       JSL.L SUB_848097                            ;83EFDC;848097;
                        %Set8bit(!M)                             ;83EFE0;      ;
                        LDA.B #$10                           ;83EFE2;      ;
                        STA.L $7F1F47                        ;83EFE4;7F1F47;
@@ -11326,7 +11326,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83F019;      ;
                        LDX.W #$003F                         ;83F01C;      ;
                        LDY.W #$0000                         ;83F01F;      ;
-                       JSL.L VIP                            ;83F022;848097;
+                       JSL.L SUB_848097                            ;83F022;848097;
                        %Set8bit(!M)                             ;83F026;      ;
                        LDA.B #$11                           ;83F028;      ;
                        STA.L $7F1F47                        ;83F02A;7F1F47;
@@ -11341,7 +11341,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83F03C;      ;
                        LDX.W #$0040                         ;83F03F;      ;
                        LDY.W #$0000                         ;83F042;      ;
-                       JSL.L VIP                            ;83F045;848097;
+                       JSL.L SUB_848097                            ;83F045;848097;
                        %Set8bit(!M)                             ;83F049;      ;
                        LDA.B #$12                           ;83F04B;      ;
                        STA.L $7F1F47                        ;83F04D;7F1F47;
@@ -11356,7 +11356,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83F05F;      ;
                        LDX.W #$0041                         ;83F062;      ;
                        LDY.W #$0000                         ;83F065;      ;
-                       JSL.L VIP                            ;83F068;848097;
+                       JSL.L SUB_848097                            ;83F068;848097;
                        %Set8bit(!M)                             ;83F06C;      ;
                        LDA.B #$13                           ;83F06E;      ;
                        STA.L $7F1F47                        ;83F070;7F1F47;
@@ -11394,7 +11394,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83F0C0;      ;
                        LDX.W #$0042                         ;83F0C3;      ;
                        LDY.W #$0000                         ;83F0C6;      ;
-                       JSL.L VIP                            ;83F0C9;848097;
+                       JSL.L SUB_848097                            ;83F0C9;848097;
                        %Set8bit(!M)                             ;83F0CD;      ;
                        LDA.B #$14                           ;83F0CF;      ;
                        STA.L $7F1F47                        ;83F0D1;7F1F47;
@@ -11435,7 +11435,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83F128;      ;
                        LDX.W #$0046                         ;83F12B;      ;
                        LDY.W #$0000                         ;83F12E;      ;
-                       JSL.L VIP                            ;83F131;848097;
+                       JSL.L SUB_848097                            ;83F131;848097;
                        %Set8bit(!M)                             ;83F135;      ;
                        LDA.B #$15                           ;83F137;      ;
                        STA.L $7F1F47                        ;83F139;7F1F47;
@@ -11450,7 +11450,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83F14D;      ;
                        LDX.W #$0046                         ;83F150;      ;
                        LDY.W #$0001                         ;83F153;      ;
-                       JSL.L VIP                            ;83F156;848097;
+                       JSL.L SUB_848097                            ;83F156;848097;
                        %Set8bit(!M)                             ;83F15A;      ;
                        LDA.B #$16                           ;83F15C;      ;
                        STA.L $7F1F47                        ;83F15E;7F1F47;
@@ -11461,7 +11461,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83F165;      ;
                        LDX.W #$0046                         ;83F168;      ;
                        LDY.W #$0002                         ;83F16B;      ;
-                       JSL.L VIP                            ;83F16E;848097;
+                       JSL.L SUB_848097                            ;83F16E;848097;
                        %Set8bit(!M)                             ;83F172;      ;
                        LDA.B #$17                           ;83F174;      ;
                        STA.L $7F1F47                        ;83F176;7F1F47;
@@ -11472,7 +11472,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83F17D;      ;
                        LDX.W #$0046                         ;83F180;      ;
                        LDY.W #$0003                         ;83F183;      ;
-                       JSL.L VIP                            ;83F186;848097;
+                       JSL.L SUB_848097                            ;83F186;848097;
                        %Set8bit(!M)                             ;83F18A;      ;
                        LDA.B #$18                           ;83F18C;      ;
                        STA.L $7F1F47                        ;83F18E;7F1F47;
@@ -11483,7 +11483,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83F195;      ;
                        LDX.W #$0046                         ;83F198;      ;
                        LDY.W #$0004                         ;83F19B;      ;
-                       JSL.L VIP                            ;83F19E;848097;
+                       JSL.L SUB_848097                            ;83F19E;848097;
                        %Set8bit(!M)                             ;83F1A2;      ;
                        LDA.B #$19                           ;83F1A4;      ;
                        STA.L $7F1F47                        ;83F1A6;7F1F47;
@@ -11494,7 +11494,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83F1AD;      ;
                        LDX.W #$0046                         ;83F1B0;      ;
                        LDY.W #$0005                         ;83F1B3;      ;
-                       JSL.L VIP                            ;83F1B6;848097;
+                       JSL.L SUB_848097                            ;83F1B6;848097;
                        %Set8bit(!M)                             ;83F1BA;      ;
                        LDA.B #$1A                           ;83F1BC;      ;
                        STA.L $7F1F47                        ;83F1BE;7F1F47;
@@ -11505,7 +11505,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83F1C5;      ;
                        LDX.W #$0046                         ;83F1C8;      ;
                        LDY.W #$0006                         ;83F1CB;      ;
-                       JSL.L VIP                            ;83F1CE;848097;
+                       JSL.L SUB_848097                            ;83F1CE;848097;
                        %Set8bit(!M)                             ;83F1D2;      ;
                        LDA.B #$1B                           ;83F1D4;      ;
                        STA.L $7F1F47                        ;83F1D6;7F1F47;
@@ -11516,7 +11516,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83F1DD;      ;
                        LDX.W #$0046                         ;83F1E0;      ;
                        LDY.W #$0007                         ;83F1E3;      ;
-                       JSL.L VIP                            ;83F1E6;848097;
+                       JSL.L SUB_848097                            ;83F1E6;848097;
                        %Set8bit(!M)                             ;83F1EA;      ;
                        LDA.B #$20                           ;83F1EC;      ;
                        STA.L $7F1F47                        ;83F1EE;7F1F47;
@@ -11531,7 +11531,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83F202;      ;
                        LDX.W #$0046                         ;83F205;      ;
                        LDY.W #$0008                         ;83F208;      ;
-                       JSL.L VIP                            ;83F20B;848097;
+                       JSL.L SUB_848097                            ;83F20B;848097;
                        %Set8bit(!M)                             ;83F20F;      ;
                        LDA.B #$1D                           ;83F211;      ;
                        STA.L $7F1F47                        ;83F213;7F1F47;
@@ -11542,7 +11542,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83F21A;      ;
                        LDX.W #$0046                         ;83F21D;      ;
                        LDY.W #$0009                         ;83F220;      ;
-                       JSL.L VIP                            ;83F223;848097;
+                       JSL.L SUB_848097                            ;83F223;848097;
                        %Set8bit(!M)                             ;83F227;      ;
                        LDA.B #$1E                           ;83F229;      ;
                        STA.L $7F1F47                        ;83F22B;7F1F47;
@@ -11553,7 +11553,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83F232;      ;
                        LDX.W #$0046                         ;83F235;      ;
                        LDY.W #$000A                         ;83F238;      ;
-                       JSL.L VIP                            ;83F23B;848097;
+                       JSL.L SUB_848097                            ;83F23B;848097;
                        %Set8bit(!M)                             ;83F23F;      ;
                        LDA.B #$1F                           ;83F241;      ;
                        STA.L $7F1F47                        ;83F243;7F1F47;
@@ -11564,7 +11564,7 @@ UNK_TableFunctionSelect: dw $CB69,$CB69,$CB69,$CB69,$D2E0,$D2E0,$D2E0,$D2E0;83CA
                        LDA.W #$0000                         ;83F24A;      ;
                        LDX.W #$0046                         ;83F24D;      ;
                        LDY.W #$000B                         ;83F250;      ;
-                       JSL.L VIP                            ;83F253;848097;
+                       JSL.L SUB_848097                            ;83F253;848097;
                        %Set8bit(!M)                             ;83F257;      ;
                        LDA.B #$20                           ;83F259;      ;
                        STA.L $7F1F47                        ;83F25B;7F1F47;
@@ -11846,7 +11846,7 @@ RanchMasteryCalculator:
         LDA.W #$0000
         LDX.W #$0046
         LDY.W #$000C
-        JSL.L VIP
+        JSL.L SUB_848097
         %Set8bit(!M)
         LDA.B #$25
         STA.L $7F1F47
@@ -11866,7 +11866,7 @@ CODE_83F4D8:
         LDA.W #$0000
         LDX.W #$002E                         ;56
         LDY.W #$0000
-        JSL.L VIP                            ;TODO
+        JSL.L SUB_848097                            ;TODO
         %Set16bit(!MX)
         STZ.W $0196
         LDA.L $7F1F5E
