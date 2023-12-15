@@ -2886,7 +2886,7 @@ SetCCPoiner: ;84887C
           CODE_8496B0: %Set8bit(!M)                             ;8496B0;      ;
                        LDA.W !item_on_hand                          ;8496B2;00091D;
                        BEQ CODE_8496C4                      ;8496B5;8496C4;
-                       STA.W $091E                          ;8496B7;00091E;
+                       STA.W !old_item_on_hand                          ;8496B7;00091E;
                        %Set16bit(!MX)                             ;8496BA;      ;
                        LDA.B $C9                            ;8496BC;0000C9;
                        CLC                                  ;8496BE;      ;

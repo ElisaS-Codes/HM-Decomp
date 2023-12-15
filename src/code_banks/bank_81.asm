@@ -6080,9 +6080,9 @@ SUB_81BFB7: ;81BFB7
                        JSL.L SUB_829260                    ;81C53E;829260;
                                                             ;      ;      ;
           CODE_81C542: %Set8bit(!M)                             ;81C542;      ;
-                       LDA.W $091B                          ;81C544;00091B;
+                       LDA.W !counter_tool_sound                          ;81C544;00091B;
                        INC A                                ;81C547;      ;
-                       STA.W $091B                          ;81C548;00091B;
+                       STA.W !counter_tool_sound                          ;81C548;00091B;
                        CMP.B #$18                           ;81C54B;      ;
                        BNE CODE_81C553                      ;81C54D;81C553;
                        JSL.L SUB_828FB1                          ;81C54F;828FB1;
@@ -6476,10 +6476,10 @@ SUB_81BFB7: ;81BFB7
                                                             ;      ;      ;
           CODE_81C806: %Set8bit(!M)                             ;81C806;      ;
                        %Set16bit(!X)                             ;81C808;      ;
-                       LDA.W $091A                          ;81C80A;00091A;
+                       LDA.W !run_step_sound                          ;81C80A;00091A;
                        INC A                                ;81C80D;      ;
                        AND.B #$0F                           ;81C80E;      ;
-                       STA.W $091A                          ;81C810;00091A;
+                       STA.W !run_step_sound                          ;81C810;00091A;
                        BNE CODE_81C827                      ;81C813;81C827;
                        %Set8bit(!M)                             ;81C815;      ;
                        %Set16bit(!X)                             ;81C817;      ;
@@ -6705,7 +6705,7 @@ SUB_81BFB7: ;81BFB7
                        STA.B !game_state                            ;81C9D2;0000D2;
                        %Set8bit(!M)                             ;81C9D4;      ;
                        LDA.W !item_on_hand                          ;81C9D6;00091D;
-                       STA.W $091E                          ;81C9D9;00091E;
+                       STA.W !old_item_on_hand                          ;81C9D9;00091E;
                                                             ;      ;      ;
           CODE_81C9DC: JMP.W ResetIdleAnimatioTimer                    ;81C9DC;81C002;
                                                             ;      ;      ;

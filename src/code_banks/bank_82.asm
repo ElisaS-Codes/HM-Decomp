@@ -1803,7 +1803,7 @@ UNK_ToolUsed: ;8290A8
     .toolused:
         JSR.W SUB_82927D
         %Set8bit(!M)
-        STZ.W $091B
+        STZ.W !counter_tool_sound
         LDA.B #$00
         XBA
         LDA.W !tool_selected

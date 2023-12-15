@@ -3495,15 +3495,15 @@ FirstNightReset: ;83ABF0
         LDA.W !max_stamina
         STA.W !current_stamina
         %Set8bit(!M)
-        STZ.W $091A
-        STZ.W $091B
+        STZ.W !run_step_sound
+        STZ.W !counter_tool_sound
         %Set8bit(!M)
         STZ.W !idle_animation_timer
         %Set8bit(!M)
         STZ.W $0990
         %Set8bit(!M)
         STZ.W !item_on_hand
-        STZ.W $091E
+        STZ.W !old_item_on_hand
         STZ.W $091F
         STZ.W $0920
         STZ.W $096B

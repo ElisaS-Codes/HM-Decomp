@@ -159,7 +159,11 @@ $7E0119 =  - 8b audio related
 🧢$7E0917 = !max_stamina - 8b
 🧢$7E0918 = !current_stamina - 8b
 
+🧢$7E091A = !run_step_sound - 8b
+🧢$7E091B = !counter_tool_sound - 8b
+
 🧢$7E091D = !item_on_hand - 8b
+🧢$7E091E = !old_item_on_hand - 8b
 
 🧢$7E0921 = !tool_selected - 8b
 🧢$7E0922 = !tool_used_sound - 8b
