@@ -76,7 +76,7 @@ GameLoop: ;808083
         JSL.L BAAAA
         JSL.L SUB_81BFB7
         JSL.L AutoMapScrolling
-        JSL.L CODE_84816F
+        JSL.L SUB_84816F
         JSL.L CODE_81A600
         JSL.L CODE_8582C7
         JSL.L CODE_858CB2
@@ -2913,7 +2913,7 @@ UNK_ScreenTransition: ;8096D3
         LDA.W !transition_dest
         STA.B !tilemap_to_load
         JSL.L RunsFunctionbyIndex
-        JSL.L CODE_84816F
+        JSL.L SUB_84816F
         %Set8bit(!M)
         LDA.W !transition_dest
         JSL.L SUB_80972C
@@ -3256,7 +3256,7 @@ SUB_80972C: ;80972C
         LDA.W #$1800                         ;809A09;      ;
         STA.B $C7                            ;809A0C;0000C7;
         JSL.L BAAAA                          ;809A0E;81A383;
-        JSL.L CODE_84816F                    ;809A12;84816F;
+        JSL.L SUB_84816F                    ;809A12;84816F;
         JSL.L CODE_8582C7                    ;809A16;8582C7;
         JSL.L CODE_858CB2                    ;809A1A;858CB2;
         JSL.L UNK_BigLoadLoopOAM             ;809A1E;8583E0;
@@ -3267,7 +3267,7 @@ SUB_80972C: ;80972C
         LDA.W #$1800                         ;809A2C;      ;
         STA.B $C7                            ;809A2F;0000C7;
         JSL.L BAAAA                          ;809A31;81A383;
-        JSL.L CODE_84816F                    ;809A35;84816F;
+        JSL.L SUB_84816F                    ;809A35;84816F;
         JSL.L CODE_8582C7                    ;809A39;8582C7;
         JSL.L CODE_858CB2                    ;809A3D;858CB2;
         JSL.L UNK_BigLoadLoopOAM             ;809A41;8583E0;
@@ -3829,7 +3829,7 @@ SUB_809D0B: ;809D0B
         LDA.W #$0011                         ;809E30;      ;
         LDX.W #$002C                         ;809E33;      ;
         LDY.W #$0000                         ;809E36;      ;
-        JSL.L SUB_848097                            ;809E39;848097;
+        JSL.L UNK_LoadCCDataLong                            ;809E39;848097;
         BRA $7C                              ;809E3D;809EBB;
                                             ;      ;      ;
                                             ;      ;      ;
@@ -3857,7 +3857,7 @@ SUB_809D0B: ;809D0B
         LDA.W #$0013                         ;809E6E;      ;
         LDX.W #$002B                         ;809E71;      ;
         LDY.W #$0000                         ;809E74;      ;
-        JSL.L SUB_848097                            ;809E77;848097;
+        JSL.L UNK_LoadCCDataLong                            ;809E77;848097;
         BRA $3E                              ;809E7B;809EBB;
                                             ;      ;      ;
                                             ;      ;      ;
@@ -3885,7 +3885,7 @@ SUB_809D0B: ;809D0B
         LDA.W #$0012                         ;809EAC;      ;
         LDX.W #$002A                         ;809EAF;      ;
         LDY.W #$0000                         ;809EB2;      ;
-        JSL.L SUB_848097                            ;809EB5;848097;
+        JSL.L UNK_LoadCCDataLong                            ;809EB5;848097;
         BRA !NMI_Status                              ;809EB9;809EBB;
                                             ;      ;      ;
         RTL                                  ;809EBB;      ;END_SUB_809D0B

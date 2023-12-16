@@ -9,6 +9,8 @@ DATA8_81B363 - 16bit
 81AC49 -16bit
 81B121 - code
 
+8489BB
+
 ====
 $09B6 - current map logical tile
 $7E2000 - current map graphical tile
@@ -21,6 +23,8 @@ $94
 !demo_timer = $90
 $97
 $AF
+
+$DE: random number, related to npc?
 
 A: 0
 X: 9
@@ -41,12 +45,13 @@ struct $CC
 06:r -8b
 0C:r -8b
 0F:r -8b
+10: - 16b
 12:r -8b
 14:r -16b
-10:r -16b
+10:r is event running this frame -16b
 1A:r -16b
 1C:r -16b
-30: Data from B38000 -16b
+30: Data from B38000 -16b this is a kind of pointer with 32, but 32 is always the bank of the event list
 32: bank of C9? -8b
 3F: Index of struct -8
 

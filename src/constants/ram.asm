@@ -65,6 +65,7 @@
 !Joy2_Unused = $013A
 ;
 !inputstate = $019A
+;00:, 01: normal, 02: no control, 03:, 04:menu input, 05:name input mode, 06:
 
 ;BGs Offsets, 16b
 !BG1_Map_Offset_X = $013C

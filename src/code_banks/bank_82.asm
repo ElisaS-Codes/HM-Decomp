@@ -178,7 +178,7 @@ ShippingScene: ;828131
         LDA.W #$0006
         LDX.W #$0000
         LDY.W #$0026
-        JSL.L SUB_848097
+        JSL.L UNK_LoadCCDataLong
 
 ;;;;;;;;
 ShippingSceneDialogue: ;828165
@@ -213,7 +213,7 @@ ShippingSceneDialogue: ;828165
         LDA.W #$0006
         LDX.W #$0000
         LDY.W #$0027
-        JSL.L SUB_84803F                      ;TODO
+        JSL.L UNK_LoadCCDataShort                      ;TODO
         %Set16bit(!M)
         LDA.L $7F1F5A
         AND.W #$FBFF                           ;FLAG5A
@@ -4479,8 +4479,8 @@ SUB_82D1C0: ;82D1C0
         LDA.W #$0000                         ;82D31D;      ;
         LDX.W #$0047                         ;82D320;      ;
         LDY.W #$0000                         ;82D323;      ;
-        JSL.L SUB_848097                            ;82D326;848097;
-        JSL.L CODE_84816F                    ;82D32A;84816F;
+        JSL.L UNK_LoadCCDataLong                            ;82D326;848097;
+        JSL.L SUB_84816F                    ;82D32A;84816F;
         %Set8bit(!M)                             ;82D32E;      ;
         LDA.W !transition_dest                          ;82D330;00098B;
         STA.B !tilemap_to_load                            ;82D333;000022;
@@ -4511,7 +4511,7 @@ SUB_82D1C0: ;82D1C0
         JSL.L BAAAA                          ;82D374;81A383;
         JSL.L SUB_81BFB7                          ;82D378;81BFB7;
         JSL.L AutoMapScrolling               ;82D37C;8095B3;
-        JSL.L CODE_84816F                    ;82D380;84816F;
+        JSL.L SUB_84816F                    ;82D380;84816F;
         JSL.L CODE_81A600                    ;82D384;81A600;
         JSL.L CODE_8582C7                    ;82D388;8582C7;
         JSL.L CODE_858CB2                    ;82D38C;858CB2;
@@ -4727,7 +4727,7 @@ DemoPresentation:
         LDA.W #$0000                         ;82D576;      ;
         LDX.W #$0047                         ;82D579;      ;
         LDY.W #$0002                         ;82D57C;      ;
-        JSL.L SUB_848097                            ;82D57F;848097;
+        JSL.L UNK_LoadCCDataLong                            ;82D57F;848097;
         %Set8bit(!M)                             ;82D583;      ;
         LDA.B #$01                           ;82D585;      ;
         STA.L $7F1F48                        ;82D587;7F1F48;
@@ -4738,7 +4738,7 @@ DemoPresentation:
         LDA.W #$0000                         ;82D590;      ;
         LDX.W #$0047                         ;82D593;      ;
         LDY.W #$0004                         ;82D596;      ;
-        JSL.L SUB_848097                            ;82D599;848097;
+        JSL.L UNK_LoadCCDataLong                            ;82D599;848097;
         %Set8bit(!M)                             ;82D59D;      ;
         LDA.B #$02                           ;82D59F;      ;
         STA.L $7F1F48                        ;82D5A1;7F1F48;
@@ -4749,7 +4749,7 @@ DemoPresentation:
         LDA.W #$0000                         ;82D5AA;      ;
         LDX.W #$0047                         ;82D5AD;      ;
         LDY.W #$0006                         ;82D5B0;      ;
-        JSL.L SUB_848097                            ;82D5B3;848097;
+        JSL.L UNK_LoadCCDataLong                            ;82D5B3;848097;
         %Set8bit(!M)                             ;82D5B7;      ;
         LDA.B #$03                           ;82D5B9;      ;
         STA.L $7F1F48                        ;82D5BB;7F1F48;
@@ -4760,7 +4760,7 @@ DemoPresentation:
         LDA.W #$0000                         ;82D5C4;      ;
         LDX.W #$0047                         ;82D5C7;      ;
         LDY.W #$0007                         ;82D5CA;      ;
-        JSL.L SUB_848097                            ;82D5CD;848097;
+        JSL.L UNK_LoadCCDataLong                            ;82D5CD;848097;
         %Set8bit(!M)                             ;82D5D1;      ;
         LDA.B #$04                           ;82D5D3;      ;
         STA.L $7F1F48                        ;82D5D5;7F1F48;
@@ -4771,7 +4771,7 @@ DemoPresentation:
         LDA.W #$0000                         ;82D5DE;      ;
         LDX.W #$0047                         ;82D5E1;      ;
         LDY.W #$0009                         ;82D5E4;      ;
-        JSL.L SUB_848097                            ;82D5E7;848097;
+        JSL.L UNK_LoadCCDataLong                            ;82D5E7;848097;
         %Set8bit(!M)                             ;82D5EB;      ;
         LDA.B #$05                           ;82D5ED;      ;
         STA.L $7F1F48                        ;82D5EF;7F1F48;
@@ -4782,7 +4782,7 @@ DemoPresentation:
         LDA.W #$0000                         ;82D5F8;      ;
         LDX.W #$0047                         ;82D5FB;      ;
         LDY.W #$000B                         ;82D5FE;      ;
-        JSL.L SUB_848097                            ;82D601;848097;
+        JSL.L UNK_LoadCCDataLong                            ;82D601;848097;
         %Set8bit(!M)                             ;82D605;      ;
         LDA.B #$06                           ;82D607;      ;
         STA.L $7F1F48                        ;82D609;7F1F48;
@@ -4793,7 +4793,7 @@ DemoPresentation:
         LDA.W #$0000                         ;82D612;      ;
         LDX.W #$0047                         ;82D615;      ;
         LDY.W #$000D                         ;82D618;      ;
-        JSL.L SUB_848097                            ;82D61B;848097;
+        JSL.L UNK_LoadCCDataLong                            ;82D61B;848097;
         %Set8bit(!M)                             ;82D61F;      ;
         LDA.B #$07                           ;82D621;      ;
         STA.L $7F1F48                        ;82D623;7F1F48;
@@ -4804,7 +4804,7 @@ DemoPresentation:
         LDA.W #$0000                         ;82D62C;      ;
         LDX.W #$0047                         ;82D62F;      ;
         LDY.W #$0011                         ;82D632;      ;
-        JSL.L SUB_848097                            ;82D635;848097;
+        JSL.L UNK_LoadCCDataLong                            ;82D635;848097;
         %Set8bit(!M)                             ;82D639;      ;
         LDA.B #$08                           ;82D63B;      ;
         STA.L $7F1F48                        ;82D63D;7F1F48;
@@ -4815,7 +4815,7 @@ DemoPresentation:
         LDA.W #$0000                         ;82D646;      ;
         LDX.W #$0047                         ;82D649;      ;
         LDY.W #$0015                         ;82D64C;      ;
-        JSL.L SUB_848097                            ;82D64F;848097;
+        JSL.L UNK_LoadCCDataLong                            ;82D64F;848097;
         %Set8bit(!M)                             ;82D653;      ;
         LDA.B #$09                           ;82D655;      ;
         STA.L $7F1F48                        ;82D657;7F1F48;
@@ -4826,7 +4826,7 @@ DemoPresentation:
         LDA.W #$0000                         ;82D660;      ;
         LDX.W #$0047                         ;82D663;      ;
         LDY.W #$0017                         ;82D666;      ;
-        JSL.L SUB_848097                            ;82D669;848097;
+        JSL.L UNK_LoadCCDataLong                            ;82D669;848097;
         %Set8bit(!M)                             ;82D66D;      ;
         LDA.B #$0A                           ;82D66F;      ;
         STA.L $7F1F48                        ;82D671;7F1F48;
@@ -4837,7 +4837,7 @@ DemoPresentation:
         LDA.W #$0000                         ;82D67A;      ;
         LDX.W #$0047                         ;82D67D;      ;
         LDY.W #$0019                         ;82D680;      ;
-        JSL.L SUB_848097                            ;82D683;848097;
+        JSL.L UNK_LoadCCDataLong                            ;82D683;848097;
         %Set8bit(!M)                             ;82D687;      ;
         LDA.B #$0B                           ;82D689;      ;
         STA.L $7F1F48                        ;82D68B;7F1F48;
@@ -4848,14 +4848,14 @@ DemoPresentation:
         LDA.W #$0000                         ;82D694;      ;
         LDX.W #$0047                         ;82D697;      ;
         LDY.W #$001B                         ;82D69A;      ;
-        JSL.L SUB_848097                            ;82D69D;848097;
+        JSL.L UNK_LoadCCDataLong                            ;82D69D;848097;
         %Set8bit(!M)                             ;82D6A1;      ;
         LDA.B #$00                           ;82D6A3;      ;
         STA.L $7F1F48                        ;82D6A5;7F1F48;
         JMP.W .CODE_82D6AC                    ;82D6A9;82D6AC;
 
     .CODE_82D6AC:
-        JSL.L CODE_84816F                    ;82D6AC;84816F;
+        JSL.L SUB_84816F                    ;82D6AC;84816F;
         %Set8bit(!M)                             ;82D6B0;      ;
         LDA.W !transition_dest                          ;82D6B2;00098B;
         STA.B !tilemap_to_load                            ;82D6B5;000022;
@@ -4885,7 +4885,7 @@ DemoPresentation:
         JSL.L BAAAA                          ;82D6F6;81A383;
         JSL.L SUB_81BFB7                          ;82D6FA;81BFB7;
         JSL.L AutoMapScrolling               ;82D6FE;8095B3;
-        JSL.L CODE_84816F                    ;82D702;84816F;
+        JSL.L SUB_84816F                    ;82D702;84816F;
         JSL.L CODE_81A600                    ;82D706;81A600;
         JSL.L CODE_8582C7                    ;82D70A;8582C7;
         JSL.L CODE_858CB2                    ;82D70E;858CB2;
@@ -5138,8 +5138,8 @@ IntroScreen: ;82D75E
         LDA.W #$0000
         LDX.W #$0009
         LDY.W #$0000
-        JSL.L SUB_848097
-        JSL.L CODE_84816F
+        JSL.L UNK_LoadCCDataLong
+        JSL.L SUB_84816F
         %Set8bit(!M)                             ;82D912;      ;
         LDA.W !transition_dest                          ;82D914;00098B;
         STA.B !tilemap_to_load                            ;82D917;000022;
@@ -5173,7 +5173,7 @@ IntroScreen: ;82D75E
         JSL.L BAAAA                          ;82D968;81A383;
         JSL.L SUB_81BFB7                          ;82D96C;81BFB7;
         JSL.L AutoMapScrolling               ;82D970;8095B3;
-        JSL.L CODE_84816F                    ;82D974;84816F;
+        JSL.L SUB_84816F                    ;82D974;84816F;
         JSL.L CODE_81A600                    ;82D978;81A600;
         JSL.L CODE_8582C7                    ;82D97C;8582C7;
         JSL.L CODE_858CB2                    ;82D980;858CB2;

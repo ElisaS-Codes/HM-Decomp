@@ -492,7 +492,7 @@ ToolUsedHammer: ;8295C0
         LDA.W #$0015
         LDX.W #$0000
         LDY.W #$0016
-        JSL.L SUB_84803F                    ;TODO
+        JSL.L UNK_LoadCCDataShort                    ;TODO
         %Set8bit(!M)
         LDA.B #$04
         JSL.L RNGReturn0toA
@@ -726,7 +726,7 @@ ToolUsedAxe: ;8297BD
         LDA.W #$0000
         LDX.W #$0017
         LDY.W #$0000
-        JSL.L SUB_848097
+        JSL.L UNK_LoadCCDataLong
 
     .return:
         %Set16bit(!MX)
@@ -1697,7 +1697,7 @@ ToolUsedGoldHammer: ;82A005
         LDA.W #$0015
         LDX.W #$0000
         LDY.W #$0016
-        JSL.L SUB_84803F
+        JSL.L UNK_LoadCCDataShort
         %Set8bit(!M)
         LDA.B #$04
         JSL.L RNGReturn0toA
@@ -1990,7 +1990,7 @@ ToolUsedGemSeed: ;82A3AA
         LDA.W #$0000
         LDX.W #$0012
         LDY.W #$0000
-        JSL.L SUB_848097
+        JSL.L UNK_LoadCCDataLong
         %Set8bit(!M)
         STZ.W !tool_selected
 

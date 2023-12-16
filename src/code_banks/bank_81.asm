@@ -2836,7 +2836,7 @@ Droped_on_sale_place:
       LDA.W #$0000                         ;819612;      ;
       LDX.W #$0010                         ;819615;      ;
       LDY.W #$0000                         ;819618;      ;
-      JSL.L SUB_848097                            ;81961B;848097;
+      JSL.L UNK_LoadCCDataLong                            ;81961B;848097;
       %Set16bit(!MX)                             ;81961F;      ;
       LDA.L $7F1F66                        ;819621;7F1F66;
       ORA.W #$2000                         ;819625;      ;
@@ -3269,29 +3269,29 @@ BAAAA: ;81A383
 
 ;;;;;;;;
 UNK_PresetsMemory3:
-        %Set16bit(!MX)                             ;81A4C7;      ;$7EB4E6 to
-        LDA.W #$B4E6                         ;81A4C9;      ;
-        STA.B $07                            ;81A4CC;000007;
-        %Set8bit(!M)                             ;81A4CE;      ;
-        LDA.B #$7E                           ;81A4D0;      ;
-        STA.B $09                            ;81A4D2;000009;
-        LDX.W #$0000                         ;81A4D4;      ;
+        %Set16bit(!MX)
+        LDA.W #$B4E6
+        STA.B $07
+        %Set8bit(!M)
+        LDA.B #$7E
+        STA.B $09
+        LDX.W #$0000
 
     .loop:
-            %Set8bit(!M)                             ;81A4D7;      ;
-            LDY.W #$0000                         ;81A4D9;      ;
-            LDA.B #$00                           ;81A4DC;      ;
-            STA.B [$07],Y                        ;81A4DE;000007;
-            %Set16bit(!M)                             ;81A4E0;      ;
-            LDA.B $07                            ;81A4E2;000007;
-            CLC                                  ;81A4E4;      ;
-            ADC.W #$0010                         ;81A4E5;      ;
-            STA.B $07                            ;81A4E8;000007;
-            INX                                  ;81A4EA;      ;
-            CPX.W #$000A                         ;81A4EB;      ;
-            BNE .loop                            ;81A4EE;81A4D7;
+            %Set8bit(!M)
+            LDY.W #$0000
+            LDA.B #$00
+            STA.B [$07],Y
+            %Set16bit(!M)
+            LDA.B $07
+            CLC
+            ADC.W #$0010
+            STA.B $07
+            INX
+            CPX.W #$000A
+            BNE .loop
 
-        RTL                                  ;81A4F0;      ;
+        RTL
 ;;;;;;;;
 CODE_81A4F1:
         %Set8bit(!M)                             ;81A4F1;      ;
@@ -5566,7 +5566,7 @@ SUB_81BFB7: ;81BFB7
                        LDA.W #$0014                         ;81C0E3;      ;
                        LDX.W #$0045                         ;81C0E6;      ;
                        LDY.W #$0000                         ;81C0E9;      ;
-                       JSL.L SUB_848097                            ;81C0EC;848097;
+                       JSL.L UNK_LoadCCDataLong                            ;81C0EC;848097;
                        BRA CODE_81C101                      ;81C0F0;81C101;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -5574,7 +5574,7 @@ SUB_81BFB7: ;81BFB7
                        LDA.W #$0015                         ;81C0F4;      ;
                        LDX.W #$0045                         ;81C0F7;      ;
                        LDY.W #$0003                         ;81C0FA;      ;
-                       JSL.L SUB_848097                            ;81C0FD;848097;
+                       JSL.L UNK_LoadCCDataLong                            ;81C0FD;848097;
                                                             ;      ;      ;
           CODE_81C101: %Set16bit(!MX)                             ;81C101;      ;
                        LDA.L $7F1F60                        ;81C103;7F1F60;
@@ -5792,7 +5792,7 @@ SUB_81BFB7: ;81BFB7
                        LDA.W #$0014                         ;81C2F3;      ;
                        LDX.W #$0000                         ;81C2F6;      ;
                        LDY.W #$0033                         ;81C2F9;      ;
-                       JSL.L SUB_848097                            ;81C2FC;848097;
+                       JSL.L UNK_LoadCCDataLong                            ;81C2FC;848097;
                        JMP.W CODE_81C330                    ;81C300;81C330;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -5800,7 +5800,7 @@ SUB_81BFB7: ;81BFB7
                        LDA.W #$0014                         ;81C305;      ;
                        LDX.W #$0000                         ;81C308;      ;
                        LDY.W #$0035                         ;81C30B;      ;
-                       JSL.L SUB_848097                            ;81C30E;848097;
+                       JSL.L UNK_LoadCCDataLong                            ;81C30E;848097;
                        %Set16bit(!M)                             ;81C312;      ;
                        LDA.W #$0002                         ;81C314;      ;
                        JSL.L AddPlayerHappiness                   ;81C317;83B282;
@@ -5811,7 +5811,7 @@ SUB_81BFB7: ;81BFB7
                        LDA.W #$0014                         ;81C320;      ;
                        LDX.W #$0000                         ;81C323;      ;
                        LDY.W #$0034                         ;81C326;      ;
-                       JSL.L SUB_848097                            ;81C329;848097;
+                       JSL.L UNK_LoadCCDataLong                            ;81C329;848097;
                        JMP.W CODE_81C330                    ;81C32D;81C330;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -10260,7 +10260,7 @@ CODE_81D716: ;81D716
                        LDA.W #$0008                         ;81E836;      ;
                        LDX.W #$0000                         ;81E839;      ;
                        LDY.W #$007C                         ;81E83C;      ;
-                       JSL.L SUB_848097                            ;81E83F;848097;
+                       JSL.L UNK_LoadCCDataLong                            ;81E83F;848097;
                        %Set8bit(!M)                             ;81E843;      ;
                        LDA.B #$07                           ;81E845;      ;
                        STA.W $096F                          ;81E847;00096F;
@@ -10271,7 +10271,7 @@ CODE_81D716: ;81D716
                        LDA.W #$0007                         ;81E84F;      ;
                        LDX.W #$0000                         ;81E852;      ;
                        LDY.W #$0021                         ;81E855;      ;
-                       JSL.L SUB_848097                            ;81E858;848097;
+                       JSL.L UNK_LoadCCDataLong                            ;81E858;848097;
                        %Set8bit(!M)                             ;81E85C;      ;
                        LDA.B #$01                           ;81E85E;      ;
                        STA.W $096F                          ;81E860;00096F;
@@ -10413,14 +10413,14 @@ CODE_81D716: ;81D716
                        LDA.W #$0007                         ;81E988;      ;
                        LDX.W #$0000                         ;81E98B;      ;
                        LDY.W #$0023                         ;81E98E;      ;
-                       JSL.L SUB_848097                            ;81E991;848097;
+                       JSL.L UNK_LoadCCDataLong                            ;81E991;848097;
                        %Set8bit(!M)                             ;81E995;      ;
                        LDA.B #$00                           ;81E997;      ;
                        XBA                                  ;81E999;      ;
                        LDA.W $09A0                          ;81E99A;0009A0;
                        LDX.W #$0000                         ;81E99D;      ;
                        LDY.W #$0022                         ;81E9A0;      ;
-                       JSL.L SUB_84803F                    ;81E9A3;84803F;
+                       JSL.L UNK_LoadCCDataShort                    ;81E9A3;84803F;
                        %Set8bit(!M)                             ;81E9A7;      ;
                        LDA.B #$00                           ;81E9A9;      ;
                        XBA                                  ;81E9AB;      ;
@@ -10485,7 +10485,7 @@ CODE_81D716: ;81D716
                        LDA.W #$0007                         ;81EA28;      ;
                        LDX.W #$0000                         ;81EA2B;      ;
                        LDY.W #$0023                         ;81EA2E;      ;
-                       JSL.L SUB_848097                            ;81EA31;848097;
+                       JSL.L UNK_LoadCCDataLong                            ;81EA31;848097;
                        %Set8bit(!M)                             ;81EA35;      ;
                        LDA.B #$06                           ;81EA37;      ;
                        STA.W $096F                          ;81EA39;00096F;
@@ -10601,14 +10601,14 @@ CODE_81D716: ;81D716
                        LDA.W #$0008                         ;81EB1E;      ;
                        LDX.W #$0000                         ;81EB21;      ;
                        LDY.W #$007D                         ;81EB24;      ;
-                       JSL.L SUB_848097                            ;81EB27;848097;
+                       JSL.L UNK_LoadCCDataLong                            ;81EB27;848097;
                        %Set8bit(!M)                             ;81EB2B;      ;
                        LDA.B #$00                           ;81EB2D;      ;
                        XBA                                  ;81EB2F;      ;
                        LDA.W $09A0                          ;81EB30;0009A0;
                        LDX.W #$0000                         ;81EB33;      ;
                        LDY.W #$0022                         ;81EB36;      ;
-                       JSL.L SUB_84803F                    ;81EB39;84803F;
+                       JSL.L UNK_LoadCCDataShort                    ;81EB39;84803F;
                        %Set8bit(!M)                             ;81EB3D;      ;
                        LDA.B #$00                           ;81EB3F;      ;
                        XBA                                  ;81EB41;      ;
@@ -10656,7 +10656,7 @@ CODE_81D716: ;81D716
                        LDA.W #$0008                         ;81EBA6;      ;
                        LDX.W #$0000                         ;81EBA9;      ;
                        LDY.W #$007D                         ;81EBAC;      ;
-                       JSL.L SUB_848097                            ;81EBAF;848097;
+                       JSL.L UNK_LoadCCDataLong                            ;81EBAF;848097;
                        %Set8bit(!M)                             ;81EBB3;      ;
                        LDA.B #$0B                           ;81EBB5;      ;
                        STA.W $096F                          ;81EBB7;00096F;
@@ -10752,7 +10752,7 @@ CODE_81D716: ;81D716
                        LDA.W #$0008                         ;81EC4D;      ;
                        LDX.W #$0000                         ;81EC50;      ;
                        LDY.W #$007C                         ;81EC53;      ;
-                       JSL.L SUB_848097                            ;81EC56;848097;
+                       JSL.L UNK_LoadCCDataLong                            ;81EC56;848097;
                        %Set8bit(!M)                             ;81EC5A;      ;
                        LDA.B #$07                           ;81EC5C;      ;
                        STA.W $096F                          ;81EC5E;00096F;
@@ -10763,7 +10763,7 @@ CODE_81D716: ;81D716
                        LDA.W #$0007                         ;81EC66;      ;
                        LDX.W #$0000                         ;81EC69;      ;
                        LDY.W #$0021                         ;81EC6C;      ;
-                       JSL.L SUB_848097                            ;81EC6F;848097;
+                       JSL.L UNK_LoadCCDataLong                            ;81EC6F;848097;
                        %Set8bit(!M)                             ;81EC73;      ;
                        LDA.B #$01                           ;81EC75;      ;
                        STA.W $096F                          ;81EC77;00096F;
@@ -10866,14 +10866,14 @@ CODE_81D716: ;81D716
                        LDA.W #$0007                         ;81ED4B;      ;
                        LDX.W #$0000                         ;81ED4E;      ;
                        LDY.W #$0023                         ;81ED51;      ;
-                       JSL.L SUB_848097                            ;81ED54;848097;
+                       JSL.L UNK_LoadCCDataLong                            ;81ED54;848097;
                        %Set8bit(!M)                             ;81ED58;      ;
                        LDA.B #$00                           ;81ED5A;      ;
                        XBA                                  ;81ED5C;      ;
                        LDA.W $09A1                          ;81ED5D;0009A1;
                        LDX.W #$0000                         ;81ED60;      ;
                        LDY.W #$0024                         ;81ED63;      ;
-                       JSL.L SUB_84803F                    ;81ED66;84803F;
+                       JSL.L UNK_LoadCCDataShort                    ;81ED66;84803F;
                        %Set8bit(!M)                             ;81ED6A;      ;
                        LDA.B #$00                           ;81ED6C;      ;
                        XBA                                  ;81ED6E;      ;
@@ -10938,7 +10938,7 @@ CODE_81D716: ;81D716
                        LDA.W #$0007                         ;81EDEB;      ;
                        LDX.W #$0000                         ;81EDEE;      ;
                        LDY.W #$0023                         ;81EDF1;      ;
-                       JSL.L SUB_848097                            ;81EDF4;848097;
+                       JSL.L UNK_LoadCCDataLong                            ;81EDF4;848097;
                        %Set8bit(!M)                             ;81EDF8;      ;
                        LDA.B #$06                           ;81EDFA;      ;
                        STA.W $096F                          ;81EDFC;00096F;
@@ -11054,14 +11054,14 @@ CODE_81D716: ;81D716
                        LDA.W #$0008                         ;81EEE1;      ;
                        LDX.W #$0000                         ;81EEE4;      ;
                        LDY.W #$007D                         ;81EEE7;      ;
-                       JSL.L SUB_848097                            ;81EEEA;848097;
+                       JSL.L UNK_LoadCCDataLong                            ;81EEEA;848097;
                        %Set8bit(!M)                             ;81EEEE;      ;
                        LDA.B #$00                           ;81EEF0;      ;
                        XBA                                  ;81EEF2;      ;
                        LDA.W $09A1                          ;81EEF3;0009A1;
                        LDX.W #$0000                         ;81EEF6;      ;
                        LDY.W #$0024                         ;81EEF9;      ;
-                       JSL.L SUB_84803F                    ;81EEFC;84803F;
+                       JSL.L UNK_LoadCCDataShort                    ;81EEFC;84803F;
                        %Set8bit(!M)                             ;81EF00;      ;
                        LDA.B #$00                           ;81EF02;      ;
                        XBA                                  ;81EF04;      ;
@@ -11117,7 +11117,7 @@ CODE_81D716: ;81D716
                        LDA.W #$0008                         ;81EF7E;      ;
                        LDX.W #$0000                         ;81EF81;      ;
                        LDY.W #$007D                         ;81EF84;      ;
-                       JSL.L SUB_848097                            ;81EF87;848097;
+                       JSL.L UNK_LoadCCDataLong                            ;81EF87;848097;
                        %Set8bit(!M)                             ;81EF8B;      ;
                        LDA.B #$0B                           ;81EF8D;      ;
                        STA.W $096F                          ;81EF8F;00096F;
@@ -11249,7 +11249,7 @@ CODE_81D716: ;81D716
                        LDA.W #$0006                         ;81F07C;      ;
                        LDX.W #$0000                         ;81F07F;      ;
                        LDY.W #$0026                         ;81F082;      ;
-                       JSL.L SUB_848097                            ;81F085;848097;
+                       JSL.L UNK_LoadCCDataLong                            ;81F085;848097;
                        %Set8bit(!M)                             ;81F089;      ;
                        LDA.B #$01                           ;81F08B;      ;
                        STA.W $096F                          ;81F08D;00096F;
@@ -11299,7 +11299,7 @@ CODE_81D716: ;81D716
                        LDA.W #$0006                         ;81F0E9;      ;
                        LDX.W #$0000                         ;81F0EC;      ;
                        LDY.W #$0027                         ;81F0EF;      ;
-                       JSL.L SUB_848097                            ;81F0F2;848097;
+                       JSL.L UNK_LoadCCDataLong                            ;81F0F2;848097;
                        %Set8bit(!M)                             ;81F0F6;      ;
                        LDA.B #$03                           ;81F0F8;      ;
                        STA.W $096F                          ;81F0FA;00096F;
@@ -11418,7 +11418,7 @@ CODE_81D716: ;81D716
                        LDA.W #$0009                         ;81F1DC;      ;
                        LDX.W #$0000                         ;81F1DF;      ;
                        LDY.W #$002D                         ;81F1E2;      ;
-                       JSL.L SUB_84803F                    ;81F1E5;84803F;
+                       JSL.L UNK_LoadCCDataShort                    ;81F1E5;84803F;
                        %Set8bit(!M)                             ;81F1E9;      ;
                        LDA.B #$02                           ;81F1EB;      ;
                        STA.W $096F                          ;81F1ED;00096F;
@@ -11624,12 +11624,12 @@ CODE_81D716: ;81D716
                        LDA.W #$0009                         ;81F395;      ;
                        LDX.W #$0000                         ;81F398;      ;
                        LDY.W #$0038                         ;81F39B;      ;
-                       JSL.L SUB_84803F                    ;81F39E;84803F;
+                       JSL.L UNK_LoadCCDataShort                    ;81F39E;84803F;
                        %Set16bit(!M)                             ;81F3A2;      ;
                        LDA.W #$000A                         ;81F3A4;      ;
                        LDX.W #$0000                         ;81F3A7;      ;
                        LDY.W #$0039                         ;81F3AA;      ;
-                       JSL.L SUB_84803F                    ;81F3AD;84803F;
+                       JSL.L UNK_LoadCCDataShort                    ;81F3AD;84803F;
                        %Set8bit(!M)                             ;81F3B1;      ;
                        LDA.B #$02                           ;81F3B3;      ;
                        STA.W $096F                          ;81F3B5;00096F;
@@ -11663,12 +11663,12 @@ CODE_81D716: ;81D716
                        LDA.W #$0009                         ;81F3E7;      ;
                        LDX.W #$0000                         ;81F3EA;      ;
                        LDY.W #$0038                         ;81F3ED;      ;
-                       JSL.L SUB_84803F                    ;81F3F0;84803F;
+                       JSL.L UNK_LoadCCDataShort                    ;81F3F0;84803F;
                        %Set16bit(!M)                             ;81F3F4;      ;
                        LDA.W #$000A                         ;81F3F6;      ;
                        LDX.W #$0000                         ;81F3F9;      ;
                        LDY.W #$0039                         ;81F3FC;      ;
-                       JSL.L SUB_84803F                    ;81F3FF;84803F;
+                       JSL.L UNK_LoadCCDataShort                    ;81F3FF;84803F;
                        %Set8bit(!M)                             ;81F403;      ;
                        LDA.B #$02                           ;81F405;      ;
                        STA.W $096F                          ;81F407;00096F;
@@ -11717,7 +11717,7 @@ CODE_81D716: ;81D716
                        LDA.W #$000B                         ;81F45A;      ;
                        LDX.W #$0000                         ;81F45D;      ;
                        LDY.W #$001E                         ;81F460;      ;
-                       JSL.L SUB_84803F                    ;81F463;84803F;
+                       JSL.L UNK_LoadCCDataShort                    ;81F463;84803F;
                        %Set8bit(!M)                             ;81F467;      ;
                        LDA.B #$02                           ;81F469;      ;
                        STA.W $096F                          ;81F46B;00096F;

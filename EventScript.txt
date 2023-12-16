@@ -1,0 +1,34 @@
+Events are its own language
+
+01:Event_AudioRelated           +1byte
+02:Event_TimeRunning
+03:Event_TimeStopped
+04:Event_SetHour                +1byte
+05:Event_Empty
+06:Event_SetPlayerPosition      +4bytes
+07:Event_SetTransitionDest      +1bytes     increases $CC $10
+08:Event_SetPlayerDirection     +1bytes
+09:Event_UNKChangesGameState
+0A:Event_UNKCCchanges           +3bytes
+0B:Event_ScreenFadein           +1byte      extra byte unused
+0C:Event_UNKset7Aflag           +1byte
+0D:Event_UNKCompareset7Aflag    +1byte      compares the flag, if not set, increases $CC $10
+0E:Event_UNKCCchanges2          +4bytes     sets $CC $03, $04, $10, $05, $06, ORA $01,
+0F:Event_AudioRelated2          +1byte      extra byte unused
+10:Event_ScreenFadeout          +1byte      extra byte unused
+11:Event_
+12:Event_
+13:Event_
+14:Event_
+15:Event_
+16:Event_
+17:Event_
+18:Event_
+19:Event_
+1A:Event_
+1B:Event_
+1C:Event_
+1D:Event_
+1E:Event_
+1F:Event_
+20:Event_
