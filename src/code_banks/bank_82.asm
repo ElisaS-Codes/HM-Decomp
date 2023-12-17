@@ -208,7 +208,7 @@ ShippingSceneDialogue: ;828165
         %Set8bit(!M)
         LDA.B #$00
         STA.W $0191
-        JSL.L CODE_83935F                      ;TODO
+        JSL.L StartTextBox                      ;TODO
         %Set16bit(!M)
         LDA.W #$0006
         LDX.W #$0000
@@ -1732,54 +1732,54 @@ SUB_828FB1: ;828FB1
 
 ;;;;;;;;
 SUB_828FF3: ;828FF3
-        %Set8bit(!M)                             ;      ;
-        LDA.B #$00                           ;828FF5;      ;
-        XBA                                  ;828FF7;      ;
-        LDA.W !tool_selected                          ;828FF8;000921;
-        CMP.W $0119                          ;828FFB;000119;
-        BEQ .CODE_82904B                      ;828FFE;82904B;
-        %Set16bit(!M)                             ;829000;      ;
-        STA.B $7E                            ;829002;00007E;
-        ASL A                                ;829004;      ;
-        CLC                                  ;829005;      ;
-        ADC.B $7E                            ;829006;00007E;
-        TAX                                  ;829008;      ;
-        %Set8bit(!M)                             ;829009;      ;
-        LDA.L Tool_Noise_Table,X                 ;82900B;829054;
-        BEQ .CODE_82904B                      ;82900F;82904B;
-        STA.W $0115                          ;829011;000115;
-        INX                                  ;829014;      ;
-        PHX                                  ;829015;      ;
-        LDA.L Tool_Noise_Table,X                 ;829016;829054;
-        BEQ .CODE_829038                      ;82901A;829038;
-        STA.W $0114                          ;82901C;000114;
-        %Set8bit(!M)                             ;82901F;      ;
-        LDA.B #$00                           ;829021;      ;
-        XBA                                  ;829023;      ;
-        LDA.W $0118                          ;829024;000118;
-        %Set16bit(!M)                             ;829027;      ;
-        TAX                                  ;829029;      ;
-        %Set8bit(!M)                             ;82902A;      ;
-        LDA.L UNK_AudioTable,X               ;82902C;80B8CD;
-        INC A                                ;829030;      ;
-        STA.W $0103                          ;829031;000103;
-        JSL.L UNK_Audio18                    ;829034;83833E;
-                                            ;      ;      ;
+        %Set8bit(!M)
+        LDA.B #$00
+        XBA
+        LDA.W !tool_selected
+        CMP.W $0119
+        BEQ .CODE_82904B
+        %Set16bit(!M)
+        STA.B $7E
+        ASL A
+        CLC
+        ADC.B $7E
+        TAX
+        %Set8bit(!M)
+        LDA.L Tool_Noise_Table,X
+        BEQ .CODE_82904B
+        STA.W $0115
+        INX
+        PHX
+        LDA.L Tool_Noise_Table,X
+        BEQ .CODE_829038
+        STA.W $0114
+        %Set8bit(!M)
+        LDA.B #$00
+        XBA
+        LDA.W $0118
+        %Set16bit(!M)
+        TAX
+        %Set8bit(!M)
+        LDA.L UNK_AudioTable,X
+        INC A
+        STA.W $0103
+        JSL.L UNK_Audio18
+
     .CODE_829038:
-        %Set8bit(!M)                             ;829038;      ;
-        %Set16bit(!X)                             ;82903A;      ;
-        PLX                                  ;82903C;      ;
-        INX                                  ;82903D;      ;
-        LDA.L Tool_Noise_Table,X                 ;82903E;829054;
-        BEQ .CODE_82904B                      ;829042;82904B;
-        STA.W $0114                          ;829044;000114;
-        JSL.L UNK_Audio18                    ;829047;83833E;
-                                            ;      ;      ;
+        %Set8bit(!M)
+        %Set16bit(!X)
+        PLX
+        INX
+        LDA.L Tool_Noise_Table,X
+        BEQ .CODE_82904B
+        STA.W $0114
+        JSL.L UNK_Audio18
+
     .CODE_82904B:
-        %Set8bit(!M)                             ;82904B;      ;
-        LDA.W !tool_selected                          ;82904D;000921;
-        STA.W $0119                          ;829050;000119;
-        RTL                                  ;829053;      ;END_SUB_828FF3
+        %Set8bit(!M)
+        LDA.W !tool_selected
+        STA.W $0119
+        RTL
 
 ;;;;;;;;
 Tool_Noise_Table: ;829054
@@ -3273,7 +3273,7 @@ SUB_82AD0E: ;82AD0E
         LDA.B $93
         %Set16bit(!M)
         TAX
-        JSL.L CODE_83935F
+        JSL.L StartTextBox
         BRA .CODE_82AEE5
 
     .CODE_82AE9B:
@@ -3290,7 +3290,7 @@ SUB_82AD0E: ;82AD0E
         STA.W !inputstate
         LDA.B #$00
         STA.W $0191
-        JSL.L CODE_83935F
+        JSL.L StartTextBox
         BRA .CODE_82AEE5
 
     .CODE_82AEB8:

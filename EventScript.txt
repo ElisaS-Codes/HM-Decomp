@@ -1,34 +1,82 @@
-Events are its own language
+Events are its own language, its pretty robust, I dont know if the game uses most of these
 
-01:Event_AudioRelated           +1byte
+01:Event_AudioRelated           +1byte      sfx/song to play?
 02:Event_TimeRunning
 03:Event_TimeStopped
-04:Event_SetHour                +1byte
+04:Event_SetHour                +1byte      hour
 05:Event_Empty
-06:Event_SetPlayerPosition      +4bytes
-07:Event_SetTransitionDest      +1bytes     increases $CC $10
-08:Event_SetPlayerDirection     +1bytes
+06:Event_SetPlayerPosition      +4byte      2 for X, 2 for Y
+07:Event_SetTransitionDest      +1byte      increases $CC $10
+08:Event_SetPlayerDirection     +1byte      direction
 09:Event_UNKChangesGameState
-0A:Event_UNKCCchanges           +3bytes
+0A:Event_UNKCCchanges           +3byte
 0B:Event_ScreenFadein           +1byte      extra byte unused
 0C:Event_UNKset7Aflag           +1byte
 0D:Event_UNKCompareset7Aflag    +1byte      compares the flag, if not set, increases $CC $10
-0E:Event_UNKCCchanges2          +4bytes     sets $CC $03, $04, $10, $05, $06, ORA $01,
+0E:Event_UNKCCchanges2          +4byte      sets $CC $03, $04, $10, $05, $06, ORA $01,
 0F:Event_AudioRelated2          +1byte      extra byte unused
 10:Event_ScreenFadeout          +1byte      extra byte unused
-11:Event_
-12:Event_
-13:Event_
-14:Event_
-15:Event_
-16:Event_
-17:Event_
-18:Event_
-19:Event_
-1A:Event_
-1B:Event_
-1C:Event_
-1D:Event_
-1E:Event_
-1F:Event_
-20:Event_
+11:Event_UNKDisableCCstruct                 doesnt increase counter, I think its a stop
+12:Event_UNKChangesGameState2
+13:Event_JumptoInstruction      +2byte      Destination
+14:Event_UNKSetsCC10            +2byte
+15:Event_JumpifFlagSet          +6byte      first 3 are the memory location, next is the index of the flag. If flag is set, jump to next 2 bytes.
+16:Event_JumpifEquals           +6byte      first 3 are the memory location, next is the number. If equals, jump to next 2 bytes.
+17:Event_JumpifBetween          +7byte      first 3 are the memory location, next is the lower boundry, next is the upper boundry. if between, jump to next 2 bytes.
+18:Event_GetRNG                 +1byte      byte is upper border (RNGReturn0toA subrutine)
+19:Event_JumpIfEqualsRNG        +3byte      call Event_GetRNG first. first byte is number to compare, if equal jump to next 2 bytes.
+1A:Event_UNKSetAnimation        +3byte
+1B:Event_UNKCCchanges3          +7byte
+1C:Event_UNKCCchanges4          +3byte
+1D:Event_StartTextBox           +3byte      first 2 are the index to the text, third is TODO $0191
+1E:Event_StartTextBoxCopy       +3byte      first 2 are the index to the text, third is TODO $0191
+1F:Event_UNKCCchanges5          +2byte
+20:Event_UNKJumpif018F          +3byte      first is value to compare with, the other two is jump location
+21:Event_UNKTextrelated         +4byte
+22:Event_UNKCCchanges6          +6byte
+23:Event_SetFlag                +4byte      first 3 are the memory location, fourth is the flag index.
+24:Event_TimeofDayPalette       +1byte      index of palette to transition to
+25:Event_UNKCCchanges7          +1byte
+26:Event_ResetFlag              +4byte      first 3 are the memory location, fourth is the flag index.
+27:Event_MapScrolling           +5byte      2 speed X, 2 speed Y, 1 scroll timer
+28:Event_UNKCFD1                +2byte
+29:Event_UNKCCchanges8          +3byte
+2A:Event_AudioRelated2          +5byte
+2B:Event_UNKCCchanges9          +4byte
+2C:Event_
+2D:Event_
+2E:Event_
+2F:Event_
+30:Event_
+31:Event_
+32:Event_
+33:Event_
+34:Event_
+35:Event_
+36:Event_
+37:Event_
+38:Event_
+39:Event_
+3A:Event_
+3B:Event_
+3C:Event_
+3D:Event_
+3E:Event_
+3F:Event_
+40:Event_
+41:Event_
+42:Event_
+43:Event_
+44:Event_
+45:Event_
+46:Event_
+47:Event_
+48:Event_
+49:Event_
+4A:Event_
+4B:Event_
+4C:Event_
+4D:Event_
+4E:Event_
+4F:Event_
+50:Event_

@@ -483,7 +483,7 @@ SUB_8180B7:
                        LDX.W #$038D                         ;8183A9;      ;
                        LDA.B #$00                           ;8183AC;      ;
                        STA.W $0191                          ;8183AE;000191;
-                       JSL.L CODE_83935F                    ;8183B1;83935F;
+                       JSL.L StartTextBox                    ;8183B1;83935F;
                        RTS                                  ;8183B5;      ;
                                                             ;      ;      ;
                        RTS                                  ;8183B6;      ;
@@ -1271,7 +1271,7 @@ SUB_8180B7:
                        %Set8bit(!M)                             ;818974;      ;
                        LDA.B #$00                           ;818976;      ;
                        STA.W $0191                          ;818978;000191;
-                       JSL.L CODE_83935F                    ;81897B;83935F;
+                       JSL.L StartTextBox                    ;81897B;83935F;
                        %Set8bit(!M)                             ;81897F;      ;
                        LDA.B #$01                           ;818981;      ;
                        STA.W $0976                          ;818983;000976;
@@ -1374,7 +1374,7 @@ SUB_8180B7:
                        %Set8bit(!M)                             ;818A26;      ;
                        LDA.B #$00                           ;818A28;      ;
                        STA.W $0191                          ;818A2A;000191;
-                       JSL.L CODE_83935F                    ;818A2D;83935F;
+                       JSL.L StartTextBox                    ;818A2D;83935F;
                        %Set16bit(!M)                             ;818A31;      ;
                        LDA.B $80                            ;818A33;000080;
                        BEQ CODE_818A3A                      ;818A35;818A3A;
@@ -1430,7 +1430,7 @@ SUB_8180B7:
                        %Set8bit(!M)                             ;818A87;      ;
                        LDA.B #$00                           ;818A89;      ;
                        STA.W $0191                          ;818A8B;000191;
-                       JSL.L CODE_83935F                    ;818A8E;83935F;
+                       JSL.L StartTextBox                    ;818A8E;83935F;
                        BRA CODE_818AA0                      ;818A92;818AA0;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -1563,7 +1563,7 @@ SUB_8180B7:
                        STA.W !inputstate                          ;818B8F;00019A;
                        LDA.B #$00                           ;818B92;      ;
                        STA.W $0191                          ;818B94;000191;
-                       JSL.L CODE_83935F                    ;818B97;83935F;
+                       JSL.L StartTextBox                    ;818B97;83935F;
                        %Set8bit(!M)                             ;818B9B;      ;
                        LDA.B #$01                           ;818B9D;      ;
                        STA.W $0976                          ;818B9F;000976;
@@ -2006,7 +2006,7 @@ SUB_8180B7:
                        %Set8bit(!M)                             ;818F45;      ;
                        LDA.B #$00                           ;818F47;      ;
                        STA.W $0191                          ;818F49;000191;
-                       JSL.L CODE_83935F                    ;818F4C;83935F;
+                       JSL.L StartTextBox                    ;818F4C;83935F;
                        %Set8bit(!M)                             ;818F50;      ;
                        LDA.B #$06                           ;818F52;      ;
                        STA.W $0976                          ;818F54;000976;
@@ -2043,7 +2043,7 @@ SUB_8180B7:
                        LDX.W #$02FA                         ;818F8D;      ;
                        LDA.B #$00                           ;818F90;      ;
                        STA.W $0191                          ;818F92;000191;
-                       JSL.L CODE_83935F                    ;818F95;83935F;
+                       JSL.L StartTextBox                    ;818F95;83935F;
                        %Set16bit(!M)                             ;818F99;      ;
                        LDA.W $0978                          ;818F9B;000978;
                        STA.B $A5                            ;818F9E;0000A5;
@@ -2081,7 +2081,7 @@ SUB_8180B7:
                        LDX.W #$0303                         ;818FDE;      ;
                        LDA.B #$00                           ;818FE1;      ;
                        STA.W $0191                          ;818FE3;000191;
-                       JSL.L CODE_83935F                    ;818FE6;83935F;
+                       JSL.L StartTextBox                    ;818FE6;83935F;
                                                             ;      ;      ;
           CODE_818FEA: %Set16bit(!M)                             ;818FEA;      ;
                        LDY.W #$0001                         ;818FEC;      ;
@@ -6019,7 +6019,7 @@ SUB_81BFB7: ;81BFB7
                        STA.W !inputstate                          ;81C4BE;00019A;
                        LDA.B #$00                           ;81C4C1;      ;
                        STA.W $0191                          ;81C4C3;000191;
-                       JSL.L CODE_83935F                    ;81C4C6;83935F;
+                       JSL.L StartTextBox                    ;81C4C6;83935F;
                                                             ;      ;      ;
           CODE_81C4CA: JSR.W CODE_81CFE6                    ;81C4CA;81CFE6;
                        %Set16bit(!MX)                             ;81C4CD;      ;
@@ -8183,7 +8183,7 @@ CODE_81D716: ;81D716
       STA.W !inputstate
       LDA.B #$00
       STA.W $0191
-      JSL.L CODE_83935F
+      JSL.L StartTextBox
 
     + %Set8bit(!M)
       LDA.B #$00
@@ -8256,7 +8256,7 @@ CODE_81D716: ;81D716
                        %Set8bit(!M)                             ;81D807;      ;
                        LDA.B #$00                           ;81D809;      ;
                        STA.W $0191                          ;81D80B;000191;
-                       JSL.L CODE_83935F                    ;81D80E;83935F;
+                       JSL.L StartTextBox                    ;81D80E;83935F;
                        %Set8bit(!M)                             ;81D812;      ;
                        INC.W $096F                          ;81D814;00096F;
                        JMP.W CODE_81D96B                    ;81D817;81D96B;
@@ -8286,7 +8286,7 @@ CODE_81D716: ;81D716
                        %Set8bit(!M)                             ;81D846;      ;
                        LDA.B #$00                           ;81D848;      ;
                        STA.W $0191                          ;81D84A;000191;
-                       JSL.L CODE_83935F                    ;81D84D;83935F;
+                       JSL.L StartTextBox                    ;81D84D;83935F;
                        %Set8bit(!M)                             ;81D851;      ;
                        INC.W $096F                          ;81D853;00096F;
                        JMP.W CODE_81D96B                    ;81D856;81D96B;
@@ -8516,7 +8516,7 @@ CODE_81D716: ;81D716
                        STA.W !inputstate                          ;81DA31;00019A;
                        LDA.B #$00                           ;81DA34;      ;
                        STA.W $0191                          ;81DA36;000191;
-                       JSL.L CODE_83935F                    ;81DA39;83935F;
+                       JSL.L StartTextBox                    ;81DA39;83935F;
                                                             ;      ;      ;
           CODE_81DA3D: %Set8bit(!M)                             ;81DA3D;      ;
                        LDA.B #$00                           ;81DA3F;      ;
@@ -8605,7 +8605,7 @@ CODE_81D716: ;81D716
                        STA.W !inputstate                          ;81DAE7;00019A;
                        LDA.B #$00                           ;81DAEA;      ;
                        STA.W $0191                          ;81DAEC;000191;
-                       JSL.L CODE_83935F                    ;81DAEF;83935F;
+                       JSL.L StartTextBox                    ;81DAEF;83935F;
                                                             ;      ;      ;
           CODE_81DAF3: %Set8bit(!M)                             ;81DAF3;      ;
                        LDA.B #$00                           ;81DAF5;      ;
@@ -8751,7 +8751,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0371                         ;81DC02;      ;
                        LDA.B #$00                           ;81DC05;      ;
                        STA.W $0191                          ;81DC07;000191;
-                       JSL.L CODE_83935F                    ;81DC0A;83935F;
+                       JSL.L StartTextBox                    ;81DC0A;83935F;
                        %Set8bit(!M)                             ;81DC0E;      ;
                        INC.W $096F                          ;81DC10;00096F;
                        JMP.W CODE_81DC56                    ;81DC13;81DC56;
@@ -8782,7 +8782,7 @@ CODE_81D716: ;81D716
                        STA.W !inputstate                          ;81DC3E;00019A;
                        LDA.B #$00                           ;81DC41;      ;
                        STA.W $0191                          ;81DC43;000191;
-                       JSL.L CODE_83935F                    ;81DC46;83935F;
+                       JSL.L StartTextBox                    ;81DC46;83935F;
                                                             ;      ;      ;
           CODE_81DC4A: %Set16bit(!MX)                             ;81DC4A;      ;
                        LDA.W #$0040                         ;81DC4C;      ;
@@ -8817,7 +8817,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0023                         ;81DC70;      ;
                        LDA.B #$00                           ;81DC73;      ;
                        STA.W $0191                          ;81DC75;000191;
-                       JSL.L CODE_83935F                    ;81DC78;83935F;
+                       JSL.L StartTextBox                    ;81DC78;83935F;
                        %Set8bit(!M)                             ;81DC7C;      ;
                        INC.W $096F                          ;81DC7E;00096F;
                        JMP.W CODE_81DCCD                    ;81DC81;81DCCD;
@@ -8847,7 +8847,7 @@ CODE_81D716: ;81D716
                        STA.W !inputstate                          ;81DCAC;00019A;
                        LDA.B #$00                           ;81DCAF;      ;
                        STA.W $0191                          ;81DCB1;000191;
-                       JSL.L CODE_83935F                    ;81DCB4;83935F;
+                       JSL.L StartTextBox                    ;81DCB4;83935F;
                        %Set16bit(!M)                             ;81DCB8;      ;
                        LDA.W #$FFFF                         ;81DCBA;      ;
                        JSL.L AddPlayerHappiness                   ;81DCBD;83B282;
@@ -8979,7 +8979,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0023                         ;81DDBE;      ;
                        LDA.B #$00                           ;81DDC1;      ;
                        STA.W $0191                          ;81DDC3;000191;
-                       JSL.L CODE_83935F                    ;81DDC6;83935F;
+                       JSL.L StartTextBox                    ;81DDC6;83935F;
                        %Set8bit(!M)                             ;81DDCA;      ;
                        INC.W $096F                          ;81DDCC;00096F;
                        JMP.W CODE_81DE1B                    ;81DDCF;81DE1B;
@@ -9009,7 +9009,7 @@ CODE_81D716: ;81D716
                        STA.W !inputstate                          ;81DDFA;00019A;
                        LDA.B #$00                           ;81DDFD;      ;
                        STA.W $0191                          ;81DDFF;000191;
-                       JSL.L CODE_83935F                    ;81DE02;83935F;
+                       JSL.L StartTextBox                    ;81DE02;83935F;
                        %Set16bit(!M)                             ;81DE06;      ;
                        LDA.W #$FFFF                         ;81DE08;      ;
                        JSL.L AddPlayerHappiness                   ;81DE0B;83B282;
@@ -9054,7 +9054,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0305                         ;81DE54;      ;
                        LDA.B #$00                           ;81DE57;      ;
                        STA.W $0191                          ;81DE59;000191;
-                       JSL.L CODE_83935F                    ;81DE5C;83935F;
+                       JSL.L StartTextBox                    ;81DE5C;83935F;
                        %Set8bit(!M)                             ;81DE60;      ;
                        INC.W $096F                          ;81DE62;00096F;
                        JMP.W CODE_81E221                    ;81DE65;81E221;
@@ -9066,7 +9066,7 @@ CODE_81D716: ;81D716
                        LDX.W #$03D0                         ;81DE6F;      ;
                        LDA.B #$00                           ;81DE72;      ;
                        STA.W $0191                          ;81DE74;000191;
-                       JSL.L CODE_83935F                    ;81DE77;83935F;
+                       JSL.L StartTextBox                    ;81DE77;83935F;
                        %Set16bit(!MX)                             ;81DE7B;      ;
                        LDA.W #$0040                         ;81DE7D;      ;
                        EOR.W #$FFFF                         ;81DE80;      ;
@@ -9121,7 +9121,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0307                         ;81DEDB;      ;
                        LDA.B #$00                           ;81DEDE;      ;
                        STA.W $0191                          ;81DEE0;000191;
-                       JSL.L CODE_83935F                    ;81DEE3;83935F;
+                       JSL.L StartTextBox                    ;81DEE3;83935F;
                        %Set8bit(!M)                             ;81DEE7;      ;
                        LDA.B #$02                           ;81DEE9;      ;
                        STA.W $096F                          ;81DEEB;00096F;
@@ -9134,7 +9134,7 @@ CODE_81D716: ;81D716
                        LDX.W #$03B6                         ;81DEF8;      ;
                        LDA.B #$00                           ;81DEFB;      ;
                        STA.W $0191                          ;81DEFD;000191;
-                       JSL.L CODE_83935F                    ;81DF00;83935F;
+                       JSL.L StartTextBox                    ;81DF00;83935F;
                        %Set16bit(!MX)                             ;81DF04;      ;
                        LDA.W #$0040                         ;81DF06;      ;
                        EOR.W #$FFFF                         ;81DF09;      ;
@@ -9160,7 +9160,7 @@ CODE_81D716: ;81D716
                        LDX.W #$030A                         ;81DF32;      ;
                        LDA.B #$00                           ;81DF35;      ;
                        STA.W $0191                          ;81DF37;000191;
-                       JSL.L CODE_83935F                    ;81DF3A;83935F;
+                       JSL.L StartTextBox                    ;81DF3A;83935F;
                        %Set8bit(!M)                             ;81DF3E;      ;
                        LDA.B #$03                           ;81DF40;      ;
                        STA.W $096F                          ;81DF42;00096F;
@@ -9173,7 +9173,7 @@ CODE_81D716: ;81D716
                        LDX.W #$03B6                         ;81DF4F;      ;
                        LDA.B #$00                           ;81DF52;      ;
                        STA.W $0191                          ;81DF54;000191;
-                       JSL.L CODE_83935F                    ;81DF57;83935F;
+                       JSL.L StartTextBox                    ;81DF57;83935F;
                        %Set16bit(!MX)                             ;81DF5B;      ;
                        LDA.W #$0040                         ;81DF5D;      ;
                        EOR.W #$FFFF                         ;81DF60;      ;
@@ -9188,7 +9188,7 @@ CODE_81D716: ;81D716
                        LDX.W #$030B                         ;81DF71;      ;
                        LDA.B #$00                           ;81DF74;      ;
                        STA.W $0191                          ;81DF76;000191;
-                       JSL.L CODE_83935F                    ;81DF79;83935F;
+                       JSL.L StartTextBox                    ;81DF79;83935F;
                        %Set16bit(!MX)                             ;81DF7D;      ;
                        LDA.W #$0040                         ;81DF7F;      ;
                        EOR.W #$FFFF                         ;81DF82;      ;
@@ -9207,7 +9207,7 @@ CODE_81D716: ;81D716
                        LDX.W #$030B                         ;81DFA0;      ;
                        LDA.B #$00                           ;81DFA3;      ;
                        STA.W $0191                          ;81DFA5;000191;
-                       JSL.L CODE_83935F                    ;81DFA8;83935F;
+                       JSL.L StartTextBox                    ;81DFA8;83935F;
                        %Set16bit(!MX)                             ;81DFAC;      ;
                        LDA.W #$0040                         ;81DFAE;      ;
                        EOR.W #$FFFF                         ;81DFB1;      ;
@@ -9265,7 +9265,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0306                         ;81E013;      ;
                        LDA.B #$00                           ;81E016;      ;
                        STA.W $0191                          ;81E018;000191;
-                       JSL.L CODE_83935F                    ;81E01B;83935F;
+                       JSL.L StartTextBox                    ;81E01B;83935F;
                        %Set16bit(!MX)                             ;81E01F;      ;
                        LDA.W #$0040                         ;81E021;      ;
                        EOR.W #$FFFF                         ;81E024;      ;
@@ -9280,7 +9280,7 @@ CODE_81D716: ;81D716
                        LDX.W #$03B7                         ;81E035;      ;
                        LDA.B #$00                           ;81E038;      ;
                        STA.W $0191                          ;81E03A;000191;
-                       JSL.L CODE_83935F                    ;81E03D;83935F;
+                       JSL.L StartTextBox                    ;81E03D;83935F;
                        %Set16bit(!MX)                             ;81E041;      ;
                        LDA.W #$0040                         ;81E043;      ;
                        EOR.W #$FFFF                         ;81E046;      ;
@@ -9305,7 +9305,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0304                         ;81E06F;      ;
                        LDA.B #$00                           ;81E072;      ;
                        STA.W $0191                          ;81E074;000191;
-                       JSL.L CODE_83935F                    ;81E077;83935F;
+                       JSL.L StartTextBox                    ;81E077;83935F;
                        %Set16bit(!MX)                             ;81E07B;      ;
                        LDA.W #$0040                         ;81E07D;      ;
                        EOR.W #$FFFF                         ;81E080;      ;
@@ -9320,7 +9320,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0308                         ;81E091;      ;
                        LDA.B #$00                           ;81E094;      ;
                        STA.W $0191                          ;81E096;000191;
-                       JSL.L CODE_83935F                    ;81E099;83935F;
+                       JSL.L StartTextBox                    ;81E099;83935F;
                        %Set16bit(!MX)                             ;81E09D;      ;
                        LDA.W #$0040                         ;81E09F;      ;
                        EOR.W #$FFFF                         ;81E0A2;      ;
@@ -9346,7 +9346,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0303                         ;81E0D4;      ;
                        LDA.B #$00                           ;81E0D7;      ;
                        STA.W $0191                          ;81E0D9;000191;
-                       JSL.L CODE_83935F                    ;81E0DC;83935F;
+                       JSL.L StartTextBox                    ;81E0DC;83935F;
                        %Set16bit(!MX)                             ;81E0E0;      ;
                        LDA.W #$0040                         ;81E0E2;      ;
                        EOR.W #$FFFF                         ;81E0E5;      ;
@@ -9403,7 +9403,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0306                         ;81E13D;      ;
                        LDA.B #$00                           ;81E140;      ;
                        STA.W $0191                          ;81E142;000191;
-                       JSL.L CODE_83935F                    ;81E145;83935F;
+                       JSL.L StartTextBox                    ;81E145;83935F;
                        %Set16bit(!M)                             ;81E149;      ;
                        %Set16bit(!MX)                             ;81E14B;      ;
                        LDA.W #$0040                         ;81E14D;      ;
@@ -9419,7 +9419,7 @@ CODE_81D716: ;81D716
                        LDX.W #$03B7                         ;81E161;      ;
                        LDA.B #$00                           ;81E164;      ;
                        STA.W $0191                          ;81E166;000191;
-                       JSL.L CODE_83935F                    ;81E169;83935F;
+                       JSL.L StartTextBox                    ;81E169;83935F;
                        %Set16bit(!MX)                             ;81E16D;      ;
                        LDA.W #$0040                         ;81E16F;      ;
                        EOR.W #$FFFF                         ;81E172;      ;
@@ -9444,7 +9444,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0304                         ;81E19B;      ;
                        LDA.B #$00                           ;81E19E;      ;
                        STA.W $0191                          ;81E1A0;000191;
-                       JSL.L CODE_83935F                    ;81E1A3;83935F;
+                       JSL.L StartTextBox                    ;81E1A3;83935F;
                        %Set16bit(!MX)                             ;81E1A7;      ;
                        LDA.W #$0040                         ;81E1A9;      ;
                        EOR.W #$FFFF                         ;81E1AC;      ;
@@ -9459,7 +9459,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0311                         ;81E1BC;      ;
                        LDA.B #$00                           ;81E1BF;      ;
                        STA.W $0191                          ;81E1C1;000191;
-                       JSL.L CODE_83935F                    ;81E1C4;83935F;
+                       JSL.L StartTextBox                    ;81E1C4;83935F;
                        %Set16bit(!MX)                             ;81E1C8;      ;
                        LDA.W #$0040                         ;81E1CA;      ;
                        EOR.W #$FFFF                         ;81E1CD;      ;
@@ -9488,7 +9488,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0303                         ;81E207;      ;
                        LDA.B #$00                           ;81E20A;      ;
                        STA.W $0191                          ;81E20C;000191;
-                       JSL.L CODE_83935F                    ;81E20F;83935F;
+                       JSL.L StartTextBox                    ;81E20F;83935F;
                                                             ;      ;      ;
           CODE_81E213: %Set16bit(!MX)                             ;81E213;      ;
                        LDA.W #$0040                         ;81E215;      ;
@@ -9599,7 +9599,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0023                         ;81E2EB;      ;
                        LDA.B #$00                           ;81E2EE;      ;
                        STA.W $0191                          ;81E2F0;000191;
-                       JSL.L CODE_83935F                    ;81E2F3;83935F;
+                       JSL.L StartTextBox                    ;81E2F3;83935F;
                        %Set8bit(!M)                             ;81E2F7;      ;
                        INC.W $096F                          ;81E2F9;00096F;
                        JMP.W CODE_81E348                    ;81E2FC;81E348;
@@ -9629,7 +9629,7 @@ CODE_81D716: ;81D716
                        STA.W !inputstate                          ;81E327;00019A;
                        LDA.B #$00                           ;81E32A;      ;
                        STA.W $0191                          ;81E32C;000191;
-                       JSL.L CODE_83935F                    ;81E32F;83935F;
+                       JSL.L StartTextBox                    ;81E32F;83935F;
                        %Set16bit(!M)                             ;81E333;      ;
                        LDA.W #$FFFF                         ;81E335;      ;
                        JSL.L AddPlayerHappiness                   ;81E338;83B282;
@@ -9687,7 +9687,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0023                         ;81E3A6;      ;
                        LDA.B #$00                           ;81E3A9;      ;
                        STA.W $0191                          ;81E3AB;000191;
-                       JSL.L CODE_83935F                    ;81E3AE;83935F;
+                       JSL.L StartTextBox                    ;81E3AE;83935F;
                        %Set8bit(!M)                             ;81E3B2;      ;
                        INC.W $096F                          ;81E3B4;00096F;
                        JMP.W CODE_81E403                    ;81E3B7;81E403;
@@ -9717,7 +9717,7 @@ CODE_81D716: ;81D716
                        STA.W !inputstate                          ;81E3E2;00019A;
                        LDA.B #$00                           ;81E3E5;      ;
                        STA.W $0191                          ;81E3E7;000191;
-                       JSL.L CODE_83935F                    ;81E3EA;83935F;
+                       JSL.L StartTextBox                    ;81E3EA;83935F;
                        %Set16bit(!M)                             ;81E3EE;      ;
                        LDA.W #$FFFF                         ;81E3F0;      ;
                        JSL.L AddPlayerHappiness                   ;81E3F3;83B282;
@@ -9885,7 +9885,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0023                         ;81E53E;      ;
                        LDA.B #$00                           ;81E541;      ;
                        STA.W $0191                          ;81E543;000191;
-                       JSL.L CODE_83935F                    ;81E546;83935F;
+                       JSL.L StartTextBox                    ;81E546;83935F;
                        %Set8bit(!M)                             ;81E54A;      ;
                        INC.W $096F                          ;81E54C;00096F;
                        JMP.W CODE_81E59B                    ;81E54F;81E59B;
@@ -9915,7 +9915,7 @@ CODE_81D716: ;81D716
                        STA.W !inputstate                          ;81E57A;00019A;
                        LDA.B #$00                           ;81E57D;      ;
                        STA.W $0191                          ;81E57F;000191;
-                       JSL.L CODE_83935F                    ;81E582;83935F;
+                       JSL.L StartTextBox                    ;81E582;83935F;
                        %Set16bit(!M)                             ;81E586;      ;
                        LDA.W #$FFFF                         ;81E588;      ;
                        JSL.L AddPlayerHappiness                   ;81E58B;83B282;
@@ -9939,7 +9939,7 @@ CODE_81D716: ;81D716
                        LDX.W #$045F                         ;81E5AE;      ;
                        LDA.B #$00                           ;81E5B1;      ;
                        STA.W $0191                          ;81E5B3;000191;
-                       JSL.L CODE_83935F                    ;81E5B6;83935F;
+                       JSL.L StartTextBox                    ;81E5B6;83935F;
                        %Set8bit(!M)                             ;81E5BA;      ;
                        INC.W $096F                          ;81E5BC;00096F;
                        JMP.W CODE_81E69F                    ;81E5BF;81E69F;
@@ -9979,7 +9979,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0460                         ;81E5FC;      ;
                        LDA.B #$00                           ;81E5FF;      ;
                        STA.W $0191                          ;81E601;000191;
-                       JSL.L CODE_83935F                    ;81E604;83935F;
+                       JSL.L StartTextBox                    ;81E604;83935F;
                        %Set16bit(!MX)                             ;81E608;      ;
                        LDA.W #$0040                         ;81E60A;      ;
                        EOR.W #$FFFF                         ;81E60D;      ;
@@ -9994,7 +9994,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0462                         ;81E61E;      ;
                        LDA.B #$00                           ;81E621;      ;
                        STA.W $0191                          ;81E623;000191;
-                       JSL.L CODE_83935F                    ;81E626;83935F;
+                       JSL.L StartTextBox                    ;81E626;83935F;
                        %Set16bit(!MX)                             ;81E62A;      ;
                        LDA.W #$0040                         ;81E62C;      ;
                        EOR.W #$FFFF                         ;81E62F;      ;
@@ -10009,7 +10009,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0464                         ;81E640;      ;
                        LDA.B #$00                           ;81E643;      ;
                        STA.W $0191                          ;81E645;000191;
-                       JSL.L CODE_83935F                    ;81E648;83935F;
+                       JSL.L StartTextBox                    ;81E648;83935F;
                        %Set16bit(!MX)                             ;81E64C;      ;
                        LDA.W #$0040                         ;81E64E;      ;
                        EOR.W #$FFFF                         ;81E651;      ;
@@ -10024,7 +10024,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0461                         ;81E662;      ;
                        LDA.B #$00                           ;81E665;      ;
                        STA.W $0191                          ;81E667;000191;
-                       JSL.L CODE_83935F                    ;81E66A;83935F;
+                       JSL.L StartTextBox                    ;81E66A;83935F;
                        %Set16bit(!MX)                             ;81E66E;      ;
                        LDA.W #$0040                         ;81E670;      ;
                        EOR.W #$FFFF                         ;81E673;      ;
@@ -10039,7 +10039,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0463                         ;81E684;      ;
                        LDA.B #$00                           ;81E687;      ;
                        STA.W $0191                          ;81E689;000191;
-                       JSL.L CODE_83935F                    ;81E68C;83935F;
+                       JSL.L StartTextBox                    ;81E68C;83935F;
                        %Set16bit(!MX)                             ;81E690;      ;
                        LDA.W #$0040                         ;81E692;      ;
                        EOR.W #$FFFF                         ;81E695;      ;
@@ -10134,7 +10134,7 @@ CODE_81D716: ;81D716
                        STA.W !inputstate                          ;81E74D;00019A;
                        LDA.B #$00                           ;81E750;      ;
                        STA.W $0191                          ;81E752;000191;
-                       JSL.L CODE_83935F                    ;81E755;83935F;
+                       JSL.L StartTextBox                    ;81E755;83935F;
                        %Set8bit(!M)                             ;81E759;      ;
                        LDA.B #$02                           ;81E75B;      ;
                        STA.W $096F                          ;81E75D;00096F;
@@ -10313,7 +10313,7 @@ CODE_81D716: ;81D716
                        %Set8bit(!M)                             ;81E8AC;      ;
                        LDA.B #$00                           ;81E8AE;      ;
                        STA.W $0191                          ;81E8B0;000191;
-                       JSL.L CODE_83935F                    ;81E8B3;83935F;
+                       JSL.L StartTextBox                    ;81E8B3;83935F;
                        %Set8bit(!M)                             ;81E8B7;      ;
                        LDA.B #$02                           ;81E8B9;      ;
                        STA.W $096F                          ;81E8BB;00096F;
@@ -10324,7 +10324,7 @@ CODE_81D716: ;81D716
                        %Set8bit(!M)                             ;81E8C4;      ;
                        LDA.B #$00                           ;81E8C6;      ;
                        STA.W $0191                          ;81E8C8;000191;
-                       JSL.L CODE_83935F                    ;81E8CB;83935F;
+                       JSL.L StartTextBox                    ;81E8CB;83935F;
                        %Set8bit(!M)                             ;81E8CF;      ;
                        LDA.B #$05                           ;81E8D1;      ;
                        STA.W $096F                          ;81E8D3;00096F;
@@ -10335,7 +10335,7 @@ CODE_81D716: ;81D716
                        %Set8bit(!M)                             ;81E8DC;      ;
                        LDA.B #$00                           ;81E8DE;      ;
                        STA.W $0191                          ;81E8E0;000191;
-                       JSL.L CODE_83935F                    ;81E8E3;83935F;
+                       JSL.L StartTextBox                    ;81E8E3;83935F;
                        %Set8bit(!M)                             ;81E8E7;      ;
                        LDA.B #$05                           ;81E8E9;      ;
                        STA.W $096F                          ;81E8EB;00096F;
@@ -10349,7 +10349,7 @@ CODE_81D716: ;81D716
                        STA.W !inputstate                          ;81E8FA;00019A;
                        LDA.B #$00                           ;81E8FD;      ;
                        STA.W $0191                          ;81E8FF;000191;
-                       JSL.L CODE_83935F                    ;81E902;83935F;
+                       JSL.L StartTextBox                    ;81E902;83935F;
                        %Set8bit(!M)                             ;81E906;      ;
                        LDA.B #$05                           ;81E908;      ;
                        STA.W $096F                          ;81E90A;00096F;
@@ -10372,7 +10372,7 @@ CODE_81D716: ;81D716
                        LDX.W #$030F                         ;81E92A;      ;
                        LDA.B #$00                           ;81E92D;      ;
                        STA.W $0191                          ;81E92F;000191;
-                       JSL.L CODE_83935F                    ;81E932;83935F;
+                       JSL.L StartTextBox                    ;81E932;83935F;
                        %Set8bit(!M)                             ;81E936;      ;
                        LDA.B #$03                           ;81E938;      ;
                        STA.W $096F                          ;81E93A;00096F;
@@ -10385,7 +10385,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0309                         ;81E947;      ;
                        LDA.B #$00                           ;81E94A;      ;
                        STA.W $0191                          ;81E94C;000191;
-                       JSL.L CODE_83935F                    ;81E94F;83935F;
+                       JSL.L StartTextBox                    ;81E94F;83935F;
                        %Set8bit(!M)                             ;81E953;      ;
                        LDA.B #$05                           ;81E955;      ;
                        STA.W $096F                          ;81E957;00096F;
@@ -10544,7 +10544,7 @@ CODE_81D716: ;81D716
                        STA.W !inputstate                          ;81EAA4;00019A;
                        LDA.B #$00                           ;81EAA7;      ;
                        STA.W $0191                          ;81EAA9;000191;
-                       JSL.L CODE_83935F                    ;81EAAC;83935F;
+                       JSL.L StartTextBox                    ;81EAAC;83935F;
                        %Set8bit(!M)                             ;81EAB0;      ;
                        LDA.B #$08                           ;81EAB2;      ;
                        STA.W $096F                          ;81EAB4;00096F;
@@ -10567,7 +10567,7 @@ CODE_81D716: ;81D716
                        LDX.W #$014B                         ;81EAD4;      ;
                        LDA.B #$00                           ;81EAD7;      ;
                        STA.W $0191                          ;81EAD9;000191;
-                       JSL.L CODE_83935F                    ;81EADC;83935F;
+                       JSL.L StartTextBox                    ;81EADC;83935F;
                        %Set8bit(!M)                             ;81EAE0;      ;
                        LDA.B #$09                           ;81EAE2;      ;
                        STA.W $096F                          ;81EAE4;00096F;
@@ -10580,7 +10580,7 @@ CODE_81D716: ;81D716
                        LDX.W #$014C                         ;81EAF1;      ;
                        LDA.B #$00                           ;81EAF4;      ;
                        STA.W $0191                          ;81EAF6;000191;
-                       JSL.L CODE_83935F                    ;81EAF9;83935F;
+                       JSL.L StartTextBox                    ;81EAF9;83935F;
                        %Set8bit(!M)                             ;81EAFD;      ;
                        LDA.B #$0A                           ;81EAFF;      ;
                        STA.W $096F                          ;81EB01;00096F;
@@ -10788,7 +10788,7 @@ CODE_81D716: ;81D716
                        STA.W !inputstate                          ;81EC9E;00019A;
                        LDA.B #$00                           ;81ECA1;      ;
                        STA.W $0191                          ;81ECA3;000191;
-                       JSL.L CODE_83935F                    ;81ECA6;83935F;
+                       JSL.L StartTextBox                    ;81ECA6;83935F;
                        %Set8bit(!M)                             ;81ECAA;      ;
                        LDA.B #$02                           ;81ECAC;      ;
                        STA.W $096F                          ;81ECAE;00096F;
@@ -10802,7 +10802,7 @@ CODE_81D716: ;81D716
                        STA.W !inputstate                          ;81ECBD;00019A;
                        LDA.B #$00                           ;81ECC0;      ;
                        STA.W $0191                          ;81ECC2;000191;
-                       JSL.L CODE_83935F                    ;81ECC5;83935F;
+                       JSL.L StartTextBox                    ;81ECC5;83935F;
                        %Set8bit(!M)                             ;81ECC9;      ;
                        LDA.B #$05                           ;81ECCB;      ;
                        STA.W $096F                          ;81ECCD;00096F;
@@ -10825,7 +10825,7 @@ CODE_81D716: ;81D716
                        LDX.W #$030F                         ;81ECED;      ;
                        LDA.B #$00                           ;81ECF0;      ;
                        STA.W $0191                          ;81ECF2;000191;
-                       JSL.L CODE_83935F                    ;81ECF5;83935F;
+                       JSL.L StartTextBox                    ;81ECF5;83935F;
                        %Set8bit(!M)                             ;81ECF9;      ;
                        LDA.B #$03                           ;81ECFB;      ;
                        STA.W $096F                          ;81ECFD;00096F;
@@ -10838,7 +10838,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0309                         ;81ED0A;      ;
                        LDA.B #$00                           ;81ED0D;      ;
                        STA.W $0191                          ;81ED0F;000191;
-                       JSL.L CODE_83935F                    ;81ED12;83935F;
+                       JSL.L StartTextBox                    ;81ED12;83935F;
                        %Set8bit(!M)                             ;81ED16;      ;
                        LDA.B #$05                           ;81ED18;      ;
                        STA.W $096F                          ;81ED1A;00096F;
@@ -10997,7 +10997,7 @@ CODE_81D716: ;81D716
                        STA.W !inputstate                          ;81EE67;00019A;
                        LDA.B #$00                           ;81EE6A;      ;
                        STA.W $0191                          ;81EE6C;000191;
-                       JSL.L CODE_83935F                    ;81EE6F;83935F;
+                       JSL.L StartTextBox                    ;81EE6F;83935F;
                        %Set8bit(!M)                             ;81EE73;      ;
                        LDA.B #$08                           ;81EE75;      ;
                        STA.W $096F                          ;81EE77;00096F;
@@ -11020,7 +11020,7 @@ CODE_81D716: ;81D716
                        LDX.W #$014A                         ;81EE97;      ;
                        LDA.B #$00                           ;81EE9A;      ;
                        STA.W $0191                          ;81EE9C;000191;
-                       JSL.L CODE_83935F                    ;81EE9F;83935F;
+                       JSL.L StartTextBox                    ;81EE9F;83935F;
                        %Set8bit(!M)                             ;81EEA3;      ;
                        LDA.B #$09                           ;81EEA5;      ;
                        STA.W $096F                          ;81EEA7;00096F;
@@ -11033,7 +11033,7 @@ CODE_81D716: ;81D716
                        LDX.W #$014C                         ;81EEB4;      ;
                        LDA.B #$00                           ;81EEB7;      ;
                        STA.W $0191                          ;81EEB9;000191;
-                       JSL.L CODE_83935F                    ;81EEBC;83935F;
+                       JSL.L StartTextBox                    ;81EEBC;83935F;
                        %Set8bit(!M)                             ;81EEC0;      ;
                        LDA.B #$0A                           ;81EEC2;      ;
                        STA.W $096F                          ;81EEC4;00096F;
@@ -11196,7 +11196,7 @@ CODE_81D716: ;81D716
                        STA.W !inputstate                          ;81F01A;00019A;
                        LDA.B #$00                           ;81F01D;      ;
                        STA.W $0191                          ;81F01F;000191;
-                       JSL.L CODE_83935F                    ;81F022;83935F;
+                       JSL.L StartTextBox                    ;81F022;83935F;
                        %Set8bit(!M)                             ;81F026;      ;
                        LDA.B #$03                           ;81F028;      ;
                        STA.W $096F                          ;81F02A;00096F;
@@ -11278,7 +11278,7 @@ CODE_81D716: ;81D716
                                                             ;      ;      ;
           CODE_81F0BF: LDA.B #$00                           ;81F0BF;      ;
                        STA.W $0191                          ;81F0C1;000191;
-                       JSL.L CODE_83935F                    ;81F0C4;83935F;
+                       JSL.L StartTextBox                    ;81F0C4;83935F;
                        %Set8bit(!M)                             ;81F0C8;      ;
                        LDA.B #$02                           ;81F0CA;      ;
                        STA.W $096F                          ;81F0CC;00096F;
@@ -11387,7 +11387,7 @@ CODE_81D716: ;81D716
                        STA.W !inputstate                          ;81F19B;00019A;
                        LDA.B #$00                           ;81F19E;      ;
                        STA.W $0191                          ;81F1A0;000191;
-                       JSL.L CODE_83935F                    ;81F1A3;83935F;
+                       JSL.L StartTextBox                    ;81F1A3;83935F;
                        %Set8bit(!M)                             ;81F1A7;      ;
                        LDA.B #$03                           ;81F1A9;      ;
                        STA.W $096F                          ;81F1AB;00096F;
@@ -11400,7 +11400,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0137                         ;81F1B8;      ;
                        LDA.B #$00                           ;81F1BB;      ;
                        STA.W $0191                          ;81F1BD;000191;
-                       JSL.L CODE_83935F                    ;81F1C0;83935F;
+                       JSL.L StartTextBox                    ;81F1C0;83935F;
                        %Set8bit(!M)                             ;81F1C4;      ;
                        LDA.B #$01                           ;81F1C6;      ;
                        STA.W $096F                          ;81F1C8;00096F;
@@ -11493,7 +11493,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0135                         ;81F279;      ;
                        LDA.B #$00                           ;81F27C;      ;
                        STA.W $0191                          ;81F27E;000191;
-                       JSL.L CODE_83935F                    ;81F281;83935F;
+                       JSL.L StartTextBox                    ;81F281;83935F;
                        %Set8bit(!M)                             ;81F285;      ;
                        LDA.B #$01                           ;81F287;      ;
                        STA.W $096F                          ;81F289;00096F;
@@ -11512,7 +11512,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0304                         ;81F2A8;      ;
                        LDA.B #$00                           ;81F2AB;      ;
                        STA.W $0191                          ;81F2AD;000191;
-                       JSL.L CODE_83935F                    ;81F2B0;83935F;
+                       JSL.L StartTextBox                    ;81F2B0;83935F;
                        %Set8bit(!M)                             ;81F2B4;      ;
                        LDA.B #$01                           ;81F2B6;      ;
                        STA.W $096F                          ;81F2B8;00096F;
@@ -11525,7 +11525,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0136                         ;81F2C4;      ;
                        LDA.B #$00                           ;81F2C7;      ;
                        STA.W $0191                          ;81F2C9;000191;
-                       JSL.L CODE_83935F                    ;81F2CC;83935F;
+                       JSL.L StartTextBox                    ;81F2CC;83935F;
                        %Set8bit(!M)                             ;81F2D0;      ;
                        LDA.B #$01                           ;81F2D2;      ;
                        STA.W $096F                          ;81F2D4;00096F;
@@ -11581,7 +11581,7 @@ CODE_81D716: ;81D716
                        STA.W !inputstate                          ;81F332;00019A;
                        LDA.B #$00                           ;81F335;      ;
                        STA.W $0191                          ;81F337;000191;
-                       JSL.L CODE_83935F                    ;81F33A;83935F;
+                       JSL.L StartTextBox                    ;81F33A;83935F;
                        %Set8bit(!M)                             ;81F33E;      ;
                        LDA.B #$01                           ;81F340;      ;
                        STA.W $096F                          ;81F342;00096F;
@@ -11613,7 +11613,7 @@ CODE_81D716: ;81D716
                        LDX.W #$025C                         ;81F37E;      ;
                        LDA.B #$00                           ;81F381;      ;
                        STA.W $0191                          ;81F383;000191;
-                       JSL.L CODE_83935F                    ;81F386;83935F;
+                       JSL.L StartTextBox                    ;81F386;83935F;
                        %Set8bit(!M)                             ;81F38A;      ;
                        LDA.B #$03                           ;81F38C;      ;
                        STA.W $096F                          ;81F38E;00096F;
@@ -11699,7 +11699,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0300                         ;81F436;      ;
                        LDA.B #$00                           ;81F439;      ;
                        STA.W $0191                          ;81F43B;000191;
-                       JSL.L CODE_83935F                    ;81F43E;83935F;
+                       JSL.L StartTextBox                    ;81F43E;83935F;
                        %Set8bit(!M)                             ;81F442;      ;
                        LDA.B #$01                           ;81F444;      ;
                        STA.W $096F                          ;81F446;00096F;
@@ -11891,7 +11891,7 @@ CODE_81D716: ;81D716
                        LDX.W #$024B                         ;81F5D7;      ;
                        LDA.B #$00                           ;81F5DA;      ;
                        STA.W $0191                          ;81F5DC;000191;
-                       JSL.L CODE_83935F                    ;81F5DF;83935F;
+                       JSL.L StartTextBox                    ;81F5DF;83935F;
                        %Set8bit(!M)                             ;81F5E3;      ;
                        INC.W $096F                          ;81F5E5;00096F;
                        JMP.W CODE_81F6D6                    ;81F5E8;81F6D6;
@@ -11923,7 +11923,7 @@ CODE_81D716: ;81D716
                        LDX.W #$024C                         ;81F61D;      ;
                        LDA.B #$00                           ;81F620;      ;
                        STA.W $0191                          ;81F622;000191;
-                       JSL.L CODE_83935F                    ;81F625;83935F;
+                       JSL.L StartTextBox                    ;81F625;83935F;
                        %Set8bit(!M)                             ;81F629;      ;
                        LDA.B #$02                           ;81F62B;      ;
                        STA.W $096F                          ;81F62D;00096F;
@@ -11936,7 +11936,7 @@ CODE_81D716: ;81D716
                        LDX.W #$024D                         ;81F63A;      ;
                        LDA.B #$00                           ;81F63D;      ;
                        STA.W $0191                          ;81F63F;000191;
-                       JSL.L CODE_83935F                    ;81F642;83935F;
+                       JSL.L StartTextBox                    ;81F642;83935F;
                        %Set8bit(!M)                             ;81F646;      ;
                        LDA.B #$03                           ;81F648;      ;
                        STA.W $096F                          ;81F64A;00096F;
@@ -11949,7 +11949,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0213                         ;81F657;      ;
                        LDA.B #$00                           ;81F65A;      ;
                        STA.W $0191                          ;81F65C;000191;
-                       JSL.L CODE_83935F                    ;81F65F;83935F;
+                       JSL.L StartTextBox                    ;81F65F;83935F;
                        %Set8bit(!M)                             ;81F663;      ;
                        LDA.B #$03                           ;81F665;      ;
                        STA.W $096F                          ;81F667;00096F;
@@ -12034,7 +12034,7 @@ CODE_81D716: ;81D716
                        LDX.W #$024A                         ;81F6FE;      ;
                        LDA.B #$00                           ;81F701;      ;
                        STA.W $0191                          ;81F703;000191;
-                       JSL.L CODE_83935F                    ;81F706;83935F;
+                       JSL.L StartTextBox                    ;81F706;83935F;
                        %Set8bit(!M)                             ;81F70A;      ;
                        INC.W $096F                          ;81F70C;00096F;
                        JMP.W CODE_81F7FE                    ;81F70F;81F7FE;
@@ -12066,7 +12066,7 @@ CODE_81D716: ;81D716
                        LDX.W #$024C                         ;81F744;      ;
                        LDA.B #$00                           ;81F747;      ;
                        STA.W $0191                          ;81F749;000191;
-                       JSL.L CODE_83935F                    ;81F74C;83935F;
+                       JSL.L StartTextBox                    ;81F74C;83935F;
                        %Set8bit(!M)                             ;81F750;      ;
                        LDA.B #$02                           ;81F752;      ;
                        STA.W $096F                          ;81F754;00096F;
@@ -12079,7 +12079,7 @@ CODE_81D716: ;81D716
                        LDX.W #$024D                         ;81F761;      ;
                        LDA.B #$00                           ;81F764;      ;
                        STA.W $0191                          ;81F766;000191;
-                       JSL.L CODE_83935F                    ;81F769;83935F;
+                       JSL.L StartTextBox                    ;81F769;83935F;
                        %Set8bit(!M)                             ;81F76D;      ;
                        LDA.B #$03                           ;81F76F;      ;
                        STA.W $096F                          ;81F771;00096F;
@@ -12092,7 +12092,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0213                         ;81F77E;      ;
                        LDA.B #$00                           ;81F781;      ;
                        STA.W $0191                          ;81F783;000191;
-                       JSL.L CODE_83935F                    ;81F786;83935F;
+                       JSL.L StartTextBox                    ;81F786;83935F;
                        %Set8bit(!M)                             ;81F78A;      ;
                        LDA.B #$03                           ;81F78C;      ;
                        STA.W $096F                          ;81F78E;00096F;
@@ -12221,7 +12221,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0455                         ;81F87C;      ;
                        LDA.B #$00                           ;81F87F;      ;
                        STA.W $0191                          ;81F881;000191;
-                       JSL.L CODE_83935F                    ;81F884;83935F;
+                       JSL.L StartTextBox                    ;81F884;83935F;
                        %Set8bit(!M)                             ;81F888;      ;
                        INC.W $096F                          ;81F88A;00096F;
                        JMP.W CODE_81F91E                    ;81F88D;81F91E;
@@ -12255,7 +12255,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0456                         ;81F8BF;      ;
                        LDA.B #$00                           ;81F8C2;      ;
                        STA.W $0191                          ;81F8C4;000191;
-                       JSL.L CODE_83935F                    ;81F8C7;83935F;
+                       JSL.L StartTextBox                    ;81F8C7;83935F;
                        %Set16bit(!MX)                             ;81F8CB;      ;
                        LDA.W #$0040                         ;81F8CD;      ;
                        EOR.W #$FFFF                         ;81F8D0;      ;
@@ -12270,7 +12270,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0457                         ;81F8E1;      ;
                        LDA.B #$00                           ;81F8E4;      ;
                        STA.W $0191                          ;81F8E6;000191;
-                       JSL.L CODE_83935F                    ;81F8E9;83935F;
+                       JSL.L StartTextBox                    ;81F8E9;83935F;
                        %Set16bit(!MX)                             ;81F8ED;      ;
                        LDA.W #$0040                         ;81F8EF;      ;
                        EOR.W #$FFFF                         ;81F8F2;      ;
@@ -12285,7 +12285,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0458                         ;81F903;      ;
                        LDA.B #$00                           ;81F906;      ;
                        STA.W $0191                          ;81F908;000191;
-                       JSL.L CODE_83935F                    ;81F90B;83935F;
+                       JSL.L StartTextBox                    ;81F90B;83935F;
                        %Set16bit(!MX)                             ;81F90F;      ;
                        LDA.W #$0040                         ;81F911;      ;
                        EOR.W #$FFFF                         ;81F914;      ;
@@ -12323,7 +12323,7 @@ CODE_81D716: ;81D716
                        LDX.W #$0459                         ;81F954;      ;
                        LDA.B #$00                           ;81F957;      ;
                        STA.W $0191                          ;81F959;000191;
-                       JSL.L CODE_83935F                    ;81F95C;83935F;
+                       JSL.L StartTextBox                    ;81F95C;83935F;
                        %Set8bit(!M)                             ;81F960;      ;
                        INC.W $096F                          ;81F962;00096F;
                        JMP.W CODE_81FA45                    ;81F965;81FA45;
@@ -12363,7 +12363,7 @@ CODE_81D716: ;81D716
                        LDX.W #$045A                         ;81F9A2;      ;
                        LDA.B #$00                           ;81F9A5;      ;
                        STA.W $0191                          ;81F9A7;000191;
-                       JSL.L CODE_83935F                    ;81F9AA;83935F;
+                       JSL.L StartTextBox                    ;81F9AA;83935F;
                        %Set16bit(!MX)                             ;81F9AE;      ;
                        LDA.W #$0040                         ;81F9B0;      ;
                        EOR.W #$FFFF                         ;81F9B3;      ;
@@ -12378,7 +12378,7 @@ CODE_81D716: ;81D716
                        LDX.W #$045B                         ;81F9C4;      ;
                        LDA.B #$00                           ;81F9C7;      ;
                        STA.W $0191                          ;81F9C9;000191;
-                       JSL.L CODE_83935F                    ;81F9CC;83935F;
+                       JSL.L StartTextBox                    ;81F9CC;83935F;
                        %Set16bit(!MX)                             ;81F9D0;      ;
                        LDA.W #$0040                         ;81F9D2;      ;
                        EOR.W #$FFFF                         ;81F9D5;      ;
@@ -12393,7 +12393,7 @@ CODE_81D716: ;81D716
                        LDX.W #$045C                         ;81F9E6;      ;
                        LDA.B #$00                           ;81F9E9;      ;
                        STA.W $0191                          ;81F9EB;000191;
-                       JSL.L CODE_83935F                    ;81F9EE;83935F;
+                       JSL.L StartTextBox                    ;81F9EE;83935F;
                        %Set16bit(!MX)                             ;81F9F2;      ;
                        LDA.W #$0040                         ;81F9F4;      ;
                        EOR.W #$FFFF                         ;81F9F7;      ;
@@ -12408,7 +12408,7 @@ CODE_81D716: ;81D716
                        LDX.W #$045D                         ;81FA08;      ;
                        LDA.B #$00                           ;81FA0B;      ;
                        STA.W $0191                          ;81FA0D;000191;
-                       JSL.L CODE_83935F                    ;81FA10;83935F;
+                       JSL.L StartTextBox                    ;81FA10;83935F;
                        %Set16bit(!MX)                             ;81FA14;      ;
                        LDA.W #$0040                         ;81FA16;      ;
                        EOR.W #$FFFF                         ;81FA19;      ;
@@ -12423,7 +12423,7 @@ CODE_81D716: ;81D716
                        LDX.W #$045E                         ;81FA2A;      ;
                        LDA.B #$00                           ;81FA2D;      ;
                        STA.W $0191                          ;81FA2F;000191;
-                       JSL.L CODE_83935F                    ;81FA32;83935F;
+                       JSL.L StartTextBox                    ;81FA32;83935F;
                        %Set16bit(!MX)                             ;81FA36;      ;
                        LDA.W #$0040                         ;81FA38;      ;
                        EOR.W #$FFFF                         ;81FA3B;      ;
@@ -12477,7 +12477,7 @@ CODE_81D716: ;81D716
                        STA.W !inputstate                          ;81FA9B;00019A;
                        LDA.B #$00                           ;81FA9E;      ;
                        STA.W $0191                          ;81FAA0;000191;
-                       JSL.L CODE_83935F                    ;81FAA3;83935F;
+                       JSL.L StartTextBox                    ;81FAA3;83935F;
                        %Set16bit(!MX)                             ;81FAA7;      ;
                        LDA.W #$0040                         ;81FAA9;      ;
                        EOR.W #$FFFF                         ;81FAAC;      ;

@@ -2229,78 +2229,81 @@ SUB_83932D: ;83932D
         RTL
 
 ;;;;;;;;
-          CODE_83935F: %Set16bit(!MX)                             ;83935F;      ;
-                       STX.W $0183                          ;839361;000183;
-                       LDA.W #$5000                         ;839364;      ;
-                       CLC                                  ;839367;      ;
-                       ADC.W #$0010                         ;839368;      ;
-                       STA.W $0185                          ;83936B;000185;
-                       STZ.W $0187                          ;83936E;000187;
-                       %Set8bit(!M)                             ;839371;      ;
-                       LDA.W $019B                          ;839373;00019B;
-                       ORA.B #$01                           ;839376;      ;
-                       STA.W $019B                          ;839378;00019B;
-                       STZ.W $0189                          ;83937B;000189;
-                       STZ.W $018B                          ;83937E;00018B;
-                       STZ.W $018C                          ;839381;00018C;
-                       STZ.W $018E                          ;839384;00018E;
-                       STZ.W $018F                          ;839387;00018F;
-                       STZ.W $0190                          ;83938A;000190;
-                       %Set16bit(!M)                             ;83938D;      ;
-                       LDA.W $0183                          ;83938F;000183;
-                       ASL A                                ;839392;      ;
-                       CLC                                  ;839393;      ;
-                       ADC.W $0183                          ;839394;000183;
-                       TAX                                  ;839397;      ;
-                       LDA.L DATA8_839BF6,X                 ;839398;839BF6;
-                       STA.B $01                            ;83939C;000001;
-                       INX                                  ;83939E;      ;
-                       INX                                  ;83939F;      ;
-                       %Set8bit(!M)                             ;8393A0;      ;
-                       LDA.L DATA8_839BF6,X                 ;8393A2;839BF6;
-                       STA.B $03                            ;8393A6;000003;
-                       %Set8bit(!M)                             ;8393A8;      ;
-                       LDA.W $0191                          ;8393AA;000191;
-                       BNE CODE_8393C5                      ;8393AD;8393C5;
-                       LDA.B #$01                           ;8393AF;      ;
-                       STA.W $0191                          ;8393B1;000191;
-                       %Set16bit(!M)                             ;8393B4;      ;
-                       LDA.W $090D                          ;8393B6;00090D;
-                       CMP.W #$0081                         ;8393B9;      ;
-                       BCS CODE_8393C5                      ;8393BC;8393C5;
-                       %Set8bit(!M)                             ;8393BE;      ;
-                       LDA.B #$02                           ;8393C0;      ;
-                       STA.W $0191                          ;8393C2;000191;
-                                                            ;      ;      ;
-          CODE_8393C5: %Set8bit(!M)                             ;8393C5;      ;
-                       LDA.B #$00                           ;8393C7;      ;
-                       XBA                                  ;8393C9;      ;
-                       LDA.W $0191                          ;8393CA;000191;
-                       DEC A                                ;8393CD;      ;
-                       %Set16bit(!MX)                             ;8393CE;      ;
-                       ASL A                                ;8393D0;      ;
-                       ASL A                                ;8393D1;      ;
-                       ASL A                                ;8393D2;      ;
-                       ASL A                                ;8393D3;      ;
-                       ASL A                                ;8393D4;      ;
-                       ASL A                                ;8393D5;      ;
-                       ASL A                                ;8393D6;      ;
-                       STA.B $7E                            ;8393D7;00007E;
-                       LDA.W !BG3_Map_Offset_Y                          ;8393D9;000146;
-                       SEC                                  ;8393DC;      ;
-                       SBC.W #$0100                         ;8393DD;      ;
-                       SEC                                  ;8393E0;      ;
-                       SBC.B $7E                            ;8393E1;00007E;
-                       STA.W !BG3_Map_Offset_Y                          ;8393E3;000146;
-                       %Set8bit(!M)                             ;8393E6;      ;
-                       STZ.W !time_running                          ;8393E8;000973;
-                       %Set16bit(!M)                             ;8393EB;      ;
-                       LDA.L $7F1F5A                        ;8393ED;7F1F5A;
-                       ORA.W #$4000                         ;FLAG5A
-                       STA.L $7F1F5A                        ;8393F4;7F1F5A;
-                       RTL                                  ;8393F8;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
+StartTextBox: ;83935F
+        %Set16bit(!MX)
+        STX.W $0183
+        LDA.W #$5000
+        CLC
+        ADC.W #$0010
+        STA.W $0185
+        STZ.W $0187
+        %Set8bit(!M)
+        LDA.W $019B
+        ORA.B #$01
+        STA.W $019B
+        STZ.W $0189
+        STZ.W $018B
+        STZ.W $018C
+        STZ.W $018E
+        STZ.W $018F
+        STZ.W $0190
+        %Set16bit(!M)
+        LDA.W $0183
+        ASL A
+        CLC
+        ADC.W $0183
+        TAX
+        LDA.L DATA8_839BF6,X
+        STA.B $01
+        INX
+        INX
+        %Set8bit(!M)
+        LDA.L DATA8_839BF6,X
+        STA.B $03
+        %Set8bit(!M)
+        LDA.W $0191
+        BNE .CODE_8393C5
+        LDA.B #$01
+        STA.W $0191
+        %Set16bit(!M)
+        LDA.W $090D
+        CMP.W #$0081
+        BCS .CODE_8393C5
+        %Set8bit(!M)
+        LDA.B #$02
+        STA.W $0191
+
+    .CODE_8393C5:
+        %Set8bit(!M)
+        LDA.B #$00
+        XBA
+        LDA.W $0191
+        DEC A
+        %Set16bit(!MX)
+        ASL A
+        ASL A
+        ASL A
+        ASL A
+        ASL A
+        ASL A
+        ASL A
+        STA.B $7E
+        LDA.W !BG3_Map_Offset_Y
+        SEC
+        SBC.W #$0100
+        SEC
+        SBC.B $7E
+        STA.W !BG3_Map_Offset_Y
+        %Set8bit(!M)
+        STZ.W !time_running
+        %Set16bit(!M)
+        LDA.L $7F1F5A
+        ORA.W #$4000                         ;FLAG5A
+        STA.L $7F1F5A
+
+        RTL
+
+
           CODE_8393F9: %Set8bit(!M)                             ;8393F9;      ;
                        %Set16bit(!X)                             ;8393FB;      ;
                        STZ.W $019B                          ;8393FD;00019B;

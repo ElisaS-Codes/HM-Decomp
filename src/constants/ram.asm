@@ -216,7 +216,7 @@
 !happiness = $7F1F33 ;16b
 !power_berry_N = $7F1F36 ;8b
 !player_action = $D4 ;16b TODO
-;1 walk, 2 run, 3 jump, 4 item on hand, 05 Drop Item 09 idle, 0A Using Tool, 0B Tired, 0C Show Tool, 0D whistle Horse, 0F about to cast, 10 casting, 11 fishing, 12 fishing with bite, 13 reeling, 14 drunk, 15 drinking, 16, Dropping Dog 1B Whistle Dog, 1C Use Tool
+;1 walk, 2 run, 3 jump, 4 item on hand, 05 Drop Item 09 idle animation, 0A Using Tool, 0B Tired, 0C Show Tool, 0D whistle Horse, 0F about to cast, 10 casting, 11 fishing, 12 fishing with bite, 13 reeling, 14 drunk, 15 drinking, 16, Dropping Dog 1B Whistle Dog, 1C Use Tool
 !exaustion_level = $096C
 
 ;;Family

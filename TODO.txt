@@ -8,6 +8,7 @@ DATA8_81A58B
 DATA8_81B363 - 16bit
 81AC49 -16bit
 81B121 - code
+839BF6 - long ponters
 
 8489BB
 
@@ -39,21 +40,25 @@ $3F holds the index of the stuct... weird cause you need the index to access the
 struct $CC
 00: "used" flag? -8
 01:r -8b
+02: -8b
 03:r -8b
 04:r -8b
 05:r -8b
 06:r -8b
 0C:r -8b
+0D: rng -8b
 0F:r -8b
 10: - 16b
 12:r -8b
 14:r -16b
+16: -16b
 10:r is event running this frame -16b
 1A:r -16b
 1C:r -16b
 30: Data from B38000 -16b this is a kind of pointer with 32, but 32 is always the bank of the event list
 32: bank of C9? -8b
-3F: Index of struct -8
+33: -16b
+3F: Index of struct -8b
 
 
 ====Working on
@@ -75,7 +80,7 @@ $7F1F29 - ammount of planted grass
 $7F1F48 - (0)
 $7F1F49 - (0)
 
-
+$01 - 24b pointer to text, confirmed
 $04 - 24b pointer, related to BG2/weather?
 $07 - 24b Pointer, increases by $10
 $0A - 24b Pointer, related to audio
@@ -178,6 +183,7 @@ $0187 - something to do with text writing
 
 $018B -
 
+$0191 - Open textbox. if 1, its already open
 $0195 - Graphic mode ?
 $0196 - flags? related to time?
 ?n?k ?ts? n:name set k = data keyboard read? s=Skips test and updates during what I think is the transition funciton? t:transitions screen
@@ -228,12 +234,14 @@ $0905 - OAM Source pointer? related to 7EA100 block
 
 $0907 - (Related to position X)
 $0909 - (Related to position Y)
+$0901 -
 $0911 - (Direction you are looking) copy reset at night
 $0915 - (Related to animation, FFFF when not animating) reset at night
 $0919 - (Related to Walk Cycle)
 $091A - (Related to Run Cycle)
 $091B - (Related to Tool/Anim Cycle?)
 $091C - (related to animals?)
+090D
 $091E -
 $091F -
 $0920 - related to chickens
