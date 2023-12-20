@@ -1,0 +1,5966 @@
+DATA16_B688A4:
+I'll work hard again
+tomorrow.¬
+
+DATA16_B68972:
+Good night.¬
+
+DATA16_B695A4:
+No, don't tell me you are
+working on New Years' Day.
+Just relax today.¬
+
+DATA16_B6978C:
+Oh yes, I've nailed down the
+door to prepare for the
+hurricane.¬
+
+Text_Elf_Cave_Door_Closed:
+I can't open it.It's locked.¬
+
+DATA16_B69FE0:
+I can't open it.
+something's stuck.¬
+
+DATA16_B6A03E:
+Hey, how's it going?
+Don't work too hard.
+Just take time.¬
+
+DATA16_B6A0CE:
+Ask the florist for flowers
+and ask the livestock delaer
+for livestock.▼
+Better ask Mrs.
+Fortune-teller for girls.¬
+
+DATA16_B6A1C8:
+Don't hang around.
+Listen to the priest.¬
+
+DATA16_B6A22C:
+You are off today,
+aren't you?▼
+We can't keep it up all the
+time.¬
+
+DATA16_B6A2C0:
+People in town talk
+differently according to the
+weather, day, and season.¬
+
+DATA16_B6A364:
+Everybody has different
+ideas on what happiness
+means,right?▼
+I guess the best thing is
+to do what you want to do.
+But it's probably not▼
+real happiness when you
+annoy someone or are blamed.¬
+
+DATA16_B6A4FC:
+You are working so hard.
+You should have a chat with
+your friends or go to▼
+mountains...
+to relax once in a while.¬
+
+DATA16_B6A604:
+This church is dedicated to
+the God of the crops.
+I suggest you pray▼
+faithfully.¬
+
+DATA16_B6A6B2:
+I like taking my time
+reading books.That's one of
+my happiest times.¬
+
+DATA16_B6A748:
+Have you heard of the water
+imp? Someone has seen it in
+the pond of the mountain.¬
+
+DATA16_B6A7EC:
+Don't think it's OK to do
+bad things if it's not
+discovered.▼
+No one is perfect. We all
+make mistakes.
+That's the way we are.▼
+But it's wrong to not feel
+guilty about what you've
+done wrong.¬
+
+DATA16_B6A99A:
+I wonder if our daughter Ann
+can get married living like
+that.¬
+
+DATA16_B6AA16:
+Hi, how's your work going?
+There are some wild dogs,
+so you should fix the fence.¬
+
+DATA16_B6AAC0:
+I believe God exists.
+You believe it, don't you?¬
+
+DATA16_B6AB2E:
+Hey, it's strange. She is
+always here by now.▼
+.....oh no,
+it's nothing at all.¬
+
+DATA16_B6ABF0:
+Hi. Are you taking a walk
+too? It's important to get a
+few days off.▼
+Working hard till late at
+night will drive you crazy,
+mentally and physically.¬
+
+DATA16_B6AD1E:
+I just can't help myself
+worrying about Ann so much.
+Mr. #PN1, you are of the▼
+same generation as Ann.
+What do you think of her?
+....oh, sorry.▼
+Maybe I'm a little confused.¬
+
+DATA16_B6AE86:
+Hello. You always look fine.
+The bag of seed for sowing.
+It's convenient to buy▼
+a few bags at once.¬
+
+DATA16_B6AF4C:
+Grass grows in Autumn so you
+don't have to mow much
+before Winter.¬
+
+DATA16_B6AFDA:
+May everyone give kindness
+to everyone else....¬
+
+DATA16_B6B03C:
+....¬
+
+DATA16_B6B046:
+What? The shop is closed on
+Saturdays. So I'm bathing in
+the sun. Nice,huh?¬
+
+DATA16_B6B0DC:
+It's kind of dark on rainy
+days....feels slightly
+lonely,doesn't it?▼
+But the rain is good when it
+comes to producing crops.¬
+
+DATA16_B6B1DE:
+What a coincidence. Are you
+having a meal here today?¬
+
+DATA16_B6B24A:
+It's not easy to work
+steadily but it's
+worthwhile.¬
+
+DATA16_B6B2D2:
+Hope business will be
+better,it will be better   .
+...▼
+What? Isn't it the God of
+business? Oh,well.¬
+
+DATA16_B6B3A8:
+It's good to bathe in the
+sun. Eat well and work hard.
+Good health is the▼
+foundation of happiness.¬
+
+DATA16_B6B470:
+Eat something when you are
+tired. Our cakes are the
+best to get more energy.¬
+
+DATA16_B6B512:
+Howdy,young boys! What's up?
+....hic.¬
+
+DATA16_B6B55C:
+...hic,working like a dog
+is not the only way to live.¬
+
+DATA16_B6B5CE:
+It's my routine to take a
+walk on Sundays so it's OK
+with me.¬
+
+DATA16_B6B650:
+Oh no,it started raining
+now...gee, I was going to
+work.▼
+Well,I can do nothing but
+stay home today.¬
+
+DATA16_B6B726:
+What are you saying?
+It doesn't matter if It
+rains to do our work here!¬
+
+DATA16_B6B7CC:
+ulp...soooo...great!
+She's out.I can relax as
+much as▼
+I want,yeah.¬
+
+DATA16_B6B866:
+You can be calm inside the
+church.Not many people here,
+you know.▼
+It's crowded on holidays
+though.¬
+
+DATA16_B6B932:
+I felt time went by slowly
+when I was young.
+Now time goes by too fast▼
+and one year seems short.
+It's strange,really.¬
+
+DATA16_B6BA38:
+Have sympathy for people.
+When you are kind to people,
+they give you▼
+kindness in return.
+Animals are the same as us
+for sure.¬
+
+DATA16_B6BB48:
+It's not necessarily right
+or wrong. Daily incidents
+are neither.▼
+It's up to you,really.¬
+
+DATA16_B6BC00:
+I know it won't consume your
+stamina on a rainy day but
+you should be off.▼
+Really.¬
+
+DATA16_B6BCA6:
+It's tough to take care of
+cows.Take good care of them
+so that they do not▼
+get sick.My note is right
+there so read it carefully
+so you can avoid any▼
+diseases.¬
+
+DATA16_B6BDEC:
+Hey,do your hens lay eggs?
+Put them in the cage.
+And feed them every day.▼
+They won't lay eggs for
+3days after you miss a
+feeding.¬
+
+DATA16_B6BF10:
+Hey,young boy! Put your
+livestock inside the pen
+before the weather gets▼
+worse!¬
+
+DATA16_B6BFBE:
+You know,cows give you more
+milk when you take good care
+of them with love.▼
+..hey,are you listening to
+me? They will like you and
+good calves will be born▼
+...listen to me,boy!¬
+
+DATA16_B6C120:
+You can't redo your life.
+You might not have the
+second chance.▼
+Think before you act.¬
+
+DATA16_B6C1DA:Text_Town_FortuneTeller
+Are you asking if I don't go
+to church? God is everywhere
+and He is nowhere,▼
+you know.
+Hee-hee-hee.¬
+
+DATA16_B6C2C2:Text_FortuneTeller2
+There's a useful book over
+there, about girls,I wrote
+it.Better read it.¬
+
+DATA16_B6C358:
+I'm also a midwife.You know,
+the mayor's daughter Maria
+and the grocery shop▼
+owner's daughter Ann
+I delivered them all.¬
+
+DATA16_B6C456:
+Grown-ups always make rule
+telling us to do this,do
+that,don't do this,▼
+don't do that.What hard work
+it is being a child.¬
+
+DATA16_B6C550:
+Hmmm...is he in love with
+Maria's sister? ....it can't
+be.¬
+
+DATA16_B6C5C8:
+We can gather many things in
+the mountain.I want to sell
+them but they won't allow▼
+a little kid to go to the
+mountains alone.¬
+
+DATA16_B6C6C6:
+Please,please!
+I've got a date.¬
+
+DATA16_B6C720:
+You'd better read the book
+written by Mrs.
+Fortune-teller many times.▼
+It's pretty hard to capture
+a girl's heart.¬
+
+DATA16_B6C81E:Text_Bartender3
+Yeah, welcome. Make yourself
+at home.¬
+
+DATA16_B6C868:
+Things girls like are
+flowers and sweets,right?▼
+I'm saving money to buy a
+present for Maria.¬
+
+DATA16_B6C932:
+I love Maria.I wish she
+would be my bride in the
+future.¬
+
+DATA16_B6C9B2:
+I always pray that I can be
+a grown-up very quickly.¬
+
+DATA16_B6CA1C:
+It's not a date! It's not a
+date! Just a walk,that's
+all!¬
+
+DATA16_B6CA96:Text_Bar_Shipper3
+Oh yes,put crops in the
+shipping box so I can
+collect them.¬
+
+DATA16_B6CB22:Text_Bar_Shipper4
+You can't use the tool when
+you lose your stamina but
+you can carry things a▼
+round.¬
+
+DATA16_B6CBCE:
+Well, a drink after work is
+the best.¬
+
+DATA16_B6CC1A:Text_Bar_ShipperApprentice1
+Things you can't ship are
+flowers,animals,and
+perishables like cakes.▼
+Don't put those things in
+the box.¬
+
+DATA16_B6CD04:Text_Bar_ShipperApprentice2
+Even if you put shipping
+goods in the box at night,
+they won't last till▼
+the morning.So wasteful.¬
+
+DATA16_B6CDD0:
+I collect shipping goods
+even in the shed so please
+don't worry.¬
+
+DATA16_B6CE5A:
+Shall we watch the weather
+forecast? You'd better put
+the livestock inside right▼
+after you find out it's
+raining.¬
+
+DATA16_B6CF4A:Text_Town_Visitor1
+It would be much easier to
+live if it was true that God
+brings you happiness.¬
+
+DATA16_B6CFE6:Text_Town_Visitor2
+Anything can happen in our
+lives. Just in case,you'd
+better save money.¬
+
+DATA16_B6D07C:Text_Bar_Visitor1
+I know money is important
+but the most important thing
+is love,you know,▼
+LOVE! Don't you think so?¬
+
+DATA16_B6D144:Text_Peddler
+I'm a wandering peddler.
+But I don't often sell
+anything to anyone.▼
+If there's anything you want
+to sell, just put them on
+that table over there.¬
+
+DATA16_B6D27A:
+Fences are easy to break
+after rain and snow.▼
+Please make new fences after
+knocking the broken fences
+down.¬
+
+DATA16_B6D358:Text_EvesGrandparent1
+I live in the mountains
+hunting animals.▼
+Eve always tells me to come
+down to the town but I won't
+change my life style.¬
+
+DATA16_B6D44E:Text_EvesGrandparent2
+Have you heard of
+"Power Berry"?  Eat it and
+you'll gain a little energy.¬
+
+DATA16_B6D4F8:Text_EvesGrandparent3
+When it rains, you must keep
+off the top of the mountain,
+because it is dangerous.¬
+
+DATA16_B6D59A:
+Some mushrooms are
+poisonous,so be careful.¬
+
+DATA16_B6D604:
+Hey,do you want to fish?▼
+ Yes
+ No»2
+
+DATA16_B6D678:
+OK,you can use my fishing
+rod. Use Y button.¬
+
+DATA16_B6D6D6:
+No,this is pretty good. It
+tastes good and sells at a
+high price.¬
+
+DATA16_B6D75E:Text_Peddler_Late
+Visit us again.¬
+
+DATA16_B6D77E:
+Hello.It's a fine day today.¬
+
+DATA16_B6D7B8:
+It's been hot every day but
+how are you doing?¬
+
+DATA16_B6D816:
+I somehow love the autumn
+scenery.¬
+
+DATA16_B6D860:
+Hope it'll be spring soon.¬
+
+DATA16_B6D896:
+Do you believe in God?▼
+ Yes
+ No»2
+
+DATA16_B6D906:
+Really? It's unusual these
+days. Please come to the
+church on Sunday.¬
+
+DATA16_B6D99A:
+It's not whether God exists
+or not,it's more a "belief"
+that counts,I think.¬
+
+DATA16_B6DA34:
+Please take care of yourself
+not to be worn down by the
+summer heat.¬
+
+DATA16_B6DABE:
+....Excuse me, do you love
+kids?▼
+ I love kids.
+ Not really.»2
+
+DATA16_B6DB56:
+I love kids too. My dream is
+to live with a lot of kids
+around me.¬
+
+DATA16_B6DBDC:
+...Oh.¬
+
+DATA16_B6DBEA:
+It's pretty cold so please
+take care of yourself not to
+catch a cold.¬
+
+DATA16_B6DC76:
+Oh,you have come to listen
+to the priest.▼
+ Yes
+ No»2
+
+DATA16_B6DD0E:
+You are devout.¬
+
+DATA16_B6DD2E:
+No? then,why are you here?
+Oh,to pray?¬
+
+DATA16_B6DD7E:
+It's a welcome rain. We have
+a lot of rain here in
+spring.¬
+
+DATA16_B6DDFE:
+Uum...well...can I come over
+to your ranch some day soon?¬
+
+DATA16_B6DE70:
+Aren't you lonely living in
+that big place?▼
+ A little lonely
+ No,not at all»2
+
+DATA16_B6DF20:
+Uum..well...yes, if...no,
+nothing....g-good-by.¬
+
+DATA16_B6DF84:
+I..see...sorry,I didn't
+mean to ask you anything
+personal.¬
+
+DATA16_B6E008:
+I'm going to make great
+tools like my dad!¬
+
+DATA16_B6E066:
+It'll be showcased at the
+shop one of these days so
+please try it.▼
+ Hum
+ I don't want it»2
+
+DATA16_B6E150:
+Trust me.¬
+
+DATA16_B6E164:
+You don't trust me, do you?¬
+
+DATA16_B6E19C:
+It seems a little different
+from the plan I had but...no
+big deal.¬
+
+DATA16_B6E220:
+Aren't I acting like a girl?▼
+ No,not at all
+Not that bad»2
+
+DATA16_B6E2AE:
+How outspoken you are!¬
+
+DATA16_B6E2DC:
+My dad always tells me to
+act like a girl but I wonder
+exactly what acting▼
+like a girl means.¬
+
+DATA16_B6E39A:
+Well...I don't know why
+but...it feels good in
+spring.▼
+I go like "OK,it's show
+time!"¬
+
+DATA16_B6E460:
+I love summer though it's
+hot.¬
+
+DATA16_B6E4A2:
+well,constant effort is
+important,you know. They say
+success comes from▼
+failure.¬
+
+DATA16_B6E54A:
+It looks cold outside.It
+turns white when you breathe
+out,doesn't it?¬
+
+DATA16_B6E5DA:
+Ho hum...it's boring,
+isn't it?▼
+ Yes
+ Not really»2
+
+DATA16_B6E678:
+It is,hum? I'm so sleepy...
+ho hum...¬
+
+DATA16_B6E6C4:
+Gee,you are so serious.¬
+
+DATA16_B6E6F4:
+Yes,I feel relaxed
+outside...I haven't been out
+for a while.¬
+
+DATA16_B6E77E:
+No idea comes out under this
+heat!¬
+
+DATA16_B6E7C2:
+Let's do our best,shall we? ¬
+
+DATA16_B6E7FC:
+The mountain is covered with
+snow by now.¬
+
+DATA16_B6E84E:
+I hate rain.It feels
+depressing.I like when it
+pours.¬
+
+DATA16_B6E8CC:
+...My dad tells me to get
+married so often....
+He would be all by himself▼
+if I got married to
+someone...
+Doesn't he realize that?¬
+
+DATA16_B6EA14:
+Hello! Hey, look at this!
+This is the automatic
+pudding maker!▼
+I've put eggs and milk in
+here. Now all you have to do
+is turn it on.Do it!▼
+ Push
+ I don't want to do»2
+
+DATA16_B6EB9E:
+It smells wonderful,doesn't
+it?¬
+
+DATA16_B6EBDE:
+You say it's much quicker to
+make pudding without the
+machine? Oh no...don'▼
+t you have a dream?¬
+
+DATA16_B6ECA2:
+I love Spring when all the
+flowers start to bloom.¬
+
+DATA16_B6ED0A:
+Hello. Do you like flowers?▼
+ Yes
+ Not really»2
+
+DATA16_B6ED94:
+Yeah,Nina loves them too!¬
+
+DATA16_B6EDC8:
+ugh...¬
+
+DATA16_B6EDD6:
+Autumn to Winter is an off
+season for us because
+there's nothing to sell.¬
+
+DATA16_B6EE78:
+Do you believe that there
+is a flower which blooms
+in Winter?▼
+ Yes
+ You're kidding?»2
+
+DATA16_B6EF5A:
+It must be beautiful.¬
+
+DATA16_B6EF86:
+Let me tell you the code for
+the flower in our shop.
+It is "I like you a lot!"¬
+
+DATA16_B6F02A:
+Hey,I guess she would be
+happy if you gave the flower
+to the girl you like.¬
+
+DATA16_B6F0C6:
+The mountains this season
+are beautiful. There are
+many fruits and nuts,too...¬
+
+DATA16_B6F16E:
+It's deserted in Winter.But
+we can't experience the joys
+of Spring without Winter.¬
+
+DATA16_B6F212:
+The herb in the inner part
+of the cave works well for
+fever and headache▼
+when you boil it.¬
+
+DATA16_B6F2CC:
+The flower sold at the shop
+is what we raise here.¬
+
+DATA16_B6F332:
+I'm collecting fallen leaves
+to make manure for the
+flowers.¬
+
+DATA16_B6F3B4:
+Plants are alive under the
+snow.Isn't it wonderful?▼
+ Wonderful
+ So?»2
+
+DATA16_B6F462:
+Human,animals,and plants
+are all alive.¬
+
+DATA16_B6F4B8:
+So great!¬
+
+DATA16_B6F4CC:
+I know you are busy working
+but please try to come to
+the festival.¬
+
+DATA16_B6F558:
+I kind of like rainy days.
+Leaves look happy when it
+rains.¬
+
+DATA16_B6F5D6:
+Flowers can be edible and
+used for medicinal purposes
+as well as making us feel▼
+comfortable.But I don't pick
+them when I don't need them.▼
+I believe they want to live
+too.¬
+
+DATA16_B6F72E:
+I heard there was the
+"Secret Garden" in the
+ranch. Is it so?▼
+I want to go see it.▼
+ OK
+ I don't want to go.»2
+
+DATA16_B6F84E:
+Wow,I can hardly wait.¬
+
+DATA16_B6F87C:
+How mean!
+Forget it!¬
+
+DATA16_B6F8CA:
+Hello,you always look fine. ¬
+
+DATA16_B6F904:
+I have a little bird. Her
+name is P-chan. She sings
+beautifully.¬
+
+DATA16_B6F98E:
+Hey,do you like sweets?▼
+ I love them
+ Not really»2
+
+DATA16_B6FA10:
+Really? I'm good at making
+sweets.I hope I can cook
+you something someday.¬
+
+DATA16_B6FAAE:
+I'm sorry.¬
+
+DATA16_B6FAC4:
+The stillness of Winter
+makes me calm down so
+I love it.¬
+
+DATA16_B6FB4A:
+Hey,do you like animals?▼
+ I love them
+ I don't like them»2
+
+DATA16_B6FBDC:
+Yes? I love animals too.¬
+
+DATA16_B6FC0E:
+You are lying. animals dont
+take to people who don't
+like them.¬
+
+DATA16_B6FC94:
+#Do1 would bark at wild dogs
+when they come here. Check
+if the fence is broken.¬
+
+DATA16_B6FD32:
+It's hard to look after
+animals.We always must be
+careful so they dont▼
+get sick....
+I feel just like a mother
+who is taking care of her▼
+children.¬
+
+DATA16_B6FE84:
+You are always running
+around,aren't you? You look
+fine even if it's cold▼
+outside.¬
+
+DATA16_B6FF34:
+I hope my dad stays healthy
+at all times.¬
+aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaa
+
+DATA16_B78000:
+My uncle liked you. Please
+make friends with him.OK?▼
+ OK
+ No»2
+
+DATA16_B780AE:
+Really? I'm glad. Please
+excuse him for being
+meddlesome.▼
+I guess he gets that from
+my mother.¬
+
+DATA16_B78184:
+He's strict but basically a
+good person.¬
+
+DATA16_B781D6:
+Oh no, you are too soaked.
+You might catch a cold
+unless you dry yourself▼
+soon.¬
+
+DATA16_B78282:
+Oh,come on,Dad.Let's go home
+now.¬
+
+DATA16_B782C4:
+Otherwise Mom will get
+really mad at you.¬
+
+DATA16_B78322:
+Will you taste my new cake
+when it's baked?¬
+
+DATA16_B7837C:
+Hey,I baked a new cake.
+Will you have a bite?▼
+ Yes
+ No»2
+
+DATA16_B78422:
+Is it good? It's a
+cheesecake. Do you think
+it's good enough to sell▼
+at the shop?¬
+
+DATA16_B784DE:
+You look pretty busy.
+I hope everything's well
+with you.¬
+
+DATA16_B78562:
+Oh,what a coincidence to
+meet you here.▼
+ Yes
+ No»2
+
+DATA16_B785FA:
+Tee-hee...¬
+
+DATA16_B78610:
+Wow,what a coincidence.
+Hey,were you waiting for
+me here?▼
+Titter...I'm waiting for you
+at the bar.¬
+
+DATA16_B786E2:
+Hi.I just came to shop.
+Sorry,but I'm in too much of
+a hurry to see you.¬
+
+DATA16_B7877A:
+You came here in this rain?
+I'm so glad.¬
+
+DATA16_B787CC:
+Grand-pa is so strict...¬
+
+DATA16_B787FE:
+You are pretty daring,
+aren't you? Shall I wash
+your back?▼
+ Yes
+ N..N..No»2
+
+DATA16_B788D2:
+Hey, I'm just kidding.¬
+
+DATA16_B78900:
+Hee-hee, I won't do it.¬
+
+DATA16_B78930:
+Hi. You look fine today.¬
+
+DATA16_B78962:
+It's my home made fruit
+juice. Do you want it?▼
+ Yes
+ No thank you»2
+
+DATA16_B78A1E:
+Tee-hee...I'll kiss you if
+you can drink it. ¬
+
+DATA16_B78A7C:
+Why are you here at this
+bar? ...Aha, you want to
+see me.¬
+
+DATA16_B78AFC:
+It doesn't get cool at
+night.¬
+
+DATA16_B78B42:
+Thanks a lot for today.¬
+
+DATA16_B78B72:
+I don't like to be alone.¬
+
+DATA16_B78BA6:
+I sometimes go to the
+mountains to gather some
+berries.¬
+
+DATA16_B78C28:
+Wasn't it cold outside?
+When it's cold, you better
+drink and warm you body▼
+from the inside.¬
+
+DATA16_B78CEA:
+I saw you at the ranch the
+other day. You didn't notice
+me because you were working.¬
+
+DATA16_B78D94:
+I couldn't stand to be alone
+in that huge place. Don't
+you feel lonely there?▼
+ Sometimes
+ Not at all»2
+
+DATA16_B78E84:
+It's much better to have
+someone around me and say
+"yeah," when I say "▼
+the weather is fine."
+Feel secure, don't you ?
+I think it's better than▼
+being alone. Right?¬
+
+DATA16_B78FE8:
+Sure, you can live alone but
+it's just like breathing,
+you know? It's lonely...¬
+
+DATA16_B7908A:Text_Intro1
+Hello. You are the one who
+is supposed to work at this
+ranch today.▼
+What's your name?¬
+
+DATA16_B79138:Text_Intro2
+Mr.#PN2,I'm in charge of
+shipping here. I come here
+every evening to pick up▼
+stuff you put in the
+shipping box. Nice to meet
+you.▼
+Oh yeah, ask anything you
+want to people in town.
+It will help you.¬
+
+DATA16_B792E6:Text_Visitor_Intro
+Hello. Where are you
+from?...You are managing the
+ranch alone, separately▼
+from your parents? Great!
+There's nothing here in the
+ranch, is there?...for▼
+practice? You have wonderful
+parents.¬
+
+DATA16_B7946E:
+Hi, How do you do? I'm the
+mayor of this town. It's a
+pleasure to meet you.▼
+There are some tools left in
+the shed that your
+grandfather used to use.▼
+And a book on how to use
+them,too.¬
+
+DATA16_B795F8:
+Your grandfather helped me
+in those days. If you have
+any  problems, don't▼
+hesitate to talk to me.
+Well,you should get some
+rest when you get back home.¬
+
+DATA16_B7973C:
+How do you do? Hard,isn't
+it? But don't give up.......
+...........Oh,yeah▼
+I have a daughter....she may
+be at the church.¬
+
+DATA16_B7982E:
+She is a cute girl with long
+hair.¬
+
+DATA16_B79872:
+I haven't seen you before.
+Did you come to that ranch?
+I'm Maria.▼
+Nice meeting you.¬
+
+DATA16_B7991C:
+It may be hard at first but
+don't give up.¬
+
+DATA16_B79972:
+I've heard something!
+I've heard a faint sound of
+laughter behind the trees▼
+in the ranch. And some
+people talking,too!
+...What was that?¬
+
+DATA16_B79AAA:
+He..Hello.¬
+
+DATA16_B79AC0:
+How do you do? I'm the
+priest of this church.
+Ask questions to people at▼
+the shop. They know many
+things. And for the rest,
+check the signboards.¬
+
+DATA16_B79C02:
+You'll have a plenty of
+challenges but things will
+be better for sure.▼
+Please stick to it.¬
+
+DATA16_B79CC2:
+This year is over today.
+What was your year like?▼
+Well,this town will be in a
+festive mood tomorrow
+because lots of people▼
+are going to the top to see
+the sun rise.¬
+
+DATA16_B79E1E:
+"Shipping box for livestock"
+After talking at the shop,
+put livestock in here.▼
+Livestock Dealer¬
+
+DATA16_B79EDE:
+Tools are in the shed and
+the pen. Pick them up with
+A button to get equipped.▼
+To use them, push Y button.¬
+
+DATA16_B79FBA:
+Unfortunately, there's
+nothing for sale here but
+there will be soon.▼
+So please drop by in a
+while.¬
+
+DATA16_B7A098:
+Heh, you are the owner of
+the ranch. I'm Ann.
+Nice to meet you.¬
+
+DATA16_B7A12C:
+Stamina decreases when you
+use tools. Eat food or
+sleep in the bed to▼
+recover.¬
+
+DATA16_B7A1D6:
+You went to the ranch,
+didn't you? If you are
+going to raise crops there,▼
+I'll give this to you.
+It's a watering can.
+It's for getting water▼
+from the pond. I'll bring it
+to your shed.¬
+
+DATA16_B7A370:
+Vegetable seeds will be in
+soon so come again soon.¬
+
+DATA16_B7A3DA:
+How do you do? I'm Nina.
+These crops must be sowed
+during a certain season.▼
+They won't germinate unless
+you sow them in the proper
+season.¬
+
+DATA16_B7A4FC:
+And you have to plow the
+ground well to make it a
+field.¬
+
+DATA16_B7A57A:
+Welcome. You'd better eat
+everyday, you know. Stamina
+is key.¬
+
+DATA16_B7A5FA:
+It must be hard, I know, but
+try your best.¬
+
+DATA16_B7A650:
+Puff...hic..Have I seen you
+before?¬
+
+DATA16_B7A698:
+Hey,son! You have to have a
+meadow to buy livestock.
+Not only for cows▼
+but also for chickens.
+I have some grass left so
+use it to raise them.▼
+I'll bring it to your shed.
+Talk to me over the counter
+when you want to buy▼
+livestock.¬
+
+DATA16_B7A878:
+First,you must have a
+plenty of grass when you
+raise livestock.▼
+Beginners should start off
+with chickens.¬
+
+DATA16_B7A960:
+Howdy! I put those cows in
+the pen and gave those bells
+for free.▼
+Well,first thing to do is to
+name them with affection.Tak
+e good care of them!¬
+
+DATA16_B7AA7E:Text_Peddler_Intro
+Hello. I'm a wandering
+peddler.I don't have
+anything to sell right▼
+now though. If you want to
+sell something, bring it to
+me so I can buy it.¬
+
+DATA16_B7ABB4:
+Girls in this town are all
+cute and good-natured so it
+may be fun to be here.¬
+
+DATA16_B7AC52:Text_FortuneTeller_Intro
+Hohoho...Mister, you don't
+know what to begin with,do
+you?▼
+First,you must learn how to
+use those tools with the
+book in the shed.▼
+The rest, ask the florist
+about the crops  and the
+livestock dealer about▼
+livestock.¬
+
+DATA16_B7AE14:Text_FortuneTeller1
+Don't overextend yourself.
+When you are tired, just go
+to bed earlier.▼
+The healthy body is your
+precious asset. Try your
+best to become an▼
+independent rancher.¬
+
+DATA16_B7AF62:
+Mrs.Fortune-teller's words
+always prove right.  Just
+like the weather fore▼
+cast on TV.¬
+
+DATA16_B7B016:
+Oh,hi,I'm Ellen. Nice
+meeting you.¬
+
+DATA16_B7B068:Text_EvesGrandparent_Intro
+What? Are you the heir of
+the ranch? I wonder if you
+can manage it.▼
+Young men these days have
+little guts.¬
+
+DATA16_B7B148:
+Hello. The bar is closed
+today. It's usually open
+except Sunday though.¬
+
+DATA16_B7B1E4:Text_Intro_Return_Home1
+Are you going back to the
+ranch?▼
+ Yes
+ Not yet»2
+
+DATA16_B7B276:Text_Intro_Return_Home2
+Then,I'll give you a lift.
+I'm a trainee of shipping
+too.▼
+Let's do our best to achieve
+each other's goal.
+With grit!¬
+
+DATA16_B7B376:Text_Intro_Return_Home3
+OK.Let me know when you go
+home.¬
+
+DATA16_B7B3BA:Text_Intro_Talk_More
+I suggest you listen to
+the villagers a little more.¬
+
+DATA16_B7B42C:
+You've come to that haunted
+ranch? Tee,hee...good luck.
+I'm Eve,nice to meet you.▼
+Here you are, it's from me.¬
+
+DATA16_B7B508:
+The best thing to recover
+from fatigue is to relax.¬
+
+DATA16_B7B574:Text_Bartender1
+Welcome.Make yourself at
+home.¬
+
+DATA16_B7B5B8:Text_Bartender2
+That's Eve,the drawing card
+of this bar. Isn't she
+pretty?▼
+That's because she is my
+niece.¬
+
+DATA16_B7B67E:
+No...I'm still fine.¬
+
+DATA16_B7B6A8:Text_Bar_Shipper1
+Good evening. I'm a fan of
+Eve's,you know.¬
+
+DATA16_B7B700:Text_Bar_Shipper2
+Eve works at night so I
+suppose she kinda misses
+people her age.▼
+Mr.#PN3,right? Will you come
+here as much as you can?¬
+
+DATA16_B7B7F8:
+Eve lost her parents and her
+grandfather who is a hunter
+brought her up.▼
+Her grandfather locks
+himself in the mountain and
+hardly comes down to the▼
+town.¬
+
+DATA16_B7B936:
+She may miss him too...but
+she's always cheerful.
+Such a nice girl.¬
+
+DATA16_B7B9CA:
+Koro! Wait!¬
+
+DATA16_B7B9E2:
+Puff-puff...Don't run
+suddenly.Oh,you.You are the
+Mr. Rancher▼
+everybody's talking about.
+Well,excuse me,..will you
+please keep this dog▼
+for me? My house is a
+grocery store so my mom
+doesn't allow me to keep▼
+this dog...so,please!¬
+
+DATA16_B7BBD2:
+Thank you very much! You
+have a new house,#PN4
+You've got to be a▼
+good boy. Take care.¬
+
+DATA16_B7BC90:
+Hey,you are a newcomer
+here. Really,a rancher?
+That's something.▼
+For a young boy like you.¬
+
+DATA16_B7BD58:
+We are carpenters. Please
+come to us when you want to
+enlarge your house.¬
+
+DATA16_B7BDF0:
+For the extension of your
+house,please call us when
+you have enough wood▼
+for it. See, there's a sign
+by the house.Check it out.¬
+
+DATA16_B7BEF8:
+Now it's an extension
+campaign. If you can enlarge
+your house by the end of▼
+summer, you will get a
+special gift for free.¬
+
+DATA16_B7C000:
+I'm an angler. I live in
+perfect freedom.
+You' better forget your▼
+work and spend some quiet
+time, once in a while,
+enjoying things like▼
+fishing.¬
+
+DATA16_B7C14C:
+I'll prepare a fishing rod
+for you next time.¬
+
+DATA16_B7C1AA:
+Hi,what's up?. How's your
+work going?¬
+
+DATA16_B7C1FA:
+You can gather materials by
+chopping logs in the
+mountain.¬
+
+DATA16_B7C27E:
+You can also use materials
+for the fence so you should
+always gather them.¬
+
+DATA16_B7C316:
+Do you want to enlarge your
+house?▼
+ Yes
+ No»2
+
+DATA16_B7C39E:
+OK.I'll be at the ranch
+tomorrow.¬
+
+DATA16_B7C3EA:
+Let me know whenever you
+want to do it.¬
+
+DATA16_B7C440:
+How do you like living in
+the "Super Deluxe Great Log
+House"? Isn't it great?¬
+
+DATA16_B7C4E0:
+It costs 5000G to enlarge
+your house. Take it?▼
+ Yes
+ No
+  Money #Money20G»2
+
+DATA16_B7C5D0:
+Alright.We'll start off
+tomorrow.¬
+
+DATA16_B7C61C:
+Oh...OK.Call me again any
+time.¬
+
+DATA16_B7C660:
+Oh my God! There's not
+enough materials. Hey,listen
+to me very carefully!▼
+We don't want to do
+half-finished work!
+We can't start without▼
+enough materials.
+You'll see what you need on
+that sign there so getting▼
+them is the first thing
+to do.Bye.¬
+
+DATA16_B7C88E:
+Chop stumps with an axe to
+make them materials.It
+takes you about 6 hits▼
+to chop them down.¬
+
+DATA16_B7C952:
+Hee-hee,look forward to it. ¬
+
+DATA16_B7C98C:
+I'll build a terrific one!
+Look forward to it.¬
+
+DATA16_B7C9EC:
+It costs 10000G to enlarge
+your house. Take it?▼
+ Yes
+ No
+  Money #Money30G»2
+
+DATA16_B7CADC:
+Oh no,just do what you have
+to do.OK?¬
+
+DATA16_B7CB28:
+Look,isn't it an excellent
+house? It's called "Super
+Log House."¬
+
+DATA16_B7CBB0:
+What's happened to Eve
+tonight?¬
+
+DATA16_B7CBFA:
+Nina's mother collapsed from
+fever. I can't sell tools
+while Dad is out▼
+nursing her.¬
+
+DATA16_B7CCA6:
+It's finished! Look at this
+the "Super Deluxe Great Log
+House"!!▼
+Even if I do fall in love
+with it.See you.¬
+
+DATA16_B7CD82:
+Say,I've heard of a rare
+seed.It grows to be a tall
+bean tree that reaches▼
+all the way to the sky.
+I want to see it.¬
+
+DATA16_B7CE7C:
+Hi!I was scared by the
+earthquake  this morning.
+Come up to the mountain▼
+after checking out the
+ranch.¬
+
+DATA16_B7CF62:
+.....Do you like...Nina?¬
+
+DATA16_B7CF94:
+Today is the last day of
+this year. It seems long
+enough but at the same▼
+time,it flies by quickly
+too.¬
+
+DATA16_B7D074:
+Scheduled date has already
+passed now.  I have to let
+them in the shed right away.¬
+
+DATA16_B7D11E:
+Hey,the long winter is
+finally over. Animals looks
+so happy when springs▼
+comes too.¬
+
+DATA16_B7D1D0:
+...yeah,I'm OK.I just felt
+dizzy...¬
+
+DATA16_B7D21A:Text_Hawker_Berry1
+I'm a wandering hawker.
+Today,I have very rare
+berries.▼
+Take one bite,and you'll be
+full of vitality.This is a
+special offer,▼
+I can exchange some for a
+chicken over there.▼
+ Exchange
+ Not exchange»2
+
+DATA16_B7D3E0:Text_Hawker_Beans1
+I'm a wandering hawker.
+Today,I have a very rare
+bean seed.▼
+You'll see the wonder when
+you plant it in the soil.
+I can exchange it with one▼
+of your cows.
+It's a bargain.▼
+ Exchange
+ Not exchange»2
+
+DATA16_B7D5BA:Text_Hawker_Berry2
+Well then,this cow is now
+mine. The hawker is glad.
+See you.¬
+
+DATA16_B7D63C:Text_Hawker_Beans2
+OK,this cow is mine now.
+I've put the seed in you
+shed.▼
+Plant it on the top of the
+mountain. Something good
+will definitely happen.▼
+See you.¬
+
+DATA16_B7D76A:Text_Hawker_No_Exchange
+You are a hardhearted
+customer.I'm a wandering
+hawker.▼
+This hawker is very sad.
+Good-bye.¬
+
+DATA16_B7D836:Text_Hawker_BellTree1
+I'm a peddler of the wind.
+This is the seed of a tree
+that grows money.▼
+Plant it in the ground,
+you'll be surprised.Mister,
+you're buying something▼
+good. It's only 20000G.▼
+ Buy it
+ Not buy it
+  Money #Money40G»2
+
+DATA16_B7DA28:Text_Hawker_BellTree2
+Now,I've planted it.
+Mister,look forward to
+today.¬
+
+DATA16_B7DAA6:Text_Hawker_BellTree3
+Are you sure? I guarantee
+that you will regret this
+for the rest of your life.¬
+
+DATA16_B7DB4C:
+Hey, it's tough when the
+weather is gloomy.¬
+
+DATA16_B7DBAA:
+I'm busy, busy.¬
+
+DATA16_B7DBCA:
+It's the way back. It's
+connected to the world here
+below.¬
+
+DATA16_B7DC48:
+Good Lord, what's happening
+here? Hey, Is your place
+alright?¬
+
+DATA16_B7DCCA:
+They say a hurricane is
+coming here tomorrow.¬
+
+DATA16_B7DD2E:
+The wind is blowing harder
+and that makes me scared.¬
+
+DATA16_B7DD9A:
+Oh well, the sky looks
+threatening. We'll probably
+have a hurricane tomorrow.¬
+
+DATA16_B7DE40:
+I don't know why but I get
+excited when something like
+a hurricane comes.Don't you?¬
+
+DATA16_B7DEEA:
+The wind is blowing harder
+now. I don't like
+hurricanes.¬
+
+DATA16_B7DF72:
+Rain is OK but not
+hurricane. Because it blows
+flowers away.¬
+
+DATA16_B7DFFE:
+You'd better pray to God
+that there is no damage from
+the hurricane. Trust me.¬
+
+DATA16_B7E0A0:
+Hey,son,the hurricane is
+getting near. Have you put
+your livestock in the pen?▼
+ Sure
+ I Forgot»2
+
+DATA16_B7E194:
+You know what to do even if
+you are young.¬
+
+DATA16_B7E1EA:
+Are you an idiot? What are
+you doing here? Go home and
+put them in the▼
+penright now.¬
+
+DATA16_B7E296:
+What are you hanging around
+here for? Don't you know a
+hurricane is coming?¬
+
+DATA16_B7E330:
+Have you put the livestock
+in the pen? Let's lock the
+doors later and go to bed.¬
+
+DATA16_B7E3D6:
+It's impossible to go out
+today.¬
+
+DATA16_B7E41C:
+Thank God that there was
+only slight damage from the
+hurricane.¬
+
+DATA16_B7E4A2:
+I think the precious
+weather-cock was blown away.¬
+
+DATA16_B7E514:
+I'm glad everybody is fine.¬
+
+DATA16_B7E54C:
+Is your ranch alright?¬
+
+DATA16_B7E57A:
+That was awful. Yes, ours
+is alright.¬
+
+DATA16_B7E5CA:
+Let's look around the ranch.
+There will be trouble if the
+fences are broken.¬
+
+DATA16_B7E660:
+The earthquake last night
+registered 4 on the richter
+scale.▼
+The damage is not serious.¬
+
+DATA16_B7E714:
+You'd better inspect here
+and there.¬
+
+DATA16_B7E762:
+What? An earthquake?
+I didn't notice it.¬
+
+DATA16_B7E7C2:
+I wonder how my grandpa is
+doing. There are a lot of
+areas to collapse spots▼
+in the mountain so I'm
+worried about him.¬
+
+DATA16_B7E8C0:
+I was surprised.Is your
+ranch alright?¬
+
+DATA16_B7E916:
+Cows are simple. So don't
+keep them out on the ground
+when it rains, snows,▼
+and a hurricane comes.¬
+
+DATA16_B7E9E0:
+It seems there are changes
+everywhere caused by the
+earthquake.▼
+We were just talking of
+going to look around.¬
+
+DATA16_B7EACC:
+The big rock out there
+collapsed by the earthquake.
+Did you know that?¬
+
+DATA16_B7EB62:
+Oh yes,I was pretty
+surprised.¬
+
+DATA16_B7EBB0:
+Hey,listen, we can go
+through the rock.¬
+
+DATA16_B7EC0C:
+It might be able to go to
+the end of the ranch faster
+through here.▼
+But time still goes on.¬
+
+DATA16_B7ECC8:
+Have you seen a mole?It
+scares the cows sometimes.
+You'd better kick it▼
+out of the fence right away.¬
+
+DATA16_B7ED9C:
+I'm happy....¬
+
+DATA16_B7EDB8:
+Well,I haven't thought about
+it yet...¬
+
+DATA16_B7EE04:
+...Are you sure? Me?¬
+
+DATA16_B7EE2E:
+You're kidding...¬
+
+DATA16_B7EE52:
+Yes! You!¬
+
+DATA16_B7EE66:
+I'm afraid it's too early...¬
+
+DATA16_B7EEA0:
+What? ......Yes.¬
+
+DATA16_B7EEC2:
+It's all too sudden so I
+don't know what to do...¬
+
+DATA16_B7EF2C:
+Titter...alright. I say OK.¬
+
+DATA16_B7EF64:
+Well, It's still too early.¬
+
+DATA16_B7EF9C:
+Good morning....da-darling.
+Be happy together from
+now on.¬
+
+DATA16_B7F01C:
+ #Dayname1,#Ord of #Seaso.¬
+
+DATA16_B7F044:
+Don't be too late.¬
+
+DATA16_B7F06A:
+Thank you for your trouble,
+darling.¬
+
+DATA16_B7F0B4:
+Please work hard today,too.¬
+
+DATA16_B7F0EC:
+I've got to do my best today
+also.¬
+
+DATA16_B7F130:
+I'll work hard to give the
+house a good shine.¬
+
+DATA16_B7F190:
+It's strange. It's the same
+sky but the wind and the air
+feel different.¬
+
+DATA16_B7F220:
+I'll try my best to make
+something that will help
+you.¬
+
+DATA16_B7F29A:
+I'll take care of those
+tools too.
+.....Don't worry.▼
+I won't break any.¬
+
+DATA16_B7F354:
+"Auto Milking & Yogurt-Maker
+: Special Version"
+I wish it would be▼
+finished by spring...¬
+
+DATA16_B7F416:
+Time goes by really quickly.
+I feel like I met you only a
+few days ago.¬
+
+DATA16_B7F4A2:
+The weather is beautiful.
+Let's go on a picnic to the
+mountain top soon.¬
+
+DATA16_B7F538:
+La-la-la-la-la...
+The sky is blue. I somehow
+feel cheerful.¬
+
+DATA16_B7F5C6:
+That mysterious flower in
+the mountain,someday I'm
+dreaming of growing them▼
+at the ranch.¬
+
+DATA16_B7F684:
+Good morning, sweetheart.
+There was a sparrow playing
+in front of our house▼
+some minutes ago.
+It was so cute.¬
+
+DATA16_B7F778:
+I want to cook delicious
+meals for you every day.¬
+
+DATA16_B7F7E2:
+#Do2 may be the descended of
+a Thoroughbred.
+Don't you think so?▼
+It has a pretty fine coat
+of hair.¬
+
+DATA16_B7F8C2:
+Yes,spring is wonderful.¬
+
+DATA16_B7F8F4:
+Gradually I am getting used
+to living here. What? Am I
+lonely?▼
+Oh,come on,you are here
+beside me.¬
+
+DATA16_B7F9C2:
+There are many kinds of
+animals in the mountain.
+Doesnt' that give you▼
+comfort?¬
+
+DATA16_B7FA70:
+What should I cook this
+evening?¬
+
+DATA16_B7FABA:
+Honey, please work well.¬
+
+DATA16_B7FAEC:
+There are no Sundays at
+ranch.¬
+
+DATA16_B7FB32:
+It's warm. Such a
+comfortable Sunday.¬
+
+DATA16_B7FB92:
+Do you work on a day like
+this?¬
+
+DATA16_B7FBD6:
+It's raining so hard
+outside. You might catch
+cold.¬
+
+DATA16_B7FC52:
+What snow! I can hardly wait
+for spring.¬
+
+DATA16_B7FCA2:
+It's so quiet. Just like
+time stops.¬
+
+DATA16_B7FCF2:
+I'm going back to my
+parents' home!¬
+
+DATA16_B7FD48:
+You came to pick me up?
+......Sorry.¬
+
+DATA16_B7FD9A:
+I am not angry any more!
+Only a little...¬
+
+DATA16_B7FDF4:
+Waaa,I missed you.¬
+
+DATA16_B7FE1A:
+OK,I'll be back. To be
+honest, I was sorry.¬
+
+DATA16_B7FE7C:
+You don't know why I get mad
+at you, do you? It's because
+you always leave me alone.¬
+
+DATA16_B7FF22:
+Hey,darling,shall we paint
+our house in a beautiful
+color?¬
+
+DATA16_B7FFA0:
+It has become a pretty
+house.¬
+aaaaaaaaaaaaa
+
+DATA16_B88000:
+Well...Uummmm...say...
+I...umm..
+I guess I'm pregnant.¬
+
+DATA16_B8809C:
+It'll be born some time
+later.¬
+
+DATA16_B880E2:
+Will you think of a name for
+the baby?¬
+
+DATA16_B8812E:
+I feel my body becoming a
+little heavier.¬
+
+DATA16_B88186:
+I wonder if it will be a boy
+or a girl.¬
+
+DATA16_B881D4:
+I know.I won't walk around
+so much.¬
+
+DATA16_B8821E:
+I feel strange that I'm
+going to have a baby soon.¬
+
+DATA16_B8828C:
+Get out of my way, get out!¬
+
+DATA16_B882C4:
+I'm OK,honey.Don't worry.
+Please go to work.▼
+ Really?
+ No, no, no»2
+
+DATA16_B88374:
+I'll do alright.¬
+
+DATA16_B88396:
+Are you with me? Thank you.¬
+
+DATA16_B883CE:
+uugh..uugh...¬
+
+DATA16_B883EA:
+Oh my God,the baby is
+coming!¬
+
+DATA16_B88432:
+Faltering,faltering.¬
+
+DATA16_B8845C:
+Take it easy.¬
+
+DATA16_B88478:
+Don't be walking about.¬
+
+DATA16_B884A8:Text_EvesGrandparent_Birth1
+I guess I've got to be old
+enough to be able to see my
+great grandchild.¬
+
+DATA16_B8853C:
+Waah-waah...¬
+
+DATA16_B88556:
+Ho-ho-ho...It's a very
+healthy baby boy.¬
+
+DATA16_B885B2:
+Great!¬
+
+DATA16_B885C0:
+Phew...I haven't been this
+nervous for years.¬
+
+DATA16_B8861E:
+Yes, he looks like Nina.
+Well...but he has your eyes,
+maybe.¬
+
+DATA16_B8869C:
+It reminds me of when Nina
+was born.¬
+
+DATA16_B886E8:Text_EvesGrandparent_Birth2
+It reminds me of when Eve
+was born.¬
+
+DATA16_B88734:
+Darling, please name him.¬
+
+DATA16_B88768:
+Thank you, honey. I'm so
+happy.¬
+
+DATA16_B887AE:
+ #Dayname2,#Or2 of #Seas2.
+ Our baby was born.¬
+
+DATA16_B88800:
+What? Present? I'm so glad
+that you remembered the
+anniversary.¬
+
+DATA16_B8888A:
+La-la-la¬
+
+DATA16_B8889C:
+ #Dayname3,#Or3 of #Seas3.
+ We got married today.¬
+
+DATA16_B888F4:
+Dah...¬
+
+DATA16_B88902:
+Da-da...¬
+
+DATA16_B88914:
+Boo-boo...¬
+
+DATA16_B8892A:Text_Peddler_BlueFeather1
+This is "Blue feather of
+happiness."Well,happiness
+is different for each▼
+one though.
+Right now, it's only 1000G!▼
+ Buy it
+ Don't buy it
+  Money #Money50G»2
+
+DATA16_B88AC4:Text_Peddler_BlueFeather1
+God bless you!¬
+
+DATA16_B88AE2:Text_Peddler_BlueFeather2
+Yes, you should consider
+it many times because it a
+big choice of life.¬
+
+DATA16_B88B7A:
+Don't be silly,I'm married.¬
+
+DATA16_B88BB2:
+Who are you playing a joke
+on,young man?¬
+
+DATA16_B88C06:
+That's it! Come on!¬
+
+DATA16_B88C2E:
+Hey, you are giving it to a
+wrong person.¬
+
+DATA16_B88C82:
+You have to give it to the
+girl you love, OK? To the
+girl you want to marry.¬
+
+DATA16_B88D22:
+Wow,the blue feather!
+Show it to me.¬
+
+DATA16_B88D78:
+Good morning. Please excuse
+me for bothering you so
+early in the morning▼
+but have you seen Maria?
+When I woke up,her bed was
+empty. Oh Lord,now that▼
+she's not here,then,where
+on earth is she now? Please!
+Will you look for her▼
+with me?¬
+
+DATA16_B88F60:
+Oh,Maria! Your dad was
+wrong.Please,please come
+back to me!¬
+
+DATA16_B88FE8:
+She is usually a quiet girl
+but...reason? ho-ho-ho,
+it's her father's▼
+fault.I'm sorry to trouble
+you.But please look
+for her.¬
+
+DATA16_B890FE:
+It seems Maria and her
+father argued over you.¬
+
+DATA16_B89166:
+I think Maria went up to the
+mountain.She said she
+wanted to go there alone.¬
+
+DATA16_B8920A:
+Where did Maria go? She went
+to...exactly northeast.
+You see a pond there.¬
+
+DATA16_B892A6:
+Don't rush.How about
+praying for a while?¬
+
+DATA16_B89308:
+Hello.A girl? No, I haven't
+seen any.¬
+
+DATA16_B89354:
+Hi.What do you want today?
+What? Are you looking for
+a girl?¬
+
+DATA16_B893D4:
+Uumm,n-no,I don't know.
+I sure don't know,really.
+She's not hiding behind▼
+the bed.¬
+
+DATA16_B89486:
+I'm sorry..I'm...going home.
+Hey,thank you.¬
+
+DATA16_B894DC:
+What's going on here,hey,
+you?¬
+
+DATA16_B8951E:
+Ho-ho-ho,Maria is in the
+back room. She is my
+daughter.▼
+She does the same thing as
+me. She's just a little
+sulky.¬
+
+DATA16_B89620:
+How rude!¬
+
+DATA16_B89634:
+I don't like this smell so
+much.¬
+
+DATA16_B89678:
+Hey,have you seen my
+weather-cock?
+The one on the top of▼
+my roof.
+It was blown away by the
+strong wind last night.▼
+I suppose it came here
+but please let me know if
+you find it.¬
+
+DATA16_B8983E:
+I made that weather-cock for
+my wife.so it's just like a
+memento for Ann.▼
+She's usually cheerful but
+now she's so depressed.¬
+
+DATA16_B89938:
+The Direction in which the
+weather-cock went to?
+Somewhere you can keep▼
+away from the rain.And the
+key word is chicken!¬
+
+DATA16_B89A38:
+You can't find it...aha...¬
+
+DATA16_B89A6E:
+She came back home in such a
+hurry,went into her room
+right away, and still▼
+stays there.¬
+
+DATA16_B89B24:Text_Visitor_BlueFeather
+That's a tradition in this
+area called "Blue feather of
+happiness."▼
+Use it when you make a
+marriage proposal to
+someone.¬
+
+DATA16_B89C2E:
+I'm not hanging on to my
+memory but it's so precious
+for me.▼
+....Thank you!¬
+
+DATA16_B89CCC:
+How nice the young people
+are! Yes,I want her to be
+cheerful all the time. Sure.¬
+
+DATA16_B89D76:
+Nina hasn't been back since
+she went to the mountain to
+find a herb.▼
+Please look for her!¬
+
+DATA16_B89E2A:
+Her Dad is out taking care
+of her mother.¬
+
+DATA16_B89E80:
+.....Herb.... A grass with
+a tiny little white
+flower...¬
+
+DATA16_B89F04:
+Mmmm,a girl fell down in a
+dark, small place. Go get
+her right away before▼
+it's too late.¬
+
+DATA16_B89FBE:
+...Thank you.Good.Mom will
+be better with this.¬
+
+DATA16_B8A020:
+....No,I can't move any
+more.¬
+
+DATA16_B8A064:
+Heh-heh,Nina always wants
+to make up to everyone so
+it must be hard for you▼
+to take care of her.¬
+
+DATA16_B8A12E:
+What have you done this
+time? They all are pretty
+angry.¬
+
+DATA16_B8A1AC:
+My P-chan is gone. If you
+see her, please let me know.
+Promise me.¬
+
+DATA16_B8A234:
+Recently a cute customer
+came here.¬
+
+DATA16_B8A282:
+Ellen's bird flew away so
+she is pretty depressed.¬
+
+DATA16_B8A2EC:
+Aha...¬
+
+DATA16_B8A2FA:
+Which direction did the blue
+bird go? Well,I think I
+saw it flying up towards▼
+the mountain.¬
+
+DATA16_B8A3B8:
+Ellen depends on you,
+doesn't she?
+Look after her.¬
+
+DATA16_B8A448:
+I'm sorry...I'm OK now.
+I was ....always...cheered
+up and never thought▼
+of P-chan.
+She's free now...good bye,
+P-chan...take care...thank▼
+you for everything you've
+done for me.¬
+
+DATA16_B8A5DA:
+Thank you for looking for my
+bird.¬
+
+DATA16_B8A61E:
+...You recently....no,
+nothing...¬
+
+DATA16_B8A66C:
+...What? I'm very busy!¬
+
+DATA16_B8A69C:
+Good God! The old hunter is
+locked in the cave!¬
+
+DATA16_B8A6FC:
+Please,help my grandpa!¬
+
+DATA16_B8A72C:
+We've got to save him as
+soon as possible.¬
+
+DATA16_B8A788:
+We can't go forward because
+the inside of the cave has
+collapsed.¬
+
+DATA16_B8A80E:
+So glad,you made it! He's a
+promising young man.¬
+
+DATA16_B8A870:
+Have you got a hammer?
+Hammer!?¬
+
+DATA16_B8A8BA:
+Who? Eve? They say your
+grandfather was in trouble
+in the mountain so▼
+they are still over there.¬
+
+DATA16_B8A986:
+Groan...ouch... It's you...
+Phew,I'm too old now...
+If something happens to me,▼
+look after Eve.¬
+
+DATA16_B8AA4E:
+Grandpa! ...I am .So glad to
+see that you are alright.¬
+
+DATA16_B8AABA:
+I could have gotten out of
+there by myself.¬
+
+DATA16_B8AB14:
+Grandpa...you scared me to
+death.....Please don't be
+unreasonable any more.▼
+....Come down to the town.¬
+
+DATA16_B8ABE8:
+Thank you.¬
+
+DATA16_B8ABFE:
+Well,the Flower Festival is
+tomorrow.The whole town is
+covered with the good▼
+smell of flowers. Everybody,
+let's get together at the
+public square at 3 o'clock.¬
+
+DATA16_B8AD42:
+The flower festival is...
+once upon a time...
+The Goddess of Land was▼
+trying to cheer up a girl
+who had lost her boyfriend
+She made the flowers▼
+bloom for the first time.
+And Before that,
+there was no flowers at all.¬
+
+DATA16_B8AF26:
+We'll be selling wonderful
+things at the festival
+tomorrow so look forward▼
+to it.¬
+
+DATA16_B8AFD6:
+I'm really giving her a
+present this year.¬
+
+DATA16_B8B034:
+God has taught us that the
+heart is for appreciating
+flowers and to being▼
+open and relaxed.¬
+
+DATA16_B8B0F2:
+It's the Flower Festival
+tomorrow. It also celebrate
+the spring to come.¬
+
+DATA16_B8B18A:
+It's the Flower Festival
+tomorrow.It's good to relax
+once in a while.¬
+
+DATA16_B8B21C:
+It's the Flower Festival
+tomorrow.I love it the best
+of all the festivals.¬
+
+DATA16_B8B2B8:
+Don't buy all that unusual
+stuff at the festival.¬
+
+DATA16_B8B31E:
+Heh,I love festivals.I am
+Looking forward to it.¬
+
+DATA16_B8B384:
+No one has to go to the
+festival but please join us
+tomorrow.¬
+
+DATA16_B8B408:
+We are selling bottles of
+some wonderful perfume
+toda
+DATA16_B8B480:
+y.▼
+Please pick up what you
+like.¬
+
+DATA16_B8B4CA:
+That's made of "Rose"
+flowers.Smells sweet and
+romantic,doesn't it?▼
+It costs 1000G Do you
+want it?▼
+ Yes
+ No
+  Money #Money60G»2
+
+DATA16_B8B63C:
+It's made of "Lilac"
+flowers. Its fragrance is
+mild and elegant, isn't it?▼
+It costs 1000G. Do you want
+to buy it?▼
+ Yes
+ No
+  Money #Money70G»2
+
+DATA16_B8B7C0:
+It's made of "Violet"
+flowers.Its fragrance makes
+you feel refreshed.▼
+It's 1000G. Do you want to
+buy it?▼
+ Yes
+ No
+  Money #Money80G»2
+
+DATA16_B8B92E:
+Thank you very much.
+Please be careful not to
+drop and break it.¬
+
+DATA16_B8B9C4:
+I see.I'm a little
+disappointed.¬
+
+DATA16_B8BA18:
+Wow,thanks a lot. Mmmm,it
+smells so good.¬
+
+DATA16_B8BA70:
+Oh no,Mister,you don't
+have enough money.¬
+
+DATA16_B8BACE:
+I have a very rare product
+this time. It's said to be
+truly the only▼
+one of its kind in the
+world...It's called "seed of
+snow flower."▼
+It costs 2000G.
+Do you want to buy it?▼
+ Buy it
+ Not this time
+  Money #Money90G»2
+
+DATA16_B8BCDC:
+Well,I'll deliver it to
+your shed.Use it in winter
+at the mountain top.¬
+
+DATA16_B8BD76:
+I'm a bit disappointed.
+I can't guarantee I'll have
+it next time though.¬
+
+DATA16_B8BE10:
+Fragrance makes people feel
+calm and relaxed.¬
+
+DATA16_B8BE6C:
+When it comes down to it,
+I can't buy it.¬
+
+DATA16_B8BEC4:
+I feel calm when I see
+flowers. I mean it.¬
+
+DATA16_B8BF24:
+I want to buy a bottle of
+perfume for my sister.¬
+
+DATA16_B8BF8A:
+The fragrance of soap is
+the best for girls.¬
+
+DATA16_B8BFEA:
+They say it's the statue of
+the Goddess of Land.¬
+
+DATA16_B8C04C:
+Goddess of Land lives in the
+mountain.And she is very
+friendly.▼
+Grandma told me so..... but
+I wonder if it's true.¬
+
+DATA16_B8C136:
+They say that the Goddess of
+Land lives in a small
+spring.¬
+
+DATA16_B8C1B6:
+Think carefully about the
+girls' tastes and choose a
+present.¬
+
+DATA16_B8C238:
+My heart warms up with the
+joys of spring  when it's
+filled with the smell▼
+of flowers.¬
+
+DATA16_B8C2EC:
+Flowers soften people's
+minds.May everybody be with
+the gentle mind.¬
+
+DATA16_B8C37E:
+Flowers are one of the most
+wonderful gifts from God.¬
+
+DATA16_B8C3EA:
+Let's dance later, darling.¬
+
+DATA16_B8C422:
+Dad wanders like that every
+year.¬
+
+DATA16_B8C466:
+Let see...I don't have a
+character to fit the
+flowers.¬
+
+DATA16_B8C4E8:
+He probably likes the type
+of girl who is fond of
+flowers.¬
+
+DATA16_B8C56A:
+I'm not sure but it might be
+neat to work on a machine to
+make perfume.¬
+
+DATA16_B8C5F6:
+Flowers cover the whole
+town.I am so happy! Hey,are
+you happy?¬
+
+DATA16_B8C67C:
+Say,happy?
+Come on! You' ve got to be
+cheerier?¬
+
+DATA16_B8C700:
+In Heaven,I suppose there
+are blooming flowers
+everywhere such as on the▼
+water,and in the wind.¬
+
+DATA16_B8C7D2:
+Hey,I can dance much better
+now.¬
+
+DATA16_B8C814:
+Too much perfume.It makes
+me dizzy.¬
+
+DATA16_B8C860:
+Do you believe the story of
+the Goddess that made
+flowers bloom?▼
+Isn't it romantic?¬
+
+DATA16_B8C914:
+I wonder if men are not very
+interested in this kind of
+festival?¬
+
+DATA16_B8C998:
+It's good to be merry at a
+festival sometimes.¬
+
+DATA16_B8C9F8:
+Heh-heh,I could get relaxed
+with the smell of flowers.¬
+
+DATA16_B8CA66:
+God's got a little sense of
+humor.If it's supposed to
+cheer people up,▼
+wine would be much better.
+Don't you think?¬
+
+DATA16_B8CB52:
+What? You say I'm much
+prettier than flowers?
+You didn't say so? ...What?¬
+
+DATA16_B8CBFA:
+You,I won't forgive you if
+you pick up another girl.¬
+
+DATA16_B8CC66:
+Can we start dancing now?
+If you haven't done all the
+thing you wanted to do,▼
+hurry up and do it right
+now.▼
+ Let's dance
+ Hold on»2
+
+DATA16_B8CD94:
+Now pick up your partner.¬
+
+DATA16_B8CDC8:
+If you have some more to do,
+hurry up.¬
+
+DATA16_B8CE14:
+Now here comes this year's
+harvest festival. Ladies and
+gentlemen,have you decided▼
+what to take to the
+festival? The festival is
+held at the public▼
+square tomorrow. It ends at
+3:00pm so don't be late.¬
+
+DATA16_B8CFBA:
+It's the Harvest Festival
+tomorrow.¬
+
+DATA16_B8D006:
+Have you decided what to
+take to the festival? I want
+to complete my machine▼
+and present it in public.¬
+
+DATA16_B8D0D8:
+Well,what's good?I wonder if
+herbs or spices will be  OK.¬
+
+DATA16_B8D14A:
+I will take something very
+delicious tomorrow so please
+look forward to it.¬
+
+DATA16_B8D1E2:
+It's Harvest Festival
+tomorrow. I love singing and
+dancing.It's exciting.¬
+
+DATA16_B8D280:
+We'll have the harvest
+festival tomorrow, right?
+Autumn has already been▼
+here.¬
+
+DATA16_B8D32C:
+The harvest Festival is for
+celebrating the year's
+harvest.¬
+
+DATA16_B8D3AE:
+Please bring foods to eat
+for the great harvest stew.¬
+
+DATA16_B8D41E:
+The Harvest Festival is
+tomorrow.I'll stop work
+earlier and come to the▼
+public square at 3:00pm.
+If you have is livestock,
+you should feed them▼
+before.. And I'll bring
+something to put in the
+stew.Good bye.¬
+
+DATA16_B8D5E6:
+Welcome.Put what you
+brought in the stew now.¬
+
+DATA16_B8D650:
+Oh no,you didn't bring     a
+nything.  Alright.¬
+
+DATA16_B8D6AE:
+Now,wait until it's done.¬
+
+DATA16_B8D6E2:
+It's your stew.
+Eat it with gratitude.¬
+
+DATA16_B8D748:
+Mine was flowers.It was
+fairly good.¬
+
+DATA16_B8D79A:
+It was delicious.You know,
+I don't have a wife.
+No, I'm not saying Ann's▼
+dishes are bad. In fact,
+they taste pretty good
+once you get used to it.¬
+
+DATA16_B8D8DE:
+Are you cutting grass? You
+can cut it by autumn so try
+to cut as much as you can.▼
+Otherwise,you will panic if
+you don't have feed to give
+to the cows andchickens.¬
+
+DATA16_B8DA26:
+I'm 100% happy only if I
+could taste when I eat good
+stuff.¬
+
+DATA16_B8DAA4:
+I'm stuffed!¬
+
+DATA16_B8DABE:
+Good-day,today! Here are
+some famous dumpling from
+the North!▼
+Do you want some!
+It's 300G.▼
+ Buy
+ Don't Buy
+  Money #Mone100G»2
+
+DATA16_B8DC20:
+Good-day,today!
+Here are some rice balls
+made from 100% Starshine▼
+rice. They are fresh and
+warm. Do you want some?
+It's 200G.▼
+ Buy
+ Don't buy
+  Money #Mone110G»2
+
+DATA16_B8DDD6:
+Thank you. Be careful not to
+get addicted.¬
+
+DATA16_B8DE2A:
+Don't say no. Just one bite,
+it makes you 100% happy.¬
+
+DATA16_B8DE94:
+I can't bring anything
+this year. It's such hard
+work to find rare seeds.¬
+
+DATA16_B8DF36:
+The fruits of the Southern
+Country taste good,but they
+smell strong and I don't▼
+like that.¬
+
+DATA16_B8DFEE:
+I can't dance very well yet.¬
+
+DATA16_B8E028:
+Dancing will start pretty
+soon.¬
+
+DATA16_B8E06C:
+Even if you don't believe in
+God, it's good to keep
+gratitude in your mind.▼
+ Yes
+ No»2
+
+DATA16_B8E14E:
+Even if you don't believe in
+God,it's good to be
+grateful.¬
+
+DATA16_B8E1D2:
+Yes,The Goddess of Land
+exists for sure.¬
+
+DATA16_B8E22C:
+I thought it would be OK
+this time...¬
+
+DATA16_B8E27E:
+Hey, please! Eat this!▼
+ OK
+ I don't want it»2
+
+DATA16_B8E308:
+Thank you. You are so nice.¬
+
+DATA16_B8E340:
+Waaa!¬
+
+DATA16_B8E34C:
+I made this pumpkin pie.
+Do you want to try some?▼
+ Yes
+ No»2
+
+DATA16_B8E3F8:
+This year's pumpkins are
+sweet,aren't they?¬
+
+DATA16_B8E456:
+Oh yeah? This pumpkin pie
+has received  praise though.¬
+
+DATA16_B8E4C8:
+I give you a special
+souvenir "Clock" for free.
+You can find the time with▼
+the select button.¬
+
+DATA16_B8E594:
+I think it's important to
+thank the land and the sun
+as well as celebrate▼
+the harvest.¬
+
+DATA16_B8E648:
+Taraah, it's an Auto
+Harvesting Machine! Switch
+it on.▼
+ Push
+ No»2
+
+DATA16_B8E708:
+Sorry,failed.¬
+
+DATA16_B8E724:
+What are you afraid of?¬
+
+DATA16_B8E754:
+...No,this isn't right.¬
+
+DATA16_B8E784:
+Taste good,huh? It's called
+the fruit of the full-moon
+plant.▼
+It's moistured,soft,and
+melts in the mouth like ice
+cream.It's my favorite.¬
+
+DATA16_B8E8A2:
+I'll pick it up the first
+thing in the morning for
+you....¬
+
+DATA16_B8E922:
+This is a special meat pie I
+made.Want a bite?▼
+ Yes
+ No»2
+
+DATA16_B8E9C0:
+You make everything you eat
+seem delicious so it's worth
+cooking for you.¬
+
+DATA16_B8EA52:
+Alright. It's pretty good
+though..¬
+
+DATA16_B8EA9C:
+It's the berry juice I made
+last year. It's one of the
+gifts from the earth.▼
+Want to try?▼
+ Yes
+ No»2
+
+DATA16_B8EB94:
+If you think you are a man,
+drink up!¬
+
+DATA16_B8EBE0:
+It's really good though...¬
+
+DATA16_B8EC16:
+....oof,sorry.I don't feel
+good...no,no,no...
+I have to eat it with▼
+gratitude even if there's
+something strange in it.
+Right?¬
+
+DATA16_B8ED30:
+Taraaa!Improved Auto
+Harvesting Machine! Turn it
+on!▼
+ OK
+ No»2
+
+DATA16_B8EDEA:
+...Weird.¬
+
+DATA16_B8EDFE:
+....Ha-ha-ha-ha-ha!Yes,I had
+juice and now I can see
+butterflies flying.¬
+
+DATA16_B8EE96:
+It's the Star Night Festival
+tomorrow. There are a couple
+of places for it so you▼
+should ask the townsfolk to
+decide where to go.¬
+
+DATA16_B8EF96:
+It's the wild grape juice.
+It's sweet and good. Want to
+try?▼
+ Yes
+ No»2
+
+DATA16_B8F052:
+Cheers for gifts from the
+earth!¬
+
+DATA16_B8F098:
+You are not very sociable,
+aren't you?¬
+
+DATA16_B8F0E8:
+It's the Flower Festival
+tomorrow. I'll stop work
+earlier and come to the▼
+public square at 3:00.
+If you have livestock,you'd
+better feed them before▼
+the festival.I'll definitely
+pick up the shipping goods
+in the box▼
+if you put them in it.
+Good-bye.¬
+
+DATA16_B8F2FA:
+This is information of an
+event. We'll have the annual
+egg festival.▼
+The weather is very good.
+Ladies and gentlemen,you are
+cordially invited▼
+to take part.¬
+
+DATA16_B8F436:
+It's Egg Festival tomorrow.
+I'll stop work earlier and
+come to the public▼
+square by 3:00.If you have
+livestock,you'd better feed
+them before the festival.▼
+I'll definitely pick up the
+shipping goods in the box if
+you put them in it.▼
+Good-bye.¬
+
+DATA16_B8F61C:
+It's the kidney pie I'm
+proud of.  Won't you try
+it?▼
+ Yes
+ No»2
+
+DATA16_B8F6D6:
+It's very nourishing
+though.¬
+
+DATA16_B8F71E:
+It's the 3 year old berry
+juice.Smells good,huh?
+Do you want it?▼
+ Yes
+ No»2
+
+DATA16_B8F7F0:
+It's my grandpa's favorite
+juice.¬
+
+DATA16_B8F836:
+What? Can't you drink my
+juice!?¬
+
+DATA16_B8F87E:
+May we be able to have
+pleasant moments for ever.¬
+
+DATA16_B8F8EC:
+This is it! Ultra Special
+Auto harvesting Machine!!!
+.....Hey,you don't seem to▼
+trust me.Don't say a word,
+just turn it on! On!▼
+ Push
+ I'd never push»2
+
+DATA16_B8FA4E:
+It's not whether you like it
+or not.¬
+
+DATA16_B8FA96:
+Fresh ingredients and
+affection are necessary to
+make dishes delicious!¬
+
+DATA16_B8FB34:
+Tasty rice balls and
+dumplings! Won't you try
+some? They are all
+delicious!¬
+
+DATA16_B8FBF2:
+Congratulations!¬
+
+DATA16_B8FC14:
+You are going to have a baby
+pretty soon.¬
+
+DATA16_B8FC66:
+Ho-ho,look at this baby.
+It's a cute baby girl.¬
+
+DATA16_B8FCCC:
+Oh,I have my partner. You'd
+better try to find one for
+you.¬
+
+DATA16_B8FD46:
+I...I want to dance with
+someone else.¬
+
+DATA16_B8FD9A:
+A young man should dance
+with a young girl.¬
+
+DATA16_B8FDF8:
+Bring me more juice!¬
+
+DATA16_B8FE22:
+Was it delicious?¬
+
+DATA16_B8FE46:
+No,I want to dance with
+someone else,not you.¬
+
+DATA16_B8FEAA:
+Yeah,I want to dance with
+Maria!¬
+
+DATA16_B8FEF0:
+It's the New Year's festival
+tomorrow. You should say the
+last hello of this year. ¬
+aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaa
+
+DATA16_B98000:
+It's just a dance but it
+means more because you
+choose your partner here.¬
+
+DATA16_B980A4:
+Who are you going to ask to
+dance? You are going to
+....no,forget it.¬
+
+DATA16_B98138:
+You can never cancel it. So
+choose carefully so you
+won't regret.¬
+
+DATA16_B981C4:
+It's the Thanksgiving
+Festival tomorrow. Nice
+smell of baking cakes fills▼
+the whole town.
+Dad,it'll be fun.¬
+
+DATA16_B982C8:
+It's the Thanksgiving
+Festival tomorrow. It's for
+all the husbands and▼
+fathers who are always
+working hard and women bake
+cakes for them to show▼
+thanks. I suggest you to
+come to town if possible.¬
+
+DATA16_B9846C:
+because girls give cakes to
+people they like. If you
+have time,▼
+I suggest you come to town.¬
+
+DATA16_B9852A:
+I'm going to bed now.
+Good night.¬
+
+DATA16_B9857A:
+Heh-heh This is very
+delicious! Want to try
+some?▼
+ Eat it
+ I don't' want it»2
+
+DATA16_B98654:
+It's Thanksgiving Festival
+today. Here you are,
+darling.▼
+Thank you for working hard
+for me every day.¬
+
+DATA16_B98732:
+Please work well from
+now on.¬
+
+DATA16_B9877A:?Fidgety
+Fidgety...¬
+
+DATA16_B98790:?ShipperApprentice
+Thump,thump,thump...¬
+
+DATA16_B987BA:
+Yes,Ellen is a good cook and
+takes good care of the
+livestock.▼
+She is a nice and steady
+girl. Don't you think so?¬
+
+DATA16_B988AC:
+I love my wife's cake but my
+daughter's makes me so much
+happier.¬
+
+DATA16_B9892E:
+I scorched the cake again.¬
+
+DATA16_B98964:
+What should I do?¬
+
+DATA16_B98988:
+Ann's hand-made cake...it
+won't explode,will it?¬
+
+DATA16_B989EE:
+I get a cake from Maria
+every year.¬
+
+DATA16_B98A3E:
+Yeah,I got a cake from
+Maria!¬
+
+DATA16_B98A84:
+I'll be able to bake a
+perfectly delicious cake
+when I get older! Gee!¬
+
+DATA16_B98B22:
+Hi,well...it's for you.I
+hope you like it.¬
+
+DATA16_B98B7E:
+uumm,thank you for working
+every day.¬
+
+DATA16_B98BCC:
+Hello.¬
+
+DATA16_B98BDA:
+I'll give it to you. I'm not
+sure if it tastes good or
+not.¬
+
+DATA16_B98C54:
+You want medicine just in
+case?¬
+
+DATA16_B98C98:
+My dad is so rude. He looked
+at my cake carefully before
+he ate it.¬
+
+DATA16_B98D1E:
+Here it is. It's a special
+herb cake.¬
+
+DATA16_B98D6C:
+It doesn't look very good
+but isn't it delicious?¬
+
+DATA16_B98DD4:
+My mom is wandering around
+with a baked cake in her
+hands since this morning.¬
+
+DATA16_B98E78:
+I used plenty of milk and
+eggs.¬
+
+DATA16_B98EBC:
+I have confidence in making
+sweets.¬
+
+DATA16_B98F04:
+Hey,you probably think I'm
+a monkey or something,
+right?▼
+.........That's OK with me
+though.¬
+
+DATA16_B98FCA:
+This is a cake fulled with
+berries.¬
+
+DATA16_B99014:
+I hope you like it.¬
+
+DATA16_B9903C:
+Now it's the Star Night
+Festival tomorrow. It'll be
+nice with the clear blue▼
+sky so you'll see the
+beautiful star at night.¬
+
+DATA16_B99148:
+On the Star Night Festival
+you are supposed to pray for
+the night when▼
+you can see the most
+beautiful stars of the year.¬
+
+DATA16_B99248:
+Look at the sky. It'll be
+really beautiful tomorrow
+night.¬
+
+DATA16_B992C6:
+I'm going to play organ at
+the church.¬
+
+DATA16_B99316:
+Tomorrow? Heh-heh,I'm going
+to a wonderful place.¬
+
+DATA16_B9937A:
+Say,I'm going to the nearest
+place to the stars.¬
+
+DATA16_B993DA:
+We'll pray at the public
+square. So romantic.¬
+
+DATA16_B9943C:
+Let's have a ball tomorrow.
+I'm waiting for you.¬
+
+DATA16_B9949E:
+It's the Star Night Festival
+tomorrow. I'm going to the
+place I always go.¬
+
+DATA16_B99534:
+It's the Star Night Festival
+tomorrow! I'm going to the
+place I always go so▼
+please come see me there.¬
+
+DATA16_B99602:
+It's the Star Night Festival
+today! Where should I go?▼
+ Public square  Mountain top
+ Church         Spa
+ Bar»5
+
+DATA16_B996EA:
+Well, ladies and gentlemen.
+Let's pray for the stars.¬
+
+DATA16_B99756:
+The light of the stars we
+are seeing now is that of
+millions of years ago.▼
+It's mysterious when I think
+of it.¬
+
+DATA16_B9983A:
+...May my business get
+better.¬
+
+DATA16_B99882:
+Do you want me to read your
+horoscope?▼
+ Sure
+ No thanks»2
+
+DATA16_B99920:
+The girl who gets along well
+with you is no one but      #Bac1!¬
+
+DATA16_B9999A:
+Really? Don't you want to
+know?¬
+
+DATA16_B999DE:
+When I close my eyes, I feel
+like I'm floating in the
+night sky.¬
+
+DATA16_B99A64:
+What did I pray for?
+Everybody's good health.
+....And.. It's a secret.¬
+
+DATA16_B99B06:
+The stars are shinning all
+the time. You just can't see
+them because of those▼
+lights and stuff on the
+earth. And same as the
+stars,the truth and love▼
+always exist. You just don't
+see. Yes,it's true.¬
+
+DATA16_B99CA4:
+It sometimes won't work even
+if we are so much in love,
+will it?▼
+In that case, all you have
+to do is pray, I guess.¬
+
+DATA16_B99D8E:
+...I feel sleepy now.¬
+
+DATA16_B99DBA:
+Zzzzzzz.....¬
+
+DATA16_B99DD4:
+I think I'll have a good
+dream tonight.¬
+
+DATA16_B99E2A:
+Good evening. ....Umm,I wish
+we could also spend some
+time together nextyear.¬
+
+DATA16_B99ECA:Text_Bartender5
+Let's sing a song.
+Enjoy yourselves!¬
+
+DATA16_B99F26:
+Now,you sing something!¬
+
+DATA16_B99F56:
+I happened to be here
+tonight...well..it's
+coincident...and she▼
+happens to be here too.¬
+
+DATA16_B9A020:
+Ah,good evening. Nina?
+She always goes somewhere
+alone.▼
+I wonder where she's been?¬
+
+DATA16_B9A0D4:
+Cheers for the beautiful sky
+in the night!¬
+
+DATA16_B9A128:
+Hi! Are you having fun?
+cheers for the fate of the
+star of having met you!¬
+
+DATA16_B9A1C8:
+Did you see it? I see a
+shooting star every year.
+Don't tell anybody about▼
+this place. It's a secret
+between us. OK?¬
+
+DATA16_B9A2C2:
+Did you make a wish? Nina
+wished... ..titter..
+it's a secret.¬
+
+DATA16_B9A350:
+I take a hot spring bath,
+watching stars like this.
+It's just like paradise,▼
+isn't it?¬
+
+DATA16_B9A406:
+May everybody live happily.
+Now let's pray together.¬
+
+DATA16_B9A470:
+Have you prayed already?
+Also it's important to
+choose a goal at the▼
+beginning of the year.¬
+
+DATA16_B9A538:
+May the earth give us gifts
+this year too.¬
+
+DATA16_B9A58E:
+This...this year, I'll tell
+her...¬
+
+DATA16_B9A5D4:
+May my business go well this
+year too.¬
+
+DATA16_B9A620:
+Alright, I'm telling your
+fortune.▼
+ Yes
+ No»2
+
+DATA16_B9A6AC:
+Pick up any card you like.▼
+ Top
+ Middle
+ Bottom»3
+
+DATA16_B9A764:
+"Excellent luck"
+Great harvest!
+Everything goes well!¬
+
+DATA16_B9A800:
+"Luck" Fair harvest.
+The person you are waiting
+for will come.¬
+
+DATA16_B9A88E:
+"Misfortune"
+Nothing will turn out good.¬
+
+DATA16_B9A8FE:
+I see. I'd better develop my
+way by myself.¬
+
+DATA16_B9A954:
+Whmmm,it's going to be good
+this year.¬
+
+DATA16_B9A9A2:
+May this year be a good year
+for you.¬
+
+DATA16_B9A9EC:
+We should see the first
+sunrise at the beginning of
+the year.¬
+
+DATA16_B9AA70:
+well,do your best.¬
+
+DATA16_B9AA96:
+Now,the annual egg searching
+game in autumn!
+The rule is simple.▼
+The first person that finds
+the same colored egg as the
+one I show wins the game.▼
+May I begin now?▼
+ Yes
+ No»2
+
+DATA16_B9AC36:
+Here we go! First one is
+this!¬
+
+DATA16_B9AC7A:
+Come on! Hurry up! The time
+is running out.¬
+
+DATA16_B9ACD2:
+I won't be beaten by those
+young kids.¬
+
+DATA16_B9AD22:
+Is the prize juice?¬
+
+DATA16_B9AD4A:
+They say the winner will get
+the great prize.¬
+
+DATA16_B9ADA4:
+Little kids need handicap.¬
+
+DATA16_B9ADDA:
+Alright,I'll try to win
+this year.¬
+
+DATA16_B9AE28:
+I hear the prize is a seed
+of the rare flower.¬
+
+DATA16_B9AE88:
+If #Do3 were here,he would
+find it very quickly.¬
+
+DATA16_B9AEEA:
+Yes,that's the same color.
+You get 1 point. Next is
+this one!¬
+
+DATA16_B9AF6E:
+OK,the game is over. I'm
+announcing the winner.
+Everybody,come here,please.¬
+
+DATA16_B9B016:
+Bingo! You are correct.
+Next is this one!¬
+
+DATA16_B9B072:
+The winner of this year's
+Egg Festival is
+Mr. #PN5!¬
+
+DATA16_B9B0F4:
+This year's prize is the
+fodder for one whole month!
+I'll deliver it to▼
+your ranch.¬
+
+DATA16_B9B1A2:
+Congratulations! I'll
+deliver the prize to your
+home.¬
+
+DATA16_B9B21E:
+Now,everybody,let's do our
+best this year too!¬
+
+DATA16_B9B27E:
+How humiliating you are,
+young men.¬
+
+DATA16_B9B2CC:
+Phew, I just couldn't do it
+like I usually do.¬
+
+DATA16_B9B32A:
+Hic...shouldn't have come
+here.¬
+
+DATA16_B9B36E:
+Puff-puff.¬
+
+DATA16_B9B384:
+Puff-puff...don't...speak...
+to me...please?¬
+
+DATA16_B9B3DC:
+Hey,it's not a seed of a
+flower. Who said that?¬
+
+DATA16_B9B442:
+Phew,it's good for healthy
+body to do exercise
+sometimes.¬
+
+DATA16_B9B4C8:
+New Year's Festival! Let's
+go see the first sunrise!¬
+
+DATA16_B9B534:
+That's a seed of grass. This
+grass grows without
+watering. It's 500G.▼
+Want it?▼
+ Buy
+ Not buy
+  Money #Mone130G»2
+
+DATA16_B9B66E:
+Thank you. I'll deliver it
+to your shed.¬
+
+DATA16_B9B6C2:
+Thank you very much.¬
+
+DATA16_B9B6EC:
+Ah,you don't have enough
+money for it.¬
+
+DATA16_B9B740:
+Thank you. Come visit me
+again.¬
+
+DATA16_B9B786:
+Will you be buying a cow?
+Then I'll give you this
+bell.▼
+Cows gather when they hear
+the sound of this bell.
+But don't ring it so often.▼
+It makes you tired. Well,
+I'll deliver it with the
+cow.¬
+
+DATA16_B9B924:
+It's the special paint for
+the house only. It's 1500G
+but do you want to buy it?▼
+ Yes
+ No
+  Money #Mone140G»2
+
+DATA16_B9BA58:
+Thank you. I'll deliver it
+to your shed.¬
+
+DATA16_B9BAAC:
+It's good stuff though.¬
+
+DATA16_B9BADC:
+Oh,you don't have enough
+money for it.¬
+
+DATA16_B9BB30:
+Oh,your horse has become
+big. I made saddle bags for
+your horse.▼
+Just put the shipping items
+in the saddle bags. It'll be
+very convenient since your▼
+horse will carry them for
+you.¬
+
+DATA16_B9BCA0:
+That's medicine for the
+cows. Are they sick? It
+heals only by using it▼
+for the cows.
+the price is...mmm...1000G.
+You usually have to take▼
+good care of them.▼
+ Buy
+ Not buy
+  Money #Mone150G»2
+
+DATA16_B9BE94:
+I'll deliver it to your
+shed.¬
+
+DATA16_B9BED8:
+Aha!¬
+
+DATA16_B9BEE2:
+What? You don't have enough
+money. Come back again when
+you have saved enough money.¬
+
+DATA16_B9BF8C:
+Hi, what do you want today?▼
+ Buy a cow      Sell a cow
+ Buy a chicken
+ Sell a chicken»4
+
+DATA16_B9C056:
+You need to have more grass
+to raise livestock.¬
+
+DATA16_B9C0B6:
+A cow costs 5000G so will
+you be buying one?▼
+ Buy
+ Not buy
+  Money #Mone160G»2
+
+DATA16_B9C1A2:
+I'll deliver it to your pen.¬
+
+DATA16_B9C1DC:
+If you want to sell cows
+again,please contact me.
+Bye!¬
+
+DATA16_B9C256:
+A chicken costs 1000G but
+do you want one?▼
+ Buy
+ Not buy
+  Money #Mone170G»2
+
+DATA16_B9C33E:
+OK,I'll come pick it up
+later so let it be at the
+entrance of your ranch▼
+today.¬
+
+DATA16_B9C3EA:
+Hey,I put the cow in the
+pen. Take good care.
+Alright,the first thing is▼
+to name it with affection.
+Bye!¬
+
+DATA16_B9C4D2:
+Hey you,don't even think of
+selling a cow in this
+condition.▼
+Consider it again.¬
+
+DATA16_B9C57E:
+It costs #Pr10G. Do you want
+to sell it?▼
+ Sell
+ Not sell
+  Money #Mone180G»2
+
+DATA16_B9C65A:
+OK! I'll take it with me.¬
+
+DATA16_B9C68E:
+I can't accept it until it's
+grown more.¬
+
+DATA16_B9C6DE:
+It's outside so take it with
+you. It'll eat grass by
+himself so let it be▼
+outside. But once it's in
+the pen,feed it properly.¬
+
+DATA16_B9C7E4:
+It's a milker. You can milk
+by using it toward a cow.
+It's 1800G.▼
+ Buy
+ Not buy
+  Money #Mone190G»2
+
+DATA16_B9C8FA:
+Sorry but we can't accept
+that.¬
+
+DATA16_B9C93E:
+It's a brush for cows. They
+become happy when you brush
+them with affection.▼
+Once a day is enough.
+It's 800G.▼
+ Buy
+ Not buy
+  Money #Mone200G»2
+
+DATA16_B9CAB4:
+Our Father in Heaven,please
+help his precious cow rest.¬
+
+DATA16_B9CB24:
+...Are you an idiot? Didn't
+I tell you to take care of
+cows carefully?▼
+If they become sick next
+time,give them the medicine
+right away.¬
+
+DATA16_B9CC3C:
+Great! A calf was born! OK,
+I'll name it.¬
+
+DATA16_B9CC90:
+What? .....a calf! Alright,
+I'll name it.¬
+
+DATA16_B9CCE4:
+Its name is ..... you do it.¬
+
+DATA16_B9CD1E:Text_Daily_Shipping
+Is that all you are shipping
+today? It costs #Mone210G intotal.
+I'll put money▼
+in the box tomorrow.¬
+
+DATA16_B9CDDC:Text_Daily_Shipping_Nothing
+Is there no shipping today?
+OK,bye.¬
+
+DATA16_B9CE24:
+Business hours
+Weekday: 7:00am - 5:00pm
+Weekend & holiday: closed¬
+
+DATA16_B9CEC8:
+Don't throw things in the
+spring.¬
+
+DATA16_B9CF10:
+Hi! How do you do? I'm
+Goddess of Spring. Did you
+expect me to come out?▼
+By the way,I have a
+question. Is this gold axe
+the one you dropped.?▼
+ Yes
+ No»2
+
+DATA16_B9D08C:
+You are lying. Yours is this
+one. No,God knows
+everything. Bye.¬
+
+DATA16_B9D11E:
+Oh yes,I've found an honest
+person!! I'm giving you this
+gold axe.▼
+...No,you don't have to
+thank me. I'm so happy to
+meet someone honest▼
+like you. Bye now. Keep up
+with your work.¬
+
+DATA16_B9D292:
+Excuse me but can I borrow
+your hammer?▼
+ OK
+ No»2
+
+DATA16_B9D326:
+Thank you. I'll put it more
+power when I return it.¬
+
+DATA16_B9D38E:
+What? I won't ask you any
+more!¬
+
+DATA16_B9D3D2:
+You can plow the field
+before spring. But I hear
+it's a little damaged▼
+when it comes to spring.¬
+
+DATA16_B9D4A0:
+How do you do? Has your
+ranch become lively?¬
+
+DATA16_B9D502:
+You can go out from here.¬
+
+DATA16_B9D536:
+Hey,are you from the ranch?
+Do you use the sickle in the
+shed? How's it working?▼
+ Very good Don't use it ofte
+n»2
+
+DATA16_B9D614:
+Wow! I made it.I'm so happy.
+I'll make it better.
+Look forward to it.¬
+
+DATA16_B9D6AC:
+Really? Don't you use it?
+I made it with all my
+energy!¬
+
+DATA16_B9D72C:
+Bye-Bye.¬
+
+DATA16_B9D73E:
+Gi....give me something to
+eat.¬
+
+DATA16_B9D780:
+Mushroom if possible. I want
+a mushroom.....¬
+
+DATA16_B9D7D8:
+Phew,I'm alive now. Thank
+you very much. I didn't eat
+anything for 3 days.▼
+I need to give you
+something. Take a look in
+the shed tomorrow.¬
+
+DATA16_B9D908:
+That's a poisonous mushroom!
+It will kill you,you know.¬
+
+DATA16_B9D976:
+mash..mushroom... I want
+nothing but a mushroom.¬
+
+DATA16_B9D9DE:Text_EvesGrandparent_Rabbit1
+Stop that!! That rabbit is
+mine. What are you doing
+to it?▼
+ Let it loose
+ Just watching»2
+
+DATA16_B9DAB4:Text_EvesGrandparent_Rabbit2
+If you buy it with 1000G,
+you can do what you want.▼
+ Pay
+ Not pay
+  Money #Mon010G»2
+
+DATA16_B9DBAE:Text_EvesGrandparent_Rabbit3
+I live like this. Bye.¬
+
+DATA16_B9DBDC:Text_EvesGrandparent_Rabbit4
+I see...you are kind.
+I don't want money. But
+Everybody lives▼
+differently. Please
+understand it. Bye.¬
+
+DATA16_B9DCCC:Text_EvesGrandparent_Rabbit5
+No,I can't hand this rabbit
+to you. I live like this.
+Bye.¬
+
+DATA16_B9DD46:
+I'm the spirit here,Water
+imp. You gave my fish back.
+You are a good man.▼
+I give you this.
+You become fine.¬
+
+DATA16_B9DE38:Text_Chiken_God1
+Ah,the first human in...
+well,how long had it been
+since the last human▼
+being came here? ...Hey you,
+are you working hard?▼
+ Yes
+ No»2
+
+DATA16_B9DF78:Text_Chiken_God2
+Now,take this with you.
+You can sell it at an
+expensive price.▼
+Work hard from now on.¬
+
+DATA16_B9E038:Text_Chiken_God3
+Go home as soon as possible.¬
+
+DATA16_B9E072:
+Thank you for letting it
+bloom. No one has ever
+planted it before.▼
+I'm so happy.... I want to
+give something good to you.¬
+
+DATA16_B9E178:
+.........Both the flower and
+I will disappear soon but...
+I will always pray for you▼
+to be happy.¬
+
+DATA16_B9E238:
+That's the miracle potion.
+Good luck.
+The medicine to get him▼
+in good shape is included
+and it's 4000G in total,
+a little expensive, huh?▼
+ Buy
+ Don't buy
+  Money #Mone220G»2
+
+DATA16_B9E408:
+It's a tomato seed. It's
+economical because even
+after the harvest,▼
+you can have tomatoes if you
+keep watering. It's 300G.▼
+ Buy
+ Don't buy
+  Money #Mone230G»2
+
+DATA16_B9E598:
+That's a potato seed. You
+can harvest it when the
+leaves become big.▼
+It's 200G.▼
+ Buy
+ Don't buy
+  Money #Mone240G»2
+
+DATA16_B9E6D2:
+That's a turnip seed. It
+doesn't take you long to
+harvest so it's very▼
+convenient. The price is
+200G, convenient too, huh?▼
+ Buy
+ Don't buy
+  Money #Mone250G»2
+
+DATA16_B9E868:
+That's a corn seed. It takes
+the longest time to harvest
+but sells at a higher.▼
+Also you can have some corn
+if you keep watering them
+after the harvest.▼
+It's 300G.▼
+ Buy
+ Don't buy
+  Money #Mone250G»2
+
+DATA16_B9EA40:
+That's a flower. It just
+blooms one day but it's good
+for a present. OK,▼
+it's 300G, the discounted
+price!▼
+ Buy
+ Don't buy
+  Money #Mone260G»2
+
+DATA16_B9EBAA:
+That's feed for cows. 12
+feedings per bag but you
+better feed them fodder as▼
+much as possible.
+It costs 1000G.▼
+ Buy
+ Don't buy
+  Money #Mone270G»2
+
+DATA16_B9ED36:
+It's feed for chickens. 12
+feedings per bag. Use it
+when you don't have enough▼
+fodder but generally you'd
+better feed them fodder.
+It costs 300G.▼
+ Buy
+ Don't buy
+  Money #Mone280G»2
+
+DATA16_B9EEF8:
+It's a sprinkler. You can
+water with it very quickly!
+It's really cheap.▼
+If you trade your watering
+can in, we can sell it for
+2000G.▼
+ Buy
+ Don't buy
+  Money #Mone290G»2
+
+DATA16_B9F09A:
+That's a super sickle. I
+invented it. If you trade
+your sickle in,▼
+we can sell it for 2000G.▼
+ Buy
+ Don't buy
+  Money #Mone300G»2
+
+DATA16_B9F1EC:
+That's a super hoe. It's
+very powerful. If you trade
+your hoe in,▼
+we can sell it for 2000G.▼
+ Buy
+ Don't buy
+  Money #Mone310G»2
+
+DATA16_B9F338:
+That's a super hammer. It
+can knock a big rock down.
+Don't you want it?▼
+If you trade your hammer in,
+we can sell it for 2000G.▼
+ Buy
+ Don't buy
+  Money #Mone320G»2
+
+DATA16_B9F4C8:
+That's a super axe. You can
+chop a log with one blow!
+If you trade your axe in,▼
+we can sell it for 200G.▼
+ Buy
+ Don't buy
+  Money #Mone330G»2
+
+DATA16_B9F62C:
+That's a cake,good for a
+present and recovery of
+stamina. It's only500G.▼
+ Buy
+ Don't  buy
+  Money #Mone340G»2
+
+DATA16_B9F75A:
+Thank you.It's perishable so
+eat while it's still fresh.¬
+
+DATA16_B9F7CA:
+You don't know
+how good it is!¬
+
+DATA16_B9F822:
+"Place to Hatch Eggs"
+Please place eggs here.¬
+
+DATA16_B9F88A:
+"Shipping Box for Eggs"¬
+
+DATA16_B9F8BA:
+"Shipping Box for Milk"¬
+
+DATA16_B9F8EA:
+Get the cows in here
+when they give a birth.¬
+
+DATA16_B9F952:
+"Take out spout of fodder"
+Cut grass comes out of here.¬
+
+DATA16_B9F9C4:
+Milk? I'm buying it for 200G
+Do you agree?▼
+ Yes
+ No
+  Money #Mone350G»2
+
+DATA16_B9FAA6:
+Milk? I'm buying it for 300G
+but is it OK?▼
+ Yes
+ No
+  Money #Mone360G»2
+
+DATA16_B9FB88:
+Milk? I'm buying it for 400G
+but is it OK?▼
+ Yes
+ No
+  Money #Mone370G»2
+
+DATA16_B9FC6A:
+Corn? Well...I'm buying it
+for 240G but is it OK?▼
+ Yes
+ No
+  Money #Mone380G»2
+
+DATA16_B9FD5E:
+Yes,it's a well ripened
+tomato. I'm buying it for
+200G but is it OK?▼
+ Yes
+ No
+  Money #Mone390G»2
+
+DATA16_B9FE82:
+Potato? Well,I'm buying it
+for 160G but is it OK?▼
+ Yes
+ No
+  Money #Mone400G»2
+aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaa
+
+DATA16_BA8000:
+Turnip? Good shape,isn't it?
+ I'm buying it for 120G but
+is it OK?▼
+ Yes
+ No
+  Money #Mone410G»2
+
+DATA16_BA8112:
+Isn't it a fresh egg? I'm
+buying it for 100G but is it
+OK?▼
+ Yes
+ No
+  Money #Mone420G»2
+
+DATA16_BA8218:
+Mushroom. How about 200G
+for it?▼
+ Yes
+ No
+  Money #Mone430G»2
+
+DATA16_BA82EE:
+It's a poisonous mushroom.
+It can be a medicine when
+it's compounded well.▼
+How about 300G for it?▼
+ Yes
+ No
+  Money #Mone440G»2
+
+DATA16_BA8446:
+Oh yes,it's a good herb.
+Well, how about 200G for it?▼
+ Yes
+ No
+  Money #Mone450G»2
+
+DATA16_BA8546:
+Ah, it's a berry of wild
+grape. Smells good. How
+about 200G for it?▼
+ Yes
+ No
+  Money #Mone460G»2
+
+DATA16_BA866A:
+Oh boy, it's a tropical
+fruit,isn't it? How about
+300G for it?▼
+ Yes
+ No
+  Money #Mone470G»2
+
+DATA16_BA8782:
+Ah,what a rare thing! It's a
+berry of Fullmoon Plant.
+I'm buying it for▼
+600G but how about it?▼
+ Yes
+ No
+  Money #Mone480G»2
+
+DATA16_BA88D2:
+It's a very fresh fish. I'm
+buying it for 300G but how
+about it?▼
+ Yes
+ No
+  Money #Mone490G»2
+
+DATA16_BA89E4:
+Sleeping.¬
+
+DATA16_BA89F8:Text_Peddler_GoldenEgg
+Good Lord! This is a Golden
+Egg! I never expected to see
+it with my own eyes...▼
+Alright,5000! No,10000G for
+it! Will you please,
+please sell it to me?▼
+Yes,yes,living longer means
+something for sure.¬
+
+DATA16_BA8B92:
+Darling,aren't you going to
+the festival?¬
+
+DATA16_BA8BE6:
+It's good to be at a
+festival like this for a
+change.¬
+
+DATA16_BA8C66:
+I know you are busy but
+let's go to the festival.¬
+
+DATA16_BA8CD2:
+The tradition from hundreds
+years ago seem nice,
+I guess.¬
+
+DATA16_BA8D54:
+Have you had too much
+beverage? .....I think I
+have had enough.¬
+
+DATA16_BA8DE6:
+Mushroom!▼
+ Eat
+ Don't eat»2
+
+DATA16_BA8E4A:
+It looks a little
+dangerous.▼
+ Eat
+ Don't eat»2
+
+DATA16_BA8EE8:
+It's the berry of wild
+grape!▼
+ Eat
+ Don't eat»2
+
+DATA16_BA8F7E:
+....Something smells so
+strong▼
+ Eat
+ Don't eat»2
+
+DATA16_BA9014:
+It smells sweet and nice.▼
+ Eat
+ Don't eat»2
+
+DATA16_BA9098:
+Cake▼
+ Eat
+ Don't eat»2
+
+DATA16_BA90F2:
+Fish!▼
+ Eat
+ Don't eat»2
+
+DATA16_BA914E:
+I've got a berry of Power
+Tree!¬
+
+DATA16_BA9192:
+The main tap of gas is off!¬
+
+DATA16_BA91CA:
+It's burning.¬
+
+DATA16_BA91E6:
+Sniff-sniff..good smell.¬
+
+DATA16_BA9218:
+The flier is in. Do you want
+to read it?▼
+ Yes
+ No»2
+
+DATA16_BA92AA:
+For recovery of stamina
+...Spa in the mountains.¬
+
+DATA16_BA9314:
+Vacation in Autumn! Mushroom
+gathering in the mountains
+covered with autumn leaves▼
+The yum-yum at the mountain
+top! Fullmoon Plant!!¬
+
+DATA16_BA941E:
+10th of Winter Month is
+Thanksgiving! For
+Thanksgiving,▼
+don't forget our
+"Smiling Mark" eggs and
+milks!¬
+
+DATA16_BA9528:
+23rd of Spring Month is the
+Flower Festival! Enjoy
+various fragrances.¬
+
+DATA16_BA95C0:
+That's my home made pickled
+vegetables in salted rice
+bran.¬
+
+DATA16_BA963C:
+That's Eve's home made berry
+juice.¬
+
+DATA16_BA9682:
+You are such a restless guy!¬
+
+DATA16_BA96BC:
+Everything is all right!¬
+
+DATA16_BA96EE:
+I come to the church at
+least once in a year.¬
+
+DATA16_BA9752:
+It looks like an artificial
+flower.¬
+
+DATA16_BA979A:
+I looks like an ornament of
+a chicken but what is it?
+It interests me.¬
+
+DATA16_BA982C:
+What are you looking for?¬
+
+DATA16_BA9860:
+Ah,that's a photo of my
+wife.¬
+
+DATA16_BA98A4:
+Hey,don't touch it without
+permission!¬
+
+DATA16_BA98F4:
+That's my grandchild's piggy
+bank.¬
+
+DATA16_BA9938:
+Eve brought that juice here,
+saying "drink it with your
+grandfather."¬
+
+DATA16_BA99C4:
+What's written in it?¬
+
+DATA16_BA99F0:
+It's too heavy to pick up...
+yes,looks pretty spooky.¬
+
+DATA16_BA9A5A:
+It's a prize from the Egg
+Festival. It's a charm to
+protect from disasters,▼
+they say.¬
+
+DATA16_BA9B0E:
+It's a very old organ.¬
+
+DATA16_BA9B3C:
+Now,let's pray here.¬
+
+DATA16_BA9B66:
+ Quality: Sulfur spring
+ Benefits: rheumatism
+ recovery of stamina¬
+
+DATA16_BA9C00:
+Nothing in there.¬
+
+DATA16_BA9C24:
+Confirm the origin of fire!¬
+
+DATA16_BA9C5C:
+#Or4 of #Seas4Month,        #Co5
+ rests here quietly.▼
+Let's pray her soul may rest
+in peace today.¬
+
+DATA16_BA9D1A:
+Old ladies get cold easily
+so I keep the fireplace
+burning all the time.¬
+
+DATA16_BA9DB6:
+"Notice" Slippery and
+dangerous. This road is
+temporarily closed today.¬
+
+DATA16_BA9E5A:
+Not this!¬
+
+DATA16_BA9E6E:
+What? Heard something?¬
+
+DATA16_BA9E9C:
+The winner of this year's
+Egg Festival is...
+the livestock dealer!¬
+
+DATA16_BA9F38:
+Beep! Time is up! Next egg.¬
+
+DATA16_BA9F70:
+It's late so we'd better go
+home now.¬
+
+DATA16_BA9FBC:Text_Town_Visitor_Late
+Better go home now.¬
+
+DATA16_BA9FE4:
+The mountain top is a
+mysterious place. I
+recommend you plant a▼
+different seed over there
+when you get one.¬
+
+DATA16_BAA0DC:
+It is said that a happy
+flower blooms when you eat a
+berry of Power Tree.▼
+It won't even die in winter.¬
+
+DATA16_BAA1B0:
+Are you working hard? You
+know, No food for lazy
+workers, right?¬
+
+DATA16_BAA240:
+Ah, you! Working too hard is
+not good for your health,
+you know.¬
+
+DATA16_BAA2C4:
+Day like today, it's good to
+think of your life a little
+seriously.▼
+...Oh no, I shouldn't do
+that...I've complained a
+little unconsciously▼
+but...well, that's what
+I do, anyway.¬
+
+DATA16_BAA438:
+You won't die without money.
+Money is not necessary to
+live a full life.¬
+
+DATA16_BAA4CC:
+This weather makes me feel
+depressed. It's boring...I
+want to sleep in winter.¬
+
+DATA16_BAA56E:
+Hey,warm up your body..
+don't catch a cold.¬
+
+DATA16_BAA5CE:
+It's cold outside,isn't it?
+I have a fireplace inthe
+back room so warm yourself.¬
+
+DATA16_BAA676:
+In winter,I make some
+flowers to decorate the
+shop. I want to make the▼
+shop look nice with them.¬
+
+DATA16_BAA74C:
+It's hard to shovel snow but
+it feels good to exercise in
+the morning when it snows.¬
+
+DATA16_BAA7F2:
+I don't like the coldness of
+winter but I like the smell
+of snow.▼
+You can smell it before it
+starts snowing, can't you?
+It's like,yes it will be▼
+snowing tomorrow.
+I like that.¬
+
+DATA16_BAA968:
+They say it a gift from the
+workman.¬
+
+DATA16_BAA9B2:
+You are not so busy in
+winter,are you? You should
+gather materials, then.¬
+
+DATA16_BAAA52:
+Welcome.¬
+
+DATA16_BAAA64:
+"Shipping Box"
+ Pick up in the evening.
+                  Shippers¬
+
+DATA16_BAAB0A:
+Ah! This is a chicken
+feather?!¬
+
+DATA16_BAAB56:
+"Secret Garden" No entry
+allowed!¬
+
+DATA16_BAABA0:
+Events of the year
+1st of Spring Month
+ New Year's Festival▼
+23rd of Spring Month
+ Flower Festival▼
+12th of Autumn Month
+ Harvest Festival▼
+20th of Autumn Month
+ Egg Festival▼
+10th of Winter Month
+ Thanksgiving Festival▼
+24th of Winter Month
+ Star Night Festival¬
+
+DATA16_BAAE0C:
+ ♥¬
+
+DATA16_BAAE12:
+ ♥♥¬
+
+DATA16_BAAE1A:
+ ♥♥♥¬
+
+DATA16_BAAE24:
+ ♥♥♥♥¬
+
+DATA16_BAAE30:
+ ♥♥♥♥♥¬
+
+DATA16_BAAE3E:
+ ♥♥♥♥♥♥¬
+
+DATA16_BAAE4E:
+ ♥♥♥♥♥♥♥¬
+
+DATA16_BAAE60:
+ ♥♥♥♥♥♥♥♥¬
+
+DATA16_BAAE74:
+ ♥♥♥♥♥♥♥♥♥¬
+
+DATA16_BAAE8A:
+ ♥♥♥♥♥♥♥♥♥♥¬
+
+DATA16_BAAEA2:
+......Th-thank you.¬
+
+DATA16_BAAECA:
+Don't pick up herbs without
+thinking what they are for.¬
+
+DATA16_BAAF3A:
+Thank you. It looks
+delicious.¬
+
+DATA16_BAAF88:
+Thank you. Now I can bake a
+cake with it.¬
+
+DATA16_BAAFDC:
+Are you playing a nasty
+trick on me?¬
+
+DATA16_BAB02E:
+So glad. Are you giving me
+this neat present?
+Thank you.¬
+
+DATA16_BAB0B4:
+You can't take care of them
+if you buy a lot of them at
+a time. Drop by later again.¬
+
+DATA16_BAB15E:
+Being crowded makes
+livestock stressed. That's
+enough for now,you know.¬
+
+DATA16_BAB200:
+I don't want it.¬
+
+DATA16_BAB222:
+I could be in trouble.¬
+
+DATA16_BAB250:
+What is this?¬
+
+DATA16_BAB26C:
+What? I can't take this kind
+of stuff.¬
+
+DATA16_BAB2B8:
+What? Do you give it to me?¬
+
+DATA16_BAB2F0:
+Put things you want to sell
+on the table.¬
+
+DATA16_BAB344:
+Hi. It's getting colder when
+it rains. In winter,grass
+will freeze so you'd better▼
+weed them now.¬
+
+DATA16_BAB40A:
+Ah,Mr. #PN6
+You want to....well....to
+Maria...anyway,good luck.¬
+
+DATA16_BAB4AC:
+Is Maria doing OK?
+Let me know if you are in
+trouble.¬
+
+DATA16_BAB52E:
+Oh, Hello. Maria often talks
+about you lately.¬
+
+DATA16_BAB58A:
+After all,a girl is happiest
+when she is with someone she
+likes. Me?▼
+Of course,I'm happy.¬
+
+DATA16_BAB63A:
+Mr. ..., you come here often
+but you don't want to have a
+chat with me,do you?▼
+I see... maybe it's Ann?¬
+
+DATA16_BAB706:
+How's Ann doing? Is she
+working well as a good wife?
+I'm so very worried▼
+about her...¬
+
+DATA16_BAB7B8:
+Nina likes sweets,such as
+cakes and berries of
+Fullmoon Plant.▼
+I like that one.¬
+
+DATA16_BAB86A:
+Ho-ho-ho,how's Nina doing?
+Doesn't she bother you by
+saying something selfish?¬
+
+DATA16_BAB90E:
+If you want a wife,choose a
+girl who likes children.
+Girls like that can have▼
+many children.¬
+
+DATA16_BAB9CE:
+What? You look a little
+heavier,don't yout?
+Ellen is just like me,▼
+she is not only a pretty
+girl but also can cook very
+well.¬
+
+DATA16_BABAE8:
+Oh well,a lot of things
+happen while you are alive.
+You just couldn't go▼
+through your life if you got
+mad at everything.¬
+
+DATA16_BABBE0:
+Hey you,you carry your jokes
+to far.¬
+
+DATA16_BABC28:
+When I think of people who
+cheat and who are cheated,
+I suppose being cheated▼
+is kind of happier than
+cheating someone.
+I do think so.¬
+
+DATA16_BABD56:
+The most important thing in
+life is probably having
+someone you love beside you.¬
+
+DATA16_BABE00:
+Have you heard of Blue
+Feather? Grandma never tells
+me what it is,▼
+saying kids don't need to
+know .¬
+
+DATA16_BABED4:
+Female psychology is
+complicated.¬
+
+DATA16_BABF26:
+It's pretty hard to move
+cows as you intend. Well,it
+takes time and guts to do▼
+it properly. I'm now the cow
+master. I want to show you
+my  bell skills¬
+
+DATA16_BAC05A:
+I won't be dealing livestock
+today. They could become
+sick outside on a day▼
+like today. Some other time.¬
+
+DATA16_BAC130:
+When you see the sunset at
+the top of the mountain,
+don't you feel like it's▼
+saying something to you?¬
+
+DATA16_BAC204:
+Eve is a kind girl. She
+comes here often to be in my
+company.▼
+But she talks about nothing
+but you recently.¬
+
+DATA16_BAC2E2:Text_EvesGrandparent_EveMarried
+How's Eve doing? Oh,I see.
+That's good. She easily
+becomes lonely.¬
+
+DATA16_BAC372:
+Sister Pink would scold you
+if you picked too much
+flowers and plants.¬
+
+DATA16_BAC40A:
+A big house is necessary if
+you want to get married.¬
+
+DATA16_BAC474:
+You can gather logs in
+winter too.¬
+
+DATA16_BAC4C4:
+Howdy! Why don't you have a
+juice party at home
+sometimes?¬
+
+DATA16_BAC54A:
+You got married and work
+harder. It's not a bad thing
+but she gets in a bad▼
+mood when you come home
+late.¬
+
+DATA16_BAC62A:
+Hey,happy man!!¬
+
+DATA16_BAC64A:
+You are married to a cute
+wife,huh? If you want kids,
+you have to move to▼
+a bigger house.¬
+
+DATA16_BAC702:
+Have you seen the rare berry
+that grows at the top of the
+mountain?¬
+
+DATA16_BAC786:
+The festival ends at 3:00 so
+you must go by then.
+The sky is colored red▼
+by the sun at 3:00.¬
+
+DATA16_BAC84C:Text_Bartender4
+Our customers are different
+monthly. Some people have
+never been here.¬
+
+DATA16_BAC8DE:Text_Bartender_Married_Eve
+Hi,how's Eve doing?
+Business has been down since
+we lost our drawing card.¬
+
+DATA16_BAC982:
+Why don't adults cry? Is it
+because there is nothing to
+cry about,▼
+or is it because people
+become stronger?¬
+
+DATA16_BACA62:
+It's boring because Maria's
+gone.¬
+
+DATA16_BACAA6:
+The hardest thing to control
+is love between man and
+woman.¬
+
+DATA16_BACB24:
+Yes,marriage is wonderful.
+Should I bravely ask her to
+marry me?¬
+
+DATA16_BACBA8:?Shipper
+You'd better go home to your
+wife.¬
+
+DATA16_BACBEC:?ShipperApprentice
+Don't make your wife cry.
+Go home earlier.¬
+
+DATA16_BACC46:Text_FortuneTeller_Bachelorettes
+Will you tell it to only
+your dad secretly? Which
+girl are you most▼
+interes ted in now?▼
+ Maria          Ann
+ Nina           Ellen
+ Eve»5
+
+DATA16_BACD7E:Text_FortuneTeller_Maria
+aha,Maria. She's at church o
+n Saturdays and Sundays.   F
+lower is the best present.▼
+Man has to be active.
+Come on. Hee-hee-hee.¬
+
+DATA16_BACE88:Text_FortuneTeller_Ann
+Oh,Ann. She goes alone to
+the spa on Star Night
+Festival day.▼
+The Lucky day is Saturday.
+She likes any presents
+except mushrooms.¬
+
+DATA16_BACFA8:Text_FortuneTeller_Nina
+Hey,Nina. She goes picking
+herbs on Saturdays and to
+the mountains on Sunday.▼
+She likes sweets. Don't pick
+flowers for her.¬
+
+DATA16_BAD0A4:
+Hey,your face is becoming
+better looking.¬
+
+DATA16_BAD0FC:
+You'd better listen to the
+old preacher.¬
+
+DATA16_BAD150:
+Your children can rely on me
+as well,no problem!¬
+
+DATA16_BAD1B0:?Shipper
+This year is coming to a
+close.¬
+
+DATA16_BAD1F6:
+We are happy to live in
+health this whole year.¬
+
+DATA16_BAD25E:
+You should pick a target for
+next year.¬
+
+DATA16_BAD2AC:
+Spring is finally returning.
+We'll sell seeds again at
+the shop so dropby.¬
+
+DATA16_BAD344:
+Spring is New Year in this
+area. 1st day of Spring is
+New Year's Day.¬
+
+DATA16_BAD3D4:
+I hope it will be a good
+year for both of us.¬
+
+DATA16_BAD436:
+The prize of the Egg
+Festival is different every
+year.▼
+What will they give this
+year?¬
+
+DATA16_BAD4F6:
+The Egg Festival will be
+held at the public square
+tomorrow.¬
+
+DATA16_BAD57A:
+I will win again at the Egg
+Festival tomorrow.¬
+
+DATA16_BAD5D8:
+My annual event at the
+beginning of the year is to
+go see the first sunrise.¬
+
+DATA16_BAD67C:
+Hello! Was it a good year
+for you? Try our best next
+year too.¬
+
+DATA16_BAD700:
+The fisherman will be back
+here soon from a warm place.¬
+
+DATA16_BAD772:
+This year is closing soon.
+I wish to become better each
+year but...▼
+It's a hard thing to
+achieve.¬
+
+DATA16_BAD844:
+.....this year is ending.
+I'll develop and complete a
+great machine next year.¬
+
+DATA16_BAD8E6:
+The smell of the dirt is
+getting stronger as snow
+melts. Spring is near.¬
+
+DATA16_BAD984:
+Snow gave us a hard time but
+will miss seeing the snow.¬
+
+DATA16_BAD9F2:
+Now tonight is the last
+night of the year. Let's
+have a party. Cheers!¬
+
+DATA16_BADA8E:
+This is the last juice to
+drink seeing snow this year.
+Well,we can drink▼
+juice again seeing flowers
+soon.¬
+
+DATA16_BADB66:
+I'd better go home and rest
+now. I'm going up to the
+mountain top to see the▼
+first sunrise.¬
+
+DATA16_BADC24:?ShipperApprentice
+Thank you very much for
+everything this year. I'll
+do my best next year too.¬
+
+DATA16_BADCC8:
+Ah,Mr.#PN7,is your field and
+meadow all right?¬
+
+DATA16_BADD22:
+It's important for a human
+to overcome difficulties.¬
+
+DATA16_BADD8E:
+Such a hard time you had!
+But experience teaches you a
+lot.¬
+
+DATA16_BADE08:
+Vitality is important for
+men to work outside.¬
+
+DATA16_BADE6A:
+The shop is open at 5:00 so
+please come.¬
+
+DATA16_BADEBC:
+Everybody will come to
+church to pray tomorrow.¬
+
+DATA16_BADF26:
+I'll do the first
+fortune-telling at the
+mountain top.¬
+
+DATA16_BADFB2:
+winter is a good time to be
+friends with livestock.
+Well,with girls too.¬
+
+DATA16_BAE04C:
+There's not a lot of thing
+to eat in the mountains in
+winter so all the animals▼
+are in desperate to survive.¬
+
+DATA16_BAE12A:
+You need lots of wood in
+winter. Chop plenty of wood
+before the winter.¬
+
+DATA16_BAE1C0:
+Umm,I can't get out when
+you are there. ....You close
+you eyes so get out first?▼
+Liar. ??????¬
+
+DATA16_BAE280:
+Not many people come here.
+I wonder why.¬
+
+DATA16_BAE2D4:
+A very little light from
+above reaches the ground.
+Those herbs over there▼
+lives only with it.¬
+
+DATA16_BAE39A:
+Nina's dream is to live
+surrounded by flowers.¬
+
+DATA16_BAE400:
+Not just flowers,I love them
+all like weeds and     veget
+able.▼
+I want to do garden forever.¬
+
+DATA16_BAE4B6:
+I love church because it
+seems to wash my mind.¬
+
+DATA16_BAE51C:
+Please do your best  work.¬
+
+DATA16_BAE552:
+Are you all right? I feel
+ease knowing no one was
+hurt.▼
+But... that makes us feel
+the fear of the nature.¬
+
+DATA16_BAE636:
+Hey,why don't you surprise
+us by saying something
+decent.¬
+
+DATA16_BAE6B6:
+I was terrified. It was my
+first earthquake.¬
+
+DATA16_BAE712:
+Did you see the rock up
+there collapsed?¬
+
+DATA16_BAE76C:
+I've heard that there is a
+mysterious spring in this
+mountain.▼
+It is......I don't remember
+the place.¬
+
+DATA16_BAE83E:
+I don't like winter because
+it feels kind of lonely.¬
+
+DATA16_BAE8A8:
+Because of the hurricane,
+there's a leak in the roof.
+They are fixing it now.¬
+
+DATA16_BAE948:
+Uum,I want an egg.¬
+
+DATA16_BAE96E:
+sob...I won't ask you any
+more. You idiot!¬
+
+DATA16_BAE9C8:
+Thank you. This is...the
+money I saved. Bye.¬
+
+DATA16_BAEA28:
+I want an egg. I want just
+one egg.,so please!¬
+
+DATA16_BAEA88:
+"Stable"¬
+
+DATA16_BAEA9A:
+Celebration of #CH1's
+birthday. It's been a year
+now. Time goes too fast.¬
+
+DATA16_BAEB3A:
+Wow,cake                   #CH2
+'s birthday,isn't it?¬
+
+DATA16_BAEBA2:
+It's warm enough now. What a
+nice day.¬
+
+DATA16_BAEBEE:
+Various disasters can happen
+in summer so you better
+watch the weather▼
+forecast every day.¬
+
+DATA16_BAECAA:
+It's autumn...the sky is
+high.¬
+
+DATA16_BAECEE:
+I hope I'll be able to cook
+better step by step.
+......please be patient.¬
+
+DATA16_BAED90:
+I wish I had had trained a
+little to be a wife.¬
+
+DATA16_BAEDF2:
+It's spring! Spring!
+Let's plant seeds!¬
+
+DATA16_BAEE50:
+Morning. It's so nice and
+bright today.¬
+
+DATA16_BAEEA4:
+I hear wild dogs sometimes
+come around here. It's
+dangerous to keep fences▼
+broken.¬
+
+DATA16_BAEF56:
+When it rains, we have to
+put #Do5 inside the house.¬
+
+DATA16_BAEFC2:
+Darling, please take        #Do6
+ or #Ho2                for
+a walk sometimes.¬
+
+DATA16_BAF05A:
+I want to ride on #Ho3.¬
+
+DATA16_BAF088:
+Ah,things like temparature
+of this place make it
+suitable for making▼
+berry juice.¬
+
+DATA16_BAF13A:
+This one is wild grape
+juice. This is bayberry,
+and this is cowberry.▼
+My uncle gave them to me.
+I want to share them with
+other people if possible.¬
+
+DATA16_BAF27A:
+This is the one I made in
+spring. We can drink it
+soon.¬
+
+DATA16_BAF2F6:
+I won't play with machines
+for the time being.
+I'm going to stay at home.¬
+
+DATA16_BAF39C:
+It snows a lot so those
+fences are often broken.¬
+
+DATA16_BAF406:
+I hope spring will come
+soon.¬
+
+DATA16_BAF44A:
+We are not busy working so I
+want to gather people here
+to have a party.¬
+
+DATA16_BAF4DC:
+Say,the sound of burning
+wood and the smell of the
+smoke make you nostalgic,▼
+don't they?¬
+
+DATA16_BAF598:
+All the grass on the ground
+is gone. It looks lonesome.¬
+
+DATA16_BAF608:
+Hey,it's just hit my mind
+but there are as many people
+as there are stars,right?▼
+So the probability of
+meeting a certain person is
+basically one out of▼
+millions. So I really thank
+God for having you at that
+ranch.¬
+
+DATA16_BAF7C4:
+Will those stars still shine
+when we become really old?¬
+
+DATA16_BAF832:
+Good evening. If.. if you
+are interested,won't you go
+see the stars with▼
+me after this?¬
+
+DATA16_BAF8E6:
+May everybody be happy and
+may you be fine all the
+time...▼
+OK,let's go home after
+seeing those stars as we do
+every year.¬
+
+DATA16_BAF9EE:
+I'm glad that you are here.
+Now let's have a toast!
+I want to spend time with▼
+you next year too if
+possible.¬
+
+DATA16_BAFADE:
+HoneyAh,you are late. We are
+     having a wonderful time
+.    Come and join us.¬
+
+DATA16_BAFB7C:
+.........................Hey
+I look forward to the
+shooting star every year▼
+but with you I feel much
+happier.¬
+
+DATA16_BAFC68:
+.......Next year,the year
+after that......may I be
+able to see stars with▼
+you like this.¬
+
+DATA16_BAFD24:
+......Say,we don't often see
+someone late at night like
+this,especially▼
+at a place like here.......
+Not like me but I'm kind of
+nervous....▼
+.......Hey,are you
+listening to me?¬
+
+DATA16_BAFE96:
+hmmm,it feels good. This is
+the best spot to see stars.¬
+
+DATA16_BAFF06:
+Thank you but I can't answer
+you right now. If it's
+sunny,I'll be waiting▼
+for you at the church at
+noon on Saturday.¬
+
+DATA16_BB8000:
+What? It sounds good but now
+I can't... On sunny
+Saturdays,▼
+I'll be waiting for you in
+front of the shop so please
+come before it gets dark.¬
+
+DATA16_BB812A:
+........Uummm,well,I can't
+answer now. If it's sunny...
+will you come to▼
+the mountain on Sunday?
+Before it gets dark....I'll
+be waiting for you there.¬
+
+DATA16_BB8260:
+Ah,........well,I....
+sorry but I can't answer you
+right now....▼
+I'm visiting the livestock
+dealer's house so please go
+there if it's sunny.▼
+I'm expecting you.¬
+
+DATA16_BB83AC:
+.........Huh? Really? well,
+I've got to talk to my
+grandpa....▼
+If it's sunny on Saturday,
+please go to the mountain
+again,all right?▼
+I'll be waiting for you from
+morning so come as early as
+you can.¬
+
+DATA16_BB8548:
+It moo"s...........¬
+
+DATA16_BB8570:
+Hey,I made this overall.
+Isn't it cute?¬
+
+DATA16_BB85C6:
+ Money #Mone500G¬
+
+DATA16_BB85E0:
+ Cow     #1
+ Chicken #2¬
+
+DATA16_BB8634:
+ Stamina #ST¬
+
+DATA16_BB864E:
+ Cow's best affection rate
+ #Co6 #AF¬
+
+DATA16_BB8698:
+ Maria's love #MA¬
+
+DATA16_BB86BC:
+ Ann's love   #AN¬
+
+DATA16_BB86E0:
+ Nina's love  #NI¬
+
+DATA16_BB8704:
+ Ellen's love #EL¬
+
+DATA16_BB8728:
+ Eve's love   #Ev¬
+
+DATA16_BB874C:
+ Amount of shipped tomatoes
+ #TO¬
+
+DATA16_BB878E:
+ Amount of shipped corn
+ #CO¬
+
+DATA16_BB87D0:
+ Amount of shipped potatoes
+ #PO¬
+
+DATA16_BB8812:
+ Amount of shipped turnips
+ #TU¬
+
+DATA16_BB8854:
+ Wood house¬
+
+DATA16_BB886C:
+ Super wood house¬
+
+DATA16_BB8890:
+ Super deluxe great
+ wood house¬
+
+DATA16_BB88E0:
+ Happiness rate #HA¬
+
+DATA16_BB8908:
+Florist's crops note▼
+ "tomato, corn"
+ "turnip, potato"
+ "grass"»3
+
+DATA16_BB89B6:
+Tomato and corn seeds must
+be planted in summer.
+Notice: Never grow when▼
+planting in other seasons.
+Be able to have more fruits
+by watering after the▼
+harvest.
+Tomatoes grow quicker. Die
+in autumn. Shipping rate:▼
+Tomato/1 piece 100G
+Corn/1 piece   120G¬
+
+DATA16_BB8BF6:
+Turnip and potato seeds must
+be planted in spring.
+They grow quicker than▼
+tomatoes and corn. turnip
+are a quick grower.
+Only one harvest per year.▼
+Shipping rate:
+Turnip/1 piece 60G
+Potato/1 piece 80G¬
+
+DATA16_BB8DD0:
+Grass seeds must be planted
+from spring to summer.
+Cut by autumn.▼
+No need to water. Grass
+doesn't make money but it is
+important as feed to▼
+livestock.¬
+
+DATA16_BB8F0E:
+Livestock note:▼
+ "Cow"          "Chicken"
+ "Milk"         "Egg"
+ "Grass"»5
+
+DATA16_BB8FB2:
+Cows on sale are young ones
+that can't milk. Takes 21
+days to grow large▼
+enough for milking.
+The key is to keep them away
+from sickness:▼
+Don't forget to feed.
+Don't let them out when it
+rains,lightening,hurricane.▼
+Nothing works when they get
+wet in the morning.▼
+They don't produce milk
+for a while when they get
+sick or are in bad mood.¬
+
+DATA16_BB9280:
+Equip the milker and point
+Y button to a cow to milk.
+Only once a day.▼
+Cow's affection rate
+increases when being brushed
+or talked to.▼
+Cows you devote your
+affection to can produce
+middle-sized and▼
+large-sized milk.¬
+
+DATA16_BB9454:
+Cows eat well grown grass.
+When the grass is young,
+it's like not feeding,▼
+so be careful. Cut grass
+makes fodder.  It's feed in
+rainy days and winter.▼
+Don't run out of it.¬
+
+DATA16_BB95BA:
+Chickens lay one egg a day.
+It doesn't lay eggs for 3
+days when you forget▼
+to feed or it gets wet in
+the rain. They could be
+blown away when you let▼
+them outside during
+hurricane. Possibly to be
+eaten by wild dogs.¬
+
+DATA16_BB978C:
+Eggs become chicks in 3 days
+when you incubate them. No
+feed is necessary for▼
+chicks. Chicks grow to
+chickens in 7 days.
+If you increase the amount▼
+of chickens, the feed will
+run out so be careful¬
+
+DATA16_BB9932:
+"Lessons of Love"▼
+ Present        Conversation
+ Festival       Diary
+ Marriage»5
+
+DATA16_BB99DC:
+Most portable things can be
+presents. Every girl has a
+different taste so observe▼
+their reactions. Expensive
+presents don't work all the
+time.¬
+
+DATA16_BB9AFE:
+It's important to talk to a
+girl you love as much as
+possible.¬
+
+DATA16_BB9B82:
+Festivals are the best
+opportunity! Girls are
+sometimes at different▼
+places depending on the
+festival. Talk to her the
+day before and check out▼
+where she's going the next
+day. Lucky item is perfume.¬
+
+DATA16_BB9D32:
+The girls' impression of you
+can be found in the diary in
+each one's room.▼
+But don't look too often.
+Try you best to capture her
+heart!¬
+
+DATA16_BB9E42:
+Item for marriage proposal
+is a blue feather. When the
+good impression rate gets▼
+higher,check out the peddler
+on Sunday. You need to
+enlarge your house to get▼
+married too.¬
+
+DATA16_BB9FA4:Text_FortuneTeller_Ellen
+I see,Ellen. She's behind
+the pen on Saturdays.
+She's at the public▼
+square on Star Night
+Festival night. For present,
+flowers are nice but milk▼
+milked by you or an egg will
+please her,too.¬
+
+DATA16_BBA138:Text_FortuneTeller_Eve
+Eve..hmm... Go to the bar as
+many times as you can and go
+to the mountain▼
+on Saturdays and Sundays.
+For present,flowers or
+berries are good.▼
+She doesn't like fish so
+don't give it to her.¬
+
+DATA16_BBA2C0:
+Sweetheart......Stay happy
+forever.¬
+
+DATA16_BBA30A:
+Hey,darling....I would like
+a baby. How about you?¬
+
+DATA16_BBA370:
+.........Honey,you work too
+hard. I want you to be with
+me more.¬
+
+DATA16_BBA3F2:
+ #Dayname4,#Or5 of #Seas5.
+ Money #Mone510G¬
+
+DATA16_BBA436:
+ #Dayname5,#Or6 of #Seas6.
+ It's 6 o'clock now.▼
+ Going to have a good day
+ today!
+ Money #Mone520G¬
+
+DATA16_BBA514:
+ #Dayname6,#Or7 of #Seas7.
+ It's 7 o'clock now.
+ Money #Mone530G¬
+
+DATA16_BBA590:
+ #Dayname7,#Or8 of #Seas8.
+ It's 8 o'clock now.
+ Money #Mone540G¬
+
+DATA16_BBA60C:
+ #Dayname8,#Or9 of #Seas9.
+ It's 9 o'clock now.
+ Money #Mone550G¬
+
+DATA16_BBA688:
+ #Dayname9,#O10 of #Sea10.
+ It's 10 o'clock now.
+ Money #Mone560G¬
+
+DATA16_BBA704:
+ #Daynam10,#O11 of #Sea11.
+ It's 11 o'clock now. I'm
+ hungry now.▼
+ Money #Mone570G¬
+
+DATA16_BBA79A:
+ #Daynam11,#O12 of #Sea12.
+ It's 12 o'clock now.
+ I'm charged.▼
+ Money #Mone580G¬
+
+DATA16_BBA832:
+ #Daynam12,#O13 of #Sea13.
+ It's 1 o'clock now.
+ Money #Mone590G¬
+
+DATA16_BBA8AE:
+ #Daynam13,#O14 of #Sea14.
+ It's 2 o'clock now.
+ Money #Mone600G¬
+
+DATA16_BBA92A:
+ #Daynan14,#O15 of #Sea15.
+ It's 3 o'clock now. Didn't
+ I forget to ship something▼
+ Money #Mone610G¬
+
+DATA16_BBA9DE:
+ #Daynam15,#O16 of #Sea16.
+ It's 4 o'clock now. Shipper
+ is coming here soon.▼
+ Money #Mone620G¬
+
+DATA16_BBAA86:
+ #Daynam16,#O17 of #Sea17.
+ It's 5 o'clock now. I'm
+ tired now.▼
+ Money #Mone630G¬
+
+DATA16_BBAB1A:
+ #Daynam17,#O18 of #Sea18.
+ It's 6 o'clock now. I'm
+ going home now and going▼
+ to bed.
+ Money #Mone640G¬
+
+DATA16_BBAC02:
+ #Daynam18,#O19 of #Sea19.
+ It's 5 o'clock now. I could
+ be scolded if I went home▼
+ late.
+ Money #Mone650G¬
+
+DATA16_BBACEC:
+Hello, Mr. .... I've got a
+notice from your father this
+morning.▼
+He says he will be back here
+by the end of summer next
+year.▼
+He's so worried about how
+you live here so make him
+feel at ease then.¬
+
+DATA16_BBAE80:
+Hello. Your parents are
+coming tomorrow at last.
+They will be surprised▼
+to see this ranch.¬
+
+DATA16_BBAF44:
+...........Really,you still
+need to be trained more.¬
+
+DATA16_BBAFAE:
+It's kind of disappointing
+when the weather is not good
+on Sunday.¬
+
+DATA16_BBB034:
+Honey, the shop is closed
+because it's Saturday today.¬
+
+DATA16_BBB0A6:
+Equip the axe and use it in
+front of the spring in the
+mountain and then. ........¬
+
+DATA16_BBB14E:
+Hey,how are you doing? I'm
+making a great thing now!
+It'll be completed around▼
+the 20th so come see it at
+the shop then.¬
+
+DATA16_BBB248:
+Darling,will you hold our
+child sometimes?¬
+
+DATA16_BBB2A2:
+Look. He is crawling now!¬
+
+DATA16_BBB2D6:
+This child grows pretty
+quickly. Just a little bit
+but he started to speak▼
+words.¬
+
+DATA16_BBB384:
+ Ranch master rate #R1
+ Still a long way to go.¬
+
+DATA16_BBB3EE:
+He is very active so I have
+to put on eye on him all the
+time.¬
+
+DATA16_BBB46A:
+Darling,please take care of
+yourself.¬
+
+DATA16_BBB4B6:
+I heard an awful sound from
+here this morning.  Are you
+all right?▼
+Has anything strange
+happened? Check it out.¬
+
+DATA16_BBB5A4:Text_EllensFather_Hawker
+You said what? You were
+supposed to sell it,weren't
+you? Now I'm leaving.¬
+
+DATA16_BBB640:
+ Ranch master rate #R2
+ Try harder.¬
+
+DATA16_BBB692:
+ Ranch master rate #R3
+ Come on,you are so close!¬
+
+DATA16_BBB700:
+ Ranch master rate #R4
+ Great! But try to be the
+ best rancher!¬
+
+DATA16_BBB78E:
+ Ranch master rate #R5
+ Congratulations! You are
+ the perfect rancher now!¬
+
+DATA16_BBB832:
+ Ranch developing rate #R6%¬
+
+DATA16_BBB86A:
+How is P-chan doing?
+I wonder if it's doing OK?¬
+
+DATA16_BBB8D8:
+Money is not the only thing
+in life. Look at various
+things.¬
+
+DATA16_BBB958:
+The strange looking ornament
+of a chicken looks like it
+can be broken with a tool.¬
+
+DATA16_BBB9FE:
+What a beautiful flower!¬
+
+DATA16_BBBA30:
+Hello,you should eat a lot
+today. No,it doesn't mean
+anything.¬
+
+DATA16_BBBAB4:
+Has Nina made something like
+a flower garden at the
+ranch? Has she?¬
+
+DATA16_BBBB44:
+Darling,didn't you forget
+to paint the door?¬
+
+DATA16_BBBBA2:
+Maria seems to be doing
+well. Yes,she brought me a
+cake early this morning.¬
+
+DATA16_BBBC44:
+Are you getting along well
+with your wife? Don't argue,
+OK?¬
+
+DATA16_BBBCBC:
+I got a cake from the
+florist's wife. So glad. its
+like a dream to me.¬
+
+DATA16_BBBD54:
+Oh my goodness! No,no,no,
+nothing like that! You know,
+something like... thanks.¬
