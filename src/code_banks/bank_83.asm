@@ -5492,7 +5492,7 @@ CowFeedingandStatus: ;83BC5A
     .cowunfed:
         %Set16bit(!M)
         LDA.W #$FFF8
-        JSL.L AddCowHappiness
+        JSL.L Event_UNKCowRelated_AddCowHappiness
         %Set16bit(!MX)
         LDY.W #$0004
         BRA .cowgetsick
@@ -5500,7 +5500,7 @@ CowFeedingandStatus: ;83BC5A
     .CODE_83BD20:
         %Set16bit(!M)
         LDA.W #$FFF0
-        JSL.L AddCowHappiness
+        JSL.L Event_UNKCowRelated_AddCowHappiness
         %Set16bit(!MX)
         LDY.W #$0002
         BRA .cowgetsick
@@ -5508,7 +5508,7 @@ CowFeedingandStatus: ;83BC5A
     .CODE_83BD30:
         %Set16bit(!M)
         LDA.W #$FFE8
-        JSL.L AddCowHappiness
+        JSL.L Event_UNKCowRelated_AddCowHappiness
         %Set16bit(!MX)
         LDY.W #$0002
         BRA .cowgetsick
@@ -5516,7 +5516,7 @@ CowFeedingandStatus: ;83BC5A
     .CODE_83BD40:
         %Set16bit(!M)                             ;83BD40;      ;
         LDA.W #$FFF8                         ;83BD42;      ;
-        JSL.L AddCowHappiness                    ;83BD45;84A5D4;
+        JSL.L Event_UNKCowRelated_AddCowHappiness                    ;83BD45;84A5D4;
         %Set16bit(!MX)                             ;83BD49;      ;
         LDY.W #$0008                         ;83BD4B;      ;
         BRA .cowgetsick                      ;83BD4E;83BD50;
@@ -5551,7 +5551,7 @@ CowFeedingandStatus: ;83BC5A
         STA.B [$72],Y                        ;Pregnancy set to 7???
         %Set16bit(!M)
         LDA.W #$FFF4
-        JSL.L AddCowHappiness
+        JSL.L Event_UNKCowRelated_AddCowHappiness
         %Set16bit(!MX)
         LDA.W #$FFE2
         JSL.L AddPlayerHappiness
@@ -5578,7 +5578,7 @@ CowFeedingandStatus: ;83BC5A
         BNE .CODE_83BDD6
         %Set16bit(!M)
         LDA.W #$FFF8
-        JSL.L AddCowHappiness
+        JSL.L Event_UNKCowRelated_AddCowHappiness
         BRA .cowgetscranky
 
     .CODE_83BDD6:
@@ -5620,7 +5620,7 @@ CowFeedingandStatus: ;83BC5A
         STA.B [$72],Y
         %Set16bit(!M)
         LDA.W #$FFE2
-        JSL.L AddCowHappiness
+        JSL.L Event_UNKCowRelated_AddCowHappiness
         BRA .skipcow
 
     .babyonfarm:
