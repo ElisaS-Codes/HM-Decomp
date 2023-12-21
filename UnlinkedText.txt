@@ -472,92 +472,92 @@ high price.¬
 DATA16_B6D75E:Text_Peddler_Late
 Visit us again.¬
 
-DATA16_B6D77E:
+DATA16_B6D77E:Text_Maria_Spring
 Hello.It's a fine day today.¬
 
-DATA16_B6D7B8:
+DATA16_B6D7B8:Text_Maria_Summer1
 It's been hot every day but
 how are you doing?¬
 
-DATA16_B6D816:
+DATA16_B6D816:Text_Maria_Fall
 I somehow love the autumn
 scenery.¬
 
-DATA16_B6D860:
+DATA16_B6D860:Text_Maria_Winter1
 Hope it'll be spring soon.¬
 
-DATA16_B6D896:
+DATA16_B6D896:Text_Maria_God_Question1
 Do you believe in God?▼
  Yes
  No»2
 
-DATA16_B6D906:
+DATA16_B6D906:Text_Maria_God_Question2
 Really? It's unusual these
 days. Please come to the
 church on Sunday.¬
 
-DATA16_B6D99A:
+DATA16_B6D99A:Text_Maria_God_Question3
 It's not whether God exists
 or not,it's more a "belief"
 that counts,I think.¬
 
-DATA16_B6DA34:
+DATA16_B6DA34:Text_Maria_Summer2
 Please take care of yourself
 not to be worn down by the
 summer heat.¬
 
-DATA16_B6DABE:
+DATA16_B6DABE:Text_Maria_Kids_Question1
 ....Excuse me, do you love
 kids?▼
  I love kids.
  Not really.»2
 
-DATA16_B6DB56:
+DATA16_B6DB56:Text_Maria_Kids_Question2
 I love kids too. My dream is
 to live with a lot of kids
 around me.¬
 
-DATA16_B6DBDC:
+DATA16_B6DBDC:Text_Maria_Kids_Question3
 ...Oh.¬
 
-DATA16_B6DBEA:
+DATA16_B6DBEA:Text_Maria_Winter2
 It's pretty cold so please
 take care of yourself not to
 catch a cold.¬
 
-DATA16_B6DC76:
+DATA16_B6DC76:Text_Maria_Priest_Question1
 Oh,you have come to listen
 to the priest.▼
  Yes
  No»2
 
-DATA16_B6DD0E:
+DATA16_B6DD0E:Text_Maria_Priest_Question1
 You are devout.¬
 
-DATA16_B6DD2E:
+DATA16_B6DD2E:Text_Maria_Priest_Question1
 No? then,why are you here?
 Oh,to pray?¬
 
-DATA16_B6DD7E:
+DATA16_B6DD7E:Text_Maria_Spring_Rain
 It's a welcome rain. We have
 a lot of rain here in
 spring.¬
 
-DATA16_B6DDFE:
+DATA16_B6DDFE:Text_Maria_Church2
 Uum...well...can I come over
 to your ranch some day soon?¬
 
-DATA16_B6DE70:
+DATA16_B6DE70:Text_Maria_Lonely_Question1
 Aren't you lonely living in
 that big place?▼
  A little lonely
  No,not at all»2
 
-DATA16_B6DF20:
+DATA16_B6DF20:Text_Maria_Lonely_Question2
 Uum..well...yes, if...no,
 nothing....g-good-by.¬
 
-DATA16_B6DF84:
+DATA16_B6DF84:Text_Maria_Lonely_Question3
 I..see...sorry,I didn't
 mean to ask you anything
 personal.¬
@@ -760,7 +760,7 @@ are all alive.¬
 DATA16_B6F4B8:
 So great!¬
 
-DATA16_B6F4CC:
+DATA16_B6F4CC:Text_Maria_Pre_Festival
 I know you are busy working
 but please try to come to
 the festival.¬
@@ -1074,13 +1074,13 @@ DATA16_B7982E:
 She is a cute girl with long
 hair.¬
 
-DATA16_B79872:
+DATA16_B79872:Text_Maria_Intro1
 I haven't seen you before.
 Did you come to that ranch?
 I'm Maria.▼
 Nice meeting you.¬
 
-DATA16_B7991C:
+DATA16_B7991C:Text_Maria_Intro2
 It may be hard at first but
 don't give up.¬
 
@@ -1635,7 +1635,7 @@ DATA16_B7DCCA:
 They say a hurricane is
 coming here tomorrow.¬
 
-DATA16_B7DD2E:
+DATA16_B7DD2E:Text_Maria_Pre_Hurricane
 The wind is blowing harder
 and that makes me scared.¬
 
@@ -1695,7 +1695,7 @@ DATA16_B7E3D6:
 It's impossible to go out
 today.¬
 
-DATA16_B7E41C:
+DATA16_B7E41C:Text_Maria_Post_Hurricane
 Thank God that there was
 only slight damage from the
 hurricane.¬
@@ -1740,7 +1740,7 @@ areas to collapse spots▼
 in the mountain so I'm
 worried about him.¬
 
-DATA16_B7E8C0:
+DATA16_B7E8C0:Text_Maria_Earthquake
 I was surprised.Is your
 ranch alright?¬
 
@@ -2091,7 +2091,7 @@ What? Present? I'm so glad
 that you remembered the
 anniversary.¬
 
-DATA16_B8888A:
+DATA16_B8888A:Text_Spa_Monkey
 La-la-la¬
 
 DATA16_B8889C:
@@ -2728,7 +2728,7 @@ held at the public▼
 square tomorrow. It ends at
 3:00pm so don't be late.¬
 
-DATA16_B8CFBA:
+DATA16_B8CFBA:Text_Maria_Pre_HarvestFestival
 It's the Harvest Festival
 tomorrow.¬
 
@@ -3342,7 +3342,7 @@ Look at the sky. It'll be
 really beautiful tomorrow
 night.¬
 
-DATA16_B992C6:
+DATA16_B992C6:Text_Maria_Saturday
 I'm going to play organ at
 the church.¬
 
@@ -4621,7 +4621,7 @@ This weather makes me feel
 depressed. It's boring...I
 want to sleep in winter.¬
 
-DATA16_BAA56E:
+DATA16_BAA56E:Text_Maria_Snow
 Hey,warm up your body..
 don't catch a cold.¬
 
@@ -5088,7 +5088,7 @@ DATA16_BAD700:
 The fisherman will be back
 here soon from a warm place.¬
 
-DATA16_BAD772:
+DATA16_BAD772:Text_Maria_PreNewYears
 This year is closing soon.
 I wish to become better each
 year but...▼
@@ -5204,7 +5204,7 @@ all like weeds and     veget
 able.▼
 I want to do garden forever.¬
 
-DATA16_BAE4B6:
+DATA16_BAE4B6:Text_Maria_Church1
 I love church because it
 seems to wash my mind.¬
 
