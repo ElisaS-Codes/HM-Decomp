@@ -70,3 +70,6 @@ endmacro
 !map_barn = #$27
 !map_coop = #$28
 !NATSUME_LOGO = #$5D
+
+;;Structs $CC indexes
+!CCSTRUCT_USED = #$0000

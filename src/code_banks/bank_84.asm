@@ -1,7 +1,7 @@
 ORG $848000
 
 ;;;;;;;;
-UNK_ClearsStartofAllCCPointers: ;848000
+ClearsofAllCCStructs: ;848000
         %Set16bit(!MX)
         LDX.W #$0000
 
@@ -83,7 +83,7 @@ UNK_LoadCCDataShort: ;84803F
         LDY.W #$0032
         STA.B [$CC],Y
         STA.B $CB
-        JSR.W PresetsCCPointerStructureShort
+        JSR.W ResetsCurrentCCStructureShort
 
         RTL
 
@@ -102,7 +102,7 @@ UNK_LoadCCDataLong: ;848097
         INX
         INX
         %Set8bit(!M)
-        LDA.L Events_Bank_Table,X                 ;B38000
+        LDA.L Events_Bank_Table,X            ;B38000
         STA.B $74
         %Set16bit(!M)
         LDA.B $7E
@@ -131,7 +131,7 @@ UNK_LoadCCDataLong: ;848097
         %Set16bit(!X)
         LDY.W #$0032
         STA.B [$CC],Y
-        JSR.W PresetsCCPointerStructureLong
+        JSR.W ResetsCurrentCCStructureLong
         %Set16bit(!MX)
         PLA
         %Set8bit(!M)
@@ -184,7 +184,7 @@ SUB_8480F8: ;8480F8
         %Set16bit(!X)
         LDY.W #$0032
         STA.B [$CC],Y
-        JSR.W PresetsCCPointerStructureLong
+        JSR.W ResetsCurrentCCStructureLong
         %Set16bit(!MX)
         PLA
         %Set8bit(!M)
@@ -1214,12 +1214,13 @@ SUB_848895: ;848895
 
         RTL
 
-;;;;;;;;
-PresetsCCPointerStructureLong: ;8488D4
+;;;;;;;; Resets some important variables of the structure and sets it as used
+;;;;;;;; CC must be set
+ResetsCurrentCCStructureLong: ;8488D4
         %Set16bit(!MX)
         %Set8bit(!M)
         %Set16bit(!X)
-        LDY.W #$0000
+        LDY.W !CCSTRUCT_USED
         LDA.B #$01
         STA.B [$CC],Y
         %Set8bit(!M)
@@ -1280,12 +1281,13 @@ PresetsCCPointerStructureLong: ;8488D4
 
         RTS
 
-;;;;;;;;
-PresetsCCPointerStructureShort: ;848961
+;;;;;;;; Resets less variables than the previous subrutine
+;;;;;;;; CC must be set
+ResetsCurrentCCStructureShort: ;848961
         %Set16bit(!MX)
         %Set8bit(!M)
         %Set16bit(!X)
-        LDY.W #$0000
+        LDY.W !CCSTRUCT_USED
         LDA.B #$01
         STA.B [$CC],Y
         %Set8bit(!M)
@@ -1559,7 +1561,7 @@ Event_UNKCCchanges: ;848B08
         %Set16bit(!MX)
         LDY.W #$0030
         STA.B [$CC],Y
-        JSR.W PresetsCCPointerStructureLong
+        JSR.W ResetsCurrentCCStructureLong
         %Set8bit(!M)
         PLA
         %Set8bit(!M)
@@ -3073,7 +3075,7 @@ Event_AudioRelated3:
         JSL.L UNK_Audio24
         %Set8bit(!M)
         STZ.W $0119
-        JSL.L SUB_828FF3
+        JSL.L ToolUsedSound2
         %Set16bit(!MX)
         LDA.B $C9
         CLC

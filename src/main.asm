@@ -62,9 +62,9 @@ incsrc "data_banks/bank_AF.asm"
 incsrc "data_banks/bank_B0.asm"
 incsrc "data_banks/bank_B1.asm"
 incsrc "data_banks/bank_B2.asm"
-incsrc "data_banks/bank_B3.asm"
-incsrc "data_banks/bank_B4.asm"
-incsrc "data_banks/bank_B5.asm"
+incsrc "data_banks/bank_B3.asm"     ;Events?
+incsrc "data_banks/bank_B4.asm"     ;Events?
+incsrc "data_banks/bank_B5.asm"     ;Events?
 incsrc "data_banks/bank_B6.asm"     ;Text
 incsrc "data_banks/bank_B7.asm"     ;Text
 incsrc "data_banks/bank_B8.asm"     ;Text

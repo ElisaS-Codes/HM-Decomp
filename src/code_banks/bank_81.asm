@@ -1043,7 +1043,7 @@ SUB_8180B7:
                        JSL.L CODE_81A4F1                    ;81882C;81A4F1;
                        %Set8bit(!M)                             ;818830;      ;
                        STZ.W !item_on_hand                          ;818832;00091D;
-                       JSL.L SUB_828FF3                          ;818835;828FF3;
+                       JSL.L ToolUsedSound2                          ;818835;828FF3;
                        RTS                                  ;818839;      ;
                                                             ;      ;      ;
                                                             ;      ;      ;
@@ -2557,10 +2557,10 @@ SUB_8180B7:
                        JMP.W Droped_on_special_place                    ;8193BA;819497;
                                                             ;      ;      ;
                                                             ;      ;      ;
-          CODE_8193BD: BRA Droped_on_sale_place                      ;8193BD;8193BF;
+          CODE_8193BD: BRA Dropedonsaleplace                      ;8193BD;8193BF;
                                                             ;      ;      ;
 ;;;;;; This controlls if its get sold or it gets incubated or what happens.
-Droped_on_sale_place:
+Dropedonsaleplace:
       %Set8bit(!M)
       %Set16bit(!X)
       LDA.B #$00
@@ -5540,7 +5540,7 @@ SUB_81BFB7: ;81BFB7
                        STA.W !tool_selected                          ;81C0A7;000921;
                        PLA                                  ;81C0AA;      ;
                        STA.W !tool_backpack                          ;81C0AB;000923;
-                       JSL.L SUB_828FF3                          ;81C0AE;828FF3;
+                       JSL.L ToolUsedSound2                          ;81C0AE;828FF3;
                                                             ;      ;      ;
           CODE_81C0B2: JMP.W ResetIdleAnimatioTimer                    ;81C0B2;81C002;
                                                             ;      ;      ;
@@ -6086,7 +6086,7 @@ SUB_81BFB7: ;81BFB7
                        STA.W !counter_tool_sound                          ;81C548;00091B;
                        CMP.B #$18                           ;81C54B;      ;
                        BNE CODE_81C553                      ;81C54D;81C553;
-                       JSL.L SUB_828FB1                          ;81C54F;828FB1;
+                       JSL.L ToolUsedSound1                          ;81C54F;828FB1;
                                                             ;      ;      ;
           CODE_81C553: JMP.W ResetIdleAnimatioTimer                    ;81C553;81C002;
                                                             ;      ;      ;
@@ -8082,7 +8082,7 @@ CODE_81D670: ;81D670
       STA.B !game_state
       %Set8bit(!M)
       STZ.W $0119
-      JSL.L SUB_828FF3
+      JSL.L ToolUsedSound2
 
    .return: RTS
 
@@ -9668,7 +9668,7 @@ CODE_81D716: ;81D716
                        JSL.L UNK_Audio24                          ;81E37A;8382FE;
                        %Set8bit(!M)                             ;81E37E;      ;
                        STZ.W $0119                          ;81E380;000119;
-                       JSL.L SUB_828FF3                          ;81E383;828FF3;
+                       JSL.L ToolUsedSound2                          ;81E383;828FF3;
                        %Set16bit(!MX)                             ;81E387;      ;
                        LDA.W #$0040                         ;81E389;      ;
                        EOR.W #$FFFF                         ;81E38C;      ;

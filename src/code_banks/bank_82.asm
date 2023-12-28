@@ -1694,7 +1694,7 @@ FindMostLovedName: ;828EC6
         RTL
 
 ;;;;;;;;
-SUB_828FB1: ;828FB1
+ToolUsedSound1: ;828FB1
         %Set8bit(!M)                             ;      ;
         LDA.B #$00                           ;828FB3;      ;
         XBA                                  ;828FB5;      ;
@@ -1728,10 +1728,10 @@ SUB_828FB1: ;828FB1
         STA.W $0114                          ;828FEB;000114;
         JSL.L UNK_Audio19                    ;828FEE;838332;
 
-        .return: RTL                                  ;828FF2;      ;END_SUB_828FB1
+        .return: RTL                                  ;828FF2;      ;END_ToolUsedSound1
 
 ;;;;;;;;
-SUB_828FF3: ;828FF3
+ToolUsedSound2: ;828FF3
         %Set8bit(!M)
         LDA.B #$00
         XBA
@@ -4470,7 +4470,7 @@ SUB_82D1C0: ;82D1C0
         JSL.L UNK_UNKClearWRAMSpace         ;82D2FF;858ED7;
         JSL.L InitializeOBJs         ;82D303;85820F;
         JSL.L UNK_PresetsMemory3                 ;82D307;81A4C7;
-        JSL.L UNK_ClearsStartofAllCCPointers                 ;82D30B;848000;
+        JSL.L ClearsofAllCCStructs                 ;82D30B;848000;
         JSL.L LoadDefaultFarmMap                ;82D30F;82A65A;
         %Set16bit(!M)                             ;82D313;      ;
         LDA.W #$0100                         ;82D315;      ;
@@ -4657,7 +4657,7 @@ DemoPresentation:
         JSL.L UNK_UNKClearWRAMSpace         ;82D500;858ED7;
         JSL.L InitializeOBJs         ;82D504;85820F;
         JSL.L UNK_PresetsMemory3                 ;82D508;81A4C7;
-        JSL.L UNK_ClearsStartofAllCCPointers                 ;82D50C;848000;
+        JSL.L ClearsofAllCCStructs                 ;82D50C;848000;
         JSL.L LoadDefaultFarmMap                ;82D510;82A65A;
         %Set16bit(!M)                             ;82D514;      ;
         LDA.W #$0100                         ;82D516;      ;
@@ -5113,7 +5113,7 @@ IntroScreen: ;82D75E
         JSL.L UNK_UNKClearWRAMSpace
         JSL.L InitializeOBJs
         JSL.L UNK_PresetsMemory3
-        JSL.L UNK_ClearsStartofAllCCPointers
+        JSL.L ClearsofAllCCStructs
         %Set16bit(!M)
         %Set16bit(!MX)
         LDA.B !game_state
@@ -5140,16 +5140,16 @@ IntroScreen: ;82D75E
         LDY.W #$0000
         JSL.L UNK_LoadCCDataLong
         JSL.L SUB_84816F
-        %Set8bit(!M)                             ;82D912;      ;
-        LDA.W !transition_dest                          ;82D914;00098B;
-        STA.B !tilemap_to_load                            ;82D917;000022;
-        JSL.L UNK_Audio5;82D919;8095DE;
-        JSL.L UNK_Audio21                    ;82D91D;83841F;
-        JSL.L UNK_Audio20                    ;82D921;8383A4;
-        JSL.L UNK_Audio22                    ;82D925;838380;
-        %Set8bit(!M)                             ;82D929;      ;
-        LDA.W $0110                          ;82D92B;000110;
-        STA.W $0117                          ;82D92E;000117;
+        %Set8bit(!M)
+        LDA.W !transition_dest
+        STA.B !tilemap_to_load
+        JSL.L UNK_Audio5
+        JSL.L UNK_Audio21
+        JSL.L UNK_Audio20
+        JSL.L UNK_Audio22
+        %Set8bit(!M)
+        LDA.W $0110
+        STA.W $0117
         %Set8bit(!M)                             ;82D931;      ;
         LDA.W !transition_dest                          ;82D933;00098B;
         JSL.L SUB_80972C                           ;82D936;80972C;
@@ -5225,7 +5225,7 @@ IntroScreen: ;82D75E
                        JSL.L UNK_UNKClearWRAMSpace         ;82D9E8;858ED7;
                        JSL.L InitializeOBJs         ;82D9EC;85820F;
                        JSL.L UNK_PresetsMemory3                 ;82D9F0;81A4C7;
-                       JSL.L UNK_ClearsStartofAllCCPointers                 ;82D9F4;848000;
+                       JSL.L ClearsofAllCCStructs                 ;82D9F4;848000;
                        %Set8bit(!M)                             ;82D9F8;      ;
                        LDA.B #$5B                           ;82D9FA;      ;
                        STA.B !tilemap_to_load                            ;82D9FC;000022;
@@ -5367,7 +5367,7 @@ IntroScreen: ;82D75E
                        JSL.L UNK_UNKClearWRAMSpace         ;82DB2D;858ED7;
                        JSL.L InitializeOBJs         ;82DB31;85820F;
                        JSL.L UNK_PresetsMemory3                 ;82DB35;81A4C7;
-                       JSL.L UNK_ClearsStartofAllCCPointers                 ;82DB39;848000;
+                       JSL.L ClearsofAllCCStructs                 ;82DB39;848000;
                        %Set16bit(!M)                             ;82DB3D;      ;
                        STZ.B !player_pos_X                           ;82DB3F;0000D6;
                        STZ.B !player_pos_Y                            ;82DB41;0000D8;

@@ -13,8 +13,8 @@
 
 Bank 80
 
-❓808000 - SpawnAfterLoad
-❓808083 - GameLoop
+❔808000 - SpawnAfterLoad
+❔808083 - GameLoop
 ✅8080ED - SetPlayerName
 ✅80815F - SetCowNameBought
 ✅8081D2 - SetCowNameBorn
@@ -40,7 +40,7 @@ Bank 80
 ✅808980 - ZeroesCGRAM
 ✅8089BC - ZeroesPartialVRAM
 ✅8089F9 - RNGReturn0toA
-❔808A33 - AddProgrammedDMA
+✅808A33 - AddProgrammedDMA
 ✅808AA0 - RemoveProgrammedDMA
 ✅808AB2 - StartLastPreparedDMA
 ✅808AF0 - StartProgramedDMA
@@ -79,7 +79,7 @@ Bank 80
 ❓808F82 - ZeroesOne42Pointer
 ❓808F92 - ZeroesPartial42Pointers
 ❓808FAB - Zeroes42Pointers
-❓808FC7 - SetTimeofDayPalette
+✅808FC7 - SetTimeofDayPalette
 ✅80900C - TransitionTimeofDayPalettes
 ✅809157 - ClearsTimeofDayPaletteIndexandSetsNext
 ✅809166 - ClearsTimeofDayPalette
@@ -94,9 +94,9 @@ Bank 80
 ❓809380 - SUB_809380
 ❓809392 - SUB_809392
 ❓8093A3 - SUB_8093A3
-❓809501 - SetPaletteToLoad
+✅809501 - SetPaletteToLoad
 ❓809553 - CallIndexedSubrutines
-❓8095B3 - AutoMapScrolling
+✅8095B3 - AutoMapScrolling
 ❓8095DE - UNK_Audio5
 ❓809671 - SetScreenTransition
 ❓8096D3 - UNK_ScreenTransition
@@ -134,8 +134,12 @@ Bank 80
 💾80DD5B - UNK_Pointer42_Table
 
 Bank 81
+❔81AAB6 - ReplaceTilesFarm
 ...
 ✅81D061 - ChangeStamina
+✅81D14E - CalculateTileinFront
+✅81D570 - PlayerInteractionSelector
+✅81D644 - GetFenceFromStack
 ...
 ❔81D570 - PlayerInteractionSelector
 ...
@@ -144,15 +148,15 @@ Bank 81
 Bank 82
 ❔828000 - UpdateTime
 ✅8280AA - HaveLunch
-❓828131 - ShippingScene
-❓828165 - ShippingSceneDialogue
+❔828131 - ShippingScene
+❔828165 - ShippingSceneDialogue
 ✅8281BF - ShippingReturn
 ❓8281C0 - SUB_8281C0
 ❓8281FD - UNK_Table6
-❓828209 - ClimateFarmDamagePrep
-❓828270 - LoadsDamageProbabilities
-❓828298 - DamageProbabilityTable
-❓8282AC - NightReset
+✅828209 - ClimateFarmDamagePrep
+✅828270 - LoadsDamageProbabilities
+✅828298 - DamageProbabilityTable
+❔8282AC - NightReset
 ⛔82878E - SUB_82878E
 ✅828790 - WifePregnanacyandChilds
 ✅8289D6 - LoadsDateNames
@@ -162,16 +166,16 @@ Bank 82
 📄828BF9 - Ordinals_Names_Table
 ❔828C09 - SetWeatherFlags
 💾828CED - Climate_Flag_Table
-💾828CF9 - WeatherTomorrow
+✅828CF9 - WeatherTomorrow
 💾828EB2 - Hurricane_Chance_Table
 💾828EB6 - Rain_Chance_Table
 💾828EBA - Snow_Chance_Table
 💾828EBE - Thunder_Chance_Table
 💾828EC2 - Snowstorm_Chance_Table
 ✅828EC6 - FindMostLovedName
-❓828FB1 - SUB_828FB1
-❓828FF3 - SUB_828FF3
-❓829054 - Tool_Noise_Table
+❓828FB1 - ToolUsedSound1
+❓828FF3 - ToolUsedSound2
+💾829054 - Tool_Noise_Table
 ❓8290A8 - UNK_ToolUsed
 ->bank_82_toolused_subrutines
 ❓829260 - SUB_829260

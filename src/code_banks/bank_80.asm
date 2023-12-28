@@ -2908,7 +2908,7 @@ UNK_ScreenTransition: ;8096D3
         JSL.L UNK_UNKClearWRAMSpace
         JSL.L InitializeOBJs
         JSL.L UNK_PresetsMemory3
-        JSL.L UNK_ClearsStartofAllCCPointers
+        JSL.L ClearsofAllCCStructs
         %Set8bit(!M)
         LDA.W !transition_dest
         STA.B !tilemap_to_load
@@ -3247,7 +3247,7 @@ SUB_80972C: ;80972C
         JSL.L UNK_Audio21                    ;8099EB;83841F;
         JSL.L UNK_Audio20                    ;8099EF;8383A4;
         JSL.L UNK_Audio22                    ;8099F3;838380;
-        JSL.L SUB_828FF3                          ;8099F7;828FF3;
+        JSL.L ToolUsedSound2                          ;8099F7;828FF3;
         %Set8bit(!M)                             ;8099FB;      ;
         LDA.W $0110                          ;8099FD;000110;
         STA.W $0117                          ;809A00;000117;

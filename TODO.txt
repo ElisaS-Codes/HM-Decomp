@@ -27,10 +27,13 @@ $AF
 
 $DE: random number, related to npc?
 
-A: 0
-X: 9
-Y: 0
+LDA.W #$0000
+LDX.W #$0009
+LDY.W #$0000
 
+$7EB586 =
+
+JSL.L UNK_LoadCCDataLong
 ok ok, no, focus, CC is a pointer to a collection of structures, I know that. Its $40 bytes long, aka 64 bytes. Thats a ton of info!
 $00 is always one, probably a "its not used" flag, as there is a subrutine that sets all $00s to 0, that resets the whole structures.
 some values are 8bits, some are 16 bits, some are important enough to be cleaned before using, most are not
