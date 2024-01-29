@@ -5017,7 +5017,7 @@ IntroScreen: ;82D75E
         BEQ .natsumescreen
         CMP.B #$01
         BNE .CODE_82D829
-        JML.L .CODE_82D8B0
+        JML.L .parentsintroscene
 
     .CODE_82D829:
         CMP.B #$02                           ;82D829;      ;
@@ -5076,7 +5076,7 @@ IntroScreen: ;82D75E
         JMP.W DemoPresentation
 
         ..skip:
-            BRA .waitNMI                      ;82D881;82D80D;END_MainLoop?
+            BRA .waitNMI
 
     ;;;; Just wait for the natsume logo to pass
     .natsumescreen:
@@ -5105,7 +5105,7 @@ IntroScreen: ;82D75E
         STZ.B $94
         BRA .democheck
 
-    .CODE_82D8B0:
+    .parentsintroscene: ;82d8b2
         %Set16bit(!MX)
         JSL.L ZeroesVRAM
         JSL.L ZeroesCGRAM

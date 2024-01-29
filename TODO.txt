@@ -40,7 +40,7 @@ some values are 8bits, some are 16 bits, some are important enough to be cleaned
 $0F seems to be important? its reset out of order
 $3F holds the index of the stuct... weird cause you need the index to access the struct...
 
-struct $CC
+--struct $CC
 00: "used" flag? -8
 01:r -8b
 02: -8b
@@ -59,13 +59,19 @@ struct $CC
 1A:r -16b
 1C:r -16b
 30: Data from B38000 -16b this is a kind of pointer with 32, but 32 is always the bank of the event list
-32: bank of C9? -8b
+32: Bank -8b
 33: -16b
 3F: Index of struct -8b
 
+--B3 structures
+first 2 bytes are the start of the script? seems to always be 32 bytes later?
+rest of the first 32 bits not used???
+
 
 ====Working on
-tools, sickle
+
+$07 - pointer to next sprite during animations?
+$7EB4E6 - list of sprite data during animations?
 
 ====Confirm Vars
 $7E09A3 - X Position ??? coounter
@@ -98,6 +104,7 @@ $1E - does things when transitioning to places
 
 $20 - Camera Offset Subtile X?
 $21 - Camera Offset Subtile Y?
+
 $42 - pointers *10
 
 $89 - Tile in front X?

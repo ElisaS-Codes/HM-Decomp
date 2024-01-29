@@ -353,7 +353,8 @@ InitializeOBJs: ;85820F
         BEQ .skip
         JMP.W .loop
 
-        .skip: %Set16bit(!M)
+    .skip:
+        %Set16bit(!M)
         STZ.B $DC
         JSR.W PresetsWRAMCopyofOAM
 
@@ -856,7 +857,7 @@ UNK_BigLoadLoopOAM: ;8583E0
                        db $FC,$FF,$F3,$FF,$CF,$FF,$3F,$FF,$FF,$FC,$FF,$F3,$FF,$CF,$FF,$3F;858637;      ;
 
 ;;;;;;;; Loops, ever heard of them?
-PresetsWRAMCopyofOAM:
+PresetsWRAMCopyofOAM: ;858647
         %Set16bit(!MX)
         LDA.W #$F0F0
         STA.L $7EA000

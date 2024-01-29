@@ -9,7 +9,7 @@ ORG $B38000
         dl Event06                           ;B38012;B3D447;6
         dl Event07                           ;B38015;B3D9F7;7
         dl Event08                           ;B38018;B3E0BF;8
-        dl Event09                           ;B3801B;B3E603;9
+        dl Event09                           ;B3801B;B3E603;9 Parents scene
         dl Event0A                           ;B3801E;B3E83B;a
         dl Event0B                           ;B38021;B3E9DA;b
         dl Event0C                           ;B38024;B3EF5A;c

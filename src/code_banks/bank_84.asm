@@ -1373,7 +1373,7 @@ Event_TimeRunning: ;8489E3
         RTS
 
 ;;;;;;;;
-Event_TimeStopped:
+Event_TimeStopped: ;808A0D
         %Set16bit(!MX)
         %Set16bit(!MX)
         LDA.B $C9
@@ -1518,7 +1518,7 @@ Event_UNKChangesGameState: ;848AE7
         RTS
 
 ;;;;;;;;
-Event_UNKCCchanges: ;848B08
+Event_NewCCStructure: ;848B08
         %Set16bit(!MX)
         %Set16bit(!MX)
         LDA.B $C9
@@ -2307,9 +2307,9 @@ Event_StartTextBoxCopy: ;849034
 
         RTS
 
-
 ;;;;;;;;
-Event_UNKCCchanges5:
+Event_UNKCCchanges5: ;809079
+Event_UNKCCchanges5D:
         %Set16bit(!MX)
         %Set16bit(!MX)
         LDA.B $C9
@@ -2494,7 +2494,7 @@ Event_UNKJumpif018F: ;84919D
         RTS
 
 ;;;;;;;;
-Event_UNKTextrelated:
+Event_UNKTextrelated: ;8091D2
         %Set16bit(!MX)
         %Set16bit(!MX)
         LDA.B $C9
@@ -2766,7 +2766,9 @@ Event_UNKCCchanges7: ;849375
         RTS
 
 ;;;;;;;;
-
+Event_ResetFlag: ;8093C9
+Event_ResetFlagD:
+Event_ResetFlagDD:
         %Set16bit(!MX)
         %Set16bit(!MX)
         LDA.B $C9
@@ -2811,109 +2813,114 @@ Event_UNKCCchanges7: ;849375
         RTS
 
 EventInstructionPointers: ;849419
-dw $89BB,$89E3,$8A0D,$8A39,$8A58,$8A65,$8A94,$8ABF;      ;
-dw $8AE7,$8B08,$8B83,$8BAC,$8BDC,$8C22,$8CA8,$8CB9;849429;      ;
-dw $8CE2,$8CFD,$8D13,$8D24,$8D44,$8DA5,$8DFB,$8E68;849439;      ;
-dw $8E90,$8EC9,$8F0A,$8F9B,$8FEF,$9034,$9079,$9079;849449;      ;
-dw $919D,$91D2,$923F,$9306,$9356,$9375,$93C9,$93C9;849459;      ;
-dw $93C9,$9513,$9553,$957D,$95E8,$9633,$9777,$9810;849469;      ;
-dw $9857,$9AD4,$A90F,$A94C,$AA5D,$AB27,$AF06,$B34B;849479;      ;
-dw $B365,$B389,$B427,$B4DC,$B503,$B52D,$B556,$B57B;849489;      ;
-dw $B58F,$B5A9,$B602,$B666,$B6BC,$B72D,$B79A,$B84C;849499;      ;
-dw $B889,$B8D9,$B93C,$BA10,$BA51,$BA72,$BB31,$BB4B;8494A9;      ;
-dw $BBDA,$BC9C,$BD44,$BE0D,$BED6,$BF20,$BF81,$BFA0;8494B9;      ;
-dw $BFBF,$C000                       ;8494C9;      ;
+dw $89BB,$89E3,$8A0D,$8A39,$8A58,$8A65,$8A94,$8ABF
+dw $8AE7,$8B08,$8B83,$8BAC,$8BDC,$8C22,$8CA8,$8CB9
+dw $8CE2,$8CFD,$8D13,$8D24,$8D44,$8DA5,$8DFB,$8E68
+dw $8E90,$8EC9,$8F0A,$8F9B,$8FEF,$9034,$9079,$9079
+dw $919D,$91D2,$923F,$9306,$9356,$9375,$93C9,$93C9
+dw $93C9,$9513,$9553,$957D,$95E8,$9633,$9777,$9810
+dw $9857,$9AD4,$A90F,$A94C,$AA5D,$AB27,$AF06,$B34B
+dw $B365,$B389,$B427,$B4DC,$B503,$B52D,$B556,$B57B
+dw $B58F,$B5A9,$B602,$B666,$B6BC,$B72D,$B79A,$B84C
+dw $B889,$B8D9,$B93C,$BA10,$BA51,$BA72,$BB31,$BB4B
+dw $BBDA,$BC9C,$BD44,$BE0D,$BED6,$BF20,$BF81,$BFA0
+dw $BFBF,$C000
 
-;dw Event_AudioRelated                ;01
-;dw Event_TimeRunning                 ;02
-;dw Event_TimeStopped                 ;03
-;dw Event_SetHour                     ;04
-;dw Event_Empty                       ;05
-;dw Event_SetPlayerPosition           ;06
-;dw Event_SetTransitionDest           ;07
-;dw Event_SetPlayerDirection          ;08
-;dw Event_UNKChangesGameState         ;09
-;dw Event_UNKCCchanges                ;0A
-;dw Event_ScreenFadein                ;0B
-;dw Event_UNKset7Aflag                ;0C
-;dw Event_UNKCompareset7Aflag         ;0D
-;dw Event_UNKCCchanges2               ;0E
-;dw Event_AudioRelated2               ;0F
-;dw Event_ScreenFadeout               ;10
-;dw Event_UNKDisableCCstruct          ;11
-;dw Event_UNKChangesGameState2        ;12
-;dw Event_JumptoInstruction           ;13
-;dw Event_UNKSetsCC10                 ;14
-;dw Event_JumpifFlagSet               ;15
-;dw Event_JumpifEquals                ;16
-;dw Event_JumpifBetween               ;17
-;dw Event_GetRNG                      ;18
-;dw Event_JumpIfEqualsRNG             ;19
-;dw Event_UNKSetAnimation             ;1A
-;dw Event_UNKCCchanges3               ;1B
-;dw Event_UNKCCchanges4               ;1C
-;dw Event_StartTextBox                ;1D
-;dw Event_StartTextBoxCopy            ;1E
-;dw Event_UNKCCchanges5               ;1F
-;dw Event_UNKJumpif018F               ;20
-;dw Event_UNKTextrelated              ;21
-;dw Event_UNKCCchanges6               ;22
-;dw Event_SetFlag                     ;23
-;dw Event_TimeofDayPalette            ;24
-;dw Event_UNKCCchanges7               ;25
-;dw Event_ResetFlag                   ;26
-;dw CODE_0093C9                       ;849465;0093C9;27
-;dw CODE_0093C9                       ;849467;0093C9;28
-;dw CODE_0093C9                       ;849469;0093C9;29
-;dw CODE_009513                       ;84946B;009513;2A
-;dw CODE_009553                       ;84946D;009553;2B
-;dw CODE_00957D                       ;84946F;00957D;2C
-;dw CODE_0095E8                       ;849471;0095E8;2D
-;dw LOOSE_OP_009633                   ;849473;009633;2E
-;dw CODE_009777                       ;849475;009777;2F
-;dw CODE_009810                       ;849477;009810;30
-;dw CODE_009857                       ;849479;009857;37
-;dw LOOSE_OP_009AD4                   ;84947B;009AD4;38
-;dw CODE_00A90F                       ;84947D;00A90F;39
-;dw CODE_00A94C                       ;84947F;00A94C;3A
-;dw LOOSE_OP_00AA5D                   ;849481;00AA5D;3B
-;dw PTR16_00AB27                      ;849483;00AB27;3C
-;dw DATA8_00AF06                      ;849485;00AF06;3D
-;dw DATA8_00B34B                      ;849487;00B34B;3E
-;dw DATA8_00B365                      ;849489;00B365;3F
-;dw DATA8_00B389                      ;84948B;00B389;40
-;dw DATA8_00B427                      ;84948D;00B427;41
-;dw DATA8_00B4DC                      ;84948F;00B4DC;42
-;dw DATA8_00B503                      ;849491;00B503;43
-;dw DATA8_00B52D                      ;849493;00B52D;44
-;dw DATA8_00B556                      ;849495;00B556;45
-;dw DATA8_00B57B                      ;849497;00B57B;46
-;dw DATA8_00B58F                      ;849499;00B58F;47
-;dw DATA8_00B5A9                      ;84949B;00B5A9;48
-;dw DATA8_00B602                      ;84949D;00B602;49
-;dw DATA8_00B666                      ;84949F;00B666;4A
-;dw DATA8_00B6BC                      ;8494A1;00B6BC;4B
-;dw DATA8_00B72D                      ;8494A3;00B72D;4C
-;dw DATA8_00B79A                      ;8494A5;00B79A;4D
-;dw DATA8_00B84C                      ;8494A7;00B84C;4E
-;dw DATA8_00B889                      ;8494A9;00B889;4F
-;dw DATA8_00B8D9                      ;8494AB;00B8D9;50
-;dw DATA8_00B93C                      ;8494AD;00B93C;51
-;dw PTR24_00BA10                      ;8494AF;00BA10;52
-;dw PTR24_00BA51                      ;8494B1;00BA51;53
-;dw PTR24_00BA72                      ;8494B3;00BA72;54
-;dw PTR24_00BB31                      ;8494B5;00BB31;55
-;dw PTR24_00BB4B                      ;8494B7;00BB4B;56
-;dw DATA8_00BBDA                      ;8494B9;00BBDA;57
-;dw DATA8_00BC9C                      ;8494BB;00BC9C;58
-;dw DATA8_00BD44                      ;8494BD;00BD44;59
-;dw DATA8_00BE0D                      ;8494BF;00BE0D;5A
-;dw DATA8_00BED6                      ;8494C1;00BED6;5B
-;dw PTR16_00BF20                      ;8494C3;00BF20;5C
-;dw PTR16_00BF81                      ;8494C5;00BF81;5D
-;dw PTR16_00BFA0                      ;8494C7;00BFA0;5E
-;dw PTR16_00BFBF                      ;8494C9;00BFBF;5F
-;dw PTR16_00C000                      ;8494CB;00C000;60
+;dw Event_AudioRelated                ;00;89BB
+;dw Event_TimeRunning                 ;01;89E3
+;dw Event_TimeStopped                 ;02;8A0D
+;dw Event_SetHour                     ;03;8A39
+;dw Event_Empty                       ;04;8A58
+;dw Event_SetPlayerPosition           ;05;8A65
+;dw Event_SetTransitionDest           ;06;8A94
+;dw Event_SetPlayerDirection          ;07;8ABF
+;dw Event_UNKChangesGameState         ;08;8AE7
+;dw Event_UNKCCchanges                ;09;8B08
+;dw Event_ScreenFadein                ;0A;8B83
+;dw Event_UNKset7Aflag                ;0B;8BAC
+;dw Event_UNKCompareset7Aflag         ;0C;8BDC
+;dw Event_UNKCCchanges2               ;0D;8C22
+;dw Event_AudioRelated2               ;0E;8CA8
+;dw Event_ScreenFadeout               ;0F;8CB9
+
+;dw Event_UNKDisableCCstruct          ;10;8CE2
+;dw Event_UNKChangesGameState2        ;11;8CFD
+;dw Event_JumptoInstruction           ;12;8D13
+;dw Event_UNKSetsCC10                 ;13;8D24
+;dw Event_JumpifFlagSet               ;14;8D44
+;dw Event_JumpifEquals                ;15;8DA5
+;dw Event_JumpifBetween               ;16;8DFB
+;dw Event_GetRNG                      ;17;8E68
+;dw Event_JumpIfEqualsRNG             ;18;8E90
+;dw Event_UNKSetAnimation             ;19;8EC9
+;dw Event_UNKCCchanges3               ;1A;8F0A
+;dw Event_UNKCCchanges4               ;1B;8F9B
+;dw Event_StartTextBox                ;1C;8FEF
+;dw Event_StartTextBoxCopy            ;1D;9034
+;dw Event_UNKCCchanges5               ;1E;9079
+;dw Event_UNKCCchanges5               ;1F;9079
+
+;dw Event_UNKJumpif018F               ;20;919D
+;dw Event_UNKTextrelated              ;21;91D2
+;dw Event_UNKCCchanges6               ;22;923F
+;dw Event_SetFlag                     ;23;9306
+;dw Event_TimeofDayPalette            ;24;9356
+;dw Event_UNKCCchanges7               ;25;9375
+;dw Event_ResetFlag                   ;26;93C9
+;dw CODE_0093C9                       ;27;93C9
+;dw CODE_0093C9                       ;28;93C9
+;dw CODE_0093C9                       ;29;9513
+;dw CODE_009513                       ;2A;9553
+;dw CODE_009553                       ;2B;957D
+;dw CODE_00957D                       ;2C;95E8
+;dw CODE_0095E8                       ;2D;9633
+;dw LOOSE_OP_009633                   ;2E;9777
+;dw CODE_009777                       ;2F;9810
+
+;dw CODE_009810                       ;30;9857
+;dw CODE_009810                       ;31;9AD4
+;dw CODE_009810                       ;32;A90F
+;dw CODE_009810                       ;33;A94C
+;dw CODE_009810                       ;34;AA5D
+;dw CODE_009810                       ;35;AB27
+;dw CODE_009810                       ;36;AF06
+;dw CODE_009857                       ;37;B34B
+;dw LOOSE_OP_009AD4                   ;38;B365
+;dw CODE_00A90F                       ;39;B389
+;dw CODE_00A94C                       ;3A;B427
+;dw LOOSE_OP_00AA5D                   ;3B;B4DC
+;dw PTR16_00AB27                      ;3C;B503
+;dw DATA8_00AF06                      ;3D;B52D
+;dw DATA8_00B34B                      ;3E;B556
+;dw DATA8_00B365                      ;3F;B57B
+
+;dw DATA8_00B389                      ;40;B58F
+;dw DATA8_00B427                      ;41;B5A9
+;dw DATA8_00B4DC                      ;42;B602
+;dw DATA8_00B503                      ;43;B666
+;dw DATA8_00B52D                      ;44;B6BC
+;dw DATA8_00B556                      ;45;B72D
+;dw DATA8_00B57B                      ;46;B79A
+;dw DATA8_00B58F                      ;47;B84C
+;dw DATA8_00B5A9                      ;48;B889
+;dw DATA8_00B602                      ;49;B8D9
+;dw DATA8_00B666                      ;4A;B93C
+;dw DATA8_00B6BC                      ;4B;BA10
+;dw DATA8_00B72D                      ;4C;BA51
+;dw DATA8_00B79A                      ;4D;BA72
+;dw DATA8_00B84C                      ;4E;BB31
+;dw DATA8_00B889                      ;4F;BB4B
+
+;dw DATA8_00B8D9                      ;50;BBDA
+;dw DATA8_00B93C                      ;51;BC9C
+;dw PTR24_00BA10                      ;52;BD44
+;dw PTR24_00BA51                      ;53;BE0D
+;dw PTR24_00BA72                      ;54;BED6
+;dw PTR24_00BB31                      ;55;BF20
+;dw PTR24_00BB4B                      ;56;BF81
+;dw DATA8_00BBDA                      ;57;BFA0
+;dw DATA8_00BC9C                      ;58;BFBF
+;dw DATA8_00BD44                      ;59;C000
 
 
 Events_Bank_Table: ;8494CD
@@ -2929,7 +2936,7 @@ Events_Inverse_Flags_Tables: ;8494F3
         dw $FEFF,$FDFF,$FBFF,$F7FF,$EFFF,$DFFF,$BFFF,$7FFF
 
 ;;;;;;;;
-Event_MapScrolling:
+Event_MapScrolling: ;809513
         %Set16bit(!MX)
         %Set16bit(!MX)
         LDA.B $C9
@@ -2964,7 +2971,7 @@ Event_MapScrolling:
         RTS
 
 ;;;;;;;;
-Event_UNKCFD1:
+Event_UNKCFD1: ;809553
         %Set16bit(!MX)
         %Set16bit(!MX)
         LDA.B $C9
@@ -3043,7 +3050,7 @@ Event_UNKCCchanges8: ;84957D
         RTS
 
 ;;;;;;;;
-Event_AudioRelated3:
+Event_AudioRelated3: ;8095E8
         %Set16bit(!MX)
         %Set16bit(!MX)
         LDA.B $C9
@@ -3085,7 +3092,7 @@ Event_AudioRelated3:
         RTS
 
 ;;;;;;;;
-Event_UNKCCchanges9:
+Event_UNKCCchanges9: ;809633
         %Set16bit(!MX)
         %Set16bit(!MX)
         LDA.B $C9
@@ -3846,7 +3853,7 @@ Event_UNKCowRelated: ;849AD4
         BEQ .CODE_849BE9
         JMP.W .CODE_849DBE
 
-    .CODE_849BE9: JMP.W .CODE_84A0B9                    ;849BE9;84A0B9;
+    .CODE_849BE9: JMP.W .CODE_84A0B9
 
     .CODE_849BEC:
         %Set8bit(!M)
@@ -7450,7 +7457,7 @@ Event_ChangeMoney: ;84B602
     .CODE_84B665: RTS                                  ;84B665;      ;
 
 ;;;;;;;;
-Event_Event_JumpifEqualsValue: ;84B666
+Event_JumpifEqualsValue: ;84B666
         %Set16bit(!MX)                             ;      ;
         %Set16bit(!MX)                             ;84B668;      ;
         LDA.B $C9                            ;84B66A;0000C9;
@@ -7499,67 +7506,73 @@ Event_Event_JumpifEqualsValue: ;84B666
         STA.B $C9                            ;84B6B9;0000C9;
 
         RTS                                  ;84B6BB;      ;
-                                                            ;      ;      ;
-                       %Set16bit(!MX)                             ;84B6BC;      ;
-                       %Set16bit(!MX)                             ;84B6BE;      ;
-                       LDA.B $C9                            ;84B6C0;0000C9;
-                       CLC                                  ;84B6C2;      ;
-                       ADC.W #$0001                         ;84B6C3;      ;
-                       STA.B $C9                            ;84B6C6;0000C9;
-                       %Set16bit(!M)                             ;84B6C8;      ;
-                       LDA.B [$C9]                          ;84B6CA;0000C9;
-                       STA.B $72                            ;84B6CC;000072;
-                       %Set16bit(!MX)                             ;84B6CE;      ;
-                       LDA.B $C9                            ;84B6D0;0000C9;
-                       CLC                                  ;84B6D2;      ;
-                       ADC.W #$0002                         ;84B6D3;      ;
-                       STA.B $C9                            ;84B6D6;0000C9;
-                       %Set8bit(!M)                             ;84B6D8;      ;
-                       LDA.B [$C9]                          ;84B6DA;0000C9;
-                       STA.B $74                            ;84B6DC;000074;
-                       %Set16bit(!MX)                             ;84B6DE;      ;
-                       LDA.B $C9                            ;84B6E0;0000C9;
-                       CLC                                  ;84B6E2;      ;
-                       ADC.W #$0001                         ;84B6E3;      ;
-                       STA.B $C9                            ;84B6E6;0000C9;
-                       %Set16bit(!M)                             ;84B6E8;      ;
-                       LDA.B [$C9]                          ;84B6EA;0000C9;
-                       STA.B $7E                            ;84B6EC;00007E;
-                       %Set16bit(!MX)                             ;84B6EE;      ;
-                       LDA.B $C9                            ;84B6F0;0000C9;
-                       CLC                                  ;84B6F2;      ;
-                       ADC.W #$0002                         ;84B6F3;      ;
-                       STA.B $C9                            ;84B6F6;0000C9;
-                       %Set8bit(!M)                             ;84B6F8;      ;
-                       LDA.B [$C9]                          ;84B6FA;0000C9;
-                       STA.B $80                            ;84B6FC;000080;
-                       %Set16bit(!MX)                             ;84B6FE;      ;
-                       LDA.B $C9                            ;84B700;0000C9;
-                       CLC                                  ;84B702;      ;
-                       ADC.W #$0001                         ;84B703;      ;
-                       STA.B $C9                            ;84B706;0000C9;
-                       %Set16bit(!M)                             ;84B708;      ;
-                       LDA.B [$72]                          ;84B70A;000072;
-                       CMP.B $7E                            ;84B70C;00007E;
-                       BNE CODE_84B722                      ;84B70E;84B722;
-                       %Set8bit(!M)                             ;84B710;      ;
-                       LDY.W #$0002                         ;84B712;      ;
-                       LDA.B [$72],Y                        ;84B715;000072;
-                       CMP.B $80                            ;84B717;000080;
-                       BNE CODE_84B722                      ;84B719;84B722;
-                       %Set16bit(!M)                             ;84B71B;      ;
-                       LDA.B [$C9]                          ;84B71D;0000C9;
-                       STA.B $C9                            ;84B71F;0000C9;
-                       RTS                                  ;84B721;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_84B722: %Set16bit(!MX)                             ;84B722;      ;
-                       LDA.B $C9                            ;84B724;0000C9;
-                       CLC                                  ;84B726;      ;
-                       ADC.W #$0002                         ;84B727;      ;
-                       STA.B $C9                            ;84B72A;0000C9;
-                       RTS                                  ;84B72C;      ;
-                                                            ;      ;      ;
+
+;;;;;;;;
+
+        %Set16bit(!MX)
+        %Set16bit(!MX)
+        LDA.B $C9
+        CLC
+        ADC.W #$0001
+        STA.B $C9
+        %Set16bit(!M)
+        LDA.B [$C9]
+        STA.B $72
+        %Set16bit(!MX)
+        LDA.B $C9
+        CLC
+        ADC.W #$0002
+        STA.B $C9
+        %Set8bit(!M)
+        LDA.B [$C9]
+        STA.B $74
+        %Set16bit(!MX)
+        LDA.B $C9
+        CLC
+        ADC.W #$0001
+        STA.B $C9
+        %Set16bit(!M)
+        LDA.B [$C9]
+        STA.B $7E
+        %Set16bit(!MX)
+        LDA.B $C9
+        CLC
+        ADC.W #$0002
+        STA.B $C9
+        %Set8bit(!M)
+        LDA.B [$C9]
+        STA.B $80
+        %Set16bit(!MX)
+        LDA.B $C9
+        CLC
+        ADC.W #$0001
+        STA.B $C9
+        %Set16bit(!M)
+        LDA.B [$72]
+        CMP.B $7E
+        BNE .CODE_84B722
+        %Set8bit(!M)
+        LDY.W #$0002
+        LDA.B [$72],Y
+        CMP.B $80
+        BNE .CODE_84B722
+        %Set16bit(!M)
+        LDA.B [$C9]
+        STA.B $C9
+
+        RTS
+
+    .CODE_84B722:
+        %Set16bit(!MX)
+        LDA.B $C9
+        CLC
+        ADC.W #$0002
+        STA.B $C9
+
+        RTS
+
+;;;;;;;;
+
                        %Set16bit(!MX)                             ;84B72D;      ;
                        %Set16bit(!MX)                             ;84B72F;      ;
                        LDA.B $C9                            ;84B731;0000C9;
@@ -9052,103 +9065,107 @@ NameMenuKeyRight: ;84C267
 
         RTL
 
+;;;;;;;;
+MenuInputs: ;84C288
+        %Set8bit(!M)
+        LDA.B $95
+        CMP.B #$01
+        BNE .CODE_84C293
+        JMP.W CODE_84C2B4
 
-          MenuInputs: %Set8bit(!M)                             ;84C288;      ;
-                       LDA.B $95                            ;84C28A;000095;
-                       CMP.B #$01                           ;84C28C;      ;
-                       BNE CODE_84C293                      ;84C28E;84C293;
-                       JMP.W CODE_84C2B4                    ;84C290;84C2B4;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_84C293: CMP.B #$02                           ;84C293;      ;
-                       BNE CODE_84C29A                      ;84C295;84C29A;
-                       JMP.W CODE_84C428                    ;84C297;84C428;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_84C29A: CMP.B #$03                           ;84C29A;      ;
-                       BNE CODE_84C2A1                      ;84C29C;84C2A1;
-                       JMP.W CODE_84C428                    ;84C29E;84C428;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_84C2A1: CMP.B #$05                           ;84C2A1;      ;
-                       BNE CODE_84C2A8                      ;84C2A3;84C2A8;
-                       JMP.W CODE_84C458                    ;84C2A5;84C458;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_84C2A8: CMP.B #$07                           ;84C2A8;      ;
-                       BEQ CODE_84C2FE                      ;84C2AA;84C2FE;
-                       CMP.B #$08                           ;84C2AC;      ;
-                       BNE CODE_84C2B3                      ;84C2AE;84C2B3;
-                       JMP.W CODE_84C380                    ;84C2B0;84C380;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_84C2B3: RTL                                  ;84C2B3;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_84C2B4: %Set16bit(!MX)                             ;84C2B4;      ;
-                       LDA.B !player_action                            ;84C2B6;0000D4;
-                       CMP.W #$0003                         ;84C2B8;      ;
-                       BEQ CODE_84C2C1                      ;84C2BB;84C2C1;
-                       JSL.L CODE_84C7D6                    ;84C2BD;84C7D6;
-                                                            ;      ;      ;
-          CODE_84C2C1: %Set16bit(!MX)                             ;84C2C1;      ;
-                       LDA.L $7F1F5A                        ;84C2C3;7F1F5A;
-                       AND.W #$8000                         ;84C2C7;      ;
-                       BEQ CODE_84C2D7                      ;84C2CA;84C2D7;
-                       LDA.W !Joy1_New_Input                          ;84C2CC;000128;
-                       BIT.W #$1000                         ;84C2CF;      ;
-                       BEQ CODE_84C2D7                      ;84C2D2;84C2D7;
-                       JMP.W CODE_84C2D8                    ;84C2D4;84C2D8;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_84C2D7: RTL                                  ;84C2D7;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_84C2D8: %Set8bit(!M)                             ;84C2D8;      ;
-                       LDA.B #$09                           ;84C2DA;      ;
-                       STA.B $95                            ;84C2DC;000095;
-                       %Set8bit(!M)                             ;84C2DE;      ;
-                       %Set16bit(!X)                             ;84C2E0;      ;
-                       LDA.B #$03                           ;84C2E2;      ;
-                       STA.W $0114                          ;84C2E4;000114;
-                       LDA.B #$06                           ;84C2E7;      ;
-                       STA.W $0115                          ;84C2E9;000115;
-                       JSL.L UNK_Audio19                    ;84C2EC;838332;
-                       %Set16bit(!M)                             ;84C2F0;      ;
-                       LDA.L $7F1F5C                        ;84C2F2;7F1F5C;
-                       ORA.W #$0004                         ;84C2F6;      ;
-                       STA.L $7F1F5C                        ;84C2F9;7F1F5C;
-                       RTL                                  ;84C2FD;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_84C2FE: %Set16bit(!MX)                             ;84C2FE;      ;
-                       LDA.W !Joy1_New_Input                          ;84C300;000128;
-                       BIT.W #$0400                         ;84C303;      ;
-                       BEQ CODE_84C30B                      ;84C306;84C30B;
-                       JMP.W CODE_84C32D                    ;84C308;84C32D;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_84C30B: LDA.W !Joy1_New_Input                          ;84C30B;000128;
-                       BIT.W #$0800                         ;84C30E;      ;
-                       BEQ CODE_84C316                      ;84C311;84C316;
-                       JMP.W CODE_84C32D                    ;84C313;84C32D;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_84C316: LDA.W !Joy1_New_Input                          ;84C316;000128;
-                       BIT.W #$8000                         ;84C319;      ;
-                       BEQ CODE_84C321                      ;84C31C;84C321;
-                       JMP.W CODE_84C34E                    ;84C31E;84C34E;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_84C321: LDA.W !Joy1_New_Input                          ;84C321;000128;
-                       BIT.W #$0080                         ;84C324;      ;
-                       BEQ CODE_84C32C                      ;84C327;84C32C;
-                       JMP.W CODE_84C367                    ;84C329;84C367;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_84C32C: RTL                                  ;84C32C;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
+    .CODE_84C293:
+        CMP.B #$02
+        BNE .CODE_84C29A
+        JMP.W CODE_84C428
+
+    .CODE_84C29A:
+        CMP.B #$03
+        BNE .CODE_84C2A1
+        JMP.W CODE_84C428
+
+    .CODE_84C2A1:
+        CMP.B #$05
+        BNE .CODE_84C2A8
+        JMP.W CODE_84C458
+
+    .CODE_84C2A8:
+        CMP.B #$07
+        BEQ CODE_84C2FE
+        CMP.B #$08
+        BNE .CODE_84C2B3
+        JMP.W CODE_84C380
+
+    .CODE_84C2B3: RTL
+
+;;;;;;;;
+CODE_84C2B4:
+        %Set16bit(!MX)
+        LDA.B !player_action
+        CMP.W #$0003
+        BEQ .CODE_84C2C1
+        JSL.L CODE_84C7D6
+
+    .CODE_84C2C1:
+        %Set16bit(!MX)
+        LDA.L $7F1F5A
+        AND.W #$8000
+        BEQ .CODE_84C2D7
+        LDA.W !Joy1_New_Input
+        BIT.W #$1000
+        BEQ .CODE_84C2D7
+        JMP.W CODE_84C2D8
+
+    .CODE_84C2D7: RTL
+
+;;;;;;;;
+CODE_84C2D8:
+        %Set8bit(!M)
+        LDA.B #$09
+        STA.B $95
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDA.B #$03
+        STA.W $0114
+        LDA.B #$06
+        STA.W $0115
+        JSL.L UNK_Audio19
+        %Set16bit(!M)
+        LDA.L $7F1F5C
+        ORA.W #$0004
+        STA.L $7F1F5C
+
+        RTL
+
+;;;;;;;;
+CODE_84C2FE:
+        %Set16bit(!MX)
+        LDA.W !Joy1_New_Input
+        BIT.W #$0400
+        BEQ .CODE_84C30B
+        JMP.W CODE_84C32D
+
+    .CODE_84C30B:
+        LDA.W !Joy1_New_Input
+        BIT.W #$0800
+        BEQ .CODE_84C316
+        JMP.W CODE_84C32D
+
+    .CODE_84C316:
+        LDA.W !Joy1_New_Input
+        BIT.W #$8000
+        BEQ .CODE_84C321
+        JMP.W CODE_84C34E
+
+    .CODE_84C321:
+        LDA.W !Joy1_New_Input
+        BIT.W #$0080
+        BEQ .CODE_84C32C
+        JMP.W CODE_84C367
+
+    .CODE_84C32C: RTL
+
+
+;;;;;;;;
           CODE_84C32D: %Set8bit(!M)                             ;84C32D;      ;
                        LDA.W $098E                          ;84C32F;00098E;
                        EOR.B #$01                           ;84C332;      ;

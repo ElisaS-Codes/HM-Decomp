@@ -426,6 +426,7 @@ SetKid2Name: ;8083AE
 ;;;;;;;; These values are used during the VRAM and OBJRAM Initializers.
 Value_0000: dw $0000 ;808424
 Value_00F0: dw $00F0 ;808426
+
 ;;;;;;;; Reset IRQ location, beguining of the program, basically
 ;;;;;;;; Sets all hardware registers and blanks some WRAM locations
 RESET:   ;808428
@@ -1670,100 +1671,100 @@ UNK_BigLoop: ;808E69
         JMP.W .CODE_808F62
 
     .bigloop:
-        PLY
-        TYX
-        %Set8bit(!M)
-        LDA.W $014A,X
-        BEQ .CODE_808ED0
-        JMP.W .CODE_808F52
+            PLY
+            TYX
+            %Set8bit(!M)
+            LDA.W $014A,X
+            BEQ .CODE_808ED0
+            JMP.W .CODE_808F52
 
-    .CODE_808ED0:
-        PHY
-        TYX
-        LDA.B #$00
-        XBA
-        LDA.W $016A,X
-        %Set16bit(!M)
-        PHA
-        TYX
-        %Set8bit(!M)
-        LDA.B #$00
-        XBA
-        LDA.W $015A,X
-        %Set16bit(!M)
-        PHA
-        LDA.B [$72]
-        PLX
-        PLY
-        JSL.L SUB_80916F
-        %Set16bit(!MX)
-        PLY
-        PHY
-        TYX
-        LDY.W #$0002
-        %Set8bit(!M)
-        LDA.B [$72],Y
-        STA.W $014A,X
-        %Set16bit(!M)
-        PLY
-        TYA
-        STA.B $7E
-        ASL A
-        CLC
-        ADC.B $7E
-        TAX
-        LDA.B $42,X
-        CLC
-        ADC.W #$0003
-        STA.B $42,X
-        %Set8bit(!M)
-        LDA.B $44,X
-        ADC.B #$00
-        STA.B $44,X
+        .CODE_808ED0:
+            PHY
+            TYX
+            LDA.B #$00
+            XBA
+            LDA.W $016A,X
+            %Set16bit(!M)
+            PHA
+            TYX
+            %Set8bit(!M)
+            LDA.B #$00
+            XBA
+            LDA.W $015A,X
+            %Set16bit(!M)
+            PHA
+            LDA.B [$72]
+            PLX
+            PLY
+            JSL.L SUB_80916F
+            %Set16bit(!MX)
+            PLY
+            PHY
+            TYX
+            LDY.W #$0002
+            %Set8bit(!M)
+            LDA.B [$72],Y
+            STA.W $014A,X
+            %Set16bit(!M)
+            PLY
+            TYA
+            STA.B $7E
+            ASL A
+            CLC
+            ADC.B $7E
+            TAX
+            LDA.B $42,X
+            CLC
+            ADC.W #$0003
+            STA.B $42,X
+            %Set8bit(!M)
+            LDA.B $44,X
+            ADC.B #$00
+            STA.B $44,X
 
-    .smallloop:
-        %Set16bit(!M)
-        TYA
-        STA.B $7E
-        ASL A
-        CLC
-        ADC.B $7E
-        TAX
-        INY
-        CPY.W #$0010
-        BEQ .CODE_808F2C
-        JMP.W $8E81
+        .smallloop:
+                %Set16bit(!M)
+                TYA
+                STA.B $7E
+                ASL A
+                CLC
+                ADC.B $7E
+                TAX
+                INY
+                CPY.W #$0010
+                BEQ .CODE_808F2C
+                JMP.W $8E81
 
-    .CODE_808F2C:
-        %Set8bit(!M)
-        LDA.B $93
-        BEQ .return
-        LDA.B #$05
-        STA.B !ProgDMA_Channel_Index
-        LDA.B #$22
-        STA.B !ProgDMA_Destination_Memory
-        %Set16bit(!M)
-        LDY.W #$0100
-        LDX.W #$0000
-        LDA.W #$0900
-        STA.B $72
-        %Set8bit(!M)
-        LDA.B #$7F
-        STA.B $74
-        JSL.L AddProgrammedDMA
+            .CODE_808F2C:
+                %Set8bit(!M)
+                LDA.B $93
+                BEQ .return
+                LDA.B #$05
+                STA.B !ProgDMA_Channel_Index
+                LDA.B #$22
+                STA.B !ProgDMA_Destination_Memory
+                %Set16bit(!M)
+                LDY.W #$0100
+                LDX.W #$0000
+                LDA.W #$0900
+                STA.B $72
+                %Set8bit(!M)
+                LDA.B #$7F
+                STA.B $74
+                JSL.L AddProgrammedDMA
 
-    .return: RTL
+            .return: RTL
 
-    .CODE_808F52:
-        DEC.W $014A,X
-        BRA .smallloop
+            .CODE_808F52:
+                DEC.W $014A,X
+                BRA .smallloop
 
-    .CODE_808F57:
-        %Set16bit(!M)
-        STZ.B $42,X
-        %Set8bit(!M)
-        STZ.B $44,X
-        JMP.W .bigloop
+        .CODE_808F57:
+            %Set16bit(!M)
+            STZ.B $42,X
+            %Set8bit(!M)
+            STZ.B $44,X
+            JMP.W .bigloop
 
     .CODE_808F62:
         %Set16bit(!M)
