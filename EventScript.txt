@@ -72,21 +72,21 @@ Events are its own language, its pretty robust, I dont know if the game uses mos
 41:Event_UNKCCchanges14             +5byte
 42:Event_ChangeMoney                +6byte      seems to be a bug, the 3 bytes of money are read twice
 43:Event_JumpifEqualsValue          +7byte      fisrt 3 are the memory address, the next 2 are the value, and the other 2 are the jump destination
-44:Event_
-45:Event_
-46:Event_
-47:Event_
-48:Event_
-49:Event_
-4A:Event_
-4B:Event_
-4C:Event_
-4D:Event_
-4E:Event_
-4F:Event_
+44:Event_JumpifEqualsValueLong      +8byte      fisrt 3 are the memory address, the next 3 are the value, and the other 2 are the jump destination
+45:Event_JumpifBetweenValue         +9byte      fisrt 3 are the memory address, the next 2 is lower value, the next 2 are the upper value, and the last 2 are the jump destination
+46:Event_JumpifBetweenValueLong     +11byte     fisrt 3 are the memory address, the next 3 is lower value, the next 3 are the upper value, and the last 2 are the jump destination
+47:Event_SetValueSort               +4byte      first 3 are the memory address, the last 1 is the new value
+48:Event_SetValueLong               +6byte      first 3 are the memory address, the last 3 are the new value
+49:Event_UNKCCchanges15             +3byte
+4A:Event_UNK3
+4B:Event_EditTileonMap              +5byte      first one is the new tile, next 2 are X, last 2 are Y
+4C:Event_UNKCCchanges16
+4D:Event_UNKCCchanges17             +2byte      jump destination
+4E:Event_UNKReset5C
+4F:Event_UNKSet60
 
-50:Event_
-51:Event_
+50:Event_UNKTools                   -1byte      nevers moves the index
+51:Event_UNKChickenRelated2
 52:Event_
 53:Event_
 54:Event_
