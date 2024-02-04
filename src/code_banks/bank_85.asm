@@ -1,104 +1,107 @@
 ORG $858000
 
+;;;;;;;;
 CODE_858000:
-        %Set16bit(!M)                             ;858000;      ;
-        LDA.B $A1                            ;858002;0000A1;
-        CMP.W #$0262                         ;858004;      ;
-        BCS CODE_858013                      ;858007;858013;
-        %Set8bit(!M)                             ;858009;      ;
-        LDA.B #$86                           ;85800B;      ;
-        STA.B $77                            ;85800D;000077;
-        STA.B $7A                            ;85800F;00007A;
-        BRA CODE_85801B                      ;858011;85801B;
+        %Set16bit(!M)
+        LDA.B $A1
+        CMP.W #$0262
+        BCS .CODE_858013
+        %Set8bit(!M)
+        LDA.B #$86
+        STA.B $77
+        STA.B $7A
+        BRA .CODE_85801B
 
-    CODE_858013:
-        %Set8bit(!M)                             ;858013;      ;
-        LDA.B #$87                           ;858015;      ;
-        STA.B $77                            ;858017;000077;
-        STA.B $7A                            ;858019;00007A;
+    .CODE_858013:
+        %Set8bit(!M)
+        LDA.B #$87
+        STA.B $77
+        STA.B $7A
 
-    CODE_85801B:
-        %Set16bit(!MX)                             ;85801B;      ;
-        %Set16bit(!MX)                             ;85801D;      ;
-        LDX.W #$0000                         ;85801F;      ;
-        LDY.W #$0000                         ;858022;      ;
-        LDA.B $DC                            ;858025;0000DC;
-        CMP.W #$0028                         ;858027;      ;
-        BEQ CODE_85802F                      ;85802A;85802F;
-        INC A                                ;85802C;      ;
-        STA.B $DC                            ;85802D;0000DC;
+    .CODE_85801B:
+        %Set16bit(!MX)
+        %Set16bit(!MX)
+        LDX.W #$0000
+        LDY.W #$0000
+        LDA.B $DC
+        CMP.W #$0028
+        BEQ .CODE_85802F
+        INC A
+        STA.B $DC
 
-    CODE_85802F:
-        LDA.W $019C,X                        ;85802F;00019C;
-        BEQ CODE_858046                      ;858032;858046;
-        TXA                                  ;858034;      ;
-        CLC                                  ;858035;      ;
-        ADC.W #$0024                         ;858036;      ;
-        TAX                                  ;858039;      ;
-        INY                                  ;85803A;      ;
-        CPY.B $DC                            ;85803B;0000DC;
-        BNE CODE_85802F                      ;85803D;85802F;
-        LDA.W #$FFFF                         ;85803F;      ;
-        STA.B $A7                            ;858042;0000A7;
-        BRA return85                      ;858044;8580B8;
+    .CODE_85802F:
+            LDA.W $019C,X
+            BEQ .CODE_858046
+            TXA
+            CLC
+            ADC.W #$0024
+            TAX
+            INY
+            CPY.B $DC
+            BNE .CODE_85802F
 
-    CODE_858046:
-        STY.B $A5                            ;858046;0000A5;
-        LDA.W #$7777                         ;858048;      ;
-        STA.W $019C,X                        ;85804B;00019C;
-        LDA.B $A1                            ;85804E;0000A1;
-        STA.W $019E,X                        ;858050;00019E;
-        LDA.B $9F                            ;858053;00009F;
-        STA.W $01A0,X                        ;858055;0001A0;
-        LDA.B $A3                            ;858058;0000A3;
-        STA.W $01A2,X                        ;85805A;0001A2;
-        LDA.B $9B                            ;85805D;00009B;
-        STA.W $01A4,X                        ;85805F;0001A4;
-        LDA.B $9D                            ;858062;00009D;
-        STA.W $01A6,X                        ;858064;0001A6;
-        STX.B $A9                            ;858067;0000A9;
-        LDA.B $A1                            ;858069;0000A1;
-        CMP.W #$0262                         ;85806B;      ;
-        BCS CODE_85807D                      ;85806E;85807D;
-        LDA.W $019E,X                        ;858070;00019E;
-        ASL A                                ;858073;      ;
-        TAX                                  ;858074;      ;
-        LDA.L DATA8_868080,X                 ;858075;868080;
-        STA.B $75                            ;858079;000075;
-        BRA CODE_85808C                      ;85807B;85808C;
+        LDA.W #$FFFF
+        STA.B $A7
+        BRA return85
 
-    CODE_85807D:
-        LDA.W $019E,X                        ;85807D;00019E;
-        SEC                                  ;858080;      ;
-        SBC.W #$0262                         ;858081;      ;
-        ASL A                                ;858084;      ;
-        TAX                                  ;858085;      ;
-        LDA.L UNK_Table15,X                  ;858086;878080;
-        STA.B $75                            ;85808A;000075;
+    .CODE_858046:
+        STY.B $A5
+        LDA.W #$7777
+        STA.W $019C,X
+        LDA.B $A1
+        STA.W $019E,X
+        LDA.B $9F
+        STA.W $01A0,X
+        LDA.B $A3
+        STA.W $01A2,X
+        LDA.B $9B
+        STA.W $01A4,X
+        LDA.B $9D
+        STA.W $01A6,X
+        STX.B $A9
+        LDA.B $A1
+        CMP.W #$0262
+        BCS .CODE_85807D
+        LDA.W $019E,X
+        ASL A
+        TAX
+        LDA.L DATA8_868080,X
+        STA.B $75
+        BRA .CODE_85808C
 
-    CODE_85808C:
-        LDX.B $A9                            ;85808C;0000A9;
-        LDA.B $75                            ;85808E;000075;
-        STA.W $01A8,X                        ;858090;0001A8;
-        CLC                                  ;858093;      ;
-        ADC.W #$0003                         ;858094;      ;
-        STA.W $01AA,X                        ;858097;0001AA;
-        LDY.W #$0000                         ;85809A;      ;
-        LDA.B [$75],Y                        ;85809D;000075;
-        STA.W $01AC,X                        ;85809F;0001AC;
-        %Set8bit(!M)                             ;8580A2;      ;
-        LDY.W #$0002                         ;8580A4;      ;
-        LDA.B [$75],Y                        ;8580A7;000075;
-        STA.W $01AE,X                        ;8580A9;0001AE;
-        %Set16bit(!M)                             ;8580AC;      ;
-        JSR.W CODE_858AE5                    ;8580AE;858AE5;
-        %Set16bit(!M)                             ;8580B1;      ;
-        LDA.W #$0000                         ;8580B3;      ;
-        STA.B $A7                            ;8580B6;0000A7;
+    .CODE_85807D:
+        LDA.W $019E,X
+        SEC
+        SBC.W #$0262
+        ASL A
+        TAX
+        LDA.L UNK_Table15,X
+        STA.B $75
 
-    return85: RTL
-                                                            ;      ;      ;
-                                                            ;      ;      ;
+    .CODE_85808C:
+        LDX.B $A9
+        LDA.B $75
+        STA.W $01A8,X
+        CLC
+        ADC.W #$0003
+        STA.W $01AA,X
+        LDY.W #$0000
+        LDA.B [$75],Y
+        STA.W $01AC,X
+        %Set8bit(!M)
+        LDY.W #$0002
+        LDA.B [$75],Y
+        STA.W $01AE,X
+        %Set16bit(!M)
+        JSR.W CODE_858AE5
+        %Set16bit(!M)
+        LDA.W #$0000
+        STA.B $A7
+
+;;;;;;;; Return of many functions
+return85: RTL
+
+;;;;;;;;
           CODE_8580B9: %Set16bit(!M)                             ;8580B9;      ;
                        LDA.B $A1                            ;8580BB;0000A1;
                        CMP.W #$0262                         ;8580BD;      ;
@@ -1358,8 +1361,9 @@ CODE_858C30:
         LDA.W #$0000
 
     .loop:
-        CMP.B $BB
-        BEQ .loop
+            CMP.B $BB
+            BEQ .loop
+
         STA.B $BD
         LDA.B $B3
         STA.L $7EA220,X

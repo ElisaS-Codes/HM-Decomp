@@ -7482,46 +7482,48 @@ SUB_81BFB7: ;81BFB7
                        LDA.W #$0000                         ;81CF98;      ;
                        STA.B !player_direction                            ;81CF9B;0000DA;
                        JMP.W CODE_81CB9E                    ;81CF9D;81CB9E;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_81CFA0: %Set16bit(!MX)                             ;81CFA0;      ;
-                       LDA.W $0901                          ;81CFA2;000901;
-                       STA.W $0903                          ;81CFA5;000903;
-                       STA.B $7E                            ;81CFA8;00007E;
-                       ASL A                                ;81CFAA;      ;
-                       CLC                                  ;81CFAB;      ;
-                       ADC.B $7E                            ;81CFAC;00007E;
-                       TAX                                  ;81CFAE;      ;
-                       LDA.L DATA8_81D210,X                 ;81CFAF;81D210;
-                       STA.B $A1                            ;81CFB3;0000A1;
-                       INX                                  ;81CFB5;      ;
-                       INX                                  ;81CFB6;      ;
-                       %Set8bit(!M)                             ;81CFB7;      ;
-                       LDA.B #$00                           ;81CFB9;      ;
-                       XBA                                  ;81CFBB;      ;
-                       LDA.L DATA8_81D210,X                 ;81CFBC;81D210;
-                       %Set16bit(!M)                             ;81CFC0;      ;
-                       ASL A                                ;81CFC2;      ;
-                       ASL A                                ;81CFC3;      ;
-                       ASL A                                ;81CFC4;      ;
-                       ASL A                                ;81CFC5;      ;
-                       ASL A                                ;81CFC6;      ;
-                       ASL A                                ;81CFC7;      ;
-                       STA.W $090F                          ;81CFC8;00090F;
-                       STA.B $9F                            ;81CFCB;00009F;
-                       LDA.W #$0000                         ;81CFCD;      ;
-                       STA.B $A3                            ;81CFD0;0000A3;
-                       LDA.B !player_pos_X                           ;81CFD2;0000D6;
-                       STA.B $9B                            ;81CFD4;00009B;
-                       LDA.B !player_pos_Y                            ;81CFD6;0000D8;
-                       STA.B $9D                            ;81CFD8;00009D;
-                       JSL.L CODE_858000                    ;81CFDA;858000;
-                       %Set16bit(!M)                             ;81CFDE;      ;
-                       LDA.B $A5                            ;81CFE0;0000A5;
-                       STA.W $0905                          ;81CFE2;000905;
-                       RTL                                  ;81CFE5;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
+
+;;;;;;;;
+CODE_81CFA0: ;81CFA0
+        %Set16bit(!MX)
+        LDA.W $0901                          ;Related to animation
+        STA.W $0903
+        STA.B $7E
+        ASL A
+        CLC
+        ADC.B $7E
+        TAX
+        LDA.L DATA8_81D210,X
+        STA.B $A1
+        INX
+        INX
+        %Set8bit(!M)
+        LDA.B #$00
+        XBA
+        LDA.L DATA8_81D210,X
+        %Set16bit(!M)
+        ASL A
+        ASL A
+        ASL A
+        ASL A
+        ASL A
+        ASL A                                ;*64???
+        STA.W $090F
+        STA.B $9F
+        LDA.W #$0000
+        STA.B $A3
+        LDA.B !player_pos_X
+        STA.B $9B
+        LDA.B !player_pos_Y
+        STA.B $9D
+        JSL.L CODE_858000
+        %Set16bit(!M)
+        LDA.B $A5
+        STA.W $0905
+
+        RTL
+
+;;;;;;;;
           CODE_81CFE6: %Set16bit(!MX)                             ;81CFE6;      ;
                        LDA.W $0905                          ;81CFE8;000905;
                        STA.B $A5                            ;81CFEB;0000A5;

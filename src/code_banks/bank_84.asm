@@ -204,7 +204,7 @@ SUB_8480F8: ;8480F8
         RTL
 
 ;;;;;;;;
-SUB_84816F: ;84816F
+IterateCCStructures: ;84816F
         %Set8bit(!M)
         %Set16bit(!X)
         LDA.W !inputstate
@@ -2113,7 +2113,8 @@ Event_UNKSetAnimation: ;848EC9
 
         RTS
 
-;;;;;;;;
+;;;;;;;; first 2 are stored in CC$1A, next 2 in CC$1C, next 2 in CC$33, final 1 in CC$02.
+;;;;;;;; increases CC$10 by one, calls function that sets a pointer, sets CC$10 by one
 Event_UNKCCchanges3: ;848F0A
         %Set16bit(!MX)
         %Set16bit(!MX)
@@ -8755,7 +8756,7 @@ Event_JumpifEqualsValue: ;84B666
                        dw $0100,$0200,$0400,$0800,$1000,$2000,$4000,$8000;84C024;      ;
 
 ;;;;;;
-InputTypeSelector:
+InputTypeSelector: ;84C034
         %Set8bit(!M)
         %Set16bit(!X)
         LDA.W !inputstate

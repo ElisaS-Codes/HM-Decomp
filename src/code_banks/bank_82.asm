@@ -2008,7 +2008,7 @@ LoadMap: ;82A5FB
         %Set16bit(!M)
         TAX
         PHX
-        LDA.L MapPointerTable,X
+        LDA.L MapPointerTable,X              ;logical map?
         STA.B $72
         %Set8bit(!M)
         INX
@@ -2019,7 +2019,7 @@ LoadMap: ;82A5FB
     .set0D:
         %Set16bit(!MX)
         PLX
-        LDA.L UNK_PointersTable,X
+        LDA.L UNK_PointersTable,X            ;
         STA.B $0D
         INX
         INX
@@ -4480,7 +4480,7 @@ SUB_82D1C0: ;82D1C0
         LDX.W #$0047                         ;82D320;      ;
         LDY.W #$0000                         ;82D323;      ;
         JSL.L UNK_LoadCCDataLong                            ;82D326;848097;
-        JSL.L SUB_84816F                    ;82D32A;84816F;
+        JSL.L IterateCCStructures                    ;82D32A;84816F;
         %Set8bit(!M)                             ;82D32E;      ;
         LDA.W !transition_dest                          ;82D330;00098B;
         STA.B !tilemap_to_load                            ;82D333;000022;
@@ -4511,7 +4511,7 @@ SUB_82D1C0: ;82D1C0
         JSL.L BAAAA                          ;82D374;81A383;
         JSL.L SUB_81BFB7                          ;82D378;81BFB7;
         JSL.L AutoMapScrolling               ;82D37C;8095B3;
-        JSL.L SUB_84816F                    ;82D380;84816F;
+        JSL.L IterateCCStructures                    ;82D380;84816F;
         JSL.L CODE_81A600                    ;82D384;81A600;
         JSL.L CODE_8582C7                    ;82D388;8582C7;
         JSL.L CODE_858CB2                    ;82D38C;858CB2;
@@ -4855,7 +4855,7 @@ DemoPresentation:
         JMP.W .CODE_82D6AC                    ;82D6A9;82D6AC;
 
     .CODE_82D6AC:
-        JSL.L SUB_84816F                    ;82D6AC;84816F;
+        JSL.L IterateCCStructures                    ;82D6AC;84816F;
         %Set8bit(!M)                             ;82D6B0;      ;
         LDA.W !transition_dest                          ;82D6B2;00098B;
         STA.B !tilemap_to_load                            ;82D6B5;000022;
@@ -4885,7 +4885,7 @@ DemoPresentation:
         JSL.L BAAAA                          ;82D6F6;81A383;
         JSL.L SUB_81BFB7                          ;82D6FA;81BFB7;
         JSL.L AutoMapScrolling               ;82D6FE;8095B3;
-        JSL.L SUB_84816F                    ;82D702;84816F;
+        JSL.L IterateCCStructures                    ;82D702;84816F;
         JSL.L CODE_81A600                    ;82D706;81A600;
         JSL.L CODE_8582C7                    ;82D70A;8582C7;
         JSL.L CODE_858CB2                    ;82D70E;858CB2;
@@ -5139,7 +5139,7 @@ IntroScreen: ;82D75E
         LDX.W #$0009
         LDY.W #$0000
         JSL.L UNK_LoadCCDataLong
-        JSL.L SUB_84816F
+        JSL.L IterateCCStructures
         %Set8bit(!M)
         LDA.W !transition_dest
         STA.B !tilemap_to_load
@@ -5156,10 +5156,11 @@ IntroScreen: ;82D75E
         %Set16bit(!MX)                             ;82D93A;      ;
         LDY.W #$0000                         ;82D93C;      ;
 
-    CODE_82D93F:
-        %Set8bit(!M)                             ;82D93F;      ;
-        LDA.B !NMI_Status                            ;82D941;000000;
-        BEQ CODE_82D93F                      ;82D943;82D93F;
+    .CODE_82D93F:
+            %Set8bit(!M)                             ;82D93F;      ;
+            LDA.B !NMI_Status                            ;82D941;000000;
+            BEQ .CODE_82D93F                      ;82D943;82D93F;
+
         %Set16bit(!M)                             ;82D945;      ;
         LDA.W #$1800                         ;82D947;      ;
         STA.B $C7                            ;82D94A;0000C7;
@@ -5173,7 +5174,7 @@ IntroScreen: ;82D75E
         JSL.L BAAAA                          ;82D968;81A383;
         JSL.L SUB_81BFB7                          ;82D96C;81BFB7;
         JSL.L AutoMapScrolling               ;82D970;8095B3;
-        JSL.L SUB_84816F                    ;82D974;84816F;
+        JSL.L IterateCCStructures                    ;82D974;84816F;
         JSL.L CODE_81A600                    ;82D978;81A600;
         JSL.L CODE_8582C7                    ;82D97C;8582C7;
         JSL.L CODE_858CB2                    ;82D980;858CB2;
@@ -5184,12 +5185,12 @@ IntroScreen: ;82D75E
         BNE CODE_82D9B3                      ;82D991;82D9B3;
         %Set8bit(!M)                             ;82D993;      ;
         STZ.B !NMI_Status                            ;82D995;000000;
-        JMP.W CODE_82D93F                    ;82D997;82D93F;
+        JMP.W .CODE_82D93F                    ;82D997;82D93F;
 
         PLY                                  ;82D99A;      ;
         INY                                  ;82D99B;      ;
         CPY.W #$0168                         ;82D99C;      ;
-        BNE CODE_82D93F                      ;82D99F;82D93F;
+        BNE .CODE_82D93F                      ;82D99F;82D93F;
         %Set8bit(!M)                             ;82D9A1;      ;
         LDA.B #$0F                           ;82D9A3;      ;
         STA.B $92                            ;82D9A5;000092;

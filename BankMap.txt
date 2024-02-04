@@ -114,7 +114,7 @@ Bank 80
 ❓80A308 - SUB_80A308
 ❓80A481 - SUB_80A481
 ❓80A617 - SUB_80A617
-❓80A7AE - SUB_80A7AE
+❓80A7AE - GetBackgroundData
 ❓80A7C6 - BackgroundsManager
 ❔80AA38 - DMAVRAMWithOffset
 💾80AA68 - UNK_Table2

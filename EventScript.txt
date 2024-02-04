@@ -27,7 +27,7 @@ Events are its own language, its pretty robust, I dont know if the game uses mos
 17:Event_GetRNG                     +1byte      byte is upper border (RNGReturn0toA subrutine)
 18:Event_JumpIfEqualsRNG            +3byte      call Event_GetRNG first. first byte is number to compare, if equal jump to next 2 bytes.
 19:Event_UNKSetAnimation            +3byte
-1A:Event_UNKCCchanges3              +7byte
+1A:Event_UNKCCchanges3              +7byte      first 2 are stored in CC$1A, next 2 in CC$1C, next 2 in CC$33, final 1 in CC$02. increases CC$10 by one
 1B:Event_UNKCCchanges4              +3byte
 1C:Event_StartTextBox               +3byte      first 2 are the index to the text, third is TODO $0191
 1D:Event_StartTextBoxCopy           +3byte      first 2 are the index to the text, third is TODO $0191

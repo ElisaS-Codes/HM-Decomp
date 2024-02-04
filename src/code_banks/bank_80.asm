@@ -76,7 +76,7 @@ GameLoop: ;808083
         JSL.L BAAAA
         JSL.L SUB_81BFB7
         JSL.L AutoMapScrolling
-        JSL.L SUB_84816F
+        JSL.L IterateCCStructures
         JSL.L CODE_81A600
         JSL.L CODE_8582C7
         JSL.L CODE_858CB2
@@ -1741,7 +1741,7 @@ UNK_BigLoop: ;808E69
                 BEQ .return
                 LDA.B #$05
                 STA.B !ProgDMA_Channel_Index
-                LDA.B #$22
+                LDA.B !BBADX_DMA_CGRAMPORT
                 STA.B !ProgDMA_Destination_Memory
                 %Set16bit(!M)
                 LDY.W #$0100
@@ -2397,10 +2397,10 @@ SUB_809329: ;809329
         TAX
         LDA.L !hour
         CMP.B #$12                           ;18
-        BCC CODE_809358
+        BCC .CODE_809358
         INX
 
-        CODE_809358:
+    .CODE_809358:
         %Set8bit(!M)
         %Set16bit(!X)
         LDA.W UNK_Table11,X
@@ -2475,18 +2475,19 @@ SUB_8093A3: ;8093A3
         BCS .notfarm
 
     .seasonloop:
-        %Set8bit(!M)
-        LDA.L !season
-        %Set16bit(!M)
-        STA.B $82
-        BRA .continue
+            %Set8bit(!M)
+            LDA.L !season
+            %Set16bit(!M)
+            STA.B $82
+            BRA .continue
 
-    .notfarm:
-        %Set8bit(!M)
-        CMP.B #$10
-        BCC .seasonloop                      ;Check Fork
-        CMP.B #$14
-        BCS .seasonloop                      ;Check Mountain
+        .notfarm:
+            %Set8bit(!M)
+            CMP.B #$10
+            BCC .seasonloop                      ;Check Fork
+            CMP.B #$14
+            BCS .seasonloop                      ;Check Mountain
+
         %Set16bit(!M)
         SEC
         SBC.W #$0008
@@ -2914,7 +2915,7 @@ UNK_ScreenTransition: ;8096D3
         LDA.W !transition_dest
         STA.B !tilemap_to_load
         JSL.L RunsFunctionbyIndex
-        JSL.L SUB_84816F
+        JSL.L IterateCCStructures
         %Set8bit(!M)
         LDA.W !transition_dest
         JSL.L SUB_80972C
@@ -2923,60 +2924,57 @@ UNK_ScreenTransition: ;8096D3
 ScreenTransitionReturn: ;80972B
         RTL                                  ;Used by this and previous Subrutine
 
-;;;;;;;;
+;;;;;;;; Param in A tilema to load
 SUB_80972C: ;80972C
-        %Set8bit(!M)                             ;      ;
-        %Set16bit(!X)                             ;80972E;      ;
-        STA.B !tilemap_to_load                            ;809730;000022;
-        PHA                                  ;809732;      ;
-        %Set8bit(!M)                             ;809733;      ;
-        STZ.W !time_running                          ;809735;000973;
-        %Set16bit(!MX)                             ;809738;      ;
-        LDY.W #$0001                         ;80973A;      ;
-        JSL.L SUB_80A7AE                          ;80973D;80A7AE;
-        %Set8bit(!M)                             ;809741;      ;
-        PHA                                  ;809743;      ;
-        AND.B #$20                           ;809744;      ;
-        BEQ CODE_80975A                      ;809746;80975A;
-        %Set16bit(!M)                             ;809748;      ;
-        LDA.L $7F1F5C                        ;80974A;7F1F5C;
-        AND.W #$0001                         ;80974E;      ;
-        BNE CODE_80975A                      ;809751;80975A;
-        %Set8bit(!M)                             ;809753;      ;
-        LDA.B #$01                           ;809755;      ;
-        STA.W !time_running                          ;809757;000973;
-                                            ;      ;      ;
-        CODE_80975A:
-        %Set8bit(!M)                             ;80975A;      ;
-        PLA                                  ;80975C;      ;
-        AND.B #$C0                           ;80975D;      ;
-        BNE CODE_809764                      ;80975F;809764;
-        JMP.W CODE_8098A8                    ;809761;8098A8;
-                                            ;      ;      ;
-                                            ;      ;      ;
-        CODE_809764:
+        %Set8bit(!M)
+        %Set16bit(!X)
+        STA.B !tilemap_to_load
+        PHA
+        %Set8bit(!M)
+        STZ.W !time_running
+        %Set16bit(!MX)
+        LDY.W #$0001
+        JSL.L GetBackgroundData
+        %Set8bit(!M)
+        PHA
+        AND.B #$20
+        BEQ .CODE_80975A
+        %Set16bit(!M)
+        LDA.L $7F1F5C
+        AND.W #$0001
+        BNE .CODE_80975A
+        %Set8bit(!M)
+        LDA.B #$01
+        STA.W !time_running
+
+    .CODE_80975A:
+        %Set8bit(!M)
+        PLA
+        AND.B #$C0
+        BNE .CODE_809764
+        JMP.W .CODE_8098A8
+
+    .CODE_809764:
         AND.B #$80                           ;809764;      ;
-        BNE CODE_809775                      ;809766;809775;
+        BNE .CODE_809775                      ;809766;809775;
         %Set16bit(!M)                             ;809768;      ;
         LDA.W $0196                          ;80976A;000196;
         AND.W #$0004                         ;80976D;      ;
-        BEQ CODE_809775                      ;809770;809775;
-        JMP.W CODE_8098A8                    ;809772;8098A8;
-                                            ;      ;      ;
-                                            ;      ;      ;
-        CODE_809775:
+        BEQ .CODE_809775                      ;809770;809775;
+        JMP.W .CODE_8098A8                    ;809772;8098A8;
+
+    .CODE_809775:
         %Set16bit(!M)                             ;809775;      ;
         LDA.L $7F1F5C                        ;809777;7F1F5C;
         AND.W #$0002                         ;80977B;      ;
-        BEQ CODE_809783                      ;80977E;809783;
-        JMP.W CODE_8098A8                    ;809780;8098A8;
-                                            ;      ;      ;
-                                            ;      ;      ;
-        CODE_809783:
+        BEQ .CODE_809783                      ;80977E;809783;
+        JMP.W .CODE_8098A8                    ;809780;8098A8;
+
+    .CODE_809783:
         %Set16bit(!M)                             ;809783;      ;
         LDA.W $0196                          ;809785;000196;
         AND.W #$0002                         ;809788;      ;
-        BEQ CODE_809806                      ;80978B;809806;
+        BEQ .CODE_809806                      ;80978B;809806;
         %Set8bit(!M)                             ;80978D;      ;
         LDA.B #$57                           ;80978F;      ;
         STA.B !tilemap_to_load                            ;809791;000022;
@@ -3029,33 +3027,30 @@ SUB_80972C: ;80972C
         LDX.B #$03                           ;8097FB;      ;
         LDY.B #$00                           ;8097FD;      ;
         JSL.L UNK_SetPointer42            ;8097FF;808E48;
-        JMP.W CODE_8098A8                    ;809803;8098A8;
-                                            ;      ;      ;
-                                            ;      ;      ;
-        CODE_809806:
+        JMP.W .CODE_8098A8                    ;809803;8098A8;
+
+    .CODE_809806:
         %Set16bit(!M)                             ;809806;      ;
         LDA.W $0196                          ;809808;000196;
         AND.W #$0004                         ;80980B;      ;
-        BEQ CODE_809828                      ;80980E;809828;
+        BEQ .CODE_809828                      ;80980E;809828;
         %Set8bit(!M)                             ;809810;      ;
         LDA.L !hour                        ;809812;7F1F1C;
         CMP.B #$11                           ;809816;      ;
-        BCC CODE_80981D                      ;809818;80981D;
-        JMP.W CODE_8098A8                    ;80981A;8098A8;
-                                            ;      ;      ;
-                                            ;      ;      ;
-        CODE_80981D:
+        BCC .CODE_80981D                      ;809818;80981D;
+        JMP.W .CODE_8098A8                    ;80981A;8098A8;
+
+    .CODE_80981D:
         LDA.B #$58                           ;80981D;      ;
         STA.B !tilemap_to_load                            ;80981F;000022;
         JSL.L BackgroundsManager           ;809821;80A7C6;
-        JMP.W CODE_8098A8                    ;809825;8098A8;
-                                            ;      ;      ;
-                                            ;      ;      ;
-        CODE_809828:
+        JMP.W .CODE_8098A8                    ;809825;8098A8;
+
+    .CODE_809828:
         %Set16bit(!M)                             ;809828;      ;
         LDA.W $0196                          ;80982A;000196;
         AND.W #$0008                         ;80982D;      ;
-        BEQ CODE_8098A8                      ;809830;8098A8;
+        BEQ .CODE_8098A8                      ;809830;8098A8;
         %Set8bit(!M)                             ;809832;      ;
         LDA.B #$59                           ;809834;      ;
         STA.B !tilemap_to_load                            ;809836;000022;
@@ -3108,183 +3103,184 @@ SUB_80972C: ;80972C
         LDX.B #$03                           ;8098A0;      ;
         LDY.B #$00                           ;8098A2;      ;
         JSL.L UNK_SetPointer42            ;8098A4;808E48;
-                                            ;      ;      ;
-        CODE_8098A8:
-        JSL.L SUB_8392BB                    ;8098A8;8392BB;
-        %Set8bit(!M)                             ;8098AC;      ;
-        PLA                                  ;8098AE;      ;
-        STA.B !tilemap_to_load                            ;8098AF;000022;
-        JSL.L LoadMap                          ;8098B1;82A5FB;
-        JSL.L BackgroundsManager           ;8098B5;80A7C6;
-        JSL.L ChangePalettebyTime                           ;8098B9;8092E2;
-        JSL.L SUB_809329                           ;8098BD;809329;
-        JSL.L CallIndexedSubrutines                           ;8098C1;809553;
-        JSL.L SUB_809241                           ;8098C5;809241;
-        JSL.L UNK_BigLoop                    ;8098C9;808E69;
-        %Set8bit(!M)                             ;8098CD;      ;
-        %Set16bit(!X)                             ;8098CF;      ;
-        LDA.B #$00                           ;8098D1;      ;
-        STA.B !ProgDMA_Channel_Index                            ;8098D3;000027;
-        LDA.B #$22                           ;8098D5;      ;
-        STA.B !ProgDMA_Destination_Memory                            ;8098D7;000029;
-        %Set16bit(!M)                             ;8098D9;      ;
-        LDY.W #$0200                         ;8098DB;      ;
-        LDX.W #$0000                         ;8098DE;      ;
-        LDA.W #$0900                         ;8098E1;      ;
-        STA.B $72                            ;8098E4;000072;
-        %Set8bit(!M)                             ;8098E6;      ;
-        LDA.B #$7F                           ;8098E8;      ;
-        STA.B $74                            ;8098EA;000074;
-        JSL.L AddProgrammedDMA                ;8098EC;808A33;
-        JSL.L StartLastPreparedDMA               ;8098F0;808AB2;
-        %Set16bit(!MX)                             ;8098F4;      ;
-        STZ.B $1E                            ;8098F6;00001E;
-        LDA.B !OBJ_Offset_X                            ;8098F8;0000F5;
-        STA.W !BG2_Map_Offset_X                          ;8098FA;000140;
-        LDA.B !OBJ_Offset_Y                           ;8098FD;0000F7;
-        STA.W !BG2_Map_Offset_Y                          ;8098FF;000142;
-        %Set8bit(!M)                             ;809902;      ;
-        LDA.B !tilemap_to_load                            ;809904;000022;
-        CMP.B #$26                           ;809906;      ;
-        BNE CODE_809912                      ;809908;809912;
-        %Set16bit(!M)                             ;80990A;      ;
-        LDA.W #$0100                         ;80990C;      ;
-        STA.W !BG2_Map_Offset_Y                          ;80990F;000142;
-                                            ;      ;      ;
-        CODE_809912:
-        %Set8bit(!M)                             ;809912;      ;
-        STZ.W $091C                          ;809914;00091C;
-        %Set16bit(!M)                             ;809917;      ;
-        LDA.L $7F1F5A                        ;809919;7F1F5A;
-        AND.W #$FDFF                         ;FLAG5A
-        STA.L $7F1F5A                        ;809920;7F1F5A;
-        LDA.W #$0000                         ;809924;      ;
-        STA.L $7F1F7A                        ;809927;7F1F7A;
-        STZ.W $0878                          ;80992B;000878;
-        LDA.B !player_pos_X                           ;80992E;0000D6;
-        STA.W $0907                          ;809930;000907;
-        LDA.B !player_pos_Y                            ;809933;0000D8;
-        STA.W $0909                          ;809935;000909;
-        %Set8bit(!M)                             ;809938;      ;
-        STZ.W $098A                          ;80993A;00098A;
-        STZ.W $0919                          ;80993D;000919;
-        %Set16bit(!MX)                             ;809940;      ;
-        LDA.W #$0080                         ;809942;      ;
-        EOR.W #$FFFF                         ;809945;      ;
-        AND.B !game_state                            ;809948;0000D2;
-        STA.B !game_state                            ;80994A;0000D2;
-        %Set16bit(!M)                             ;80994C;      ;
-        STZ.W $08FD                          ;80994E;0008FD;
-        STZ.W $08FF                          ;809951;0008FF;
-        %Set16bit(!MX)                             ;809954;      ;
-        LDA.W #$1000                         ;809956;      ;
-        EOR.W #$FFFF                         ;809959;      ;
-        AND.B !game_state                            ;80995C;0000D2;
-        STA.B !game_state                            ;80995E;0000D2;
-        %Set8bit(!M)                             ;809960;      ;
-        LDA.W !item_on_hand                          ;809962;00091D;
-        BEQ CODE_8099BC                      ;809965;8099BC;
-        CMP.B #$0D                           ;809967;      ;
-        BEQ CODE_8099B1                      ;809969;8099B1;
-        CMP.B #$0E                           ;80996B;      ;
-        BEQ CODE_8099B1                      ;80996D;8099B1;
-        CMP.B #$0F                           ;80996F;      ;
-        BEQ CODE_8099B1                      ;809971;8099B1;
-        CMP.B #$57                           ;809973;      ;
-        BEQ CODE_8099B1                      ;809975;8099B1;
-        STA.W $0984                          ;809977;000984;
-        %Set16bit(!M)                             ;80997A;      ;
-        LDY.W #$0001                         ;80997C;      ;
-        JSL.L SUB_8180B7                          ;80997F;8180B7;
-        LDA.W $090B                          ;809983;00090B;
-        STA.W $0980                          ;809986;000980;
-        LDA.W $090D                          ;809989;00090D;
-        STA.W $0982                          ;80998C;000982;
-        %Set8bit(!M)                             ;80998F;      ;
-        LDA.B #$01                           ;809991;      ;
-        STA.W $0974                          ;809993;000974;
-        LDA.B #$01                           ;809996;      ;
-        STA.W $0975                          ;809998;000975;
-        LDA.B #$02                           ;80999B;      ;
-        STA.W $0976                          ;80999D;000976;
-        JSL.L CODE_81A500                    ;8099A0;81A500;
-        %Set16bit(!MX)                             ;8099A4;      ;
-        LDA.W #$0014                         ;8099A6;      ;
-        CLC                                  ;8099A9;      ;
-        ADC.B !player_direction                            ;8099AA;0000DA;
-        STA.W $0901                          ;8099AC;000901;
-        BRA CODE_8099CD                      ;8099AF;8099CD;
-                                            ;      ;      ;
-                                            ;      ;      ;
-        CODE_8099B1:
-        %Set16bit(!MX)                             ;8099B1;      ;
-        LDA.W #$0000                         ;8099B3;      ;
-        CLC                                  ;8099B6;      ;
-        ADC.B !player_direction                            ;8099B7;0000DA;
-        STA.W $0901                          ;8099B9;000901;
-                                            ;      ;      ;
-        CODE_8099BC:
-        %Set8bit(!M)                             ;8099BC;      ;
-        STZ.W !item_on_hand                          ;8099BE;00091D;
-        %Set16bit(!MX)                             ;8099C1;      ;
-        LDA.W #$0002                         ;8099C3;      ;
-        EOR.W #$FFFF                         ;8099C6;      ;
-        AND.B !game_state                            ;8099C9;0000D2;
-        STA.B !game_state                            ;8099CB;0000D2;
-                                            ;      ;      ;
-        CODE_8099CD:
-        JSL.L CODE_81CFA0                    ;8099CD;81CFA0;
-        JSL.L SUB_81BFB7                          ;8099D1;81BFB7;
-        %Set16bit(!MX)                             ;8099D5;      ;
-        LDA.L $7F1F5E                        ;8099D7;7F1F5E;
-        AND.W #$0002                         ;8099DB;      ;
-        BNE CODE_8099E4                      ;8099DE;8099E4;
-        JSL.L CODE_83C296                    ;8099E0;83C296;
-                                            ;      ;      ;
-        CODE_8099E4:
-        %Set16bit(!MX)                             ;8099E4;      ;
-        LDA.W #$0000                         ;8099E6;      ;
-        STA.B !player_action                            ;8099E9;0000D4;
-        JSL.L UNK_Audio21                    ;8099EB;83841F;
-        JSL.L UNK_Audio20                    ;8099EF;8383A4;
-        JSL.L UNK_Audio22                    ;8099F3;838380;
-        JSL.L ToolUsedSound2                          ;8099F7;828FF3;
-        %Set8bit(!M)                             ;8099FB;      ;
-        LDA.W $0110                          ;8099FD;000110;
-        STA.W $0117                          ;809A00;000117;
-        JSL.L WaitForNMI               ;809A03;808645;
-        %Set16bit(!M)                             ;809A07;      ;
-        LDA.W #$1800                         ;809A09;      ;
-        STA.B $C7                            ;809A0C;0000C7;
-        JSL.L BAAAA                          ;809A0E;81A383;
-        JSL.L SUB_84816F                    ;809A12;84816F;
-        JSL.L CODE_8582C7                    ;809A16;8582C7;
-        JSL.L CODE_858CB2                    ;809A1A;858CB2;
-        JSL.L UNK_BigLoadLoopOAM             ;809A1E;8583E0;
-        %Set8bit(!M)                             ;809A22;      ;
-        STZ.B !NMI_Status                            ;809A24;000000;
-        JSL.L WaitForNMI               ;809A26;808645;
-        %Set16bit(!M)                             ;809A2A;      ;
-        LDA.W #$1800                         ;809A2C;      ;
-        STA.B $C7                            ;809A2F;0000C7;
-        JSL.L BAAAA                          ;809A31;81A383;
-        JSL.L SUB_84816F                    ;809A35;84816F;
-        JSL.L CODE_8582C7                    ;809A39;8582C7;
-        JSL.L CODE_858CB2                    ;809A3D;858CB2;
-        JSL.L UNK_BigLoadLoopOAM             ;809A41;8583E0;
-        %Set8bit(!M)                             ;809A45;      ;
-        STZ.B !NMI_Status                            ;809A47;000000;
-        JSL.L WaitForNMI               ;809A49;808645;
-        JSL.L ResetForceBlank                ;809A4D;808E1E;
-        %Set8bit(!M)                             ;809A51;      ;
-        LDA.B #$03                           ;809A53;      ;
-        STA.B $92                            ;809A55;000092;
-        LDA.B #$03                           ;809A57;      ;
-        STA.B $93                            ;809A59;000093;
-        LDA.B #$0F                           ;809A5B;      ;
-        STA.B $94                            ;809A5D;000094;
-        JSL.L ScreenFadein                         ;809A5F;8087CE;
-        RTL                                  ;809A63;      ;END_SUB_80972C
+
+    .CODE_8098A8:
+        JSL.L LoadDialogueBox
+        %Set8bit(!M)
+        PLA
+        STA.B !tilemap_to_load
+        JSL.L LoadMap
+        JSL.L BackgroundsManager
+        JSL.L ChangePalettebyTime
+        JSL.L SUB_809329
+        JSL.L CallIndexedSubrutines
+        JSL.L SUB_809241
+        JSL.L UNK_BigLoop
+        %Set8bit(!M)
+        %Set16bit(!X)
+        LDA.B #$00
+        STA.B !ProgDMA_Channel_Index
+        LDA.B !BBADX_DMA_CGRAMPORT
+        STA.B !ProgDMA_Destination_Memory
+        %Set16bit(!M)
+        LDY.W #$0200
+        LDX.W #$0000
+        LDA.W #$0900
+        STA.B $72
+        %Set8bit(!M)
+        LDA.B #$7F
+        STA.B $74
+        JSL.L AddProgrammedDMA
+        JSL.L StartLastPreparedDMA
+
+        %Set16bit(!MX)
+        STZ.B $1E
+        LDA.B !OBJ_Offset_X
+        STA.W !BG2_Map_Offset_X
+        LDA.B !OBJ_Offset_Y
+        STA.W !BG2_Map_Offset_Y
+        %Set8bit(!M)
+        LDA.B !tilemap_to_load
+        CMP.B #$26                           ;Tool shed
+        BNE .CODE_809912
+        %Set16bit(!M)
+        LDA.W #$0100
+        STA.W !BG2_Map_Offset_Y
+
+    .CODE_809912:
+        %Set8bit(!M)
+        STZ.W $091C
+        %Set16bit(!M)
+        LDA.L $7F1F5A
+        AND.W #$FDFF
+        STA.L $7F1F5A
+        LDA.W #$0000
+        STA.L $7F1F7A
+        STZ.W $0878
+        LDA.B !player_pos_X
+        STA.W $0907
+        LDA.B !player_pos_Y
+        STA.W $0909
+        %Set8bit(!M)
+        STZ.W $098A
+        STZ.W $0919
+        %Set16bit(!MX)
+        LDA.W #$0080
+        EOR.W #$FFFF
+        AND.B !game_state
+        STA.B !game_state
+        %Set16bit(!M)
+        STZ.W $08FD
+        STZ.W $08FF
+        %Set16bit(!MX)
+        LDA.W #$1000
+        EOR.W #$FFFF
+        AND.B !game_state
+        STA.B !game_state
+        %Set8bit(!M)
+        LDA.W !item_on_hand
+        BEQ .CODE_8099BC
+        CMP.B #$0D
+        BEQ .CODE_8099B1
+        CMP.B #$0E
+        BEQ .CODE_8099B1
+        CMP.B #$0F
+        BEQ .CODE_8099B1
+        CMP.B #$57
+        BEQ .CODE_8099B1
+        STA.W $0984
+        %Set16bit(!M)
+        LDY.W #$0001
+        JSL.L SUB_8180B7
+        LDA.W $090B
+        STA.W $0980
+        LDA.W $090D
+        STA.W $0982
+        %Set8bit(!M)
+        LDA.B #$01
+        STA.W $0974
+        LDA.B #$01
+        STA.W $0975
+        LDA.B #$02
+        STA.W $0976
+        JSL.L CODE_81A500
+        %Set16bit(!MX)
+        LDA.W #$0014
+        CLC
+        ADC.B !player_direction
+        STA.W $0901
+        BRA .CODE_8099CD
+
+    .CODE_8099B1:
+        %Set16bit(!MX)
+        LDA.W #$0000
+        CLC
+        ADC.B !player_direction
+        STA.W $0901
+
+    .CODE_8099BC:
+        %Set8bit(!M)
+        STZ.W !item_on_hand
+        %Set16bit(!MX)
+        LDA.W #$0002
+        EOR.W #$FFFF
+        AND.B !game_state
+        STA.B !game_state
+
+    .CODE_8099CD:
+        JSL.L CODE_81CFA0
+        JSL.L SUB_81BFB7
+        %Set16bit(!MX)
+        LDA.L $7F1F5E
+        AND.W #$0002
+        BNE .CODE_8099E4
+        JSL.L CODE_83C296
+
+    .CODE_8099E4:
+        %Set16bit(!MX)
+        LDA.W #$0000
+        STA.B !player_action
+        JSL.L UNK_Audio21
+        JSL.L UNK_Audio20
+        JSL.L UNK_Audio22
+        JSL.L ToolUsedSound2
+        %Set8bit(!M)
+        LDA.W $0110
+        STA.W $0117
+        JSL.L WaitForNMI
+        %Set16bit(!M)
+        LDA.W #$1800
+        STA.B $C7
+        JSL.L BAAAA
+        JSL.L IterateCCStructures
+        JSL.L CODE_8582C7
+        JSL.L CODE_858CB2
+        JSL.L UNK_BigLoadLoopOAM
+        %Set8bit(!M)
+        STZ.B !NMI_Status
+        JSL.L WaitForNMI
+        %Set16bit(!M)
+        LDA.W #$1800
+        STA.B $C7
+        JSL.L BAAAA
+        JSL.L IterateCCStructures
+        JSL.L CODE_8582C7
+        JSL.L CODE_858CB2
+        JSL.L UNK_BigLoadLoopOAM
+        %Set8bit(!M)
+        STZ.B !NMI_Status
+        JSL.L WaitForNMI
+        JSL.L ResetForceBlank
+        %Set8bit(!M)
+        LDA.B #$03
+        STA.B $92
+        LDA.B #$03
+        STA.B $93
+        LDA.B #$0F
+        STA.B $94
+        JSL.L ScreenFadein
+
+        RTL
 
 ;;;;;;;; Related to Transition?
 SUB_809A64: ;809A64
@@ -5196,8 +5192,8 @@ SUB_80A617: ;80A617
         STA.B $10                            ;80A7AB;000010;
         RTL                                  ;80A7AD;      ;
 
-;;;;;;;;
-SUB_80A7AE: ;80A7AE
+;;;;;;;;Sees to only be used in one place to get the value of $1, half of the data ORed with 196
+GetBackgroundData: ;80A7AE
         %Set8bit(!M)
         %Set16bit(!X)
         LDA.B #$00

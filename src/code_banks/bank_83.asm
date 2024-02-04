@@ -2150,7 +2150,7 @@ UNK_Audio_Table2: db $00,$00,$00,$05,$00,$00,$00,$00,$00,$00,$00,$00,$0D,$13,$1D
 UNK_Audio_Table4: db $17,$18,$19,$1A,$15,$06,$0A,$00,$00,$00;8392B1
 
 ;;;;;;;;
-SUB_8392BB: ;8392BB
+LoadDialogueBox: ;8392BB
         %Set16bit(!MX)
         %Set16bit(!M)
         LDA.W #$CB05
