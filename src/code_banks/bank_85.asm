@@ -5,31 +5,31 @@ CODE_858000:
         %Set16bit(!M)
         LDA.B $A1
         CMP.W #$0262
-        BCS .CODE_858013
+        BCS .onsecondbank
         %Set8bit(!M)
         LDA.B #$86
         STA.B $77
         STA.B $7A
-        BRA .CODE_85801B
+        BRA .bankselected
 
-    .CODE_858013:
+    .onsecondbank:
         %Set8bit(!M)
         LDA.B #$87
         STA.B $77
         STA.B $7A
 
-    .CODE_85801B:
+    .bankselected:
         %Set16bit(!MX)
         %Set16bit(!MX)
         LDX.W #$0000
         LDY.W #$0000
         LDA.B $DC
         CMP.W #$0028
-        BEQ .CODE_85802F
+        BEQ .findemptyslot
         INC A
         STA.B $DC
 
-    .CODE_85802F:
+    .findemptyslot:
             LDA.W $019C,X
             BEQ .CODE_858046
             TXA
@@ -38,7 +38,7 @@ CODE_858000:
             TAX
             INY
             CPY.B $DC
-            BNE .CODE_85802F
+            BNE .findemptyslot
 
         LDA.W #$FFFF
         STA.B $A7
@@ -1167,7 +1167,7 @@ PresetsWRAMCopyOAMCopy:
         RTS
 
 ;;;;;;;;
-        CODE_858AE5:
+CODE_858AE5:
         %Set16bit(!MX)
         LDX.B $A9
         LDA.W $01AC,X
@@ -1188,35 +1188,35 @@ PresetsWRAMCopyOAMCopy:
         STA.B $AF
 
     .loop:
-        LDA.B $AD
-        BNE .continue
-        BRA .exitloop
+            LDA.B $AD
+            BNE .continue
+            BRA .exitloop
 
-    .continue:
-        LDA.B [$78],Y
-        STA.B $B3
-        LDA.B $AF
-        STA.B $B5
-        %Set16bit(!MX)
-        PHX
-        PHY
-        JSR.W CODE_858C30
-        %Set16bit(!MX)
-        PLY
-        PLX
-        LDA.B $B3
-        AND.W #$00FF
-        %Set8bit(!M)
-        STA.W $01B0,X
-        %Set16bit(!M)
-        INX
-        INC.B $AF
-        TYA
-        CLC
-        ADC.W #$0005
-        TAY
-        DEC.B $AD
-        BRA .loop
+        .continue:
+            LDA.B [$78],Y
+            STA.B $B3
+            LDA.B $AF
+            STA.B $B5
+            %Set16bit(!MX)
+            PHX
+            PHY
+            JSR.W CODE_858C30
+            %Set16bit(!MX)
+            PLY
+            PLX
+            LDA.B $B3
+            AND.W #$00FF
+            %Set8bit(!M)
+            STA.W $01B0,X
+            %Set16bit(!M)
+            INX
+            INC.B $AF
+            TYA
+            CLC
+            ADC.W #$0005
+            TAY
+            DEC.B $AD
+            BRA .loop
 
     .exitloop:
         %Set16bit(!MX)
@@ -1694,7 +1694,7 @@ CopiesWRAMtoOBJVGRAM:
     .return: RTL
 
 ;;;;;;; TODO
-UNK_UNKClearWRAMSpace: ;858ED7
+ClearSpriteDataTables: ;858ED7
         %Set16bit(!MX)
         LDA.W #$FFFF
         STA.L $7EA420
@@ -1704,29 +1704,29 @@ UNK_UNKClearWRAMSpace: ;858ED7
         LDY.W #$0000
 
     .loop1:
-        LDA.W #$0000
-        STA.L $7EA320,X
-        LDA.W #$FFFF
-        STA.L $7EA322,X
-        STA.L $7EA220,X
-        INX
-        INX
-        INX
-        INX
-        INY
-        CPY.W #64                            ;16 adresses in total
-        BNE .loop1
+            LDA.W #$0000
+            STA.L $7EA320,X
+            LDA.W #$FFFF
+            STA.L $7EA322,X
+            STA.L $7EA220,X
+            INX
+            INX
+            INX
+            INX
+            INY
+            CPY.W #64                            ;16 adresses in total
+            BNE .loop1
 
         %Set16bit(!MX)
         LDX.W #$0000
         LDA.W #$FFFF
 
     .loop2:
-        STA.L $7F0F00,X
-        INX
-        INX
-        CPX.W #$1000
-        BNE .loop2
+            STA.L $7F0F00,X
+            INX
+            INX
+            CPX.W #$1000
+            BNE .loop2
 
         STZ.W $0846
         STZ.W $0848

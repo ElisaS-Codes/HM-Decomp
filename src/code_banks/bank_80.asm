@@ -622,7 +622,7 @@ RESET:   ;808428
         JSL.L ZeroesVRAM
         JSL.L ZeroesOAM
         JSL.L ZeroesCGRAM
-        JSL.L UNK_UNKClearWRAMSpace         ;TODO
+        JSL.L ClearSpriteDataTables
         JSL.L InitializeOBJs
         JSL.L CheckSRAMIntegrity
         %Set8bit(!M)
@@ -2243,7 +2243,7 @@ LoadSecondHalfPaletteToWRAM: ;809208
         RTL
 
 ;;;;;;;;
-SUB_809241: ;809241
+UNK_CustomisePalette: ;809241
         %Set8bit(!M)
         %Set16bit(!X)
         LDA.B #$00
@@ -2281,58 +2281,59 @@ SUB_809241: ;809241
         LDX.W #$0000
         LDY.W #$0000
 
-        CODE_809288:
-        LDA.B [$72],Y                        ;809288;000072;
-        STA.L $7F0B00,X                      ;80928A;7F0B00;
-        INY                                  ;80928E;      ;
-        INY                                  ;80928F;      ;
-        INX                                  ;809290;      ;
-        INX                                  ;809291;      ;
-        CPY.B $7E                            ;809292;00007E;
-        BNE CODE_809288                      ;809294;809288;
+        .loop1:
+            LDA.B [$72],Y
+            STA.L $7F0B00,X
+            INY
+            INY
+            INX
+            INX
+            CPY.B $7E
+            BNE .loop1
 
-        %Set8bit(!M)                             ;809296;      ;
-        LDA.B #$00                           ;809298;      ;
-        XBA                                  ;80929A;      ;
-        LDA.B !tilemap_to_load                            ;80929B;000022;
-        ASL A                                ;80929D;      ;
-        TAX                                  ;80929E;      ;
-        INX                                  ;80929F;      ;
-        LDA.W UNK_Table11,X                 ;8092A0;00BE44;
-        %Set16bit(!M)                             ;8092A3;      ;
-        STA.B $7E                            ;8092A5;00007E;
-        ASL A                                ;8092A7;      ;
-        CLC                                  ;8092A8;      ;
-        ADC.B $7E                            ;8092A9;00007E;
-        TAX                                  ;8092AB;      ;
-        LDA.L PalettePointerTable,X          ;8092AC;80B9FD;
-        STA.B $72                            ;8092B0;000072;
-        INX                                  ;8092B2;      ;
-        INX                                  ;8092B3;      ;
-        %Set8bit(!M)                             ;8092B4;      ;
-        LDA.L PalettePointerTable,X          ;8092B6;80B9FD;
-        STA.B $74                            ;8092BA;000074;
-        %Set16bit(!M)                             ;8092BC;      ;
-        LDA.W #$0100                         ;8092BE;      ;
-        STA.B $7E                            ;8092C1;00007E;
-        LDX.W #$0100                         ;8092C3;      ;
-        LDY.W #$0000                         ;8092C6;      ;
+        %Set8bit(!M)
+        LDA.B #$00
+        XBA
+        LDA.B !tilemap_to_load
+        ASL A
+        TAX
+        INX
+        LDA.W UNK_Table11,X
+        %Set16bit(!M)
+        STA.B $7E
+        ASL A
+        CLC
+        ADC.B $7E
+        TAX
+        LDA.L PalettePointerTable,X
+        STA.B $72
+        INX
+        INX
+        %Set8bit(!M)
+        LDA.L PalettePointerTable,X
+        STA.B $74
+        %Set16bit(!M)
+        LDA.W #$0100
+        STA.B $7E
+        LDX.W #$0100
+        LDY.W #$0000
 
-        CODE_8092C9:
-        LDA.B [$72],Y                        ;8092C9;000072;
-        STA.L $7F0B00,X                      ;8092CB;7F0B00;
-        INY                                  ;8092CF;      ;
-        INY                                  ;8092D0;      ;
-        INX                                  ;8092D1;      ;
-        INX                                  ;8092D2;      ;
-        CPY.B $7E                            ;8092D3;00007E;
-        BNE CODE_8092C9                      ;8092D5;8092C9;
-        %Set8bit(!M)                             ;8092D7;      ;
-        LDA.B #$01                           ;8092D9;      ;
-        STA.B $92                            ;8092DB;000092;
-        JSL.L SUB_8093A3                           ;8092DD;8093A4;
+        .loop2:
+            LDA.B [$72],Y
+            STA.L $7F0B00,X
+            INY
+            INY
+            INX
+            INX
+            CPY.B $7E
+            BNE .loop2
 
-        RTL                                  ;8092E1;      ;END_GGGG
+        %Set8bit(!M)
+        LDA.B #$01
+        STA.B $92
+        JSL.L CustomiseSpritePalette
+
+        RTL
 
 ;;;;;;;;
 ChangePalettebyTime: ;8092E2
@@ -2378,17 +2379,17 @@ ChangePalettebyTime: ;8092E2
         RTL
 
 ;;;;;;;;
-SUB_809329: ;809329
+PrepareSpritePalette: ;809329
         %Set16bit(!MX)
         LDA.L $7F1F5E
         AND.W #$0080                         ;Flag5E
-        BNE SUB_80936E
+        BNE .CODE_80936E
         LDA.L $7F1F5E
         AND.W #$0100                         ;Flag5E
-        BNE SUB_809380
+        BNE .CODE_809380
         LDA.L $7F1F5E
         AND.W #$0200                         ;Flag5E
-        BNE SUB_809392
+        BNE .CODE_809392
         %Set8bit(!M)
         LDA.B #$00
         XBA
@@ -2408,45 +2409,42 @@ SUB_809329: ;809329
         JSL.L LoadSecondHalfPaletteToWRAM
         %Set8bit(!M)
         STZ.B $92
-        JSL.L SUB_8093A3
+        JSL.L CustomiseSpritePalette
 
         RTL
 
-;;;;;;;;
-SUB_80936E: ;80936E
+    .CODE_80936E: ;80936E
         %Set16bit(!MX)
         LDA.W #$0071
         JSL.L LoadSecondHalfPaletteToWRAM
         %Set8bit(!M)
         STZ.B $92
-        JSL.L SUB_8093A3
+        JSL.L CustomiseSpritePalette
 
         RTL
 
-;;;;;;;;
-SUB_809380: ;809380
+    .CODE_809380: ;809380
         %Set16bit(!MX)
         LDA.W #$0072
         JSL.L LoadSecondHalfPaletteToWRAM
         %Set8bit(!M)
         STZ.B $92
-        JSL.L SUB_8093A3
+        JSL.L CustomiseSpritePalette
 
         RTL
 
-;;;;;;;;
-SUB_809392: ;809392
+    .CODE_809392: ;809392
         %Set16bit(!MX)
         LDA.W #$0073
         JSL.L LoadSecondHalfPaletteToWRAM
         %Set8bit(!M)
         STZ.B $92
-        JSL.L SUB_8093A3
+        JSL.L CustomiseSpritePalette
 
         RTL
 
 ;;;;;;;;
-SUB_8093A3: ;8093A3
+CustomiseSpritePalette: ;8093A3
         %Set16bit(!MX)
         STZ.B $7E
         %Set8bit(!M)
@@ -2484,9 +2482,9 @@ SUB_8093A3: ;8093A3
         .notfarm:
             %Set8bit(!M)
             CMP.B #$10
-            BCC .seasonloop                      ;Check Fork
+            BCC .seasonloop                  ;Check Fork
             CMP.B #$14
-            BCS .seasonloop                      ;Check Mountain
+            BCS .seasonloop                  ;Check Mountain
 
         %Set16bit(!M)
         SEC
@@ -2494,135 +2492,145 @@ SUB_8093A3: ;8093A3
         STA.B $82
 
     .continue:
-        %Set8bit(!M)                             ;8093F1;      ;
-        LDA.B #$00                           ;8093F3;      ;
-        XBA                                  ;8093F5;      ;
-        LDA.B $82                            ;8093F6;000082;
-        CLC                                  ;8093F8;      ;
-        ADC.B $7E                            ;8093F9;00007E;
-        STA.B $80                            ;8093FB;000080;
-        %Set16bit(!M)                             ;8093FD;      ;
-        ASL A                                ;8093FF;      ;
-        CLC                                  ;809400;      ;
-        ADC.B $80                            ;809401;000080;
-        ASL A                                ;809403;      ;
-        TAX                                  ;809404;      ;
-        PHX                                  ;809405;      ;
-        LDA.L UNK_Table9,X                   ;809406;80BD9C;
-        LDX.W #$000A                         ;80940A;      ;
-        LDY.W #$000F                         ;80940D;      ;
-        JSL.L SUB_80919D                    ;809410;80919D;
-        %Set16bit(!MX)                             ;809414;      ;
-        PLX                                  ;809416;      ;
-        INX                                  ;809417;      ;
-        INX                                  ;809418;      ;
-        PHX                                  ;809419;      ;
-        LDA.L UNK_Table9,X                   ;80941A;80BD9C;
-        LDX.W #$000B                         ;80941E;      ;
-        LDY.W #$000F                         ;809421;      ;
-        JSL.L SUB_80919D                    ;809424;80919D;
-        %Set16bit(!MX)                             ;809428;      ;
-        PLX                                  ;80942A;      ;
-        INX                                  ;80942B;      ;
-        INX                                  ;80942C;      ;
-        LDA.L UNK_Table9,X                   ;80942D;80BD9C;
-        LDX.W #$000C                         ;809431;      ;
-        LDY.W #$000F                         ;809434;      ;
-        JSL.L SUB_80919D                    ;809437;80919D;
-        %Set16bit(!MX)                             ;80943B;      ;
-        STZ.B $7E                            ;80943D;00007E;
-        %Set8bit(!M)                             ;80943F;      ;
-        LDA.B $92                            ;809441;000092;
-        BNE CODE_809457                      ;809443;809457;
-        LDA.L !hour                        ;809445;7F1F1C;Hour
-        CMP.B #$12                           ;809449;      ;
-        BCC CODE_809460                      ;80944B;809460;
-        LDA.B !tilemap_to_load                            ;80944D;000022;
-        CMP.B #$31                           ;80944F;      ;
-        BCS CODE_809457                      ;809451;809457;
-        CMP.B #$15                           ;809453;      ;
-        BCS CODE_809460                      ;809455;809460;
+        %Set8bit(!M)
+        LDA.B #$00
+        XBA
+        LDA.B $82
+        CLC
+        ADC.B $7E
+        STA.B $80
+        %Set16bit(!M)
+        ASL A
+        CLC
+        ADC.B $80
+        ASL A
+        TAX
+        PHX
+        LDA.L UNK_Table9,X
+        LDX.W #$000A
+        LDY.W #$000F
+        JSL.L SUB_80919D
+        %Set16bit(!MX)
+        PLX
+        INX
+        INX
+        PHX
+        LDA.L UNK_Table9,X
+        LDX.W #$000B
+        LDY.W #$000F
+        JSL.L SUB_80919D
+        %Set16bit(!MX)
+        PLX
+        INX
+        INX
+        LDA.L UNK_Table9,X
+        LDX.W #$000C
+        LDY.W #$000F
+        JSL.L SUB_80919D
+        %Set16bit(!MX)
+        STZ.B $7E
+        %Set8bit(!M)
+        LDA.B $92
+        BNE .CODE_809457
+        LDA.L !hour
+        CMP.B #$12
+        BCC .CODE_809460
+        LDA.B !tilemap_to_load
+        CMP.B #$31
+        BCS .CODE_809457
+        CMP.B #$15
+        BCS .CODE_809460
 
-        CODE_809457: %Set16bit(!M)                             ;809457;      ;
-        LDA.W #$0006                         ;809459;      ;
-        STA.B $7E                            ;80945C;00007E;
-        BRA CODE_809460                      ;80945E;809460;
+    .CODE_809457:
+        %Set16bit(!M)
+        LDA.W #$0006
+        STA.B $7E
+        BRA .CODE_809460
 
-        CODE_809460: %Set16bit(!MX)                             ;809460;      ;
-        LDA.L !wife_pregnancy                        ;809462;7F1F3B;Wife Pregnancy
-        BNE CODE_80946B                      ;809466;80946B;
-        JMP.W returnAAAA                        ;809468;809500;
+    .CODE_809460:
+        %Set16bit(!MX)
+        LDA.L !wife_pregnancy
+        BNE .CODE_80946B
+        JMP.W .returnAAAA
 
-        CODE_80946B: LDA.L $7F1F66                        ;80946B;7F1F66;Which Wife Flag
-        AND.W #$0001                         ;80946F;      ;
-        BNE CODE_80949A                      ;809472;80949A;
-        LDA.L $7F1F66                        ;809474;7F1F66;Which Wife Flag
-        AND.W #$0002                         ;809478;      ;
-        BNE CODE_8094A1                      ;80947B;8094A1;
-        LDA.L $7F1F66                        ;80947D;7F1F66;Which Wife Flag
-        AND.W #$0004                         ;809481;      ;
-        BNE CODE_8094A8                      ;809484;8094A8;
-        LDA.L $7F1F66                        ;809486;7F1F66;Which Wife Flag
-        AND.W #$0008                         ;80948A;      ;
-        BNE CODE_8094AF                      ;80948D;8094AF;
-        LDA.L $7F1F66                        ;80948F;7F1F66;Which Wife Flag
-        AND.W #$0010                         ;809493;      ;
-        BNE CODE_8094B6                      ;809496;8094B6;
-        BRA returnAAAA                          ;809498;809500;
+    .CODE_80946B:
+        LDA.L $7F1F66
+        AND.W #$0001
+        BNE .CODE_80949A
+        LDA.L $7F1F66
+        AND.W #$0002
+        BNE .CODE_8094A1
+        LDA.L $7F1F66
+        AND.W #$0004
+        BNE .CODE_8094A8
+        LDA.L $7F1F66
+        AND.W #$0008
+        BNE .CODE_8094AF
+        LDA.L $7F1F66
+        AND.W #$0010
+        BNE .CODE_8094B6
+        BRA .returnAAAA
 
-        CODE_80949A: %Set16bit(!MX)                             ;80949A;      ;
-        LDA.W #$0001                         ;80949C;      ;
-        BRA CODE_8094BD                      ;80949F;8094BD;
+    .CODE_80949A:
+        %Set16bit(!MX)
+        LDA.W #$0001
+        BRA .CODE_8094BD
 
-        CODE_8094A1: %Set16bit(!MX)                             ;8094A1;      ;
-        LDA.W #$0002                         ;8094A3;      ;
-        BRA CODE_8094BD                      ;8094A6;8094BD;
+    .CODE_8094A1:
+        %Set16bit(!MX)
+        LDA.W #$0002
+        BRA .CODE_8094BD
 
-        CODE_8094A8: %Set16bit(!MX)                             ;8094A8;      ;
-        LDA.W #$0003                         ;8094AA;      ;
-        BRA CODE_8094BD                      ;8094AD;8094BD;
+    .CODE_8094A8:
+        %Set16bit(!MX)
+        LDA.W #$0003
+        BRA .CODE_8094BD
 
-        CODE_8094AF: %Set16bit(!MX)                             ;8094AF;      ;
-        LDA.W #$0004                         ;8094B1;      ;
-        BRA CODE_8094BD                      ;8094B4;8094BD;
+    .CODE_8094AF:
+        %Set16bit(!MX)
+        LDA.W #$0004
+        BRA .CODE_8094BD
 
-        CODE_8094B6: %Set16bit(!MX)                             ;8094B6;      ;
-        LDA.W #$0005                         ;8094B8;      ;
-        BRA CODE_8094BD                      ;8094BB;8094BD;
+    .CODE_8094B6:
+        %Set16bit(!MX)
+        LDA.W #$0005
+        BRA .CODE_8094BD
 
-        CODE_8094BD: %Set16bit(!MX)                             ;8094BD;      ;
-        CLC                                  ;8094BF;      ;
-        ADC.B $7E                            ;8094C0;00007E;
-        STA.B $80                            ;8094C2;000080;
-        ASL A                                ;8094C4;      ;
-        CLC                                  ;8094C5;      ;
-        ADC.B $80                            ;8094C6;000080;
-        ASL A                                ;8094C8;      ;
-        TAX                                  ;8094C9;      ;
-        PHX                                  ;8094CA;      ;
-        LDA.L UNK_Table10,X                  ;8094CB;80BDFC;
-        LDX.W #$0008                         ;8094CF;      ;
-        LDY.W #$000B                         ;8094D2;      ;
-        JSL.L SUB_80919D                    ;8094D5;80919D;
-        %Set16bit(!MX)                             ;8094D9;      ;
-        PLX                                  ;8094DB;      ;
-        INX                                  ;8094DC;      ;
-        INX                                  ;8094DD;      ;
-        PHX                                  ;8094DE;      ;
-        LDA.L UNK_Table10,X                  ;8094DF;80BDFC;
-        LDX.W #$0009                         ;8094E3;      ;
-        LDY.W #$000B                         ;8094E6;      ;
-        JSL.L SUB_80919D                    ;8094E9;80919D;
-        %Set16bit(!MX)                             ;8094ED;      ;
-        PLX                                  ;8094EF;      ;
-        INX                                  ;8094F0;      ;
-        INX                                  ;8094F1;      ;
-        LDA.L UNK_Table10,X                  ;8094F2;80BDFC;
-        LDX.W #$000A                         ;8094F6;      ;
-        LDY.W #$000B                         ;8094F9;      ;
-        JSL.L SUB_80919D                    ;8094FC;80919D;
+    .CODE_8094BD:
+        %Set16bit(!MX)
+        CLC
+        ADC.B $7E
+        STA.B $80
+        ASL A
+        CLC
+        ADC.B $80
+        ASL A
+        TAX
+        PHX
+        LDA.L UNK_Table10,X
+        LDX.W #$0008
+        LDY.W #$000B
+        JSL.L SUB_80919D
+        %Set16bit(!MX)
+        PLX
+        INX
+        INX
+        PHX
+        LDA.L UNK_Table10,X
+        LDX.W #$0009
+        LDY.W #$000B
+        JSL.L SUB_80919D
+        %Set16bit(!MX)
+        PLX
+        INX
+        INX
+        LDA.L UNK_Table10,X
+        LDX.W #$000A
+        LDY.W #$000B
+        JSL.L SUB_80919D
 
-        returnAAAA: RTL                                  ;809500;      ;END_AAAA
+    .returnAAAA:
+        RTL
 
 ;;;;;;;;
 SetPaletteToLoad: ;809501
@@ -2907,7 +2915,7 @@ UNK_ScreenTransition: ;8096D3
         JSL.L ZeroesPartialVRAM
         JSL.L Zeroes42Pointers
         JSL.L ClearsTimeofDayPalette
-        JSL.L UNK_UNKClearWRAMSpace
+        JSL.L ClearSpriteDataTables
         JSL.L InitializeOBJs
         JSL.L UNK_PresetsMemory3
         JSL.L ClearsofAllCCStructs
@@ -3112,9 +3120,9 @@ SUB_80972C: ;80972C
         JSL.L LoadMap
         JSL.L BackgroundsManager
         JSL.L ChangePalettebyTime
-        JSL.L SUB_809329
+        JSL.L PrepareSpritePalette
         JSL.L CallIndexedSubrutines
-        JSL.L SUB_809241
+        JSL.L UNK_CustomisePalette
         JSL.L UNK_BigLoop
         %Set8bit(!M)
         %Set16bit(!X)

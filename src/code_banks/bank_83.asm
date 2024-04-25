@@ -7508,803 +7508,816 @@ CowFeedingandStatus: ;83BC5A
                        STA.L $7F1F32                        ;83C291;7F1F32;
                                                             ;      ;      ;
           CODE_83C295: RTL                                  ;83C295;      ;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C296: %Set16bit(!MX)                             ;83C296;      ;
-                       LDX.W #$0000                         ;83C298;      ;
-                                                            ;      ;      ;
-          CODE_83C29B: %Set16bit(!MX)                             ;83C29B;      ;
-                       PHX                                  ;83C29D;      ;
-                       PHX                                  ;83C29E;      ;
-                       TXA                                  ;83C29F;      ;
-                       JSL.L GetChickenPointer          ;83C2A0;83C995;
-                       %Set8bit(!M)                             ;83C2A4;      ;
-                       %Set16bit(!X)                             ;83C2A6;      ;
-                       PLX                                  ;83C2A8;      ;
-                       LDY.W #$0000                         ;83C2A9;      ;
-                       LDA.B [$72],Y                        ;83C2AC;000072;
-                       AND.B #$01                           ;83C2AE;      ;
-                       BNE CODE_83C2B5                      ;83C2B0;83C2B5;
-                       JMP.W CODE_83C401                    ;83C2B2;83C401;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C2B5: LDY.W #$0000                         ;83C2B5;      ;
-                       LDA.B [$72],Y                        ;83C2B8;000072;
-                       AND.B #$20                           ;83C2BA;      ;
-                       BEQ CODE_83C2C1                      ;83C2BC;83C2C1;
-                       JMP.W CODE_83C401                    ;83C2BE;83C401;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C2C1: %Set8bit(!M)                             ;83C2C1;      ;
-                       LDY.W #$0001                         ;83C2C3;      ;
-                       LDA.B [$72],Y                        ;83C2C6;000072;
-                       CMP.B #$04                           ;83C2C8;      ;
-                       BCS CODE_83C2D8                      ;83C2CA;83C2D8;
-                       LDA.B !tilemap_to_load                            ;83C2CC;000022;
-                       CMP.B #$04                           ;83C2CE;      ;
-                       BCC CODE_83C2D5                      ;83C2D0;83C2D5;
-                       JMP.W CODE_83C401                    ;83C2D2;83C401;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C2D5: JMP.W CODE_83C370                    ;83C2D5;83C370;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C2D8: %Set8bit(!M)                             ;83C2D8;      ;
-                       LDY.W #$0001                         ;83C2DA;      ;
-                       LDA.B [$72],Y                        ;83C2DD;000072;
-                       CMP.B #$08                           ;83C2DF;      ;
-                       BCS CODE_83C2F5                      ;83C2E1;83C2F5;
-                       LDA.B !tilemap_to_load                            ;83C2E3;000022;
-                       CMP.B #$04                           ;83C2E5;      ;
-                       BCS CODE_83C2EC                      ;83C2E7;83C2EC;
-                       JMP.W CODE_83C401                    ;83C2E9;83C401;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C2EC: CMP.B #$08                           ;83C2EC;      ;
-                       BCC CODE_83C2F3                      ;83C2EE;83C2F3;
-                       JMP.W CODE_83C401                    ;83C2F0;83C401;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C2F3: BRA CODE_83C370                      ;83C2F3;83C370;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C2F5: %Set8bit(!M)                             ;83C2F5;      ;
-                       LDY.W #$0001                         ;83C2F7;      ;
-                       LDA.B [$72],Y                        ;83C2FA;000072;
-                       CMP.B #$10                           ;83C2FC;      ;
-                       BCS CODE_83C312                      ;83C2FE;83C312;
-                       LDA.B !tilemap_to_load                            ;83C300;000022;
-                       CMP.B #$0C                           ;83C302;      ;
-                       BCS CODE_83C309                      ;83C304;83C309;
-                       JMP.W CODE_83C401                    ;83C306;83C401;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C309: CMP.B #$10                           ;83C309;      ;
-                       BCC CODE_83C310                      ;83C30B;83C310;
-                       JMP.W CODE_83C401                    ;83C30D;83C401;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C310: BRA CODE_83C370                      ;83C310;83C370;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C312: %Set8bit(!M)                             ;83C312;      ;
-                       LDY.W #$0001                         ;83C314;      ;
-                       LDA.B [$72],Y                        ;83C317;000072;
-                       CMP.B #$14                           ;83C319;      ;
-                       BCS CODE_83C32F                      ;83C31B;83C32F;
-                       LDA.B !tilemap_to_load                            ;83C31D;000022;
-                       CMP.B #$10                           ;83C31F;      ;
-                       BCS CODE_83C326                      ;83C321;83C326;
-                       JMP.W CODE_83C401                    ;83C323;83C401;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C326: CMP.B #$14                           ;83C326;      ;
-                       BCC CODE_83C32D                      ;83C328;83C32D;
-                       JMP.W CODE_83C401                    ;83C32A;83C401;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C32D: BRA CODE_83C370                      ;83C32D;83C370;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C32F: %Set8bit(!M)                             ;83C32F;      ;
-                       LDY.W #$0001                         ;83C331;      ;
-                       LDA.B [$72],Y                        ;83C334;000072;
-                       CMP.B #$18                           ;83C336;      ;
-                       BCS CODE_83C34C                      ;83C338;83C34C;
-                       LDA.B !tilemap_to_load                            ;83C33A;000022;
-                       CMP.B #$15                           ;83C33C;      ;
-                       BCS CODE_83C343                      ;83C33E;83C343;
-                       JMP.W CODE_83C401                    ;83C340;83C401;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C343: CMP.B #$18                           ;83C343;      ;
-                       BCC CODE_83C34A                      ;83C345;83C34A;
-                       JMP.W CODE_83C401                    ;83C347;83C401;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C34A: BRA CODE_83C370                      ;83C34A;83C370;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C34C: %Set8bit(!M)                             ;83C34C;      ;
-                       LDY.W #$0001                         ;83C34E;      ;
-                       LDA.B [$72],Y                        ;83C351;000072;
-                       CMP.B #$31                           ;83C353;      ;
-                       BCC CODE_83C362                      ;83C355;83C362;
-                       LDA.B !tilemap_to_load                            ;83C357;000022;
-                       CMP.B #$31                           ;83C359;      ;
-                       BCS CODE_83C360                      ;83C35B;83C360;
-                       JMP.W CODE_83C401                    ;83C35D;83C401;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C360: BRA CODE_83C370                      ;83C360;83C370;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C362: %Set8bit(!M)                             ;83C362;      ;
-                       LDY.W #$0001                         ;83C364;      ;
-                       LDA.B [$72],Y                        ;83C367;000072;
-                       CMP.B !tilemap_to_load                            ;83C369;000022;
-                       BEQ CODE_83C370                      ;83C36B;83C370;
-                       JMP.W CODE_83C401                    ;83C36D;83C401;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C370: %Set16bit(!M)                             ;83C370;      ;
-                       LDY.W #$0004                         ;83C372;      ;
-                       LDA.B [$72],Y                        ;83C375;000072;
-                       STA.W !tile_in_front_X                          ;83C377;000985;
-                       LDY.W #$0006                         ;83C37A;      ;
-                       LDA.B [$72],Y                        ;83C37D;000072;
-                       STA.W !tile_in_front_Y                          ;83C37F;000987;
-                       %Set8bit(!M)                             ;83C382;      ;
-                       LDY.W #$0000                         ;83C384;      ;
-                       LDA.B [$72],Y                        ;83C387;000072;
-                       AND.B #$02                           ;83C389;      ;
-                       BEQ CODE_83C3AB                      ;83C38B;83C3AB;
-                       %Set16bit(!M)                             ;83C38D;      ;
-                       TXA                                  ;83C38F;      ;
-                       CLC                                  ;83C390;      ;
-                       ADC.W #$0024                         ;83C391;      ;
-                       LDX.W #$0000                         ;83C394;      ;
-                       LDY.W #$0000                         ;83C397;      ;
-                       JSL.L SUB_8480F8                    ;83C39A;8480F8;
-                       %Set8bit(!M)                             ;83C39E;      ;
-                       %Set16bit(!X)                             ;83C3A0;      ;
-                       LDY.W #$0000                         ;83C3A2;      ;
-                       LDA.B #$03                           ;83C3A5;      ;
-                       STA.B [$CC],Y                        ;83C3A7;0000CC;
-                       BRA CODE_83C401                      ;83C3A9;83C401;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C3AB: %Set8bit(!M)                             ;83C3AB;      ;
-                       LDY.W #$0000                         ;83C3AD;      ;
-                       LDA.B [$72],Y                        ;83C3B0;000072;
-                       AND.B #$04                           ;83C3B2;      ;
-                       BEQ CODE_83C3C9                      ;83C3B4;83C3C9;
-                       %Set16bit(!M)                             ;83C3B6;      ;
-                       TXA                                  ;83C3B8;      ;
-                       CLC                                  ;83C3B9;      ;
-                       ADC.W #$0024                         ;83C3BA;      ;
-                       LDX.W #$0000                         ;83C3BD;      ;
-                       LDY.W #$0001                         ;83C3C0;      ;
-                       JSL.L SUB_8480F8                    ;83C3C3;8480F8;
-                       BRA CODE_83C401                      ;83C3C7;83C401;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C3C9: %Set8bit(!M)                             ;83C3C9;      ;
-                       LDY.W #$0000                         ;83C3CB;      ;
-                       LDA.B [$72],Y                        ;83C3CE;000072;
-                       AND.B #$08                           ;83C3D0;      ;
-                       BEQ CODE_83C3F0                      ;83C3D2;83C3F0;
-                       %Set16bit(!M)                             ;83C3D4;      ;
-                       TXA                                  ;83C3D6;      ;
-                       CLC                                  ;83C3D7;      ;
-                       ADC.W #$0024                         ;83C3D8;      ;
-                       LDX.W #$0000                         ;83C3DB;      ;
-                       LDY.W #$0002                         ;83C3DE;      ;
-                       JSL.L SUB_8480F8                    ;83C3E1;8480F8;
-                       %Set16bit(!MX)                             ;83C3E5;      ;
-                       PLA                                  ;83C3E7;      ;
-                       PHA                                  ;83C3E8;      ;
-                       ASL A                                ;83C3E9;      ;
-                       TAX                                  ;83C3EA;      ;
-                       STZ.W $093B,X                        ;83C3EB;00093B;
-                       BRA CODE_83C401                      ;83C3EE;83C401;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C3F0: %Set16bit(!M)                             ;83C3F0;      ;
-                       TXA                                  ;83C3F2;      ;
-                       CLC                                  ;83C3F3;      ;
-                       ADC.W #$0024                         ;83C3F4;      ;
-                       LDX.W #$0000                         ;83C3F7;      ;
-                       LDY.W #$005F                         ;83C3FA;      ;
-                       JSL.L SUB_8480F8                    ;83C3FD;8480F8;
-                                                            ;      ;      ;
-          CODE_83C401: %Set16bit(!MX)                             ;83C401;      ;
-                       PLX                                  ;83C403;      ;
-                       INX                                  ;83C404;      ;
-                       CPX.W #$000D                         ;83C405;      ;
-                       BEQ CODE_83C40D                      ;83C408;83C40D;
-                       JMP.W CODE_83C29B                    ;83C40A;83C29B;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C40D: LDX.W #$0000                         ;83C40D;      ;
-                                                            ;      ;      ;
-          CODE_83C410: %Set16bit(!MX)                             ;83C410;      ;
-                       PHX                                  ;83C412;      ;
-                       PHX                                  ;83C413;      ;
-                       TXA                                  ;83C414;      ;
-                       JSL.L GetsCowPointer                ;83C415;83C9A7;
-                       %Set8bit(!M)                             ;83C419;      ;
-                       %Set16bit(!X)                             ;83C41B;      ;
-                       PLX                                  ;83C41D;      ;
-                       LDY.W #$0000                         ;83C41E;      ;
-                       LDA.B [$72],Y                        ;83C421;000072;
-                       AND.B #$01                           ;83C423;      ;
-                       BNE CODE_83C42A                      ;83C425;83C42A;
-                       JMP.W CODE_83C63D                    ;83C427;83C63D;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C42A: %Set8bit(!M)                             ;83C42A;      ;
-                       LDA.B !tilemap_to_load                            ;83C42C;000022;
-                       CMP.B #$27                           ;83C42E;      ;
-                       BNE CODE_83C46D                      ;83C430;83C46D;
-                       LDY.W #$0002                         ;83C432;      ;
-                       LDA.B [$72],Y                        ;83C435;000072;
-                       CMP.B #$27                           ;83C437;      ;
-                       BEQ CODE_83C43E                      ;83C439;83C43E;
-                       JMP.W CODE_83C63D                    ;83C43B;83C63D;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C43E: PHX                                  ;83C43E;      ;
-                       %Set8bit(!M)                             ;83C43F;      ;
-                       LDY.W #$0000                         ;83C441;      ;
-                       LDA.B [$72],Y                        ;83C444;000072;
-                       AND.B #$C0                           ;83C446;      ;
-                       BEQ CODE_83C44D                      ;83C448;83C44D;
-                       LDX.W #$000C                         ;83C44A;      ;
-                                                            ;      ;      ;
-          CODE_83C44D: %Set16bit(!M)                             ;83C44D;      ;
-                       TXA                                  ;83C44F;      ;
-                       ASL A                                ;83C450;      ;
-                       ASL A                                ;83C451;      ;
-                       TAX                                  ;83C452;      ;
-                       LDY.W #$0008                         ;83C453;      ;
-                       LDA.L Table_CowsSpawnPos,X           ;83C456;83CA44;
-                       STA.W !tile_in_front_X                          ;83C45A;000985;
-                       INX                                  ;83C45D;      ;
-                       INX                                  ;83C45E;      ;
-                       LDY.W #$000A                         ;83C45F;      ;
-                       LDA.L Table_CowsSpawnPos,X           ;83C462;83CA44;
-                       STA.W !tile_in_front_Y                          ;83C466;000987;
-                       PLX                                  ;83C469;      ;
-                       JMP.W CODE_83C52E                    ;83C46A;83C52E;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C46D: %Set8bit(!M)                             ;83C46D;      ;
-                       LDY.W #$0002                         ;83C46F;      ;
-                       LDA.B [$72],Y                        ;83C472;000072;
-                       CMP.B #$04                           ;83C474;      ;
-                       BCS CODE_83C484                      ;83C476;83C484;
-                       LDA.B !tilemap_to_load                            ;83C478;000022;
-                       CMP.B #$04                           ;83C47A;      ;
-                       BCC CODE_83C481                      ;83C47C;83C481;
-                       JMP.W CODE_83C63D                    ;83C47E;83C63D;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C481: JMP.W CODE_83C51C                    ;83C481;83C51C;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C484: %Set8bit(!M)                             ;83C484;      ;
-                       LDY.W #$0002                         ;83C486;      ;
-                       LDA.B [$72],Y                        ;83C489;000072;
-                       CMP.B #$08                           ;83C48B;      ;
-                       BCS CODE_83C4A1                      ;83C48D;83C4A1;
-                       LDA.B !tilemap_to_load                            ;83C48F;000022;
-                       CMP.B #$04                           ;83C491;      ;
-                       BCS CODE_83C498                      ;83C493;83C498;
-                       JMP.W CODE_83C63D                    ;83C495;83C63D;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C498: CMP.B #$08                           ;83C498;      ;
-                       BCC CODE_83C49F                      ;83C49A;83C49F;
-                       JMP.W CODE_83C63D                    ;83C49C;83C63D;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C49F: BRA CODE_83C51C                      ;83C49F;83C51C;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C4A1: %Set8bit(!M)                             ;83C4A1;      ;
-                       LDY.W #$0002                         ;83C4A3;      ;
-                       LDA.B [$72],Y                        ;83C4A6;000072;
-                       CMP.B #$10                           ;83C4A8;      ;
-                       BCS CODE_83C4BE                      ;83C4AA;83C4BE;
-                       LDA.B !tilemap_to_load                            ;83C4AC;000022;
-                       CMP.B #$0C                           ;83C4AE;      ;
-                       BCS CODE_83C4B5                      ;83C4B0;83C4B5;
-                       JMP.W CODE_83C63D                    ;83C4B2;83C63D;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C4B5: CMP.B #$10                           ;83C4B5;      ;
-                       BCC CODE_83C4BC                      ;83C4B7;83C4BC;
-                       JMP.W CODE_83C63D                    ;83C4B9;83C63D;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C4BC: BRA CODE_83C51C                      ;83C4BC;83C51C;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C4BE: %Set8bit(!M)                             ;83C4BE;      ;
-                       LDY.W #$0002                         ;83C4C0;      ;
-                       LDA.B [$72],Y                        ;83C4C3;000072;
-                       CMP.B #$14                           ;83C4C5;      ;
-                       BCS CODE_83C4DB                      ;83C4C7;83C4DB;
-                       LDA.B !tilemap_to_load                            ;83C4C9;000022;
-                       CMP.B #$10                           ;83C4CB;      ;
-                       BCS CODE_83C4D2                      ;83C4CD;83C4D2;
-                       JMP.W CODE_83C63D                    ;83C4CF;83C63D;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C4D2: CMP.B #$14                           ;83C4D2;      ;
-                       BCC CODE_83C4D9                      ;83C4D4;83C4D9;
-                       JMP.W CODE_83C63D                    ;83C4D6;83C63D;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C4D9: BRA CODE_83C51C                      ;83C4D9;83C51C;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C4DB: %Set8bit(!M)                             ;83C4DB;      ;
-                       LDY.W #$0002                         ;83C4DD;      ;
-                       LDA.B [$72],Y                        ;83C4E0;000072;
-                       CMP.B #$18                           ;83C4E2;      ;
-                       BCS CODE_83C4F8                      ;83C4E4;83C4F8;
-                       LDA.B !tilemap_to_load                            ;83C4E6;000022;
-                       CMP.B #$15                           ;83C4E8;      ;
-                       BCS CODE_83C4EF                      ;83C4EA;83C4EF;
-                       JMP.W CODE_83C63D                    ;83C4EC;83C63D;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C4EF: CMP.B #$18                           ;83C4EF;      ;
-                       BCC CODE_83C4F6                      ;83C4F1;83C4F6;
-                       JMP.W CODE_83C63D                    ;83C4F3;83C63D;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C4F6: BRA CODE_83C51C                      ;83C4F6;83C51C;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C4F8: %Set8bit(!M)                             ;83C4F8;      ;
-                       LDY.W #$0002                         ;83C4FA;      ;
-                       LDA.B [$72],Y                        ;83C4FD;000072;
-                       CMP.B #$31                           ;83C4FF;      ;
-                       BCC CODE_83C50E                      ;83C501;83C50E;
-                       LDA.B !tilemap_to_load                            ;83C503;000022;
-                       CMP.B #$31                           ;83C505;      ;
-                       BCS CODE_83C50C                      ;83C507;83C50C;
-                       JMP.W CODE_83C63D                    ;83C509;83C63D;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C50C: BRA CODE_83C51C                      ;83C50C;83C51C;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C50E: %Set8bit(!M)                             ;83C50E;      ;
-                       LDY.W #$0002                         ;83C510;      ;
-                       LDA.B [$72],Y                        ;83C513;000072;
-                       CMP.B !tilemap_to_load                            ;83C515;000022;
-                       BEQ CODE_83C51C                      ;83C517;83C51C;
-                       JMP.W CODE_83C63D                    ;83C519;83C63D;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C51C: %Set16bit(!M)                             ;83C51C;      ;
-                       LDY.W #$0008                         ;83C51E;      ;
-                       LDA.B [$72],Y                        ;83C521;000072;
-                       STA.W !tile_in_front_X                          ;83C523;000985;
-                       LDY.W #$000A                         ;83C526;      ;
-                       LDA.B [$72],Y                        ;83C529;000072;
-                       STA.W !tile_in_front_Y                          ;83C52B;000987;
-                                                            ;      ;      ;
-          CODE_83C52E: %Set8bit(!M)                             ;83C52E;      ;
-                       LDY.W #$0000                         ;83C530;      ;
-                       LDA.B [$72],Y                        ;83C533;000072;
-                       AND.B #$02                           ;83C535;      ;
-                       BEQ CODE_83C572                      ;83C537;83C572;
-                       %Set16bit(!M)                             ;83C539;      ;
-                       LDA.W $0196                          ;83C53B;000196;
-                       AND.W #$0002                         ;83C53E;      ;
-                       BEQ CODE_83C553                      ;83C541;83C553;
-                       %Set8bit(!M)                             ;83C543;      ;
-                       LDY.W #$0002                         ;83C545;      ;
-                       LDA.B [$72],Y                        ;83C548;000072;
-                       CMP.B #$27                           ;83C54A;      ;
-                       BEQ CODE_83C553                      ;83C54C;83C553;
-                       LDY.W #$0017                         ;83C54E;      ;
-                       BRA CODE_83C558                      ;83C551;83C558;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C553: %Set16bit(!MX)                             ;83C553;      ;
-                       LDY.W #$0003                         ;83C555;      ;
-                                                            ;      ;      ;
-          CODE_83C558: %Set16bit(!M)                             ;83C558;      ;
-                       TXA                                  ;83C55A;      ;
-                       CLC                                  ;83C55B;      ;
-                       ADC.W #$0018                         ;83C55C;      ;
-                       LDX.W #$0000                         ;83C55F;      ;
-                       JSL.L SUB_8480F8                    ;83C562;8480F8;
-                       %Set16bit(!MX)                             ;83C566;      ;
-                       PLA                                  ;83C568;      ;
-                       PHA                                  ;83C569;      ;
-                       ASL A                                ;83C56A;      ;
-                       TAX                                  ;83C56B;      ;
-                       STZ.W $0953,X                        ;83C56C;000953;
-                       JMP.W CODE_83C63D                    ;83C56F;83C63D;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C572: %Set8bit(!M)                             ;83C572;      ;
-                       LDY.W #$0000                         ;83C574;      ;
-                       LDA.B [$72],Y                        ;83C577;000072;
-                       AND.B #$04                           ;83C579;      ;
-                       BEQ CODE_83C5B6                      ;83C57B;83C5B6;
-                       %Set16bit(!M)                             ;83C57D;      ;
-                       LDA.W $0196                          ;83C57F;000196;
-                       AND.W #$0002                         ;83C582;      ;
-                       BEQ CODE_83C597                      ;83C585;83C597;
-                       %Set8bit(!M)                             ;83C587;      ;
-                       LDY.W #$0002                         ;83C589;      ;
-                       LDA.B [$72],Y                        ;83C58C;000072;
-                       CMP.B #$27                           ;83C58E;      ;
-                       BEQ CODE_83C597                      ;83C590;83C597;
-                       LDY.W #$002F                         ;83C592;      ;
-                       BRA CODE_83C59C                      ;83C595;83C59C;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C597: %Set16bit(!MX)                             ;83C597;      ;
-                       LDY.W #$0004                         ;83C599;      ;
-                                                            ;      ;      ;
-          CODE_83C59C: %Set16bit(!M)                             ;83C59C;      ;
-                       TXA                                  ;83C59E;      ;
-                       CLC                                  ;83C59F;      ;
-                       ADC.W #$0018                         ;83C5A0;      ;
-                       LDX.W #$0000                         ;83C5A3;      ;
-                       JSL.L SUB_8480F8                    ;83C5A6;8480F8;
-                       %Set16bit(!MX)                             ;83C5AA;      ;
-                       PLA                                  ;83C5AC;      ;
-                       PHA                                  ;83C5AD;      ;
-                       ASL A                                ;83C5AE;      ;
-                       TAX                                  ;83C5AF;      ;
-                       STZ.W $0953,X                        ;83C5B0;000953;
-                       JMP.W CODE_83C63D                    ;83C5B3;83C63D;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C5B6: %Set8bit(!M)                             ;83C5B6;      ;
-                       LDY.W #$0000                         ;83C5B8;      ;
-                       LDA.B [$72],Y                        ;83C5BB;000072;
-                       AND.B #$08                           ;83C5BD;      ;
-                       BEQ CODE_83C63D                      ;83C5BF;83C63D;
-                       %Set8bit(!M)                             ;83C5C1;      ;
-                       LDY.W #$0000                         ;83C5C3;      ;
-                       LDA.B [$72],Y                        ;83C5C6;000072;
-                       AND.B #$80                           ;83C5C8;      ;
-                       BNE CODE_83C616                      ;83C5CA;83C616;
-                       %Set8bit(!M)                             ;83C5CC;      ;
-                       LDY.W #$0000                         ;83C5CE;      ;
-                       LDA.B [$72],Y                        ;83C5D1;000072;
-                       AND.B #$40                           ;83C5D3;      ;
-                       BEQ CODE_83C5DC                      ;83C5D5;83C5DC;
-                       LDY.W #$0008                         ;83C5D7;      ;
-                       BRA CODE_83C624                      ;83C5DA;83C624;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C5DC: %Set8bit(!M)                             ;83C5DC;      ;
-                       LDY.W #$0000                         ;83C5DE;      ;
-                       LDA.B [$72],Y                        ;83C5E1;000072;
-                       AND.B #$20                           ;83C5E3;      ;
-                       BEQ CODE_83C5EC                      ;83C5E5;83C5EC;
-                       LDY.W #$0007                         ;83C5E7;      ;
-                       BRA CODE_83C624                      ;83C5EA;83C624;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C5EC: %Set8bit(!M)                             ;83C5EC;      ;
-                       LDY.W #$0000                         ;83C5EE;      ;
-                       LDA.B [$72],Y                        ;83C5F1;000072;
-                       AND.B #$10                           ;83C5F3;      ;
-                       BEQ CODE_83C5FC                      ;83C5F5;83C5FC;
-                       LDY.W #$0006                         ;83C5F7;      ;
-                       BRA CODE_83C624                      ;83C5FA;83C624;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C5FC: %Set16bit(!M)                             ;83C5FC;      ;
-                       LDA.W $0196                          ;83C5FE;000196;
-                       AND.W #$0002                         ;83C601;      ;
-                       BEQ CODE_83C621                      ;83C604;83C621;
-                       %Set8bit(!M)                             ;83C606;      ;
-                       LDY.W #$0002                         ;83C608;      ;
-                       LDA.B [$72],Y                        ;83C60B;000072;
-                       CMP.B #$27                           ;83C60D;      ;
-                       BEQ CODE_83C621                      ;83C60F;83C621;
-                       LDY.W #$0009                         ;83C611;      ;
-                       BRA CODE_83C624                      ;83C614;83C624;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C616: %Set8bit(!M)                             ;83C616;      ;
-                       LDY.W #$0000                         ;83C618;      ;
-                       LDA.B [$72],Y                        ;83C61B;000072;
-                       AND.B #$7F                           ;83C61D;      ;
-                       STA.B [$72],Y                        ;83C61F;000072;
-                                                            ;      ;      ;
-          CODE_83C621: LDY.W #$0005                         ;83C621;      ;
-                                                            ;      ;      ;
-          CODE_83C624: %Set16bit(!M)                             ;83C624;      ;
-                       TXA                                  ;83C626;      ;
-                       CLC                                  ;83C627;      ;
-                       ADC.W #$0018                         ;83C628;      ;
-                       LDX.W #$0000                         ;83C62B;      ;
-                       JSL.L SUB_8480F8                    ;83C62E;8480F8;
-                       %Set16bit(!MX)                             ;83C632;      ;
-                       PLA                                  ;83C634;      ;
-                       PHA                                  ;83C635;      ;
-                       ASL A                                ;83C636;      ;
-                       TAX                                  ;83C637;      ;
-                       STZ.W $0953,X                        ;83C638;000953;
-                       BRA CODE_83C63D                      ;83C63B;83C63D;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C63D: %Set16bit(!MX)                             ;83C63D;      ;
-                       PLX                                  ;83C63F;      ;
-                       INX                                  ;83C640;      ;
-                       CPX.W #$000C                         ;83C641;      ;
-                       BEQ CODE_83C649                      ;83C644;83C649;
-                       JMP.W CODE_83C410                    ;83C646;83C410;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C649: %Set16bit(!MX)                             ;83C649;      ;
-                       LDA.L $7F1F68                        ;83C64B;7F1F68;
-                       AND.W #$0080                         ;83C64F;      ;
-                       BNE CODE_83C657                      ;83C652;83C657;
-                       JMP.W CODE_83C734                    ;83C654;83C734;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C657: LDA.B !game_state                            ;83C657;0000D2;
-                       AND.W #$0800                         ;83C659;      ;
-                       BEQ CODE_83C661                      ;83C65C;83C661;
-                       JMP.W CODE_83C734                    ;83C65E;83C734;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C661: %Set8bit(!M)                             ;83C661;      ;
-                       LDA.L !dog_map                        ;83C663;7F1F30;
-                       CMP.B #$04                           ;83C667;      ;
-                       BCS CODE_83C677                      ;83C669;83C677;
-                       LDA.B !tilemap_to_load                            ;83C66B;000022;
-                       CMP.B #$04                           ;83C66D;      ;
-                       BCC CODE_83C674                      ;83C66F;83C674;
-                       JMP.W CODE_83C734                    ;83C671;83C734;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C674: JMP.W CODE_83C709                    ;83C674;83C709;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C677: %Set8bit(!M)                             ;83C677;      ;
-                       LDA.L !dog_map                        ;83C679;7F1F30;
-                       CMP.B #$08                           ;83C67D;      ;
-                       BCS CODE_83C693                      ;83C67F;83C693;
-                       LDA.B !tilemap_to_load                            ;83C681;000022;
-                       CMP.B #$04                           ;83C683;      ;
-                       BCS CODE_83C68A                      ;83C685;83C68A;
-                       JMP.W CODE_83C734                    ;83C687;83C734;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C68A: CMP.B #$08                           ;83C68A;      ;
-                       BCC CODE_83C691                      ;83C68C;83C691;
-                       JMP.W CODE_83C734                    ;83C68E;83C734;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C691: BRA CODE_83C709                      ;83C691;83C709;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C693: %Set8bit(!M)                             ;83C693;      ;
-                       LDA.L !dog_map                        ;83C695;7F1F30;
-                       CMP.B #$10                           ;83C699;      ;
-                       BCS CODE_83C6AF                      ;83C69B;83C6AF;
-                       LDA.B !tilemap_to_load                            ;83C69D;000022;
-                       CMP.B #$0C                           ;83C69F;      ;
-                       BCS CODE_83C6A6                      ;83C6A1;83C6A6;
-                       JMP.W CODE_83C734                    ;83C6A3;83C734;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C6A6: CMP.B #$10                           ;83C6A6;      ;
-                       BCC CODE_83C6AD                      ;83C6A8;83C6AD;
-                       JMP.W CODE_83C734                    ;83C6AA;83C734;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C6AD: BRA CODE_83C709                      ;83C6AD;83C709;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C6AF: %Set8bit(!M)                             ;83C6AF;      ;
-                       LDA.L !dog_map                        ;83C6B1;7F1F30;
-                       CMP.B #$14                           ;83C6B5;      ;
-                       BCS CODE_83C6CB                      ;83C6B7;83C6CB;
-                       LDA.B !tilemap_to_load                            ;83C6B9;000022;
-                       CMP.B #$10                           ;83C6BB;      ;
-                       BCS CODE_83C6C2                      ;83C6BD;83C6C2;
-                       JMP.W CODE_83C734                    ;83C6BF;83C734;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C6C2: CMP.B #$14                           ;83C6C2;      ;
-                       BCC CODE_83C6C9                      ;83C6C4;83C6C9;
-                       JMP.W CODE_83C734                    ;83C6C6;83C734;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C6C9: BRA CODE_83C709                      ;83C6C9;83C709;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C6CB: %Set8bit(!M)                             ;83C6CB;      ;
-                       LDA.L !dog_map                        ;83C6CD;7F1F30;
-                       CMP.B #$18                           ;83C6D1;      ;
-                       BCS CODE_83C6E7                      ;83C6D3;83C6E7;
-                       LDA.B !tilemap_to_load                            ;83C6D5;000022;
-                       CMP.B #$15                           ;83C6D7;      ;
-                       BCS CODE_83C6DE                      ;83C6D9;83C6DE;
-                       JMP.W CODE_83C734                    ;83C6DB;83C734;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C6DE: CMP.B #$18                           ;83C6DE;      ;
-                       BCC CODE_83C6E5                      ;83C6E0;83C6E5;
-                       JMP.W CODE_83C734                    ;83C6E2;83C734;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C6E5: BRA CODE_83C709                      ;83C6E5;83C709;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C6E7: %Set8bit(!M)                             ;83C6E7;      ;
-                       LDA.L !dog_map                        ;83C6E9;7F1F30;
-                       CMP.B #$31                           ;83C6ED;      ;
-                       BCC CODE_83C6FC                      ;83C6EF;83C6FC;
-                       LDA.B !tilemap_to_load                            ;83C6F1;000022;
-                       CMP.B #$31                           ;83C6F3;      ;
-                       BCS CODE_83C6FA                      ;83C6F5;83C6FA;
-                       JMP.W CODE_83C734                    ;83C6F7;83C734;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C6FA: BRA CODE_83C709                      ;83C6FA;83C709;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C6FC: %Set8bit(!M)                             ;83C6FC;      ;
-                       LDA.L !dog_map                        ;83C6FE;7F1F30;
-                       CMP.B !tilemap_to_load                            ;83C702;000022;
-                       BEQ CODE_83C709                      ;83C704;83C709;
-                       JMP.W CODE_83C734                    ;83C706;83C734;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C709: %Set16bit(!MX)                             ;83C709;      ;
-                       LDA.L !dog_pos_X                        ;83C70B;7F1F2C;
-                       STA.W !tile_in_front_X                          ;83C70F;000985;
-                       LDA.L !dog_pos_Y                        ;83C712;7F1F2E;
-                       STA.W !tile_in_front_Y                          ;83C716;000987;
-                       LDA.W #$0016                         ;83C719;      ;
-                       LDX.W #$0000                         ;83C71C;      ;
-                       LDY.W #$0011                         ;83C71F;      ;
-                       JSL.L SUB_8480F8                    ;83C722;8480F8;
-                       %Set16bit(!M)                             ;83C726;      ;
-                       LDA.W #$0001                         ;83C728;      ;
-                       STA.L $7F1F58                        ;83C72B;7F1F58;
-                       %Set8bit(!M)                             ;83C72F;      ;
-                       STZ.W $0938                          ;83C731;000938;
-                                                            ;      ;      ;
-          CODE_83C734: %Set16bit(!MX)                             ;83C734;      ;
-                       LDA.L $7F1F68                        ;83C736;7F1F68;
-                       AND.W #$0100                         ;83C73A;      ;
-                       BNE CODE_83C742                      ;83C73D;83C742;
-                       JMP.W CODE_83C806                    ;83C73F;83C806;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C742: LDA.B !game_state                            ;83C742;0000D2;
-                       AND.W #$0010                         ;83C744;      ;
-                       BEQ CODE_83C74C                      ;83C747;83C74C;
-                       JMP.W CODE_83C806                    ;83C749;83C806;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C74C: %Set8bit(!M)                             ;83C74C;      ;
-                       LDA.L $7F1F31                        ;83C74E;7F1F31;
-                       CMP.B #$04                           ;83C752;      ;
-                       BCS CODE_83C761                      ;83C754;83C761;
-                       LDA.B !tilemap_to_load                            ;83C756;000022;
-                       CMP.B #$04                           ;83C758;      ;
-                       BCC CODE_83C75F                      ;83C75A;83C75F;
-                       JMP.W CODE_83C806                    ;83C75C;83C806;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C75F: BRA CODE_83C7D7                      ;83C75F;83C7D7;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C761: %Set8bit(!M)                             ;83C761;      ;
-                       LDA.L $7F1F31                        ;83C763;7F1F31;
-                       CMP.B #$08                           ;83C767;      ;
-                       BCS CODE_83C77D                      ;83C769;83C77D;
-                       LDA.B !tilemap_to_load                            ;83C76B;000022;
-                       CMP.B #$04                           ;83C76D;      ;
-                       BCS CODE_83C774                      ;83C76F;83C774;
-                       JMP.W CODE_83C806                    ;83C771;83C806;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C774: CMP.B #$08                           ;83C774;      ;
-                       BCC CODE_83C77B                      ;83C776;83C77B;
-                       JMP.W CODE_83C806                    ;83C778;83C806;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C77B: BRA CODE_83C7D7                      ;83C77B;83C7D7;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C77D: %Set8bit(!M)                             ;83C77D;      ;
-                       LDA.L $7F1F31                        ;83C77F;7F1F31;
-                       CMP.B #$10                           ;83C783;      ;
-                       BCS CODE_83C799                      ;83C785;83C799;
-                       LDA.B !tilemap_to_load                            ;83C787;000022;
-                       CMP.B #$0C                           ;83C789;      ;
-                       BCS CODE_83C790                      ;83C78B;83C790;
-                       JMP.W CODE_83C806                    ;83C78D;83C806;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C790: CMP.B #$10                           ;83C790;      ;
-                       BCC CODE_83C797                      ;83C792;83C797;
-                       JMP.W CODE_83C806                    ;83C794;83C806;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C797: BRA CODE_83C7D7                      ;83C797;83C7D7;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C799: %Set8bit(!M)                             ;83C799;      ;
-                       LDA.L $7F1F31                        ;83C79B;7F1F31;
-                       CMP.B #$14                           ;83C79F;      ;
-                       BCS CODE_83C7B5                      ;83C7A1;83C7B5;
-                       LDA.B !tilemap_to_load                            ;83C7A3;000022;
-                       CMP.B #$10                           ;83C7A5;      ;
-                       BCS CODE_83C7AC                      ;83C7A7;83C7AC;
-                       JMP.W CODE_83C806                    ;83C7A9;83C806;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C7AC: CMP.B #$14                           ;83C7AC;      ;
-                       BCC CODE_83C7B3                      ;83C7AE;83C7B3;
-                       JMP.W CODE_83C806                    ;83C7B0;83C806;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C7B3: BRA CODE_83C7D7                      ;83C7B3;83C7D7;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C7B5: %Set8bit(!M)                             ;83C7B5;      ;
-                       LDA.L $7F1F31                        ;83C7B7;7F1F31;
-                       CMP.B #$31                           ;83C7BB;      ;
-                       BCC CODE_83C7CA                      ;83C7BD;83C7CA;
-                       LDA.B !tilemap_to_load                            ;83C7BF;000022;
-                       CMP.B #$31                           ;83C7C1;      ;
-                       BCS CODE_83C7C8                      ;83C7C3;83C7C8;
-                       JMP.W CODE_83C806                    ;83C7C5;83C806;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C7C8: BRA CODE_83C7D7                      ;83C7C8;83C7D7;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C7CA: %Set8bit(!M)                             ;83C7CA;      ;
-                       LDA.L $7F1F31                        ;83C7CC;7F1F31;
-                       CMP.B !tilemap_to_load                            ;83C7D0;000022;
-                       BEQ CODE_83C7D7                      ;83C7D2;83C7D7;
-                       JMP.W CODE_83C806                    ;83C7D4;83C806;
-                                                            ;      ;      ;
-                                                            ;      ;      ;
-          CODE_83C7D7: %Set16bit(!MX)                             ;83C7D7;      ;
-                       LDA.W #$0110                         ;83C7D9;      ;
-                       STA.W !tile_in_front_X                          ;83C7DC;000985;
-                       LDA.W #$0140                         ;83C7DF;      ;
-                       STA.W !tile_in_front_Y                          ;83C7E2;000987;
-                       LDY.W #$0013                         ;83C7E5;      ;
-                       %Set8bit(!M)                             ;83C7E8;      ;
-                       LDA.L $7F1F32                        ;83C7EA;7F1F32;
-                       CMP.B #$15                           ;83C7EE;      ;
-                       BNE CODE_83C7F5                      ;83C7F0;83C7F5;
-                       LDY.W #$0010                         ;83C7F2;      ;
-                                                            ;      ;      ;
-          CODE_83C7F5: %Set16bit(!MX)                             ;83C7F5;      ;
-                       LDA.W #$0017                         ;83C7F7;      ;
-                       LDX.W #$0000                         ;83C7FA;      ;
-                       JSL.L SUB_8480F8                    ;83C7FD;8480F8;
-                       %Set8bit(!M)                             ;83C801;      ;
-                       STZ.W $0939                          ;83C803;000939;
-                                                            ;      ;      ;
-          CODE_83C806: RTL                                  ;83C806;      ;
+
+;;;;;;;;
+CODE_83C296:
+        %Set16bit(!MX)
+        LDX.W #$0000
+
+    .CODE_83C29B:
+            %Set16bit(!MX)
+            PHX
+            PHX
+            TXA
+            JSL.L GetChickenPointer
+            %Set8bit(!M)
+            %Set16bit(!X)
+            PLX
+            LDY.W #$0000
+            LDA.B [$72],Y
+            AND.B #$01
+            BNE .CODE_83C2B5
+            JMP.W .CODE_83C401
+
+        .CODE_83C2B5:
+            LDY.W #$0000
+            LDA.B [$72],Y
+            AND.B #$20
+            BEQ .CODE_83C2C1
+            JMP.W .CODE_83C401
+
+        .CODE_83C2C1:
+            %Set8bit(!M)
+            LDY.W #$0001
+            LDA.B [$72],Y
+            CMP.B #$04
+            BCS .CODE_83C2D8
+            LDA.B !tilemap_to_load
+            CMP.B #$04
+            BCC .CODE_83C2D5
+            JMP.W .CODE_83C401
+
+        .CODE_83C2D5:
+            JMP.W .CODE_83C370
+
+        .CODE_83C2D8:
+            %Set8bit(!M)
+            LDY.W #$0001
+            LDA.B [$72],Y
+            CMP.B #$08
+            BCS .CODE_83C2F5
+            LDA.B !tilemap_to_load
+            CMP.B #$04
+            BCS .CODE_83C2EC
+            JMP.W .CODE_83C401
+
+        .CODE_83C2EC:
+            CMP.B #$08
+            BCC .CODE_83C2F3
+            JMP.W .CODE_83C401
+
+        .CODE_83C2F3:
+            BRA .CODE_83C370
+
+        .CODE_83C2F5:
+            %Set8bit(!M)
+            LDY.W #$0001
+            LDA.B [$72],Y
+            CMP.B #$10
+            BCS .CODE_83C312
+            LDA.B !tilemap_to_load
+            CMP.B #$0C
+            BCS .CODE_83C309
+            JMP.W .CODE_83C401
+
+        .CODE_83C309:
+            CMP.B #$10
+            BCC .CODE_83C310
+            JMP.W .CODE_83C401
+
+        .CODE_83C310:
+            BRA .CODE_83C370
+
+        .CODE_83C312:
+            %Set8bit(!M)
+            LDY.W #$0001
+            LDA.B [$72],Y
+            CMP.B #$14
+            BCS .CODE_83C32F
+            LDA.B !tilemap_to_load
+            CMP.B #$10
+            BCS .CODE_83C326
+            JMP.W .CODE_83C401
+
+        .CODE_83C326:
+            CMP.B #$14
+            BCC .CODE_83C32D
+            JMP.W .CODE_83C401
+
+        .CODE_83C32D:
+            BRA .CODE_83C370
+
+        .CODE_83C32F:
+            %Set8bit(!M)
+            LDY.W #$0001
+            LDA.B [$72],Y
+            CMP.B #$18
+            BCS .CODE_83C34C
+            LDA.B !tilemap_to_load
+            CMP.B #$15
+            BCS .CODE_83C343
+            JMP.W .CODE_83C401
+
+        .CODE_83C343:
+            CMP.B #$18
+            BCC .CODE_83C34A
+            JMP.W .CODE_83C401
+
+        .CODE_83C34A:
+            BRA .CODE_83C370
+
+        .CODE_83C34C:
+            %Set8bit(!M)
+            LDY.W #$0001
+            LDA.B [$72],Y
+            CMP.B #$31
+            BCC .CODE_83C362
+            LDA.B !tilemap_to_load
+            CMP.B #$31
+            BCS .CODE_83C360
+            JMP.W .CODE_83C401
+
+        .CODE_83C360:
+            BRA .CODE_83C370
+
+        .CODE_83C362:
+            %Set8bit(!M)
+            LDY.W #$0001
+            LDA.B [$72],Y
+            CMP.B !tilemap_to_load
+            BEQ .CODE_83C370
+            JMP.W .CODE_83C401
+
+        .CODE_83C370:
+            %Set16bit(!M)
+            LDY.W #$0004
+            LDA.B [$72],Y
+            STA.W !tile_in_front_X
+            LDY.W #$0006
+            LDA.B [$72],Y
+            STA.W !tile_in_front_Y
+            %Set8bit(!M)
+            LDY.W #$0000
+            LDA.B [$72],Y
+            AND.B #$02
+            BEQ .CODE_83C3AB
+            %Set16bit(!M)
+            TXA
+            CLC
+            ADC.W #$0024
+            LDX.W #$0000
+            LDY.W #$0000
+            JSL.L SUB_8480F8
+            %Set8bit(!M)
+            %Set16bit(!X)
+            LDY.W #$0000
+            LDA.B #$03
+            STA.B [$CC],Y
+            BRA .CODE_83C401
+
+        .CODE_83C3AB:
+            %Set8bit(!M)
+            LDY.W #$0000
+            LDA.B [$72],Y
+            AND.B #$04
+            BEQ .CODE_83C3C9
+            %Set16bit(!M)
+            TXA
+            CLC
+            ADC.W #$0024
+            LDX.W #$0000
+            LDY.W #$0001
+            JSL.L SUB_8480F8
+            BRA .CODE_83C401
+
+        .CODE_83C3C9:
+            %Set8bit(!M)
+            LDY.W #$0000
+            LDA.B [$72],Y
+            AND.B #$08
+            BEQ .CODE_83C3F0
+            %Set16bit(!M)
+            TXA
+            CLC
+            ADC.W #$0024
+            LDX.W #$0000
+            LDY.W #$0002
+            JSL.L SUB_8480F8
+            %Set16bit(!MX)
+            PLA
+            PHA
+            ASL A
+            TAX
+            STZ.W $093B,X
+            BRA .CODE_83C401
+
+        .CODE_83C3F0:
+            %Set16bit(!M)
+            TXA
+            CLC
+            ADC.W #$0024
+            LDX.W #$0000
+            LDY.W #$005F
+            JSL.L SUB_8480F8
+
+        .CODE_83C401:
+            %Set16bit(!MX)
+            PLX
+            INX
+            CPX.W #$000D
+            BEQ .CODE_83C40D
+            JMP.W .CODE_83C29B
+
+    .CODE_83C40D:
+        LDX.W #$0000
+
+    .CODE_83C410:
+            %Set16bit(!MX)
+            PHX
+            PHX
+            TXA
+            JSL.L GetsCowPointer
+            %Set8bit(!M)
+            %Set16bit(!X)
+            PLX
+            LDY.W #$0000
+            LDA.B [$72],Y
+            AND.B #$01
+            BNE .CODE_83C42A
+            JMP.W .CODE_83C63D
+
+        .CODE_83C42A:
+            %Set8bit(!M)
+            LDA.B !tilemap_to_load
+            CMP.B #$27
+            BNE .CODE_83C46D
+            LDY.W #$0002
+            LDA.B [$72],Y
+            CMP.B #$27
+            BEQ .CODE_83C43E
+            JMP.W .CODE_83C63D
+
+        .CODE_83C43E:
+            PHX
+            %Set8bit(!M)
+            LDY.W #$0000
+            LDA.B [$72],Y
+            AND.B #$C0
+            BEQ .CODE_83C44D
+            LDX.W #$000C
+
+        .CODE_83C44D:
+            %Set16bit(!M)
+            TXA
+            ASL A
+            ASL A
+            TAX
+            LDY.W #$0008
+            LDA.L Table_CowsSpawnPos,X
+            STA.W !tile_in_front_X
+            INX
+            INX
+            LDY.W #$000A
+            LDA.L Table_CowsSpawnPos,X
+            STA.W !tile_in_front_Y
+            PLX
+            JMP.W .CODE_83C52E
+
+        .CODE_83C46D:
+            %Set8bit(!M)
+            LDY.W #$0002
+            LDA.B [$72],Y
+            CMP.B #$04
+            BCS .CODE_83C484
+            LDA.B !tilemap_to_load
+            CMP.B #$04
+            BCC .CODE_83C481
+            JMP.W .CODE_83C63D
+
+        .CODE_83C481:
+            JMP.W .CODE_83C51C
+
+        .CODE_83C484:
+            %Set8bit(!M)
+            LDY.W #$0002
+            LDA.B [$72],Y
+            CMP.B #$08
+            BCS .CODE_83C4A1
+            LDA.B !tilemap_to_load
+            CMP.B #$04
+            BCS .CODE_83C498
+            JMP.W .CODE_83C63D
+
+        .CODE_83C498:
+            CMP.B #$08
+            BCC .CODE_83C49F
+            JMP.W .CODE_83C63D
+
+        .CODE_83C49F:
+            BRA .CODE_83C51C
+
+        .CODE_83C4A1:
+            %Set8bit(!M)
+            LDY.W #$0002
+            LDA.B [$72],Y
+            CMP.B #$10
+            BCS .CODE_83C4BE
+            LDA.B !tilemap_to_load
+            CMP.B #$0C
+            BCS .CODE_83C4B5
+            JMP.W .CODE_83C63D
+
+        .CODE_83C4B5:
+            CMP.B #$10
+            BCC .CODE_83C4BC
+            JMP.W .CODE_83C63D
+
+        .CODE_83C4BC:
+            BRA .CODE_83C51C
+
+        .CODE_83C4BE:
+            %Set8bit(!M)
+            LDY.W #$0002
+            LDA.B [$72],Y
+            CMP.B #$14
+            BCS .CODE_83C4DB
+            LDA.B !tilemap_to_load
+            CMP.B #$10
+            BCS .CODE_83C4D2
+            JMP.W .CODE_83C63D
+
+        .CODE_83C4D2:
+            CMP.B #$14
+            BCC .CODE_83C4D9
+            JMP.W .CODE_83C63D
+
+        .CODE_83C4D9:
+            BRA .CODE_83C51C
+
+        .CODE_83C4DB:
+            %Set8bit(!M)
+            LDY.W #$0002
+            LDA.B [$72],Y
+            CMP.B #$18
+            BCS .CODE_83C4F8
+            LDA.B !tilemap_to_load
+            CMP.B #$15
+            BCS .CODE_83C4EF
+            JMP.W .CODE_83C63D
+
+        .CODE_83C4EF:
+            CMP.B #$18
+            BCC .CODE_83C4F6
+            JMP.W .CODE_83C63D
+
+        .CODE_83C4F6:
+            BRA .CODE_83C51C
+
+        .CODE_83C4F8:
+            %Set8bit(!M)
+            LDY.W #$0002
+            LDA.B [$72],Y
+            CMP.B #$31
+            BCC .CODE_83C50E
+            LDA.B !tilemap_to_load
+            CMP.B #$31
+            BCS .CODE_83C50C
+            JMP.W .CODE_83C63D
+
+        .CODE_83C50C:
+            BRA .CODE_83C51C
+
+        .CODE_83C50E:
+            %Set8bit(!M)
+            LDY.W #$0002
+            LDA.B [$72],Y
+            CMP.B !tilemap_to_load
+            BEQ .CODE_83C51C
+            JMP.W .CODE_83C63D
+
+        .CODE_83C51C:
+            %Set16bit(!M)
+            LDY.W #$0008
+            LDA.B [$72],Y
+            STA.W !tile_in_front_X
+            LDY.W #$000A
+            LDA.B [$72],Y
+            STA.W !tile_in_front_Y
+
+        .CODE_83C52E:
+            %Set8bit(!M)
+            LDY.W #$0000
+            LDA.B [$72],Y
+            AND.B #$02
+            BEQ .CODE_83C572
+            %Set16bit(!M)
+            LDA.W $0196
+            AND.W #$0002
+            BEQ .CODE_83C553
+            %Set8bit(!M)
+            LDY.W #$0002
+            LDA.B [$72],Y
+            CMP.B #$27
+            BEQ .CODE_83C553
+            LDY.W #$0017
+            BRA .CODE_83C558
+
+        .CODE_83C553:
+            %Set16bit(!MX)
+            LDY.W #$0003
+
+        .CODE_83C558:
+            %Set16bit(!M)
+            TXA
+            CLC
+            ADC.W #$0018
+            LDX.W #$0000
+            JSL.L SUB_8480F8
+            %Set16bit(!MX)
+            PLA
+            PHA
+            ASL A
+            TAX
+            STZ.W $0953,X
+            JMP.W .CODE_83C63D
+
+        .CODE_83C572:
+            %Set8bit(!M)
+            LDY.W #$0000
+            LDA.B [$72],Y
+            AND.B #$04
+            BEQ .CODE_83C5B6
+            %Set16bit(!M)
+            LDA.W $0196
+            AND.W #$0002
+            BEQ .CODE_83C597
+            %Set8bit(!M)
+            LDY.W #$0002
+            LDA.B [$72],Y
+            CMP.B #$27
+            BEQ .CODE_83C597
+            LDY.W #$002F
+            BRA .CODE_83C59C
+
+        .CODE_83C597:
+            %Set16bit(!MX)
+            LDY.W #$0004
+
+        .CODE_83C59C:
+            %Set16bit(!M)
+            TXA
+            CLC
+            ADC.W #$0018
+            LDX.W #$0000
+            JSL.L SUB_8480F8
+            %Set16bit(!MX)
+            PLA
+            PHA
+            ASL A
+            TAX
+            STZ.W $0953,X
+            JMP.W .CODE_83C63D
+
+        .CODE_83C5B6:
+            %Set8bit(!M)
+            LDY.W #$0000
+            LDA.B [$72],Y
+            AND.B #$08
+            BEQ .CODE_83C63D
+            %Set8bit(!M)
+            LDY.W #$0000
+            LDA.B [$72],Y
+            AND.B #$80
+            BNE .CODE_83C616
+            %Set8bit(!M)
+            LDY.W #$0000
+            LDA.B [$72],Y
+            AND.B #$40
+            BEQ .CODE_83C5DC
+            LDY.W #$0008
+            BRA .CODE_83C624
+
+        .CODE_83C5DC:
+            %Set8bit(!M)
+            LDY.W #$0000
+            LDA.B [$72],Y
+            AND.B #$20
+            BEQ .CODE_83C5EC
+            LDY.W #$0007
+            BRA .CODE_83C624
+
+        .CODE_83C5EC:
+            %Set8bit(!M)
+            LDY.W #$0000
+            LDA.B [$72],Y
+            AND.B #$10
+            BEQ .CODE_83C5FC
+            LDY.W #$0006
+            BRA .CODE_83C624
+
+        .CODE_83C5FC:
+            %Set16bit(!M)
+            LDA.W $0196
+            AND.W #$0002
+            BEQ .CODE_83C621
+            %Set8bit(!M)
+            LDY.W #$0002
+            LDA.B [$72],Y
+            CMP.B #$27
+            BEQ .CODE_83C621
+            LDY.W #$0009
+            BRA .CODE_83C624
+
+        .CODE_83C616:
+            %Set8bit(!M)
+            LDY.W #$0000
+            LDA.B [$72],Y
+            AND.B #$7F
+            STA.B [$72],Y
+
+        .CODE_83C621:
+            LDY.W #$0005
+
+        .CODE_83C624:
+            %Set16bit(!M)
+            TXA
+            CLC
+            ADC.W #$0018
+            LDX.W #$0000
+            JSL.L SUB_8480F8
+            %Set16bit(!MX)
+            PLA
+            PHA
+            ASL A
+            TAX
+            STZ.W $0953,X
+            BRA .CODE_83C63D
+
+        .CODE_83C63D:
+            %Set16bit(!MX)
+            PLX
+            INX
+            CPX.W #$000C
+            BEQ .CODE_83C649
+            JMP.W .CODE_83C410
+
+    .CODE_83C649:
+        %Set16bit(!MX)
+        LDA.L $7F1F68
+        AND.W #$0080
+        BNE .CODE_83C657
+        JMP.W .CODE_83C734
+
+    .CODE_83C657:
+        LDA.B !game_state
+        AND.W #$0800
+        BEQ .CODE_83C661
+        JMP.W .CODE_83C734
+
+    .CODE_83C661:
+        %Set8bit(!M)
+        LDA.L !dog_map
+        CMP.B #$04
+        BCS .CODE_83C677
+        LDA.B !tilemap_to_load
+        CMP.B #$04
+        BCC .CODE_83C674
+        JMP.W .CODE_83C734
+
+    .CODE_83C674:
+        JMP.W .CODE_83C709
+
+    .CODE_83C677:
+        %Set8bit(!M)
+        LDA.L !dog_map
+        CMP.B #$08
+        BCS .CODE_83C693
+        LDA.B !tilemap_to_load
+        CMP.B #$04
+        BCS .CODE_83C68A
+        JMP.W .CODE_83C734
+
+    .CODE_83C68A:
+        CMP.B #$08
+        BCC .CODE_83C691
+        JMP.W .CODE_83C734
+
+    .CODE_83C691:
+        BRA .CODE_83C709
+
+    .CODE_83C693:
+        %Set8bit(!M)
+        LDA.L !dog_map
+        CMP.B #$10
+        BCS .CODE_83C6AF
+        LDA.B !tilemap_to_load
+        CMP.B #$0C
+        BCS .CODE_83C6A6
+        JMP.W .CODE_83C734
+
+    .CODE_83C6A6:
+        CMP.B #$10
+        BCC .CODE_83C6AD
+        JMP.W .CODE_83C734
+
+    .CODE_83C6AD:
+        BRA .CODE_83C709
+
+    .CODE_83C6AF:
+        %Set8bit(!M)
+        LDA.L !dog_map
+        CMP.B #$14
+        BCS .CODE_83C6CB
+        LDA.B !tilemap_to_load
+        CMP.B #$10
+        BCS .CODE_83C6C2
+        JMP.W .CODE_83C734
+
+    .CODE_83C6C2:
+        CMP.B #$14
+        BCC .CODE_83C6C9
+        JMP.W .CODE_83C734
+
+    .CODE_83C6C9:
+        BRA .CODE_83C709
+
+    .CODE_83C6CB:
+        %Set8bit(!M)
+        LDA.L !dog_map
+        CMP.B #$18
+        BCS .CODE_83C6E7
+        LDA.B !tilemap_to_load
+        CMP.B #$15
+        BCS .CODE_83C6DE
+        JMP.W .CODE_83C734
+
+    .CODE_83C6DE:
+        CMP.B #$18
+        BCC .CODE_83C6E5
+        JMP.W .CODE_83C734
+
+    .CODE_83C6E5:
+        BRA .CODE_83C709
+
+    .CODE_83C6E7:
+        %Set8bit(!M)
+        LDA.L !dog_map
+        CMP.B #$31
+        BCC .CODE_83C6FC
+        LDA.B !tilemap_to_load
+        CMP.B #$31
+        BCS .CODE_83C6FA
+        JMP.W .CODE_83C734
+
+    .CODE_83C6FA:
+        BRA .CODE_83C709
+
+    .CODE_83C6FC:
+        %Set8bit(!M)
+        LDA.L !dog_map
+        CMP.B !tilemap_to_load
+        BEQ .CODE_83C709
+        JMP.W .CODE_83C734
+
+    .CODE_83C709:
+        %Set16bit(!MX)
+        LDA.L !dog_pos_X
+        STA.W !tile_in_front_X
+        LDA.L !dog_pos_Y
+        STA.W !tile_in_front_Y
+        LDA.W #$0016
+        LDX.W #$0000
+        LDY.W #$0011
+        JSL.L SUB_8480F8
+        %Set16bit(!M)
+        LDA.W #$0001
+        STA.L $7F1F58
+        %Set8bit(!M)
+        STZ.W $0938
+
+    .CODE_83C734:
+        %Set16bit(!MX)
+        LDA.L $7F1F68
+        AND.W #$0100
+        BNE .CODE_83C742
+        JMP.W .CODE_83C806
+
+    .CODE_83C742:
+        LDA.B !game_state
+        AND.W #$0010
+        BEQ .CODE_83C74C
+        JMP.W .CODE_83C806
+
+    .CODE_83C74C:
+        %Set8bit(!M)
+        LDA.L $7F1F31
+        CMP.B #$04
+        BCS .CODE_83C761
+        LDA.B !tilemap_to_load
+        CMP.B #$04
+        BCC .CODE_83C75F
+        JMP.W .CODE_83C806
+
+    .CODE_83C75F:
+        BRA .CODE_83C7D7
+
+    .CODE_83C761:
+        %Set8bit(!M)
+        LDA.L $7F1F31
+        CMP.B #$08
+        BCS .CODE_83C77D
+        LDA.B !tilemap_to_load
+        CMP.B #$04
+        BCS .CODE_83C774
+        JMP.W .CODE_83C806
+
+    .CODE_83C774:
+        CMP.B #$08
+        BCC .CODE_83C77B
+        JMP.W .CODE_83C806
+
+    .CODE_83C77B:
+        BRA .CODE_83C7D7
+
+    .CODE_83C77D:
+        %Set8bit(!M)
+        LDA.L $7F1F31
+        CMP.B #$10
+        BCS .CODE_83C799
+        LDA.B !tilemap_to_load
+        CMP.B #$0C
+        BCS .CODE_83C790
+        JMP.W .CODE_83C806
+
+    .CODE_83C790:
+        CMP.B #$10
+        BCC .CODE_83C797
+        JMP.W .CODE_83C806
+
+    .CODE_83C797:
+        BRA .CODE_83C7D7
+
+    .CODE_83C799:
+        %Set8bit(!M)
+        LDA.L $7F1F31
+        CMP.B #$14
+        BCS .CODE_83C7B5
+        LDA.B !tilemap_to_load
+        CMP.B #$10
+        BCS .CODE_83C7AC
+        JMP.W .CODE_83C806
+
+    .CODE_83C7AC:
+        CMP.B #$14
+        BCC .CODE_83C7B3
+        JMP.W .CODE_83C806
+
+    .CODE_83C7B3:
+        BRA .CODE_83C7D7
+
+    .CODE_83C7B5:
+        %Set8bit(!M)
+        LDA.L $7F1F31
+        CMP.B #$31
+        BCC .CODE_83C7CA
+        LDA.B !tilemap_to_load
+        CMP.B #$31
+        BCS .CODE_83C7C8
+        JMP.W .CODE_83C806
+
+    .CODE_83C7C8:
+        BRA .CODE_83C7D7
+
+    .CODE_83C7CA:
+        %Set8bit(!M)
+        LDA.L $7F1F31
+        CMP.B !tilemap_to_load
+        BEQ .CODE_83C7D7
+        JMP.W .CODE_83C806
+
+    .CODE_83C7D7:
+        %Set16bit(!MX)
+        LDA.W #$0110
+        STA.W !tile_in_front_X
+        LDA.W #$0140
+        STA.W !tile_in_front_Y
+        LDY.W #$0013
+        %Set8bit(!M)
+        LDA.L $7F1F32
+        CMP.B #$15
+        BNE .CODE_83C7F5
+        LDY.W #$0010
+
+    .CODE_83C7F5:
+        %Set16bit(!MX)
+        LDA.W #$0017
+        LDX.W #$0000
+        JSL.L SUB_8480F8
+        %Set8bit(!M)
+        STZ.W $0939
+
+    .CODE_83C806:
+        RTL
 
 
 ;;;;;;;; Param in A = 0: hatched; Return in A, 0 = sucess, 1 = coop full

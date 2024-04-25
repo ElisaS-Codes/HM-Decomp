@@ -87,7 +87,7 @@ Bank 80
 ❓80919D - SUB_80919D
 ✅8091CF - LoadFirstHalfPaletteToWRAM
 ✅809208 - LoadSecondHalfPaletteToWRAM
-❓809241 - SUB_809241
+❓809241 - UNK_CustomisePalette
 ❓8092E2 - ChangePalettebyTime
 ❓809329 - SUB_809329
 ❓80936E - SUB_80936E

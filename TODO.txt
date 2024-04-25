@@ -319,8 +319,9 @@ $7E2400- - Tilemap content
 $7EA000-$7EA1FF - OAM contents Low Table
 $7EA200-$7EA21E - OAM contents High Table
 
+Sprite Data Tables
 $7EA220-31E - ($0000)
-$7EA320-41E - ($0000-$FFFF)
+$7EA320-41E -
 $B7
 $B3
 $BB

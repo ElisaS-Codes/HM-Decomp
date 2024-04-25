@@ -4467,7 +4467,7 @@ SUB_82D1C0: ;82D1C0
         JSL.L ZeroesVRAM                      ;82D2F3;808846;
         JSL.L ZeroesCGRAM                     ;82D2F7;808980;
         JSL.L Zeroes42Pointers           ;82D2FB;808FAB;
-        JSL.L UNK_UNKClearWRAMSpace         ;82D2FF;858ED7;
+        JSL.L ClearSpriteDataTables         ;82D2FF;858ED7;
         JSL.L InitializeOBJs         ;82D303;85820F;
         JSL.L UNK_PresetsMemory3                 ;82D307;81A4C7;
         JSL.L ClearsofAllCCStructs                 ;82D30B;848000;
@@ -4654,7 +4654,7 @@ DemoPresentation:
         JSL.L ZeroesVRAM                      ;82D4F4;808846;
         JSL.L ZeroesCGRAM                     ;82D4F8;808980;
         JSL.L Zeroes42Pointers           ;82D4FC;808FAB;
-        JSL.L UNK_UNKClearWRAMSpace         ;82D500;858ED7;
+        JSL.L ClearSpriteDataTables         ;82D500;858ED7;
         JSL.L InitializeOBJs         ;82D504;85820F;
         JSL.L UNK_PresetsMemory3                 ;82D508;81A4C7;
         JSL.L ClearsofAllCCStructs                 ;82D50C;848000;
@@ -5110,7 +5110,7 @@ IntroScreen: ;82D75E
         JSL.L ZeroesVRAM
         JSL.L ZeroesCGRAM
         JSL.L Zeroes42Pointers
-        JSL.L UNK_UNKClearWRAMSpace
+        JSL.L ClearSpriteDataTables
         JSL.L InitializeOBJs
         JSL.L UNK_PresetsMemory3
         JSL.L ClearsofAllCCStructs
@@ -5223,7 +5223,7 @@ IntroScreen: ;82D75E
                        JSL.L ZeroesVRAM                      ;82D9DC;808846;
                        JSL.L ZeroesCGRAM                     ;82D9E0;808980;
                        JSL.L Zeroes42Pointers           ;82D9E4;808FAB;
-                       JSL.L UNK_UNKClearWRAMSpace         ;82D9E8;858ED7;
+                       JSL.L ClearSpriteDataTables         ;82D9E8;858ED7;
                        JSL.L InitializeOBJs         ;82D9EC;85820F;
                        JSL.L UNK_PresetsMemory3                 ;82D9F0;81A4C7;
                        JSL.L ClearsofAllCCStructs                 ;82D9F4;848000;
@@ -5365,7 +5365,7 @@ IntroScreen: ;82D75E
                        JSL.L ZeroesVRAM                      ;82DB21;808846;
                        JSL.L ZeroesCGRAM                     ;82DB25;808980;
                        JSL.L Zeroes42Pointers           ;82DB29;808FAB;
-                       JSL.L UNK_UNKClearWRAMSpace         ;82DB2D;858ED7;
+                       JSL.L ClearSpriteDataTables         ;82DB2D;858ED7;
                        JSL.L InitializeOBJs         ;82DB31;85820F;
                        JSL.L UNK_PresetsMemory3                 ;82DB35;81A4C7;
                        JSL.L ClearsofAllCCStructs                 ;82DB39;848000;
@@ -6811,7 +6811,7 @@ Unk_NamesInput: ;82E80C
         JSL.L ForceBlank
         JSL.L ZeroesVRAM
         JSL.L Zeroes42Pointers
-        JSL.L UNK_UNKClearWRAMSpace
+        JSL.L ClearSpriteDataTables
         JSL.L InitializeOBJs
         %Set16bit(!M)
         LDA.W $0196
