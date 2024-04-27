@@ -732,7 +732,7 @@ UpdateGraphics: ;8086B1
         BNE .notwaitingforDMA
         JSL.L StartProgramedDMA
         %Set8bit(!M)
-        LDA.B $9A                            ;DMA Channel 4 seems to be special?
+        LDA.B $9A                            ;DMA Channel 4 holds the OAM changes
         STA.W !MDMAEN
         STZ.B $9A
         STZ.W !MDMAEN

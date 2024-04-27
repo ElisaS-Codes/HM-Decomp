@@ -415,9 +415,60 @@ $7F1F7A -
 $A78000 -
 
 
+=======
 
+$77 - bank86/87
+$7A - bank86/87
+$7E - FFFF
 
+$A1 - chooses bank if bigger than 610
+$A9 - result from 01A6, index to 019E
+$AB -
+$AD - 0
+$AF - value of $DC -1
+$BF - obj X?
+$C1 - obj Y?
+$DC - seems to be a counter of how many objs are on a scene, only increases
+$0905 - used as index for table14 and as limit countr of a loop. gets written into 084C
 
+UNK_Table14: sums of 24, used as index of $01A6
+
+$7EA000-$7EA1FF - OAM contents Low Table
+$7EA200-$7EA21E - OAM contents High Table
+
+--struct $019C
+40 entrys $019C-$073B
+    $DC index?
+    $019C - 20x 16b initialized as 0
+    $01B0 - 16x 8b initialized as $FF
+
+--struct $7EA320
+64 entrys $7EA320-$7EA41F
+    $B3 index?
+    $7EA220 - 16b initialized as $FFFF
+    $7EA222 - 16b not initialized
+    $7EA320 - 16b initialized as 0
+    $7EA322 - 16b initialized as $FFFF
+
+=======
+
+$7A  8b - #128
+$78 16b - Value of A222, pointer
+$BB 16b - amount of sprites in memory? rises by 4 till 256
+$BD 16b - related to BB
+$BF 16b - 0
+$C3 16b - 0846 << 2, stores empty A320 slot open?
+$C5 16b - 0846, $C3 << 2
+$C7 16b - bigger/eq than 256
+$C1 16b - Value of A220
+
+$0848 16b - <<2 used as an index to A320, inc by 4 but has to be less than 256
+$0846 16b - compared to 64, increased by one, counter?
+
+7EA220
+7EA320
+
+=======
 
 Items:
 00 nothing
