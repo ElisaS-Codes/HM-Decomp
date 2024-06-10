@@ -268,6 +268,11 @@ $092D -
 $092E - related to cut grass?
 
 $0937 -
+#these cunnts up to 80 ish when the sprite is shown
+$0938 - 8b Dog tick counter
+$0939 - 8b Horse tick counter
+$093A-$0951 - 16b Chicken tick counter
+$0952-$0969 - 16b Cow tick counter
 
 $096B - tool used frame?
 $096C - stamina level
@@ -417,30 +422,72 @@ $A78000 -
 
 =======
 
+
+
+$75 - A9 + AD - 1 used as next snesobj idx
 $77 - bank86/87
 $7A - bank86/87
 $7E - FFFF
+$80 -
 
-$A1 - chooses bank if bigger than 610
-$A9 - result from 01A6, index to 019E
-$AB -
-$AD - 0
-$AF - value of $DC -1
-$BF - obj X?
-$C1 - obj Y?
+$9B - Xpos
+$9D - Ypos
+$9F - horizontal flip?
+$A1 - sprite table idx
+$A3 - $01A2
+$A5 - idx of last 019C structure?
+$A7 - some kind of control return?
+$A9 - object Y pos/gameobj index
+$AB - current obj count
+$AD - Counts up to DC to get draw order / obj number
+$AE - obj number counter?
+$AF - Counts down from DC to get drawn order
+$B1 - temp Pallete data?
+$B2 - temp modifier data
+$BF - cooked obj X
+$C1 - cooked obj Y
+$C5 - obj data table indx?
 $DC - seems to be a counter of how many objs are on a scene, only increases
-$0905 - used as index for table14 and as limit countr of a loop. gets written into 084C
-
-UNK_Table14: sums of 24, used as index of $01A6
+$0905 - What gameobject is the player. used as index for table14 and as limit countr of a loop. gets written into 084C.
 
 $7EA000-$7EA1FF - OAM contents Low Table
 $7EA200-$7EA21E - OAM contents High Table
 
+--array $084C
+40 entrys? of 8b
+    orders the objects are copyed from the 019C to 7EA00?
+    - $084C - gameobject idx
+
 --struct $019C
-40 entrys $019C-$073B
+40 entrys of $24/36 $019C-$073B
     $DC index?
-    $019C - 20x 16b initialized as 0
-    $01B0 - 16x 8b initialized as $FF
+    - $019C - 20x 16b initialized as 0, if first 0, its empty 7777 used?
+    - $019E - 16b sprite table idx
+    - $01A0 - 16b horizontal filp, maybe more
+    -
+    - $01A4 - 16b X coord
+    - $01A6 - 16b Y coord
+    -
+    - $01AC - 16b sprite memory address?
+    - $01AF - 8b OBJ number
+    - $01B0 - 16x 8b initialized as $FF
+    - $01B0 - 8b OBJ Sprite 1 load position idx
+    - $01B1 - 8b OBJ Sprite 2 load position idx
+    - $01B2 - 8b OBJ Sprite 3 load position idx
+    - $01B3 - 8b OBJ Sprite 4 load position idx
+    - $01B4+ - 8b more sprites?
+
+--$86/87 8080 table
+    byte 1-2: $86/87 data tables addr
+    byte 3:
+    byte 4:
+    byte 5:
+
+--$86/87 data tables
+    byte 1: pallete
+    byte 4: x offset
+    byte 5: y offset
+
 
 --struct $7EA320
 64 entrys $7EA320-$7EA41F
@@ -450,23 +497,34 @@ $7EA200-$7EA21E - OAM contents High Table
     $7EA320 - 16b initialized as 0
     $7EA322 - 16b initialized as $FFFF
 
+Sprite Data Tables
+$7EA220-31E - ($0000)
+$7EA320-41E -
+$B7
+$B3
+$BB
+$BD
+$7EA420 - what to write to VRAM for OBJ. Source. FFFF means End of data - 16
+$7EA422 - Source Add - 16
+$7EA424 - Source Add Banks - 8
+$7F0F00-1F00 - ($FFFF)
+
 =======
 
-$7A  8b - #128
-$78 16b - Value of A222, pointer
-$BB 16b - amount of sprites in memory? rises by 4 till 256
-$BD 16b - related to BB
-$BF 16b - 0
-$C3 16b - 0846 << 2, stores empty A320 slot open?
-$C5 16b - 0846, $C3 << 2
-$C7 16b - bigger/eq than 256
-$C1 16b - Value of A220
-
-$0848 16b - <<2 used as an index to A320, inc by 4 but has to be less than 256
-$0846 16b - compared to 64, increased by one, counter?
-
-7EA220
-7EA320
+$80 - WRAM hi table index
+$A9 - related to $01A6
+$AB -
+$AD - index for $084C related to $A9
+$AF - index for $084C related to $DC
+$B1 - palette
+$BF - Xcoord
+$C1 - Ycoord
+$C3 - WRAM Hi table content
+$C5 - sprite info index? is an index for banks 86/87
+$0905 - related to $084C
+$084C - related to
+$DC - $019C index
+$A9
 
 =======
 

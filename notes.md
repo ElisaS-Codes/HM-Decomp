@@ -47,3 +47,9 @@ Oh boy, this is a big thing. CC is a pointer to a collection of structures, begu
 The $B3 bank start with a long list of pointers to this and the next 2 banks. Each holds a long chain of bytes. Those bytes are read one at a time, and used as index to execute one of many functions. These functions may take extra bytes of the chains as parameters, and hold functions to move the player, set fade ins and fade outs, change maps, chage time of day, jump between parts of the chain with comparisons, etc.
 Im pretty sure this is a very robust scripting language for events, and they work as instructions on a processor. I need to do more research and decode more of these "event functions"
 
+## OBJs
+Terminology
+* SNES OBJ - SOBJ: the data that the snes uses. Its only used to later copy into the OBJRAM
+* Game OBJ - GOBJ: the data as the games uses and keeps track of. gets turned into the SOBJ. Its composed of multiple SOBJs
+* Component: each sprite is made of certain ammount of componet SOBJs
+* Sprite: the 16x16 characters in the VRAM or the LoadedSpriteTable

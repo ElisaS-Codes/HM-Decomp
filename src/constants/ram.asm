@@ -156,8 +156,7 @@
 !ProgDMA_Destination_Memory = $29 ;8bit
 !ProgDMA_Control_Register_Table = $2A ;8bit up to 31, the 8 channels
 !ProgDMA_Destination_Addr_Table = $32 ;16bit up to 41
-
-;$7E009A - DMA ready but only for Channel 5? its only set in one place directly
+!ProgDMA_OAM_channel = $9A ;8b, either 0 or $10
 
 ;;Sound
 !run_step_sound = $091A ;8b
@@ -399,3 +398,51 @@
 ;$7EC2CE - Chicken 10
 ;$7EC2E6 - Chicken 11
 ;$7EC2EE - Chicken 12
+
+;;;;SNES Object data
+;this holds the data to be copied into the SNES OBJRAM
+!sobj_low_table = $7EA000
+!sobj_low_table_x = $7EA000
+!sobj_low_table_y = $7EA001
+!sobj_low_table_sprite = $7EA002
+!sobj_low_table_attributes = $7EA003
+!sobj_high_table = $7EA200
+
+;;;;Game Object data
+;this stores info related to the game objects, that later gets processed into
+;snes objects stored in $7EA00
+!player_gobj_index = $0905 ;16b used for sprite ordering
+!gobj_pos_x = $9B ;16b
+!gobj_pos_y = $9D ;16b
+!gobj_flip_x = $9F ;16b
+!gobj_sprite_table_idx = $A1 ;16b
+!gobj_last_gobj_used = $A5 ;16b
+!gobj_struct_idx = $A9 ;16b
+!gobj_current_gobj = $AB ;16b
+!gobj_component_total = $AD ;16b
+!gobj_component_total_high_byte = $AE ;8b used for 8bits operations on $AD
+!gobj_OAM_table_idx = $AF ;16b
+!gobj_pallete_data = $B1 ;16b
+;!gobj_priority_data = $B2 ;16b
+!gobj_final_pos_x = $BF ;16b
+!gobj_final_pos_y = $C1 ;16b
+!gobj_current_OAM_HT_value = $C3 ;16b
+!gobj_data_table_idx = $C5 ;16b
+!gobj_loaded_objs = $DC ;16b seems to be a counter of how many objs are on a scene, only increases
+
+;;struct $019C, Game Objects
+;40 entrys of 36b $019C-$0A9C
+!gobj_struct_initialized = $019C ;$7777 if initialized, 0 if not
+!gobj_struct_sprite_table_idx = $019E ;16b used as index to get sprite metadata from banks $86/$87
+!gobj_struct_flip = $01A0 ;16b
+!gobj_struct_UNK1 = $01A2 ;16b 0, seems to be just read and written again with no changes
+!gobj_struct_pos_X = $01A4 ;16b
+!gobj_struct_pos_Y = $01A6 ;16b
+!gobj_struct_UNK2 = $01A8 ;16b value of table 8X8080, pointer to sprite_table_address
+!gobj_struct_UNK3 = $01AA ;16b $01A8+3
+!gobj_struct_sprite_table_address = $01AC ;16b sprite memory address?
+!gobj_struct_UNK4 = $01AE ;8b
+!gobj_struct_component_total = $01AF ;8b the ammount of SOBJ composing the GOBJ
+!gobj_struct_components = $01B0 ;8b the components, $FF means unused
+
+!gobj_order_array = $084C ;40?x16b. Holds there order that sprites should be drawn

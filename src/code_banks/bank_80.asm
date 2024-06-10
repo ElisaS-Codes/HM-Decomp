@@ -80,7 +80,7 @@ GameLoop: ;808083
         JSL.L CODE_81A600
         JSL.L CODE_8582C7
         JSL.L CODE_858CB2
-        JSL.L UNK_BigLoadLoopOAM
+        JSL.L PrepareOAMData
         %Set8bit(!M)
         STZ.B !NMI_Status
         JMP.W GameLoop
@@ -732,12 +732,12 @@ UpdateGraphics: ;8086B1
         BNE .notwaitingforDMA
         JSL.L StartProgramedDMA
         %Set8bit(!M)
-        LDA.B $9A                            ;DMA Channel 4 holds the OAM changes
+        LDA.B !ProgDMA_OAM_channel           ;DMA Channel 4 holds the OAM changes
         STA.W !MDMAEN
-        STZ.B $9A
+        STZ.B !ProgDMA_OAM_channel
         STZ.W !MDMAEN
-        JSL.L CopiesWRAMtoOBJVGRAM           ;TODO
-        STZ.B $9A
+        JSL.L CopiesWRAMtoOBJVGRAM
+        STZ.B !ProgDMA_OAM_channel
         STZ.W !MDMAEN
 
     .notwaitingforDMA:
@@ -3263,7 +3263,7 @@ SUB_80972C: ;80972C
         JSL.L IterateCCStructures
         JSL.L CODE_8582C7
         JSL.L CODE_858CB2
-        JSL.L UNK_BigLoadLoopOAM
+        JSL.L PrepareOAMData
         %Set8bit(!M)
         STZ.B !NMI_Status
         JSL.L WaitForNMI
@@ -3274,7 +3274,7 @@ SUB_80972C: ;80972C
         JSL.L IterateCCStructures
         JSL.L CODE_8582C7
         JSL.L CODE_858CB2
-        JSL.L UNK_BigLoadLoopOAM
+        JSL.L PrepareOAMData
         %Set8bit(!M)
         STZ.B !NMI_Status
         JSL.L WaitForNMI

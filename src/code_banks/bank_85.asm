@@ -2,8 +2,14 @@ ORG $858000
 
 ;;;;;;;;Gets called every time a sprite is added?
 CODE_858000:
+        !temp_component_idx = $75
+        !temp_sprite_table_component_address = $78
+        !temp_sprite_table_component_address_H = $7A
+        !temp = $75
+        !temp_unused_H = $77
+
         %Set16bit(!M)
-        LDA.B $A1
+        LDA.B !gobj_sprite_table_idx
         CMP.W #$0262
         BCS .onsecondbank
         %Set8bit(!M)
@@ -19,79 +25,82 @@ CODE_858000:
         STA.B $7A
 
     .bankselected:
+        ;if theres space, selects the next unloaded slot, if not, finds an unused one
         %Set16bit(!MX)
         %Set16bit(!MX)
         LDX.W #$0000
         LDY.W #$0000
-        LDA.B $DC
+        LDA.B !gobj_loaded_objs
         CMP.W #$0028
         BEQ .findemptyslot
         INC A
-        STA.B $DC
+        STA.B !gobj_loaded_objs
 
     .findemptyslot:
-            LDA.W $019C,X
-            BEQ .CODE_858046
+            LDA.W !gobj_struct_initialized,X
+            BEQ .slotfound
             TXA
             CLC
             ADC.W #$0024
             TAX
             INY
-            CPY.B $DC
+            CPY.B !gobj_loaded_objs
             BNE .findemptyslot
 
+        ;exits if no unused slot is found
         LDA.W #$FFFF
         STA.B $A7
         BRA return85
 
-    .CODE_858046:
-        STY.B $A5
+    .slotfound:
+        ;fills the slot with some pre programed data
+        STY.B !gobj_last_gobj_used
         LDA.W #$7777
-        STA.W $019C,X
-        LDA.B $A1
-        STA.W $019E,X
-        LDA.B $9F
-        STA.W $01A0,X
+        STA.W !gobj_struct_initialized,X
+        LDA.B !gobj_sprite_table_idx
+        STA.W !gobj_struct_sprite_table_idx,X
+        LDA.B !gobj_flip_x
+        STA.W !gobj_struct_flip,X
         LDA.B $A3
-        STA.W $01A2,X
-        LDA.B $9B
-        STA.W $01A4,X
-        LDA.B $9D
-        STA.W $01A6,X
-        STX.B $A9
-        LDA.B $A1
+        STA.W !gobj_struct_UNK1,X
+        LDA.B !gobj_pos_x
+        STA.W !gobj_struct_pos_X,X
+        LDA.B !gobj_pos_y
+        STA.W !gobj_struct_pos_Y,X
+        STX.B !gobj_struct_idx
+        LDA.B !gobj_sprite_table_idx
         CMP.W #$0262
-        BCS .CODE_85807D
-        LDA.W $019E,X
+        BCS .inbank87
+        LDA.W !gobj_struct_sprite_table_idx,X
         ASL A
         TAX
         LDA.L DATA8_868080,X
         STA.B $75
-        BRA .CODE_85808C
+        BRA .setupfinished
 
-    .CODE_85807D:
-        LDA.W $019E,X
+    .inbank87:
+        LDA.W !gobj_struct_sprite_table_idx,X
         SEC
         SBC.W #$0262
         ASL A
         TAX
-        LDA.L UNK_Table15,X
+        LDA.L DATA8_878080,X
         STA.B $75
 
-    .CODE_85808C:
-        LDX.B $A9
+    .setupfinished:
+        LDX.B !gobj_struct_idx
         LDA.B $75
-        STA.W $01A8,X
+        STA.W !gobj_struct_UNK2,X
         CLC
         ADC.W #$0003
-        STA.W $01AA,X
+        STA.W !gobj_struct_UNK3,X
         LDY.W #$0000
         LDA.B [$75],Y
-        STA.W $01AC,X
+        STA.W !gobj_struct_sprite_table_address,X
         %Set8bit(!M)
         LDY.W #$0002
         LDA.B [$75],Y
-        STA.W $01AE,X
+        STA.W !gobj_struct_UNK4,X
         %Set16bit(!M)
         JSR.W CODE_858AE5
         %Set16bit(!M)
@@ -102,7 +111,7 @@ CODE_858000:
 return85: RTL
 
 ;;;;;;;;
-    CODE_8580B9:
+CODE_8580B9:
         %Set16bit(!M)
         LDA.B $A1
         CMP.W #$0262
@@ -124,7 +133,7 @@ return85: RTL
         LDA.B $A5
         ASL A
         TAX
-        LDA.L UNK_Table14,X
+        LDA.L Table_GameOBJIndexes,X
         STA.B $A9
         TAX
         LDA.W #$0001
@@ -143,7 +152,7 @@ return85: RTL
     .CODE_8580FF: RTL
 
 ;;;;;;;;
-        CODE_858100:
+CODE_858100:
         %Set16bit(!MX)
         %Set16bit(!M)
         LDA.B $A1
@@ -166,7 +175,7 @@ return85: RTL
         LDA.B $A5
         ASL A
         TAX
-        LDA.L UNK_Table14,X
+        LDA.L Table_GameOBJIndexes,X
         STA.B $A9
         JSR.W CODE_858B7B
         LDA.B $AF
@@ -202,7 +211,7 @@ return85: RTL
         SBC.W #$0262
         ASL A
         TAX
-        LDA.L UNK_Table15,X
+        LDA.L DATA8_878080,X
         STA.B $75
 
         .CODE_858177:
@@ -232,7 +241,7 @@ return85: RTL
         LDA.B $A5
         ASL A
         TAX
-        LDA.L UNK_Table14,X
+        LDA.L Table_GameOBJIndexes,X
         STA.B $A9
         JSR.W CODE_858B7B
         LDA.B $AF
@@ -256,7 +265,7 @@ CODE_8581CB:
         LDA.B $A5
         ASL A
         TAX
-        LDA.L UNK_Table14,X
+        LDA.L Table_GameOBJIndexes,X
         STA.B $A9
         TAX
         LDA.W $019C,X
@@ -298,7 +307,7 @@ InitializeOBJs: ;85820F
         %Set16bit(!MX)
         %Set16bit(!M)
         LDA.B $A1
-        CMP.W #$0262                         ;TODO
+        CMP.W #$0262
         BCS .bank87
         %Set8bit(!M)
         LDA.B #$86
@@ -479,15 +488,16 @@ CODE_8582C7:
     .CODE_858376:
         RTL
 
-;;;;;;;;
-UNK_TableReading: ;858377
+;;;;;;;; This populates the $084C array, that is the order each OBJ
+;;;;;;;; should be copied to OBJRAM, akind a ZBuffer
+GetOBJOrderToDraw: ;858377
         %Set16bit(!MX)
-        LDA.W $0905
+        LDA.W !player_gobj_index
         ASL A
         TAX
-        LDA.L UNK_Table14,X
+        LDA.L Table_GameOBJIndexes,X
         TAX
-        LDA.W $01A6,X
+        LDA.W $01A6,X                        ;Y pos
         STA.B $A9
         LDA.W #$0000
         STA.B $AD
@@ -503,19 +513,19 @@ UNK_TableReading: ;858377
             %Set16bit(!M)
             PHX
             CPY.W $0905
-            BEQ .CODE_8583C8
+            BEQ .next
             LDA.W $01A6,X
             CMP.B $A9
-            BCC .CODE_8583BA
+            BCC .smallerthany
             LDX.B $AD
             TYA
             %Set8bit(!M)
             STA.W $084C,X
             %Set16bit(!M)
             INC.B $AD
-            BRA .CODE_8583C8
+            BRA .next
 
-        .CODE_8583BA:
+        .smallerthany:
             %Set16bit(!M)
             LDX.B $AF
             TYA
@@ -524,7 +534,7 @@ UNK_TableReading: ;858377
             %Set16bit(!M)
             DEC.B $AF
 
-        .CODE_8583C8:
+        .next:
             %Set16bit(!M)
             PLA
             CLC
@@ -541,101 +551,114 @@ UNK_TableReading: ;858377
 
         RTS
 
-;;;;;;;;
-UNK_BigLoadLoopOAM: ;8583E0
+;;;;;;;; This function reads the different GOBJs and prepares the SOBJ table to be copied
+;;;;;;;; into the OBJRAM, and prepares the DMA
+PrepareOAMData: ;8583E0
+        !temp_component_idx = $75
+        !temp_sprite_table_component_address = $78
+        !temp_sprite_table_component_address_H = $7A
+        !temp_unused_H = $77
+
         %Set16bit(!MX)
         %Set16bit(!M)
-        LDA.B $A1
+        ;Calculates what bank data should be used for the sprite metadata, but
+        ;I dont think this is used before being rewriten in the main loop
+        LDA.B !gobj_sprite_table_idx
         CMP.W #$0262
         BCS .sethighbank
         %Set8bit(!M)
         LDA.B #$86
-        STA.B $77
-        STA.B $7A
+        STA.B !temp_unused_H
+        STA.B !temp_sprite_table_component_address_H
         BRA .continue
 
     .sethighbank:
         %Set8bit(!M)
         LDA.B #$87
-        STA.B $77
-        STA.B $7A
+        STA.B !temp_unused_H
+        STA.B !temp_sprite_table_component_address_H
 
     .continue:
+        ;Prepares the memory to start processing data
         %Set16bit(!MX)
-        JSR.W PresetsWRAMCopyOAMCopy        ;clear the OAM
-        JSR.W UNK_TableReading
+        JSR.W PresetsWRAMCopyOAMCopy
+        JSR.W GetOBJOrderToDraw
         %Set16bit(!MX)
         %Set8bit(!M)
         LDA.B #$00
         XBA
-        LDA.W $084C
+        LDA.W !gobj_order_array
         %Set16bit(!M)
         ASL A
         TAX
-        LDA.L UNK_Table14,X
-        STA.B $A9
+        LDA.L Table_GameOBJIndexes,X
+        STA.B !gobj_struct_idx
         LDA.W #$0000
-        STA.B $AB
-        STA.B $AF
-        LDY.B $AB
+        STA.B !gobj_current_gobj
+        STA.B !gobj_OAM_table_idx
+        LDY.B !gobj_current_gobj
 
-    ;MOBIUS TRIPLE REACHAROUND, this loop is a bit of a mess
-    .loopstart:
-            LDX.B $A9
-            LDA.W $019C,X
-            BNE .CODE_858444
+    ;MOBIUS TRIPLE REACHAROUND, this loop is a bit of a mess flowwise.
+    ;but in essence, it goes GOBJ by GOBJ, component by component of them,
+    ;filling the SOBJ high and low tables.
+    .gobjloop:
+            LDX.B !gobj_struct_idx
+            LDA.W !gobj_struct_initialized,X
+            BNE .gameobjfound                ;if its initialized
 
-        .CODE_858429:
+        .setnextgobj:
             INY
             TYX
             %Set8bit(!M)
             LDA.B #$00
             XBA
-            LDA.W $084C,X
+            LDA.W !gobj_order_array,X
             %Set16bit(!M)
             ASL A
             TAX
-            LDA.L UNK_Table14,X
-            STA.B $A9
-            CPY.B $DC
-            BNE .loopstart
-            JMP.W .prepareDMA
+            LDA.L Table_GameOBJIndexes,X
+            STA.B !gobj_struct_idx
+            CPY.B !gobj_loaded_objs
+            BNE .gobjloop
+            JMP.W .prepareDMA                ;end of the list reached
 
-        .CODE_858444:
-            STY.B $AB
-            LDX.B $A9
-            LDA.W $019E,X
+        .gameobjfound:
+            STY.B !gobj_current_gobj
+            LDX.B !gobj_struct_idx
+            LDA.W !gobj_struct_sprite_table_idx,X
             CMP.W #$0262
-            BCS .CODE_85845A
+            BCS .setgobjhighbank
             %Set8bit(!M)
             LDA.B #$86
-            STA.B $77
-            STA.B $7A
-            BRA .CODE_858462
+            STA.B !temp_unused_H
+            STA.B !temp_sprite_table_component_address_H
+            BRA .bankset
 
-        .CODE_85845A:
+        .setgobjhighbank:
             %Set8bit(!M)
             LDA.B #$87
-            STA.B $77
-            STA.B $7A
+            STA.B !temp_unused_H
+            STA.B !temp_sprite_table_component_address_H
 
-        .CODE_858462:
+        .bankset:
+            ;loads data from the GOBJ
             %Set16bit(!M)
-            LDA.W $01AC,X
-            STA.B $78
-            LDA.W $01A0,X
-            STA.B $9F
-            LDA.W $01A4,X
-            STA.B $9B
-            LDA.W $01A6,X
-            STA.B $9D
+            LDA.W !gobj_struct_sprite_table_address,X
+            STA.B !temp_sprite_table_component_address
+            LDA.W !gobj_struct_flip,X
+            STA.B !gobj_flip_x
+            LDA.W !gobj_struct_pos_X,X
+            STA.B !gobj_pos_x
+            LDA.W !gobj_struct_pos_Y,X
+            STA.B !gobj_pos_y
             %Set8bit(!M)
-            LDA.W $01AF,X
-            STA.B $AD
-            STZ.B $AE
+            LDA.W !gobj_struct_component_total,X
+            STA.B !gobj_component_total
+            STZ.B !gobj_component_total_high_byte
+            ;Sets the location of the X offset in the Sprite Data Table
             %Set16bit(!M)
-            INC.B $78
-            LDA.B $AD
+            INC.B !temp_sprite_table_component_address
+            LDA.B !gobj_component_total
             DEC A
             STA.B $7E
             ASL A
@@ -643,212 +666,220 @@ UNK_BigLoadLoopOAM: ;8583E0
             CLC
             ADC.B $7E
             ADC.B $80
-            ADC.B $78
-            STA.B $78
-            LDA.B $A9
-            STA.B $75
+            ADC.B !temp_sprite_table_component_address
+            STA.B !temp_sprite_table_component_address
+            ;Sets last components, as they are read last to first
+            LDA.B !gobj_struct_idx
+            STA.B !temp_component_idx
             CLC
-            ADC.B $AD
+            ADC.B !gobj_component_total
             SEC
             SBC.W #$0001
-            STA.B $75
+            STA.B !temp_component_idx
 
-        .CODE_8584A3:
-            LDY.B $AB
-            LDA.B $AD
-            BNE .CODE_8584AC
-            JMP.W .CODE_858429
+        .setnextcomponent:
+                LDY.B !gobj_current_gobj
+                LDA.B !gobj_component_total
+                BNE .setnextsnesobj
+                JMP.W .setnextgobj
 
+            .setnextsnesobj:
+                LDX.B !temp_component_idx
+                %Set8bit(!M)
+                LDA.W !gobj_struct_components,X
+                CMP.B #$FF
+                BNE .componentfound
+                JMP.W .componentnotset
 
-        .CODE_8584AC:
-            LDX.B $75
-            %Set8bit(!M)
-            LDA.W $01B0,X
-            CMP.B #$FF
-            BNE .CODE_8584BA
-            JMP.W .CODE_8585E3
+            .componentfound:
+                ;calculates final X position of the sprite
+                %Set16bit(!M)
+                LDY.W #$0002
+                %Set8bit(!M)
+                LDA.B [!temp_sprite_table_component_address],Y
+                %Set8bit(!M)
+                CMP.B #$00
+                BMI .negativexoffset
+                XBA
+                LDA.B #$00
+                BRA .flipxoffset
 
-        .CODE_8584BA:
-            %Set16bit(!M)
-            LDY.W #$0002
-            %Set8bit(!M)
-            LDA.B [$78],Y
-            %Set8bit(!M)
-            CMP.B #$00
-            BMI .CODE_8584CE
-            XBA
-            LDA.B #$00
-            BRA .CODE_8584D1
+            .negativexoffset:
+                XBA
+                LDA.B #$FF
 
-        .CODE_8584CE:
-            XBA
-            LDA.B #$FF
+            .flipxoffset:
+                XBA
+                %Set16bit(!M)
+                JSR.W InvertIfFlipedX
+                CLC
+                ADC.B !gobj_pos_x
+                SEC
+                SBC.B !OBJ_Offset_X
+                STA.B !gobj_final_pos_x
+                INY
+                %Set8bit(!M)
 
-        .CODE_8584D1:
-            XBA
-            %Set16bit(!M)
-            JSR.W CODE_858BB0
-            CLC
-            ADC.B $9B
-            SEC
-            SBC.B !OBJ_Offset_X
-            STA.B $BF
-            INY
-            %Set8bit(!M)
-            LDA.B [$78],Y
-            %Set8bit(!M)
-            CMP.B #$00
-            BMI .CODE_8584EF
-            XBA
-            LDA.B #$00
-            BRA .CODE_8584F2
+                ;calculates final Y position of the sprite
+                LDA.B [!temp_sprite_table_component_address],Y
+                %Set8bit(!M)
+                CMP.B #$00
+                BMI .negativeyoffset
+                XBA
+                LDA.B #$00
+                BRA .flipyoffset
 
-        .CODE_8584EF:
-            XBA
-            LDA.B #$FF
+            .negativeyoffset:
+                XBA
+                LDA.B #$FF
 
-        .CODE_8584F2:
-            XBA
-            %Set16bit(!M)
-            JSR.W CODE_858BBC
-            CLC
-            ADC.B $9D
-            SEC
-            SBC.B !OBJ_Offset_Y
-            STA.B $C1
-            STY.B $C5
-            %Set16bit(!MX)
-            LDA.B $AF
-            AND.W #$FFE0
-            STA.B $7E
-            LSR A
-            LSR A
-            LSR A
-            LSR A
-            STA.B $80
-            LDA.B $AF
-            SEC
-            SBC.B $7E
-            STA.B $7E
-            LDA.B $80
-            TAX
-            LDA.L $7EA200,X
-            STA.B $C3
-            LDA.B $BF
-            CMP.W #$0100
-            BCC .posXcalculation
-            LDA.B $7E
-            AND.W #$FFFC
-            LSR A
-            TAX
-            LDA.L DATA8_858BD0,X
-            ORA.B $C3
-            STA.B $C3
+            .flipyoffset:
+                XBA
+                %Set16bit(!M)
+                JSR.W InvertIfFlipedY
+                CLC
+                ADC.B !gobj_pos_y
+                SEC
+                SBC.B !OBJ_Offset_Y
+                STA.B !gobj_final_pos_y
 
-        .posXcalculation:
-            %Set16bit(!M)
-            LDA.B $BF
-            CMP.W #$0100
-            BCC .posYcalculation
-            CMP.W #$FFF0
-            BCS .posYcalculation
-            JMP.W .spritenotonscreen
+                STY.B !gobj_data_table_idx
 
-        .posYcalculation:
-            %Set16bit(!M)
-            LDA.B $C1
-            CMP.W #$00F0
-            BCC .storingOAMcopy
-            CMP.W #$FFF0
-            BCS .storingOAMcopy
-            JMP.W .spritenotonscreen
+                ;calculates OAM High X position Bit
+                %Set16bit(!MX)
+                LDA.B !gobj_OAM_table_idx
+                AND.W #$FFE0                     ;Remove first 5 bits
+                STA.B $7E
+                LSR A
+                LSR A
+                LSR A
+                LSR A                            ;/16
+                STA.B $80
+                LDA.B !gobj_OAM_table_idx
+                SEC
+                SBC.B $7E
+                STA.B $7E
+                LDA.B $80
+                TAX
+                LDA.L $7EA200,X
+                STA.B !gobj_current_OAM_HT_value
+                LDA.B !gobj_final_pos_x
+                CMP.W #$0100
+                BCC .posXlessthan1byte
+                LDA.B $7E
+                AND.W #$FFFC
+                LSR A
+                TAX
+                LDA.L Table_HighOAMXbit,X
+                ORA.B !gobj_current_OAM_HT_value
+                STA.B !gobj_current_OAM_HT_value
 
-        .storingOAMcopy:
-            %Set16bit(!MX)
-            LDX.B $AF
-            LDA.B $BF
-            %Set8bit(!M)
-            STA.L $7EA000,X
-            %Set16bit(!M)
-            LDA.B $C1
-            %Set8bit(!M)
-            STA.L $7EA001,X
-            %Set16bit(!M)
-            LDX.B $80
-            LDA.B $C3
-            STA.L $7EA200,X
-            %Set16bit(!MX)
-            LDX.B $AF
-            LDY.B $C5
-            INY
-            %Set8bit(!M)
-            LDA.B [$78],Y
-            STA.B $B2
-            ASL A
-            AND.B #$0E
-            STA.B $B1                        ;Palette?
-            LDA.B $B2
-            ASL A
-            ASL A
-            AND.B #$C0                       ;Flip flags?
-            LSR A
-            STA.B $B2
-            ASL A
-            ASL A
-            ORA.B $B2
-            AND.B #$C0
-            ORA.B $B1
-            ORA.B #$20
-            EOR.B $9F
-            STA.L $7EA003,X
-            LDA.W !current_graphic_preset
-            ASL A
-            ASL A
-            ASL A
-            ASL A
-            ORA.L $7EA003,X
-            STA.L $7EA003,X
-            %Set16bit(!M)
-            LDA.W #$0000
-            LDX.B $75
-            %Set8bit(!M)
-            LDA.W $01B0,X
-            %Set16bit(!M)
-            ASL A
-            TAX
-            LDA.L DATA8_868000,X
-            %Set8bit(!M)
-            LDX.B $AF
-            STA.L $7EA002,X
-            %Set16bit(!M)
-            LDA.B $AF
-            CLC
-            ADC.W #$0004
-            STA.B $AF
+            .posXlessthan1byte:
+                %Set16bit(!M)
+                LDA.B !gobj_final_pos_x
+                CMP.W #$0100
+                BCC .posYcalculation
+                CMP.W #$FFF0
+                BCS .posYcalculation
+                JMP.W .spritenotonscreen
 
-        .spritenotonscreen:
-            LDA.B $78
-            SEC
-            SBC.W #$0005
-            STA.B $78
-            BRA .jmpsetDMAforOAMcopy
+            .posYcalculation:
+                %Set16bit(!M)
+                LDA.B !gobj_final_pos_y
+                CMP.W #$00F0
+                BCC .storingOAMcopy
+                CMP.W #$FFF0
+                BCS .storingOAMcopy
+                JMP.W .spritenotonscreen
 
-        .CODE_8585E3:
-            %Set16bit(!M)
-            LDA.B $78
-            SEC
-            SBC.W #$0005
-            STA.B $78
+            .storingOAMcopy:
+                %Set16bit(!MX)
+                LDX.B !gobj_OAM_table_idx
+                LDA.B !gobj_final_pos_x
+                %Set8bit(!M)
+                STA.L !sobj_low_table_x,X
+                %Set16bit(!M)
+                LDA.B !gobj_final_pos_y
+                %Set8bit(!M)
+                STA.L !sobj_low_table_y,X
+                %Set16bit(!M)
+                LDX.B $80
+                LDA.B !gobj_current_OAM_HT_value
+                STA.L !sobj_high_table,X
+                %Set16bit(!MX)
+                LDX.B !gobj_OAM_table_idx
+                LDY.B !gobj_data_table_idx
+                INY
+                %Set8bit(!M)
+                LDA.B [!temp_sprite_table_component_address],Y
+                STA.B $B2
+                ASL A
+                AND.B #$0E
+                STA.B !gobj_pallete_data
+                LDA.B $B2                    ;TODO: WTF is this bit shuffle?
+                ASL A
+                ASL A
+                AND.B #$C0
+                LSR A
+                STA.B $B2
+                ASL A
+                ASL A
+                ORA.B $B2
+                AND.B #$C0
+                ORA.B !gobj_pallete_data
+                ORA.B #$20                   ;priority data, all objs are priority 2
+                EOR.B !gobj_flip_x
+                STA.L !sobj_low_table_attributes,X
+                LDA.W !current_graphic_preset   ;TODO pallete relevant?
+                ASL A
+                ASL A
+                ASL A
+                ASL A
+                ORA.L !sobj_low_table_attributes,X
+                STA.L !sobj_low_table_attributes,X
+                ;Sets sprite to use from the loaded sprites
+                %Set16bit(!M)
+                LDA.W #$0000
+                LDX.B !temp_component_idx
+                %Set8bit(!M)
+                LDA.W !gobj_struct_components,X
+                %Set16bit(!M)
+                ASL A
+                TAX
+                LDA.L DATA8_868000,X
+                %Set8bit(!M)
+                LDX.B !gobj_OAM_table_idx
+                STA.L !sobj_low_table_sprite,X
+                ;prepares for next object
+                %Set16bit(!M)
+                LDA.B !gobj_OAM_table_idx
+                CLC
+                ADC.W #$0004
+                STA.B !gobj_OAM_table_idx
 
-        .jmpsetDMAforOAMcopy:
-            DEC.B $75
-            DEC.B $AD
-            JMP.W .CODE_8584A3
+            .spritenotonscreen:
+                LDA.B !temp_sprite_table_component_address
+                SEC
+                SBC.W #$0005
+                STA.B !temp_sprite_table_component_address
+                BRA .preparefornextcomponent
+
+            .componentnotset:
+                %Set16bit(!M)
+                LDA.B !temp_sprite_table_component_address
+                SEC
+                SBC.W #$0005
+                STA.B !temp_sprite_table_component_address
+
+            .preparefornextcomponent:
+                DEC.B !temp_component_idx
+                DEC.B $AD
+                JMP.W .setnextcomponent
 
     .prepareDMA:
         %Set16bit(!MX)
-        LDA.B $AF
-        STA.W $084A
+        LDA.B !gobj_OAM_table_idx
+        STA.W $084A                         ;this seems to be unused
         %Set8bit(!M)
         LDX.W #$0000
         STX.W !OAMADDL                       ;OAM Address Registers
@@ -863,9 +894,9 @@ UNK_BigLoadLoopOAM: ;8583E0
         STA.W $4344
         LDX.W #$0220
         STX.W $4345
-        LDA.B $9A
+        LDA.B !ProgDMA_OAM_channel
         ORA.B #$10
-        STA.B $9A
+        STA.B !ProgDMA_OAM_channel
 
         RTL
 
@@ -1180,30 +1211,30 @@ PresetsWRAMCopyOAMCopy:
         RTS
 
 ;;;;;;;;
-CODE_858AE5:
+CODE_858AE5: ;858AE5
         %Set16bit(!MX)
-        LDX.B $A9
-        LDA.W $01AC,X
+        LDX.B !gobj_struct_idx
+        LDA.W !gobj_struct_sprite_table_address,X
         STA.B $78
         LDY.W #$0000
         %Set8bit(!M)
         LDA.B [$78],Y
-        STA.B $AD
-        STA.W $01AF,X
-        STZ.B $AE
+        STA.B !gobj_component_total
+        STA.W !gobj_struct_component_total,X
+        STZ.B !gobj_component_total_high_byte
         %Set16bit(!M)
         INY
         TXA
         CLC
         ADC.W #$019C
         CLC
-        ADC.W #$0014
+        ADC.W #$0014                         ;adds $01B0, gobj_struct_components
         STA.B $AF
 
     .loop:
-            LDA.B $AD
+            LDA.B !gobj_component_total
             BNE .continue
-            BRA .exitloop
+            BRA .exitloop                    ;no components to add
 
         .continue:
             LDA.B [$78],Y
@@ -1228,7 +1259,7 @@ CODE_858AE5:
             CLC
             ADC.W #$0005
             TAY
-            DEC.B $AD
+            DEC.B !gobj_component_total
             BRA .loop
 
     .exitloop:
@@ -1314,21 +1345,21 @@ CODE_858B7B:
     .return: RTS
 
 ;;;;;;;; You can enter this subrutine trough one of these 2 functions
-CODE_858BB0:
+InvertIfFlipedX:
         %Set16bit(!MX)
         PHA
         LDA.B $9F
         AND.W #$0040
-        BEQ CODE_858BCE
-        BRA CODE_858BC4
+        BEQ InvertIfFliped_NotFliped
+        BRA InvertIfFliped_Fliped
 
-CODE_858BBC:
+InvertIfFlipedY:
         PHA
         LDA.B $9F
         AND.W #$0080
-        BEQ CODE_858BCE
+        BEQ InvertIfFliped_NotFliped
 
-    CODE_858BC4:
+    InvertIfFliped_Fliped:
             PLA
             EOR.W #$FFFF
             INC A
@@ -1336,16 +1367,15 @@ CODE_858BBC:
             ADC.W #$FFF0
             RTS
 
-    CODE_858BCE:
+    InvertIfFliped_NotFliped:
             PLA
             RTS
 
-DATA8_858BD0: ;858BD0
+Table_HighOAMXbit: ;858BD0
         db $01,$00,$04,$00,$10,$00,$40,$00,$00,$01,$00,$04,$00,$10,$00,$40
 
-
 ;;;;;;; sums of 24
-UNK_Table14:;858BE0
+Table_GameOBJIndexes:;858BE0
         db $00,$00,$24,$00,$48,$00,$6C,$00,$90,$00,$B4,$00,$D8,$00,$FC,$00
         db $20,$01,$44,$01,$68,$01,$8C,$01,$B0,$01,$D4,$01,$F8,$01,$1C,$02
         db $40,$02,$64,$02,$88,$02,$AC,$02,$D0,$02,$F4,$02,$18,$03,$3C,$03
@@ -1376,7 +1406,7 @@ CODE_858C30:
         BNE .loop
         LDA.W #$0000
 
-    .loop:
+    .loop:                                   ;Posible infinite loop
             CMP.B $BB
             BEQ .loop
 

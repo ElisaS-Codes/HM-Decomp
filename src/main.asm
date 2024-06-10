@@ -17,8 +17,8 @@ incsrc "code_banks/bank_84.asm"     ;
 incsrc "code_banks/bank_85.asm"     ;
 
 ;Data Banks
-incsrc "data_banks/bank_86.asm"
-incsrc "data_banks/bank_87.asm"
+incsrc "data_banks/bank_86.asm"     ;OBJ attributes
+incsrc "data_banks/bank_87.asm"     ;OBJ attributes
 incsrc "data_banks/bank_88.asm"     ;Sprites
 incsrc "data_banks/bank_89.asm"     ;Sprites
 incsrc "data_banks/bank_8A.asm"     ;Sprites

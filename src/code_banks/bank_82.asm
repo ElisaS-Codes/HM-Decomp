@@ -4515,7 +4515,7 @@ SUB_82D1C0: ;82D1C0
         JSL.L CODE_81A600                    ;82D384;81A600;
         JSL.L CODE_8582C7                    ;82D388;8582C7;
         JSL.L CODE_858CB2                    ;82D38C;858CB2;
-        JSL.L UNK_BigLoadLoopOAM             ;82D390;8583E0;
+        JSL.L PrepareOAMData             ;82D390;8583E0;
         %Set16bit(!M)                             ;82D394;      ;
         LDA.L $7F1F5C                        ;82D396;7F1F5C;
         AND.W #$0004                         ;82D39A;      ;
@@ -4889,7 +4889,7 @@ DemoPresentation:
         JSL.L CODE_81A600                    ;82D706;81A600;
         JSL.L CODE_8582C7                    ;82D70A;8582C7;
         JSL.L CODE_858CB2                    ;82D70E;858CB2;
-        JSL.L UNK_BigLoadLoopOAM             ;82D712;8583E0;
+        JSL.L PrepareOAMData             ;82D712;8583E0;
         %Set16bit(!M)                             ;82D716;      ;
         LDA.L $7F1F5C                        ;82D718;7F1F5C;
         AND.W #$0004                         ;82D71C;      ;
@@ -5178,7 +5178,7 @@ IntroScreen: ;82D75E
         JSL.L CODE_81A600                    ;82D978;81A600;
         JSL.L CODE_8582C7                    ;82D97C;8582C7;
         JSL.L CODE_858CB2                    ;82D980;858CB2;
-        JSL.L UNK_BigLoadLoopOAM             ;82D984;8583E0;
+        JSL.L PrepareOAMData             ;82D984;8583E0;
         %Set16bit(!M)                             ;82D988;      ;
         LDA.L $7F1F5C                        ;82D98A;7F1F5C;
         AND.W #$0004                         ;82D98E;      ;
@@ -6970,7 +6970,7 @@ Unk_NamesInput: ;82E80C
         JSL.L CODE_8580B9
         JSL.L CODE_8582C7
         JSL.L CODE_858CB2
-        JSL.L UNK_BigLoadLoopOAM
+        JSL.L PrepareOAMData
         %Set8bit(!M)
         STZ.B !NMI_Status
         JML.L .waitNMI
